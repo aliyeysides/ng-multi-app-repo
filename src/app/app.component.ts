@@ -10,12 +10,13 @@ import {Component, ViewEncapsulation} from '@angular/core';
       <cpt-bear-alerts></cpt-bear-alerts>
       <cpt-bear-settings-menu></cpt-bear-settings-menu>
     </div>
-    
-    <div class="sidebar">
+
+    <div class="sidebar" [class.opened]="isOpen">
       <cpt-bear-brand></cpt-bear-brand>
       <cpt-bear-navigator></cpt-bear-navigator>
+      <div (click)="toggleMenu()">Collapse Menu</div>
     </div>
-    
+
     <div class="container-fluid container-main">
       <router-outlet></router-outlet>
     </div>
@@ -23,4 +24,9 @@ import {Component, ViewEncapsulation} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  isOpen = true;
+
+  toggleMenu() {
+    this.isOpen = !this.isOpen;
+  }
 }

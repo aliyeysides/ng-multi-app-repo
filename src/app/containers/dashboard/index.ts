@@ -1,11 +1,8 @@
 import {NgModule} from '@angular/core';
 import {DashboardComponent} from './dashboard.component';
-import {routing} from './dashboard.routing';
 
 @NgModule({
-  imports: [
-    routing
-  ],
+  imports: [],
   exports: [DashboardComponent],
   declarations: [DashboardComponent],
   providers: []
