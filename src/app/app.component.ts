@@ -10,11 +10,15 @@ import {Component, ViewEncapsulation} from '@angular/core';
       <cpt-bear-alerts></cpt-bear-alerts>
       <cpt-bear-settings-menu></cpt-bear-settings-menu>
     </div>
+    
     <div class="sidebar">
       <cpt-bear-brand></cpt-bear-brand>
       <cpt-bear-navigator></cpt-bear-navigator>
     </div>
-    <router-outlet></router-outlet>
+    
+    <div class="container-fluid container-main">
+      <router-outlet></router-outlet>
+    </div>
   `,
   styleUrls: ['./app.component.scss']
 })
