@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
   selector: 'cpt-stock-report',
   template: `
     <div class="container stock-report">
-      stock-report Works!
       <cpt-report></cpt-report>
     </div>
   `,
