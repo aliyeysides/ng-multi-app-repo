@@ -3,9 +3,14 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'cpt-dashboard',
   template: `
-    <p>
+    <div class="container dashboard">
       dashboard Works!
-    </p>
+      <cpt-bearish-insights></cpt-bearish-insights>
+      <cpt-idea-lists></cpt-idea-lists>
+      <cpt-bear-of-the-week></cpt-bear-of-the-week>
+      <cpt-user-lists></cpt-user-lists>
+      <cpt-best-bear-ideas></cpt-best-bear-ideas>
+    </div>
   `,
   styleUrls: ['./dashboard.component.scss']
 })
