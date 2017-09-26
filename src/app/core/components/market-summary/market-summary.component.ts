@@ -3,6 +3,7 @@ import {MarketsSummaryService} from '../../services/markets-summary.service';
 import {Subject} from 'rxjs/Subject';
 
 import * as moment from 'moment';
+import {Moment} from 'moment';
 
 export interface MarketData {
   change: number;
@@ -29,18 +30,18 @@ export class MarketSummaryComponent implements OnInit, OnDestroy {
   public SPY: MarketData;
   public DJI: MarketData;
   public QQQ: MarketData;
+  private presentDate: Moment;
   public currentTime: string;
 
   constructor(private marketsSummary: MarketsSummaryService) {
   }
 
   ngOnInit() {
-    const presentDate = moment(new Date, 'America/New_York');
-    this.currentTime = presentDate.format('h:mma');
-    this.initialMarketSectorData();
+    this.init();
     setInterval(() => {
       this.initialMarketSectorData();
-      this.currentTime = presentDate.format('h:mma');
+      this.presentDate = moment(new Date, 'America/New_York');
+      this.currentTime = this.presentDate.format('h:mma');
       }, 1000 * 60);
   }
 
@@ -58,6 +59,12 @@ export class MarketSummaryComponent implements OnInit, OnDestroy {
         this.DJI = indicies[1];
         this.QQQ = indicies[2];
       });
+  }
+
+  private init() {
+    this.presentDate = moment(new Date, 'America/New_York');
+    this.currentTime = this.presentDate.format('h:mma');
+    this.initialMarketSectorData();
   }
 
 }
