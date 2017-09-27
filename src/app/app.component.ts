@@ -4,6 +4,9 @@ import {Component, ViewEncapsulation} from '@angular/core';
   selector: 'cpt-root',
   encapsulation: ViewEncapsulation.None,
   template: `
+    <div id="search-darken" class="darken"></div>
+    <div id="alerts-darken" class="darken"></div>
+    <div id="settings-darken" class="darken"></div>
     <div class="navbar">
       <cpt-market-summary></cpt-market-summary>
       <cpt-bear-search></cpt-bear-search>

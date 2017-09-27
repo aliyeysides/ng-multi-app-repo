@@ -19,9 +19,24 @@ export interface MarketData {
     <div class="market-summary__contents">
       <h3>Markets</h3>
       <p class="current-time">As of {{currentTime}}</p>
-      <p class="indice">SPY&nbsp; {{SPY?.change}}%</p>
-      <p class="indice">DJI&nbsp; {{DJI?.change}}%</p>
-      <p class="indice">NASD&nbsp; {{QQQ?.change}}%</p>
+      <p class="indice">
+        SPY&nbsp;
+        <span [ngClass]="{'up-change':SPY?.change>0,'down-change':SPY?.change<0}">
+          {{SPY?.change}}%
+        </span>
+      </p>
+      <p class="indice">
+        DJI&nbsp; 
+        <span [ngClass]="{'up-change':DJI?.change>0,'down-change':DJI?.change<0}">
+          {{DJI?.change}}%
+        </span>
+      </p>
+      <p class="indice">
+        NASD&nbsp; 
+        <span [ngClass]="{'up-change':QQQ?.change>0,'down-change':QQQ?.change<0}">
+          {{QQQ?.change}}%
+        </span>
+      </p>
     </div>
   `,
   styleUrls: ['./market-summary.component.scss']
@@ -44,7 +59,7 @@ export class MarketSummaryComponent implements OnInit, OnDestroy {
       this.initialMarketSectorData();
       this.presentDate = moment(new Date, 'America/New_York');
       this.currentTime = this.presentDate.format('h:mma');
-      }, 1000 * 60);
+    }, 1000 * 60);
   }
 
   ngOnDestroy() {
