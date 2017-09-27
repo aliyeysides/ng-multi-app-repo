@@ -1,10 +1,12 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {noop} from 'rxjs/util/noop';
 
 @Component({
   selector: 'cpt-bear-settings-menu',
   template: `
     <a class="quick-link">
-      <svg class="align-absolute" width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      <svg class="align-absolute" width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
+           xmlns="http://www.w3.org/2000/svg"
            xmlns:xlink="http://www.w3.org/1999/xlink">
         <defs></defs>
         <g id="icon_gear" fill="#000000" stroke="none" stroke-width="1" fill-rule="evenodd">
@@ -27,11 +29,11 @@ import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/c
           </g>
         </svg>
         <h1>Settings</h1>
-        <!--<ul>-->
-          <!--<li *ngFor="let choice of items" (click)="choice.fn();">-->
-            <!--<a href="{{choice.href}}" target="{{choice.target}}">{{choice.title}}</a>-->
-          <!--</li>-->
-        <!--</ul>-->
+        <ul>
+          <li *ngFor="let choice of items" (click)="choice.fn();">
+            <a href="{{choice.href}}" target="{{choice.target}}">{{choice.title}}</a>
+          </li>
+        </ul>
       </div>
 
     </div>
@@ -44,9 +46,28 @@ export class BearSettingsMenuComponent implements OnInit {
   @HostListener('click') onClick() {
     this.toggleNav(this.nav.nativeElement, '500px', true);
   }
+
   @HostListener('document:click', ['$event']) offClick(e: Event) {
     if (!this.el.nativeElement.contains(e.target)) this.toggleNav(this.nav.nativeElement, '0', false);
   }
+
+  public items: object[] = [
+    // { title: 'Quickstart', href: '#', target: '', fn: this.relaunchOnboarding.bind(this) },
+    {
+      title: 'Upgrade',
+      href: 'https://mh214.infusionsoft.com/app/orderForms/Chaikin-Analytics---Annual-Subscription',
+      target: '_blank',
+      fn: noop
+    },
+    {
+      title: 'User guide',
+      href: 'https://www.chaikinanalytics.com/analytics-resource-guide/',
+      target: '_blank',
+      fn: noop
+    },
+    // { title: 'Support/Contact', href: '#', target: '', fn: this.openSupportModal.bind(this) },
+    {title: 'Log out', href: '#', target: '', fn: this.logOutSession.bind(this)}
+  ];
 
   constructor(private el: ElementRef) {
   }
@@ -61,5 +82,11 @@ export class BearSettingsMenuComponent implements OnInit {
     } else if (darken === false) {
       document.getElementById('settings-darken').style.visibility = 'hidden';
     }
+  }
+
+  public logOutSession(): void {
+    // this.authService.logOutSession()
+    //   .takeUntil(this.ngUnsubscribe)
+    //   .subscribe();
   }
 }
