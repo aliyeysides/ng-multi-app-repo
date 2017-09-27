@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {animate, Component, keyframes, OnDestroy, OnInit, transition, trigger, style, NgZone} from '@angular/core';
 import {MarketsSummaryService} from '../../services/markets-summary.service';
 import {Subject} from 'rxjs/Subject';
 
@@ -21,36 +21,52 @@ export interface MarketData {
       <p class="current-time">As of {{currentTime}}</p>
       <p class="indice">
         SPY&nbsp;
-        <span [ngClass]="{'up-change':SPY?.change>0,'down-change':SPY?.change<0}">
+        <span [@fadeInDown]="fadeInDownSPYState" (@fadeInDown.done)="resetSPY()"
+              [ngClass]="{'up-change':SPY?.change>0,'down-change':SPY?.change<0}">
           {{SPY?.change}}%
         </span>
       </p>
       <p class="indice">
-        DJI&nbsp; 
-        <span [ngClass]="{'up-change':DJI?.change>0,'down-change':DJI?.change<0}">
+        DJI&nbsp;
+        <span [@fadeInDown]="fadeInDownDJIState" (@fadeInDown.done)="resetDJI()"
+              [ngClass]="{'up-change':DJI?.change>0,'down-change':DJI?.change<0}">
           {{DJI?.change}}%
         </span>
       </p>
       <p class="indice">
-        NASD&nbsp; 
-        <span [ngClass]="{'up-change':QQQ?.change>0,'down-change':QQQ?.change<0}">
+        QQQ&nbsp;
+        <span [@fadeInDown]="fadeInDownQQQState" (@fadeInDown.done)="resetQQQ()"
+              [ngClass]="{'up-change':QQQ?.change>0,'down-change':QQQ?.change<0}">
           {{QQQ?.change}}%
         </span>
       </p>
     </div>
   `,
+  animations: [
+    trigger('fadeInDown', [
+      transition('inactive => active', animate(1000, keyframes([
+        style({opacity: '0', transform: 'translate3d(0, -100%, 0)'}),
+        style({opacity: '1', transform: 'none'})
+      ]))),
+    ])],
   styleUrls: ['./market-summary.component.scss']
 })
 export class MarketSummaryComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
+  public fadeInDownSPYState: string;
+  public fadeInDownDJIState: string;
+  public fadeInDownQQQState: string;
+
   public SPY: MarketData;
   public DJI: MarketData;
   public QQQ: MarketData;
+
   private presentDate: Moment;
   public currentTime: string;
 
-  constructor(private marketsSummary: MarketsSummaryService) {
+  constructor(private marketsSummary: MarketsSummaryService,
+              private zone: NgZone) {
   }
 
   ngOnInit() {
@@ -59,7 +75,7 @@ export class MarketSummaryComponent implements OnInit, OnDestroy {
       this.initialMarketSectorData();
       this.presentDate = moment(new Date, 'America/New_York');
       this.currentTime = this.presentDate.format('h:mma');
-    }, 1000 * 60);
+    }, 1000 * 60 );
   }
 
   ngOnDestroy() {
@@ -72,10 +88,53 @@ export class MarketSummaryComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe)
       .subscribe(res => {
         const indicies = res['market_indices'];
+        if (this.SPY && this.DJI && this.QQQ) {
+          if (Object.is(this.SPY.change, indicies[0].change) != true) {
+            this.SPY = indicies[0];
+            this.triggerSPYAnimation();
+          }
+          if (Object.is(this.DJI.change, indicies[1].change) != true) {
+            this.DJI = indicies[1];
+            this.triggerDJIAnimation();
+          }
+          if (Object.is(this.QQQ.change, indicies[2].change) != true) {
+            this.QQQ = indicies[2];
+            this.triggerQQQAnimation();
+          }
+          return;
+        }
         this.SPY = indicies[0];
         this.DJI = indicies[1];
         this.QQQ = indicies[2];
-      });
+      })
+  }
+
+  public triggerSPYAnimation() {
+    this.fadeInDownSPYState = 'active';
+  }
+
+  public triggerDJIAnimation() {
+    this.fadeInDownDJIState = 'active';
+  }
+
+  public triggerQQQAnimation() {
+    this.fadeInDownQQQState = 'active';
+  }
+
+  public resetSPY() {
+    this.zone.run(() => {
+      this.fadeInDownSPYState = 'inactive';
+    });
+  }
+  public resetDJI() {
+    this.zone.run(() => {
+      this.fadeInDownDJIState = 'inactive';
+    });
+  }
+  public resetQQQ() {
+    this.zone.run(() => {
+      this.fadeInDownQQQState = 'inactive';
+    });
   }
 
   private init() {
