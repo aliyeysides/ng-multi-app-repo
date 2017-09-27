@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {URLSearchParams} from '@angular/http';
-import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {UtilService} from './util.service';
 
 @Injectable()
 export class MarketsSummaryService {
 
-  apiHostName = environment.envProtocol + '://' + environment.envHostName;
+  apiHostName = this.utilService.getApiHostName();
   private apiPrependText = '/CPTRestSecure/app';
   private symbolLookupParams: URLSearchParams;
 
