@@ -1,0 +1,88 @@
+@import 'variables';
+
+
+
+/*------------------------------------*\
+  #SIDE BAR
+\*------------------------------------*/
+
+
+
+
+
+.side-nav {
+
+	.side-nav__rule {
+		width: 100%;
+		padding: 0px 15px;
+
+		p {
+			font-size: 11px;
+			color: #999999;
+			letter-spacing: 0.1px;
+			font-weight: 300;
+		}
+	}
+
+	.side-nav__section {
+		padding: 10px 0px;
+		width: 100%;
+
+		li {
+			height: 50px;
+			padding: 0 0px 0 15px;
+			cursor: pointer;
+
+
+			svg {
+				float: left;
+				width: 25px;
+				height: 25px;
+				margin-top: 12px;
+				margin-right: 13px;
+			}
+
+			svg.stockview {
+				width: 22px;
+				height: 22px;
+				margin-top: 14px;
+			}
+
+			svg g {
+				fill: #ffffff;
+			}
+
+			a {
+				float: left;
+				font-size: 17px;
+				font-weight: 400;
+				color: #ffffff;
+				line-height: 50px;
+				text-decoration: none;
+			}
+
+			&:hover {
+				background-color: $background--MD-hover;
+
+				a {
+					color: #ffffff;
+
+				}
+
+				svg g {
+					fill: #ffffff;
+				}
+			}
+		}
+
+		li.selected {
+			background-color: $link-blue;
+			font-weight: 600;
+		}
+
+	  	li.active {
+	    	background-color: $link-blue;
+	    	font-weight: 600;
+	  	}
+	}
+}
