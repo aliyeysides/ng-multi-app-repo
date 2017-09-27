@@ -11,6 +11,7 @@ import {APP_CORE_MODULES} from './core/components/index';
 import {APP_CONTAINER_MODULES} from './containers/index';
 
 import {UtilService} from './core/services/util.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {UtilService} from './core/services/util.service';
     BrowserModule,
     HttpModule,
     SharedModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
     ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES
