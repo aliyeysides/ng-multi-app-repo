@@ -14,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
         </div>
         <div class="col-header__container row">
           <div class="col-header col-sm-2">Rating</div>
-          <div class="col-header col-sm-4">Ticker</div>
+          <div class="col-header col-header--ticker col-sm-4">Ticker</div>
           <div class="col-header col-sm-3">Last Price</div>
           <div class="col-header col-sm-3">% Chg</div>
         </div>

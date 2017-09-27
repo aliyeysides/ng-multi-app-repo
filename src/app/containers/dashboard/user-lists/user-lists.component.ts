@@ -18,12 +18,29 @@ import { Component, OnInit } from '@angular/core';
         </div>
         <div class="col-header__container row">
           <div class="col-header col-sm-2">Rating</div>
-          <div class="col-header col-sm-4">Ticker</div>
+          <div class="col-header col-header--ticker col-sm-4">Ticker</div>
           <div class="col-header col-sm-3">Last Price</div>
           <div class="col-header col-sm-3">% Chg</div>
         </div>
       </div>
       <div class="post-body post-body--list">
+        <div class="row">
+          <div class="col-lg-2 col-xl-2 stock__PGR">
+            <img class="align-absolute" src="/.svg">
+          </div>
+          <div class="col-lg-3 col-xl-3 stock__ticker">
+            <p class="ticker">CMCSA</p>
+          </div>
+          <div class="col-lg-1 col-xl-1 stock__alert">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+          </div>
+          <div class="col-lg-3 col-xl-3 stock__price">
+            <p class="data">$455.55</p>
+          </div>
+          <div class="col-lg-3 col-xl-3 stock__price">
+            <p class="data">+10.54%</p>
+          </div>
+        </div>
       </div>
     </div>
   `,

@@ -855,6 +855,11 @@ a.quick-link {
         font-size: 9px;
         line-height: 1;
         font-weight: 400;
+        text-align: center;
+      }
+
+      .col-header.col-header--ticker {
+        text-align: left;
       }
     }
   }
