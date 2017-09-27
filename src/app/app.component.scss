@@ -82,6 +82,135 @@
 	background-color: #F8F8F8;
 }
 
+@import 'variables';
+
+
+
+
+/*------------------------------------*\
+  #PRIMARY-NAV
+\*------------------------------------*/
+
+
+
+
+.top-nav {
+  position: relative;
+  z-index: 100;
+
+
+  .top-nav__contents {
+    position: absolute;
+    right:20px;
+    height: 35px;
+    top: 3px;
+
+
+    li {
+      height: 35px;
+      width: 35px;
+      margin-left: 20px;
+
+      svg {
+        width: 26px;
+        height: 26px;
+      }
+
+      svg g {
+        fill: $font-color;
+      }
+
+      a {
+
+        svg {
+          width: 26px;
+          height: 26px;
+        }
+
+        svg g {
+          fill: $font-color;
+        }
+      }
+
+      &:hover {
+        svg g {
+          fill: $link-blue;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+.sidenav {
+  height: 100%;
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  background-color: $background--LT !important;
+  overflow-x: hidden;
+  padding:0;
+  transition: 0.5s;
+  box-shadow: -7px 0 20px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 10px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 40px;
+  color: #f4f4f4;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus{
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.right-sidebar__header {
+  width: 100%;
+  height: 60px;
+  background-color: $link-blue;
+  padding:6px 15px;
+
+  h1 {
+    color:#ffffff;
+    float: left;
+    margin-bottom:0px;
+  }
+
+  svg {
+    width: 36px;
+    height: 36px;
+    float: left;
+    margin: 5px 15px 0 0px;
+  }
+}
+
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
 .darken {
   background-color: rgba(0,0,0,0.5);
   width: 100%;

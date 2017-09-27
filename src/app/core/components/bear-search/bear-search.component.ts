@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'cpt-bear-search',
@@ -40,8 +40,11 @@ export class BearSearchComponent implements OnInit {
   @HostListener('click') onClick() {
     this.toggleNav(this.nav.nativeElement, '500px', true);
   }
+  @HostListener('document:click', ['$event']) offClick(e: Event) {
+    if (!this.el.nativeElement.contains(e.target)) this.toggleNav(this.nav.nativeElement, '0', false);
+  }
 
-  constructor() {
+  constructor(private el: ElementRef) {
   }
 
   ngOnInit() {
@@ -50,9 +53,9 @@ export class BearSearchComponent implements OnInit {
   public toggleNav(el: HTMLElement, size: string, darken: boolean): void {
     el.style.width = size;
     if (darken === true) {
-      document.getElementById('darken').style.visibility = 'visible';
+      document.getElementById('search-darken').style.visibility = 'visible';
     } else if (darken === false) {
-      document.getElementById('darken').style.visibility = 'hidden';
+      document.getElementById('search-darken').style.visibility = 'hidden';
     }
   }
 
