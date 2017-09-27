@@ -1,0 +1,552 @@
+@import 'variables';
+
+/*------------------------------------*\
+  #DISCOVERY
+\*------------------------------------*/
+
+.discovery__body {
+
+  .body__top {
+    background-color: $background--LT2;
+    height: 220px;
+    position: relative;
+    padding-top: 10px;
+
+    .row--header {
+      padding-left: 65px;
+
+      h1 {
+        float: left;
+        text-align: left;
+        margin-bottom: 15px;
+        margin-right: 10px;
+      }
+
+      .search__header {
+        float: left;
+      }
+    }
+
+    .discovery__base-stock {
+      padding: 5px 55px 0px 100px;
+
+      .row {
+        position: relative;
+        height: 115px;
+        background: $background--DK;
+        padding: 10px;
+        border-radius: 30px 0px 0px 30px;
+        min-width: 905px;
+
+        .base-stock__logo {
+          position: absolute;
+          background-color: #ffffff;
+          width: 130px;
+          height: 130px;
+          border-radius: 65px;
+          top: -10px;
+          left: -35px;
+          //box-shadow: 2px 1px 4px rgba(0,0,0,0.3);
+          overflow: hidden;
+
+          img {
+            max-width: 110px;
+            height: auto;
+          }
+        }
+
+        .base-stock__symbol {
+          margin-left: 115px;
+          width: 210px;
+
+          .ticker {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 32px;
+            line-height: 1;
+          }
+
+          .company-name {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 300;
+            line-height: 1.75;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+
+          .company-industry {
+            font-size: 14px;
+            color: $font-color--MD;
+            line-height: 1.5;
+            font-weight: 400;
+            font-style: italic;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+
+        .base-stock__price {
+          width: 120px;
+          border-right: 1px dashed rgba(255, 255, 255, 0.4);
+          padding-right: 15px;
+          text-align: right;
+
+          .last-price {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 3px;
+            margin-top: -4px;
+          }
+
+          .change {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.5;
+            margin-bottom: 5px;
+          }
+
+          .percentage {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.5;
+          }
+        }
+
+        .base-stock__actions {
+          border-right: 1px dashed rgba(255, 255, 255, 0.4);
+          padding: 0 15px;
+          width: 60px;
+          text-align: center;
+          height: 95px;
+          overflow: hidden;
+
+          a {
+            cursor: pointer;
+            opacity: 0.6;
+
+            svg {
+              width: 20px;
+              height: 20px;
+              margin-top: 2px;
+              margin-bottom: 12px;
+            }
+
+            svg g {
+              fill: #ffffff;
+            }
+
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+
+        .base-stock__PGR {
+          width: 160px;
+          border-right: 1px dashed rgba(255, 255, 255, 0.4);
+
+          img {
+            width: 100px;
+            height: auto;
+            margin: 5px 30px 8px;
+          }
+
+          .PGR__text {
+            font-size: 19px;
+            font-weight: 700;
+            color: #FFFFFF;
+            line-height: 1.5;
+            text-transform: uppercase;
+            text-align: center;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+
+        .base-stock__factors {
+          border-right: 1px dashed rgba(255, 255, 255, 0.4);
+          padding: 0 30px;
+          width: 220px;
+          overflow: hidden;
+
+          ul {
+            height: 95px;
+            overflow: hidden;
+
+            li {
+              font-size: 11px;
+              color: #ffffff;
+              line-height: 1.5;
+              margin: 0 0 4px;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+
+              &:before {
+                color: #1199ff;
+                content: "â—";
+                padding-right: 7px;
+                font-size: 11px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.discovery-results__slider.selected-slider .slider__scroll {
+  display: block !important;
+}
+
+.discovery-results__container {
+  margin-left: 2px;
+  overflow-y: scroll;
+  height: 100vh;
+  padding-bottom: 220px;
+
+  .discovery-results__slider {
+    height: 280px;
+    position: relative;
+    background-color: $background--LT;
+    margin-bottom: 2px;
+    padding: 10px 70px 0;
+
+    &:first-child {
+      margin-top: 2px;
+    }
+
+    .discovery-slider__label {
+      margin: 10px 0 0;
+      font-weight: 400;
+      font-size: 22px;
+      color: $font-color;
+      line-height: 1.7;
+
+      span {
+        font-weight: 700;
+      }
+    }
+
+    .slider__scroll {
+      display: none;
+      width: 40px;
+      height: 175px;
+      position: absolute;
+      z-index: 200;
+      top: 53px;
+      opacity: 0.7;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      img {
+        width: 20px;
+        height: auto;
+      }
+    }
+
+    .slider__scroll--right {
+      right: 30px;
+    }
+
+    .slider__scroll--left {
+      left: 18px;
+    }
+
+    .discovery-slider__tiles {
+      width: 100%;
+      list-style-type: none;
+      white-space: nowrap;
+      overflow: hidden;
+      padding: 0 15px;
+      margin: 0 0 -15px -15px;
+      height: 230px;
+
+      .tile__wrapper {
+        width: 181px;
+        display: inline-block;
+        margin: 0px 45px 0px 0px;
+        position: relative;
+        -webkit-perspective: 800px;
+        perspective: 800px;
+
+        &:hover {
+          -ms-transform: scale(1.05); /* IE 9 */
+          -webkit-transform: scale(1.05); /* Safari */
+          transform: scale(1.05); /* Standard syntax */
+        }
+
+        &:active {
+          -ms-transform: scale(1.05); /* IE 9 */
+          -webkit-transform: scale(1.05); /* Safari */
+          transform: scale(1.05); /* Standard syntax */
+        }
+
+        .discovery__tile {
+          position: relative;
+          -webkit-transform-style: preserve-3d;
+          -webkit-transition: 0.5s;
+          transform-style: preserve-3d;
+          transition: 0.5s;
+
+          .tile__front {
+            display: block;
+            position: absolute;
+            float: left;
+            width: 181px;
+            height: 181px;
+            background-image: linear-gradient(0deg, #6F7689 0%, #313540 53%);
+            box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.18);
+            border-radius: 7px;
+            border: 3px solid #323641;
+            z-index: 1;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+
+            .tile__contents {
+              position: relative;
+
+              .logo {
+                width: 175px;
+                background: #FFFFFF;
+                border-radius: 4px 4px 0px 0px;
+                height: 80px;
+                position: relative;
+
+                img {
+                  max-height: 75px;
+                  max-width: 160px;
+                }
+              }
+
+              .symbol {
+                width: 175px;
+                padding: 10px 7px 5px;
+
+                .ticker {
+                  font-size: 24px;
+                  font-weight: 700;
+                  margin: 0px;
+                  color: #ffffff;
+                  line-height: 1;
+                  float: left;
+                }
+
+                .rating {
+                  float: left;
+                  width: 175px;
+                  margin: 0px;
+
+                  img {
+                    width: 40px;
+                    margin: 1px 10px 0 0;
+                    float: left;
+                  }
+                }
+              }
+
+              .price {
+                width: 175px;
+                padding: 0 7px;
+                margin-bottom: 5px;
+
+                .last-price {
+                  float: left;
+                  font-size: 16px;
+                  font-weight: 600;
+                }
+
+                .percentage {
+                  float: right;
+                  font-size: 16px;
+                  font-weight: 400;
+                }
+              }
+
+              .mainFactor {
+                width: 175px;
+                border-top: 2px solid #323641;
+                padding: 7px;
+
+                .factor {
+                  font-size: 12px;
+                  color: #FFFFFF;
+                  font-weight: 400;
+                  line-height: 1.6;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                }
+              }
+            }
+          }
+
+          .tile__back {
+            display: block;
+            position: absolute;
+            float: left;
+            width: 181px;
+            height: 181px;
+            background-color: #ffffff;
+            box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.30);
+            border-radius: 7px;
+            padding: 0px;
+            border: 3px solid #1199ff;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotatey(-180deg);
+            transform: rotatey(-180deg);
+
+            .tile__contents {
+              position: relative;
+
+              .symbol {
+                width: 175px;
+                padding: 8px 7px 5px;
+                height: 135px;
+                overflow: hidden;
+
+                .ticker {
+                  font-size: 24px;
+                  font-weight: 700;
+                  margin: 0px;
+                  color: #4a4a4a;
+                  line-height: 1;
+                  float: left;
+                }
+
+                .rating {
+                  float: left;
+                  width: 175px;
+                  margin: 0px;
+
+                  img {
+                    width: 40px;
+                    margin: 1px 10px 0 0;
+                    float: left;
+                  }
+                }
+              }
+
+              .tile__actions {
+                width: 175px;
+                height: 40px;
+                background-image: linear-gradient(0deg, #6F7689 0%, #313540 100%);
+                border-radius: 0px 0px 4px 4px;
+
+                .nav {
+                  margin-left: 2px;
+
+                  .nav-item {
+                    cursor: pointer;
+                    opacity: 0.8;
+
+                    &:hover {
+                      opacity: 1;
+                    }
+
+                    .nav-link {
+                      display: block;
+                      padding: .75em .75em;
+
+                      svg {
+                        width: 22px;
+                        height: 22px;
+                      }
+
+                      svg g {
+                        fill: #ffffff;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.discovery__tile.selected {
+
+  .tile__front {
+    border: 3px solid #1199ff;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.30);
+    z-index: 0;
+
+    .cornerFlip {
+
+      a {
+        display: block;
+        position: absolute;
+        bottom: -1px;
+        right: 0;
+        width: 19px;
+        height: 19px;
+        z-index: 10;
+        background-image: url('/../../../assets/imgs/dogEar.svg');
+
+        &:hover {
+          background-image: url('/../../../assets/imgs/dogEar_hover.svg');
+        }
+      }
+    }
+  }
+}
+
+.discovery__tile.flipped {
+  -webkit-transform: rotatey(-180deg);
+  transform: rotatey(-180deg);
+}
+
+.cornerFlip a {
+  display: none;
+  position: absolute;
+  bottom: -1px;
+  right: 0;
+  cursor: pointer;
+}
+
+.tile__pgr {
+  display: block;
+  float: left;
+
+  .pgr__sliders {
+    margin-top: 7px;
+
+    li {
+      margin: 1px 0 0px;
+
+      .sliderBar-container {
+
+        .pgr__label {
+          font-weight: 600;
+          font-size: 11px;
+          color: $font-color--MD;
+          text-transform: uppercase;
+          margin: 2px 0 2px;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
