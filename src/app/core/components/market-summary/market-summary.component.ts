@@ -75,7 +75,7 @@ export class MarketSummaryComponent implements OnInit, OnDestroy {
       this.initialMarketSectorData();
       this.presentDate = moment(new Date, 'America/New_York');
       this.currentTime = this.presentDate.format('h:mma');
-    }, 1000 );
+    }, 1000 * 60 );
   }
 
   ngOnDestroy() {
