@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="119px" height="61px" viewBox="0 0 119 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>Bullish Arc Large</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="58.3779871%" y1="100%" x2="58.3779846%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#EB0000" offset="0%"></stop>
+            <stop stop-color="#FF5731" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Bullish-Arc-Large" fill="url(#linearGradient-1)">
+            <path d="M0,60.5121101 L23.5080816,60.5121101 C23.5080816,40.2984059 39.6180603,23.9117767 59.4905028,23.9117767 C79.3629453,23.9117767 95.6127563,40.2984059 95.6127563,60.5121101 L118.98147,60.5121101 C118.98147,27.091949 92.3464416,0 59.4905028,0 C26.6350286,0 0,27.091949 0,60.5121101 Z" id="Combined-Shape"></path>
+        </g>
+    </g>
+</svg>

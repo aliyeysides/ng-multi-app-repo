@@ -16,11 +16,13 @@ export interface MarketData {
 @Component({
   selector: 'cpt-market-summary',
   template: `
-    <h3>Markets</h3>
-    <p>As of {{currentTime}}</p>
-    <p>SPY {{SPY?.change}}%</p>
-    <p>DJI {{DJI?.change}}%</p>
-    <p>NASD {{QQQ?.change}}%</p>
+    <div class="market-summary__contents">
+      <h3>Markets</h3>
+      <p class="current-time">As of {{currentTime}}</p>
+      <p class="indice">SPY&nbsp; {{SPY?.change}}%</p>
+      <p class="indice">DJI&nbsp; {{DJI?.change}}%</p>
+      <p class="indice">NASD&nbsp; {{QQQ?.change}}%</p>
+    </div>
   `,
   styleUrls: ['./market-summary.component.scss']
 })
