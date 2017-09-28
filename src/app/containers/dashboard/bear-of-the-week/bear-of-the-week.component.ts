@@ -17,7 +17,7 @@ import { Component, OnInit } from '@angular/core';
         <div class="container">
           <div class="row">
             <div class="col-sm-6">
-              <img class="rating" src="../../assets/imgs/arc_VeryBearish.svg">
+              <img class="rating" src="assets/imgs/arc_VeryBearish.svg">
               <p class="ticker">TSLA</p>
             </div>
             <div class="col-sm-6">

@@ -27,7 +27,7 @@ import { Component, OnInit } from '@angular/core';
       <ul class="post-body post-body--userlist">
         <li class="row no-gutters">
           <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="../../assets/imgs/arc_VeryBullish.svg">
+            <img class="align-absolute" src="./assets/imgs/arc_VeryBullish.svg">
           </div>
           <div class="col-3 stock__ticker">
             <p class="ticker">CMCSA</p>
@@ -44,7 +44,7 @@ import { Component, OnInit } from '@angular/core';
         </li>
         <li class="row no-gutters">
           <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="../../assets/imgs/arc_VeryBullish.svg">
+            <img class="align-absolute" src="./assets/imgs/arc_VeryBullish.svg">
           </div>
           <div class="col-3 stock__ticker">
             <p class="ticker">T</p>
@@ -60,7 +60,7 @@ import { Component, OnInit } from '@angular/core';
         </li>
         <li class="row no-gutters">
           <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="../../assets/imgs/arc_Bearish.svg">
+            <img class="align-absolute" src="./assets/imgs/arc_Bearish.svg">
           </div>
           <div class="col-3 stock__ticker">
             <p class="ticker">YUM</p>
@@ -76,7 +76,7 @@ import { Component, OnInit } from '@angular/core';
         </li>
         <li class="row no-gutters">
           <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="../../assets/imgs/arc_VeryBullish.svg">
+            <img class="align-absolute" src="./assets/imgs/arc_VeryBullish.svg">
           </div>
           <div class="col-3 stock__ticker">
             <p class="ticker">AMZN</p>
@@ -93,7 +93,7 @@ import { Component, OnInit } from '@angular/core';
         </li>
         <li class="row no-gutters">
           <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="../../assets/imgs/arc_VeryBearish.svg">
+            <img class="align-absolute" src="./assets/imgs/arc_VeryBearish.svg">
           </div>
           <div class="col-3 stock__ticker">
             <p class="ticker">CMCSA</p>
@@ -110,7 +110,7 @@ import { Component, OnInit } from '@angular/core';
         </li>
         <li class="row no-gutters">
           <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="../../assets/imgs/arc_VeryBearish.svg">
+            <img class="align-absolute" src="./assets/imgs/arc_VeryBearish.svg">
           </div>
           <div class="col-3 stock__ticker">
             <p class="ticker">CMCSA</p>
@@ -127,7 +127,7 @@ import { Component, OnInit } from '@angular/core';
         </li>
         <li class="row no-gutters">
           <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="../../assets/imgs/arc_VeryBearish.svg">
+            <img class="align-absolute" src="./assets/imgs/arc_VeryBearish.svg">
           </div>
           <div class="col-3 stock__ticker">
             <p class="ticker">CMCSA</p>

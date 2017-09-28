@@ -23,7 +23,7 @@ import {SignalService} from '../../../core/services/signal.service';
           <p class="change" [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
             {{ stock ? stock['Change'] : null }}</p>
           <p class="percentage" [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
-            {{ stock ? stock['Percentage'] : null }}</p>
+            {{ stock ? stock['Percentage'] : null }}%</p>
         </div>
         <div class="base-stock__actions">
           <a (click)="viewStockReport(stock?.symbol)">
@@ -113,9 +113,9 @@ export class DiscoverySeedComponent implements AfterViewInit, OnDestroy {
     return this.signalService.appendPGRText(pgr);
   }
 
-  // public addToList(val: AddListConfig) {
+  public addToList(val: any) {
   //   this.addToListClicked.emit(val);
-  // }
+  }
 
   public viewStockReport(symbol: string) {
     this.viewStockReportClicked.emit(symbol);
