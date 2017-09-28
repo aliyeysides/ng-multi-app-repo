@@ -5,11 +5,11 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <div class="container-fluid dashboard">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6 col-lg-7 col-xl-8">
           <cpt-bearish-insights></cpt-bearish-insights>
           <cpt-idea-lists></cpt-idea-lists>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6 col-lg-5 col-xl-4">
           <cpt-bear-of-the-week></cpt-bear-of-the-week>
           <cpt-user-lists></cpt-user-lists>
           <cpt-best-bear-ideas></cpt-best-bear-ideas>

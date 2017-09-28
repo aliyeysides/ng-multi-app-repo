@@ -4,16 +4,16 @@ import { Component, OnInit } from '@angular/core';
   selector: 'cpt-user-lists',
   template: `
     <div class="insights__container insights__container--list">
-      <div class="post-head">
+      <div class="post-head post-head--userlist">
         <div class="clearfix">
           <h4><a class="active">Holding</a> <span class="divider-toggle">|</span> <a class="">Watching</a></h4>
           <a class="post-head__button">
-            <i class="fa fa-plus-circle" aria-hidden="true"></i>
-             <span>&nbsp;Add Stock</span>
-          </a>
-          <a class="post-head__button">
             <i class="fa fa-external-link-square" aria-hidden="true"></i>
              <span>&nbsp;View List</span>
+          </a>          
+          <a class="post-head__button">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+             <span>&nbsp;Add Stock</span>
           </a>
         </div>
         <div class="col-header__container row no-gutters">
