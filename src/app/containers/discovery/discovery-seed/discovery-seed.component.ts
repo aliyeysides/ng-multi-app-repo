@@ -26,7 +26,7 @@ import {SignalService} from '../../../core/services/signal.service';
             {{ stock ? stock['Percentage'] : null }}</p>
         </div>
         <div class="base-stock__actions">
-          <a (click)="viewStockReport(stock?.symbol)"><img src="assets/imgs/icon-stockview.svg" width="" alt="">
+          <a (click)="viewStockReport(stock?.symbol)">
             <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg"
                  xmlns:xlink="http://www.w3.org/1999/xlink">
               <defs></defs>
@@ -36,8 +36,7 @@ import {SignalService} from '../../../core/services/signal.service';
               </g>
             </svg>
           </a>
-          <a (click)="addToList({symbol: stock?.symbol, listName: 'Watching'})"><img src="assets/imgs/icon-watch.svg"
-                                                                                     width="" alt="">
+          <a (click)="addToList({symbol: stock?.symbol, listName: 'Watching'})">
             <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg"
                  xmlns:xlink="http://www.w3.org/1999/xlink">
               <defs></defs>
@@ -47,8 +46,7 @@ import {SignalService} from '../../../core/services/signal.service';
               </g>
             </svg>
           </a>
-          <a (click)="addToList({symbol: stock?.symbol, listName: 'Holding'})"><img src="assets/imgs/icon-hold.svg"
-                                                                                    width="" alt="">
+          <a (click)="addToList({symbol: stock?.symbol, listName: 'Holding'})">
             <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg"
                  xmlns:xlink="http://www.w3.org/1999/xlink">
               <defs></defs>

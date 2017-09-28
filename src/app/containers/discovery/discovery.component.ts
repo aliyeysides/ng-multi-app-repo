@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {DiscoveryService} from '../../core/services/discovery.service';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -18,21 +18,22 @@ import {Idea} from '../../shared/models/idea';
                                [metaInfo]="metaInfo"></cpt-discovery-seed>
         </div>
         <div class="body__bottom">
-          <!--<app-discovery-results (addToListClicked)="addToList($event)"-->
-                                 <!--(viewStockReportClicked)="viewStockReport($event)"-->
-                                 <!--(viewStockDiscoveryClicked)="viewStockDiscovery($event)"-->
-                                 <!--[results]="results"></app-discovery-results>-->
+          <cpt-discovery-results (addToListClicked)="addToList($event)"
+                                 (viewStockReportClicked)="viewStockReport($event)"
+                                 (viewStockDiscoveryClicked)="viewStockDiscovery($event)"
+                                 [results]="results"></cpt-discovery-results>
         </div>
       </div>
     </div>
   `,
-  styleUrls: ['./discovery.component.scss']
+  styleUrls: ['./discovery.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DiscoveryComponent implements OnInit, OnDestroy {
 
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   public metaInfo: Idea;
-  // public results: object[];
+  public results: object[];
 
   constructor(private router: Router,
               private discoveryService: DiscoveryService,
@@ -68,7 +69,7 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
 
   private parseDiscoveryResponse(res: object) {
     this.metaInfo = res['metainfo'] as Idea;
-    // this.results = res['results'];
+    this.results = res['results'];
   }
 
 }
