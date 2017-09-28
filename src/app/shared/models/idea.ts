@@ -15,6 +15,8 @@ export interface Idea {
   Percentage: number;
   industry_ListID: number;
   SummaryRating: number;
+  most_significant_shared_factor?: string;
+  logo_url?: string;
 }
 
 export interface IdeaList {

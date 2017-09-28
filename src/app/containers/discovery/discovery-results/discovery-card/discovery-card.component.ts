@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/core';
 import {SignalService} from '../../../../core/services/signal.service';
 import {Router} from '@angular/router';
+import {Idea} from '../../../../shared/models/idea';
 
 @Component({
   selector: 'cpt-discovery-card',
@@ -170,7 +171,7 @@ export class DiscoveryCardComponent implements AfterViewInit {
 
   @Output('addToListClicked') public addToListClicked = new EventEmitter();
 
-  @Input() stock: object;
+  @Input() stock: Idea;
 
   constructor(private signalService: SignalService,
               private router: Router) {
@@ -191,9 +192,9 @@ export class DiscoveryCardComponent implements AfterViewInit {
     return this.signalService.appendPGRImage(pgr);
   }
 
-  // public addToList(val: AddListConfig) {
+  public addToList(ticker: string, list: string) {
   //   this.addToListClicked.emit(val);
-  // }
+  }
 
   public viewStockReport(ticker: string) {
     this.router.navigate(['/report', ticker]);

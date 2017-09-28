@@ -13,15 +13,15 @@ import {Idea} from '../../shared/models/idea';
           <div class="row--header header text-center row no-gutters">
             <h1 class="col-12">Discovery Results for</h1>
           </div>
-          <cpt-discovery-seed (addToListClicked)="addToList($event)"
-                               (viewStockReportClicked)="viewStockReport($event)"
-                               [metaInfo]="metaInfo"></cpt-discovery-seed>
+          <cpt-discovery-seed
+            (viewStockReportClicked)="viewStockReport($event)"
+            [metaInfo]="metaInfo"></cpt-discovery-seed>
         </div>
         <div class="body__bottom">
-          <cpt-discovery-results (addToListClicked)="addToList($event)"
-                                 (viewStockReportClicked)="viewStockReport($event)"
-                                 (viewStockDiscoveryClicked)="viewStockDiscovery($event)"
-                                 [results]="results"></cpt-discovery-results>
+          <cpt-discovery-results
+            (viewStockReportClicked)="viewStockReport($event)"
+            (viewStockDiscoveryClicked)="viewStockDiscovery($event)"
+            [results]="results"></cpt-discovery-results>
         </div>
       </div>
     </div>
