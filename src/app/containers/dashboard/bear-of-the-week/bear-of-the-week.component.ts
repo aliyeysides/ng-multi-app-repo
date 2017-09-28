@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
       <div class="post-head post-head--bearpick">
         <h4>Bear of the Week</h4>
         <div class="divider-h"></div>
-        <p class="header__post-date">Sept 27, 2017</p>
+        <p class="header__post-date">Sept 27</p>
         <a class="post-head__button">
           <i class="fa fa-calendar" aria-hidden="true"></i>
            <span>&nbsp;Previous</span>

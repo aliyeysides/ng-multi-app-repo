@@ -596,6 +596,7 @@ a.quick-link {
   .post-head {
     width: 100%;
     background-color: #313540;
+    overflow: hidden;
 
     h2, h4 {
       color: #ffffff;
@@ -710,6 +711,7 @@ a.quick-link {
       font-weight: 700;
       line-height: 1.2;
       color: #AE004D;
+      margin-bottom: 3px;
     }
 
     ul {
@@ -728,7 +730,7 @@ a.quick-link {
     }
 
     .link__read-all {
-      padding: 10px 0 5px;
+      padding: 15px 0 0px;
 
       a {
         width: 100%;
@@ -755,6 +757,9 @@ a.quick-link {
 
 
 .insights__container.insights__container--small {
+  min-width: 375px;
+  max-width: 475px;
+
   .post-head {
     height: 40px;
 
@@ -768,7 +773,7 @@ a.quick-link {
 
     .divider-h {
       height: 26px;
-      margin:7px 10px;
+      margin: 7px 10px 7px 7px;
     }
 
     .header__post-date {
@@ -781,14 +786,14 @@ a.quick-link {
       font-weight: 400;
       font-size: 11px;
       height: 40px;
-      padding: 12px 15px;
+      padding: 12px 12px;
 
       i {
         font-size: 16px;
       }
 
       span {
-        margin-left:3px;
+        margin-left:2px;
       }
     }
   }
@@ -806,6 +811,8 @@ a.quick-link {
 
 
 .insights__container.insights__container--list {
+  min-width: 375px;
+  max-width: 475px;
 
   .post-head {
     height: 60px;
