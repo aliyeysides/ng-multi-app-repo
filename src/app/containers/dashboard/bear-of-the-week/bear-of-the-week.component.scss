@@ -61,6 +61,12 @@
 		a {
 			color: $link-blue;
 			line-height: 1;
+			cursor: pointer;
+
+		    &:hover {
+		       	text-decoration:underline;
+		       	color: $link-blue;
+		    }
 		}
 	}
 }

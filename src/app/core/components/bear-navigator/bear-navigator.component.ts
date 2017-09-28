@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
     <div class="side-nav">
       <div class="side-nav__rule">
         <p>&ndash;&ndash;&ndash;&nbsp; NAVIGATION
-          &nbsp;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;</p>
+          &nbsp;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;</p>
       </div>
       <ul class="side-nav__section">
         <li *ngFor="let route of routes"

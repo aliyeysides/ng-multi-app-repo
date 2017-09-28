@@ -551,6 +551,12 @@ input:focus {
 
 
 
+/*------------------------------------*\
+  #TOP RIGHT CORNER BUTTONS
+\*------------------------------------*/
+
+
+
 
 
 a.quick-link {
@@ -575,6 +581,10 @@ a.quick-link {
 		}
 	}
 }
+
+
+
+
 
 
 
@@ -621,7 +631,6 @@ a.quick-link {
       font-weight: 400;
       position: relative;
       cursor: pointer;
-      border-left:1px solid rgba(255,255,255,0);
 
       i {
         display: inline-block;
@@ -739,6 +748,7 @@ a.quick-link {
         font-weight: 600;
         text-align: center;
         display: inline-block;
+        cursor: pointer;
 
         &:hover {
           text-decoration:underline;
