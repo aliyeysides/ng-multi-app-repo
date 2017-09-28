@@ -6,6 +6,7 @@ import {RouterModule} from '@angular/router';
 import {AppComponent} from './app.component';
 
 import {SharedModule} from './shared/index';
+
 import {ROUTES} from './app.routes';
 import {APP_CORE_MODULES} from './core/components/index';
 import {APP_CONTAINER_MODULES} from './containers/index';
@@ -24,7 +25,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
     ...APP_CORE_MODULES,
-    ...APP_CONTAINER_MODULES
+    ...APP_CONTAINER_MODULES,
   ],
   providers: [UtilService],
   bootstrap: [AppComponent]

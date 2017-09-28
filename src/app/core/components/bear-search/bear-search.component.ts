@@ -29,7 +29,7 @@ import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/c
         <h1>Search</h1>
       </div>
 
-      <!--<symbol-search></symbol-search>-->
+      <cpt-symbol-search></cpt-symbol-search>
     </div>
   `,
   styleUrls: ['./bear-search.component.scss']
