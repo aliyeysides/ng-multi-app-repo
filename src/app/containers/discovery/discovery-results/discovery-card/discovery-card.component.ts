@@ -29,7 +29,7 @@ import {Idea} from '../../../../shared/models/idea';
               {{ stock.Change }}</p>
             <p class="percentage"
                [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
-              {{ stock.Percentage }}</p>
+              {{ stock.Percentage }}%</p>
           </div>
           <div class="mainFactor">
             <p class="factor">{{ stock.most_significant_shared_factor }}</p>
