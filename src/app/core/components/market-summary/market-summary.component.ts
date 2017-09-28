@@ -1,9 +1,10 @@
-import {animate, Component, keyframes, OnDestroy, OnInit, transition, trigger, style, NgZone} from '@angular/core';
+import {Component, OnDestroy, OnInit, NgZone} from '@angular/core';
 import {MarketsSummaryService} from '../../services/markets-summary.service';
 import {Subject} from 'rxjs/Subject';
 
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {fadeInDown} from '../../../shared/animations/fadeInDown';
 
 export interface MarketData {
   change: number;
@@ -42,13 +43,7 @@ export interface MarketData {
       </p>
     </div>
   `,
-  animations: [
-    trigger('fadeInDown', [
-      transition('inactive => active', animate(1000, keyframes([
-        style({opacity: '0', transform: 'translate3d(0, -100%, 0)'}),
-        style({opacity: '1', transform: 'none'})
-      ]))),
-    ])],
+  animations: [fadeInDown()],
   styleUrls: ['./market-summary.component.scss']
 })
 export class MarketSummaryComponent implements OnInit, OnDestroy {
