@@ -1,0 +1,35 @@
+@import 'variables';
+
+.idea-lists__component {
+
+	.idea-lists__header {
+		height: 40px;
+
+		h3 {
+			display: block;
+			float: left;
+		}
+
+	    .divider-h {
+	      display: block;
+	      float: left;
+	      border-left: 1px dotted rgba(0,0,0,0.3);
+	      height: 40px;
+      	  margin:0px 50px;
+	    }
+
+		a {
+			color: $link-blue;
+			cursor: pointer;
+			font-size: 14px;
+			font-weight: 600;
+			line-height: 38px;
+		}
+	}
+
+	.idea-lists__container {
+		
+	}
+}
+
+

@@ -14,6 +14,31 @@ import { Component, OnInit } from '@angular/core';
         </a>
       </div>
       <div class="post-body post-body--bearpick">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6">
+              <img class="rating" src="../../assets/imgs/arc_VeryBearish.svg">
+              <p class="ticker">TSLA</p>
+            </div>
+            <div class="col-sm-6">
+              <p class="data data--change down-change">-1.40%</p>
+              <p class="data down-change">$336.19</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <p class="company-name">Telsa Motors</p>
+            </div>
+            <div class="col-sm-6">
+              <p class="industry-name">Autos-Tires-Trucks</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="link__see-more col-sm-12">
+              <a class="">See Commentary <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   `,
