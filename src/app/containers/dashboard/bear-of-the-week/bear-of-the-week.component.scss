@@ -1,7 +1,7 @@
 @import 'variables';
 
 .post-body--bearpick {
-	padding: 5px;
+	padding: 5px 0px;
 
 	.row {
 		padding:5px 0;
@@ -27,7 +27,7 @@
 	.data {
 		display: inline-block;
 		float: right;
-		font-size: 18px;
+		font-size: 16px;
 		font-weight: 600;
 		line-height: 32px;
 		margin-left:0px;
@@ -35,7 +35,7 @@
 	}
 
 	.data--change {
-		margin-left:40px;
+		margin-left:30px;
 	}
 
 	.company-name {

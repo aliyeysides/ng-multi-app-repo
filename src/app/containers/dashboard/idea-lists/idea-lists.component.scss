@@ -42,15 +42,15 @@
 			.list__option {
 				display: inline-block;
 				position: relative;
-				height: 140px;
+				height: 150px;
 				vertical-align: top;
 
 				.list__image {
-					width: 70px;
-					height: 70px;
+					width: 80px;
+					height: 80px;
 					position: relative !important;
-					margin: 10px 25px 10px;
-					border-radius: 35px;
+					margin: 10px 15px 10px;
+					border-radius: 40px;
 					background-image: linear-gradient(135deg, #EC2E2E 0%, #A01861 100%);
 
 					.close {
@@ -68,8 +68,8 @@
 					}
 
 					img {
-						width: 56px;
-						height: 56px;
+						width: 66px;
+						height: 66px;
 						margin: 7px;
 					}
 				}
@@ -78,8 +78,8 @@
 					font-size: 12px;
 					line-height: 1.4;
 					text-align: center;
-					font-weight: 400;
-					width: 120px;
+					font-weight: 600;
+					width: 110px;
 					padding: 0px 10px;
 					white-space: normal;
 				}
