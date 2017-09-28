@@ -6,8 +6,8 @@ import {Idea} from '../../../../shared/models/idea';
 @Component({
   selector: 'cpt-discovery-card',
   template: `
-    <div class="discovery__tile" (mouseleave)="toggleMouseOver(stock.symbol); cardFlipped[stock.symbol] = false"
-         (mouseenter)="toggleMouseOver(stock.symbol)"
+    <div class="discovery__tile"
+         (mouseenter)="toggleMouseOver(stock.symbol)" (mouseleave)="toggleMouseOver(stock.symbol)"
          [ngClass]="{'selected' : showDogEar[stock.symbol] == true, 'flipped' : cardFlipped[stock.symbol] == true }">
       <div class="tile__front">
         <div class="tile__contents">
@@ -36,7 +36,7 @@ import {Idea} from '../../../../shared/models/idea';
           </div>
         </div>
       </div>
-      <div class="tile__back">
+      <div (mouseleave)="cardFlipped[stock.symbol] = false" class="tile__back">
         <div class="tile__contents">
           <div class="symbol clearfix">
             <div class="rating">
@@ -193,7 +193,7 @@ export class DiscoveryCardComponent implements AfterViewInit {
   }
 
   public addToList(ticker: string, list: string) {
-  //   this.addToListClicked.emit(val);
+    //   this.addToListClicked.emit(val);
   }
 
   public viewStockReport(ticker: string) {
@@ -217,7 +217,7 @@ export class DiscoveryCardComponent implements AfterViewInit {
       this.cardFlipped[symbol] = true;
       return;
     }
-    this.cardFlipped[symbol] = !this.cardFlipped[symbol];
+      this.cardFlipped[symbol] = !this.cardFlipped[symbol];
   }
 
 }
