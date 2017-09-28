@@ -552,7 +552,7 @@ input:focus {
 
 
 /*------------------------------------*\
-  #TOP RIGHT CORNER BUTTONS
+  #QUICK LINKS
 \*------------------------------------*/
 
 
@@ -600,7 +600,7 @@ a.quick-link {
 .insights__container {
   width: 100%;
   border: 1px solid #cccccc;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   background-color: #ffffff;
 
   .post-head {
@@ -654,6 +654,7 @@ a.quick-link {
     background-image: linear-gradient(135deg, #B0004D 0%, #6E008C 52%, #0096D4 100%);
   }
 }
+
 
 
 /*------------------------------------*\
@@ -871,13 +872,13 @@ a.quick-link {
   }
 
   .post-body {
-    height: 170px;
+    height: 180px;
     overflow: hidden;
     overflow-y: scroll;
     padding:4px 0;
 
     li {
-      padding:5px 0;
+      padding:6px 0;
 
       .stock__PGR {
         position: relative;

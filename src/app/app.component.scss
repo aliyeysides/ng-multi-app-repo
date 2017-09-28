@@ -41,20 +41,16 @@
 		cursor: pointer;
 
 		svg {
-			width: 23px;
-			height: 23px;
+			width: 20px;
+			height: 20px;
 			float: left;
-			margin-top: 14px;
+			margin-top: 16px;
 			margin-right: 10px;
-		}
-
-		svg g {
-			fill: #ffffff;
 		}
 
 		a {
 			float: left;
-			font-size: 17px;
+			font-size: 15px;
 			font-weight: 400;
 			color: #ffffff;
 			line-height: 50px;
@@ -62,24 +58,19 @@
 		}
 
 		&:hover {
-			background-color: $background--MD-hover;
+			background-color: $background--DK2;
 
 			a {
 				color: #ffffff;
-
-			}
-
-			svg g {
-				fill: #ffffff;
 			}
 		}
 	}
 
 	.side-nav__rule {
 		width: 94%;
-		padding: 0px 15px;
-    overflow: hidden;
-    white-space: nowrap;
+		padding: 0px 15px 10px;
+    	overflow: hidden;
+    	white-space: nowrap;
 
 		p {
 			font-size: 11px;
@@ -108,7 +99,7 @@
 	height: 100vh;
 	padding-left: 180px;
 	background-color: #F8F8F8;
-  overflow-y: scroll;
+  	overflow-y: scroll;
 }
 
 
