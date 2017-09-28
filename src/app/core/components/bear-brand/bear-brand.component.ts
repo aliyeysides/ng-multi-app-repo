@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'cpt-bear-brand',
   template: `
       <div class="sidebar__logo">
-        <img class="align-absolute" src="../assets/imgs/logo-chaikin-W.svg" alt="logo">
+        <img class="align-absolute" src="./assets/imgs/logo-chaikin-W.svg" alt="logo">
       </div>
       <div class="tagline">
         <p>Mastering The Bear</p>
