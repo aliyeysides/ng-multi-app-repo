@@ -13,7 +13,7 @@ import {Component, OnInit} from '@angular/core';
             routerLinkActive="active"
             routerLink="{{ route.link }}">
           <a>
-            <i class="{{ route.icon }}"></i>
+            <img src="{{ route.icon }}">
             <span class="text">{{ route.label }}</span>
           </a>
         </li>
@@ -25,10 +25,10 @@ import {Component, OnInit} from '@angular/core';
 export class BearNavigatorComponent implements OnInit {
 
   public routes = [
-    {link: '/dashboard', icon: '', label: 'Home'},
-    {link: '/ideas', icon: '', label: 'Stock Ideas'},
-    {link: '/discovery', icon: '', label: 'Stock Discovery'},
-    {link: '/report', icon: '', label: 'Stock View'}
+    {link: '/dashboard', icon: './assets/imgs/icon_home.svg', label: 'Home'},
+    {link: '/ideas', icon: './assets/imgs/icon_bulb.svg', label: 'Stock Ideas'},
+    {link: '/discovery', icon: './assets/imgs/icon_discovery.svg', label: 'Stock Discovery'},
+    {link: '/report', icon: './assets/imgs/icon_stockview.svg', label: 'Stock View'}
   ];
 
   constructor() {

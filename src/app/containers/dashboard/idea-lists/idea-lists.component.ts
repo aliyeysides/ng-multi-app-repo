@@ -16,7 +16,7 @@ import {Component, OnInit} from '@angular/core';
               <button type="button" class="close">
                 <i class="fa fa-star" aria-hidden="true"></i>
               </button>
-              <img class="" src="../../assets/imgs/img_list-classicbears.svg">
+              <img class="" src="./assets/imgs/img_list-classicbears.svg">
             </div>
             <p class="list__label">Best Bear Ideas</p>
           </li>
@@ -25,7 +25,7 @@ import {Component, OnInit} from '@angular/core';
               <button type="button" class="close">
                 <i class="fa fa-star" aria-hidden="true"></i>
               </button>
-              <img class="" src="../../assets/imgs/img_list-sellrallies.svg">
+              <img class="" src="./assets/imgs/img_list-sellrallies.svg">
             </div>
             <p class="list__label">Sell the Rallies</p>
           <li class="list__option">
@@ -33,7 +33,7 @@ import {Component, OnInit} from '@angular/core';
               <button type="button" class="close">
                 <i class="fa fa-star" aria-hidden="true"></i>
               </button>
-              <img class="" src="../../assets/imgs/img_list-largecap.svg">
+              <img class="" src="./assets/imgs/img_list-largecap.svg">
             </div>
             <p class="list__label">Large Cap Bears</p>
           </li>
@@ -42,7 +42,7 @@ import {Component, OnInit} from '@angular/core';
               <button type="button" class="close">
                 <i class="fa fa-star" aria-hidden="true"></i>
               </button>
-              <img class="" src="../../assets/imgs/img_list-smallcap.svg">
+              <img class="" src="./assets/imgs/img_list-smallcap.svg">
             </div>
             <p class="list__label">Small Cap Bears</p>
           </li>
@@ -51,7 +51,7 @@ import {Component, OnInit} from '@angular/core';
               <button type="button" class="close">
                 <i class="fa fa-star" aria-hidden="true"></i>
               </button>
-              <img class="" src="../../assets/imgs/img_list-earningsbears.svg">
+              <img class="" src="./assets/imgs/img_list-earningsbears.svg">
             </div>
             <p class="list__label">Upcoming Earnings Bears</p>
           </li>
@@ -60,7 +60,7 @@ import {Component, OnInit} from '@angular/core';
               <button type="button" class="close">
                 <i class="fa fa-star" aria-hidden="true"></i>
               </button>
-              <img class="" src="../../assets/imgs/img_list-PGRdowngrade.svg">
+              <img class="" src="./assets/imgs/img_list-PGRdowngrade.svg">
             </div>
             <p class="list__label">Power Gauge Downgrades</p>
           </li>
@@ -69,7 +69,7 @@ import {Component, OnInit} from '@angular/core';
               <button type="button" class="close">
                 <i class="fa fa-star" aria-hidden="true"></i>
               </button>
-              <img class="" src="../../assets/imgs/img_list-dontfighttheshorts.svg">
+              <img class="" src="./assets/imgs/img_list-dontfighttheshorts.svg">
             </div>
             <p class="list__label">Don't Fight the&nbsp;Shorts</p>
           </li>
@@ -78,7 +78,7 @@ import {Component, OnInit} from '@angular/core';
               <button type="button" class="close">
                 <i class="fa fa-star" aria-hidden="true"></i>
               </button>
-              <img class="" src="../../assets/imgs/img_list-analystdarlings.svg">
+              <img class="" src="./assets/imgs/img_list-analystdarlings.svg">
             </div>
             <p class="list__label">Analyst Bears</p>
           </li>
