@@ -28,7 +28,70 @@
 	}
 
 	.idea-lists__container {
-		
+		overflow: hidden;
+		overflow-x: scroll;
+
+		ul {
+		    width: 100%;
+		    list-style-type: none;
+		    margin: auto;
+		    white-space: nowrap;
+		    margin-top: 0px;
+		    padding-top: 20px;
+
+			.list__option {
+				display: inline-block;
+				position: relative;
+				height: 140px;
+				vertical-align: top;
+
+				.list__image {
+					width: 70px;
+					height: 70px;
+					position: relative !important;
+					margin: 10px 25px 10px;
+					border-radius: 35px;
+					background-image: linear-gradient(135deg, #EC2E2E 0%, #A01861 100%);
+
+					.close {
+						float: right;
+						font-size: 10px;
+						line-height: 1;
+						color: $font-color !important;
+						text-shadow: 0 0 0 #fff !important;
+						opacity: .4;
+						margin: -2px -2px 0 0;
+
+						&:hover {
+							opacity: .6;
+						}
+					}
+
+					img {
+						width: 56px;
+						height: 56px;
+						margin: 7px;
+					}
+				}
+
+				.list__label {
+					font-size: 12px;
+					line-height: 1.4;
+					text-align: center;
+					font-weight: 400;
+					width: 120px;
+					padding: 0px 10px;
+					white-space: normal;
+				}
+
+				&:hover {
+
+					.list__image {
+						transform: scale(1.1);
+					}
+				}
+			}
+		}
 	}
 }
 
