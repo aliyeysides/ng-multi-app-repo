@@ -1,19 +1,28 @@
 import {NgModule} from '@angular/core';
-import {DiscoveryComponent} from './discovery.component';
 import {routing} from './discovery.routing';
-import {DiscoverySeedComponent} from './discovery-seed/discovery-seed.component';
+
 import {DiscoveryService} from '../../core/services/discovery.service';
+import {SharedModule} from '../../shared/index';
+import {SignalService} from '../../core/services/signal.service';
+
+import {DiscoveryComponent} from './discovery.component';
+import {DiscoverySeedComponent} from './discovery-seed/discovery-seed.component';
+import {DiscoveryResultsComponent} from './discovery-results/discovery-results.component';
+import {DiscoveryCardComponent} from './discovery-results/discovery-card/discovery-card.component';
 
 @NgModule({
   imports: [
-    routing
+    routing,
+    SharedModule
   ],
   exports: [DiscoveryComponent],
   declarations: [
     DiscoveryComponent,
-    DiscoverySeedComponent
+    DiscoverySeedComponent,
+    DiscoveryResultsComponent,
+    DiscoveryCardComponent
   ],
-  providers: [DiscoveryService]
+  providers: [DiscoveryService, SignalService]
 })
 export class DiscoveryModule {
 }
