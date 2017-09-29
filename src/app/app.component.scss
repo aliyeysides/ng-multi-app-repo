@@ -1,18 +1,32 @@
 @import 'variables';
 
+
+
+
+
+
 .navbar {
 	display:block;
 	width: 100%;
-	padding-left: 202px;
+	padding-left: 180px;
 	height: 50px;
 	border-bottom: 1px solid #CCCCCC;
 	overflow:hidden;
-	padding: 0 0px 0 202px;
+	padding: 0 0px 0 180px;
 }
+
+
+
+
+
+
+
+
+
 
 .sidebar {
 	display:block;
-	width: 202px;
+	width: 180px;
 	height: 100vh;
 	overflow: hidden;
 	position: absolute;
@@ -27,20 +41,16 @@
 		cursor: pointer;
 
 		svg {
-			width: 23px;
-			height: 23px;
+			width: 20px;
+			height: 20px;
 			float: left;
-			margin-top: 14px;
+			margin-top: 16px;
 			margin-right: 10px;
-		}
-
-		svg g {
-			fill: #ffffff;
 		}
 
 		a {
 			float: left;
-			font-size: 17px;
+			font-size: 15px;
 			font-weight: 400;
 			color: #ffffff;
 			line-height: 50px;
@@ -48,22 +58,19 @@
 		}
 
 		&:hover {
-			background-color: $background--MD-hover;
+			background-color: $background--DK2;
 
 			a {
 				color: #ffffff;
-
-			}
-
-			svg g {
-				fill: #ffffff;
 			}
 		}
 	}
 
 	.side-nav__rule {
-		width: 100%;
-		padding: 0px 15px;
+		width: 94%;
+		padding: 0px 15px 10px;
+    	overflow: hidden;
+    	white-space: nowrap;
 
 		p {
 			font-size: 11px;
@@ -74,72 +81,36 @@
 	}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 .container-main {
 	display:block;
 	width: 100%;
 	height: 100vh;
-	padding-left: 202px;
+	padding-left: 180px;
 	background-color: #F8F8F8;
+  	overflow-y: scroll;
 }
 
-@import 'variables';
 
 
 
 
-/*------------------------------------*\
-  #PRIMARY-NAV
-\*------------------------------------*/
 
 
 
 
-.top-nav {
-  position: relative;
-  z-index: 100;
 
-
-  .top-nav__contents {
-    position: absolute;
-    right:20px;
-    height: 35px;
-    top: 3px;
-
-
-    li {
-      height: 35px;
-      width: 35px;
-      margin-left: 20px;
-
-      svg {
-        width: 26px;
-        height: 26px;
-      }
-
-      svg g {
-        fill: $font-color;
-      }
-
-      a {
-
-        svg {
-          width: 26px;
-          height: 26px;
-        }
-
-        svg g {
-          fill: $font-color;
-        }
-      }
-
-      &:hover {
-        svg g {
-          fill: $link-blue;
-        }
-      }
-    }
-  }
-}
 
 
 
@@ -178,29 +149,32 @@
   position: absolute;
   top: 0;
   right: 20px;
-  font-size: 36px;
+  font-size: 30px;
   margin-left: 50px;
 }
 
 .right-sidebar__header {
   width: 100%;
-  height: 60px;
+  height: 50px;
   background-color: $link-blue;
   padding:6px 15px;
 
-  h1 {
+  h3 {
     color:#ffffff;
     float: left;
     margin-bottom:0px;
   }
 
   svg {
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     float: left;
-    margin: 5px 15px 0 0px;
+    margin: 4px 15px 0 0px;
   }
 }
+
+
+
 
 
 

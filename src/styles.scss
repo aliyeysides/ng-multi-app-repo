@@ -551,6 +551,12 @@ input:focus {
 
 
 
+/*------------------------------------*\
+  #QUICK LINKS
+\*------------------------------------*/
+
+
+
 
 
 a.quick-link {
@@ -575,6 +581,10 @@ a.quick-link {
 		}
 	}
 }
+
+
+
+
 
 
 
@@ -621,7 +631,6 @@ a.quick-link {
       font-weight: 400;
       position: relative;
       cursor: pointer;
-      border-left:1px solid rgba(255,255,255,0);
 
       i {
         display: inline-block;
@@ -647,6 +656,7 @@ a.quick-link {
 }
 
 
+
 /*------------------------------------*\
   #LARGE CONTAINER
 \*------------------------------------*/
@@ -654,6 +664,7 @@ a.quick-link {
 
 
 .insights__container.insights__container--large {
+  position: relative;
 
   .post-head {
     height: 45px;
@@ -727,24 +738,7 @@ a.quick-link {
     p {
       font-size: 14px;
       line-height: 1.55;
-    }
-
-    .link__read-all {
-      padding: 15px 0 0px;
-
-      a {
-        width: 100%;
-        color: $link-blue;
-        font-size: 17px;
-        font-weight: 600;
-        text-align: center;
-        display: inline-block;
-
-        &:hover {
-          text-decoration:underline;
-          color: $link-blue;
-        }
-      }
+      margin-bottom: 10px;
     }
   }
 }
@@ -861,13 +855,13 @@ a.quick-link {
   }
 
   .post-body {
-    height: 170px;
+    height: 180px;
     overflow: hidden;
     overflow-y: scroll;
     padding:4px 0;
 
     li {
-      padding:5px 0;
+      padding:6px 0;
 
       .stock__PGR {
         position: relative;

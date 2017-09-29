@@ -84,6 +84,10 @@ import {Component, OnInit} from '@angular/core';
           </li>
         </ul>
       </div>
+
+      <div class="idea-lists__footer row no-gutters">
+        <p class="">Idea lists updated daily</p>
+      </div>
     </div>
 
   `,

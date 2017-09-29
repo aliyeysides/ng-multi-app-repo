@@ -27,7 +27,7 @@ import { Component, OnInit } from '@angular/core';
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <p class="company-name">Telsa Motors</p>
+              <p class="company-name">Telsa Motors, Inc.</p>
             </div>
             <div class="col-sm-6">
               <p class="industry-name">Autos-Tires-Trucks</p>
