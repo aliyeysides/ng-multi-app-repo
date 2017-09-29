@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="23px" height="23px" viewBox="0 0 23 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 46.1 (44463) - http://www.bohemiancoding.com/sketch -->
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
     <title>Group 4</title>
     <desc>Created with Sketch.</desc>
     <defs>
-        <linearGradient x1="-228.722426%" y1="-269.508272%" x2="50%" y2="50%" id="linearGradient-1">
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-1">
             <stop stop-color="#6F7689" offset="0%"></stop>
             <stop stop-color="#313540" offset="100%"></stop>
         </linearGradient>
-        <path d="M0,5.00861359 C0,2.24243269 2.23993443,0 5.00861359,0 L17,0 L0,17 L0,5.00861359 Z" id="path-2"></path>
+        <path d="M6,0 L17,0 L0,17 L0,6 L0,6 C-4.05812251e-16,2.6862915 2.6862915,2.38507522e-15 6,1.77635684e-15 Z" id="path-2"></path>
         <filter x="-26.5%" y="-26.5%" width="152.9%" height="152.9%" filterUnits="objectBoundingBox" id="filter-3">
             <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
             <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
