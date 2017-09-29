@@ -7,10 +7,9 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 @Component({
   selector: 'cpt-report',
   template: `
-    <div class="stock-view__container container">
+    <div class="stock-view__container container-fluid">
       <div class="row--header header text-center row no-gutters">
-        <h1 class="col-12"><a (click)="goBack()" class="back"><i class="fa fa-reply" aria-hidden="true"></i></a> Stock
-          Report for</h1>
+        <h1 class="col-12"><a (click)="goBack()" class="back"><i class="fa fa-reply" aria-hidden="true"></i></a> Stock Report for</h1>
       </div>
       <iframe class="stock-view__iframe" id="iframeId" [src]="sanitizedSrc"></iframe>
     </div>
