@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {environment} from '../../../../environments/environment';
@@ -12,12 +12,13 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
         <h1 class="col-12"><a (click)="goBack()" class="back"><i class="fa fa-reply" aria-hidden="true"></i></a> Stock
           Report for</h1>
       </div>
-      <iframe class="stock-view__iframe" id="iframeId" [src]="sanitizedSrc"></iframe>
+      <iframe #iframe class="stock-view__iframe" id="iframeId" [src]="sanitizedSrc" (load)="onLoad()"></iframe>
     </div>
   `,
   styleUrls: ['./report.component.scss']
 })
 export class ReportComponent implements OnInit {
+  @ViewChild('iframe') iframe: ElementRef;
   public symbol: string;
   public src: string;
   public sanitizedSrc: SafeUrl;
@@ -45,6 +46,12 @@ export class ReportComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  onLoad() {
+    const iframe = this.iframe.nativeElement;
+    const doc = iframe.contentDocument || (<HTMLIFrameElement>iframe).contentWindow;
+    doc.body.style.backgroundColor = 'red';
   }
 
 

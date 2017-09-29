@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'cpt-stock-report',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
       <cpt-report></cpt-report>
     </div>
   `,
-  styleUrls: ['./stock-report.component.scss']
+  styleUrls: ['./stock-report.component.scss'],
 })
 export class StockReportComponent implements OnInit {
 

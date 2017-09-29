@@ -3,27 +3,27 @@
 
 
 .settings__container {
-	ul {
-		li {
-			padding: 10px;
+  ul {
+    li {
+      padding: 10px;
 
-			a {
-				color: $font-color;
-				font-size: 24px;
-				font-weight: 400;
+      a {
+        color: $font-color;
+        font-size: 24px;
+        font-weight: 400;
 
-				i {
+        i {
 
-				}
+        }
 
-				&:hover {
-					color: $link-blue;
-				}
-			}
+        &:hover {
+          color: $link-blue;
+        }
+      }
 
-			&:hover {
-				background-color: #ffffff;
-			}
-		}
-	}
+      &:hover {
+        background-color: #ffffff;
+      }
+    }
+  }
 }

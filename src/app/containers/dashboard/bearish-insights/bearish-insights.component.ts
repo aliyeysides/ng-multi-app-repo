@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'cpt-bearish-insights',
   template: `
+    <cpt-previous-modal #previous></cpt-previous-modal>
     <div class="insights__container insights__container--large insights__container--mainbear">
       <div class="post-head post-head--insights">
         <h2>Mastering the Bear</h2>
@@ -36,10 +37,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bearish-insights.component.scss']
 })
 export class BearishInsightsComponent implements OnInit {
+  @ViewChild('previous') previous;
 
   constructor() { }
 
   ngOnInit() {
+    console.log('modal ref', this.previous);
   }
 
 }
