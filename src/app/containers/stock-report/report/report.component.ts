@@ -50,7 +50,7 @@ export class ReportComponent implements OnInit {
   onLoad() {
     const iframe = this.iframe.nativeElement;
     const doc = iframe.contentDocument || (<HTMLIFrameElement>iframe).contentWindow;
-    doc.body.style.backgroundColor = 'red';
+    doc.rowSummaryDate.style.marginTop = '10px';
   }
 
 

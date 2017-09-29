@@ -11,13 +11,13 @@ import {Idea} from '../../shared/models/idea';
       <div class="discovery__body body">
         <div class="body__top">
           <div class="row--header header text-center row no-gutters">
-            <h1 class="col-12">Discovery Results for</h1>
+            <h1 class="col-12">Discovery results for</h1>
           </div>
           <cpt-discovery-seed
             (viewStockReportClicked)="viewStockReport($event)"
             [metaInfo]="metaInfo"></cpt-discovery-seed>
         </div>
-        <div class="body__bottom">
+        <div class="body__bottom"> 
           <cpt-discovery-results
             (viewStockReportClicked)="viewStockReport($event)"
             (viewStockDiscoveryClicked)="viewStockDiscovery($event)"
