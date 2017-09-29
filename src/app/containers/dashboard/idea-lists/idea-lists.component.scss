@@ -1,6 +1,7 @@
 @import 'variables';
 
 .idea-lists__component {
+	margin-top:15px;
 
 	.idea-lists__header {
 		height: 40px;
@@ -91,6 +92,13 @@
 					}
 				}
 			}
+		}
+	}
+
+	.idea-lists__footer {
+		p {
+			font-size: 12px;
+			font-weight: 300;
 		}
 	}
 }

@@ -600,7 +600,7 @@ a.quick-link {
 .insights__container {
   width: 100%;
   border: 1px solid #cccccc;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   background-color: #ffffff;
 
   .post-head {
@@ -664,6 +664,7 @@ a.quick-link {
 
 
 .insights__container.insights__container--large {
+  position: relative;
 
   .post-head {
     height: 45px;
@@ -737,25 +738,7 @@ a.quick-link {
     p {
       font-size: 14px;
       line-height: 1.55;
-    }
-
-    .link__read-all {
-      padding: 15px 0 0px;
-
-      a {
-        width: 100%;
-        color: $link-blue;
-        font-size: 17px;
-        font-weight: 600;
-        text-align: center;
-        display: inline-block;
-        cursor: pointer;
-
-        &:hover {
-          text-decoration:underline;
-          color: $link-blue;
-        }
-      }
+      margin-bottom: 10px;
     }
   }
 }

@@ -2,3 +2,33 @@
 
 
 
+.insights__container.insights__container--mainbear {
+	max-height: 510px;
+	overflow: hidden;
+
+	.link__read-all {
+      z-index: 200;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      height: 220px;
+      background-image: linear-gradient(180deg, rgba(255,255,255,0.00) -20%, #FFFFFF 100%);
+
+      a {
+        width: 100%;
+        color: $link-blue;
+        font-size: 17px;
+        font-weight: 600;
+        cursor: pointer;
+        position: absolute;
+        bottom:20px;
+        text-align: center;
+
+        &:hover {
+          text-decoration:underline;
+          color: $link-blue;
+        }
+      }
+    }
+}
+
