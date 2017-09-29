@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
 
 @Component({
-  selector: 'cpt-bear-previous-insights-modal',
+  selector: 'cpt-bear-weekly-previous-modal',
   template: `
     <div class="modal-header">
       <h4 class="modal-title pull-left">{{title}}</h4>
@@ -20,7 +20,7 @@ import {BsModalRef} from 'ngx-bootstrap';
     </div>
   `
 })
-export class PreviousInsightsModalComponent implements OnInit {
+export class PreviousBearsModalComponent implements OnInit {
   public title: string;
   public list: any[] = [];
 
@@ -28,6 +28,6 @@ export class PreviousInsightsModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title = 'test 1';
+    this.title = 'test 2';
   }
 }

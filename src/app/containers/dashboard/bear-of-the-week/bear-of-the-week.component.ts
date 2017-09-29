@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {PreviousBearsModalComponent} from './previous-modal/previous-modal.component';
 
 @Component({
   selector: 'cpt-bear-of-the-week',
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
         <h4>Bear of the Week</h4>
         <div class="divider-h"></div>
         <p class="header__post-date">Sept 27</p>
-        <a class="post-head__button">
+        <a (click)="openPreviousModal()" class="post-head__button">
           <i class="fa fa-calendar" aria-hidden="true"></i>
            <span>&nbsp;Previous</span>
         </a>
@@ -45,10 +47,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bear-of-the-week.component.scss']
 })
 export class BearOfTheWeekComponent implements OnInit {
+  public bearModalRef: BsModalRef;
+  public config = {
+    animated: true,
+    keyboard: true,
+    backdrop: false,
+    ignoreBackdropClick: false
+  };
 
-  constructor() { }
+  constructor(public modalService: BsModalService) {
+  }
 
   ngOnInit() {
   }
 
+  public openPreviousModal() {
+    this.bearModalRef = this.modalService.show(PreviousBearsModalComponent, this.config);
+  }
 }
