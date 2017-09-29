@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {FullListModalComponent} from './full-list-modal.component';
 
 @Component({
   selector: 'cpt-idea-lists',
@@ -7,7 +9,7 @@ import {Component, OnInit} from '@angular/core';
       <div class="idea-lists__header row no-gutters">
         <h3>Idea Lists</h3>
         <div class="divider-h"></div>
-        <a>See List Descriptions <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+        <a (click)="openFullList()">See List Descriptions <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
       </div>
       <div class="idea-lists__container row no-gutters">
         <ul class="">
@@ -94,11 +96,22 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./idea-lists.component.scss']
 })
 export class IdeaListsComponent implements OnInit {
+  public fullListModalRef: BsModalRef;
+  public config = {
+    animated: true,
+    keyboard: true,
+    backdrop: false,
+    ignoreBackdropClick: false
+  };
 
-  constructor() {
+  constructor(private modalService: BsModalService) {
   }
 
   ngOnInit() {
+  }
+
+  public openFullList() {
+    this.fullListModalRef = this.modalService.show(FullListModalComponent, this.config);
   }
 
 }

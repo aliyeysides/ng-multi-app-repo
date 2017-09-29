@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {PreviousInsightsModalComponent} from './previous-modal/previous-modal.component';
+import {PreviousInsightsModalComponent} from './modals/previous-modal.component';
+import {InsightsCommentaryModalComponent} from './modals/commentary-modal.component';
 
 @Component({
   selector: 'cpt-bearish-insights',
@@ -38,7 +39,7 @@ import {PreviousInsightsModalComponent} from './previous-modal/previous-modal.co
           breaking out of a 6-month ascending triangle. AMGN became overbought above the upper band, which has stalled
           the advance.</p>
       </div>
-      <div class="link__read-all">
+      <div (click)="openCommentaryModal()" class="link__read-all">
         <a>Read the Full Article &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
       </div>
     </div>
@@ -62,6 +63,10 @@ export class BearishInsightsComponent implements OnInit {
 
   public openPreviousModal() {
     this.insightsModalRef = this.modalService.show(PreviousInsightsModalComponent, this.config);
+  }
+
+  public openCommentaryModal() {
+    this.insightsModalRef = this.modalService.show(InsightsCommentaryModalComponent, this.config);
   }
 
 }

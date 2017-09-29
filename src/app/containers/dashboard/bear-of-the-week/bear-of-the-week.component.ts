@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {PreviousBearsModalComponent} from './previous-modal/previous-modal.component';
+import {PreviousBearsModalComponent} from './modals/previous-modal.component';
+import {WeeklyCommentaryModalComponent} from './modals/commentary-modal.component';
 
 @Component({
   selector: 'cpt-bear-of-the-week',
@@ -35,7 +36,7 @@ import {PreviousBearsModalComponent} from './previous-modal/previous-modal.compo
               <p class="industry-name">Autos-Tires-Trucks</p>
             </div>
           </div>
-          <div class="row">
+          <div (click)="openCommentaryModal()" class="row">
             <div class="link__see-more col-sm-12">
               <a class="">See Commentary <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
             </div>
@@ -63,5 +64,9 @@ export class BearOfTheWeekComponent implements OnInit {
 
   public openPreviousModal() {
     this.bearModalRef = this.modalService.show(PreviousBearsModalComponent, this.config);
+  }
+
+  public openCommentaryModal() {
+    this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
   }
 }

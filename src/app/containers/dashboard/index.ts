@@ -12,8 +12,11 @@ import {UserListsComponent} from './user-lists/user-lists.component';
 
 import {BsModalService} from 'ngx-bootstrap';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import {PreviousInsightsModalComponent} from './bearish-insights/previous-modal/previous-modal.component';
-import {PreviousBearsModalComponent} from './bear-of-the-week/previous-modal/previous-modal.component';
+import {PreviousInsightsModalComponent} from './bearish-insights/modals/previous-modal.component';
+import {PreviousBearsModalComponent} from './bear-of-the-week/modals/previous-modal.component';
+import {InsightsCommentaryModalComponent} from './bearish-insights/modals/commentary-modal.component';
+import {WeeklyCommentaryModalComponent} from './bear-of-the-week/modals/commentary-modal.component';
+import {FullListModalComponent} from './idea-lists/full-list-modal.component';
 
 @NgModule({
   imports: [
@@ -30,9 +33,18 @@ import {PreviousBearsModalComponent} from './bear-of-the-week/previous-modal/pre
     BestBearIdeasComponent,
     UserListsComponent,
     PreviousInsightsModalComponent,
-    PreviousBearsModalComponent
+    PreviousBearsModalComponent,
+    InsightsCommentaryModalComponent,
+    WeeklyCommentaryModalComponent,
+    FullListModalComponent
   ],
-  entryComponents: [PreviousInsightsModalComponent, PreviousBearsModalComponent],
+  entryComponents: [
+    PreviousInsightsModalComponent,
+    PreviousBearsModalComponent,
+    InsightsCommentaryModalComponent,
+    WeeklyCommentaryModalComponent,
+    FullListModalComponent
+  ],
   providers: [BsModalService]
 })
 export class DashboardModule {

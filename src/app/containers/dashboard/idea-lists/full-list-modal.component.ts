@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
 
 @Component({
-  selector: 'cpt-bear-previous-insights-modal',
+  selector: 'cpt-full-list-modal',
   template: `
     <div class="modal-header">
       <h4 class="modal-title pull-left">{{title}}</h4>
@@ -18,16 +18,17 @@ import {BsModalRef} from 'ngx-bootstrap';
     <div class="modal-footer">
       <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
     </div>
-  `
+  `,
+  styleUrls: ['./full-list-modal.component.scss']
 })
-export class PreviousInsightsModalComponent implements OnInit {
+export class FullListModalComponent implements OnInit {
   public title: string;
   public list: any[] = [];
 
-  constructor(public bsModalRef: BsModalRef) {
-  }
+  constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit() {
-    this.title = 'test 1';
+    this.title = 'test 5';
   }
+
 }
