@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 @Component({
   selector: 'cpt-stock-report',
   template: `
-    <div class="container stock-report">
+    <div class="container-fluid stock-report">
       <cpt-report></cpt-report>
     </div>
   `,
@@ -17,3 +17,4 @@ export class StockReportComponent implements OnInit {
   }
 
 }
+ 
