@@ -5,12 +5,15 @@ import {BsModalRef} from 'ngx-bootstrap';
   selector: 'cpt-bear-commentary-weekly-modal',
   template: `
     <div class="insights__container insights__container--large insights__container--modal"> 
-      <div class="post-head post-head--insights">
+      <div class="post-head post-head--bearpick">
         <h2 class="">{{title}}</h2>
         <div class="divider-h"></div>
         <p class="header__post-date">September 27th, 2017</p>
         <button type="button" class="post-head__button" aria-label="Close" (click)="bsModalRef.hide()">
-          <a><span aria-hidden="true">&times;</span></a>
+          <a class="">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span>&nbsp;Close</span>
+          </a>
         </button>
         <a (click)="openPreviousModal()" class="post-head__button">
           <i class="fa fa-calendar" aria-hidden="true"></i>

@@ -631,6 +631,7 @@ a.quick-link {
       font-weight: 400;
       position: relative;
       cursor: pointer;
+      background-color: transparent;
 
       i {
         display: inline-block;
@@ -652,6 +653,10 @@ a.quick-link {
 
   .post-head--insights {
     background-image: linear-gradient(135deg, #B0004D 0%, #6E008C 52%, #0096D4 100%);
+  }
+
+  .post-head--bearpick {
+    background-image: linear-gradient(45deg, #EC2E2E 0%, #92247C 100%);
   }
 }
 
