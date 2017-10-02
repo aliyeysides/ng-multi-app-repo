@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
 
@@ -12,7 +13,11 @@ import {APP_CORE_MODULES} from './core/components/index';
 import {APP_CONTAINER_MODULES} from './containers/index';
 
 import {UtilService} from './core/services/util.service';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AuthService} from './core/services/auth.service';
+
+import {BusyModule} from 'angular2-busy';
+import {AuthGuard} from './shared/auth.guard';
+import {loadingMaskConfig} from '../loading-mask-config';
 
 @NgModule({
   declarations: [
@@ -24,10 +29,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     SharedModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
+    BusyModule.forRoot(loadingMaskConfig),
     ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES,
   ],
-  providers: [UtilService],
+  providers: [UtilService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

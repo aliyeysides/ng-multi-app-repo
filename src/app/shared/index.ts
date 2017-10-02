@@ -6,6 +6,8 @@ import {RouterModule} from '@angular/router';
 import {SHARED_COMPONENTS} from './components/index';
 
 import {FullListModalComponent} from "app/shared/components/idea-lists";
+import {BusyModule} from 'angular2-busy';
+import {PipesModule} from './pipes/index';
 
 @NgModule({
   imports: [
@@ -13,12 +15,16 @@ import {FullListModalComponent} from "app/shared/components/idea-lists";
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    BusyModule,
+    PipesModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    BusyModule,
+    PipesModule,
     ...SHARED_COMPONENTS
   ],
   entryComponents: [

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {FullListModalComponent} from './full-list-modal.component';
 
@@ -95,7 +95,8 @@ import {FullListModalComponent} from './full-list-modal.component';
   `,
   styleUrls: ['./idea-lists.component.scss']
 })
-export class IdeaListsComponent implements OnInit {
+export class IdeaListsComponent implements AfterViewInit {
+  @Input('lists') lists;
   public fullListModalRef: BsModalRef;
   public config = {
     animated: true,
@@ -107,7 +108,8 @@ export class IdeaListsComponent implements OnInit {
   constructor(private modalService: BsModalService) {
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    console.log('lists', this.lists);
   }
 
   public openFullList() {

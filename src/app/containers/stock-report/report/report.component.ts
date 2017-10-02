@@ -10,7 +10,7 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
     <div class="stock-view__container container-fluid">
       <div class="row--header header text-center row no-gutters">
         <h1 class="col-3"><a (click)="goBack()" class="back"><i class="fa fa-reply" aria-hidden="true"></i></a> Stock
-          Report for</h1>
+          View for</h1>
         <cpt-symbol-search class="col-6"></cpt-symbol-search>
       </div>
       <iframe #iframe class="stock-view__iframe" id="iframeId" [src]="sanitizedSrc" (load)="onLoad()"></iframe>

@@ -116,7 +116,7 @@ export class SymbolSearchComponent implements OnInit, OnDestroy {
       } else if (this.navEndLocation == 'StockReportComponent') {
         this.gotoReport(this.searchResults[0].Symbol);
       } else {
-        this.gotoDiscovery(this.searchResults[0].Symbol);
+        this.gotoReport(this.searchResults[0].Symbol);
       }
       this.symbolSearchForm.reset();
     }

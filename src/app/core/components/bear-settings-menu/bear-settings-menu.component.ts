@@ -1,5 +1,7 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {noop} from 'rxjs/util/noop';
+import {AuthService} from '../../services/auth.service';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-bear-settings-menu',
@@ -86,7 +88,10 @@ export class BearSettingsMenuComponent implements OnInit {
     }
   ];
 
-  constructor(private el: ElementRef) {
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
+
+  constructor(private el: ElementRef,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -102,8 +107,8 @@ export class BearSettingsMenuComponent implements OnInit {
   }
 
   public logOutSession(): void {
-    // this.authService.logOutSession()
-    //   .takeUntil(this.ngUnsubscribe)
-    //   .subscribe();
+    this.authService.logOutSession()
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe();
   }
 }
