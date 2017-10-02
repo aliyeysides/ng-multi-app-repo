@@ -7,7 +7,7 @@ import {WeeklyCommentaryModalComponent} from './modals/commentary-modal.componen
   selector: 'cpt-bear-of-the-week',
   template: `
     <div class="insights__container insights__container--small">
-      <div class="post-head post-head--bearpick">
+      <div class="post-head">
         <h4>Bear of the Week</h4>
         <div class="divider-h"></div>
         <p class="header__post-date">Sept 27</p>
