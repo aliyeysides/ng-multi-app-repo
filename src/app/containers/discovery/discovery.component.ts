@@ -11,7 +11,8 @@ import {Idea} from '../../shared/models/idea';
       <div class="discovery__body body">
         <div class="body__top">
           <div class="row--header header text-center row no-gutters">
-            <h1 class="col-12">Discovery results for</h1>
+            <h1 class="col-3">Discovery results for</h1>
+            <cpt-symbol-search id="symbol-search-discovery" class="col-6"></cpt-symbol-search>
           </div>
           <cpt-discovery-seed
             (viewStockReportClicked)="viewStockReport($event)"
