@@ -4,19 +4,27 @@ import {BsModalRef} from 'ngx-bootstrap';
 @Component({
   selector: 'cpt-bear-commentary-insights-modal',
   template: `
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">{{title}}</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <ul *ngIf="list.length">
-        <li *ngFor="let item of list">{{item}}</li>
-      </ul>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+    <div class="insights__container insights__container--large insights__container--modal"> 
+      <div class="post-head post-head--insights">
+        <h2 class="">{{title}}</h2>
+        <div class="divider-h"></div>
+        <p class="header__post-date">September 27th, 2017</p>
+        <button type="button" class="post-head__button" aria-label="Close" (click)="bsModalRef.hide()">
+          <a><span aria-hidden="true">&times;</span></a>
+        </button>
+        <a (click)="openPreviousModal()" class="post-head__button">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <span>&nbsp;Previous</span>
+        </a>
+      </div>
+      <div class="post-body">
+        <ul *ngIf="list.length">
+          <li *ngFor="let item of list">{{item}}</li>
+        </ul>
+        <div class="post-footer">
+          <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+        </div>
+      </div>
     </div>
   `,
   styleUrls: ['./commentary-modal.component.scss']
@@ -29,6 +37,6 @@ export class InsightsCommentaryModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title = 'test 3';
+    this.title = 'Mastering The Bear';
   }
 }

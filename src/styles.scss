@@ -916,3 +916,101 @@ a.quick-link {
     }
   }
 }
+
+
+
+
+
+
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+}
+
+
+.modal-dialog {
+  max-width: 100%;
+  margin: 0px auto;
+  position: relative;
+  width: 100%;
+  margin: 0px;
+  background-color: rgba(0,0,0,0.8);
+  height: 100vh;
+  padding-top:50px;
+}
+
+.modal-content {
+  width:auto;
+  max-width: 1280px;
+  min-width: 600px;
+  margin: 0px auto;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background-color: transparent;
+  background-clip: padding-box;
+  border: 0px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
