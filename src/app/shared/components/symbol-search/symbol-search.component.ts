@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 
 import {FormControl} from '@angular/forms';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import {Subject} from 'rxjs/Subject';
 import {SymbolSearchService} from '../../../core/services/symbol-search.service';
 
