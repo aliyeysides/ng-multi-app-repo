@@ -4,19 +4,22 @@ import {BsModalRef} from 'ngx-bootstrap';
 @Component({
   selector: 'cpt-bear-previous-insights-modal',
   template: `
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">{{title}}</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <ul *ngIf="list.length">
-        <li *ngFor="let item of list">{{item}}</li>
-      </ul>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+
+    <div class="insights__container insights__container--large insights__container--modal">
+      <div class="post-head post-head--insights">
+        <h2 class="modal-title pull-left">{{title}}</h2>
+        <button type="button" class="post-head__button" aria-label="Close" (click)="bsModalRef.hide()">
+          <a class="">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <span>&nbsp;Close</span>
+          </a>
+        </button>
+      </div>
+      <div class="post-body">
+        <ul *ngIf="list.length">
+          <li *ngFor="let item of list">{{item}}</li>
+        </ul>
+      </div>
     </div>
   `,
   styleUrls: ['./previous-modal.component.scss']
@@ -29,6 +32,6 @@ export class PreviousInsightsModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title = 'test 1';
+    this.title = 'Previous Articles';
   }
 }

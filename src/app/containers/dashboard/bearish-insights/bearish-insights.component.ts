@@ -53,12 +53,14 @@ export class BearishInsightsComponent implements OnInit {
     keyboard: true,
     backdrop: false,
     ignoreBackdropClick: false,
+    class: 'modal-dialog--fullscreen',
   };
   public config2 = {
     animated: true,
     keyboard: true,
     backdrop: false,
     ignoreBackdropClick: false,
+    class: 'modal-dialog--popup',
   };
 
   constructor(public modalService: BsModalService) {
