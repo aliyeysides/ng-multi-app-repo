@@ -52,7 +52,13 @@ export class BearishInsightsComponent implements OnInit {
     animated: true,
     keyboard: true,
     backdrop: false,
-    ignoreBackdropClick: false
+    ignoreBackdropClick: false,
+  };
+  public config2 = {
+    animated: true,
+    keyboard: true,
+    backdrop: false,
+    ignoreBackdropClick: false,
   };
 
   constructor(public modalService: BsModalService) {
@@ -62,7 +68,7 @@ export class BearishInsightsComponent implements OnInit {
   }
 
   public openPreviousModal() {
-    this.insightsModalRef = this.modalService.show(PreviousInsightsModalComponent, this.config);
+    this.insightsModalRef = this.modalService.show(PreviousInsightsModalComponent, this.config2);
   }
 
   public openCommentaryModal() {
