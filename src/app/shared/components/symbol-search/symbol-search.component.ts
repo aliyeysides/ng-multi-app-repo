@@ -110,14 +110,16 @@ export class SymbolSearchComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.navEndLocation == 'DiscoveryComponent') {
-      this.gotoDiscovery(this.searchResults[0].Symbol);
-    } else if (this.navEndLocation == 'StockReportComponent') {
-      this.gotoReport(this.searchResults[0].Symbol);
-    } else {
-      this.gotoDiscovery(this.searchResults[0].Symbol);
+    if (this.searchResults.length != 0) {
+      if (this.navEndLocation == 'DiscoveryComponent') {
+        this.gotoDiscovery(this.searchResults[0].Symbol);
+      } else if (this.navEndLocation == 'StockReportComponent') {
+        this.gotoReport(this.searchResults[0].Symbol);
+      } else {
+        this.gotoDiscovery(this.searchResults[0].Symbol);
+      }
+      this.symbolSearchForm.reset();
     }
-    this.symbolSearchForm.reset();
   }
 
   toggleFocus() {
