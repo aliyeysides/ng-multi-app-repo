@@ -3,13 +3,13 @@
 
   <!-- ROW: ACTION BAR  -->
   <div
-    [ngClass]="{'list-view__actionbar--bulllist' : checkIfBullList(selectedListName), 'list-view__actionbar--userlist' : checkIfUserList(selectedListName), 'list-view__actionbar--bearlist' : checkIfBearList(selectedListName), 'list-view__actionbar--themelist' : checkIfThemeList(selectedListName)}"
+    [ngClass]="{'list-view__actionbar--bulllist' : checkIfBullList(currentList?.name), 'list-view__actionbar--userlist' : checkIfUserList(currentList?.name), 'list-view__actionbar--bearlist' : checkIfBearList(currentList?.name), 'list-view__actionbar--themelist' : checkIfThemeList(currentList?.name)}"
     class="list-view__actionbar row no-gutters">
     <div class="list__header col-lg-6">
 
       <p class="list__title">
-        <span><i tooltip="This is a user list." *ngIf="checkIfUserList(selectedListName)" class="fa fa-user-circle"
-                 aria-hidden="true"></i>&nbsp;{{selectedListName}}</span>
+        <span><i tooltip="This is a user list." *ngIf="checkIfUserList(currentList?.name)" class="fa fa-user-circle"
+                 aria-hidden="true"></i>&nbsp;{{ currentList?.name }}</span>
       </p>
 
       <ul class="list-sort__container">

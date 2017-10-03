@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
 // import {SharedService} from '../../../shared/shared.service';
 import {Router} from '@angular/router';
 // import {Idea} from '../../../models/idea';
@@ -7,8 +7,10 @@ import {Subscription} from 'rxjs/Subscription';
 // import {ListSelectionService} from '../../../services/list-selection.service';
 // import {IdeaListProvider} from '../../../services/idea-list.service';
 import {Subject} from 'rxjs/Subject';
-import {Idea} from '../../../shared/models/idea';
+import {Idea, IdeaList} from '../../../shared/models/idea';
 import {SignalService} from "app/core/services/signal.service";
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {IdeasService} from '../../../core/services/ideas.service';
 // import {UtilService} from '../../../services/util.service';
 
 @Component({
@@ -17,25 +19,41 @@ import {SignalService} from "app/core/services/signal.service";
   styleUrls: ['./list-view.component.scss'],
 })
 
-export class ListViewComponent implements OnInit, OnDestroy {
+export class ListViewComponent implements AfterViewInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
+  @Input('currentList')
+  set currentList(list: IdeaList) {
+    this._currentList.next(list);
+  }
+
+  get currentList() {
+    return this._currentList.getValue();
+  }
+
+  private _currentList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>({} as IdeaList);
+
   public ideaList: Array<object>;
+
   public additionalLists: boolean = false;
   public mouseHoverOptionsMap: object = {};
   public popupOptionsMap: object = {};
   public currentView: string = 'list-view';
   public showHeadlines: boolean = false;
+
   public selectedStock: Idea;
   public selectedListId: string;
   public selectedListName: string;
-  public orderByObject: object = {};
+
   public selectedStockPGR: object;
   public selectedStockChartPoints: object;
   public selectedStockSimilars: object;
+
   public headlines: any;
+  public orderByObject: object = {};
   public loadedStockIdeas: number = 0;
   public panelViewIdeasList: Array<object>;
+
   public loading: Subscription;
   public headlinesLoading: Subscription;
   public symbolListLoading: Subscription;
@@ -57,11 +75,21 @@ export class ListViewComponent implements OnInit, OnDestroy {
               private router: Router,
     //           private chartService: ChartService,
               private signalService: SignalService,
+              private ideaService: IdeasService
     //           private utilService: UtilService
   ) {
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    this._currentList
+      .takeUntil(this.ngUnsubscribe)
+      .filter(x => x !== undefined)
+      .flatMap(list => {
+        console.log('currentList', list);
+        return this.ideaService.getListSymbols(list['list_id'].toString() );
+      })
+      .subscribe(stocks => this.ideaList = stocks['symbols']);
+
     // this.ideaListProvider.selectedList$
     //   .switchMap(val => {
     //     this.selectedListName = val['name'];

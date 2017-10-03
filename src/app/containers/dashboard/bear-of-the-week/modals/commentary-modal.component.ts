@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {BsModalRef} from 'ngx-bootstrap';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {PreviousBearsModalComponent} from './previous-modal.component';
 
 @Component({
   selector: 'cpt-bear-commentary-weekly-modal',
@@ -35,11 +36,23 @@ import {BsModalRef} from 'ngx-bootstrap';
 export class WeeklyCommentaryModalComponent implements OnInit {
   public title: string;
   public list: any[] = [];
+  public bearModalRef: BsModalRef;
+  public config = {
+    animated: true,
+    keyboard: true,
+    backdrop: false,
+    ignoreBackdropClick: false
+  };
 
-  constructor(public bsModalRef: BsModalRef) {
+  constructor(public bsModalRef: BsModalRef,
+              private modalService: BsModalService) {
   }
 
   ngOnInit() {
     this.title = 'Bear of the Week';
+  }
+
+  public openPreviousModal() {
+    this.bearModalRef = this.modalService.show(PreviousBearsModalComponent, this.config);
   }
 }

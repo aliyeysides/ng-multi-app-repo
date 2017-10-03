@@ -1,6 +1,9 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {FullListModalComponent} from './full-list-modal.component';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {IdeaList} from '../../models/idea';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-idea-lists',
@@ -13,76 +16,14 @@ import {FullListModalComponent} from './full-list-modal.component';
       </div>
       <div class="idea-lists__container row no-gutters">
         <ul class="">
-          <li class="list__option">
+          <li (click)="emitListSelected(list)" *ngFor="let list of lists" class="list__option">
             <div class="list__image">
               <button type="button" class="close">
                 <i class="fa fa-star" aria-hidden="true"></i>
               </button>
               <img class="" src="./assets/imgs/img_list-classicbears.svg">
             </div>
-            <p class="list__label">Best Bear Ideas</p>
-          </li>
-          <li class="list__option">
-            <div class="list__image">
-              <button type="button" class="close">
-                <i class="fa fa-star" aria-hidden="true"></i>
-              </button>
-              <img class="" src="./assets/imgs/img_list-sellrallies.svg">
-            </div>
-            <p class="list__label">Sell the Rallies</p>
-          <li class="list__option">
-            <div class="list__image">
-              <button type="button" class="close">
-                <i class="fa fa-star" aria-hidden="true"></i>
-              </button>
-              <img class="" src="./assets/imgs/img_list-largecap.svg">
-            </div>
-            <p class="list__label">Large Cap Bears</p>
-          </li>
-          <li class="list__option">
-            <div class="list__image">
-              <button type="button" class="close">
-                <i class="fa fa-star" aria-hidden="true"></i>
-              </button>
-              <img class="" src="./assets/imgs/img_list-smallcap.svg">
-            </div>
-            <p class="list__label">Small Cap Bears</p>
-          </li>
-          <li class="list__option">
-            <div class="list__image">
-              <button type="button" class="close">
-                <i class="fa fa-star" aria-hidden="true"></i>
-              </button>
-              <img class="" src="./assets/imgs/img_list-earningsbears.svg">
-            </div>
-            <p class="list__label">Upcoming Earnings Bears</p>
-          </li>
-          <li class="list__option">
-            <div class="list__image">
-              <button type="button" class="close">
-                <i class="fa fa-star" aria-hidden="true"></i>
-              </button>
-              <img class="" src="./assets/imgs/img_list-PGRdowngrade.svg">
-            </div>
-            <p class="list__label">Power Gauge Downgrades</p>
-          </li>
-          <li class="list__option">
-            <div class="list__image">
-              <button type="button" class="close">
-                <i class="fa fa-star" aria-hidden="true"></i>
-              </button>
-              <img class="" src="./assets/imgs/img_list-dontfighttheshorts.svg">
-            </div>
-            <p class="list__label">Don't Fight the&nbsp;Shorts</p>
-          </li>
-          <li class="list__option">
-            <div class="list__image">
-              <button type="button" class="close">
-                <i class="fa fa-star" aria-hidden="true"></i>
-              </button>
-              <img class="" src="./assets/imgs/img_list-analystdarlings.svg">
-            </div>
-            <p class="list__label">Analyst Bears</p>
+            <p class="list__label">{{list.name}}</p>
           </li>
         </ul>
       </div>
@@ -96,7 +37,18 @@ import {FullListModalComponent} from './full-list-modal.component';
   styleUrls: ['./idea-lists.component.scss']
 })
 export class IdeaListsComponent implements AfterViewInit {
-  @Input('lists') lists;
+  @Output('listSelected') listSelected: EventEmitter<IdeaList> = new EventEmitter<IdeaList>();
+  @Input('lists')
+  set lists(lists: object[]) {
+    this._lists.next(lists);
+  }
+
+  get lists() {
+    return this._lists.getValue();
+  }
+
+  private _lists: BehaviorSubject<object[]> = new BehaviorSubject<object[]>([]);
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   public fullListModalRef: BsModalRef;
   public config = {
     animated: true,
@@ -109,11 +61,17 @@ export class IdeaListsComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log('lists', this.lists);
+    this._lists
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(lists => console.log('lists', lists));
   }
 
   public openFullList() {
     this.fullListModalRef = this.modalService.show(FullListModalComponent, this.config);
+  }
+
+  public emitListSelected(list: IdeaList) {
+    this.listSelected.emit(list);
   }
 
 }
