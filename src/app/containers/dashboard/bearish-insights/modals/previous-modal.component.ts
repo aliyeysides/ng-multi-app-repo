@@ -21,27 +21,27 @@ import {BsModalRef} from 'ngx-bootstrap';
         </ul>-->
         <ul>
           <li>
-            <p class="header__post-date">September 27th, 2017</p>
+            <p class="header__post-date"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; September 27th, 2017</p>
             <h5>The Dow Jones Industrials Make a Series of All-Time Highs, but the Nasdaq and the S&amp;P&nbsp;500 Indices Lag</h5>
           </li>
           <li>
-            <p class="header__post-date">September 27th, 2017</p>
+            <p class="header__post-date"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; September 27th, 2017</p>
             <h5>The Dow Jones Industrials Make a Series of All-Time Highs, but the Nasdaq and the S&amp;P&nbsp;500 Indices Lag</h5>
           </li>
           <li>
-            <p class="header__post-date">September 27th, 2017</p>
+            <p class="header__post-date"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; September 27th, 2017</p>
             <h5>The Dow Jones Industrials Make a Series of All-Time Highs, but the Nasdaq and the S&amp;P&nbsp;500 Indices Lag</h5>
           </li>
           <li>
-            <p class="header__post-date">September 27th, 2017</p>
+            <p class="header__post-date"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; September 27th, 2017</p>
             <h5>The Dow Jones Industrials Make a Series of All-Time Highs, but the Nasdaq and the S&amp;P&nbsp;500 Indices Lag</h5>
           </li>
           <li>
-            <p class="header__post-date">September 27th, 2017</p>
+            <p class="header__post-date"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; September 27th, 2017</p>
             <h5>The Dow Jones Industrials Make a Series of All-Time Highs, but the Nasdaq and the S&amp;P&nbsp;500 Indices Lag</h5>
           </li>
           <li>
-            <p class="header__post-date">September 27th, 2017</p>
+            <p class="header__post-date"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; September 27th, 2017</p>
             <h5>The Dow Jones Industrials Make a Series of All-Time Highs, but the Nasdaq and the S&amp;P&nbsp;500 Indices Lag</h5>
           </li>
         </ul>

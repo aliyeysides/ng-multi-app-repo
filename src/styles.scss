@@ -712,6 +712,10 @@ a.quick-link {
   outline: 0;
   height: 100vh;
   background-color: rgba(0,0,0,0.8);
+
+  button {
+    outline:0;
+  }
 }
 
 
@@ -743,7 +747,7 @@ a.quick-link {
 
 .modal-dialog.modal-dialog--popup {
   border-radius: 0.5rem;
-  padding-top:50px;
+  padding-top: 50px;
 
   .modal-content {
     width: 100%;
@@ -768,6 +772,9 @@ a.quick-link {
         font-size: 20px;
         padding-bottom: 18px;
         border-bottom: 3px solid #efefef;
+      }
+      .header__post-date {
+        color: #B0004D
       }
     }
   }
