@@ -4,7 +4,6 @@ import {routing} from './dashboard.routing';
 import {SharedModule} from '../../shared/index';
 
 import {DashboardComponent} from './dashboard.component';
-import {IdeaListsComponent} from './idea-lists/idea-lists.component';
 import {BearishInsightsComponent} from './bearish-insights/bearish-insights.component';
 import {BearOfTheWeekComponent} from './bear-of-the-week/bear-of-the-week.component';
 import {BestBearIdeasComponent} from './best-bear-ideas/best-bear-ideas.component';
@@ -16,7 +15,6 @@ import {PreviousInsightsModalComponent} from './bearish-insights/modals/previous
 import {PreviousBearsModalComponent} from './bear-of-the-week/modals/previous-modal.component';
 import {InsightsCommentaryModalComponent} from './bearish-insights/modals/commentary-modal.component';
 import {WeeklyCommentaryModalComponent} from './bear-of-the-week/modals/commentary-modal.component';
-import {FullListModalComponent} from './idea-lists/full-list-modal.component';
 
 @NgModule({
   imports: [
@@ -27,7 +25,6 @@ import {FullListModalComponent} from './idea-lists/full-list-modal.component';
   exports: [DashboardComponent],
   declarations: [
     DashboardComponent,
-    IdeaListsComponent,
     BearishInsightsComponent,
     BearOfTheWeekComponent,
     BestBearIdeasComponent,
@@ -36,14 +33,12 @@ import {FullListModalComponent} from './idea-lists/full-list-modal.component';
     PreviousBearsModalComponent,
     InsightsCommentaryModalComponent,
     WeeklyCommentaryModalComponent,
-    FullListModalComponent
   ],
   entryComponents: [
     PreviousInsightsModalComponent,
     PreviousBearsModalComponent,
     InsightsCommentaryModalComponent,
     WeeklyCommentaryModalComponent,
-    FullListModalComponent
   ],
   providers: [BsModalService]
 })

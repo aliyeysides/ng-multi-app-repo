@@ -9,7 +9,9 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
   template: `
     <div class="stock-view__container container-fluid">
       <div class="row--header header text-center row no-gutters">
-        <h1 class="col-12"><a (click)="goBack()" class="back"><i class="fa fa-reply" aria-hidden="true"></i></a> Stock Report for</h1>
+        <h1 class="col-3"><a (click)="goBack()" class="back"><i class="fa fa-reply" aria-hidden="true"></i></a> Stock
+          View for</h1>
+        <cpt-symbol-search class="col-6"></cpt-symbol-search>
       </div>
       <iframe #iframe class="stock-view__iframe" id="iframeId" [src]="sanitizedSrc" (load)="onLoad()"></iframe>
     </div>

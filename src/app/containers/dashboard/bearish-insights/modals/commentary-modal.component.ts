@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {BsModalRef} from 'ngx-bootstrap';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {PreviousInsightsModalComponent} from './previous-modal.component';
 
 @Component({
   selector: 'cpt-bear-commentary-insights-modal',
@@ -35,11 +36,23 @@ import {BsModalRef} from 'ngx-bootstrap';
 export class InsightsCommentaryModalComponent implements OnInit {
   public title: string;
   public list: any[] = [];
+  public insightsModalRef: BsModalRef;
+  public config = {
+    animated: true,
+    keyboard: true,
+    backdrop: false,
+    ignoreBackdropClick: false,
+  };
 
-  constructor(public bsModalRef: BsModalRef) {
+  constructor(public bsModalRef: BsModalRef,
+              private modalService: BsModalService) {
   }
 
   ngOnInit() {
     this.title = 'Mastering The Bear';
+  }
+
+  public openPreviousModal() {
+    this.insightsModalRef = this.modalService.show(PreviousInsightsModalComponent, this.config);
   }
 }
