@@ -5,7 +5,7 @@ import {PreviousBearsModalComponent} from './previous-modal.component';
 @Component({
   selector: 'cpt-bear-commentary-weekly-modal',
   template: `
-    <div class="insights__container insights__container--large insights__container--modal"> 
+    <div class="insights__container insights__container--large insights__container--modal">
       <div class="post-head post-head--bearpick">
         <h2 class="">{{title}}</h2>
         <div class="divider-h"></div>
@@ -15,16 +15,14 @@ import {PreviousBearsModalComponent} from './previous-modal.component';
             <i class="fa fa-times-circle" aria-hidden="true"></i>
             <span>&nbsp;Close</span>
           </a>
-        </button>
+        </button> 
         <a (click)="openPreviousModal()" class="post-head__button">
           <i class="fa fa-calendar" aria-hidden="true"></i>
           <span>&nbsp;Previous</span>
         </a>
       </div>
       <div class="post-body">
-        <ul *ngIf="list.length">
-          <li *ngFor="let item of list">{{item}}</li>
-        </ul>
+        <div [innerHtml]="commentary"></div>
         <div class="post-footer">
           <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
         </div>
@@ -36,6 +34,7 @@ import {PreviousBearsModalComponent} from './previous-modal.component';
 export class WeeklyCommentaryModalComponent implements OnInit {
   public title: string;
   public list: any[] = [];
+  public commentary: string;
   public bearModalRef: BsModalRef;
   public config = {
     animated: true,

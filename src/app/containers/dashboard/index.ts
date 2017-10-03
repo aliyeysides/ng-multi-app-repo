@@ -15,6 +15,8 @@ import {PreviousInsightsModalComponent} from './bearish-insights/modals/previous
 import {PreviousBearsModalComponent} from './bear-of-the-week/modals/previous-modal.component';
 import {InsightsCommentaryModalComponent} from './bearish-insights/modals/commentary-modal.component';
 import {WeeklyCommentaryModalComponent} from './bear-of-the-week/modals/commentary-modal.component';
+import {WordpressService} from '../../core/services/wordpress.service';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   imports: [
@@ -40,7 +42,7 @@ import {WeeklyCommentaryModalComponent} from './bear-of-the-week/modals/commenta
     InsightsCommentaryModalComponent,
     WeeklyCommentaryModalComponent,
   ],
-  providers: [BsModalService]
+  providers: [BsModalService, WordpressService, DatePipe]
 })
 export class DashboardModule {
 }
