@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
+import {WordpressService} from '../../../../core/services/wordpress.service';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-bear-weekly-previous-modal',
@@ -15,21 +17,33 @@ import {BsModalRef} from 'ngx-bootstrap';
         </button>
       </div>
       <div class="post-body">
-        <!--<ul *ngIf="list.length">
-          <li *ngFor="let item of list">{{item}}</li>
-        </ul>-->
+        <ul>
+          <li *ngFor="let item of previousPosts">
+            {{ item }}
+          </li>
+        </ul>
       </div>
     </div>
   `
 })
 export class PreviousBearsModalComponent implements OnInit {
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   public title: string;
-  public list: any[] = [];
+  public previousPosts: object[];
 
-  constructor(public bsModalRef: BsModalRef) {
+  constructor(public bsModalRef: BsModalRef,
+              private wordpressService: WordpressService) {
   }
 
   ngOnInit() {
     this.title = 'Previous Picks';
+    this.wordpressService.getWordPressJson('48', 7)
+      .takeUntil(this.ngUnsubscribe)
+      .flatMap(items => {
+        console.log('items', items);
+        return this.previousPosts = items['0']['48'];
+      })
+      // .map(post => )
+
   }
 }
