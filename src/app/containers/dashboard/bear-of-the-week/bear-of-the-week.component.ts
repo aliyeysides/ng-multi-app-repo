@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {PreviousBearsModalComponent} from './modals/previous-modal.component';
 import {WeeklyCommentaryModalComponent} from './modals/commentary-modal.component';
+import {WordpressService} from '../../../core/services/wordpress.service';
+import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
+import {IdeasService} from '../../../core/services/ideas.service';
 
 @Component({
   selector: 'cpt-bear-of-the-week',
@@ -21,7 +25,7 @@ import {WeeklyCommentaryModalComponent} from './modals/commentary-modal.componen
           <div class="row">
             <div class="col-sm-6">
               <img class="rating" src="assets/imgs/arc_VeryBearish.svg">
-              <p class="ticker">TSLA</p>
+              <p class="ticker" [innerHTML]="ticker"></p>
             </div>
             <div class="col-sm-6">
               <p class="data data--change down-change">-1.40%</p>
@@ -48,7 +52,11 @@ import {WeeklyCommentaryModalComponent} from './modals/commentary-modal.componen
   styleUrls: ['./bear-of-the-week.component.scss']
 })
 export class BearOfTheWeekComponent implements OnInit {
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   public bearModalRef: BsModalRef;
+  public post: object;
+  public ticker: string;
+  public stockData: object;
   public config = {
     animated: true,
     keyboard: true,
@@ -56,10 +64,29 @@ export class BearOfTheWeekComponent implements OnInit {
     ignoreBackdropClick: false
   };
 
-  constructor(public modalService: BsModalService) {
+  constructor(public modalService: BsModalService,
+              private ideasService: IdeasService,
+              private wordpressSerivce: WordpressService) {
   }
 
   ngOnInit() {
+    this.wordpressSerivce.getWordPressJson('48', 1)
+      .takeUntil(this.ngUnsubscribe)
+      .filter(x => x !== undefined)
+      .flatMap(res => Observable.of(res['0']['48'][0]) )
+      .map(post => {
+        this.post = post;
+        return this.wordpressSerivce.getInsightPostTicker(post);
+      })
+      .flatMap(ticker => {
+        this.ticker = ticker.trim();
+        return this.ideasService.getStockCardData(this.ticker);
+      })
+      .subscribe(data => {
+        console.log('data', data);
+        this.stockData = data;
+        console.log('stockData', this.stockData);
+      });
   }
 
   public openPreviousModal() {
@@ -68,5 +95,6 @@ export class BearOfTheWeekComponent implements OnInit {
 
   public openCommentaryModal() {
     this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
+    this.bearModalRef.content.commentary = this.wordpressSerivce.getInsightPostBody(this.post);
   }
 }
