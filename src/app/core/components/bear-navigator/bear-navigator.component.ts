@@ -27,7 +27,7 @@ export class BearNavigatorComponent implements OnInit {
   public routes = [
     {link: '/dashboard', icon: './assets/imgs/icon_home.svg', label: 'Home'},
     {link: '/ideas', icon: './assets/imgs/icon_bulb.svg', label: 'Stock Ideas'},
-    {link: '/discovery', icon: './assets/imgs/icon_discovery.svg', label: 'Stock Discovery'},
+    {link: '/discovery', icon: './assets/imgs/icon_discovery.svg', label: 'Discovery'},
     {link: '/report', icon: './assets/imgs/icon_stockview.svg', label: 'Stock View'}
   ];
 
