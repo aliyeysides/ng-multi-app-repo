@@ -54,7 +54,8 @@ export class IdeaListsComponent implements AfterViewInit {
     animated: true,
     keyboard: true,
     backdrop: false,
-    ignoreBackdropClick: false
+    ignoreBackdropClick: false,
+    class: 'modal-dialog--fullscreen',
   };
 
   constructor(private modalService: BsModalService) {
