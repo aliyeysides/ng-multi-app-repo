@@ -41,7 +41,7 @@ import {WeeklyCommentaryModalComponent} from './modals/commentary-modal.componen
               <a class="">See Commentary <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
             </div>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
   `,
@@ -53,7 +53,16 @@ export class BearOfTheWeekComponent implements OnInit {
     animated: true,
     keyboard: true,
     backdrop: false,
-    ignoreBackdropClick: false
+    ignoreBackdropClick: false,
+    class: 'modal-dialog--fullscreen',
+  };
+
+  public config2 = {
+    animated: true,
+    keyboard: true,
+    backdrop: false,
+    ignoreBackdropClick: false,
+    class: 'modal-dialog--popup',
   };
 
   constructor(public modalService: BsModalService) {
@@ -63,7 +72,7 @@ export class BearOfTheWeekComponent implements OnInit {
   }
 
   public openPreviousModal() {
-    this.bearModalRef = this.modalService.show(PreviousBearsModalComponent, this.config);
+    this.bearModalRef = this.modalService.show(PreviousBearsModalComponent, this.config2);
   }
 
   public openCommentaryModal() {
