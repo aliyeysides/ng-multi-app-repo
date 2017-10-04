@@ -10,7 +10,7 @@ import {Subject} from 'rxjs/Subject';
   template: `
     <div class="idea-lists__component container-fluid">
       <div class="idea-lists__header row no-gutters">
-        <h3>Idea Lists</h3>
+        <h1>Idea Lists</h1>
         <div class="divider-h"></div>
         <a (click)="openFullList()">See List Descriptions <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
       </div>

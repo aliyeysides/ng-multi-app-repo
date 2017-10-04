@@ -25,7 +25,7 @@ import {IdeasService} from '../../../core/services/ideas.service';
           <div class="row">
             <div class="col-sm-6">
               <img class="rating" src="assets/imgs/arc_VeryBearish.svg">
-              <p class="ticker" [innerHTML]="ticker"></p>
+              <p class="ticker">TSLA</p>
             </div>
             <div class="col-sm-6">
               <p class="data data--change down-change">-1.40%</p>

@@ -12,7 +12,7 @@ import {Component, OnInit} from '@angular/core';
 export class StockReportComponent implements OnInit {
 
   constructor() { }
-
+ 
   ngOnInit() {
   }
 

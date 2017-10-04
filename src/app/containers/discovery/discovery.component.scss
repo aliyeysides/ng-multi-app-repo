@@ -4,27 +4,12 @@
   #DISCOVERY
 \*------------------------------------*/
 
-.discovery__body {
+.discovery__container {
 
   .body__top {
     background-color: #f8f8f8;
     height: 210px;
     position: relative;
-
-    .row--header {
-      padding: 10px 25px 0 73px;
-
-      h1 {
-        float: left;
-        text-align: left;
-        margin-bottom: 15px;
-        margin-right: 10px;
-      }
-
-      .search__header {
-        float: left;
-      }
-    }
 
     .discovery__base-stock {
       padding: 5px 25px 0px 100px;
