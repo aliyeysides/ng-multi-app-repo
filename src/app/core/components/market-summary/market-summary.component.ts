@@ -18,7 +18,7 @@ export interface MarketData {
   selector: 'cpt-market-summary',
   template: `
     <div class="market-summary__contents">
-      <h3>Markets</h3>
+      <h4>Markets</h4>
       <p class="current-time">As of {{currentTime}}</p>
       <p class="indice">
         SPY&nbsp;

@@ -6,11 +6,14 @@
 	height: 50px;
 	float: left;
 
-	h3 {
+	h4 {
 		display: inline-block;
 		float: left;
-		line-height: 48px;
+		line-height: 52px;
 		height: 50px;
+		text-transform: uppercase;
+		font-size: 20px;
+		font-weight: 700;
 	}
 
 	p.current-time {

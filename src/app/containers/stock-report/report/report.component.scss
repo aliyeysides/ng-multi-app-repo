@@ -1,39 +1,15 @@
 @import 'variables';
 
 
+
 .stock-view__container {
   position: relative;
-  background-color: #F8f8f8;
+  background-color: #FFFFFF;
   height: 100vh;
-  padding:0 25px;
-
 
   .stock-view__iframe {
     width: 100%;
-    height: 80%;
-    border: 1px solid #cccccc;
-  }
-
-  .row--header {
-      background-color: #F8f8f8;
-      padding: 15px 10px 0px;
-
-
-    h1 {
-      text-align: left;
-      float: left;
-
-      .back {
-        display: inline-block;
-        color: $font-color;
-        opacity: 0.5;
-        font-size: 28px;
-        margin-right: 15px;
-
-        &:hover {
-          opacity: 1;
-        }
-      }
-    }
+    height: 100%;
+    margin-top: 20px;
   }
 }
