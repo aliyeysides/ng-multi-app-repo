@@ -13,7 +13,7 @@ import {SignalService} from '../../../core/services/signal.service';
 @Component({
   selector: 'cpt-bear-of-the-week',
   template: `
-    <div [ngBusy]="loading" class="insights__container insights__container--small">
+    <div class="insights__container insights__container--small">
       <div class="post-head">
         <h4>Bear of the Week</h4>
         <div class="divider-h"></div>

@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Location} from '@angular/common';
 import {DiscoveryService} from '../../core/services/discovery.service';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -63,7 +64,8 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private discoveryService: DiscoveryService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private location: Location) {
   }
 
   ngOnInit() {
@@ -96,6 +98,10 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
   private parseDiscoveryResponse(res: object) {
     this.metaInfo = res['metainfo'] as Idea;
     this.results = res['results'];
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }
