@@ -35,6 +35,66 @@ import {SignalService} from '../../../core/services/signal.service';
           </ul>
         </div>
       </div>
+      <div *ngIf="stock" class="tile__pgr container-fluid">
+        <ul class="pgr__sliders row no-gutters">
+          <li class="col-12">
+            <div class="sliderBar-container row no-gutters">
+              <div class="pgr__label col-5">
+                <p>Financials</p>
+              </div>
+              <div class="sliderProgress  col-7">
+                <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['financial'])"></div>
+                <div class="sliderBar"
+                     [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['financial'])"
+                     role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="col-12">
+            <div class="sliderBar-container row no-gutters">
+              <div class="pgr__label col-5">
+                <p>Earnings</p>
+              </div>
+              <div class="sliderProgress col-7">
+                <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['earning'])"></div>
+                <div class="sliderBar"
+                     [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['earning'])"
+                     role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="col-12">
+            <div class="sliderBar-container row no-gutters">
+              <div class="pgr__label col-5">
+                <p>Technicals</p>
+              </div>
+              <div class="sliderProgress col-7">
+                <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['technical'])"></div>
+                <div class="sliderBar"
+                     [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['technical'])"
+                     role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="col-12">
+            <div class="sliderBar-container row no-gutters">
+              <div class="pgr__label col-5">
+                <p>Experts</p>
+              </div>
+              <div class="sliderProgress col-7">
+                <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['expert'])"></div>
+                <div class="sliderBar"
+                     [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['expert'])"
+                     role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   `,
   styleUrls: ['../discovery.component.scss']
@@ -44,28 +104,14 @@ export class DiscoverySeedComponent implements AfterViewInit, OnDestroy {
   @Output('addToListClicked') public addToListClicked = new EventEmitter<object>();
   @Output('viewStockReportClicked') public viewStockReportClicked = new EventEmitter();
 
-  private _metaInfo: BehaviorSubject<Idea> = new BehaviorSubject<Idea>({} as Idea);
-  @Input('metaInfo')
-  set metaInfo(val: Idea) {
-    this._metaInfo.next(val);
-  }
-
-  get metaInfo() {
-    return this._metaInfo.getValue();
-  }
+  @Input('metaInfo') stock;
 
   private ngUnsubscribe: Subject<void> = new Subject<void>();
-  public stock: Idea;
 
   constructor(private signalService: SignalService) {
   }
 
   ngAfterViewInit() {
-    this._metaInfo
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe(res => {
-        this.stock = res as Idea;
-      })
   }
 
   ngOnDestroy() {
@@ -87,6 +133,14 @@ export class DiscoverySeedComponent implements AfterViewInit, OnDestroy {
 
   public viewStockReport(symbol: string) {
     this.viewStockReportClicked.emit(symbol);
+  }
+
+  public appendSliderClass(pgr) {
+    return this.signalService.appendSliderClass(pgr);
+  }
+
+  public appendSliderBarClass(pgr) {
+    return this.signalService.appendSliderBarClass(pgr);
   }
 
 }

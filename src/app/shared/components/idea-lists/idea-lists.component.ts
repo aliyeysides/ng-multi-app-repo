@@ -4,6 +4,7 @@ import {FullListModalComponent} from './full-list-modal.component';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {IdeaList} from '../../models/idea';
 import {Subject} from 'rxjs/Subject';
+import {ClassMap, IDEAS_LIST_CLASSMAP} from '../../models/idea-list-class-map';
 
 @Component({
   selector: 'cpt-idea-lists',
@@ -16,14 +17,17 @@ import {Subject} from 'rxjs/Subject';
       </div>
       <div class="idea-lists__container row no-gutters">
         <ul class="">
-          <li (click)="emitListSelected(list)" *ngFor="let list of lists" class="list__option">
-            <div class="list__image">
-              <button type="button" class="close">
-                <i class="fa fa-star" aria-hidden="true"></i>
-              </button>
-              <img class="" src="./assets/imgs/img_list-classicbears.svg">
-            </div>
-            <p class="list__label">{{list.name}}</p>
+          <li [ngClass]="{'selected': selectedList === list}" (click)="emitListSelected(list)"
+              *ngFor="let list of lists" class="list__option">
+            <ng-container *ngIf="list.is_active">
+              <div class="list__image">
+                <button type="button" class="close">
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                </button>
+                <img class="" [src]="'assets/imgs/'+classMap[list.name].imgName">
+              </div>
+              <p class="list__label">{{list.name}}</p>
+            </ng-container>
           </li>
         </ul>
       </div>
@@ -38,6 +42,7 @@ import {Subject} from 'rxjs/Subject';
 })
 export class IdeaListsComponent implements AfterViewInit {
   @Output('listSelected') listSelected: EventEmitter<IdeaList> = new EventEmitter<IdeaList>();
+
   @Input('lists')
   set lists(lists: object[]) {
     this._lists.next(lists);
@@ -50,6 +55,8 @@ export class IdeaListsComponent implements AfterViewInit {
   private _lists: BehaviorSubject<object[]> = new BehaviorSubject<object[]>([]);
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   public fullListModalRef: BsModalRef;
+  public selectedList: IdeaList;
+  public classMap = IDEAS_LIST_CLASSMAP;
   public config = {
     animated: true,
     keyboard: true,
@@ -64,7 +71,8 @@ export class IdeaListsComponent implements AfterViewInit {
   ngAfterViewInit() {
     this._lists
       .takeUntil(this.ngUnsubscribe)
-      .subscribe(lists => console.log('lists', lists));
+      .filter(x => x !== undefined)
+      .subscribe(lists => this.emitListSelected(lists[0] as IdeaList));
   }
 
   public openFullList() {
@@ -72,6 +80,7 @@ export class IdeaListsComponent implements AfterViewInit {
   }
 
   public emitListSelected(list: IdeaList) {
+    this.selectedList = list;
     this.listSelected.emit(list);
   }
 

@@ -1,17 +1,11 @@
-import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
-// import {SharedService} from '../../../shared/shared.service';
+import {AfterViewInit, Component, Input, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
-// import {Idea} from '../../../models/idea';
 import {Subscription} from 'rxjs/Subscription';
-// import {ChartService} from '../../../services/chart.service';
-// import {ListSelectionService} from '../../../services/list-selection.service';
-// import {IdeaListProvider} from '../../../services/idea-list.service';
 import {Subject} from 'rxjs/Subject';
 import {Idea, IdeaList} from '../../../shared/models/idea';
 import {SignalService} from "app/core/services/signal.service";
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {IdeasService} from '../../../core/services/ideas.service';
-// import {UtilService} from '../../../services/util.service';
 
 @Component({
   selector: 'cpt-list-view',
@@ -31,7 +25,17 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
     return this._currentList.getValue();
   }
 
+  @Input('uid')
+  set uid(uid: string) {
+    this._uid.next(uid);
+  }
+
+  get uid() {
+    return this._uid.getValue();
+  }
+
   private _currentList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>({} as IdeaList);
+  private _uid: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public ideaList: Array<object>;
 
@@ -68,49 +72,23 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
     yAxisData: [48.63, 48.55, 48.47, 48.39, 48.32, 48.35, 48.32, 48.27, 48.23, 48.20, 48.16, 48.12, 48.09, 48.06, 48.02, 47.98, 47.95, 47.92, 47.88, 47.85, 47.82, 47.79, 47.76, 47.74, 47.62, 47.60, 47.60, 47.60, 47.60, 47.60, 47.60, 47.56, 47.51, 47.47, 47.43, 47.39, 47.35, 47.32, 47.29, 47.29, 47.31, 47.34, 47.34, 47.33, 47.33, 47.33, 47.33, 47.32, 47.31, 47.30, 47.29, 47.28, 47.27, 47.27, 47.24]
   };
 
-  constructor(
-    // private sharedService: SharedService,
-    //           private ideaListProvider: IdeaListProvider,
-    //           private listSelectionService: ListSelectionService,
-              private router: Router,
-    //           private chartService: ChartService,
+  constructor(private router: Router,
               private signalService: SignalService,
-              private ideaService: IdeasService
-    //           private utilService: UtilService
-  ) {
+              private ideaService: IdeasService) {
   }
 
   ngAfterViewInit() {
     this._currentList
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x !== undefined)
-      .flatMap(list => {
-        console.log('currentList', list);
-        return this.ideaService.getListSymbols(list['list_id'].toString() );
-      })
-      .subscribe(stocks => this.ideaList = stocks['symbols']);
-
-    // this.ideaListProvider.selectedList$
-    //   .switchMap(val => {
-    //     this.selectedListName = val['name'];
-    //     return this.sharedService.symbolList({listId: val['list_id']})
-    //   })
-    //   .takeUntil(this.ngUnsubscribe)
-    //   .subscribe(res => {
-    //       this.clearOrderByObject();
-    //       this.clearIdeasLists();
-    //       this.selectedListId = res['list_id'];
-    //       this.ideaList = res['symbols'];
-    //       this.assignStockData(4);
-    //       if (this.ideaList) this.selectStock(this.ideaList[0] as Idea);
-    //     },
-    //     err => {
-    //       this.utilService.handleError(err);
-    //     }
-    //   );
-    // this.listSelectionService.isShown$
-    //   .takeUntil(this.ngUnsubscribe)
-    //   .subscribe(val => this.additionalLists = val);
+      .flatMap(list => this.ideaService.getListSymbols(list['list_id'].toString(), this.uid))
+      .subscribe(stocks => {
+        this.clearOrderByObject();
+        this.clearIdeasLists();
+        this.ideaList = stocks['symbols'];
+        this.assignStockData(4);
+        if (this.ideaList) this.selectStock(this.ideaList[0] as Idea);
+      });
   }
 
   ngOnDestroy() {
@@ -137,11 +115,11 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
 
   public getSelectedStockData(stock: Idea, callback?) {
     // if (stock) {
-      // this.loading = this.sharedService.getStockCardData(stock.symbol)
-      //   .takeUntil(this.ngUnsubscribe)
-      //   .subscribe(res => {
-      //     return callback(res);
-      //   });
+    //   this.loading = this.sharedService.getStockCardData(stock.symbol)
+    //     .takeUntil(this.ngUnsubscribe)
+    //     .subscribe(res => {
+    //       return callback(res);
+    //     });
     // }
   }
 
@@ -296,19 +274,19 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
   }
 
   public checkIfUserList(listName) {
-    // return this.utilService.checkIfUserList(listName);
+    return this.ideaService.checkIfUserList(listName);
   }
 
   public checkIfBullList(listName) {
-    // return this.utilService.checkIfBullList(listName);
+    return this.ideaService.checkIfBullList(listName);
   }
 
   public checkIfBearList(listName) {
-    // return this.utilService.checkIfBearList(listName);
+    return this.ideaService.checkIfBearList(listName);
   }
 
   public checkIfThemeList(listName) {
-    // return this.utilService.checkIfThemeList(listName);
+    return this.ideaService.checkIfThemeList(listName);
   }
 
   public gotoPanelView() {
