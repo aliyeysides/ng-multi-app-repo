@@ -10,7 +10,7 @@ import {Idea} from '../../shared/models/idea';
   template: `
     <div class="discovery__container">
       <div class="body__top">
-        <div class="section-header clearfix">
+        <div class="section-header">
           <h1>Discovery results for</h1>
           <div class="section-header__search">
             <cpt-symbol-search></cpt-symbol-search>

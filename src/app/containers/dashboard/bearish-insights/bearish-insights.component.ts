@@ -40,7 +40,7 @@ import {InsightsCommentaryModalComponent} from './modals/commentary-modal.compon
           the advance.</p>
       </div>
       <div (click)="openCommentaryModal()" class="link__read-all">
-        <a>Read the Full Article &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+        <a>See Commentary &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
       </div>
     </div>
   `,

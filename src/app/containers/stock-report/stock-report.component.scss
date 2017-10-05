@@ -6,6 +6,25 @@
 
 
 
-.stock-report {
-	
+.stock-view__container {
+  position: relative;
+  background-color: #FFFFFF;
+  height: 100%;
+  overflow:hidden;
+  padding-top:80px;
+
+  	.body__top {
+	    background-color: #f8f8f8;
+	    height: 80px;
+	    position: absolute;
+	    top:0;
+	    z-index: 1000;
+	    width: 100%;
+	}
+
+	.body__bottom {
+		z-index: 1;
+		height: 100%;
+		border-top: 3px solid #eeeeee;
+	}
 }
