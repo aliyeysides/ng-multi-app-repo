@@ -11,6 +11,6 @@ export const loadingMaskConfig: BusyConfig = ({
   <div class="rect3"></div>
   <div class="rect4"></div>
   <div class="rect5"></div>
-</div>`,
+  </div>`,
   wrapperClass: 'ng-busy'
 });
