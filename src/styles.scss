@@ -17,7 +17,7 @@ p {
 }
 
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5, h6 {
   color: $font-color;
   cursor: default;
   letter-spacing: 0.3px;
@@ -167,7 +167,6 @@ display: none;
   background-color: #F8f8f8;
   padding: 0px 25px;
   height: 80px;
-  margin-bottom: 10px;
 
   h1 {
     line-height: 76px;
@@ -194,7 +193,7 @@ display: none;
           font-family: $font-stack;
           background-color: #f8f8f8;
           height: 60px;
-          width: 420px;
+          width: 375px;
           text-align: left;
           padding: 0 15px 0;
           border: 0;
@@ -202,7 +201,7 @@ display: none;
           border-radius: 0;
           outline: none;
           color: $font-color;
-          border-bottom: 1px solid #cccccc;
+          border-bottom: 2px solid #FFFFFF;
         }
       }
     }
@@ -211,6 +210,8 @@ display: none;
       top: 60px;
       background-color: #ffffff;
       box-shadow: 0px 20px 40px 3px rgba(0,0,0,0.3);
+      width: 375px;
+      overflow-x:hidden;
 
       .search__entry {
         height: 60px;
