@@ -31,7 +31,17 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
     return this._currentList.getValue();
   }
 
+  @Input('uid')
+  set uid(uid: string) {
+    this._uid.next(uid);
+  }
+
+  get uid() {
+    return this._uid.getValue();
+  }
+
   private _currentList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>({} as IdeaList);
+  private _uid: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public ideaList: Array<object>;
 
@@ -84,10 +94,7 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
     this._currentList
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x !== undefined)
-      .flatMap(list => {
-        console.log('currentList', list);
-        return this.ideaService.getListSymbols(list['list_id'].toString() );
-      })
+      .flatMap(list => this.ideaService.getListSymbols(list['list_id'].toString(), this.uid))
       .subscribe(stocks => this.ideaList = stocks['symbols']);
 
     // this.ideaListProvider.selectedList$

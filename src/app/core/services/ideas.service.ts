@@ -17,16 +17,13 @@ export class IdeasService {
     this.stockCardParams = new URLSearchParams();
   }
 
-  public getIdeasList(): Observable<Array<object>> {
-    // const uid = this.currentUser['UID'];
-    const uid = '1024494';
+  public getIdeasList(uid: string): Observable<Array<object>> {
     const ideaListLookupUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/getMidTierUserLists?`;
     this.ideaListsParams.set('uid', uid);
     return this.utilService.getJson(ideaListLookupUrl, this.ideaListsParams);
   }
 
-  public getListSymbols(listId: string): Observable<Array<object>> {
-    const uid = '1024494';
+  public getListSymbols(listId: string, uid: string): Observable<Array<object>> {
     const listSymbolsUrl = `${this.apiHostName}/CPTRestSecure/app/midTier/getListSymbols?`;
     this.listSymbolsParams.set('listId', listId);
     this.listSymbolsParams.set('uid', uid);
