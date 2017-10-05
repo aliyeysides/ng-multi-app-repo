@@ -5,30 +5,33 @@
 
 
 .idea-lists__component {
-	margin-top:15px;
 
-	.idea-lists__header {
-		height: 50px;
+	.section-header.section-header--ideas {
 
-		h1 {
-			display: block;
-			float: left;
-		}
+		.section-header__actions {
 
-	    .divider-h {
-	      display: block;
-	      float: left;
-	      border-left: 1px dashed rgba(0,0,0,0.3);
-	      height: 50px;
-      	  margin:0px 50px;
-	    }
+		    .long {
+		      	padding-top: 11px;
+		      	width: 200px;
+		      	text-align: left;
 
-		a {
-			color: $link-blue;
-			cursor: pointer;
-			font-size: 18px;
-			font-weight: 600;
-			line-height: 50px;
+		      	i {
+			        font-size: 21px;
+			        display: inline-block;
+			        color: #1199ff;
+			        margin-right:10px;
+			        vertical-align: middle;
+			        line-height: 1;
+			    }
+
+			    span {
+			        font-size: 12px;
+			        display: inline-block;
+			        color: #313540;
+			        vertical-align: middle;
+			        line-height: 1;
+			    }
+		    }
 		}
 	}
 
@@ -100,6 +103,9 @@
 	}
 
 	.idea-lists__footer {
+		height: 20px;
+		padding:0 25px;
+
 		p {
 			font-size: 12px;
 			font-weight: 300;
