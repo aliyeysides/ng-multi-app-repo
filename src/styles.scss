@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-weight: 300;
-  font-size: 36px;
+  font-size: 28px;
   margin-bottom: 20px;
   line-height: 1.3;
 }
@@ -123,28 +123,28 @@ display: none;
   padding: 0;
 }
 
-.veryBullish, .strong, .up-change {
-  color: $veryBullish-green !important;
+.veryBullish, .strong, .up-change, .VeryBullish {
+  color: $veryBullish-green;
 }
 
 .neutral-grey {
   color: #808080;
 }
 
-.bullish {
-  color: $bullish-green !important;
+.bullish, .Bullish {
+  color: $bullish-green;
 }
 
-.neutral, .hold {
-  color: $neutral-yellow !important;
+.neutral, .hold, .Neutral {
+  color: $neutral-yellow;
 }
 
-.bearish {
-  color: $bearish-red !important;
+.bearish, .Bearish {
+  color: $bearish-red;
 }
 
-.veryBearish, .weak, .down-change {
-  color: $veryBearish-red !important;
+.veryBearish, .weak, .down-change, .VeryBearish {
+  color: $veryBearish-red;
 }
 
 
@@ -166,10 +166,10 @@ display: none;
 .section-header {
   background-color: #F8f8f8;
   padding: 0px 25px;
-  height: 80px;
+  height: 70px;
 
   h1 {
-    line-height: 76px;
+    line-height: 66px;
     float: left;
     margin-bottom: 0;
   }
@@ -177,8 +177,8 @@ display: none;
   .section-header__search {
     position: relative;
     float: left;
-    margin-left: 10px;
-    margin-top: 8px;
+    margin-left: 5px;
+    margin-top: 10px;
 
     .form-inline {
       .form-group {
@@ -192,12 +192,12 @@ display: none;
         .search-box {
           font-family: $font-stack;
           background-color: #f8f8f8;
-          height: 60px;
+          height: 50px;
           width: 375px;
           text-align: left;
           padding: 0 15px 0;
           border: 0;
-          font-size: 36px;
+          font-size: 28px;
           border-radius: 0;
           outline: none;
           color: $font-color;
@@ -207,7 +207,7 @@ display: none;
     }
 
     .search__dropdown {
-      top: 60px;
+      top: 50px;
       background-color: #ffffff;
       box-shadow: 0px 20px 40px 3px rgba(0,0,0,0.3);
       width: 375px;
@@ -241,35 +241,41 @@ display: none;
 
   .section-header__actions {
     float: right;
-    height: 50px;
-    border-left: 1px dashed rgba(0,0,0,0.3);
-    margin-top: 15px;
+    height: 45px;
+    border-left: 1px dashed rgba(0,0,0,0.2);
     margin-left: 15px;
+    margin-top: 15px;
 
     a {
       display: inline-block;
       margin-left: 15px;
       padding-top: 5px;
-      height: 50px;
+      height: 40px;
       width: 40px;
       text-align: center;
       cursor: pointer;
 
       img, svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
       }
 
       i {
-        font-size: 21px;
-        color: #313540;
+        font-size: 18px;
+        color: #1199ff;
       }
 
       span {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 400;
         color: #313540;
         line-height: 1.55;
+      }
+
+      &:hover {
+        span {
+          color: $link-blue;
+        }
       }
     }
   }

@@ -9,7 +9,7 @@ import {Subject} from 'rxjs/Subject';
   selector: 'cpt-idea-lists',
   template: `
     <div class="idea-lists__component container-fluid">
-      <div class="idea-lists__header row no-gutters">
+      <div class="section-header row no-gutters">
         <h1>Idea Lists</h1>
         <div class="divider-h"></div>
         <a (click)="openFullList()">See List Descriptions <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>

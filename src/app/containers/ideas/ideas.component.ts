@@ -6,7 +6,7 @@ import {IdeaList} from '../../shared/models/idea';
 @Component({
   selector: 'cpt-ideas',
   template: `
-    <div class="ideas">
+    <div class="ideas__container">
       <cpt-idea-lists [lists]="allLists" (listSelected)="listSelected($event)"></cpt-idea-lists>
       <cpt-list-view [currentList]="selectedList"></cpt-list-view>
     </div>
