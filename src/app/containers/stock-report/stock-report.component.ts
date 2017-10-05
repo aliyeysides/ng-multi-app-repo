@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'cpt-stock-report',
@@ -44,10 +45,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class StockReportComponent implements OnInit {
 
-  constructor() { }
- 
+  constructor(private location: Location) { }
+
   ngOnInit() {
   }
 
+  goBack() {
+    this.location.back();
+  }
+
 }
- 
