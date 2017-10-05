@@ -1,34 +1,17 @@
 @import 'variables';
 
-.VeryBearish {
-  color: $veryBearish-red
-}
 
-;
-.Bearish {
-  color: $bearish-red
-}
 
-;
-.Neutral {
-  color: $neutral-yellow
-}
 
-;
-.Bullish {
-  color: $bullish-green
-}
 
-;
-.VeryBullish {
-  color: $veryBullish-green
-}
-
-;
 
 /*------------------------------------*\
   #ACTION-BAR
 \*------------------------------------*/
+
+
+
+
 
 .list-view__actionbar--userlist {
   background-image: linear-gradient(90deg, #0D43FF 0%, #0492FF 100%);
