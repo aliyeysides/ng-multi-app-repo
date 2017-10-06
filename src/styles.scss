@@ -502,30 +502,7 @@ a.quick-link {
       }
     }
 
-    h6 {
-      font-weight: 700;
-      line-height: 1.2;
-      color: #AE004D;
-      margin-bottom: 3px;
-    }
-
-    ul {
-      margin:0px 20px 20px;
-
-      li {
-        padding: 6px 0;
-        font-size: 15px;
-        font-weight: 600;
-      }
-    }
-
-    p {
-      font-size: 14px;
-      line-height: 1.55;
-      margin-bottom: 10px;
-    }
-
-    .img-full {
+    img {
       width: 100%;
       padding: 30px;
       max-width: 960px;
@@ -669,7 +646,7 @@ a.quick-link {
         p {
           display: inline-block;
           vertical-align: middle;
-          line-height: 20px;  
+          line-height: 20px;
         }
       }
 
@@ -678,7 +655,7 @@ a.quick-link {
           font-size: 15px;
           display: inline-block;
           vertical-align: middle;
-          line-height: 20px;  
+          line-height: 20px;
         }
         .up-alert {
           transform: rotate(-90deg);
