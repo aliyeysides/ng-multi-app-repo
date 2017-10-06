@@ -1,5 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
+import {Subscription} from 'rxjs/Subscription';
+import {WordpressService} from '../../../../core/services/wordpress.service';
+import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'cpt-bear-previous-insights-modal',
@@ -50,14 +54,38 @@ import {BsModalRef} from 'ngx-bootstrap';
   `,
   styleUrls: ['./previous-modal.component.scss']
 })
-export class PreviousInsightsModalComponent implements OnInit {
+export class PreviousInsightsModalComponent implements OnInit, OnDestroy {
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
+
   public title: string;
   public list: any[] = [];
+  public loading: Subscription;
 
-  constructor(public bsModalRef: BsModalRef) {
+  constructor(public bsModalRef: BsModalRef,
+              private wordpressService: WordpressService) {
   }
 
   ngOnInit() {
     this.title = 'Previous Articles';
+    this.loading = this.wordpressService.getWordPressJson('47', 7)
+      .takeUntil(this.ngUnsubscribe)
+      .filter(x => x !== undefined)
+      .flatMap(res => Observable.of(res['0']['47']))
+      .map(posts => {
+        console.log('posts', posts);
+        return posts;
+      })
+      .subscribe()
+      // .map(post => console.log('post', post));
+      // .subscribe(post => {
+      //   this.post = post;
+      //   this.commentary = this.wordpressService.getInsightPostBody(this.post);
+      //   this.wordpressService.assignWordPressDateProperties([post]);
+      // })
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

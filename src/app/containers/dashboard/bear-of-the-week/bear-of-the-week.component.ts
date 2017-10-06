@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {PreviousBearsModalComponent} from './modals/previous-modal.component';
 import {WeeklyCommentaryModalComponent} from './modals/commentary-modal.component';
@@ -57,8 +57,9 @@ import {SignalService} from '../../../core/services/signal.service';
   `,
   styleUrls: ['./bear-of-the-week.component.scss']
 })
-export class BearOfTheWeekComponent implements OnInit {
+export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+
   public bearModalRef: BsModalRef;
   public post: object;
   public ticker: string;
@@ -103,8 +104,13 @@ export class BearOfTheWeekComponent implements OnInit {
       })
       .subscribe(data => {
         this.stockDataMeta = data['meta-info'];
-        this.stockDataPGR = data['pgr']['PGR Value']
+        this.stockDataPGR = data['pgr']['PGR Value'];
       })
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   public openPreviousModal() {
@@ -114,6 +120,7 @@ export class BearOfTheWeekComponent implements OnInit {
   public openCommentaryModal() {
     this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
     this.bearModalRef.content.commentary = this.wordpressService.getInsightPostBody(this.post);
+    this.bearModalRef.content.date = this.post['post_date_formatted'];
   }
 
   public appendPGRImage(pgr: number) {
