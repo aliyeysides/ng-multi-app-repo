@@ -9,11 +9,12 @@ import {ClassMap, IDEAS_LIST_CLASSMAP} from '../../models/idea-list-class-map';
 @Component({
   selector: 'cpt-idea-lists',
   template: `
-    <div class="idea-lists__component container-fluid">
-      <div class="section-header row no-gutters">
+    <div class="idea-lists__component">
+      <div class="section-header section-header--ideas">
         <h1>Idea Lists</h1>
-        <div class="divider-h"></div>
-        <a (click)="openFullList()">See List Descriptions <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+        <div class="section-header__actions">
+          <a class="long" (click)="openFullList()"><i class="fa fa-list-ul" aria-hidden="true"></i> List Descriptions</a>
+        </div>
       </div>
       <div class="idea-lists__container row no-gutters">
         <ul class="">

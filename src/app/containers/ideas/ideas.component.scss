@@ -3,5 +3,15 @@
 
 
 .ideas__container {
-	
+	height: 100%;
+	overflow:hidden;
+
+	.body__top {
+		
+	}
+
+	.body__bottom {
+		background-color: #ffffff;
+		height: 100%;
+	}
 }

@@ -8,8 +8,12 @@ import {AuthService} from '../../core/services/auth.service';
   selector: 'cpt-ideas',
   template: `
     <div class="ideas__container">
-      <cpt-idea-lists [lists]="allLists" (listSelected)="listSelected($event)"></cpt-idea-lists>
-      <cpt-list-view [uid]="uid" [currentList]="selectedList"></cpt-list-view>
+      <div class="body__top">
+        <cpt-idea-lists [lists]="allLists" (listSelected)="listSelected($event)"></cpt-idea-lists>
+      </div>
+      <div class="body__bottom">
+        <cpt-list-view [uid]="uid" [currentList]="selectedList"></cpt-list-view>
+      </div>
     </div>
   `,
   styleUrls: ['./ideas.component.scss']

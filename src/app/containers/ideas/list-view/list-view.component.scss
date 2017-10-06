@@ -88,15 +88,24 @@
   }
 }
 
+
+
+
+
+
+
 /*------------------------------------*\
   #CURRENT-LIST
 \*------------------------------------*/
+
+
+
 
 .current-list__container {
   border-left: $border-line--W;
 
   .sort-header {
-    border-bottom: $border-dashed--LT;
+    border-bottom: 3px solid #eeeeee;
 
     p {
       color: $font-color--MD;
@@ -117,7 +126,7 @@
     height: 100vh;
     overflow-y: scroll;
     background-color: $background--LT;
-    padding-bottom: 324px;
+    padding-bottom: 396px;
 
     .list__container {
 
@@ -367,7 +376,7 @@
 
       .stock-panel__price {
         padding-bottom: 10px;
-        border-bottom: $border-dashed--LT;
+        border-bottom: 1px solid #eeeeee;
         margin-bottom: 6px;
 
         p {
@@ -381,7 +390,7 @@
       }
 
       .stock-panel__industry {
-        border-bottom: $border-dashed--LT;
+        border-bottom: 1px solid #eeeeee;
         margin-top: 10px;
         margin-bottom: 10px;
         padding-left: 15px;
@@ -436,7 +445,7 @@
       }
 
       .quick-view__pgr {
-        border-left: $border-dashed--LT;
+        border-left:  1px solid #eeeeee;
 
         .pgr__title {
           font-weight: 400;
@@ -487,7 +496,6 @@
       .quick-view__chart {
         padding-top: 20px;
         width: 100%;
-        border-top: $border-dashed--LT;
       }
     }
 
