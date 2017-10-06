@@ -59,6 +59,7 @@ import {SignalService} from '../../../core/services/signal.service';
 })
 export class BearOfTheWeekComponent implements OnInit {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+
   public bearModalRef: BsModalRef;
   public post: object;
   public ticker: string;
