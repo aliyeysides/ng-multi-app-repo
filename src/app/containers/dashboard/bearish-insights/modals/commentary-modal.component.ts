@@ -16,10 +16,6 @@ import {PreviousInsightsModalComponent} from './previous-modal.component';
             <span>&nbsp;Close</span>
           </a>
         </button>
-        <a (click)="openPreviousModal()" class="post-head__button">
-          <i class="fa fa-calendar" aria-hidden="true"></i>
-          <span>&nbsp;Previous</span>
-        </a>
       </div>
       <div class="post-body">
         <div class="post-body post-body--insights">
@@ -90,7 +86,6 @@ import {PreviousInsightsModalComponent} from './previous-modal.component';
 export class InsightsCommentaryModalComponent implements OnInit {
   public title: string;
   public list: any[] = [];
-  public insightsModalRef: BsModalRef;
   public config = {
     animated: true,
     keyboard: true,
@@ -98,15 +93,11 @@ export class InsightsCommentaryModalComponent implements OnInit {
     ignoreBackdropClick: false,
   };
 
-  constructor(public bsModalRef: BsModalRef,
-              private modalService: BsModalService) {
+  constructor(public bsModalRef: BsModalRef) {
   }
 
   ngOnInit() {
     this.title = 'Mastering The Bear';
   }
 
-  public openPreviousModal() {
-    this.insightsModalRef = this.modalService.show(PreviousInsightsModalComponent, this.config);
-  }
 }

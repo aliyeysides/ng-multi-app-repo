@@ -103,7 +103,7 @@ export class BearOfTheWeekComponent implements OnInit {
       })
       .subscribe(data => {
         this.stockDataMeta = data['meta-info'];
-        this.stockDataPGR = data['pgr']['PGR Value']
+        this.stockDataPGR = data['pgr']['PGR Value'];
       })
   }
 
@@ -114,6 +114,7 @@ export class BearOfTheWeekComponent implements OnInit {
   public openCommentaryModal() {
     this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
     this.bearModalRef.content.commentary = this.wordpressService.getInsightPostBody(this.post);
+    this.bearModalRef.content.date = this.post['post_date_formatted'];
   }
 
   public appendPGRImage(pgr: number) {
