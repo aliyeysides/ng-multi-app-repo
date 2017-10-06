@@ -23,12 +23,13 @@ import {Observable} from 'rxjs/Observable';
       </div>
       <div [ngBusy]="loading" class="post-body">
         <ul>
-          <li *ngFor="let item of previousBears; let i = index">
+          <li *ngFor="let post of posts">
             <img class="rating" src="{{ appendPGRImage(item?.pgr) }}">
-            {{ item?.Symbol }}
-            {{ item?.name }}
-            {{ item?.industry_name }}
-            <a (click)="openCommentaryModal(i)">Commentary</a>
+            {{ post.ticker }}
+            {{ post.name }}
+            {{ post.industry_name }}
+            {{ post['post_date_formatted'] }}
+            <a (click)="openCommentaryModal(post)">Commentary</a>
           </li>
         </ul>
       </div>
@@ -37,10 +38,10 @@ import {Observable} from 'rxjs/Observable';
 })
 export class PreviousBearsModalComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+
   public bearModalRef: BsModalRef;
   public title: string;
-  public previousPosts = [];
-  public previousBears = [];
+  public posts = [];
   public loading: Subscription;
   public config = {
     animated: true,
@@ -62,26 +63,17 @@ export class PreviousBearsModalComponent implements OnInit, OnDestroy {
     this.loading = this.wordpressService.getWordPressJson('48', 7)
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x !== undefined)
-      .flatMap(items => items['0']['48'])
-      .flatMap(post => {
-        console.log('post', post);
-        return Observable.zip(
-          Observable.of(post),
-          this.wordpressService.getInsightPostTicker(post)
-        )
-      })
-      .map((post, ticker) => {
-        console.log('post', post, 'ticker', ticker);
-        return post;
-        // this.ideasService.getStockCardData(ticker.trim())
-      })
-      .subscribe(data => {
-        console.log('data', data);
-        const post = Object.assign({}, data['meta-info'], { pgr: data['pgr']['PGR Value'] });
-        this.previousBears.push(post);
-        console.log('previousPosts', this.previousPosts);
-        console.log('previousBears', this.previousBears);
-      })
+      // .map(items => items['0']['48'])
+      .do(res => console.log('res1', res))
+      .map(post => Object.assign(post, this.ideasService.getStockCardData(post['ticker'])))
+      .do(res => console.log('res2', res))
+      .subscribe(posts => {
+        console.log('posts in sub:', posts);
+        this.wordpressService.assignWordPressDateProperties(posts);
+        this.wordpressService.assignWordPressPostTickers(posts);
+        this.posts = posts;
+        console.log('posts done:', posts);
+      });
   }
 
   ngOnDestroy() {
@@ -93,8 +85,8 @@ export class PreviousBearsModalComponent implements OnInit, OnDestroy {
     return this.signalService.appendPGRImage(pgr);
   }
 
-  public openCommentaryModal(indx) {
-    this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
-    this.bearModalRef.content.commentary = this.wordpressService.getInsightPostBody(this.previousPosts[indx]);
-  }
+  // public openCommentaryModal(post) {
+  //   this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
+  //   this.bearModalRef.content.commentary = this.wordpressService.getInsightPostBody(this.previousPosts[post]);
+  // }
 }
