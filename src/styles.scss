@@ -251,22 +251,23 @@ display: none;
       margin-left: 15px;
       padding-top: 5px;
       height: 40px;
-      width: 40px;
+      width: 48px;
       text-align: center;
       cursor: pointer;
 
       img, svg {
-        width: 18px;
-        height: 18px;
+        width: 19px;
+        height: 19px;
       }
 
       i {
-        font-size: 18px;
+        font-size: 19px;
         color: #1199ff;
+        margin-bottom: 2px;
       }
 
       span {
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 400;
         color: #313540;
         line-height: 1.55;
@@ -276,6 +277,14 @@ display: none;
         span {
           color: $link-blue;
         }
+      }
+    }
+
+    .discovery-icon {
+      svg {
+        width: 22px;
+        height: 22px;
+        margin-bottom: -3px;
       }
     }
   }
