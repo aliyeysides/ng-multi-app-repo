@@ -63,16 +63,18 @@ export class PreviousBearsModalComponent implements OnInit, OnDestroy {
     this.loading = this.wordpressService.getWordPressJson('48', 7)
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x !== undefined)
-      // .map(items => items['0']['48'])
-      .do(res => console.log('res1', res))
-      .map(post => Object.assign(post, this.ideasService.getStockCardData(post['ticker'])))
-      .do(res => console.log('res2', res))
+      .map(items => Observable.from(items['0']['48']))
+      .flatMap(post => post)
+      .do(post => {
+        console.log('post', post);
+        Object.assign(post, { ticker: this.wordpressService.getInsightPostTicker(post) });
+        Object.assign(post, { data: this.ideasService.getStockCardData(post['ticker']) });
+        this.wordpressService.assignWordPressDateProperties([post]);
+      })
+      .flatMap(post => post['data'])
       .subscribe(posts => {
         console.log('posts in sub:', posts);
-        this.wordpressService.assignWordPressDateProperties(posts);
-        this.wordpressService.assignWordPressPostTickers(posts);
-        this.posts = posts;
-        console.log('posts done:', posts);
+        // this.posts = posts;
       });
   }
 

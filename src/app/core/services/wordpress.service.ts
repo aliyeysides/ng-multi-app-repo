@@ -25,7 +25,8 @@ export class WordpressService {
 
   public getInsightPostTicker(post: object): string {
     const dom = this.getInsightPostDom(post);
-    return dom.getElementById('ticker').innerHTML.trim();
+    return dom.getElementById('ticker') ? dom.getElementById('ticker').innerHTML.trim()
+      : dom.body.getElementsByClassName('ticker')[0].innerHTML.trim();
   }
 
   public assignAuthorProp(postArr: object[]): void {
@@ -55,12 +56,6 @@ export class WordpressService {
       const parsedDate = post['post_date_parsed'];
       const formattedDate = this.datePipe.transform(parsedDate, 'longDate');
       return Object.assign(post, {post_date_formatted: formattedDate});
-    })
-  }
-
-  public assignWordPressPostTickers(postArr: object[]): void {
-    postArr.map(post => {
-      return Object.assign(post, { ticker: this.getInsightPostTicker(post) });
     })
   }
 
