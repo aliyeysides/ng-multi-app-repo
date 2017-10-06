@@ -25,7 +25,7 @@ export class WordpressService {
 
   public getInsightPostTicker(post: object): string {
     const dom = this.getInsightPostDom(post);
-    return dom.body.getElementsByClassName('ticker')[0].innerHTML.trim();
+    return dom.getElementById('ticker').innerHTML.trim();
   }
 
   public assignAuthorProp(postArr: object[]): void {
