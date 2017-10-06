@@ -251,23 +251,22 @@ display: none;
       margin-left: 15px;
       padding-top: 5px;
       height: 40px;
-      width: 48px;
+      width: 40px;
       text-align: center;
       cursor: pointer;
 
       img, svg {
-        width: 19px;
-        height: 19px;
+        width: 18px;
+        height: 18px;
       }
 
       i {
-        font-size: 19px;
+        font-size: 18px;
         color: #1199ff;
-        margin-bottom: 2px;
       }
 
       span {
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 400;
         color: #313540;
         line-height: 1.55;
@@ -277,14 +276,6 @@ display: none;
         span {
           color: $link-blue;
         }
-      }
-    }
-
-    .discovery-icon {
-      svg {
-        width: 22px;
-        height: 22px;
-        margin-bottom: -3px;
       }
     }
   }
@@ -502,7 +493,30 @@ a.quick-link {
       }
     }
 
-    img {
+    h6 {
+      font-weight: 700;
+      line-height: 1.2;
+      color: #AE004D;
+      margin-bottom: 3px;
+    }
+
+    ul {
+      margin:0px 20px 20px;
+
+      li {
+        padding: 6px 0;
+        font-size: 15px;
+        font-weight: 600;
+      }
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+
+    .img-full {
       width: 100%;
       padding: 30px;
       max-width: 960px;
@@ -646,7 +660,7 @@ a.quick-link {
         p {
           display: inline-block;
           vertical-align: middle;
-          line-height: 20px;
+          line-height: 20px;  
         }
       }
 
@@ -655,7 +669,7 @@ a.quick-link {
           font-size: 15px;
           display: inline-block;
           vertical-align: middle;
-          line-height: 20px;
+          line-height: 20px;  
         }
         .up-alert {
           transform: rotate(-90deg);
@@ -697,7 +711,7 @@ a.quick-link {
 
 .Bearish-H1 {
   color:#9F2C53;
-  font-size:18px;
+  font-size:22px;
   font-weight: 300;
   font-family: $font-stack;
   line-height: 1.75;
@@ -707,7 +721,7 @@ a.quick-link {
 
 .Bearish-H2 {
   color:#0070C0;
-  font-size:14px;
+  font-size:18px;
   font-weight: 600;
   font-family: $font-stack;
   line-height: 1.5;
@@ -717,7 +731,7 @@ a.quick-link {
 
 .Bearish-H3 {
   color:$font-color;
-  font-size:12px;
+  font-size:13px;
   font-weight: 600;
   font-family: $font-stack;
   line-height: 1.2;
@@ -728,8 +742,8 @@ a.quick-link {
 
 .Bearish-H4 {
   color:$font-color;
-  font-size:12px;
-  font-weight: 300;
+  font-size:13px;
+  font-weight: 600;
   font-family: $font-stack;
   line-height: 1.2;
   margin-bottom:10px;
@@ -768,6 +782,7 @@ a.quick-link {
   margin-bottom:20px;
   padding:0;
 }
+
 
 
 
