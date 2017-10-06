@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BsModalRef} from 'ngx-bootstrap';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {Subscription} from 'rxjs/Subscription';
 import {WordpressService} from '../../../../core/services/wordpress.service';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
+import {InsightsCommentaryModalComponent} from './commentary-modal.component';
 
 @Component({
   selector: 'cpt-bear-previous-insights-modal',
@@ -20,33 +21,14 @@ import {Observable} from 'rxjs/Observable';
         </button>
       </div>
       <div class="post-body">
-        <!--<ul *ngIf="list.length">
-          <li *ngFor="let item of list">{{item}}</li>
-        </ul>-->
-        <ul>
-          <li>
-            <p class="header__post-date"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; September 27th, 2017</p>
-            <h5>The Dow Jones Industrials Make a Series of All-Time Highs, but the Nasdaq and the S&amp;P&nbsp;500 Indices Lag</h5>
-          </li>
-          <li>
-            <p class="header__post-date"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; September 27th, 2017</p>
-            <h5>The Dow Jones Industrials Make a Series of All-Time Highs, but the Nasdaq and the S&amp;P&nbsp;500 Indices Lag</h5>
-          </li>
-          <li>
-            <p class="header__post-date"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; September 27th, 2017</p>
-            <h5>The Dow Jones Industrials Make a Series of All-Time Highs, but the Nasdaq and the S&amp;P&nbsp;500 Indices Lag</h5>
-          </li>
-          <li>
-            <p class="header__post-date"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; September 27th, 2017</p>
-            <h5>The Dow Jones Industrials Make a Series of All-Time Highs, but the Nasdaq and the S&amp;P&nbsp;500 Indices Lag</h5>
-          </li>
-          <li>
-            <p class="header__post-date"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; September 27th, 2017</p>
-            <h5>The Dow Jones Industrials Make a Series of All-Time Highs, but the Nasdaq and the S&amp;P&nbsp;500 Indices Lag</h5>
-          </li>
-          <li>
-            <p class="header__post-date"><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; September 27th, 2017</p>
-            <h5>The Dow Jones Industrials Make a Series of All-Time Highs, but the Nasdaq and the S&amp;P&nbsp;500 Indices Lag</h5>
+
+        <ul *ngIf="posts.length">
+          <li (click)="openCommentaryModal(post)" *ngFor="let post of posts">
+            <p class="header__post-date">
+              <i class="fa fa-calendar-o" aria-hidden="true"></i>
+              &nbsp; {{ post['post_date_formatted'] }}
+            </p>
+            <h5>{{ post['post_title'] }}</h5>
           </li>
         </ul>
       </div>
@@ -58,10 +40,19 @@ export class PreviousInsightsModalComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   public title: string;
-  public list: any[] = [];
+  public posts: any[] = [];
   public loading: Subscription;
+  public insightsModalRef: BsModalRef;
+  public config = {
+    animated: true,
+    keyboard: true,
+    backdrop: false,
+    ignoreBackdropClick: false,
+    class: 'modal-dialog--fullscreen',
+  };
 
   constructor(public bsModalRef: BsModalRef,
+              private modalService: BsModalService,
               private wordpressService: WordpressService) {
   }
 
@@ -71,21 +62,21 @@ export class PreviousInsightsModalComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x !== undefined)
       .flatMap(res => Observable.of(res['0']['47']))
-      .map(posts => {
-        console.log('posts', posts);
-        return posts;
+      .subscribe(posts => {
+        this.wordpressService.assignWordPressDateProperties(posts);
+        this.posts = posts;
       })
-      .subscribe()
-      // .map(post => console.log('post', post));
-      // .subscribe(post => {
-      //   this.post = post;
-      //   this.commentary = this.wordpressService.getInsightPostBody(this.post);
-      //   this.wordpressService.assignWordPressDateProperties([post]);
-      // })
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  public openCommentaryModal(post: object) {
+    this.insightsModalRef = this.modalService.show(InsightsCommentaryModalComponent, this.config);
+    this.insightsModalRef.content.title = post['post_title'];
+    this.insightsModalRef.content.commentary = this.wordpressService.getInsightPostBody(post);
+    this.insightsModalRef.content.date = post['post_date_formatted'];
   }
 }
