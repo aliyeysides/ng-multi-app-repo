@@ -9,10 +9,9 @@ import {InsightsCommentaryModalComponent} from './commentary-modal.component';
 @Component({
   selector: 'cpt-bear-previous-insights-modal',
   template: `
-
     <div class="insights__container insights__container--large insights__container--modal">
       <div class="post-head post-head--insights">
-        <h2 class="modal-title pull-left">{{title}}</h2>
+        <h2 class="modal-title pull-left">{{ title }}</h2>
         <button type="button" class="post-head__button" aria-label="Close" (click)="bsModalRef.hide()">
           <a class="">
             <i class="fa fa-times-circle" aria-hidden="true"></i>
@@ -57,7 +56,7 @@ export class PreviousInsightsModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.title = 'Previous Articles';
+    this.title = 'Previous Commentary';
     this.loading = this.wordpressService.getWordPressJson('47', 7)
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x !== undefined)

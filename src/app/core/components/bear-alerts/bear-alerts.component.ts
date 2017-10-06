@@ -26,7 +26,7 @@ import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/c
         </svg>
         <h3>Notifications</h3>
       </div>
-
+      <p>Coming soon...</p>
     </div>
   `,
   styleUrls: ['./bear-alerts.component.scss']

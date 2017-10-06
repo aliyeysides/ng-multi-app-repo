@@ -25,7 +25,7 @@ import {Observable} from 'rxjs/Observable';
         <div [innerHtml]="commentary"></div>
       </div>
       <div (click)="openCommentaryModal()" class="link__read-all">
-        <a>See Commentary &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+        <a>Read the full commentary &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
       </div>
     </div>
   `,
