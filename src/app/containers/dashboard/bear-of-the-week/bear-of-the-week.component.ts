@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {PreviousBearsModalComponent} from './modals/previous-modal.component';
 import {WeeklyCommentaryModalComponent} from './modals/commentary-modal.component';
@@ -57,7 +57,7 @@ import {SignalService} from '../../../core/services/signal.service';
   `,
   styleUrls: ['./bear-of-the-week.component.scss']
 })
-export class BearOfTheWeekComponent implements OnInit {
+export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   public bearModalRef: BsModalRef;
@@ -106,6 +106,11 @@ export class BearOfTheWeekComponent implements OnInit {
         this.stockDataMeta = data['meta-info'];
         this.stockDataPGR = data['pgr']['PGR Value'];
       })
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   public openPreviousModal() {

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {PreviousBearsModalComponent} from './previous-modal.component';
+import {BsModalRef} from 'ngx-bootstrap';
 
 @Component({
   selector: 'cpt-bear-commentary-weekly-modal',

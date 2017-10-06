@@ -7,9 +7,9 @@ import {PreviousInsightsModalComponent} from './previous-modal.component';
   template: `
     <div class="insights__container insights__container--large insights__container--modal">
       <div class="post-head post-head--insights">
-        <h2 class="">{{title}}</h2>
+        <h2 class="">Mastering the Bear</h2>
         <div class="divider-h"></div>
-        <p class="header__post-date">September 27th, 2017</p>
+        <p class="header__post-date">{{ date }}</p>
         <button type="button" class="post-head__button" aria-label="Close" (click)="bsModalRef.hide()">
           <a class="">
             <i class="fa fa-times-circle" aria-hidden="true"></i>
@@ -19,18 +19,21 @@ import {PreviousInsightsModalComponent} from './previous-modal.component';
       </div>
       <div class="post-body">
         <div class="post-body post-body--insights">
+          <h1>{{ title }}</h1>
           <div [innerHtml]="commentary"></div>
           <div class="post-footer">
             <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
           </div>
         </div>
       </div>
+    </div>
   `,
   styleUrls: ['./commentary-modal.component.scss']
 })
 export class InsightsCommentaryModalComponent implements OnInit {
   public title: string;
   public list: any[] = [];
+  public date: string;
   public commentary: string;
   public config = {
     animated: true,
@@ -43,7 +46,6 @@ export class InsightsCommentaryModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title = 'Mastering The Bear';
   }
 
 }

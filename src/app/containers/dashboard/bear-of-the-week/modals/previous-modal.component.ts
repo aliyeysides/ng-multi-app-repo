@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {WordpressService} from '../../../../core/services/wordpress.service';
 import {Subject} from 'rxjs/Subject';
@@ -35,7 +35,7 @@ import {Observable} from 'rxjs/Observable';
     </div>
   `
 })
-export class PreviousBearsModalComponent implements OnInit {
+export class PreviousBearsModalComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   public bearModalRef: BsModalRef;
   public title: string;
@@ -82,6 +82,11 @@ export class PreviousBearsModalComponent implements OnInit {
         console.log('previousPosts', this.previousPosts);
         console.log('previousBears', this.previousBears);
       })
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   public appendPGRImage(pgr: number) {
