@@ -931,14 +931,10 @@ a.quick-link {
 
 
 
-
-
-
-
-
 /*------------------------------------*\
-  #DROP DOWNS
+  #DROPDOWN
 \*------------------------------------*/
+
 
 
 
@@ -1084,8 +1080,20 @@ a.quick-link {
   border-bottom: 0px solid #ffffff;
 }
 
+:focus {
+  outline-color: transparent;
+  outline-style: none;
+}
 
+textarea, input, button {
+  outline: none;
+}
 
+input:focus {
+    border-color: transparent;
+    outline: 0;
+    box-shadow: inset 0 0px 0px rgba(0,0,0,0), 0 0 0px rgba(255,255,255,0);
+}
 
 
 
@@ -1271,6 +1279,7 @@ a.quick-link {
 
 
 
+
 // LOADER
 
 .spinner {
@@ -1325,24 +1334,6 @@ a.quick-link {
        -webkit-transform: scaleY(1.0);
      }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

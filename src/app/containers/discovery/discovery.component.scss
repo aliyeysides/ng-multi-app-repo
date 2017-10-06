@@ -33,7 +33,7 @@
           width: 130px;
           height: 130px;
           border-radius: 65px;
-          top: 8px;
+          top: 0px;
           left: -35px;
           overflow: hidden;
           border:1px solid #cccccc;
@@ -68,7 +68,7 @@
             color: $font-color;
             font-size: 22px;
             font-weight: 300;
-            line-height: 1.75;
+            line-height: 2;
             white-space: nowrap;
             text-overflow: ellipsis;
           }
@@ -76,7 +76,7 @@
           .company-industry {
             font-size: 14px;
             color: $font-color--MD;
-            line-height: 1.5;
+            line-height: 2;
             font-weight: 400;
             font-style: italic;
             white-space: nowrap;
@@ -95,21 +95,21 @@
             font-size: 24px;
             font-weight: 600;
             line-height: 1.5;
-            margin-bottom: 3px;
-            margin-top: -4px;
+            margin-bottom: 2px;
+            margin-top: -5px;
           }
 
           .change {
             font-size: 18px;
             font-weight: 400;
-            line-height: 1.5;
-            margin-bottom: 5px;
+            line-height: 2;
+            margin-bottom: 0px;
           }
 
           .percentage {
             font-size: 18px;
             font-weight: 400;
-            line-height: 1.5;
+            line-height: 2;
           }
         }
 
@@ -256,7 +256,6 @@
           .PGR__text {
             font-size: 16px;
             font-weight: 700;
-            color: $font-color;
             margin-bottom:5px;
             text-transform: uppercase;
             text-align: left;
@@ -273,13 +272,14 @@
               vertical-align: middle;
               line-height: 1;
               margin-right:2px;
+              color:$font-color;
             }
           }
         }
 
         .base-stock__factors {
           border-right: 3px solid rgba(0, 0, 0, 0.05);
-          padding: 5px 30px 0;
+          padding: 2px 30px 0;
           min-width: 220px;
           overflow: hidden;
 
@@ -671,7 +671,7 @@
       left: 0%;
       position: absolute;
       margin-top: -2px;
-      margin-left: 0px;
+      margin-left: -3px;
       z-index: 1;
       height: 18px;
       width: 18px;
