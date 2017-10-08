@@ -21,8 +21,8 @@ import {Observable} from 'rxjs/Observable';
           </a>
         </button>
       </div>
-      <div class="post-body">
-        <ul>
+      <div class="post-body" [ngBusy]="loading">
+        <ul *ngIf="posts">
           <li *ngFor="let post of posts">
             <ng-container *ngIf="post['data']">
               <img class="rating" src="{{ appendPGRImage(post['data']['pgr']['PGR Value']) }}">
