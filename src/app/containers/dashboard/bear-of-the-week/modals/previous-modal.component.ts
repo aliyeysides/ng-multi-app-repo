@@ -21,15 +21,17 @@ import {Observable} from 'rxjs/Observable';
           </a>
         </button>
       </div>
-      <div [ngBusy]="loading" class="post-body">
+      <div class="post-body">
         <ul>
           <li *ngFor="let post of posts">
-            <img class="rating" src="{{ appendPGRImage(item?.pgr) }}">
-            {{ post.ticker }}
-            {{ post.name }}
-            {{ post.industry_name }}
-            {{ post['post_date_formatted'] }}
-            <a (click)="openCommentaryModal(post)">Commentary</a>
+            <ng-container *ngIf="post['data']">
+              <img class="rating" src="{{ appendPGRImage(post['data']['pgr']['PGR Value']) }}">
+              {{ post.ticker }}
+              {{ post['data']['meta-info'].name }}
+              {{ post['data']['meta-info'].industry_name }}
+              {{ post['post_date_formatted'] }}
+              <a (click)="openCommentaryModal(post)">Commentary</a>
+            </ng-container>
           </li>
         </ul>
       </div>
@@ -65,16 +67,18 @@ export class PreviousBearsModalComponent implements OnInit, OnDestroy {
       .filter(x => x !== undefined)
       .map(items => Observable.from(items['0']['48']))
       .flatMap(post => post)
-      .do(post => {
-        console.log('post', post);
-        Object.assign(post, { ticker: this.wordpressService.getInsightPostTicker(post) });
-        Object.assign(post, { data: this.ideasService.getStockCardData(post['ticker']) });
+      .map(post => {
+        Object.assign(post, {ticker: this.wordpressService.getInsightPostTicker(post)});
         this.wordpressService.assignWordPressDateProperties([post]);
+        return post;
       })
-      .flatMap(post => post['data'])
+      .do(post => this.ideasService.getStockCardData(post['ticker']).subscribe(x => {
+        Object.assign(post, {data: x})
+      }))
+      .toArray()
       .subscribe(posts => {
+        this.posts = posts;
         console.log('posts in sub:', posts);
-        // this.posts = posts;
       });
   }
 
@@ -87,8 +91,8 @@ export class PreviousBearsModalComponent implements OnInit, OnDestroy {
     return this.signalService.appendPGRImage(pgr);
   }
 
-  // public openCommentaryModal(post) {
-  //   this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
-  //   this.bearModalRef.content.commentary = this.wordpressService.getInsightPostBody(this.previousPosts[post]);
-  // }
+  public openCommentaryModal(post) {
+    this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
+    this.bearModalRef.content.commentary = this.wordpressService.getInsightPostBody(post);
+  }
 }
