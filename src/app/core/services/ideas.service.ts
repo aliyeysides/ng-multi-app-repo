@@ -10,11 +10,13 @@ export class IdeasService {
   private ideaListsParams: URLSearchParams;
   private listSymbolsParams: URLSearchParams;
   private stockCardParams: URLSearchParams;
+  private headlinesParams: URLSearchParams;
 
   constructor(private utilService: UtilService) {
     this.ideaListsParams = new URLSearchParams();
     this.listSymbolsParams = new URLSearchParams();
     this.stockCardParams = new URLSearchParams();
+    this.headlinesParams = new URLSearchParams();
   }
 
   public getIdeasList(uid: string, product: string): Observable<Array<object>> {
@@ -35,6 +37,12 @@ export class IdeasService {
     const getStockCardDataUrl = `${this.apiHostName}/CPTRestSecure/app/midTier/getStockCardData?`;
     this.stockCardParams.set('symbol', symbol);
     return this.utilService.getJson(getStockCardDataUrl, this.stockCardParams);
+  }
+
+  public getHeadlines(symbol: string) {
+    const getHeadlinesUrl = `${this.apiHostName}/CPTRestSecure/app/xigniteNews/getHeadlines?`;
+    this.headlinesParams.set('symbol', symbol);
+    return this.utilService.getJson(getHeadlinesUrl, this.headlinesParams);
   }
 
   public checkIfBullList(listName) {
