@@ -11,7 +11,7 @@ import {Idea} from '../../shared/models/idea';
     <div class="discovery__container">
       <div class="body__top">
         <div class="section-header">
-          <h1>Stock Ideas Based on</h1>
+          <h1>Ideas based on</h1>
           <div class="section-header__search">
             <cpt-symbol-search></cpt-symbol-search>
           </div>

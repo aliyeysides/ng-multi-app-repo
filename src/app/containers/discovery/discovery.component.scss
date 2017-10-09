@@ -16,6 +16,7 @@
     top:0;
     z-index: 400;
     width: 100%;
+    min-width: 860px;
 
     .discovery__base-stock {
       padding: 0px 25px 0px 45px;
@@ -316,6 +317,7 @@
     overflow-y: scroll;
     height:100vh;
     padding-bottom:260px;
+    overflow-x: hidden;
   }
 }
 
@@ -388,7 +390,7 @@
       .tile__wrapper {
         width: 181px;
         display: inline-block;
-        margin: 0px 45px 0px 0px;
+        margin: 0px 15px 0px 0px;
         position: relative;
         -webkit-perspective: 800px;
         perspective: 800px;
@@ -515,7 +517,7 @@
             width: 181px;
             height: 181px;
             background-color: #ffffff;
-            box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.30);
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.30);
             border-radius: 8px;
             padding: 0px;
             border: 2px solid #1199ff;
@@ -600,7 +602,7 @@
 
   .tile__front {
     border: 3px solid #1199ff;
-    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.30);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.30);
     z-index: 0;
 
     .cornerFlip {

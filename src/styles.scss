@@ -167,7 +167,6 @@ display: none;
   background-color: #F8f8f8;
   padding: 0px 25px;
   height: 64px;
-  overflow: hidden;
 
   h1 {
     line-height: 60px;
@@ -220,11 +219,16 @@ display: none;
       width: 375px;
       overflow-x:hidden;
 
+      p {
+        cursor: pointer !important;
+      }
+
       .search__entry {
         height: 60px;
         border-bottom: 2px solid #ffffff;
         color: $font-color;
         width: 420px;
+        cursor: pointer !important;
 
         .search__company {
           min-width: 125px;
@@ -544,6 +548,10 @@ a.quick-link {
         margin-left:2px;
       }
     }
+  }
+
+  .post-body {
+    height: 180px;
   }
 }
 
