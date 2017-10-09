@@ -49,7 +49,6 @@ export class ReportComponent implements OnInit {
   onLoad() {
     const iframe = this.iframe.nativeElement;
     const doc = iframe.contentDocument || (<HTMLIFrameElement>iframe).contentWindow;
-    console.log('loaded');
     this.loading.unsubscribe();
   }
 
