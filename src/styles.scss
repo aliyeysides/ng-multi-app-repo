@@ -665,8 +665,8 @@ a.quick-link {
 
 .Bearish-H1 {
   color:#9F2C53;
-  font-size:24px;
-  font-weight: 300;
+  font-size:24px !important;
+  font-weight: 300 !important;
   font-family: $font-stack;
   line-height: 1.75;
   margin-bottom:20px;
@@ -675,8 +675,8 @@ a.quick-link {
 
 .Bearish-H2 {
   color:#0070C0;
-  font-size:19px;
-  font-weight: 600;
+  font-size:19px !important;
+  font-weight: 600 !important;
   font-family: $font-stack;
   line-height: 1.5;
   margin-bottom:15px;
@@ -685,8 +685,8 @@ a.quick-link {
 
 .Bearish-H3 {
   color:$font-color;
-  font-size:14px;
-  font-weight: 600;
+  font-size:14px !important;
+  font-weight: 600 !important;
   font-family: $font-stack;
   line-height: 1.2;
   margin-bottom:10px;
@@ -696,8 +696,8 @@ a.quick-link {
 
 .Bearish-H4 {
   color:$font-color;
-  font-size:14px;
-  font-weight: 600;
+  font-size:14px !important;
+  font-weight: 600 !important;
   font-family: $font-stack;
   line-height: 1.2;
   margin-bottom:10px;
@@ -707,8 +707,8 @@ a.quick-link {
 
 .Bearish-P {
   color:$font-color;
-  font-size:11px;
-  font-weight: 400;
+  font-size:11px !important;
+  font-weight: 400 !important;
   font-family: $font-stack;
   line-height: 1.25;
   margin-bottom:20px;
@@ -717,8 +717,8 @@ a.quick-link {
 
 .Bearish-caption {
   color:$font-color;
-  font-size:9px;
-  font-weight: 300;
+  font-size:9px !important;
+  font-weight: 300 !important;
   font-family: $font-stack;
   line-height: 1.5;
   margin:10px 20px;
