@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../core/services/auth.service';
 import {Subject} from 'rxjs/Subject';
 import {IdeasService} from '../../core/services/ideas.service';
 import {IdeaList} from '../../shared/models/idea';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'cpt-dashboard',
@@ -23,22 +24,29 @@ import {IdeaList} from '../../shared/models/idea';
   `,
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   public allLists: object[];
   public selectedList: IdeaList;
+  public loading: Subscription;
 
   constructor(private authService: AuthService,
               private ideasService: IdeasService) { }
 
   ngOnInit() {
-    this.authService.currentUser$
+    this.loading = this.authService.currentUser$
       .takeUntil(this.ngUnsubscribe)
       .map(usr => usr['UID'])
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
+      .filter(x => x !== undefined)
       .subscribe(res => {
-        this.allLists = Object.assign([], res[0]['idea_lists'], res[1]['theme_lists'], res[2]['user_lists']);
+        this.allLists = res[2]['user_lists'].concat(res[0]['idea_lists']).concat(res[1]['theme_lists']);
       });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   public listSelected(list: IdeaList) {

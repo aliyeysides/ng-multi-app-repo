@@ -34,7 +34,7 @@ export class IdeasComponent implements OnInit {
       .map(usr => this.uid = usr['UID'])
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
       .subscribe(res => {
-        this.allLists = Object.assign([], res[0]['idea_lists'], res[1]['theme_lists'], res[2]['user_lists']);
+        this.allLists = res[2]['user_lists'].concat(res[0]['idea_lists']).concat(res[1]['theme_lists']);
       });
   }
 

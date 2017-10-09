@@ -7,11 +7,14 @@ import {ListViewComponent} from './list-view/list-view.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {IdeasService} from '../../core/services/ideas.service';
 
+import {TooltipModule} from 'ngx-bootstrap';
+
 @NgModule({
   imports: [
     routing,
     SharedModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    TooltipModule.forRoot()
   ],
   exports: [
     IdeasComponent
@@ -22,4 +25,5 @@ import {IdeasService} from '../../core/services/ideas.service';
   ],
   providers: [IdeasService]
 })
-export class IdeasModule {}
+export class IdeasModule {
+}

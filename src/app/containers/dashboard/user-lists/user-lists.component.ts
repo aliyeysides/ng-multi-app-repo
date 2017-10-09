@@ -13,7 +13,8 @@ import {BearSearchComponent} from '../../../core/components/bear-search/bear-sea
     <div class="insights__container insights__container--list">
       <div class="post-head post-head--userlist">
         <div class="clearfix">
-          <h4><a (click)="currentList = 'Holding'" [ngClass]="{'active': currentList === 'Holding'}">Holding</a> <span class="divider-toggle">|</span> 
+          <h4><a (click)="currentList = 'Holding'" [ngClass]="{'active': currentList === 'Holding'}">Holding</a> <span
+            class="divider-toggle">|</span>
             <a (click)="currentList = 'Watching'" [ngClass]="{'active': currentList === 'Watching'}">Watching</a></h4>
           <a class="post-head__button">
             <i class="fa fa-external-link-square" aria-hidden="true"></i>
@@ -44,7 +45,7 @@ import {BearSearchComponent} from '../../../core/components/bear-search/bear-sea
             <i class="fa fa-bell" aria-hidden="true"></i>
           </div>
           <div class="col-3 stock__price">
-            <p class="data">$ {{ item.Last }}</p>
+            <p class="data">{{ item.Last }}</p>
           </div>
           <div class="col-3 stock__price">
             <p class="data">{{ item.Change }}%</p>
@@ -63,7 +64,7 @@ import {BearSearchComponent} from '../../../core/components/bear-search/bear-sea
             <i class="fa fa-bell" aria-hidden="true"></i>
           </div>
           <div class="col-3 stock__price">
-            <p class="data">$ {{ item.Last }}</p>
+            <p class="data">{{ item.Last }}</p>
           </div>
           <div class="col-3 stock__price">
             <p class="data">{{ item.Change }}%</p>

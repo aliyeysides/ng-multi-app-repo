@@ -1,10 +1,11 @@
-import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {FullListModalComponent} from './full-list-modal.component';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {IdeaList} from '../../models/idea';
 import {Subject} from 'rxjs/Subject';
 import {ClassMap, IDEAS_LIST_CLASSMAP} from '../../models/idea-list-class-map';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'cpt-idea-lists',
@@ -17,7 +18,7 @@ import {ClassMap, IDEAS_LIST_CLASSMAP} from '../../models/idea-list-class-map';
         </div>
       </div>
       <div class="idea-lists__container row no-gutters">
-        <ul class="">
+        <ul>
           <li [ngClass]="{'selected': selectedList === list}" (click)="emitListSelected(list)"
               *ngFor="let list of lists" class="list__option">
             <ng-container *ngIf="list.is_active">
@@ -41,7 +42,7 @@ import {ClassMap, IDEAS_LIST_CLASSMAP} from '../../models/idea-list-class-map';
   `,
   styleUrls: ['./idea-lists.component.scss']
 })
-export class IdeaListsComponent implements AfterViewInit {
+export class IdeaListsComponent implements AfterViewInit, OnDestroy {
   @Output('listSelected') listSelected: EventEmitter<IdeaList> = new EventEmitter<IdeaList>();
 
   @Input('lists')
@@ -57,6 +58,7 @@ export class IdeaListsComponent implements AfterViewInit {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   public fullListModalRef: BsModalRef;
   public selectedList: IdeaList;
+  public loading: Subscription;
   public classMap = IDEAS_LIST_CLASSMAP;
   public config = {
     animated: true,
@@ -74,6 +76,11 @@ export class IdeaListsComponent implements AfterViewInit {
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x !== undefined)
       .subscribe(lists => this.emitListSelected(lists[0] as IdeaList));
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   public openFullList() {

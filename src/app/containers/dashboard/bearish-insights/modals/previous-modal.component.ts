@@ -19,8 +19,8 @@ import {InsightsCommentaryModalComponent} from './commentary-modal.component';
           </a>
         </button>
       </div>
-      <div class="post-body" [ngBusy]="loading">
-        <ul *ngIf="posts">
+      <div class="post-body">
+        <ul [ngBusy]="loading">
           <li (click)="openCommentaryModal(post)" *ngFor="let post of posts">
             <p class="header__post-date">
               <i class="fa fa-calendar-o" aria-hidden="true"></i>

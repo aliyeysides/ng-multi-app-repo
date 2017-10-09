@@ -61,16 +61,6 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
   public loading: Subscription;
   public headlinesLoading: Subscription;
   public symbolListLoading: Subscription;
-  public _chartPanelData: any = {
-    xAxisData: [
-      'Jan\'16', 'Feb\'16', 'Mar\'16', 'May\'16', 'Jun\'16', 'Jul\'16', 'Aug\'16', 'Sep\'16', 'Oct\'16', 'Nov\'16', 'Dec\'16',
-      'Jan\'16', 'Feb\'16', 'Mar\'16', 'May\'16', 'Jun\'16', 'Jul\'16', 'Aug\'16', 'Sep\'16', 'Oct\'16', 'Nov\'16', 'Dec\'16',
-      'Jan\'16', 'Feb\'16', 'Mar\'16', 'May\'16', 'Jun\'16', 'Jul\'16', 'Aug\'16', 'Sep\'16', 'Oct\'16', 'Nov\'16', 'Dec\'16',
-      'Jan\'16', 'Feb\'16', 'Mar\'16', 'May\'16', 'Jun\'16', 'Jul\'16', 'Aug\'16', 'Sep\'16', 'Oct\'16', 'Nov\'16', 'Dec\'16',
-      'Jan\'16', 'Feb\'16', 'Mar\'16', 'May\'16', 'Jun\'16', 'Jul\'16', 'Aug\'16', 'Sep\'16', 'Oct\'16', 'Nov\'16', 'Dec\'16',
-    ],
-    yAxisData: [48.63, 48.55, 48.47, 48.39, 48.32, 48.35, 48.32, 48.27, 48.23, 48.20, 48.16, 48.12, 48.09, 48.06, 48.02, 47.98, 47.95, 47.92, 47.88, 47.85, 47.82, 47.79, 47.76, 47.74, 47.62, 47.60, 47.60, 47.60, 47.60, 47.60, 47.60, 47.56, 47.51, 47.47, 47.43, 47.39, 47.35, 47.32, 47.29, 47.29, 47.31, 47.34, 47.34, 47.33, 47.33, 47.33, 47.33, 47.32, 47.31, 47.30, 47.29, 47.28, 47.27, 47.27, 47.24]
-  };
 
   constructor(private router: Router,
               private signalService: SignalService,
@@ -96,11 +86,6 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  public updateChart() {
-    //Not using in code only for future use for ali
-    // this.userProfile.sendData();
-  }
-
   public onScroll() {
     this.assignStockData(2);
   }
@@ -114,23 +99,23 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
   }
 
   public getSelectedStockData(stock: Idea, callback?) {
-    // if (stock) {
-    //   this.loading = this.sharedService.getStockCardData(stock.symbol)
-    //     .takeUntil(this.ngUnsubscribe)
-    //     .subscribe(res => {
-    //       return callback(res);
-    //     });
-    // }
+    if (stock) {
+      this.loading = this.ideaService.getStockCardData(stock.symbol)
+        .takeUntil(this.ngUnsubscribe)
+        .subscribe(res => {
+          return callback(res);
+        });
+    }
   }
 
   public getSelectedStockHeadlines(stock: Idea) {
-    // if (stock) {
-    //   this.headlinesLoading = this.sharedService.getHeadlines(stock.symbol)
-    //     .takeUntil(this.ngUnsubscribe)
-    //     .subscribe(res => {
-    //       this.headlines = res['headlines'].filter((item, index) => index < 7);
-    //     })
-    // }
+    if (stock) {
+      this.headlinesLoading = this.ideaService.getHeadlines(stock.symbol)
+        .takeUntil(this.ngUnsubscribe)
+        .subscribe(res => {
+          this.headlines = res['headlines'].filter((item, index) => index < 7);
+        })
+    }
   }
 
   public setOrderByObject(val: string, order: boolean, e: Event) {
@@ -143,40 +128,6 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
     this.selectedStockPGR = res['pgr'];
     this.selectedStockChartPoints = res['chart-points'];
     this.selectedStockSimilars = res['discovery-similars'].stocks;
-    this.intraDayChart(this.selectedStockChartPoints, `${this.selectedStock.symbol}-chart-container`);
-  }
-
-  public intraDayChart(data, chartClass) {
-    /*
-     For ALi understanding( chart for card view )
-     Some points need to notice  before draw chart.
-     1. Make sure that xAxisData has string values and yAxisData has Int/Float values.
-     2. length of  xAxisData and yAxisData data array has same length.
-     3. Before draw chart make sure that div have width and height prperty(For the time i'm apply inline style).
-     4. update hardCoded chart data with your api data.
-     */
-
-    let chartData = {
-      xAxisData: [
-        'Jan\'16', 'Feb\'16', 'Mar\'16', 'May\'16', 'Jun\'16', 'Jul\'16', 'Aug\'16', 'Sep\'16', 'Oct\'16', 'Nov\'16', 'Dec\'16',
-        'Jan\'16', 'Feb\'16', 'Mar\'16', 'May\'16', 'Jun\'16', 'Jul\'16', 'Aug\'16', 'Sep\'16', 'Oct\'16', 'Nov\'16', 'Dec\'16',
-        'Jan\'16', 'Feb\'16', 'Mar\'16', 'May\'16', 'Jun\'16', 'Jul\'16', 'Aug\'16', 'Sep\'16', 'Oct\'16', 'Nov\'16', 'Dec\'16',
-        'Jan\'16', 'Feb\'16', 'Mar\'16', 'May\'16', 'Jun\'16', 'Jul\'16', 'Aug\'16', 'Sep\'16', 'Oct\'16', 'Nov\'16', 'Dec\'16',
-        'Jan\'16', 'Feb\'16', 'Mar\'16', 'May\'16', 'Jun\'16', 'Jul\'16', 'Aug\'16', 'Sep\'16', 'Oct\'16', 'Nov\'16', 'Dec\'16',
-      ],
-      yAxisData: [48.63, 48.55, 48.47, 48.39, 48.32, 48.35, 48.32, 48.27, 48.23, 48.20, 48.16, 48.12, 48.09, 48.06, 48.02, 47.98, 47.95, 47.92, 47.88, 47.85, 47.82, 47.79, 47.76, 47.74, 47.62, 47.60, 47.60, 47.60, 47.60, 47.60, 47.60, 47.56, 47.51, 47.47, 47.43, 47.39, 47.35, 47.32, 47.29, 47.29, 47.31, 47.34, 47.34, 47.33, 47.33, 47.33, 47.33, 47.32, 47.31, 47.30, 47.29, 47.28, 47.27, 47.27, 47.24]
-    };
-    //yAxisData: data['dema']
-    this.drawPanelChart(chartData, chartClass);
-
-  }
-
-  public drawPanelChart(chartData, chartClass) {
-    if (document.getElementById(chartClass)) {
-      let ele = document.getElementById(chartClass);
-      ele.removeChild(ele.childNodes[0]);
-    }
-    // this.chartService.interactiveAreaChartControler.init({data: chartData, id: chartClass});
   }
 
   public assignStockData(amount: number) {
