@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
@@ -9,12 +9,13 @@ import {Subscription} from 'rxjs/Subscription';
   selector: 'cpt-report',
   template: `
     <div [ngBusy]="loading">
-      <iframe #iframe class="stock-view__iframe" id="iframeId" [src]="sanitizedSrc" (load)="sanitizedSrc ? onLoad() : null"></iframe>
+      <iframe #iframe class="stock-view__iframe" id="iframeId" [src]="sanitizedSrc"
+              (load)="sanitizedSrc ? onLoad() : null"></iframe>
     </div>
   `,
   styleUrls: ['./report.component.scss']
 })
-export class ReportComponent implements OnInit {
+export class ReportComponent implements OnChanges {
   @ViewChild('iframe') iframe: ElementRef;
   public symbol: string;
   public src: string;
@@ -28,7 +29,7 @@ export class ReportComponent implements OnInit {
               private location: Location) {
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.loading = this.route.params
       .subscribe(params => {
           if (params.symbol) {
