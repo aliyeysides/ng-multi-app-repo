@@ -476,52 +476,6 @@ a.quick-link {
 
   .post-body {
     padding: 15px 20px 15px;
-
-    h5 {
-      font-size: 32px;
-      font-weight: 300;
-      line-height: 1.4;
-      margin-bottom: 20px;
-      letter-spacing: 0.2;
-
-      &:hover {
-        color: $link-blue;
-
-        &:after {
-          content: ' →';
-        }
-      }
-    }
-
-    h6 {
-      font-weight: 700;
-      line-height: 1.2;
-      color: #AE004D;
-      margin-bottom: 3px;
-    }
-
-    ul {
-      margin:0px 20px 20px;
-
-      li {
-        padding: 6px 0;
-        font-size: 15px;
-        font-weight: 600;
-      }
-    }
-
-    p {
-      font-size: 14px;
-      line-height: 1.55;
-      margin-bottom: 10px;
-    }
-
-    .img-full {
-      width: 100%;
-      padding: 30px;
-      max-width: 960px;
-      margin:0 auto;
-    }
   }
 }
 
@@ -711,7 +665,7 @@ a.quick-link {
 
 .Bearish-H1 {
   color:#9F2C53;
-  font-size:22px;
+  font-size:24px;
   font-weight: 300;
   font-family: $font-stack;
   line-height: 1.75;
@@ -721,7 +675,7 @@ a.quick-link {
 
 .Bearish-H2 {
   color:#0070C0;
-  font-size:18px;
+  font-size:19px;
   font-weight: 600;
   font-family: $font-stack;
   line-height: 1.5;
@@ -731,7 +685,7 @@ a.quick-link {
 
 .Bearish-H3 {
   color:$font-color;
-  font-size:13px;
+  font-size:14px;
   font-weight: 600;
   font-family: $font-stack;
   line-height: 1.2;
@@ -742,7 +696,7 @@ a.quick-link {
 
 .Bearish-H4 {
   color:$font-color;
-  font-size:13px;
+  font-size:14px;
   font-weight: 600;
   font-family: $font-stack;
   line-height: 1.2;
@@ -753,7 +707,7 @@ a.quick-link {
 
 .Bearish-P {
   color:$font-color;
-  font-size:10px;
+  font-size:11px;
   font-weight: 400;
   font-family: $font-stack;
   line-height: 1.25;
@@ -763,7 +717,7 @@ a.quick-link {
 
 .Bearish-caption {
   color:$font-color;
-  font-size:8px;
+  font-size:9px;
   font-weight: 300;
   font-family: $font-stack;
   line-height: 1.5;
