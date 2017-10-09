@@ -26,7 +26,7 @@ import {Subscription} from 'rxjs/Subscription';
                 <button type="button" class="close">
                   <i class="fa fa-star" aria-hidden="true"></i>
                 </button>
-                <img class="" [src]="'assets/imgs/'+classMap[list.name].imgName">
+                <img class="" [src]="'assets/imgs/'+appendListImageUrl(list.name)">
               </div>
               <p class="list__label">{{list.name}}</p>
             </ng-container>
@@ -89,6 +89,10 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
   public emitListSelected(list: IdeaList) {
     this.selectedList = list;
     this.listSelected.emit(list);
+  }
+
+  public appendListImageUrl(listName: string) {
+    return this.classMap[listName] ? this.classMap[listName].imgName : '/img_NO-LOGO--etf.svg';
   }
 
 }

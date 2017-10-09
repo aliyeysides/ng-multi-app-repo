@@ -15,7 +15,7 @@ import {Idea} from '../../../../shared/models/idea';
             <a></a>
           </div>
           <div class="logo clearfix">
-            <img class="align-absolute" src="{{ stock.logo_url }}">
+            <img class="align-absolute" src="{{ stock.logo_url != 'N/A' ? stock.logo_url : 'assets/imgs/img_NO-LOGO--stock.svg' }}">
           </div>
           <div class="symbol clearfix">
             <div class="rating">
