@@ -4,11 +4,12 @@ import {DiscoveryService} from '../../core/services/discovery.service';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Idea} from '../../shared/models/idea';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'cpt-discovery',
   template: `
-    <div class="discovery__container">
+    <div class="discovery__container" [ngBusy]="loading">
       <div class="body__top">
         <div class="section-header">
           <h1>Stock Ideas Based on</h1>
@@ -67,6 +68,7 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   public metaInfo: Idea;
   public results: object[];
+  public loading: Subscription;
 
   constructor(private router: Router,
               private discoveryService: DiscoveryService,
@@ -75,7 +77,7 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.route.params
+    this.loading = this.route.params
       .map(params => params.symbol)
       .switchMap(val => this.discoveryService.getDiscoveryResultLists(val))
       .takeUntil(this.ngUnsubscribe)
@@ -104,6 +106,7 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
   private parseDiscoveryResponse(res: object) {
     this.metaInfo = res['metainfo'] as Idea;
     this.results = res['results'];
+    this.loading.unsubscribe();
   }
 
   goBack() {

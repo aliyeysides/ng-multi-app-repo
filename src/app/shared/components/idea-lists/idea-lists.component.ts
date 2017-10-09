@@ -4,7 +4,7 @@ import {FullListModalComponent} from './full-list-modal.component';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {IdeaList} from '../../models/idea';
 import {Subject} from 'rxjs/Subject';
-import {ClassMap, IDEAS_LIST_CLASSMAP} from '../../models/idea-list-class-map';
+import {IDEAS_LIST_CLASSMAP} from '../../models/idea-list-class-map';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
@@ -38,7 +38,6 @@ import {Subscription} from 'rxjs/Subscription';
         <p class="">Idea lists updated daily</p>
       </div>
     </div>
-
   `,
   styleUrls: ['./idea-lists.component.scss']
 })
@@ -72,7 +71,7 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this._lists
+    this.loading = this._lists
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x !== undefined)
       .subscribe(lists => this.emitListSelected(lists[0] as IdeaList));

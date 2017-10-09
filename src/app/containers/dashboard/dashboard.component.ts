@@ -41,6 +41,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .filter(x => x !== undefined)
       .subscribe(res => {
         this.allLists = res[2]['user_lists'].concat(res[0]['idea_lists']).concat(res[1]['theme_lists']);
+        this.loading.unsubscribe();
       });
   }
 
