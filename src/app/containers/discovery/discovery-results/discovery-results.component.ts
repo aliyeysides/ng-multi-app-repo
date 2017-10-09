@@ -19,7 +19,7 @@ import {SignalService} from '../../../core/services/signal.service';
         </div>
         <ul class="discovery-slider__tiles">
           <li *ngFor="let stock of ( list['stocks'].slice(startIndex[list.list_key], endIndex[list.list_key] || 5) )" class="tile__wrapper">
-            <cpt-discovery-card [stock]="stock"></cpt-discovery-card>
+            <cpt-discovery-card (viewDiscoveryClicked)="viewDiscovery(list['list_key'], $event)" [stock]="stock"></cpt-discovery-card>
           </li>
         </ul>
       </div>
@@ -30,6 +30,7 @@ import {SignalService} from '../../../core/services/signal.service';
 export class DiscoveryResultsComponent implements AfterViewInit, OnDestroy {
 
   private _results: BehaviorSubject<object[]> = new BehaviorSubject<object[]>([]);
+  @Output('viewDiscoveryClicked') public viewDiscoveryClicked = new EventEmitter<string>();
   @Input('results')
   set results(val: object[]) {
     this._results.next(val);
@@ -58,6 +59,12 @@ export class DiscoveryResultsComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  viewDiscovery(list_key, val) {
+    this.viewDiscoveryClicked.emit(val);
+    this.startIndex[list_key] = 0;
+    this.endIndex[list_key] = 5;
   }
 
   initIndexValues(list_key: string) {
