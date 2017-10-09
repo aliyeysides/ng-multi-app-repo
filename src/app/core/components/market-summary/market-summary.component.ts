@@ -19,10 +19,11 @@ export interface MarketData {
   template: `
     <div class="market-summary__contents">
       <h4>Markets</h4>
-      <p class="current-time">As of {{currentTime}}</p>
+      <p class="current-time">As of {{ currentTime }}</p>
       <p class="indice">
         <span>
-          <img src="./assets/imgs/icon_arrow--down.svg">
+          <img *ngIf="SPY?.change<0" src="./assets/imgs/icon_arrow--down.svg">
+          <img *ngIf="SPY?.change>0" src="./assets/imgs/icon_arrow--up.svg">
         </span>
         SPY&nbsp;
         <span [@fadeInDown]="fadeInDownSPYState" (@fadeInDown.done)="resetSPY()"
@@ -32,7 +33,8 @@ export interface MarketData {
       </p>
       <p class="indice">
         <span>
-          <img src="./assets/imgs/icon_arrow--down.svg">
+          <img *ngIf="DJI?.change<0" src="./assets/imgs/icon_arrow--down.svg">
+          <img *ngIf="DJI?.change>0" src="./assets/imgs/icon_arrow--up.svg">
         </span>
         DJI&nbsp;
         <span [@fadeInDown]="fadeInDownDJIState" (@fadeInDown.done)="resetDJI()"
@@ -42,7 +44,8 @@ export interface MarketData {
       </p>
       <p class="indice">
         <span>
-          <img src="./assets/imgs/icon_arrow--up.svg">
+          <img *ngIf="QQQ?.change<0" src="./assets/imgs/icon_arrow--down.svg">
+          <img *ngIf="QQQ?.change>0" src="./assets/imgs/icon_arrow--up.svg">
         </span>
         QQQ&nbsp;
         <span [@fadeInDown]="fadeInDownQQQState" (@fadeInDown.done)="resetQQQ()"
