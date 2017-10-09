@@ -11,12 +11,9 @@ import {Idea} from '../../shared/models/idea';
     <div class="discovery__container">
       <div class="body__top">
         <div class="section-header">
-          <h1>Discovery results for</h1>
+          <h1>Stock Ideas Based on</h1>
           <div class="section-header__search">
             <cpt-symbol-search></cpt-symbol-search>
-          </div>
-          <div class="section-header__actions">
-            <a (click)="goBack()"><i class="fa fa-reply" aria-hidden="true"></i> <span>Back</span></a> 
           </div>
           <div class="section-header__actions">
             <a>
