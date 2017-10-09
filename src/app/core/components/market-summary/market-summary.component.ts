@@ -21,6 +21,9 @@ export interface MarketData {
       <h4>Markets</h4>
       <p class="current-time">As of {{currentTime}}</p>
       <p class="indice">
+        <span>
+          <img src="./assets/imgs/icon_arrow--down.svg">
+        </span>
         SPY&nbsp;
         <span [@fadeInDown]="fadeInDownSPYState" (@fadeInDown.done)="resetSPY()"
               [ngClass]="{'up-change':SPY?.change>0,'down-change':SPY?.change<0}">
@@ -28,6 +31,9 @@ export interface MarketData {
         </span>
       </p>
       <p class="indice">
+        <span>
+          <img src="./assets/imgs/icon_arrow--down.svg">
+        </span>
         DJI&nbsp;
         <span [@fadeInDown]="fadeInDownDJIState" (@fadeInDown.done)="resetDJI()"
               [ngClass]="{'up-change':DJI?.change>0,'down-change':DJI?.change<0}">
@@ -35,6 +41,9 @@ export interface MarketData {
         </span>
       </p>
       <p class="indice">
+        <span>
+          <img src="./assets/imgs/icon_arrow--up.svg">
+        </span>
         QQQ&nbsp;
         <span [@fadeInDown]="fadeInDownQQQState" (@fadeInDown.done)="resetQQQ()"
               [ngClass]="{'up-change':QQQ?.change>0,'down-change':QQQ?.change<0}">

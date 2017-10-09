@@ -34,6 +34,19 @@
 		color: #4A4A4A;
 		line-height: 50px;
 		margin-right: 50px;
+
+		span {
+			margin-right: 5px;
+			margin-top:-6px;
+
+			img {
+				width: 13px;
+				height: 13px;
+				margin-top: -3px;
+				display: inline-block;
+				vertical-align: middle;
+			}
+		}
 	}
 }
 
