@@ -17,9 +17,10 @@ export class IdeasService {
     this.stockCardParams = new URLSearchParams();
   }
 
-  public getIdeasList(uid: string): Observable<Array<object>> {
+  public getIdeasList(uid: string, product: string): Observable<Array<object>> {
     const ideaListLookupUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/getMidTierUserLists?`;
     this.ideaListsParams.set('uid', uid);
+    this.ideaListsParams.set('productName', product);
     return this.utilService.getJson(ideaListLookupUrl, this.ideaListsParams);
   }
 

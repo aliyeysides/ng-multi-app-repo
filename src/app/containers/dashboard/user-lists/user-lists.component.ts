@@ -94,7 +94,7 @@ export class UserListsComponent implements OnInit, OnDestroy {
     this.authService.currentUser$
       .takeUntil(this.ngUnsubscribe)
       .map(usr => this.uid = usr['UID'])
-      .flatMap(uid => this.ideasService.getIdeasList(uid))
+      .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
       .map(res => {
         this.holdingId = res[2]['user_lists'][0]['list_id'];
         this.watchingId = res[2]['user_lists'][1]['list_id'];

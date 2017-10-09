@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
     this.authService.currentUser$
       .takeUntil(this.ngUnsubscribe)
       .map(usr => usr['UID'])
-      .flatMap(uid => this.ideasService.getIdeasList(uid))
+      .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
       .subscribe(res => {
         this.allLists = Object.assign([], res[0]['idea_lists'], res[1]['theme_lists'], res[2]['user_lists']);
       });
