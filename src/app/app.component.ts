@@ -52,14 +52,15 @@ import {Component, ViewEncapsulation} from '@angular/core';
       </div>
     </div>
 
+    <div class="navbar" [class.opened]="isOpen">
+      <cpt-market-summary></cpt-market-summary>
+      <cpt-bear-search></cpt-bear-search>
+      <cpt-bear-alerts></cpt-bear-alerts>
+      <cpt-bear-settings-menu></cpt-bear-settings-menu>
+    </div>
+    
     <div class="container-fluid container-main" [class.opened]="isOpen">
 
-      <div class="navbar">
-        <cpt-market-summary></cpt-market-summary>
-        <cpt-bear-search></cpt-bear-search>
-        <cpt-bear-alerts></cpt-bear-alerts>
-        <cpt-bear-settings-menu></cpt-bear-settings-menu>
-      </div>
 
       <router-outlet></router-outlet>
     </div>
