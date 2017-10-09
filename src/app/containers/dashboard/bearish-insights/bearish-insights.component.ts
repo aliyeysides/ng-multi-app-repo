@@ -20,7 +20,7 @@ import {Observable} from 'rxjs/Observable';
           <span>&nbsp;Previous</span>
         </a>
       </div>
-      <div class="post-body post-body--insights">
+      <div class="post-body post-body--insights" [ngBusy]="loading">
         <h1>{{ title }}</h1>
         <div [innerHtml]="commentary"></div>
       </div>

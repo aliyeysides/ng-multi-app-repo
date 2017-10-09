@@ -13,7 +13,7 @@ import {Observable} from 'rxjs/Observable';
   template: `
     <div class="insights__container insights__container--large insights__container--modal">
       <div class="post-head post-head--bearpick">
-        <h2 class="modal-title pull-left">{{title}}</h2>
+        <h2 class="modal-title pull-left">{{ title }}</h2>
         <button type="button" class="post-head__button" aria-label="Close" (click)="bsModalRef.hide()">
           <a class="">
             <i class="fa fa-times-circle" aria-hidden="true"></i>
@@ -21,8 +21,8 @@ import {Observable} from 'rxjs/Observable';
           </a>
         </button>
       </div>
-      <div class="post-body" [ngBusy]="loading">
-        <ul *ngIf="posts">
+      <div class="post-body">
+        <ul [ngBusy]="loading">
           <li *ngFor="let post of posts">
             <ng-container *ngIf="post['data']">
               <img class="rating" src="{{ appendPGRImage(post['data']['pgr']['PGR Value']) }}">

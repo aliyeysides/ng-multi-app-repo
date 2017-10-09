@@ -13,7 +13,7 @@ import {SignalService} from '../../../core/services/signal.service';
 @Component({
   selector: 'cpt-bear-of-the-week',
   template: `
-    <div class="insights__container insights__container--small">
+    <div class="insights__container insights__container--small" [ngBusy]="loading">
       <div class="post-head">
         <h4>Bear of the Week</h4>
         <div class="divider-h"></div>
@@ -55,7 +55,7 @@ import {SignalService} from '../../../core/services/signal.service';
       </div>
     </div>
   `,
-  styleUrls: ['./bear-of-the-week.component.scss']
+  styleUrls: ['./bear-of-the-week.component.scss'],
 })
 export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
