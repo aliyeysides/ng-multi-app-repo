@@ -47,11 +47,15 @@
 
 	.industry-name {
 		font-size: 14px;
-		font-weight: 600;
+		font-weight: 400;
 		line-height: 18px;
 		color: $font-color--subhead;
 		float: right;
 		font-style: italic;
+    	text-align: left;
+    	white-space: nowrap;
+    	text-overflow: ellipsis;
+    	overflow: hidden;
 	}
 
 	.link__see-more {

@@ -7,48 +7,49 @@
   overflow: hidden;
   padding-top:210px;
   position: relative;
+  height:100vh;
 
   .body__top {
     background-color: #f8f8f8;
     height: 210px;
     position: absolute;
     top:0;
-    z-index: 1000;
+    z-index: 400;
     width: 100%;
 
     .discovery__base-stock {
-      padding: 0px 25px 0px 65px;
+      padding: 0px 25px 0px 45px;
 
       .row {
         position: relative;
         height: 130px;
         background: transparent;
         padding: 10px;
-        border-radius: 30px 0px 0px 30px;
-        min-width: 905px;
+        min-width: 960px;
 
         .base-stock__logo {
           position: absolute;
           background-color: #ffffff;
-          width: 130px;
-          height: 130px;
-          border-radius: 65px;
-          top: 0px;
-          left: -35px;
+          width: 115px;
+          height: 115px;
+          border-radius: 60px;
+          top: 10px;
+          left: -15px;
           overflow: hidden;
           border:1px solid #cccccc;
 
           img {
-            max-width: 110px;
+            max-width: 112px;
             height: auto;
           }
         }
 
         .base-stock__symbol {
           margin-left: 115px;
-          min-width: 210px;
+          min-width: 175px;
           padding-top:5px;
           width: 15%;
+          max-width: 220px;
 
           .ticker {
             font-weight: 700;
@@ -85,10 +86,10 @@
         }
 
         .base-stock__price {
-          width: 130px;
+          width: 135px;
           padding-top:8px;
           border-right: 3px solid rgba(0, 0, 0, 0.05);
-          padding-right: 1%;
+          padding-right: 20px;
           text-align: right;
 
           .last-price {
@@ -144,7 +145,8 @@
         }
 
         .base-stock__PGR {
-          width: 266px;
+          min-width: 266px;
+          width: 20%;
           padding:3px 28px 0 25px;
           border-right: 3px solid rgba(0, 0, 0, 0.05);
 
@@ -281,6 +283,7 @@
           border-right: 3px solid rgba(0, 0, 0, 0.05);
           padding: 2px 30px 0;
           min-width: 220px;
+          width: 20%;
           overflow: hidden;
 
           ul {
@@ -310,6 +313,9 @@
     z-index: 2;
     border-top: 3px solid #eeeeee;
     background-color:#eeeeee;
+    overflow-y: scroll;
+    height:100vh;
+    padding-bottom:260px;
   }
 }
 
@@ -319,7 +325,6 @@
 
 .discovery-results__container {
   margin-left: 2px;
-  overflow-y: scroll;
 
   .discovery-results__slider {
     height: 280px;
