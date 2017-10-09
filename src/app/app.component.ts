@@ -60,8 +60,6 @@ import {Component, ViewEncapsulation} from '@angular/core';
     </div>
     
     <div class="container-fluid container-main" [class.opened]="isOpen">
-
-
       <router-outlet></router-outlet>
     </div>
   `,
