@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
 
 import {FormControl} from '@angular/forms';
 import {NavigationEnd, Router} from '@angular/router';
@@ -106,24 +106,20 @@ export class SymbolSearchComponent implements OnInit, OnDestroy {
   }
 
   onClick(symbol: string) {
-    console.log('location', this.navEndLocation);
-
-    if (this.navEndLocation == 'DashboardComponent') {
-      this.router.navigate(['/report', symbol]);
-    }
-    if (this.navEndLocation == 'StockReportComponent') {
-
-    }
     if (this.navEndLocation == 'DiscoveryComponent') {
-
+      this.gotoDiscovery(symbol);
+    } else {
+      this.gotoReport(symbol);
     }
-    this.symbolSearchForm.reset();
   }
 
   onSubmit() {
     if (this.searchResults.length != 0) {
-      this.gotoReport(this.searchResults[0].Symbol);
-      this.symbolSearchForm.reset();
+      if (this.navEndLocation == 'DiscoveryComponent') {
+        this.gotoDiscovery(this.searchResults[0].Symbol);
+      } else {
+        this.gotoReport(this.searchResults[0].Symbol);
+      }
     }
   }
 

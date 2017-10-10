@@ -1,46 +1,26 @@
-import {AfterViewInit, Component, ElementRef, OnChanges, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
-import {environment} from '../../../../environments/environment';
-import {Subscription} from 'rxjs/Subscription';
+import {SafeUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'cpt-report',
   template: `
-    <div [ngBusy]="loading">
-      <iframe #iframe class="stock-view__iframe" id="iframeId" [src]="sanitizedSrc"
-              (load)="sanitizedSrc ? onLoad() : null"></iframe>
+    <div>
+      <iframe #iframe class="stock-view__iframe" id="iframeId" [src]="src"
+              (load)="src ? onLoad() : null"></iframe>
     </div>
   `,
   styleUrls: ['./report.component.scss']
 })
-export class ReportComponent implements OnChanges {
+export class ReportComponent implements OnInit {
   @ViewChild('iframe') iframe: ElementRef;
-  public symbol: string;
-  public src: string;
-  public sanitizedSrc: SafeUrl;
-  public loading: Subscription;
+  @Output('loadFinished') loadFinished: EventEmitter<null> = new EventEmitter<null>();
+  @Input('src') src = <SafeUrl>null;
 
-  apiHostName = environment.envProtocol + '://' + environment.envHostName;
-
-  constructor(private route: ActivatedRoute,
-              private sanitizer: DomSanitizer,
-              private location: Location) {
+  constructor(private location: Location) {
   }
 
-  ngOnChanges() {
-    this.loading = this.route.params
-      .subscribe(params => {
-          if (params.symbol) {
-            this.symbol = params.symbol;
-          } else {
-            this.symbol = 'AAPL';
-          }
-          this.src = `${this.apiHostName}/CPTRestSecure/StockSummary/index.html?lang=English&uid=9582&environment=desktop&subEnvironment=chaikinAnalytics&version=1.3.2&symbol=${this.symbol}&userType=CAUser`;
-          this.sanitizedSrc = this.sanitizer.bypassSecurityTrustResourceUrl(this.src);
-        }
-      );
+  ngOnInit() {
   }
 
   goBack() {
@@ -48,9 +28,9 @@ export class ReportComponent implements OnChanges {
   }
 
   onLoad() {
+    this.loadFinished.emit();
     const iframe = this.iframe.nativeElement;
     const doc = iframe.contentDocument || (<HTMLIFrameElement>iframe).contentWindow;
-    this.loading.unsubscribe();
   }
 
 
