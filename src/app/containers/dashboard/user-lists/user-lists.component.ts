@@ -18,11 +18,13 @@ import {BearSearchComponent} from '../../../core/components/bear-search/bear-sea
             <a (click)="currentList = 'Watching'" [ngClass]="{'active': currentList === 'Watching'}">Watching</a></h4>
           <a class="post-head__button">
             <i class="fa fa-external-link-square" aria-hidden="true"></i>
-            <span>&nbsp;View List</span>
+            <span class="show">&nbsp;View List</span>
+            <span class="hide">&nbsp;View</span>
           </a>
           <a (click)="openSearch()" class="post-head__button">
             <i class="fa fa-plus-circle" aria-hidden="true"></i>
-            <span>&nbsp;Add Stock</span>
+            <span class="show">&nbsp;Add Stock</span>
+            <span class="hide">&nbsp;Add</span>
           </a>
         </div>
         <div class="col-header__container row no-gutters">
