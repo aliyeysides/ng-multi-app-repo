@@ -1,67 +1,75 @@
 @import 'variables';
 
+
+
+
 .post-body--bearpick {
-	padding: 5px 0px;
-	min-height:100px;
-	
+	padding: 5px 0px 0px;
+	min-height: 100px;
+
 	.row {
 		padding:5px 0;
 	}
 
 	.rating {
-		width: 50px;
-		height: 26px;
+		width: 48px;
+		height: 25px;
 		display: inline-block;
 		float: left;
-		margin-right: 10px;
+		margin-right: 5px;
 		margin-top: 3px;
 	}
 
 	.ticker {
 		display: inline-block;
 		float: left;
-		font-size: 32px;
+		font-size: 30px;
 		font-weight: 800;
 		line-height: 1;
 	}
 
-	.data {
-		display: inline-block;
-		float: right;
-		font-size: 17px;
-		font-weight: 600;
-		line-height: 32px;
-		margin-left:0px;
-		vertical-align: middle;
-	}
+	.price-data {
+		margin: 0 0px 0 0;
 
-	.data--change {
-		margin-left:30px;
+		.data {
+		    display: inline-block;
+		    float: right;
+		    font-size: 17px;
+		    font-weight: 600;
+		    line-height: 32px;
+		    margin-left: 0px;
+		    vertical-align: middle;
+		}
+
+		.data--change {
+			margin-left:15%;
+		}
 	}
 
 	.company-name {
-		font-size: 21px;
+		font-size: 20px;
 		font-weight: 400;
-		line-height: 1;
-		white-space: nowrap;
+		line-height: 1.3;
 	}
 
 	.industry-name {
-		font-size: 14px;
-		font-weight: 400;
-		line-height: 24px;
-		color: $font-color--subhead;
-		float: right;
-		font-style: italic;
-    	text-align: left;
-    	white-space: nowrap;
-    	text-overflow: ellipsis;
+		font-size: 13px;
+	    font-weight: 400;
+	    line-height: 24px;
+	    height: 32px;
+	    color: $font-color--subhead;
+	    font-style: italic;
+	    text-align: left;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	    overflow: hidden;
 	}
 
 	.link__see-more {
 		font-weight: 600;
 		font-size: 14px;
 		text-align: center;
+		line-height: 1;
 
 		a {
 			color: $link-blue;
