@@ -1,4 +1,6 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {SymbolSearchService} from '../../services/symbol-search.service';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-bear-search',
@@ -40,14 +42,23 @@ export class BearSearchComponent implements OnInit {
   @HostListener('click') onClick() {
     this.toggleNav(this.nav.nativeElement, '500px', true);
   }
+
   @HostListener('document:click', ['$event']) offClick(e: Event) {
     if (!this.el.nativeElement.contains(e.target)) this.toggleNav(this.nav.nativeElement, '0', false);
   }
 
-  constructor(private el: ElementRef) {
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
+
+  constructor(private el: ElementRef,
+              private searchService: SymbolSearchService) {
   }
 
   ngOnInit() {
+    this.searchService.isOpen
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(open => {
+        if (open === true) this.toggleNav(this.nav.nativeElement, '500px', true);
+      });
   }
 
   public toggleNav(el: HTMLElement, size: string, darken: boolean): void {

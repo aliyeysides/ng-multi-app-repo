@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'cpt-root',
@@ -71,4 +71,5 @@ export class AppComponent {
   toggleMenu() {
     this.isOpen = !this.isOpen;
   }
+
 }

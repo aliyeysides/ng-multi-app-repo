@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnDestroy, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
@@ -6,16 +6,19 @@ import {Idea, IdeaList} from '../../../shared/models/idea';
 import {SignalService} from "app/core/services/signal.service";
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {IdeasService} from '../../../core/services/ideas.service';
+import {slideInRight} from '../../../shared/animations/slideInRight';
 
 @Component({
   selector: 'cpt-list-view',
   templateUrl: './list-view.component.html',
   styleUrls: ['./list-view.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  animations: [slideInRight()]
 })
 
 export class ListViewComponent implements AfterViewInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+
+  public slideInState: string;
 
   @Input('currentList')
   set currentList(list: IdeaList) {
@@ -165,13 +168,8 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
     this.mouseHoverOptionsMap = {};
   }
 
-  public toggleHeadlines() {
-    this.showHeadlines = !this.showHeadlines;
-  }
-
-  public toggleListSelectionView() {
-    this.additionalLists = !this.additionalLists;
-    // this.listSelectionService.setIsShown(this.additionalLists);
+  public triggerSlideInRight() {
+    this.slideInState = 'active';
   }
 
   public goToStockView(stock: (Idea | string), e) {

@@ -14,7 +14,8 @@ import {Subscription} from 'rxjs/Subscription';
       <div class="section-header section-header--ideas">
         <h1>Idea Lists</h1>
         <div class="section-header__actions">
-          <a class="long" (click)="openFullList()"><i class="fa fa-list-ul" aria-hidden="true"></i> List Descriptions</a>
+          <a class="long" (click)="openFullList()"><i class="fa fa-list-ul" aria-hidden="true"></i> List
+            Descriptions</a>
         </div>
       </div>
       <div class="idea-lists__container row no-gutters">
