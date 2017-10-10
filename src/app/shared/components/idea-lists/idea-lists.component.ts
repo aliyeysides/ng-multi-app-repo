@@ -24,7 +24,7 @@ import {Subscription} from 'rxjs/Subscription';
             <ng-container *ngIf="list.is_active">
               <div class="list__image">
                 <button type="button" class="close">
-                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <!--<i class="fa fa-star" aria-hidden="true"></i>-->
                 </button>
                 <img class="" [src]="'assets/imgs/'+appendListImageUrl(list.name)">
               </div>

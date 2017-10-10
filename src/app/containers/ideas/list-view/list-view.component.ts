@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
@@ -11,6 +11,7 @@ import {IdeasService} from '../../../core/services/ideas.service';
   selector: 'cpt-list-view',
   templateUrl: './list-view.component.html',
   styleUrls: ['./list-view.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class ListViewComponent implements AfterViewInit, OnDestroy {
