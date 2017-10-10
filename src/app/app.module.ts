@@ -18,6 +18,7 @@ import {AuthService} from './core/services/auth.service';
 import {BusyModule} from 'angular2-busy';
 import {AuthGuard} from './shared/auth.guard';
 import {loadingMaskConfig} from '../loading-mask-config';
+import {IdeasService} from './core/services/ideas.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import {loadingMaskConfig} from '../loading-mask-config';
     ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES,
   ],
-  providers: [UtilService, AuthService, AuthGuard],
+  providers: [UtilService, AuthService, AuthGuard, IdeasService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

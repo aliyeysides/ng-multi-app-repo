@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnDestroy} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
@@ -15,19 +15,10 @@ import {slideInRight} from '../../../shared/animations/slideInRight';
   animations: [slideInRight()]
 })
 
-export class ListViewComponent implements AfterViewInit, OnDestroy {
+export class ListViewComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   public slideInState: string;
-
-  @Input('currentList')
-  set currentList(list: IdeaList) {
-    this._currentList.next(list);
-  }
-
-  get currentList() {
-    return this._currentList.getValue();
-  }
 
   @Input('uid')
   set uid(uid: string) {
@@ -37,22 +28,16 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
   get uid() {
     return this._uid.getValue();
   }
-
-  private _currentList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>({} as IdeaList);
   private _uid: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public ideaList: Array<object>;
+  public currentList: IdeaList;
 
-  public additionalLists: boolean = false;
   public mouseHoverOptionsMap: object = {};
   public popupOptionsMap: object = {};
   public currentView: string = 'list-view';
-  public showHeadlines: boolean = false;
 
   public selectedStock: Idea;
-  public selectedListId: string;
-  public selectedListName: string;
-
   public selectedStockPGR: object;
   public selectedStockChartPoints: object;
   public selectedStockSimilars: object;
@@ -71,11 +56,16 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
               private ideaService: IdeasService) {
   }
 
-  ngAfterViewInit() {
-    this._currentList
+  ngOnInit() {
+    this.ideaService.selectedList
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x !== undefined)
-      .flatMap(list => this.ideaService.getListSymbols(list['list_id'].toString(), this.uid))
+      .filter(x => x['list_id'] !== undefined )
+      .flatMap(list => {
+        console.log('this should be selected list', list);
+        this.currentList = list;
+        return this.ideaService.getListSymbols(list['list_id'].toString(), this.uid)
+      })
       .subscribe(stocks => {
         this.clearOrderByObject();
         this.clearIdeasLists();

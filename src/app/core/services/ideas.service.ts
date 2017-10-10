@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {UtilService} from './util.service';
+import {IdeaList} from '../../shared/models/idea';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class IdeasService {
@@ -11,6 +13,13 @@ export class IdeasService {
   private listSymbolsParams: URLSearchParams;
   private stockCardParams: URLSearchParams;
   private headlinesParams: URLSearchParams;
+
+  private _selectedList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>({} as IdeaList);
+  selectedList = this._selectedList.asObservable();
+
+  setSelectedList(list: IdeaList) {
+    this._selectedList.next(list);
+  }
 
   constructor(private utilService: UtilService) {
     this.ideaListsParams = new URLSearchParams();

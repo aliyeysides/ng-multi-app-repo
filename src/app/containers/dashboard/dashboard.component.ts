@@ -37,13 +37,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loading = this.authService.currentUser$
-      .takeUntil(this.ngUnsubscribe)
       .map(usr => usr['UID'])
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
       .filter(x => x !== undefined)
+      .take(1)
       .subscribe(res => {
         this.allLists = res[0]['idea_lists'].concat(res[1]['theme_lists']);
-        this.loading.unsubscribe();
       });
   }
 

@@ -8,6 +8,7 @@ import {SHARED_COMPONENTS} from './components/index';
 import {FullListModalComponent} from "app/shared/components/idea-lists";
 import {BusyModule} from 'angular2-busy';
 import {PipesModule} from './pipes/index';
+import {IdeasService} from '../core/services/ideas.service';
 
 @NgModule({
   imports: [
