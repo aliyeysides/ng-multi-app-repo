@@ -1,5 +1,5 @@
 <div
-  [ngClass]="{'list-view__actionbar--bulllist' : checkIfBullList(currentList?.name), 'list-view__actionbar--userlist' : checkIfUserList(currentList?.name), 'list-view__actionbar--bearlist' : checkIfBearList(currentList?.name), 'list-view__actionbar--themelist' : checkIfThemeList(currentList?.name)}"
+  [ngClass]="{'list-view__actionbar--userlist' : checkIfUserList(currentList?.name), 'list-view__actionbar--bearlist' : !checkIfUserList(currentList?.name)}"
   class="list-view__actionbar row no-gutters">
   <div class="list__header col-lg-6">
     <p class="list__title">
@@ -128,7 +128,7 @@
               (click)="toggleOptions(idea, $event); selectStock(idea)" (mouseenter)="toggleHoverOptions(idea)"
               (mouseleave)="toggleHoverOptions(idea)" class="row no-gutters list__entry"
               *ngFor="let idea of ideaList | orderBy:orderByObject?.field:orderByObject?.ascending ">
-            <div *ngIf="popupOptionsMap[idea.symbol] == true" class="stock-options__popup">
+            <div [@slideInRight]="slideInState" *ngIf="popupOptionsMap[idea.symbol] == true" class="stock-options__popup">
               <ul class="nav nav-justified">
                 <li *ngIf="!idea.is_holding_stock" (click)="addToHoldingList(idea.symbol, $event)" class="nav-item">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
