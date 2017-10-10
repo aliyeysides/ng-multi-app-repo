@@ -21,15 +21,15 @@ import {Observable} from 'rxjs/Observable';
           </a>
         </button>
       </div>
-      <div class="post-body">
+      <div class="post-body post-body--previous-pick">
         <ul [ngBusy]="loading">
           <li *ngFor="let post of posts">
             <ng-container *ngIf="post['data']">
               <img class="rating" src="{{ appendPGRImage(post['data']['pgr']['PGR Value']) }}">
-              {{ post.ticker }}
-              {{ post['data']['meta-info'].name }}
-              {{ post['data']['meta-info'].industry_name }}
-              {{ post['post_date_formatted'] }}
+              <p class="ticker">{{ post.ticker }}</p>
+              <p class="company">{{ post['data']['meta-info'].name }}</p>
+              <p class="industry">{{ post['data']['meta-info'].industry_name }}</p>
+              <p class="pick-date">{{ post['post_date_formatted'] }}</p>
               <a (click)="openCommentaryModal(post)">Commentary</a>
             </ng-container>
           </li>
