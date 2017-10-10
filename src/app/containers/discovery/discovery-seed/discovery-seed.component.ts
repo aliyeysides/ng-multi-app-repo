@@ -1,7 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Idea} from '../../../shared/models/idea';
 import {SignalService} from '../../../core/services/signal.service';
 
 @Component({
@@ -10,7 +8,9 @@ import {SignalService} from '../../../core/services/signal.service';
     <div class="discovery__base-stock container-fluid">
       <div class="row no-gutters">
         <div class="base-stock__logo">
-          <img class="align-absolute" src="{{stock ? stock['logo_url'] : null }}">
+          <img class="align-absolute"
+               (error)="stock ? stock.logo_url='assets/imgs/img_NO-LOGO--stock.svg' : null"
+               src="{{ stock && stock.logo_url != 'N/A' ? stock?.logo_url : 'assets/imgs/img_NO-LOGO--stock.svg' }}">
         </div>
         <div class="base-stock__symbol">
           <p class="ticker"><img class="" src="{{ appendPGRImage(stock ? stock['PGR'] : null) }}"> {{ stock ? stock['symbol'] : null }}</p>

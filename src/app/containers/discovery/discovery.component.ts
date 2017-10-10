@@ -4,11 +4,12 @@ import {DiscoveryService} from '../../core/services/discovery.service';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Idea} from '../../shared/models/idea';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'cpt-discovery',
   template: `
-    <div class="discovery__container">
+    <div class="discovery__container" [ngBusy]="loading">
       <div class="body__top">
         <div class="section-header">
           <h1>Ideas based on</h1>
@@ -16,7 +17,7 @@ import {Idea} from '../../shared/models/idea';
             <cpt-symbol-search></cpt-symbol-search>
           </div>
           <div class="section-header__actions">
-            <a>
+            <a (click)="viewStockReport(metaInfo.symbol)">
               <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <defs></defs>
                   <g id="icon_stockview" fill="#1199ff" stroke="none" stroke-width="1" fill-rule="evenodd">
@@ -54,7 +55,7 @@ import {Idea} from '../../shared/models/idea';
       <div class="body__bottom"> 
         <cpt-discovery-results
           (viewStockReportClicked)="viewStockReport($event)"
-          (viewStockDiscoveryClicked)="viewStockDiscovery($event)"
+          (viewDiscoveryClicked)="viewStockDiscovery($event)"
           [results]="results"></cpt-discovery-results>
       </div>
     </div>
@@ -67,6 +68,7 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   public metaInfo: Idea;
   public results: object[];
+  public loading: Subscription;
 
   constructor(private router: Router,
               private discoveryService: DiscoveryService,
@@ -75,7 +77,17 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.route.params
+    this.updateData();
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  public updateData() {
+    window.scrollTo(0,0);
+    this.loading = this.route.params
       .map(params => params.symbol)
       .switchMap(val => this.discoveryService.getDiscoveryResultLists(val))
       .takeUntil(this.ngUnsubscribe)
@@ -84,16 +96,12 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
-  }
-
   public viewStockReport(ticker: string) {
     this.router.navigate(['/report', ticker]);
   }
 
   public viewStockDiscovery(ticker: string) {
+    this.updateData();
     this.router.navigate(['/discovery', ticker]);
   }
 
@@ -104,6 +112,7 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
   private parseDiscoveryResponse(res: object) {
     this.metaInfo = res['metainfo'] as Idea;
     this.results = res['results'];
+    this.loading.unsubscribe();
   }
 
   goBack() {
