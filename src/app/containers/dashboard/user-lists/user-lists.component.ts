@@ -108,7 +108,6 @@ export class UserListsComponent implements OnInit, OnDestroy {
       })
       .flatMap(res => res)
       .subscribe(res => {
-        console.log('res', res);
         this.holdingList = res[0]['symbols'];
         this.watchingList = res[1]['symbols'];
       })

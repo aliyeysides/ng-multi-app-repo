@@ -87,13 +87,13 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
 
   public updateData() {
     window.scrollTo(0,0);
-    this.loading = this.route.params
+    this.route.params
       .map(params => params.symbol)
       .switchMap(val => this.discoveryService.getDiscoveryResultLists(val))
       .takeUntil(this.ngUnsubscribe)
       .subscribe(res => {
         this.parseDiscoveryResponse(res);
-      });
+      })
   }
 
   public viewStockReport(ticker: string) {
@@ -112,7 +112,6 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
   private parseDiscoveryResponse(res: object) {
     this.metaInfo = res['metainfo'] as Idea;
     this.results = res['results'];
-    this.loading.unsubscribe();
   }
 
   goBack() {
