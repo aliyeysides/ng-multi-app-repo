@@ -14,7 +14,7 @@ import {SignalService} from '../../../core/services/signal.service';
   selector: 'cpt-bear-of-the-week',
   template: `
     <div class="insights__container insights__container--small" [ngBusy]="loading">
-      <div class="post-head">
+      <div class="post-head post-head--pick">
         <h4>Bear of the Week</h4>
         <div class="divider-h"></div>
         <p class="header__post-date">{{ post ? post['post_date_formatted'] : null }}</p>
@@ -25,12 +25,14 @@ import {SignalService} from '../../../core/services/signal.service';
       </div>
       <div class="post-body post-body--bearpick">
         <div class="container">
-          <div class="row">
-            <div class="col-md-6">
-              <img class="rating" src="{{ appendPGRImage(stockDataPGR) }}">
-              <p class="ticker" [innerHTML]="ticker"></p>
+          <div class="row no-gutters">
+            <div class="col-6">
+              <p class="ticker">
+                <img class="rating" src="{{ appendPGRImage(stockDataPGR) }}">
+                <span [innerHTML]="ticker"></span>
+              </p>
             </div>
-            <div class="col-md-6 price-data">
+            <div class="col-6 price-data">
               <p class="data data--change"
                  [ngClass]="{'down-change':stockDataMeta?.Change<0, 'up-change':stockDataMeta?.Change>0}">
                 {{ stockDataMeta?.Change }}%</p>
@@ -39,10 +41,10 @@ import {SignalService} from '../../../core/services/signal.service';
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-12 col-xl-6">
+            <div class="col-6">
               <p class="company-name">{{ stockDataMeta?.name }}</p>
             </div>
-            <div class="col-lg-12 col-xl-6">
+            <div class="col-6">
               <p class="industry-name">{{ stockDataMeta?.industry_name }}</p>
             </div>
           </div>
