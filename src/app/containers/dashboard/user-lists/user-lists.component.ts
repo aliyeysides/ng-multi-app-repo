@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {AuthService} from '../../../core/services/auth.service';
 import {Subject} from 'rxjs/Subject';
 import {IdeasService} from '../../../core/services/ideas.service';
@@ -6,6 +6,7 @@ import {IdeaList} from '../../../shared/models/idea';
 import {Observable} from 'rxjs/Observable';
 import {SignalService} from '../../../core/services/signal.service';
 import {BearSearchComponent} from '../../../core/components/bear-search/bear-search.component';
+import {SymbolSearchService} from '../../../core/services/symbol-search.service';
 
 @Component({
   selector: 'cpt-user-lists',
@@ -78,19 +79,21 @@ import {BearSearchComponent} from '../../../core/components/bear-search/bear-sea
   styleUrls: ['./user-lists.component.scss']
 })
 export class UserListsComponent implements OnInit, OnDestroy {
+  @Output('addStockClicked') addStockClicked: EventEmitter<null> = new EventEmitter<null>();
+
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private uid: string;
   private holdingId: string;
   private watchingId: string;
 
-  public searchRef: BearSearchComponent;
   public currentList = 'Holding';
   public holdingList: IdeaList;
   public watchingList: IdeaList;
 
   constructor(private authService: AuthService,
               private ideasService: IdeasService,
-              private signalService: SignalService) {
+              private signalService: SignalService,
+              private searchService: SymbolSearchService) {
   }
 
   ngOnInit() {
@@ -122,7 +125,8 @@ export class UserListsComponent implements OnInit, OnDestroy {
     return this.signalService.appendPGRImage(pgr);
   }
 
-  public openSearch() {
+  openSearch() {
+    this.searchService.setSearchOpen(true);
   }
 
 }
