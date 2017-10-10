@@ -102,8 +102,8 @@ export class StockReportComponent implements OnInit {
     this.router.navigate(['/discovery', symbol]);
   }
 
-  // loadFinished() {
-  //   this.loading.unsubscribe();
-  // }
+  loadFinished() {
+    // this.loading.unsubscribe();
+  }
 
 }
