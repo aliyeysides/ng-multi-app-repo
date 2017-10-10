@@ -22,7 +22,7 @@ import {SymbolSearchService} from '../../../core/services/symbol-search.service'
             <span class="show">&nbsp;View List</span>
             <span class="hide">&nbsp;View</span>
           </a>
-          <a (click)="openSearch()" class="post-head__button">
+          <a (click)="openSearch();$event.stopPropagation()" class="post-head__button add_stock__button">
             <i class="fa fa-plus-circle" aria-hidden="true"></i>
             <span class="show">&nbsp;Add Stock</span>
             <span class="hide">&nbsp;Add</span>

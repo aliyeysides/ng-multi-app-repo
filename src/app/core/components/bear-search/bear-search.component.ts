@@ -57,13 +57,11 @@ export class BearSearchComponent implements OnInit {
     this.searchService.isOpen
       .takeUntil(this.ngUnsubscribe)
       .subscribe(open => {
-        console.log('open', open);
-        if (open === true) this.toggleNav(this.nav.nativeElement, '500', true);
+        if (open === true) this.toggleNav(this.nav.nativeElement, '500px', true);
       });
   }
 
   public toggleNav(el: HTMLElement, size: string, darken: boolean): void {
-    console.log('el', el)
     el.style.width = size;
     if (darken === true) {
       document.getElementById('search-darken').style.visibility = 'visible';
