@@ -26,11 +26,11 @@ import {SignalService} from '../../../core/services/signal.service';
       <div class="post-body post-body--bearpick">
         <div class="container">
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-8">
               <img class="rating" src="{{ appendPGRImage(stockDataPGR) }}">
               <p class="ticker" [innerHTML]="ticker"></p>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <p class="data data--change"
                  [ngClass]="{'down-change':stockDataMeta?.Change<0, 'up-change':stockDataMeta?.Change>0}">
                 {{ stockDataMeta?.Change }}%</p>
@@ -39,10 +39,10 @@ import {SignalService} from '../../../core/services/signal.service';
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-md-6">
               <p class="company-name">{{ stockDataMeta?.name }}</p>
             </div>
-            <div class="col-sm-6">
+            <div class="col-md-6">
               <p class="industry-name">{{ stockDataMeta?.industry_name }}</p>
             </div>
           </div>
