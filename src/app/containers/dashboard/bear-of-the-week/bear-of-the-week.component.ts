@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {PreviousBearsModalComponent} from './modals/previous-modal.component';
 import {WeeklyCommentaryModalComponent} from './modals/commentary-modal.component';
@@ -58,6 +58,7 @@ import {SignalService} from '../../../core/services/signal.service';
     </div>
   `,
   styleUrls: ['./bear-of-the-week.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();

@@ -124,7 +124,7 @@ export class StockReportComponent implements OnInit {
   }
 
   addToList(listId: string, symbol: string) {
-    this.ideasService.addStockIntoList(listId.toString(), symbol)
+    this.loading = this.ideasService.addStockIntoList(listId.toString(), symbol)
       .takeLast(1)
       .subscribe()
   }

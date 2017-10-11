@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {AuthService} from '../../../core/services/auth.service';
 import {Subject} from 'rxjs/Subject';
 import {IdeasService} from '../../../core/services/ideas.service';
@@ -38,7 +38,7 @@ import {Subscription} from 'rxjs/Subscription';
           <div class="col-header col-3">% Chg</div>
         </div>
       </div>
-      <ul *ngIf="currentList === 'Holding'" class="post-body post-body--userlist">
+      <ul [ngBusy]="loading" *ngIf="currentList === 'Holding'" class="post-body post-body--userlist">
         <li *ngFor="let item of holdingListIdeas" class="row no-gutters">
           <div class="col-2 stock__PGR">
             <img class="align-absolute" src="{{ appendPGRImage(item.PGR) }}">
@@ -78,7 +78,8 @@ import {Subscription} from 'rxjs/Subscription';
       </ul>
     </div>
   `,
-  styleUrls: ['./user-lists.component.scss']
+  styleUrls: ['./user-lists.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UserListsComponent implements OnInit, OnDestroy {
   @Output('addStockClicked') addStockClicked: EventEmitter<null> = new EventEmitter<null>();

@@ -21,8 +21,10 @@ import {Router} from '@angular/router';
       </div>
       <div class="idea-lists__container row no-gutters">
         <ul>
-          <li [ngClass]="{'selected': selectedList === list}" (click)="emitListSelected(list)"
-              *ngFor="let list of lists" class="list__option">
+          <li
+            [ngClass]="{'selected': selectedList === list, 'list__option--userlist': list['name'] === 'Holding' || list['name'] === 'Watching' }"
+            (click)="emitListSelected(list)"
+            *ngFor="let list of lists" class="list__option">
             <ng-container *ngIf="list.is_active">
               <div class="list__image">
                 <button type="button" class="close">
@@ -86,6 +88,7 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
 
   public emitListSelected(list: IdeaList) {
     this.selectedList = list;
+    console.log('list', list);
     this.ideasService.setSelectedList(list);
     this.router.navigate(['/ideas']);
   }

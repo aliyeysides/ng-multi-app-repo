@@ -6,6 +6,7 @@ import {Subject} from 'rxjs/Subject';
 import {SymbolSearchService} from '../../../core/services/symbol-search.service';
 import {IdeasService} from '../../../core/services/ideas.service';
 import {AuthService} from '../../../core/services/auth.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'cpt-symbol-search',
@@ -21,7 +22,7 @@ import {AuthService} from '../../../core/services/auth.service';
     </form>
     <div (mousedown)="$event.preventDefault();" *ngIf="searchResults && symbolSearchForm.value && focus == true"
          class="search__dropdown">
-      <ul *ngFor="let result of searchResults" class="container">
+      <ul [ngBusy]="loading" *ngFor="let result of searchResults" class="container">
         <li (click)="onClick(result.Symbol)" class="row search__entry">
           <div class="col-3 search__company">
             <p class="company-ticker">
@@ -75,6 +76,8 @@ export class SymbolSearchComponent implements OnInit, OnDestroy {
   public focus: boolean = false;
   public holdingListId: string;
   public watchingListId: string;
+
+  public loading: Subscription;
 
   constructor(private router: Router,
               private authService: AuthService,
@@ -145,7 +148,7 @@ export class SymbolSearchComponent implements OnInit, OnDestroy {
   }
 
   addToList(listId: string, symbol: string) {
-    this.ideasService.addStockIntoList(listId.toString(), symbol)
+    this.loading = this.ideasService.addStockIntoList(listId.toString(), symbol)
       .takeLast(1)
       .subscribe();
   }
