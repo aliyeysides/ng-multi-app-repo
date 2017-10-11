@@ -195,6 +195,9 @@ export const IDEAS_LIST_CLASSMAP: ClassMap = {
   },
 
 
+
+
+
   'Big Data': {
     'style': 'list__option--themelist',
     'imgName': 'img_list-bigdata.svg',
@@ -321,6 +324,33 @@ export const IDEAS_LIST_CLASSMAP: ClassMap = {
     'coloredImgName': 'img_list-cloud--color.svg',
     'greyImgName': 'img_list-cloud--grey.svg',
     'description': 'This theme list is all about this exact theme'
-  }
+  },
 
+
+
+
+
+  'Large Cap Bears': {
+    'style': 'list__option--bulllist',
+    'imgName': 'img_list-largecap.svg',
+    'coloredImgName': 'img_list-largecap--color.svg',
+    'greyImgName': 'img_list-largecap--grey.svg',
+    'description': 'This list contains companies who have exceeded earnings expectations on a quartly basis'
+  },
+
+  'Small Cap Bears': {
+    'style': 'list__option--bulllist',
+    'imgName': 'img_list-smallcap.svg',
+    'coloredImgName': 'img_list-smallcap--color.svg',
+    'greyImgName': 'img_list-smallcap--grey.svg',
+    'description': 'This list contains companies who have exceeded earnings expectations on a quartly basis'
+  },
+
+  'Analyst Bears': {
+    'style': 'list__option--bulllist',
+    'imgName': 'img_list-analystdarlings.svg',
+    'coloredImgName': 'img_list-analystdarlings--color.svg',
+    'greyImgName': 'img_list-analystdarlings--grey.svg',
+    'description': 'This list contains companies who have exceeded earnings expectations on a quartly basis'
+  },
 };

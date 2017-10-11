@@ -58,6 +58,11 @@ $background--sidebar: #454D5F;
 
 
 
+/*  Gradients  */
+
+
+
+
 
 
 /*  Lines & Borders  */
@@ -68,7 +73,7 @@ $border-line--W: 2px solid #FFFFFF;
 $border-line--LT: 1px solid #EBEBED;
 $border-line--MD: 1px solid #7C828F;
 
-$border-dashed--LT: 1px dashed #EBEBED;
+$border-dashed--LT: 1px dashed rgba(0,0,0,0.2);
 $border-dashed--MD: 1px dashed #7C828F;
 
 $chart-border--LT: 1px solid #dddddd;

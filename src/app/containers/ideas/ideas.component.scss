@@ -14,22 +14,9 @@
   }
 }
 
-.body__top.body__top--ideas {
-  height: 240px;
-  background-color: $background--LT2;
-  position: relative;
-  padding-top: 8px;
 
-  .row--header {
-    padding-top: 2px;
-    padding-left: 55px;
 
-    h1 {
-      text-align: left;
-      margin-bottom: 0;
-    }
-  }
-}
+
 
 /*-- Chart --*/
 .c3 svg {

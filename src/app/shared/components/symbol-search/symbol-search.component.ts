@@ -55,7 +55,7 @@ import {SymbolSearchService} from '../../../core/services/symbol-search.service'
       </ul>
       <ul *ngIf="searchResults && symbolSearchForm.value && searchResults.length == 0">
         <li>
-          <p class="search__none">There is no such symbol</p>
+          <p class="search__none">Symbol not found</p>
         </li>
       </ul>
     </div>
