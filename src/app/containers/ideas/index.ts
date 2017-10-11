@@ -23,7 +23,7 @@ import {TooltipModule} from 'ngx-bootstrap';
     IdeasComponent,
     ListViewComponent
   ],
-  providers: [IdeasService]
+  providers: []
 })
 export class IdeasModule {
 }

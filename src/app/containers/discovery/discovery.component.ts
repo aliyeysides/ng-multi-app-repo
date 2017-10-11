@@ -5,6 +5,8 @@ import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Idea} from '../../shared/models/idea';
 import {Subscription} from 'rxjs/Subscription';
+import {IdeasService} from '../../core/services/ideas.service';
+import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'cpt-discovery',
@@ -26,7 +28,7 @@ import {Subscription} from 'rxjs/Subscription';
               </svg>
               <span>View</span>
             </a>
-            <a>
+            <a (click)="addToList(watchingListId, metaInfo.symbol)">
               <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <defs></defs>
                 <g id="icon_watching" stroke="none" stroke-width="1" fill="#1199ff" fill-rule="evenodd">
@@ -35,7 +37,7 @@ import {Subscription} from 'rxjs/Subscription';
               </svg>
               <span>Watch</span>
             </a>
-            <a>
+            <a (click)="addToList(holdingListId, metaInfo.symbol)">
               <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <defs></defs>
                   <g id="icon_portfolio" fill="#1199ff" stroke="none" stroke-width="1" fill-rule="evenodd">
@@ -66,11 +68,17 @@ import {Subscription} from 'rxjs/Subscription';
 export class DiscoveryComponent implements OnInit, OnDestroy {
 
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+  private uid: string;
+
   public metaInfo: Idea;
   public results: object[];
   public loading: Subscription;
+  public holdingListId: string;
+  public watchingListId: string;
 
   constructor(private router: Router,
+              private authService: AuthService,
+              private ideasService: IdeasService,
               private discoveryService: DiscoveryService,
               private route: ActivatedRoute,
               private location: Location) {
@@ -78,6 +86,14 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.updateData();
+    this.authService.currentUser$
+      .takeUntil(this.ngUnsubscribe)
+      .map(usr => this.uid = usr['UID'])
+      .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
+      .subscribe(res => {
+        this.holdingListId = res[2]['user_lists'][0]['list_id'];
+        this.watchingListId = res[2]['user_lists'][1]['list_id'];
+      });
   }
 
   ngOnDestroy() {
@@ -105,10 +121,6 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
     this.router.navigate(['/discovery', ticker]);
   }
 
-  // public addToList(params: AddListConfig) {
-  //  TODO: implement app add to list service
-  // }
-
   private parseDiscoveryResponse(res: object) {
     this.metaInfo = res['metainfo'] as Idea;
     this.results = res['results'];
@@ -116,6 +128,12 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
 
   goBack() {
     this.location.back();
+  }
+
+  addToList(listId: string, symbol: string) {
+    this.loading = this.ideasService.addStockIntoList(listId.toString(), symbol)
+      .takeLast(1)
+      .subscribe()
   }
 
 }

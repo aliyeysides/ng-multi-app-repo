@@ -124,14 +124,6 @@ export class DiscoverySeedComponent implements AfterViewInit, OnDestroy {
     return this.signalService.appendPGRText(pgr);
   }
 
-  public addToList(val: any) {
-  //   this.addToListClicked.emit(val);
-  }
-
-  public viewStockReport(symbol: string) {
-    this.viewStockReportClicked.emit(symbol);
-  }
-
   public appendSliderClass(pgr) {
     return this.signalService.appendSliderClass(pgr);
   }

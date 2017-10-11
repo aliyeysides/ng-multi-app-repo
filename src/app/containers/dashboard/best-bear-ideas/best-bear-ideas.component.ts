@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {IdeasService} from '../../../core/services/ideas.service';
+import {AuthService} from '../../../core/services/auth.service';
+import {Subject} from 'rxjs/Subject';
+import {Idea, IdeaList} from '../../../shared/models/idea';
+import {SignalService} from '../../../core/services/signal.service';
 
 @Component({
   selector: 'cpt-best-bear-ideas',
@@ -7,9 +13,9 @@ import { Component, OnInit } from '@angular/core';
       <div class="post-head">
         <div class="clearfix">
           <h4>Best Bear Ideas</h4>
-          <a class="post-head__button">
+          <a (click)="viewBearList()" class="post-head__button">
             <i class="fa fa-external-link-square" aria-hidden="true"></i>
-             <span>&nbsp;View List</span>
+            <span>&nbsp;View List</span>
           </a>
         </div>
         <div class="col-header__container row no-gutters">
@@ -21,118 +27,21 @@ import { Component, OnInit } from '@angular/core';
         </div>
       </div>
       <ul class="post-body post-body--bearlist">
-        <li class="row no-gutters">
+        <li *ngFor="let stock of bestBearIdeas" class="row no-gutters">
           <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="./assets/imgs/arc_VeryBearish.svg">
+            <img class="align-absolute" src="{{ appendPGRImage(stock?.PGR) }}">
           </div>
           <div class="col-3 stock__ticker">
-            <p class="ticker">MAT</p>
+            <p class="ticker">{{ stock?.symbol }}</p>
           </div>
           <div class="col-1 stock__alert">
-            <i class="fa fa-play down-change down-alert" aria-hidden="true"></i>
+            <i class="fa fa-play down-alert" aria-hidden="true"></i>
           </div>
           <div class="col-3 stock__price">
-            <p class="data up-change">$455.55</p>
+            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">$ {{ stock?.Last }}</p>
           </div>
           <div class="col-3 stock__price">
-            <p class="data up-change">+10.54%</p>
-          </div>
-        </li>
-        <li class="row no-gutters">
-          <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="./assets/imgs/arc_VeryBearish.svg">
-          </div>
-          <div class="col-3 stock__ticker">
-            <p class="ticker">TSLA</p>
-          </div>
-          <div class="col-1 stock__alert">
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data down-change">$356.77</p>
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data down-change">-3.33%</p>
-          </div>
-        </li>
-        <li class="row no-gutters">
-          <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="./assets/imgs/arc_Bearish.svg">
-          </div>
-          <div class="col-3 stock__ticker">
-            <p class="ticker">AMZN</p>
-          </div>
-          <div class="col-1 stock__alert">
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data up-change">$76.28</p>
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data up-change">+1.01%</p>
-          </div>
-        </li>
-        <li class="row no-gutters">
-          <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="./assets/imgs/arc_Bearish.svg">
-          </div>
-          <div class="col-3 stock__ticker">
-            <p class="ticker">OXY</p>
-          </div>
-          <div class="col-1 stock__alert">
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data down-change">$554.32</p>
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data down-change">-2.99%</p>
-          </div>
-        </li>
-        <li class="row no-gutters">
-          <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="./assets/imgs/arc_Bearish.svg">
-          </div>
-          <div class="col-3 stock__ticker">
-            <p class="ticker">MSFT</p>
-          </div>
-          <div class="col-1 stock__alert">
-            <i class="fa fa-play up-change up-alert" aria-hidden="true"></i>
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data up-change">$455.55</p>
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data up-change">+10.54%</p>
-          </div>
-        </li>
-        <li class="row no-gutters">
-          <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="./assets/imgs/arc_VeryBearish.svg">
-          </div>
-          <div class="col-3 stock__ticker">
-            <p class="ticker">CMCSA</p>
-          </div>
-          <div class="col-1 stock__alert">
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data up-change">$455.55</p>
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data up-change">+10.54%</p>
-          </div>
-        </li>
-        <li class="row no-gutters">
-          <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="./assets/imgs/arc_VeryBearish.svg">
-          </div>
-          <div class="col-3 stock__ticker">
-            <p class="ticker">CMCSA</p>
-          </div>
-          <div class="col-1 stock__alert">
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data up-change">$455.55</p>
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data up-change">+10.54%</p>
+            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">{{ stock?.Change }}%</p>
           </div>
         </li>
       </ul>
@@ -141,10 +50,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./best-bear-ideas.component.scss']
 })
 export class BestBearIdeasComponent implements OnInit {
+  private uid: string;
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
 
-  constructor() { }
+  public bestBearIdeaList: IdeaList;
+  public bestBearIdeas: Array<Idea>;
+
+  constructor(private router: Router,
+              private authService: AuthService,
+              private signalService: SignalService,
+              private ideasService: IdeasService) { }
 
   ngOnInit() {
+    this.authService.currentUser$
+      .map(usr => this.uid = usr['UID'])
+      .takeUntil(this.ngUnsubscribe)
+      .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
+      .map(res => {
+        this.bestBearIdeaList = res[0]['idea_lists'].filter(list => list.name === 'Best Bear Ideas')[0];
+        return this.ideasService.getListSymbols(this.bestBearIdeaList['list_id'].toString(), this.uid);
+      })
+      .flatMap(res => res)
+      .subscribe(res => {
+        this.bestBearIdeas = res['symbols'];
+      })
+  }
+
+  viewBearList() {
+    this.ideasService.setSelectedList(this.bestBearIdeaList);
+    this.router.navigate(['/ideas']);
+  }
+
+  public appendPGRImage(pgr: number) {
+    return this.signalService.appendPGRImage(pgr);
   }
 
 }

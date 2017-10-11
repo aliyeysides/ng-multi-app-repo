@@ -4,6 +4,9 @@ import {FormControl} from '@angular/forms';
 import {NavigationEnd, Router} from '@angular/router';
 import {Subject} from 'rxjs/Subject';
 import {SymbolSearchService} from '../../../core/services/symbol-search.service';
+import {IdeasService} from '../../../core/services/ideas.service';
+import {AuthService} from '../../../core/services/auth.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'cpt-symbol-search',
@@ -19,7 +22,7 @@ import {SymbolSearchService} from '../../../core/services/symbol-search.service'
     </form>
     <div (mousedown)="$event.preventDefault();" *ngIf="searchResults && symbolSearchForm.value && focus == true"
          class="search__dropdown">
-      <ul *ngFor="let result of searchResults" class="container">
+      <ul [ngBusy]="loading" *ngFor="let result of searchResults" class="container">
         <li (click)="onClick(result.Symbol)" class="row search__entry">
           <div class="col-3 search__company">
             <p class="company-ticker">
@@ -31,7 +34,7 @@ import {SymbolSearchService} from '../../../core/services/symbol-search.service'
               {{ result.CompanyName }}
             </p>
           </div>
-          <div (click)="gotoDiscovery(result.Symbol)" class="col-1 search__action">
+          <div (click)="addToList(holdingListId, result.Symbol);$event.stopPropagation()" class="col-1 search__action">
             <svg class="align-absolute" width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <defs></defs>
@@ -41,7 +44,7 @@ import {SymbolSearchService} from '../../../core/services/symbol-search.service'
               </g>
             </svg>
           </div>
-          <div (click)="gotoReport(result.Symbol)" class="col-1 search__action">
+          <div (click)="addToList(watchingListId, result.Symbol);$event.stopPropagation()" class="col-1 search__action">
             <svg class="align-absolute" width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <defs></defs>
@@ -65,12 +68,20 @@ import {SymbolSearchService} from '../../../core/services/symbol-search.service'
 })
 export class SymbolSearchComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+  private uid: string;
   private navEndLocation: string;
+
   public symbolSearchForm: FormControl;
   public searchResults: Array<any>;
   public focus: boolean = false;
+  public holdingListId: string;
+  public watchingListId: string;
+
+  public loading: Subscription;
 
   constructor(private router: Router,
+              private authService: AuthService,
+              private ideasService: IdeasService,
               private symbolSearchService: SymbolSearchService) {
     this.symbolSearchForm = new FormControl();
 
@@ -80,6 +91,15 @@ export class SymbolSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.authService.currentUser$
+      .takeUntil(this.ngUnsubscribe)
+      .map(usr => this.uid = usr['UID'])
+      .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
+      .subscribe(res => {
+        this.holdingListId = res[2]['user_lists'][0]['list_id'];
+        this.watchingListId = res[2]['user_lists'][1]['list_id'];
+      });
+
     this.searchResults = [];
     this.symbolSearchForm.valueChanges
       .debounceTime(500)
@@ -125,6 +145,12 @@ export class SymbolSearchComponent implements OnInit, OnDestroy {
 
   toggleFocus() {
     this.focus = !this.focus;
+  }
+
+  addToList(listId: string, symbol: string) {
+    this.loading = this.ideasService.addStockIntoList(listId.toString(), symbol)
+      .takeLast(1)
+      .subscribe();
   }
 
 }

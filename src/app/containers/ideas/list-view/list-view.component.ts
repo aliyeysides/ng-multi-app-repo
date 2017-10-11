@@ -1,58 +1,36 @@
-import {AfterViewInit, Component, Input, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
 import {Idea, IdeaList} from '../../../shared/models/idea';
 import {SignalService} from "app/core/services/signal.service";
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {IdeasService} from '../../../core/services/ideas.service';
-import {slideInRight} from '../../../shared/animations/slideInRight';
+import {AuthService} from '../../../core/services/auth.service';
+import {UtilService} from '../../../core/services/util.service';
 
 @Component({
   selector: 'cpt-list-view',
   templateUrl: './list-view.component.html',
   styleUrls: ['./list-view.component.scss'],
-  animations: [slideInRight()]
 })
 
 export class ListViewComponent implements AfterViewInit, OnDestroy {
+  @Output('addToListClicked') addToListClicked: EventEmitter<object> = new EventEmitter<object>();
+  @Output('removeFromListClicked') removeFromListClicked: EventEmitter<object> = new EventEmitter<object>();
+
+  @Input('symbolListLoading') symbolListLoading: Subscription;
+
   private ngUnsubscribe: Subject<void> = new Subject<void>();
-
-  public slideInState: string;
-
-  @Input('currentList')
-  set currentList(list: IdeaList) {
-    this._currentList.next(list);
-  }
-
-  get currentList() {
-    return this._currentList.getValue();
-  }
-
-  @Input('uid')
-  set uid(uid: string) {
-    this._uid.next(uid);
-  }
-
-  get uid() {
-    return this._uid.getValue();
-  }
-
-  private _currentList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>({} as IdeaList);
-  private _uid: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private uid: string;
 
   public ideaList: Array<object>;
+  public currentList: IdeaList;
 
-  public additionalLists: boolean = false;
   public mouseHoverOptionsMap: object = {};
   public popupOptionsMap: object = {};
   public currentView: string = 'list-view';
-  public showHeadlines: boolean = false;
 
   public selectedStock: Idea;
-  public selectedListId: string;
-  public selectedListName: string;
-
   public selectedStockPGR: object;
   public selectedStockChartPoints: object;
   public selectedStockSimilars: object;
@@ -64,18 +42,34 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
 
   public loading: Subscription;
   public headlinesLoading: Subscription;
-  public symbolListLoading: Subscription;
 
   constructor(private router: Router,
+              private authService: AuthService,
+              private utilService: UtilService,
               private signalService: SignalService,
               private ideaService: IdeasService) {
   }
 
   ngAfterViewInit() {
-    this._currentList
+    this.updateData();
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  updateData() {
+    this.loading = this.authService.currentUser$
+      .map(usr => this.uid = usr['UID'])
+      .flatMap(uid => this.ideaService.selectedList)
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x !== undefined)
-      .flatMap(list => this.ideaService.getListSymbols(list['list_id'].toString(), this.uid))
+      .filter(x => x['list_id'] !== undefined)
+      .flatMap(list => {
+        this.currentList = list;
+        return this.ideaService.getListSymbols(list['list_id'].toString(), this.uid)
+      })
       .subscribe(stocks => {
         this.clearOrderByObject();
         this.clearIdeasLists();
@@ -85,9 +79,23 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
       });
   }
 
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+  refreshList() {
+    this.symbolListLoading = this.ideaService.selectedList
+      .filter(x => x !== undefined)
+      .filter(x => x['list_id'] !== undefined)
+      .flatMap(list => {
+        this.currentList = list;
+        return this.ideaService.getListSymbols(list['list_id'].toString(), this.uid)
+      })
+      .take(1)
+      .subscribe(stocks => {
+        this.clearOrderByObject();
+        this.clearIdeasLists();
+        this.assignStockData(4);
+        this.ideaList = stocks['symbols'];
+        this.symbolListLoading.unsubscribe();
+        // if (this.ideaList) this.selectStock(this.selectedStock as Idea)
+      });
   }
 
   public onScroll() {
@@ -168,10 +176,6 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
     this.mouseHoverOptionsMap = {};
   }
 
-  public triggerSlideInRight() {
-    this.slideInState = 'active';
-  }
-
   public goToStockView(stock: (Idea | string), e) {
     e.stopPropagation();
     if (typeof stock === 'object') {
@@ -196,47 +200,38 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
     window.open(headline.url, '_blank');
   }
 
-  public addToHoldingList(stock: any, e) {
-    // e.stopPropagation();
-    // this.sharedService.addStockIntoHoldingList(stock)
-    //   .takeUntil(this.ngUnsubscribe)
-    //   .subscribe(res => {
-    //     console.log('res from addToList', res);
-    //   });
+  public addToList(list: string, symbol: string, e: Event) {
+    e.stopPropagation();
+    const params = {
+      list: list,
+      symbol: symbol
+    };
+    this.addToListClicked.emit(params);
   }
 
-  public addToWatchingList(stock: any, e) {
-    // e.stopPropagation();
-    // this.sharedService.addStockIntoWatchingList(stock)
-    //   .takeUntil(this.ngUnsubscribe)
-    //   .subscribe(res => {
-    //     console.log('res from addToList', res);
-    //   });
-  }
-
-  public removeFromList(stock: any, listId: string, e) {
-    // e.stopPropagation();
-    // this.sharedService.deleteSymbolFromList(stock.symbol, listId)
-    //   .takeUntil(this.ngUnsubscribe)
-    //   .subscribe(res => {
-    //     console.log('res from removeFromList', res);
-    //   });
+  public removeFromList(list: string, symbol: string, e: Event) {
+    e.stopPropagation();
+    const params = {
+      list: list,
+      symbol: symbol
+    };
+    this.removeFromListClicked.emit(params);
   }
 
   public checkIfUserList(listName) {
-    return this.ideaService.checkIfUserList(listName);
+    return this.utilService.checkIfUserList(listName);
   }
 
   public checkIfBullList(listName) {
-    return this.ideaService.checkIfBullList(listName);
+    return this.utilService.checkIfBullList(listName);
   }
 
   public checkIfBearList(listName) {
-    return this.ideaService.checkIfBearList(listName);
+    return this.utilService.checkIfBearList(listName);
   }
 
   public checkIfThemeList(listName) {
-    return this.ideaService.checkIfThemeList(listName);
+    return this.utilService.checkIfThemeList(listName);
   }
 
   public gotoPanelView() {
