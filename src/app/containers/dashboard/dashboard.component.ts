@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from '../../core/services/auth.service';
 import {Subject} from 'rxjs/Subject';
 import {IdeasService} from '../../core/services/ideas.service';
 import {IdeaList} from '../../shared/models/idea';
 import {Subscription} from 'rxjs/Subscription';
+import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'cpt-dashboard',
@@ -28,12 +28,13 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+
   public allLists: object[];
   public selectedList: IdeaList;
   public loading: Subscription;
 
-  constructor(private authService: AuthService,
-              private ideasService: IdeasService) { }
+  constructor(private ideasService: IdeasService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.loading = this.authService.currentUser$

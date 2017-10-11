@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IdeasService} from '../../core/services/ideas.service';
-import {AuthService} from '../../core/services/auth.service';
 import {Subscription} from 'rxjs/Subscription';
+import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'cpt-ideas',
@@ -11,15 +11,15 @@ import {Subscription} from 'rxjs/Subscription';
         <cpt-idea-lists [lists]="allLists"></cpt-idea-lists>
       </div>
       <div class="body__bottom">
-        <cpt-list-view [uid]="uid"></cpt-list-view>
+        <cpt-list-view></cpt-list-view>
       </div>
     </div>
   `,
   styleUrls: ['./ideas.component.scss']
 })
 export class IdeasComponent implements OnInit {
+  private uid: string;
   public allLists: object[];
-  public uid: string;
   public loading: Subscription;
 
   constructor(private ideasService: IdeasService,

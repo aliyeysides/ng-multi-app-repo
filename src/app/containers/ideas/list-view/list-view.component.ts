@@ -1,34 +1,22 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
 import {Idea, IdeaList} from '../../../shared/models/idea';
 import {SignalService} from "app/core/services/signal.service";
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {IdeasService} from '../../../core/services/ideas.service';
-import {slideInRight} from '../../../shared/animations/slideInRight';
+import {AuthService} from '../../../core/services/auth.service';
+import {UtilService} from '../../../core/services/util.service';
 
 @Component({
   selector: 'cpt-list-view',
   templateUrl: './list-view.component.html',
   styleUrls: ['./list-view.component.scss'],
-  animations: [slideInRight()]
 })
 
-export class ListViewComponent implements OnInit, OnDestroy {
+export class ListViewComponent implements AfterViewInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
-
-  public slideInState: string;
-
-  @Input('uid')
-  set uid(uid: string) {
-    this._uid.next(uid);
-  }
-
-  get uid() {
-    return this._uid.getValue();
-  }
-  private _uid: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private uid: string;
 
   public ideaList: Array<object>;
   public currentList: IdeaList;
@@ -52,17 +40,20 @@ export class ListViewComponent implements OnInit, OnDestroy {
   public symbolListLoading: Subscription;
 
   constructor(private router: Router,
+              private authService: AuthService,
+              private utilService: UtilService,
               private signalService: SignalService,
               private ideaService: IdeasService) {
   }
 
-  ngOnInit() {
-    this.ideaService.selectedList
+  ngAfterViewInit() {
+    this.authService.currentUser$
+      .map(usr => this.uid = usr['UID'])
+      .flatMap(uid => this.ideaService.selectedList)
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x !== undefined)
       .filter(x => x['list_id'] !== undefined )
       .flatMap(list => {
-        console.log('this should be selected list', list);
         this.currentList = list;
         return this.ideaService.getListSymbols(list['list_id'].toString(), this.uid)
       })
@@ -158,10 +149,6 @@ export class ListViewComponent implements OnInit, OnDestroy {
     this.mouseHoverOptionsMap = {};
   }
 
-  public triggerSlideInRight() {
-    this.slideInState = 'active';
-  }
-
   public goToStockView(stock: (Idea | string), e) {
     e.stopPropagation();
     if (typeof stock === 'object') {
@@ -214,19 +201,19 @@ export class ListViewComponent implements OnInit, OnDestroy {
   }
 
   public checkIfUserList(listName) {
-    return this.ideaService.checkIfUserList(listName);
+    return this.utilService.checkIfUserList(listName);
   }
 
   public checkIfBullList(listName) {
-    return this.ideaService.checkIfBullList(listName);
+    return this.utilService.checkIfBullList(listName);
   }
 
   public checkIfBearList(listName) {
-    return this.ideaService.checkIfBearList(listName);
+    return this.utilService.checkIfBearList(listName);
   }
 
   public checkIfThemeList(listName) {
-    return this.ideaService.checkIfThemeList(listName);
+    return this.utilService.checkIfThemeList(listName);
   }
 
   public gotoPanelView() {

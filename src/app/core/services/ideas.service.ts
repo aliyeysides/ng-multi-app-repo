@@ -13,6 +13,8 @@ export class IdeasService {
   private listSymbolsParams: URLSearchParams;
   private stockCardParams: URLSearchParams;
   private headlinesParams: URLSearchParams;
+  private addStockIntoListParams: URLSearchParams;
+  private deleteSymbolFromListParams: URLSearchParams;
 
   private _selectedList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>({} as IdeaList);
   selectedList = this._selectedList.asObservable();
@@ -26,6 +28,8 @@ export class IdeasService {
     this.listSymbolsParams = new URLSearchParams();
     this.stockCardParams = new URLSearchParams();
     this.headlinesParams = new URLSearchParams();
+    this.addStockIntoListParams = new URLSearchParams();
+    this.deleteSymbolFromListParams = new URLSearchParams();
   }
 
   public getIdeasList(uid: string, product: string): Observable<Array<object>> {
@@ -54,78 +58,18 @@ export class IdeasService {
     return this.utilService.getJson(getHeadlinesUrl, this.headlinesParams);
   }
 
-  public checkIfBullList(listName) {
-    switch (listName) {
-      case 'Bulls of the Week':
-      case 'Best Growth Stocks':
-      case 'Best of the Large Caps':
-      case 'Best of the NASDAQ':
-      case 'Best of the Small Caps':
-      case 'Buy the Dips':
-      case 'Best Under $10':
-      case 'Best Value Stocks':
-      case 'Insider Confidence':
-      case 'Money Makers':
-      case 'Relative Strength Champs':
-      case 'Money Flow Champs':
-      case 'Analyst Darlings':
-      case 'Power Gauge Rating Upgrades':
-      case 'Best of the Dow':
-      case 'Earnings Champs':
-      case 'Upcoming Earnings Bulls':
-        return true;
-      default:
-        return false;
-    }
+  public addStockIntoList(listId: string, symbol: string) {
+    const addStockIntoListUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/addStockIntoList?`;
+    this.addStockIntoListParams.set('listId', listId);
+    this.addStockIntoListParams.set('symbol', symbol);
+    return this.utilService.getJson(addStockIntoListUrl, this.addStockIntoListParams);
   }
 
-  public checkIfBearList(listName) {
-    switch (listName) {
-      case 'Sell the Rallies':
-      case 'Bears of the Week':
-      case 'Power Gauge Rating Downgrades':
-      case 'Don\'t Fight the Shorts':
-      case 'Dogs of the Dow':
-      case 'Upcoming Earnings Bears':
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  public checkIfUserList(listName) {
-    switch (listName) {
-      case 'Ideas for You':
-      case 'Holding':
-      case 'Watching':
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  public checkIfThemeList(listName) {
-    switch (listName) {
-      case 'Big Data':
-      case 'China Shops':
-      case 'Cybersecurity':
-      case 'Disruptors':
-      case 'E-Payments':
-      case 'Gold Standards':
-      case 'Internet Innovators':
-      case 'Social Butterflies':
-      case 'Video Games':
-      case 'Fashion & Luxury':
-      case 'Defense Titans':
-      case 'Earth-Friendly':
-      case 'Sin City':
-      case 'Health & Fitness':
-      case 'Cloud Computing':
-      case 'Upwardly Mobile':
-        return true;
-      default:
-        return false;
-    }
+  public deleteSymbolFromList(listId: string, symbol: string) {
+    const deleteSymbolFromListUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/deleteSymbolFromList?`;
+      this.deleteSymbolFromListParams.set('symbol', symbol);
+      this.deleteSymbolFromListParams.set('listId', listId);
+      return this.utilService.getJson(deleteSymbolFromListUrl, this.deleteSymbolFromListParams);
   }
 
 }
