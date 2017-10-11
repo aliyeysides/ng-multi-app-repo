@@ -88,7 +88,6 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
 
   public emitListSelected(list: IdeaList) {
     this.selectedList = list;
-    console.log('list', list);
     this.ideasService.setSelectedList(list);
     this.router.navigate(['/ideas']);
   }
