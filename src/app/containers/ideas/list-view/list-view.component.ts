@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
@@ -15,6 +15,8 @@ import {UtilService} from '../../../core/services/util.service';
 })
 
 export class ListViewComponent implements AfterViewInit, OnDestroy {
+  @Output('addToListClicked') addToListClicked: EventEmitter<object> = new EventEmitter<object>();
+
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private uid: string;
 
@@ -173,22 +175,13 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
     window.open(headline.url, '_blank');
   }
 
-  public addToHoldingList(stock: any, e) {
-    // e.stopPropagation();
-    // this.sharedService.addStockIntoHoldingList(stock)
-    //   .takeUntil(this.ngUnsubscribe)
-    //   .subscribe(res => {
-    //     console.log('res from addToList', res);
-    //   });
-  }
-
-  public addToWatchingList(stock: any, e) {
-    // e.stopPropagation();
-    // this.sharedService.addStockIntoWatchingList(stock)
-    //   .takeUntil(this.ngUnsubscribe)
-    //   .subscribe(res => {
-    //     console.log('res from addToList', res);
-    //   });
+  public addToList(list: string, symbol: string, e: Event) {
+    e.stopPropagation();
+    const params = {
+      list: list,
+      symbol: symbol
+    };
+    this.addToListClicked.emit(params);
   }
 
   public removeFromList(stock: any, listId: string, e) {

@@ -5,6 +5,8 @@ import {Subscription} from 'rxjs/Subscription';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {environment} from '../../../environments/environment';
 import {Subject} from 'rxjs/Subject';
+import {AuthService} from '../../core/services/auth.service';
+import {IdeasService} from '../../core/services/ideas.service';
 
 @Component({
   selector: 'cpt-stock-report',
@@ -28,7 +30,7 @@ import {Subject} from 'rxjs/Subject';
               </svg>
               <span>Discover</span>
             </a>
-            <a>
+            <a (click)="addToList(watchingListId, symbol)">
               <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg"
                    xmlns:xlink="http://www.w3.org/1999/xlink">
                 <defs></defs>
@@ -39,7 +41,7 @@ import {Subject} from 'rxjs/Subject';
               </svg>
               <span>Watch</span>
             </a>
-            <a>
+            <a (click)="addToList(holdingListId, symbol)">
               <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg"
                    xmlns:xlink="http://www.w3.org/1999/xlink">
                 <defs></defs>
@@ -62,21 +64,36 @@ import {Subject} from 'rxjs/Subject';
 })
 export class StockReportComponent implements OnInit {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+  private uid: string;
+
   public symbol: string;
   public src: string;
   public sanitizedSrc: SafeUrl;
   public loading: Subscription;
 
+  public holdingListId: string;
+  public watchingListId: string;
+
   apiHostName = environment.envProtocol + '://' + environment.envHostName;
 
   constructor(private location: Location,
               private router: Router,
+              private authService: AuthService,
+              private ideasService: IdeasService,
               private route: ActivatedRoute,
               private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
     this.updateData();
+    this.authService.currentUser$
+      .takeUntil(this.ngUnsubscribe)
+      .map(usr => this.uid = usr['UID'])
+      .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
+      .subscribe(res => {
+        this.holdingListId = res[2]['user_lists'][0]['list_id'];
+        this.watchingListId = res[2]['user_lists'][1]['list_id'];
+      });
   }
 
   updateData() {
@@ -104,6 +121,12 @@ export class StockReportComponent implements OnInit {
 
   loadFinished() {
     // this.loading.unsubscribe();
+  }
+
+  addToList(listId: string, symbol: string) {
+    this.ideasService.addStockIntoList(listId.toString(), symbol)
+      .takeLast(1)
+      .subscribe()
   }
 
 }
