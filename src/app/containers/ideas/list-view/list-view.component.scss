@@ -2,91 +2,123 @@
 
 
 
-
-
-
 /*------------------------------------*\
   #ACTION-BAR
 \*------------------------------------*/
 
-
-
-
-
-.list-view__actionbar--userlist {
-  background-image: linear-gradient(90deg, #0D43FF 0%, #0492FF 100%);
-
-  .list__header {
-    .view-toggle.active {
-      i {
-        color: #058bFF;
-      }
-    }
-  }
-}
-
-.list-view__actionbar--idealist {
-  background-image: linear-gradient(90deg, #0D43FF 0%, #0492FF 100%);
-
-  .list__header {
-    .view-toggle.active {
-      i {
-        color: #058bFF;
-      }
-    }
-  }
-}
-
-.list-view__actionbar--bulllist {
-  background-image: linear-gradient(-90deg, #82E406 0%, #21A428 100%);
-
-  .list__header {
-    .view-toggle.active {
-      i {
-        color: #33BC17;
-      }
-    }
-  }
-}
-
-.list-view__actionbar--bearlist {
-  background-image: linear-gradient(-90deg, #EC2E2E 0%, #C02145 100%);
-
-  .list__header {
-    .view-toggle.active {
-      i {
-        color: #BC2047;
-      }
-    }
-  }
-}
-
-.list-view__actionbar--themelist {
-  background-image: linear-gradient(-90deg, #A100A9 0%, #6D009E 100%);
-
-  .list__header {
-    .view-toggle.active {
-      i {
-        color: #AB00CC;
-      }
-    }
-  }
-}
-
-.list-view__actionbar--addlist {
+.list-view__actionbar {
+  height: 52px;
 
   .list__header {
 
-    .list__title {
-      color: $font-color;
+    .close {
+      opacity: 0.6;
+      color: #ffffff;
 
       span {
-        display: block !important;
-        margin-left: 15px;
+        float: right;
+        font-size: 32px !important;
+        line-height: 52px;
+        margin-right: 30px;
+        text-shadow: none;
       }
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    .list-sort__button {
+      position: relative;
+      cursor: context-menu;
+      float: right;
+
+      .sort-toggle {
+        width: 60px;
+        height: 52px;
+        font-size: 20px;
+        color: #ffffff;
+        position: relative;
+
+        i {
+          color: #ffffff;
+        }
+
+        &:hover  {
+          background-color: rgba(255,255,255,0.2);
+        }
+      }
+    }
+
+    .list__title {
+      font-size: 28px;
+      float: left;
+      color: #FFFFFF;
+      line-height: 48px;
+      white-space: nowrap;
+      font-weight: 300;
+      margin-left: 15px;
+
+      span {
+        i {
+          font-size: 24px;
+          display: inline-block;
+          padding:5px;
+          cursor: help;
+        }
+      }
+    }
+
+    .list__drop {
+      float: left;
+      width: 60px;
+      height: 52px;
+      position: relative;
+      cursor: pointer;
+      border-right: $border-line--W;
+
+      svg {
+          height: 30px;
+          width: 30px;
+      }
+
+      svg g {
+          fill: #ffffff;
+          opacity: 0.8;
+      }
+
+      &:hover  {
+        background-color: rgba(255,255,255,0.2);
+
+        svg g {
+          opacity: 1;
+        }
+      }
+    }
+
+    .view-toggle {
+      float: left;
+      width: 60px;
+      height: 52px;
+      font-size: 22px;
+      color: #ffffff;
+      position: relative;
+
+      i {
+        color: #ffffff;
+      }
+
+      &:hover  {
+        background-color: rgba(255,255,255,0.2);
+      }
+    }
+
+    .view-toggle.active  {
+      background-color: rgba(255,255,255,1);
     }
   }
 }
+
 
 
 
@@ -99,8 +131,6 @@
 \*------------------------------------*/
 
 
-
-
 .current-list__container {
   border-left: $border-line--W;
 
@@ -111,10 +141,11 @@
       color: $font-color--MD;
       text-align: center;
       text-transform: uppercase;
-      font-size: 14px;
+      font-size: 12px;
       letter-spacing: 0;
-      line-height: 28px;
+      line-height: 24px;
       font-weight: 400;
+      margin-top:2px;
     }
 
     p.active {
@@ -193,7 +224,7 @@
             fill: $link-grey;
           }
 
-          &:hover {
+          &:hover { 
             svg g {
               fill: $link-blue;
             }
@@ -224,7 +255,7 @@
                 color: #ffffff;
                 text-transform: uppercase;
                 font-weight: 600;
-                font-size: 13px;
+                font-size: 12px;
                 margin-top: 6px;
               }
 
@@ -275,6 +306,10 @@
   }
 }
 
+
+
+
+
 /*------------------------------------*\
   #QUICK-VIEW-PANEL
 \*------------------------------------*/
@@ -290,9 +325,13 @@
   }
 
   .quick-view__panel {
-    padding: 30px 40px 300px;
+    padding: 30px 30px 450px;
     overflow-y: scroll;
     height: 100vh;
+
+    @media screen and (max-width: 1199px) {
+      padding: 30px 15px 450px;
+    }
 
     .quick-view__data {
       position: relative;
@@ -319,13 +358,13 @@
 
       .button__view-summary {
         float: right;
-        width: 28px;
-        margin-top: 3px;
+        width: 25px;
+        margin-top: 4px;
         cursor: pointer;
 
         svg {
-          width: 28px;
-          height: 28px;
+          width: 25px;
+          height: 25px;
         }
 
         svg g {
@@ -357,8 +396,8 @@
             }
 
             svg {
-              height: 22px;
-              width: 22px;
+              height: 20px;
+              width: 20px;
             }
 
             svg g {
@@ -368,16 +407,14 @@
         }
 
         p {
-          font-size: 22px;
+          font-size: 21px;
           float: left;
-          white-space: nowrap;
         }
       }
 
       .stock-panel__price {
+        padding-top: 5px;
         padding-bottom: 10px;
-        border-bottom: 1px solid #eeeeee;
-        margin-bottom: 6px;
 
         p {
           font-weight: 600;
@@ -390,22 +427,20 @@
       }
 
       .stock-panel__industry {
-        border-bottom: 1px solid #eeeeee;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        padding-left: 15px;
+        border-bottom: 3px solid #f8f8f8;
+        border-top: 3px solid #f8f8f8;
+        padding: 7px 0px 7px 0;
 
         p {
           font-weight: 400;
           font-size: 12px;
+          line-height: 1.7;
           color: $font-color--MD;
           text-transform: uppercase;
-          margin: 0px 15px 0px 0;
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
-          width: 350px;
-          height: 28px;
+          padding-right:3px;
 
           span {
             font-size: 16px;
@@ -419,11 +454,16 @@
             font-weight: 700;
             text-transform: uppercase;
           }
+
+          &:hover {
+            text-overflow: inherit;
+            overflow: visible;
+          }
         }
       }
 
       .stock-panel__details {
-        padding-bottom: 5px;
+        padding:10px 0;
         margin-bottom: 5px;
 
         p {
@@ -433,6 +473,9 @@
           color: $font-color--MD;
           text-transform: uppercase;
           margin: 0px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
 
           span {
             font-size: 16px;
@@ -441,26 +484,31 @@
             margin-left: 10px;
             font-weight: 600;
           }
+
+          &:hover {
+            text-overflow: inherit;
+            overflow: visible;
+          }
         }
       }
 
       .quick-view__pgr {
-        border-left:  1px solid #eeeeee;
+        border-left: 3px solid #f8f8f8;
 
         .pgr__title {
-          font-weight: 400;
+          font-weight: 600;
           font-size: 11px;
           color: $font-color--MD;
           text-transform: uppercase;
           line-height: 1;
           margin-bottom: 4px;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.02em;
           white-space: nowrap;
         }
 
         .pgr__text {
           font-weight: 700;
-          font-size: 20px;
+          font-size: 17px;
           text-transform: uppercase;
           white-space: nowrap;
 
@@ -468,6 +516,9 @@
             font-size: 26px;
           }
 
+          @media screen and (max-width: 1479px) and (min-width: 1280px) {
+            font-size: 23px;
+          }
         }
 
         .pgr__sliders {
@@ -480,10 +531,10 @@
 
               .pgr__label {
                 font-weight: 600;
-                font-size: 13px;
+                font-size: 11px;
                 color: $font-color--MD;
                 text-transform: uppercase;
-                margin: -2px 0 2px;
+                margin: -1px 0 2px;
               }
             }
           }
@@ -501,17 +552,17 @@
 
     .quick-view__similar {
       background-color: $background--LT-blue;
-      height: 50px;
+      height: 40px;
       margin-top: 10px;
-      margin-bottom: 25px;
+      margin-bottom: 35px;
+      border-radius: 20px;
 
       .icon__discover {
         cursor: pointer;
 
         svg {
-          width: 35px;
-          height: 35px;
-          cursor: help;
+          width: 30px;
+          height: 30px;
         }
 
         svg g {
@@ -520,8 +571,8 @@
       }
 
       .similar-stock {
-        font-size: 18px;
-        line-height: 50px;
+        font-size: 16px;
+        line-height: 40px;
         font-weight: 700;
         text-align: left;
 
@@ -540,11 +591,19 @@
 
       .news-panel__header {
         width: 100%;
-        font-size: 24px;
         margin-bottom: 5px;
 
+        p {
+          color:$font-color--subhead;
+          font-size: 18px;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+
         span {
-          font-weight: 700;
+          font-weight: 800;
+          color: $font-color;
+
         }
       }
 
@@ -559,7 +618,7 @@
           border-top: $border-dashed--LT;
 
           h2 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 400;
             line-height: 1.5;
             margin: 0;
@@ -574,7 +633,7 @@
           }
 
           .news__source {
-            font-size: 14px;
+            font-size: 12px;
             display: block;
             float: left;
             font-weight: 700;
@@ -589,7 +648,7 @@
           }
 
           .update-time {
-            font-size: 12px;
+            font-size: 10px;
             display: block;
             float: right;
             line-height: 1.6;
@@ -601,9 +660,9 @@
         }
 
         .news__none {
-          font-size: 14px;
+          font-size: 13px;
           display: block;
-          font-weight: 700;
+          font-weight: 400;
           line-height: 1.6;
           margin: 10px 0 0;
           padding: 0;
@@ -613,6 +672,11 @@
   }
 }
 
+
+
+
+
+
 /*------------------------------------*\
   #VIEW OPTION-PANEL
 \*------------------------------------*/
@@ -621,6 +685,7 @@
   height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
+  margin-bottom: 200px;
 
   .empty-list__text {
     text-align: center;
@@ -664,13 +729,13 @@
 
       .button__view-summary {
         float: right;
-        width: 28px;
-        margin-top: 3px;
+        width: 25px;
+        margin-top: 4px;
         cursor: pointer;
 
         svg {
-          width: 28px;
-          height: 28px;
+          width: 25px;
+          height: 25px;
         }
 
         svg g {
@@ -702,8 +767,8 @@
             }
 
             svg {
-              height: 22px;
-              width: 22px;
+              height: 20px;
+              width: 20px;
             }
 
             svg g {
@@ -713,15 +778,14 @@
         }
 
         p {
-          font-size: 22px;
+          font-size: 21px;
           float: left;
         }
       }
 
       .stock-panel__price {
+        padding-top: 5px;
         padding-bottom: 10px;
-        border-bottom: $border-dashed--LT;
-        margin-bottom: 6px;
 
         p {
           font-weight: 600;
@@ -734,22 +798,20 @@
       }
 
       .stock-panel__industry {
-        border-bottom: $border-dashed--LT;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        padding-left: 15px;
+        border-bottom: 3px solid #f8f8f8;
+        border-top: 3px solid #f8f8f8;
+        padding: 7px 0px;
 
         p {
           font-weight: 400;
           font-size: 12px;
+          line-height: 1.7;
           color: $font-color--MD;
           text-transform: uppercase;
-          margin: 0px 15px 0px 0;
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
-          width: 350px;
-          height: 28px;
+          padding-right:3px;
 
           span {
             font-size: 16px;
@@ -763,19 +825,28 @@
             font-weight: 700;
             text-transform: uppercase;
           }
+
+          &:hover {
+            text-overflow: inherit;
+            overflow: visible;
+          }
         }
       }
 
       .stock-panel__details {
-        padding-bottom: 5px;
+        padding:10px 0;
         margin-bottom: 5px;
 
         p {
           font-weight: 400;
           font-size: 12px;
+          line-height: 1.4;
           color: $font-color--MD;
           text-transform: uppercase;
           margin: 0px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
 
           span {
             font-size: 16px;
@@ -784,26 +855,31 @@
             margin-left: 10px;
             font-weight: 600;
           }
+
+          &:hover {
+            text-overflow: inherit;
+            overflow: visible;
+          }
         }
       }
 
       .quick-view__pgr {
-        border-left: $border-dashed--LT;
+        border-left: 3px solid #f8f8f8;
 
         .pgr__title {
-          font-weight: 400;
+          font-weight: 600;
           font-size: 11px;
           color: $font-color--MD;
           text-transform: uppercase;
           line-height: 1;
           margin-bottom: 4px;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.02em;
           white-space: nowrap;
         }
 
         .pgr__text {
           font-weight: 700;
-          font-size: 20px;
+          font-size: 17px;
           text-transform: uppercase;
           white-space: nowrap;
 
@@ -811,6 +887,9 @@
             font-size: 26px;
           }
 
+          @media screen and (max-width: 1479px) and (min-width: 1280px) {
+            font-size: 23px;
+          }
         }
 
         .pgr__sliders {
@@ -823,10 +902,10 @@
 
               .pgr__label {
                 font-weight: 600;
-                font-size: 13px;
+                font-size: 11px;
                 color: $font-color--MD;
                 text-transform: uppercase;
-                margin: -2px 0 2px;
+                margin: -1px 0 2px;
               }
             }
           }
@@ -835,30 +914,26 @@
     }
 
     .quick-view__chart-container {
-      height: 160px;
 
       .quick-view__chart {
+        padding-top: 20px;
         width: 100%;
-        border-top: $border-dashed--LT;
-
-        #mainChart {
-
-        }
       }
     }
 
     .quick-view__similar {
       background-color: $background--LT-blue;
-      width: 100%;
-      height: 50px;
+      height: 40px;
+      margin-top: 10px;
+      margin-bottom: 35px;
+      border-radius: 20px;
 
       .icon__discover {
         cursor: pointer;
 
         svg {
-          width: 35px;
-          height: 35px;
-          cursor: help;
+          width: 30px;
+          height: 30px;
         }
 
         svg g {
@@ -867,8 +942,8 @@
       }
 
       .similar-stock {
-        font-size: 18px;
-        line-height: 50px;
+        font-size: 16px;
+        line-height: 40px;
         font-weight: 700;
         text-align: left;
 

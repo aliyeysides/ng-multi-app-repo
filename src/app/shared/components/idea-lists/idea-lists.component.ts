@@ -14,8 +14,7 @@ import {Subscription} from 'rxjs/Subscription';
       <div class="section-header section-header--ideas">
         <h1>Idea Lists</h1>
         <div class="section-header__actions">
-          <a class="long" (click)="openFullList()"><i class="fa fa-list-ul" aria-hidden="true"></i> List
-            Descriptions</a>
+          <a class="long" (click)="openFullList()"><i class="fa fa-external-link-square" aria-hidden="true"></i><span> List Descriptions</span></a>
         </div>
       </div>
       <div class="idea-lists__container row no-gutters">
@@ -93,7 +92,7 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
   }
 
   public appendListImageUrl(listName: string) {
-    return this.classMap[listName] ? this.classMap[listName].imgName : '/img_NO-LOGO--etf.svg';
+    return this.classMap[listName] ? this.classMap[listName].imgName : '/img_list-classicbears.svg';
   }
 
 }
