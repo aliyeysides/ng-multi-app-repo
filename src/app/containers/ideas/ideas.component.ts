@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {IdeasService} from '../../core/services/ideas.service';
 import {Subscription} from 'rxjs/Subscription';
 import {AuthService} from '../../core/services/auth.service';
+import {ListViewComponent} from './list-view/list-view.component';
 
 @Component({
   selector: 'cpt-ideas',
@@ -11,16 +12,22 @@ import {AuthService} from '../../core/services/auth.service';
         <cpt-idea-lists [lists]="allLists"></cpt-idea-lists>
       </div>
       <div class="body__bottom">
-        <cpt-list-view (addToListClicked)="addToList($event)"></cpt-list-view>
+        <cpt-list-view [symbolListLoading]="symbolListLoading" #list (addToListClicked)="addToList($event)"
+                       (removeFromListClicked)="removeFromList($event)"></cpt-list-view>
       </div>
     </div>
   `,
   styleUrls: ['./ideas.component.scss']
 })
 export class IdeasComponent implements OnInit {
+  @ViewChild('list') list: ListViewComponent;
+
   private uid: string;
   public allLists: object[];
+
   public loading: Subscription;
+  public symbolListLoading: Subscription;
+
   public holdingListId: string;
   public watchingListId: string;
 
@@ -51,7 +58,15 @@ export class IdeasComponent implements OnInit {
     if (params['list'] === 'Watching') listId = this.watchingListId;
     this.ideasService.addStockIntoList(listId.toString(), params['symbol'])
       .take(1)
-      .subscribe(res => this.updateData())
+      .subscribe(res => this.list.refreshList());
   }
 
+  removeFromList(params: object) {
+    let listId;
+    if (params['list'] === 'Holding') listId = this.holdingListId;
+    if (params['list'] === 'Watching') listId = this.watchingListId;
+    this.symbolListLoading = this.ideasService.deleteSymbolFromList(listId.toString(), params['symbol'])
+      .take(1)
+      .subscribe(res => this.list.refreshList());
+  }
 }

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
@@ -16,6 +16,9 @@ import {UtilService} from '../../../core/services/util.service';
 
 export class ListViewComponent implements AfterViewInit, OnDestroy {
   @Output('addToListClicked') addToListClicked: EventEmitter<object> = new EventEmitter<object>();
+  @Output('removeFromListClicked') removeFromListClicked: EventEmitter<object> = new EventEmitter<object>();
+
+  @Input('symbolListLoading') symbolListLoading: Subscription;
 
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private uid: string;
@@ -39,7 +42,6 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
 
   public loading: Subscription;
   public headlinesLoading: Subscription;
-  public symbolListLoading: Subscription;
 
   constructor(private router: Router,
               private authService: AuthService,
@@ -49,12 +51,21 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.authService.currentUser$
+    this.updateData();
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  updateData() {
+    this.loading = this.authService.currentUser$
       .map(usr => this.uid = usr['UID'])
       .flatMap(uid => this.ideaService.selectedList)
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x !== undefined)
-      .filter(x => x['list_id'] !== undefined )
+      .filter(x => x['list_id'] !== undefined)
       .flatMap(list => {
         this.currentList = list;
         return this.ideaService.getListSymbols(list['list_id'].toString(), this.uid)
@@ -68,9 +79,23 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
       });
   }
 
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+  refreshList() {
+    this.symbolListLoading = this.ideaService.selectedList
+      .filter(x => x !== undefined)
+      .filter(x => x['list_id'] !== undefined)
+      .flatMap(list => {
+        this.currentList = list;
+        return this.ideaService.getListSymbols(list['list_id'].toString(), this.uid)
+      })
+      .take(1)
+      .subscribe(stocks => {
+        this.clearOrderByObject();
+        this.clearIdeasLists();
+        this.assignStockData(4);
+        this.ideaList = stocks['symbols'];
+        this.symbolListLoading.unsubscribe();
+        // if (this.ideaList) this.selectStock(this.selectedStock as Idea)
+      });
   }
 
   public onScroll() {
@@ -184,13 +209,13 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
     this.addToListClicked.emit(params);
   }
 
-  public removeFromList(stock: any, listId: string, e) {
-    // e.stopPropagation();
-    // this.sharedService.deleteSymbolFromList(stock.symbol, listId)
-    //   .takeUntil(this.ngUnsubscribe)
-    //   .subscribe(res => {
-    //     console.log('res from removeFromList', res);
-    //   });
+  public removeFromList(list: string, symbol: string, e: Event) {
+    e.stopPropagation();
+    const params = {
+      list: list,
+      symbol: symbol
+    };
+    this.removeFromListClicked.emit(params);
   }
 
   public checkIfUserList(listName) {

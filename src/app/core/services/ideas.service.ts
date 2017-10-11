@@ -67,9 +67,9 @@ export class IdeasService {
 
   public deleteSymbolFromList(listId: string, symbol: string) {
     const deleteSymbolFromListUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/deleteSymbolFromList?`;
-      this.deleteSymbolFromListParams.set('symbol', symbol);
-      this.deleteSymbolFromListParams.set('listId', listId);
-      return this.utilService.getJson(deleteSymbolFromListUrl, this.deleteSymbolFromListParams);
+    this.deleteSymbolFromListParams.set('symbol', symbol);
+    this.deleteSymbolFromListParams.set('listId', listId);
+    return this.utilService.getJson(deleteSymbolFromListUrl, this.deleteSymbolFromListParams);
   }
 
 }

@@ -99,7 +99,7 @@
 <div *ngIf="currentView == 'list-view'" class="body__bottom--listview selected">
 
   <!-- ROW: CURRENT LIST  -->
-  <div [ngBusy]="symbolListLoading" class="row no-gutters">
+  <div class="row no-gutters">
     <div class="current-list__container col-md-6">
       <div class="sort-header row no-gutters">
         <div class="col-lg-2 col-xl-2 ">
@@ -119,7 +119,7 @@
         </div>
       </div>
       <!-- LIST: HOLDING  -->
-      <div class="current-list  current-list--holding ">
+      <div  [ngBusy]="symbolListLoading" class="current-list  current-list--holding ">
         <div *ngIf="!ideaList?.length" class="list__container">
           <p class="empty-list__text">There are currently no stocks in this list.</p>
         </div>
@@ -141,7 +141,7 @@
                   </svg>
                   <p>Add</p>
                 </li>
-                <li *ngIf="idea.is_holding_stock" (click)="addToList('Holding', idea.symbol, $event)" class="nav-item">
+                <li *ngIf="idea.is_holding_stock" (click)="removeFromList('Holding', idea.symbol, $event)" class="nav-item">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <defs></defs>
@@ -163,7 +163,7 @@
                   </svg>
                   <p>Watch</p>
                 </li>
-                <li *ngIf="idea.is_watching_stock" (click)="addToList('Watching', idea.symbol, $event)" class="nav-item">
+                <li *ngIf="idea.is_watching_stock" (click)="removeFromList('Watching', idea.symbol, $event)" class="nav-item">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <defs></defs>
@@ -273,7 +273,7 @@
                     </g>
                   </svg>
                 </a>
-                <a *ngIf="selectedStock.is_holding_stock" (click)="removeFromList(selectedStock.symbol, $event)"
+                <a *ngIf="selectedStock.is_holding_stock" (click)="removeFromList('Holding', selectedStock.symbol, $event)"
                    class="button__hold">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -295,7 +295,7 @@
                     </g>
                   </svg>
                 </a>
-                <a *ngIf="selectedStock.is_watching_stock" (click)="removeFromList(selectedStock.symbol, $event)"
+                <a *ngIf="selectedStock.is_watching_stock" (click)="removeFromList('Watching', selectedStock.symbol, $event)"
                    class="button__watch">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -500,7 +500,7 @@
                     </g>
                   </svg>
                 </a>
-                <a *ngIf="selectedStock.is_holding_stock" (click)="removeFromList(selectedStock.symbol, $event)"
+                <a *ngIf="selectedStock.is_holding_stock" (click)="removeFromList('Holding', selectedStock.symbol, $event)"
                    class="button__hold">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -522,7 +522,7 @@
                     </g>
                   </svg>
                 </a>
-                <a *ngIf="selectedStock.is_watching_stock" (click)="removeFromList(selectedStock.symbol, $event)"
+                <a *ngIf="selectedStock.is_watching_stock" (click)="removeFromList('Watching', selectedStock.symbol, $event)"
                    class="button__watch">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
