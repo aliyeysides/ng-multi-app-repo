@@ -4,15 +4,15 @@
   <div class="list__header col-lg-6">
     <p class="list__title">
       <span *ngIf="checkIfUserList(currentList?.name)">
-        <i tooltip="This is a user list." class="fa fa-user-circle"
+        <i tooltip="User List" class="fa fa-user-circle"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
       <span *ngIf="checkIfBearList(currentList?.name)">
-        <i tooltip="This is a bear list." class="fa fa-user-circle"
+        <i tooltip="Idea List" class="fa fa-lightbulb-o"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
       <span *ngIf="checkIfThemeList(currentList?.name)">
-        <i tooltip="This is a theme list." class="fa fa-user-circle"
+        <i tooltip="Theme List" class="fa fa-flag"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
     </p>
@@ -28,23 +28,15 @@
               Rating</a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
               <li [ngClass]="{'selected' : orderByObject['field'] == 'PGR' && orderByObject['ascending'] == false }"
-                  (click)="setOrderByObject('PGR', false, $event)"><a class="dropdown-subtoggle" tabindex="-1" href="#">Bullish</a>
+                  (click)="setOrderByObject('PGR', false, $event)"><a class="dropdown-subtoggle" tabindex="-1" href="#">Bullish to Bearish</a>
               </li>
               <li [ngClass]="{'selected' : orderByObject['field'] == 'PGR' && orderByObject['ascending'] == true }"
-                  (click)="setOrderByObject('PGR', true, $event)"><a class="dropdown-subtoggle" tabindex="-1" href="#">Bearish</a>
+                  (click)="setOrderByObject('PGR', true, $event)"><a class="dropdown-subtoggle" tabindex="-1" href="#">Bearish to Bullish</a>
               </li>
             </ul>
           </li>
           <li [ngClass]="{'selected' : orderByObject['field'] == '' }" class="dropdown-submenu">
-            <a class="dropdown-toggle dropdown-subtoggle" data-toggle="dropdown" tabindex="-1" href="#">Relevance</a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-              <li [ngClass]="{'selected' : orderByObject['field'] == '' && orderByObject['ascending'] == true }"
-                  (click)="setOrderByObject('', true, $event)"><a class="dropdown-subtoggle" tabindex="-1" href="#">Most
-                Relevant</a></li>
-              <li [ngClass]="{'selected' : orderByObject['field'] == '' && orderByObject['ascending'] == false }"
-                  (click)="setOrderByObject('', false, $event)"><a class="dropdown-subtoggle" tabindex="-1" href="#">Least
-                Relevant</a></li>
-            </ul>
+            <a class="dropdown-toggle" data-toggle="dropdown" tabindex="-1" href="#">Original Order</a>
           </li>
           <li [ngClass]="{'selected' : orderByObject['field'] == 'name' }" class="dropdown-submenu">
             <a class="dropdown-toggle dropdown-subtoggle" data-toggle="dropdown" tabindex="-1" href="#">Company
@@ -326,28 +318,28 @@
               <p>{{selectedStock.name}}</p>
             </div>
             <div class="stock-panel__price row">
-              <div class="col-4">
+              <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
                 <p class="current-price"
                    [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
                   ${{selectedStock?.Last | decimal}}</p>
               </div>
-              <div class="col-4">
+              <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="price-change"
                    [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
                   {{selectedStock?.Change | decimal}}</p>
               </div>
-              <div class="col-4">
+              <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="percent-change"
                    [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
                   ({{ selectedStock ? (selectedStock["Percentage "] | decimal) : null }}%)</p>
               </div>
             </div>
             <div class="stock-panel__industry row no-gutters">
-              <div class="col-xl-6">
-                <p>IND: <span class="industry">{{selectedStock?.industry_name}}</span></p>
+              <div class="col-12">
+                <p>INDUSTRY: <span class="industry">{{selectedStock?.industry_name}}</span></p>
               </div>
-              <div class="col-xl-6">
-                <p>STR: <span class="industry-strength"
+              <div class="col-12">
+                <p>STRENGTH: <span class="industry-strength"
                               [ngClass]="{'strong' : translateIndustryStrength(selectedStock?.list_rating) == 'Strong', 'weak' : translateIndustryStrength(selectedStock?.list_rating) == 'Weak'}">{{ translateIndustryStrength(selectedStock?.list_rating) }}</span>
                 </p>
               </div>
@@ -363,7 +355,7 @@
           </div>
 
           <div class="quick-view__pgr col-lg-4">
-            <p class="pgr__title">Overall Rating:</p>
+            <p class="pgr__title">Power Gauge:</p>
             <p class="pgr__text" [ngClass]="appendPGRClass(selectedStock.PGR)">
               {{ appendPGRText(selectedStock.PGR) }}
             </p>
@@ -434,7 +426,7 @@
         </div>
         <div class="quick-view__similar row no-gutters">
           <div (click)="goToStockDiscovery(selectedStock.symbol, $event)"
-               tooltip="Discover stock ideas similar to this stock." class="icon__discover col-md-3 col-lg-2">
+               tooltip="Discover similar stocks" class="icon__discover col-md-3 col-lg-2">
             <svg class="align-absolute" width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <defs></defs>
@@ -570,11 +562,11 @@
               </div>
             </div>
             <div class="stock-panel__industry row no-gutters">
-              <div class="col-xl-6">
-                <p>IND: <span class="industry">{{idea?.industry_name}}</span></p>
+              <div class="col-12">
+                <p>INDUSTRY: <span class="industry">{{idea?.industry_name}}</span></p>
               </div>
-              <div class="col-xl-6">
-                <p>STR: <span class="industry-strength"
+              <div class="col-12">
+                <p>STRENGTH: <span class="industry-strength"
                               [ngClass]="{'strong' : translateIndustryStrength(idea['meta-info'].listRating) == 'Strong', 'weak' : translateIndustryStrength(idea['meta-info'].listRating) == 'Weak'}">{{ translateIndustryStrength(idea['meta-info'].listRating) }}</span>
                 </p>
               </div>
@@ -590,7 +582,7 @@
           </div>
 
           <div class="quick-view__pgr col-lg-4">
-            <p class="pgr__title">Power Gauge Rating:</p>
+            <p class="pgr__title">Power Gauge:</p>
             <p class="pgr__text" [ngClass]="appendPGRClass(idea.pgr['Corrected PGR Value'])">
               {{ appendPGRText(idea.pgr['Corrected PGR Value']) }}
             </p>

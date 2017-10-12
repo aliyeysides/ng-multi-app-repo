@@ -27,7 +27,7 @@ import {SignalService} from '../../../core/services/signal.service';
             ({{ stock ? stock['Percentage'] : null }}%)</p>
         </div>
         <div class="base-stock__PGR">
-          <p class="PGR__text neutral"><span>Overall Rating:</span> {{ appendPGRText(stock ? stock['PGR'] : null) }}</p>
+          <p class="PGR__text neutral"><span>Power Gauge:</span> {{ appendPGRText(stock ? stock['PGR'] : null) }}</p>
           <ul *ngIf="stock" class="pgr__sliders">
             <li class="">
               <div class="sliderBar-container">
