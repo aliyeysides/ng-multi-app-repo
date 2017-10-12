@@ -31,7 +31,7 @@ export interface MarketData {
         SPY&nbsp;
         <span [@fadeInDown]="fadeInDownSPYState" (@fadeInDown.done)="resetSPY()"
               [ngClass]="{'up-change':SPY?.change>0,'down-change':SPY?.change<0}">
-          {{SPY?.change}}%
+          {{SPY?.percent_change}}%
         </span>
       </p>
       <p class="indice">
@@ -43,7 +43,7 @@ export interface MarketData {
         DIA&nbsp;
         <span [@fadeInDown]="fadeInDownDJIState" (@fadeInDown.done)="resetDJI()"
               [ngClass]="{'up-change':DJI?.change>0,'down-change':DJI?.change<0}">
-          {{DJI?.change}}%
+          {{DJI?.percent_change}}%
         </span>
       </p>
       <p class="indice">
@@ -55,7 +55,7 @@ export interface MarketData {
         QQQ&nbsp;
         <span [@fadeInDown]="fadeInDownQQQState" (@fadeInDown.done)="resetQQQ()"
               [ngClass]="{'up-change':QQQ?.change>0,'down-change':QQQ?.change<0}">
-          {{QQQ?.change}}%
+          {{QQQ?.percent_change}}%
         </span>
       </p>
     </div>
