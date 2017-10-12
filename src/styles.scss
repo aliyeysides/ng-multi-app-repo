@@ -660,6 +660,10 @@ input:focus {
     }
   }
 
+  .post-footer {
+    
+  }
+
   .post-head--insights {
     background-image: linear-gradient(135deg, #B0004D 0%, #6E008C 52%, #0096D4 100%);
   }
@@ -828,6 +832,7 @@ input:focus {
 
     li {
       padding: 6px 0;
+      position: relative;
 
       .stock__PGR {
         position: relative;
@@ -874,6 +879,21 @@ input:focus {
           display: none;
         }
       }
+      .stock__alert.bell--green {
+        i {
+          color: $upChange;
+        }
+      }
+      .stock__alert.bell--red {
+        i {
+          color: $downChange;
+        }
+      }
+      .stock__alert.bell--yellow {
+        i {
+          color: $neutral-yellow;
+        }
+      }
 
       .stock__price {
         font-size: 14px;
@@ -887,8 +907,35 @@ input:focus {
         }
       }
 
+      .button__remove-stock {
+        display: none;
+        position: absolute;
+        right:0px;
+        top:8px;
+        width: 20px;
+        height: 100%;
+        cursor: pointer;
+
+        a {
+            opacity: 0.5;
+
+          i {
+            color:$font-color--subhead;
+            font-size: 14px;
+          }
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+
       &:hover {
         background-color: $background--LT-hover;
+
+        .button__remove-stock {
+          display: block;
+        }
       }
     }
 

@@ -14,7 +14,7 @@
 
 		    .long {
 		      	padding-top: 13px;
-		      	width: 200px;
+		      	width:150px;
 		      	text-align: left;
 		      	margin-left:40px;
 		      	font-size: 13px;
@@ -49,7 +49,7 @@
         height: auto;
       }
 
-      @media screen and (min-width: 1450px) {
+      @media screen and (min-width: 1600px) {
       	display:none;
       }
     }
@@ -142,7 +142,7 @@
 	}
 
 	.idea-lists__footer {
-		padding:15px 25px 5px;
+		padding:10px 25px 5px;
 
 		p {
 			font-size: 12px;

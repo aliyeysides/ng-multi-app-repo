@@ -3,9 +3,23 @@
 
 
 .insights__container.insights__container--mainbear {
-	height: 430px;
+	height: 470px;
 	overflow: hidden;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+
+  .post-head--insights {
+    .divider-h {
+      @media screen and (max-width: 1120px) and (min-width: 767px) {
+        display: none;
+      }
+    }
+
+    .header__post-date {
+      @media screen and (max-width: 1120px) and (min-width: 767px) {
+        display: none;
+      }
+    }
+  } 
 
 	.link__read-all {
     z-index: 200;
@@ -32,7 +46,7 @@
   }
 
   @media screen and (max-height: 800px) {
-    height: 404px;
+    height: 437px;
     margin-bottom: 15px;
   }
 }

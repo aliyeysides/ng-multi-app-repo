@@ -46,7 +46,7 @@ import {Subscription} from 'rxjs/Subscription';
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ item.symbol }}</p>
           </div>
-          <div class="col-1 stock__alert">
+          <div class="col-1 stock__alert bell--yellow">
             <i class="fa fa-bell" aria-hidden="true"></i>
           </div>
           <div class="col-3 stock__price">
@@ -56,7 +56,7 @@ import {Subscription} from 'rxjs/Subscription';
             <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Change }}%</p>
           </div>
           <div class="button__remove-stock">
-            <!--<i class="fa fa-times" aria-hidden="true"></i>-->
+            <a><i class="fa fa-times" aria-hidden="true"></i></a>
           </div>
         </li>
       </ul>
@@ -68,7 +68,7 @@ import {Subscription} from 'rxjs/Subscription';
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ item.symbol }}</p>
           </div>
-          <div class="col-1 stock__alert">
+          <div class="col-1 stock__alert bell--yellow">
             <i class="fa fa-bell" aria-hidden="true"></i>
           </div>
           <div class="col-3 stock__price">
@@ -76,6 +76,9 @@ import {Subscription} from 'rxjs/Subscription';
           </div>
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Change }}%</p>
+          </div>
+          <div class="button__remove-stock">
+            <a><i class="fa fa-times" aria-hidden="true"></i></a>
           </div>
         </li>
       </ul>
