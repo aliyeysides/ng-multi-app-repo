@@ -7,7 +7,7 @@
 \*------------------------------------*/
 
 .list-view__actionbar {
-  height: 52px;
+  height: 40px;
 
   .list__header {
 
@@ -17,8 +17,8 @@
 
       span {
         float: right;
-        font-size: 32px !important;
-        line-height: 52px;
+        font-size: 28px !important;
+        line-height: 40px;
         margin-right: 30px;
         text-shadow: none;
       }
@@ -35,8 +35,8 @@
 
       .sort-toggle {
         width: 60px;
-        height: 52px;
-        font-size: 20px;
+        height: 40px;
+        font-size: 18px;
         color: #ffffff;
         position: relative;
 
@@ -51,13 +51,13 @@
     }
 
     .list__title {
-      font-size: 28px;
+      font-size: 21px;
       float: left;
       color: #FFFFFF;
-      line-height: 48px;
+      line-height: 40px;
       white-space: nowrap;
-      font-weight: 300;
-      margin-left: 15px;
+      font-weight: 600;
+      margin-left: 25px;
 
       span {
         i {
@@ -72,14 +72,14 @@
     .list__drop {
       float: left;
       width: 60px;
-      height: 52px;
+      height: 40px;
       position: relative;
       cursor: pointer;
       border-right: $border-line--W;
 
       svg {
-          height: 30px;
-          width: 30px;
+          height: 25px;
+          width: 25px;
       }
 
       svg g {
@@ -99,8 +99,8 @@
     .view-toggle {
       float: left;
       width: 60px;
-      height: 52px;
-      font-size: 22px;
+      height: 40px;
+      font-size: 18px;
       color: #ffffff;
       position: relative;
 
@@ -157,7 +157,7 @@
     height: 100vh;
     overflow-y: scroll;
     background-color: $background--LT;
-    padding-bottom: 396px;
+    padding-bottom: 342px;
 
     .list__container {
 
@@ -325,7 +325,7 @@
   }
 
   .quick-view__panel {
-    padding: 30px 30px 450px;
+    padding: 30px 30px 320px;
     overflow-y: scroll;
     height: 100vh;
 
@@ -614,21 +614,21 @@
           width: 100%;
           position: relative;
           margin: 10px 0 15px;
-          padding: 5px 5px;
-          border-top: $border-dashed--LT;
+          padding: 5px 5px 10px;
+          border-bottom: 3px solid #f8f8f8;
 
           h2 {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 400;
             line-height: 1.5;
             margin: 0;
-            padding: 0;
-            color: $font-color--MD;
+            padding: 0 0 3px;
+            color: $font-color;
             cursor: pointer;
 
             a {
               text-decoration: none;
-              color: $font-color--MD;
+              color: $font-color;
             }
           }
 

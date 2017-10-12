@@ -19,6 +19,12 @@ import {Router} from '@angular/router';
           <a class="long" (click)="openFullList()"><i class="fa fa-external-link-square" aria-hidden="true"></i><span> List Descriptions</span></a>
         </div>
       </div>
+      <div class="slider__scroll slider__scroll--right">
+        <img class="align-absolute" src="./assets/imgs/scroll-r.svg">
+      </div>
+      <div class="slider__scroll slider__scroll--left">
+        <img class="align-absolute" src="./assets/imgs/scroll-l.svg">
+      </div>
       <div class="idea-lists__container row no-gutters">
         <ul>
           <li
