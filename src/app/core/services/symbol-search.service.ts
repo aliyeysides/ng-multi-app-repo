@@ -24,6 +24,7 @@ export class SymbolSearchService {
     const symbolLookupUrl = `${this.apiHostName}/CPTRestSecure/app/stocks/symbol-lookupV1?`;
     this.symbolLookupParams.set('q', query);
     this.symbolLookupParams.set('searchColumn', 'symbol');
+    this.symbolLookupParams.set('mode', 'mid-tier');
     return this.utilService.getJson(symbolLookupUrl, this.symbolLookupParams);
   }
 

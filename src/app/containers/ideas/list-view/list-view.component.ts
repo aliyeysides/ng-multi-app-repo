@@ -92,9 +92,8 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
       .subscribe(stocks => {
         this.clearOrderByObject();
         this.clearIdeasLists();
-        this.assignStockData(4);
         this.ideaList = stocks['symbols'];
-        this.symbolListLoading.unsubscribe();
+        this.assignStockData(4);
         // if (this.ideaList) this.selectStock(this.selectedStock as Idea)
       });
   }
