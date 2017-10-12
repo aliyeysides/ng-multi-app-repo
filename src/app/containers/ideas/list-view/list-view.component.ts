@@ -104,6 +104,7 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
 
   public selectStock(stock: Idea) {
     this.selectedStock = stock;
+    console.log('selectedStock', this.selectedStock);
     if (stock) {
       this.getSelectedStockData(stock, this.assignSelectedStock.bind(this));
       this.getSelectedStockHeadlines(stock);
