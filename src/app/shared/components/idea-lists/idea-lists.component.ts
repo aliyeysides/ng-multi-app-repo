@@ -31,7 +31,7 @@ import {Router} from '@angular/router';
             [ngClass]="{'selected': selectedList === list, 'list__option--userlist': list['name'] === 'Holding' || list['name'] === 'Watching' }"
             (click)="emitListSelected(list)"
             *ngFor="let list of lists" class="list__option">
-            <ng-container *ngIf="list.is_active">
+            <ng-container *ngIf="list">
               <div class="list__image">
                 <button type="button" class="close">
                   <!--<i class="fa fa-star" aria-hidden="true"></i>-->

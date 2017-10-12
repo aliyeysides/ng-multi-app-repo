@@ -81,21 +81,22 @@ export class FullListModalComponent implements OnInit, OnDestroy {
 
   constructor(public bsModalRef: BsModalRef,
               private authService: AuthService,
-              private wordpressService: WordpressService,
               private ideasService: IdeasService) {
   }
 
   ngOnInit() {
     this.title = 'Idea List Descriptions';
-    this.loading = this.authService.currentUser$
-      .map(usr => this.uid = usr['UID'])
-      .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
-      .filter(x => x !== undefined)
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe(res => {
-        this.allLists = res[2]['user_lists'].concat(res[0]['idea_lists']).concat(res[1]['theme_lists']);
-        console.log('allLists', this.allLists);
-      });
+    this.authService.currentUser$
+      .subscribe(res => console.log('res', res))
+
+      // .map(usr => this.uid = usr['UID'])
+      // .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
+      // .filter(x => x !== undefined)
+      // .takeUntil(this.ngUnsubscribe)
+      // .subscribe(res => {
+      //   this.allLists = res[2]['user_lists'].concat(res[0]['idea_lists']).concat(res[1]['theme_lists']);
+      //   console.log('allLists', this.allLists);
+      // });
   }
 
   ngOnDestroy() {
@@ -103,11 +104,11 @@ export class FullListModalComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  private getWordPressPostListDescriptions() {
-    this.wordpressService.getWordPressJson('45', this.totalListAmount)
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe(val => this.wordPressPosts = val['0']['45']);
-  }
+  // private getWordPressPostListDescriptions() {
+  //   this.wordpressService.getWordPressJson('45', this.totalListAmount)
+  //     .takeUntil(this.ngUnsubscribe)
+  //     .subscribe(val => this.wordPressPosts = val['0']['45']);
+  // }
 
 
 }
