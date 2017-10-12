@@ -40,7 +40,7 @@ export interface MarketData {
           <img *ngIf="DJI?.change>0" src="./assets/imgs/icon_arrow--up.svg">
           <img *ngIf="DJI?.change==0" src="./assets/imgs/icon_arrow--nochange.svg">
         </span>
-        DJI&nbsp;
+        DIA&nbsp;
         <span [@fadeInDown]="fadeInDownDJIState" (@fadeInDown.done)="resetDJI()"
               [ngClass]="{'up-change':DJI?.change>0,'down-change':DJI?.change<0}">
           {{DJI?.change}}%
