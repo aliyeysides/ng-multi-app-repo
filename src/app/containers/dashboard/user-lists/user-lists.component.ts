@@ -55,6 +55,9 @@ import {Subscription} from 'rxjs/Subscription';
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Change }}%</p>
           </div>
+          <div class="button__remove-stock">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </div>
         </li>
       </ul>
       <ul *ngIf="currentList === 'Watching'" class="post-body post-body--userlist">

@@ -14,7 +14,7 @@ import {AuthService} from '../../core/services/auth.service';
     <div class="discovery__container" [ngBusy]="loading">
       <div class="body__top">
         <div class="section-header">
-          <h1>Ideas based on</h1>
+          <h1>Discover stocks like</h1>
           <div class="section-header__search">
             <cpt-symbol-search></cpt-symbol-search>
           </div>

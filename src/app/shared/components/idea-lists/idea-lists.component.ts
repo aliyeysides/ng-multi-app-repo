@@ -16,7 +16,7 @@ import {Router} from '@angular/router';
       <div class="section-header section-header--ideas">
         <h1>Idea Lists</h1>
         <div class="section-header__actions">
-          <a class="long" (click)="openFullList()"><i class="fa fa-external-link-square" aria-hidden="true"></i><span> List Descriptions</span></a>
+          <a class="long" (click)="openFullList()">List Descriptions <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
         </div>
       </div>
       <div class="slider__scroll slider__scroll--right">

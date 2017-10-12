@@ -17,31 +17,16 @@
 		      	width: 200px;
 		      	text-align: left;
 		      	margin-left:40px;
+		      	font-size: 13px;
+			    line-height: 1;
+			    font-weight:600;
+		    	color:$link-blue;
 
-		      	i {
-			        display: inline-block;
-			        margin-right:10px;
-			        vertical-align: middle;
-			        line-height: 1;
+			    i {
+		    		color:$link-blue !important;
+		    		font-size: 14px;
+		    		line-height: 1;
 			    }
-
-			    span {
-			        font-size: 12px;
-			        display: inline-block;
-			        vertical-align: middle;
-			        line-height: 1;
-			    }
-
-		    	&:hover {
-
-		    		span {
-		    			color:$link-blue;
-		    		}
-
-		    		i {
-		    			color:$link-blue;
-		    		}
-		    	}
 		    }
 		}
 	}
@@ -64,7 +49,7 @@
         height: auto;
       }
 
-      @media screen and (min-width: 1440px) {
+      @media screen and (min-width: 1450px) {
       	display:none;
       }
     }
