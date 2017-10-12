@@ -5,6 +5,7 @@ import {IdeasService} from '../../../core/services/ideas.service';
 import {Subject} from 'rxjs/Subject';
 import {IDEAS_LIST_CLASSMAP} from '../../models/idea-list-class-map';
 import {WordpressService} from '../../../core/services/wordpress.service';
+import {Router} from '@angular/router';
 
 interface SelectedList {
   name?: string;
@@ -43,7 +44,7 @@ interface SelectedList {
               <div class="list-description__header">
                 <img src="assets/imgs/{{ appendListColoredImageUrl(list?.name) }}">
                 <h3>{{ selectedList ? selectedList['name'] : 'Select a List to learn more...' }}</h3>
-                <a class="post-head__button">
+                <a (click)="viewList(selectedList)" class="post-head__button">
                   <i class="fa fa-external-link-square" aria-hidden="true"></i>
                   <span>&nbsp;View List</span>
                 </a>
@@ -79,6 +80,7 @@ export class FullListModalComponent implements OnInit, OnDestroy {
   public loading: Subscription;
 
   constructor(public bsModalRef: BsModalRef,
+              private router: Router,
               private wordpressService: WordpressService,
               private ideasService: IdeasService) {
   }
@@ -113,6 +115,12 @@ export class FullListModalComponent implements OnInit, OnDestroy {
     const matchingPost = this.wordPressPosts.filter(post => post['post_title'] === this.selectedList['name']);
     const htmlStr = matchingPost[0]['post_content'];
     this.parseDomString(htmlStr);
+  }
+
+  public viewList(list) {
+    this.ideasService.setSelectedList(list);
+    this.bsModalRef.hide();
+    this.router.navigate(['/ideas']);
   }
 
   private parseDomString(str: string) {
