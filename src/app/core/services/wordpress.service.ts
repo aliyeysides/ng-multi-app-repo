@@ -54,7 +54,7 @@ export class WordpressService {
   public assignWordPressFormattedDate(postArr: object[]): void {
     postArr.map(post => {
       const parsedDate = post['post_date_parsed'];
-      const formattedDate = this.datePipe.transform(parsedDate, 'longDate');
+      const formattedDate = this.datePipe.transform(parsedDate, 'shortDate');
       return Object.assign(post, {post_date_formatted: formattedDate});
     })
   }

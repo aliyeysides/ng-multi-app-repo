@@ -3,8 +3,18 @@
   class="list-view__actionbar row no-gutters">
   <div class="list__header col-lg-6">
     <p class="list__title">
-      <span><i tooltip="This is a user list." *ngIf="checkIfUserList(currentList?.name)" class="fa fa-user-circle"
-               aria-hidden="true"></i>&nbsp;{{ currentList?.name }}</span>
+      <span *ngIf="checkIfUserList(currentList?.name)">
+        <i tooltip="This is a user list." class="fa fa-user-circle"
+               aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
+      </span>
+      <span *ngIf="checkIfBearList(currentList?.name)">
+        <i tooltip="This is a bear list." class="fa fa-user-circle"
+               aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
+      </span>
+      <span *ngIf="checkIfThemeList(currentList?.name)">
+        <i tooltip="This is a theme list." class="fa fa-user-circle"
+               aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
+      </span>
     </p>
 
     <ul class="list-sort__container">
@@ -329,7 +339,7 @@
               <div class="col-4">
                 <p class="percent-change"
                    [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
-                  {{ selectedStock ? (selectedStock["Percentage "] | decimal) : null }}%</p>
+                  ({{ selectedStock ? (selectedStock["Percentage "] | decimal) : null }}%)</p>
               </div>
             </div>
             <div class="stock-panel__industry row no-gutters">
@@ -423,7 +433,7 @@
           </div>
         </div>
         <div class="quick-view__similar row no-gutters">
-          <div tooltip="Discover stock ideas similar to this stock." class="icon__discover col-md-3 col-lg-2">
+          <div (click)="goToStockDiscovery(selectedStock.symbol, $event)" tooltip="Discover stock ideas similar to this stock." class="icon__discover col-md-3 col-lg-2">
             <svg class="align-absolute" width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <defs></defs>

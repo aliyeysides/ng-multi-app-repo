@@ -13,7 +13,8 @@ import {SignalService} from '../../../core/services/signal.service';
                src="{{ stock && stock.logo_url != 'N/A' ? stock?.logo_url : 'assets/imgs/img_NO-LOGO--stock.svg' }}">
         </div>
         <div class="base-stock__symbol">
-          <p class="ticker"><img class="" src="{{ appendPGRImage(stock ? stock['PGR'] : null) }}"> {{ stock ? stock['symbol'] : null }}</p>
+          <p class="ticker"><img class="" src="{{ appendPGRImage(stock ? stock['PGR'] : null) }}">
+            {{ stock ? stock['symbol'] : null }}</p>
           <p class="company-name">{{ stock ? stock['name'] : null }}</p>
           <p class="company-industry">{{ stock ? stock['industry'] : null }}</p>
         </div>
@@ -23,7 +24,7 @@ import {SignalService} from '../../../core/services/signal.service';
           <p class="change" [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
             {{ stock ? stock['Change'] : null }}</p>
           <p class="percentage" [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
-            {{ stock ? stock['Percentage'] : null }}%</p>
+            ({{ stock ? stock['Percentage'] : null }}%)</p>
         </div>
         <div class="base-stock__PGR">
           <p class="PGR__text neutral"><span>Overall Rating:</span> {{ appendPGRText(stock ? stock['PGR'] : null) }}</p>
@@ -88,7 +89,9 @@ import {SignalService} from '../../../core/services/signal.service';
         </div>
         <div class="base-stock__factors">
           <ul>
-            <li *ngFor="let factor of stock ? stock['significant_factors'] : null ">{{ factor }}</li>
+            <ng-container *ngFor="let factor of stock ? stock['significant_factors'] : null ">
+              <li *ngIf="factor != ''">{{ factor }}</li>
+            </ng-container>
           </ul>
         </div>
       </div>

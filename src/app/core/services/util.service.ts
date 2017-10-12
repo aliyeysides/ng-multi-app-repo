@@ -55,9 +55,12 @@ export class UtilService {
 
   public checkIfBearList(listName) {
     switch (listName) {
+      case 'Best Bear Ideas':
       case 'Sell the Rallies':
+      case 'Large Cap Bears':
+      case 'Small Cap Bears':
       case 'Bears of the Week':
-      case 'Power Gauge Rating Downgrades':
+      case 'Power Gauge Downgrades':
       case 'Don\'t Fight the Shorts':
       case 'Dogs of the Dow':
       case 'Upcoming Earnings Bears':
