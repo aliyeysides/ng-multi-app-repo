@@ -35,7 +35,7 @@ import {SignalService} from '../../../core/services/signal.service';
             <div class="col-6 price-data">
               <p class="data data--change"
                  [ngClass]="{'down-change':stockDataMeta?.Change<0, 'up-change':stockDataMeta?.Change>0}">
-                {{ stockDataMeta?.Change }}%</p>
+                ({{ stockDataMeta?.Change }}%)</p>
               <p class="data" [ngClass]="{'down-change':stockDataMeta?.Change<0, 'up-change':stockDataMeta?.Change>0}">
                 {{ stockDataMeta?.Last }}</p>
             </div>

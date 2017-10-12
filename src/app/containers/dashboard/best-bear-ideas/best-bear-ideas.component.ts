@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {IdeasService} from '../../../core/services/ideas.service';
 import {AuthService} from '../../../core/services/auth.service';
@@ -34,14 +34,17 @@ import {SignalService} from '../../../core/services/signal.service';
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ stock?.symbol }}</p>
           </div>
-          <div class="col-1 stock__alert">
-            <i class="fa fa-play down-alert" aria-hidden="true"></i>
+          <div class="col-1 stock__alert"
+               [ngClass]="{'down-alert':stock?.Change<0,'up-alert':stock?.Change>0,'flat-alert':stock?.Change===0}">
+            <i class="fa fa-play" aria-hidden="true"></i>
           </div>
           <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">$ {{ stock?.Last }}</p>
+            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">$ {{ stock?.Last
+              }}</p>
           </div>
           <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">{{ stock?.Change }}%</p>
+            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">{{ stock?.Change
+              }}%</p>
           </div>
         </li>
       </ul>
@@ -59,7 +62,8 @@ export class BestBearIdeasComponent implements OnInit {
   constructor(private router: Router,
               private authService: AuthService,
               private signalService: SignalService,
-              private ideasService: IdeasService) { }
+              private ideasService: IdeasService) {
+  }
 
   ngOnInit() {
     this.authService.currentUser$

@@ -339,7 +339,7 @@
               <div class="col-4">
                 <p class="percent-change"
                    [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
-                  {{ selectedStock ? (selectedStock["Percentage "] | decimal) : null }}%</p>
+                  ({{ selectedStock ? (selectedStock["Percentage "] | decimal) : null }}%)</p>
               </div>
             </div>
             <div class="stock-panel__industry row no-gutters">
