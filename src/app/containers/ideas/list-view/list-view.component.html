@@ -660,7 +660,7 @@
           </div>
 
           <div class="quick-view__similar row no-gutters">
-            <div tooltip="Discover stock ideas similar to this stock." class="icon__discover col-md-3 col-lg-2">
+            <div (click)="goToStockDiscovery(idea.symbol, $event)" tooltip="Discover stock ideas similar to this stock." class="icon__discover col-md-3 col-lg-2">
               <svg class="align-absolute" width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <defs></defs>

@@ -56,7 +56,7 @@ import {Subscription} from 'rxjs/Subscription';
             <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Change }}%</p>
           </div>
           <div class="button__remove-stock">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <!--<i class="fa fa-times" aria-hidden="true"></i>-->
           </div>
         </li>
       </ul>
