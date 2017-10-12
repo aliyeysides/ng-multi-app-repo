@@ -131,7 +131,7 @@ input:focus {
 }
 
 .veryBullish, .strong, .up-change, .VeryBullish {
-  color: $veryBullish-green;
+  color: $veryBullish-green !important;
 }
 
 .neutral-grey {
@@ -151,7 +151,7 @@ input:focus {
 }
 
 .veryBearish, .weak, .down-change, .VeryBearish {
-  color: $veryBearish-red;
+  color: $veryBearish-red !important;
 }
 
 /*------------------------------------*\
