@@ -16,7 +16,21 @@ export class IdeasService {
   private addStockIntoListParams: URLSearchParams;
   private deleteSymbolFromListParams: URLSearchParams;
 
-  private _selectedList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>({} as IdeaList);
+  private defaultList = {
+    "list_type": "mid-tier",
+    "is_extendable": false,
+    "is_bullish_or_bearish": "Bearish",
+    "associated_product": "Bear",
+    "is_active": false,
+    "list_id": 1246724,
+    "name": "Best Bear Ideas",
+    "list_order": 1,
+    "pgr_rating_order": 0,
+    "power_Bar": "38,2,0",
+    "ideas_or_themes_list": "Ideas"
+  };
+
+  private _selectedList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>(this.defaultList);
   selectedList = this._selectedList.asObservable();
 
   setSelectedList(list: IdeaList) {

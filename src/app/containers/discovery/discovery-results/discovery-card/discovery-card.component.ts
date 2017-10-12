@@ -28,10 +28,10 @@ import {Idea} from '../../../../shared/models/idea';
           <div class="price clearfix">
             <p class="last-price"
                [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
-              {{ stock.Last }}</p>
+              {{ stock.Last | decimal }}</p>
             <p class="percentage"
                [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
-              ({{ stock.Percentage }}%)</p>
+              ({{ stock.Percentage | decimal }}%)</p>
           </div>
           <div class="mainFactor">
             <p class="factor">{{ stock.most_significant_shared_factor }}</p>

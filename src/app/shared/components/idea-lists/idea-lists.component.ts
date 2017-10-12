@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, Input, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {FullListModalComponent} from './full-list-modal.component';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {IdeaList} from '../../models/idea';
+import {Idea, IdeaList} from '../../models/idea';
 import {Subject} from 'rxjs/Subject';
 import {IDEAS_LIST_CLASSMAP} from '../../models/idea-list-class-map';
 import {Subscription} from 'rxjs/Subscription';
@@ -28,7 +28,7 @@ import {Router} from '@angular/router';
       <div class="idea-lists__container row no-gutters">
         <ul>
           <li
-            [ngClass]="{'selected': selectedList === list, 'list__option--userlist': list['name'] === 'Holding' || list['name'] === 'Watching' }"
+            [ngClass]="{'selected': isSelected(list), 'list__option--userlist': list['name'] === 'Holding' || list['name'] === 'Watching' }"
             (click)="emitListSelected(list)"
             *ngFor="let list of lists" class="list__option">
             <ng-container *ngIf="list">
@@ -52,6 +52,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./idea-lists.component.scss']
 })
 export class IdeaListsComponent implements AfterViewInit, OnDestroy {
+  @Output('listSelected') listSelected: EventEmitter<IdeaList> = new EventEmitter<IdeaList>();
   @Input('lists')
   set lists(lists: object[]) {
     this._lists.next(lists);
@@ -81,6 +82,11 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    this.ideasService.selectedList
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(list => {
+        this.selectedList = list;
+      });
   }
 
   ngOnDestroy() {
@@ -100,6 +106,10 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
 
   public appendListImageUrl(listName: string) {
     return this.classMap[listName] ? this.classMap[listName].imgName : '/img_list-classicbears.svg';
+  }
+
+  public isSelected(list) {
+    return this.selectedList === list;
   }
 
 }
