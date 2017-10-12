@@ -346,7 +346,7 @@
             </div>
             <div class="stock-panel__details row no-gutters">
               <div class="col-lg-6">
-                <p>Mkt&nbsp;Cap:<span>{{selectedStock?.market_cap | decimal }}</span></p>
+                <p>Mkt&nbsp;Cap:<span>{{selectedStock?.market_cap | marketCap | number:'.2-2' }} B</span></p>
               </div>
               <div class="col-lg-6">
                 <p>Yield:<span>{{selectedStock?.div_yield | decimal }}%</span></p>
@@ -558,7 +558,7 @@
               <div class="col-4">
                 <p
                   [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}"
-                  class="percent-change">{{idea['meta-info']["Percentage "] | decimal}}%</p>
+                  class="percent-change">({{idea['meta-info']["Percentage "] | decimal}}%)</p>
               </div>
             </div>
             <div class="stock-panel__industry row no-gutters">
@@ -573,7 +573,7 @@
             </div>
             <div class="stock-panel__details row">
               <div class="col-lg-6">
-                <p>Mkt&nbsp;Cap:<span>{{ idea['meta-info'].marketCap | decimal }}</span></p>
+                <p>Mkt&nbsp;Cap:<span>{{ idea['meta-info'].marketCap | marketCap | number:'.2-2' }}B</span></p>
               </div>
               <div class="col-lg-6">
                 <p>Yield:<span>{{ idea['meta-info'].div_yield | decimal }}%</span></p>

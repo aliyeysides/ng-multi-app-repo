@@ -75,7 +75,6 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
         this.clearIdeasLists();
         this.ideaList = stocks['symbols'];
         this.assignStockData(4);
-        console.log('panel', this.panelViewIdeasList);
         if (this.ideaList) this.selectStock(this.ideaList[0] as Idea);
       });
   }
@@ -104,7 +103,6 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
 
   public selectStock(stock: Idea) {
     this.selectedStock = stock;
-    console.log('selectedStock', this.selectedStock);
     if (stock) {
       this.getSelectedStockData(stock, this.assignSelectedStock.bind(this));
       this.getSelectedStockHeadlines(stock);
