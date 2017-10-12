@@ -87,7 +87,6 @@ export class FullListModalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.title = 'Idea List Descriptions';
-    debugger;
     this.loading = this.authService.currentUser$
       .map(usr => this.uid = usr['UID'])
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
