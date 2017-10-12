@@ -75,6 +75,7 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
         this.clearIdeasLists();
         this.ideaList = stocks['symbols'];
         this.assignStockData(4);
+        console.log('panel', this.panelViewIdeasList);
         if (this.ideaList) this.selectStock(this.ideaList[0] as Idea);
       });
   }
@@ -91,9 +92,8 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
       .subscribe(stocks => {
         this.clearOrderByObject();
         this.clearIdeasLists();
-        this.assignStockData(4);
         this.ideaList = stocks['symbols'];
-        this.symbolListLoading.unsubscribe();
+        this.assignStockData(4);
         // if (this.ideaList) this.selectStock(this.selectedStock as Idea)
       });
   }
