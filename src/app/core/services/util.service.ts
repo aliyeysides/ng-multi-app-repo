@@ -64,6 +64,7 @@ export class UtilService {
       case 'Don\'t Fight the Shorts':
       case 'Dogs of the Dow':
       case 'Upcoming Earnings Bears':
+      case 'Analyst Bears':
         return true;
       default:
         return false;
