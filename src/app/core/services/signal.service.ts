@@ -21,11 +21,13 @@ export class SignalService {
   };
 
   private alertsLookupParams: URLSearchParams;
+  private signalsLookupParams: URLSearchParams;
   private apiHostName = this.utilService.getApiHostName();
   private apiPrependText = '/CPTRestSecure/app';
 
   constructor(private utilService: UtilService) {
     this.alertsLookupParams = new URLSearchParams();
+    this.signalsLookupParams = new URLSearchParams();
   }
 
   public parseSignal(signal) {
@@ -87,6 +89,14 @@ export class SignalService {
       this.alertsLookupParams.set(key, query[key]);
     });
     return this.utilService.getJson(alertsLookupUrl, this.alertsLookupParams);
+  }
+
+  public getSignalDataforList(listId: string, period: string, uid: string) {
+    const signalsLookupUrl = `${this.apiHostName}${this.apiPrependText}/signals/getSignalDataFromList?`;
+    this.signalsLookupParams.set('list_ID', listId);
+    this.signalsLookupParams.set('period', period);
+    this.signalsLookupParams.set('uid', uid);
+    return this.utilService.getJson(signalsLookupUrl, this.signalsLookupParams);
   }
 
   public appendPGRImage(pgr) {

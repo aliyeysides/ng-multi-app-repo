@@ -55,12 +55,12 @@ import {Subscription} from 'rxjs/Subscription';
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Change }}%</p>
           </div>
-          <div class="button__remove-stock">
+          <div (click)="removeFromList('Holding', item.symbol)" class="button__remove-stock">
             <a><i class="fa fa-times" aria-hidden="true"></i></a>
           </div>
         </li>
       </ul>
-      <ul *ngIf="currentList === 'Watching'" class="post-body post-body--userlist">
+      <ul [ngBusy]="loading" *ngIf="currentList === 'Watching'" class="post-body post-body--userlist">
         <li *ngFor="let item of watchingListIdeas" class="row no-gutters">
           <div class="col-2 stock__PGR">
             <img class="align-absolute" src="{{ appendPGRImage(item.PGR) }}">
@@ -77,7 +77,7 @@ import {Subscription} from 'rxjs/Subscription';
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Change }}%</p>
           </div>
-          <div class="button__remove-stock">
+          <div (click)="removeFromList('Watching', item.symbol)" class="button__remove-stock">
             <a><i class="fa fa-times" aria-hidden="true"></i></a>
           </div>
         </li>
@@ -110,8 +110,16 @@ export class UserListsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.updateData();
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  public updateData() {
     this.loading = this.authService.currentUser$
-      .takeUntil(this.ngUnsubscribe)
       .map(usr => this.uid = usr['UID'])
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
       .map(res => {
@@ -130,11 +138,6 @@ export class UserListsComponent implements OnInit, OnDestroy {
       })
   }
 
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
-  }
-
   public appendPGRImage(pgr: number) {
     return this.signalService.appendPGRImage(pgr);
   }
@@ -150,6 +153,26 @@ export class UserListsComponent implements OnInit, OnDestroy {
       this.ideasService.setSelectedList(this.watchingList);
     }
     this.router.navigate(['/ideas']);
+  }
+
+  removeFromList(list: string, symbol: string) {
+    console.log('list', list, 'symbol', symbol);
+    let listId;
+    if (list === 'Holding') listId = this.holdingList['list_id'];
+    if (list === 'Watching') listId = this.watchingList['list_id'];
+    this.loading = this.ideasService.deleteSymbolFromList(listId.toString(), symbol)
+      .take(1)
+      .map(res => {
+        return Observable.combineLatest(
+          this.ideasService.getListSymbols(this.holdingList['list_id'].toString(), this.uid),
+          this.ideasService.getListSymbols(this.watchingList['list_id'].toString(), this.uid)
+        )
+      })
+      .flatMap(res => res)
+      .subscribe(res => {
+        this.holdingListIdeas = res[0]['symbols'];
+        this.watchingListIdeas = res[1]['symbols'];
+      })
   }
 
 }

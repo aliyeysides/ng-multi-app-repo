@@ -87,7 +87,7 @@ export class BearAlertsComponent implements OnInit {
           components: 'alerts',
           date: moment().format('YYYY-MM-DD'),
           startDate: moment().format('YYYY-MM-DD'),
-          endDate: moment().add(7, 'day').format('YYYY-MM-DD'),
+          endDate: moment().add(1, 'day').format('YYYY-MM-DD'),
           listId1: this.holdingListId,
           listId2: this.watchingListId
         })

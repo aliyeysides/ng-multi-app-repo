@@ -100,8 +100,7 @@ export class IdeasService {
       search: this.deleteSymbolFromListParams,
       withCredentials: true
     }).map(res => {
-      const result = res.json();
-      this.toast.success('Success!', 'Successfully removed from list');
+      this.toast.success('Success!', 'Successfully removed');
       return res.json()
     })
   }
