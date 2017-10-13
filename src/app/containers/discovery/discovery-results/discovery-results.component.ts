@@ -8,7 +8,7 @@ import {SignalService} from '../../../core/services/signal.service';
   template: `
     <div class="discovery-results__container container-fluid">
       <div *ngFor="let list of lists" class="discovery-results__slider row no-gutters">
-        <div *ngIf="endIndex[list['list_key']] != list['stocks'].length" (click)="scrollRight(list['list_key'])" class="slider__scroll slider__scroll--right">
+        <div *ngIf="endIndex[list['list_key']] != list['stocks'].length && list['stocks'].length > 5" (click)="scrollRight(list['list_key'])" class="slider__scroll slider__scroll--right">
           <img class="align-absolute" src="./assets/imgs/scroll-r.svg">
         </div>
         <div *ngIf="startIndex[list['list_key']] && startIndex[list['list_key']] != 0" (click)="scrollLeft(list['list_key'])" class="slider__scroll slider__scroll--left">
