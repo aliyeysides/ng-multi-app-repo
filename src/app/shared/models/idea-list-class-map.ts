@@ -63,7 +63,7 @@ export const IDEAS_LIST_CLASSMAP: ClassMap = {
   'Best of the Small Caps': {
     'style': 'list__option--bulllist',
     'imgName': 'img_list-smallcap.svg',
-    'coloredImgName': 'img_list-smallcap--color.svg',
+    'coloredImgName': 'img_list-smallcap--red.svg',
     'greyImgName': 'img_list-smallcap--grey.svg',
     'description': 'This list contains companies who have exceeded earnings expectations on a quartly basis'
   },
@@ -119,7 +119,7 @@ export const IDEAS_LIST_CLASSMAP: ClassMap = {
   'Analyst Darlings': {
     'style': 'list__option--bulllist',
     'imgName': 'img_list-analystdarlings.svg',
-    'coloredImgName': 'img_list-analystdarlings--color.svg',
+    'coloredImgName': 'img_list-analystdarlings--red.svg',
     'greyImgName': 'img_list-analystdarlings--grey.svg',
     'description': 'This list contains companies who have exceeded earnings expectations on a quartly basis'
   },
@@ -147,14 +147,14 @@ export const IDEAS_LIST_CLASSMAP: ClassMap = {
   'Sell the Rallies': {
     'style': 'list__option--bearlist',
     'imgName': 'img_list-sellrallies.svg',
-    'coloredImgName': 'img_list-sellrallies--color.svg',
+    'coloredImgName': 'img_list-sellrallies--red.svg',
     'greyImgName': 'img_list-sellrallies--grey.svg',
     'description': 'This list contains companies who have exceeded earnings expectations on a quartly basis'
   },
   'Bears of the Week': {
     'style': 'list__option--bearlist',
     'imgName': 'img_list-classicbears.svg',
-    'coloredImgName': 'img_list-classicbears--color.svg',
+    'coloredImgName': 'img_list-classicbears--red.svg',
     'greyImgName': 'img_list-classicbears--grey.svg',
     'description': 'This list contains companies who have exceeded earnings expectations on a quartly basis'
   },
@@ -168,21 +168,21 @@ export const IDEAS_LIST_CLASSMAP: ClassMap = {
   'Don\'t Fight the Shorts': {
     'style': 'list__option--bearlist',
     'imgName': 'img_list-dontfighttheshorts.svg',
-    'coloredImgName': 'img_list-dontfighttheshorts--color.svg',
+    'coloredImgName': 'img_list-dontfighttheshorts--red.svg',
     'greyImgName': 'img_list-dontfighttheshorts--grey.svg',
     'description': 'This list contains companies who have exceeded earnings expectations on a quartly basis'
   },
   'Dogs of the Dow': {
     'style': 'list__option--bearlist',
     'imgName': 'img_list-dogsofthedow.svg',
-    'coloredImgName': 'img_list-dogsofthedow--color.svg',
+    'coloredImgName': 'img_list-dogsofthedow--red.svg',
     'greyImgName': 'img_list-dogsofthedow--grey.svg',
     'description': 'This list contains companies who have exceeded earnings expectations on a quartly basis'
   },
   'Upcoming Earnings Bears': {
     'style': 'list__option--bearlist',
     'imgName': 'img_list-earningsbears.svg',
-    'coloredImgName': 'img_list-earningsbears--color.svg',
+    'coloredImgName': 'img_list-earningsbears--red.svg',
     'greyImgName': 'img_list-earningsbears--grey.svg',
     'description': 'This list contains companies who have exceeded earnings expectations on a quartly basis'
   },
