@@ -26,7 +26,227 @@ import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/c
         </svg>
         <h3>Alerts</h3>
       </div>
-      <p>Coming soon...</p>
+
+      <div class="alerts__container">
+
+        <div class="alerts__section">
+          <h4><i class="fa fa-briefcase" aria-hidden="true"></i> &nbsp;HOLDING</h4>
+          <ul class="alerts__list container container-fluid">
+
+            <li class="alert__entry row">
+              <div class="col-4 alert__stock">
+                <p class="ticker">
+                  <img class="rating" src="./assets/imgs/arc_Bearish.svg">
+                  <span>GOOGL</span>
+                </p>
+              </div>
+              <div class="col-8 alert__info">
+                <ul class="container container-fluid">
+                  <li class="row no-gutters">
+                    <div class="col-1 alert__icon">
+                      <img src="./assets/imgs/icon_arrow--down.svg">
+                    </div>
+                    <div class="col-11">
+                      <p class="alert__text">Power Gauge Turned Very Bullish</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="alert__entry row">
+              <div class="col-4 alert__stock">
+                <p class="ticker">
+                  <img class="rating" src="./assets/imgs/arc_Bullish.svg">
+                  <span>AMZN</span>
+                </p>
+              </div>
+              <div class="col-8 alert__info">
+                <ul class="container container-fluid">
+                  <li class="row no-gutters">
+                    <div class="col-1 alert__icon">
+                      <img src="./assets/imgs/icon_arrow--up.svg">
+                    </div>
+                    <div class="col-11">
+                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="down-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="alert__entry row">
+              <div class="col-4 alert__stock">
+                <p class="ticker">
+                  <img class="rating" src="./assets/imgs/arc_VeryBullish.svg">
+                  <span>AAPL</span>
+                </p>
+              </div>
+              <div class="col-8 alert__info">
+                <ul class="container container-fluid">
+                  <li class="row no-gutters">
+                    <div class="col-1 alert__icon">
+                      <img src="./assets/imgs/icon_arrow--up.svg">
+                    </div>
+                    <div class="col-11">
+                      <p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                    </div>
+                  </li>
+                  <li class="row no-gutters">
+                    <div class="col-1 alert__icon">
+                      <img src="./assets/imgs/icon_arrow--down.svg">
+                    </div>
+                    <div class="col-11">
+                      <p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="alerts__section">
+          <h4><i class="fa fa-binoculars" aria-hidden="true"></i> &nbsp;WATCHING</h4>
+          <ul class="alerts__list container container-fluid">
+
+            <li class="alert__entry row">
+              <div class="col-4 alert__stock">
+                <p class="ticker">
+                  <img class="rating" src="./assets/imgs/arc_Bearish.svg">
+                  <span>GOOGL</span>
+                </p>
+              </div>
+              <div class="col-8 alert__info">
+                <ul class="container container-fluid">
+                  <li class="row no-gutters">
+                    <div class="col-1 alert__icon">
+                      <img src="./assets/imgs/icon_arrow--down.svg">
+                    </div>
+                    <div class="col-11">
+                      <p class="alert__text">Power Gauge Turned Very Bullish</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="alert__entry row">
+              <div class="col-4 alert__stock">
+                <p class="ticker">
+                  <img class="rating" src="./assets/imgs/arc_Bullish.svg">
+                  <span>AMZN</span>
+                </p>
+              </div>
+              <div class="col-8 alert__info">
+                <ul class="container container-fluid">
+                  <li class="row no-gutters">
+                    <div class="col-1 alert__icon">
+                      <img src="./assets/imgs/icon_arrow--up.svg">
+                    </div>
+                    <div class="col-11">
+                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="down-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="alert__entry row">
+              <div class="col-4 alert__stock">
+                <p class="ticker">
+                  <img class="rating" src="./assets/imgs/arc_Bullish.svg">
+                  <span>AMZN</span>
+                </p>
+              </div>
+              <div class="col-8 alert__info">
+                <ul class="container container-fluid">
+                  <li class="row no-gutters">
+                    <div class="col-1 alert__icon">
+                      <img src="./assets/imgs/icon_arrow--up.svg">
+                    </div>
+                    <div class="col-11">
+                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="down-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="alert__entry row">
+              <div class="col-4 alert__stock">
+                <p class="ticker">
+                  <img class="rating" src="./assets/imgs/arc_Bullish.svg">
+                  <span>AMZN</span>
+                </p>
+              </div>
+              <div class="col-8 alert__info">
+                <ul class="container container-fluid">
+                  <li class="row no-gutters">
+                    <div class="col-1 alert__icon">
+                      <img src="./assets/imgs/icon_arrow--up.svg">
+                    </div>
+                    <div class="col-11">
+                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="down-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="alert__entry row">
+              <div class="col-4 alert__stock">
+                <p class="ticker">
+                  <img class="rating" src="./assets/imgs/arc_Bullish.svg">
+                  <span>AMZN</span>
+                </p>
+              </div>
+              <div class="col-8 alert__info">
+                <ul class="container container-fluid">
+                  <li class="row no-gutters">
+                    <div class="col-1 alert__icon">
+                      <img src="./assets/imgs/icon_arrow--up.svg">
+                    </div>
+                    <div class="col-11">
+                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="down-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="alert__entry row">
+              <div class="col-4 alert__stock">
+                <p class="ticker">
+                  <img class="rating" src="./assets/imgs/arc_VeryBullish.svg">
+                  <span>AAPL</span>
+                </p>
+              </div>
+              <div class="col-8 alert__info">
+                <ul class="container container-fluid">
+                  <li class="row no-gutters">
+                    <div class="col-1 alert__icon">
+                      <img src="./assets/imgs/icon_arrow--up.svg">
+                    </div>
+                    <div class="col-11">
+                      <p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                    </div>
+                  </li>
+                  <li class="row no-gutters">
+                    <div class="col-1 alert__icon">
+                      <img src="./assets/imgs/icon_arrow--down.svg">
+                    </div>
+                    <div class="col-11">
+                      <p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
     </div>
   `,
   styleUrls: ['./bear-alerts.component.scss']
