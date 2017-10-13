@@ -108,7 +108,7 @@ import {Idea} from '../../../../shared/models/idea';
           </div>
           <div class="tile__actions">
             <ul class="nav">
-              <li (click)="addToList(stock.symbol, 'Holding')" class="nav-item">
+              <li (click)="addToList('Holding', stock.symbol)" class="nav-item">
                 <a class="nav-link">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +121,7 @@ import {Idea} from '../../../../shared/models/idea';
                   </svg>
                 </a>
               </li>
-              <li (click)="addToList(stock.symbol, 'Watching')" class="nav-item">
+              <li (click)="addToList('Watching', stock.symbol)" class="nav-item">
                 <a class="nav-link">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg"
@@ -195,8 +195,8 @@ export class DiscoveryCardComponent implements AfterViewInit {
     return this.signalService.appendPGRImage(pgr);
   }
 
-  public addToList(ticker: string, list: string) {
-    //   this.addToListClicked.emit(val);
+  public addToList(list: string, symbol: string) {
+    this.addToListClicked.emit({list: list, symbol: symbol});
   }
 
   public viewStockReport(ticker: string) {
