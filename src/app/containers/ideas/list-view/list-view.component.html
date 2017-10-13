@@ -35,7 +35,7 @@
               </li>
             </ul>
           </li>
-          <li [ngClass]="{'selected' : orderByObject['field'] == '' }" class="dropdown-submenu">
+          <li (click)="clearOrderByObject()" [ngClass]="{'selected' : orderByObject['field'] == '' }" class="dropdown-submenu">
             <a class="dropdown-toggle" data-toggle="dropdown" tabindex="-1" href="#">Original Order</a>
           </li>
           <li [ngClass]="{'selected' : orderByObject['field'] == 'name' }" class="dropdown-submenu">

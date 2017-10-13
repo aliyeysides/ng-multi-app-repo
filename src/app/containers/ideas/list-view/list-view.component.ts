@@ -265,7 +265,7 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
     return this.signalService.appendSliderBarClass(pgr);
   }
 
-  private clearOrderByObject() {
+  public clearOrderByObject() {
     this.orderByObject = {};
   }
 
