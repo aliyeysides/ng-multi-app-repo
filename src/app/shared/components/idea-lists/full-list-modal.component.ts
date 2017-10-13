@@ -93,7 +93,6 @@ export class FullListModalComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.allLists = res[0]['idea_lists'].concat(res[1]['theme_lists']);
         this.getWordPressPostListDescriptions();
-        this.selectList(this.allLists[0]);
       });
   }
 
@@ -136,6 +135,7 @@ export class FullListModalComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe)
       .subscribe(val => {
         this.wordPressPosts = val['0']['45'];
+        this.selectList(this.allLists[0]);
       });
   }
 
