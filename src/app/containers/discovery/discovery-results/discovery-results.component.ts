@@ -19,7 +19,7 @@ import {SignalService} from '../../../core/services/signal.service';
         </div>
         <ul class="discovery-slider__tiles">
           <li *ngFor="let stock of ( list['stocks'].slice(startIndex[list.list_key], endIndex[list.list_key] || 5) )" class="tile__wrapper">
-            <cpt-discovery-card (viewDiscoveryClicked)="viewDiscovery(list['list_key'], $event)" [stock]="stock"></cpt-discovery-card>
+            <cpt-discovery-card (addToListClicked)="addToList($event)" (viewDiscoveryClicked)="viewDiscovery(list['list_key'], $event)" [stock]="stock"></cpt-discovery-card>
           </li>
         </ul>
       </div>
@@ -29,16 +29,17 @@ import {SignalService} from '../../../core/services/signal.service';
 })
 export class DiscoveryResultsComponent implements AfterViewInit, OnDestroy {
 
-  private _results: BehaviorSubject<object[]> = new BehaviorSubject<object[]>([]);
   @Output('viewDiscoveryClicked') public viewDiscoveryClicked = new EventEmitter<string>();
+  @Output('addToListClicked') public addToListClicked = new EventEmitter<object>();
   @Input('results')
   set results(val: object[]) {
     this._results.next(val);
   }
-
   get results() {
     return this._results.getValue();
   }
+
+  private _results: BehaviorSubject<object[]> = new BehaviorSubject<object[]>([]);
 
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   public lists: object[];
@@ -59,6 +60,10 @@ export class DiscoveryResultsComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  addToList(params: object) {
+    this.addToListClicked.emit(params);
   }
 
   viewDiscovery(list_key, val) {

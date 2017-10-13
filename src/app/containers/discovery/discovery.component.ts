@@ -28,7 +28,7 @@ import {AuthService} from '../../core/services/auth.service';
               </svg>
               <span>View</span>
             </a>
-            <a (click)="addToList(watchingListId, metaInfo.symbol)">
+            <a (click)="addToList({ list: watchingListId, symbol: metaInfo.symbol })">
               <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <defs></defs>
                 <g id="icon_watching" stroke="none" stroke-width="1" fill="#1199ff" fill-rule="evenodd">
@@ -37,7 +37,7 @@ import {AuthService} from '../../core/services/auth.service';
               </svg>
               <span>Watch</span>
             </a>
-            <a (click)="addToList(holdingListId, metaInfo.symbol)">
+            <a (click)="addToList({ list: holdingListId, symbol: metaInfo.symbol })">
               <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <defs></defs>
                   <g id="icon_portfolio" fill="#1199ff" stroke="none" stroke-width="1" fill-rule="evenodd">
@@ -58,6 +58,7 @@ import {AuthService} from '../../core/services/auth.service';
         <cpt-discovery-results
           (viewStockReportClicked)="viewStockReport($event)"
           (viewDiscoveryClicked)="viewStockDiscovery($event)"
+          (addToListClicked)="addToList($event)"
           [results]="results"></cpt-discovery-results>
       </div>
     </div>
@@ -130,8 +131,10 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  addToList(listId: string, symbol: string) {
-    this.loading = this.ideasService.addStockIntoList(listId.toString(), symbol)
+  addToList(params) {
+    if (params.list === 'Holding') params.list = this.holdingListId;
+    if (params.list === 'Watching') params.list = this.watchingListId;
+    this.loading = this.ideasService.addStockIntoList(params.list.toString(), params.symbol)
       .takeLast(1)
       .subscribe()
   }
