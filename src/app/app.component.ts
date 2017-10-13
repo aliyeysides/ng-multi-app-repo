@@ -62,11 +62,16 @@ import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
     <div class="container-fluid container-main" [class.opened]="isOpen">
       <router-outlet></router-outlet>
     </div>
+    '<simple-notifications [options]="options"></simple-notifications>'
   `,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   isOpen = true;
+  options = {
+    position: ['top', 'right'],
+    timeOut: 5000,
+  };
 
   toggleMenu() {
     this.isOpen = !this.isOpen;

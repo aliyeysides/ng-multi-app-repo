@@ -1,4 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {URLSearchParams} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {UtilService} from './util.service';
 
 @Injectable()
 export class SignalService {
@@ -16,7 +19,16 @@ export class SignalService {
     "10": "Rel. Strength Breakout",
     "11": "Rel. Strength Breakdown"
   };
-  constructor() {}
+
+  private alertsLookupParams: URLSearchParams;
+  private signalsLookupParams: URLSearchParams;
+  private apiHostName = this.utilService.getApiHostName();
+  private apiPrependText = '/CPTRestSecure/app';
+
+  constructor(private utilService: UtilService) {
+    this.alertsLookupParams = new URLSearchParams();
+    this.signalsLookupParams = new URLSearchParams();
+  }
 
   public parseSignal(signal) {
     if (typeof signal == "string") {
@@ -59,7 +71,7 @@ export class SignalService {
     return undefined;
   };
 
-  public getSignal(parsedSignals){
+  public getSignal(parsedSignals) {
     if (parsedSignals.sell == true && parsedSignals.buy == false) {
       return 0;
     } else if (parsedSignals.sell == false && parsedSignals.buy == true) {
@@ -69,6 +81,22 @@ export class SignalService {
     }
 
     return -1; // no sell or buy signal
+  }
+
+  public getAlertsData(query): Observable<Array<object>> {
+    const alertsLookupUrl = `${this.apiHostName}${this.apiPrependText}/midTier/getInitialData?`;
+    Object.keys(query).forEach((key) => {
+      this.alertsLookupParams.set(key, query[key]);
+    });
+    return this.utilService.getJson(alertsLookupUrl, this.alertsLookupParams);
+  }
+
+  public getSignalDataforList(listId: string, period: string, uid: string) {
+    const signalsLookupUrl = `${this.apiHostName}${this.apiPrependText}/signals/getSignalDataFromList?`;
+    this.signalsLookupParams.set('list_ID', listId);
+    this.signalsLookupParams.set('period', period);
+    this.signalsLookupParams.set('uid', uid);
+    return this.utilService.getJson(signalsLookupUrl, this.signalsLookupParams);
   }
 
   public appendPGRImage(pgr) {

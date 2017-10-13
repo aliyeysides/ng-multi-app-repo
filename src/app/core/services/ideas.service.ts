@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
-import {URLSearchParams} from '@angular/http';
+import {Http, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {UtilService} from './util.service';
 import {IdeaList} from '../../shared/models/idea';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+
+import {NotificationsService} from 'angular2-notifications/dist';
 
 @Injectable()
 export class IdeasService {
@@ -37,7 +39,9 @@ export class IdeasService {
     this._selectedList.next(list);
   }
 
-  constructor(private utilService: UtilService) {
+  constructor(private utilService: UtilService,
+              private toast: NotificationsService,
+              private http: Http) {
     this.ideaListsParams = new URLSearchParams();
     this.listSymbolsParams = new URLSearchParams();
     this.stockCardParams = new URLSearchParams();
@@ -76,14 +80,29 @@ export class IdeasService {
     const addStockIntoListUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/addStockIntoList?`;
     this.addStockIntoListParams.set('listId', listId);
     this.addStockIntoListParams.set('symbol', symbol);
-    return this.utilService.getJson(addStockIntoListUrl, this.addStockIntoListParams);
+    return this.http.get(addStockIntoListUrl, {
+      search: this.addStockIntoListParams,
+      withCredentials: true
+    }).map(res => {
+      const result = res.json();
+      Object.keys(result).forEach((key) => {
+        this.toast.success('Success!', 'Successfully added ' + key);
+      });
+      return res.json()
+    })
   }
 
   public deleteSymbolFromList(listId: string, symbol: string) {
     const deleteSymbolFromListUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/deleteSymbolFromList?`;
     this.deleteSymbolFromListParams.set('symbol', symbol);
     this.deleteSymbolFromListParams.set('listId', listId);
-    return this.utilService.getJson(deleteSymbolFromListUrl, this.deleteSymbolFromListParams);
+    return this.http.get(deleteSymbolFromListUrl, {
+      search: this.deleteSymbolFromListParams,
+      withCredentials: true
+    }).map(res => {
+      this.toast.success('Success!', 'Successfully removed');
+      return res.json()
+    })
   }
 
 }

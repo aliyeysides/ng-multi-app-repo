@@ -5,6 +5,7 @@ import {AuthService} from '../../../core/services/auth.service';
 import {Subject} from 'rxjs/Subject';
 import {Idea, IdeaList} from '../../../shared/models/idea';
 import {SignalService} from '../../../core/services/signal.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'cpt-best-bear-ideas',
@@ -70,11 +71,13 @@ export class BestBearIdeasComponent implements OnInit {
       .map(usr => this.uid = usr['UID'])
       .takeUntil(this.ngUnsubscribe)
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
-      .map(res => {
+      .flatMap(res => {
         this.bestBearIdeaList = res[0]['idea_lists'].filter(list => list.name === 'Best Bear Ideas')[0];
-        return this.ideasService.getListSymbols(this.bestBearIdeaList['list_id'].toString(), this.uid);
+        // return Observable.combineLatest(
+        return this.ideasService.getListSymbols(this.bestBearIdeaList['list_id'].toString(), this.uid)
+          // this.signalService.getSignalDataforList(this.bestBearIdeaList['list_id'].toString(), '1', this.uid)
+        // );
       })
-      .flatMap(res => res)
       .subscribe(res => {
         this.bestBearIdeas = res['symbols'];
       })
