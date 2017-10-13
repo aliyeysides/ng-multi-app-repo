@@ -135,7 +135,7 @@
   border-left: $border-line--W;
 
   .sort-header {
-    border-bottom: 3px solid #eeeeee;
+    border-bottom: $border-line--LT2;
 
     p {
       color: $font-color--MD;
@@ -221,7 +221,7 @@
           }
 
           svg g {
-            fill: $link-grey;
+            fill: #ffffff;
           }
 
           &:hover {
@@ -295,7 +295,7 @@
         }
 
         &:hover {
-          background-color: $background--LT-hover;
+          background-color: $background--LT2;
         }
       }
 
@@ -432,8 +432,8 @@
         padding: 7px 0px 7px 0;
 
         p {
-          font-weight: 400;
-          font-size: 12px;
+          font-weight: 600;
+          font-size: 11px;
           line-height: 1.7;
           color: $font-color--MD;
           text-transform: uppercase;
@@ -441,6 +441,7 @@
           white-space: nowrap;
           overflow: hidden;
           padding-right:3px;
+          letter-spacing: 0.02em;
 
           span {
             font-size: 16px;
@@ -594,19 +595,13 @@
 
       .news-panel__header {
         width: 100%;
-        margin-bottom: 5px;
 
         p {
           color:$font-color--subhead;
           font-size: 18px;
           font-weight: 600;
           text-transform: uppercase;
-        }
-
-        span {
-          font-weight: 800;
-          color: $font-color;
-
+          line-height:1;
         }
       }
 
@@ -618,14 +613,14 @@
           position: relative;
           margin: 10px 0 15px;
           padding: 5px 5px 10px;
-          border-bottom: 3px solid #f8f8f8;
+          border-bottom: $border-line--LT;
 
           h2 {
             font-size: 16px;
             font-weight: 400;
             line-height: 1.5;
             margin: 0;
-            padding: 0 0 3px;
+            padding: 0 0 5px;
             color: $font-color;
             cursor: pointer;
 
@@ -646,7 +641,7 @@
 
             a {
               text-decoration: none;
-              color: $font-color--Blue;
+              color: $font-color--MD;
             }
           }
 
@@ -681,7 +676,7 @@
 
 
 /*------------------------------------*\
-  #VIEW OPTION-PANEL
+  #PANEL VIEW
 \*------------------------------------*/
 
 .view-option--panel {
@@ -801,8 +796,8 @@
       }
 
       .stock-panel__industry {
-        border-bottom: 3px solid #f8f8f8;
-        border-top: 3px solid #f8f8f8;
+        border-bottom: $border-line--LT;
+        border-top: $border-line--LT;
         padding: 7px 0px;
 
         p {
