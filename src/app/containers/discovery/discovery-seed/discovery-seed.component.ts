@@ -20,7 +20,7 @@ import {SignalService} from '../../../core/services/signal.service';
         </div>
         <div class="base-stock__price">
           <p class="last-price" [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
-            {{ stock ? stock['Last'] : null }}</p>
+            {{ stock ? stock['Last'].toFixed(2) : null }}</p>
           <p class="change" [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
             {{ stock ? stock['Change'] : null }}</p>
           <p class="percentage" [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
