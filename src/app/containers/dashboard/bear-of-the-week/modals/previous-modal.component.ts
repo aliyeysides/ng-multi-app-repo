@@ -78,7 +78,6 @@ export class PreviousBearsModalComponent implements OnInit, OnDestroy {
       .toArray()
       .subscribe(posts => {
         this.posts = posts;
-        console.log('posts in sub:', posts);
       });
   }
 

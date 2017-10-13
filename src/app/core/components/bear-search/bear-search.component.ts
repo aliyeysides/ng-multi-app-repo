@@ -31,7 +31,7 @@ import {Subject} from 'rxjs/Subject';
         <h3>Search</h3>
       </div>
 
-      <cpt-symbol-search></cpt-symbol-search>
+      <cpt-symbol-search [placeholder]="'Ticker or Symbol'"></cpt-symbol-search>
     </div>
   `,
   styleUrls: ['./bear-search.component.scss']

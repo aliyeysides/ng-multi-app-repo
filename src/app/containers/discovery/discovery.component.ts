@@ -16,7 +16,7 @@ import {AuthService} from '../../core/services/auth.service';
         <div class="section-header">
           <h1>Discover stocks like</h1>
           <div class="section-header__search">
-            <cpt-symbol-search></cpt-symbol-search>
+            <cpt-symbol-search [placeholder]="metaInfo?.symbol.toUpperCase()"></cpt-symbol-search>
           </div>
           <div class="section-header__actions">
             <a (click)="viewStockReport(metaInfo.symbol)">

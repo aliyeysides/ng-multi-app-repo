@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 
 import {FormControl} from '@angular/forms';
 import {NavigationEnd, Router} from '@angular/router';
@@ -15,7 +15,7 @@ import {Subscription} from 'rxjs/Subscription';
       <div class="form-group">
         <input (focusout)="toggleFocus()" (focus)="toggleFocus()" [formControl]="symbolSearchForm" type="search"
                class="form-control search-box"
-               placeholder="Ticker or Company"
+               placeholder="{{ placeholder }}"
                aria-describedby="basic-addon1">
         <button type="submit" style="display:none">hidden submit</button>
       </div>
@@ -67,6 +67,8 @@ import {Subscription} from 'rxjs/Subscription';
   encapsulation: ViewEncapsulation.None
 })
 export class SymbolSearchComponent implements OnInit, OnDestroy {
+  @Input('placeholder') placeholder: string;
+
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private uid: string;
   private navEndLocation: string;
