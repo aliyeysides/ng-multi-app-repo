@@ -29,7 +29,7 @@ import {SignalService} from '../../../core/services/signal.service';
         <div class="base-stock__PGR">
           <p class="PGR__text"
              [ngClass]="{'veryBullish':stock?.PGR==5,'bullish':stock?.PGR==4,'neutral':stock?.PGR==3,'bearish':stock?.PGR==2,'veryBearish':stock?.PGR==1}">
-            <span>Overall Rating:</span> {{ appendPGRText(stock ? stock['PGR'] : null) }}</p>
+            <span>Power Gauge:</span> {{ appendPGRText(stock ? stock['PGR'] : null) }}</p>
           <ul *ngIf="stock" class="pgr__sliders">
             <li class="">
               <div class="sliderBar-container">

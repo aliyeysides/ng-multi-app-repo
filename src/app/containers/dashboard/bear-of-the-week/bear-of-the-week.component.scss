@@ -16,7 +16,7 @@
 
 
 .post-body--bearpick {
-	padding: 5px 0px 0px;
+	padding: 5px 0px;
 	min-height: 100px;
 
 	.row {
@@ -89,11 +89,9 @@
 
 		a {
 			color: $link-blue;
-			line-height: 1;
 			cursor: pointer;
 
 		    &:hover {
-		       	text-decoration:underline;
 		       	color: $link-blue;
 		    }
 		}

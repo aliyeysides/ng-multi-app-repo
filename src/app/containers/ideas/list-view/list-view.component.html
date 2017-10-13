@@ -4,15 +4,15 @@
   <div class="list__header col-lg-6">
     <p class="list__title">
       <span *ngIf="checkIfUserList(currentList?.name)">
-        <i tooltip="User List" class="fa fa-user-circle"
+        <i class="fa fa-user-circle"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
       <span *ngIf="checkIfBearList(currentList?.name)">
-        <i tooltip="Idea List" class="fa fa-lightbulb-o"
+        <i class="fa fa-lightbulb-o"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
       <span *ngIf="checkIfThemeList(currentList?.name)">
-        <i tooltip="Theme List" class="fa fa-flag"
+        <i class="fa fa-flag"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
     </p>
@@ -345,10 +345,10 @@
               </div>
             </div>
             <div class="stock-panel__details row no-gutters">
-              <div class="col-lg-6">
-                <p>Mkt&nbsp;Cap:<span>{{selectedStock?.market_cap | marketCap | number:'.2-2' }} B</span></p>
+              <div class="col-md-6">
+                <p>Mkt&nbsp;Cap:<span>{{selectedStock?.market_cap | marketCap | number:'.2-2' }}B</span></p>
               </div>
-              <div class="col-lg-6">
+              <div class="col-md-6">
                 <p>Yield:<span>{{selectedStock?.div_yield | decimal }}%</span></p>
               </div>
             </div>
