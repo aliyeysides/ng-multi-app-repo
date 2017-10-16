@@ -3,7 +3,7 @@
 
 $veryBullish-green: #24A300;
 $bullish-green: #7ED321;
-$neutral-yellow: #FF9900;
+$neutral-yellow: #ffbe00;
 $bearish-red: #FD4500;
 $veryBearish-red: #EB001C;
 
@@ -71,9 +71,9 @@ $border-line--LT: 3px solid #f8f8f8;
 $border-line--LT2: 1px solid #eaeaea;
 $border-line--MD: 1px solid #7C828F;
 
-$border-dashed--W: 1px dashed #ffffff;
-$border-dashed--LT: 1px dashed #eaeaea;
-$border-dashed--MD: 1px dashed #7C828F;
+$border-dashed--W: 1px solid rgba(0,0,0,0.4);
+$border-dashed--LT: 1px solid rgba(0,0,0,0.4);
+$border-dashed--MD: 3px solid #eaeaea;
 
 $chart-border--LT: 1px solid #dddddd;
 

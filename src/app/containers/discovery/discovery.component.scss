@@ -5,13 +5,13 @@
 
 .discovery__container {
   overflow: hidden;
-  padding-top:210px;
+  padding-top:200px;
   position: relative;
   height:100vh;
 
   .body__top {
-    background-color: #f8f8f8;
-    height: 210px;
+    background-color: $background--LT;
+    height: 200px;
     position: absolute;
     top:0;
     z-index: 400;
@@ -41,7 +41,7 @@
           top: 10px;
           left: -15px;
           overflow: hidden;
-          border:1px solid #cccccc;
+          border:$border-line--LT2;
 
           img {
             max-width: 112px;
@@ -88,7 +88,7 @@
 
           .company-industry {
             font-size: 14px;
-            color: $font-color--subhead;
+            color: $font-color--MD;
             line-height: 2;
             font-weight: 400;
             font-style: italic;
@@ -174,7 +174,7 @@
               left: 0%;
               position: absolute;
               margin-top: -3px;
-              margin-left: 0px;
+              margin-left: -3px;
               z-index: 1;
               height: 19px;
               width: 19px;
@@ -688,7 +688,7 @@
       left: 50%;
       position: absolute;
       margin-top: -2px;
-      margin-left: -12px;
+      margin-left: -9px;
       z-index: 1;
       height: 18px;
       width: 18px;
