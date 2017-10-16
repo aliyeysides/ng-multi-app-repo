@@ -14,17 +14,18 @@
   padding-top:64px;
 
   	.body__top {
-	    background-color: #f8f8f8;
+	    background-color: $background--LT;
 	    height: 64px;
 	    position: absolute;
 	    top:0;
 	    z-index: 400;
 	    width: 100%;
+	    min-width:860px;
 	}
 
 	.body__bottom {
 		z-index: 1;
 		height: 100%;
-		border-top: 3px solid #eeeeee;
+		border-top: $border-dashed--MD;
 	}
 }
