@@ -6,11 +6,8 @@
 	ul {
 		li {
 			img {
-
-			}
-
-			a {
-
+				float: left;
+				display: inline-block;
 			}
 
 			.ticker {
@@ -37,6 +34,12 @@
 
 			.pick-date {
 			
+			}
+
+			a {
+				cursor: pointer;
+				color: $link-blue;
+				text-decoration: none;
 			}
 		}
 	}

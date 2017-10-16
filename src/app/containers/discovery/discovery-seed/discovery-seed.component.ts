@@ -11,6 +11,7 @@ import {SignalService} from '../../../core/services/signal.service';
           <img class="align-absolute"
                (error)="stock ? stock.logo_url='assets/imgs/img_NO-LOGO--stock.svg' : null"
                src="{{ stock && stock.logo_url != 'N/A' ? stock?.logo_url : 'assets/imgs/img_NO-LOGO--stock.svg' }}">
+          <!--<p class="align-absolute">{{ stock ? stock['name'] : null }}</p>-->
         </div>
         <div class="base-stock__symbol">
           <p class="ticker"><img class="" src="{{ appendPGRImage(stock ? stock['PGR'] : null) }}">

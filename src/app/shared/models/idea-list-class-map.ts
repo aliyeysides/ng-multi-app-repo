@@ -331,25 +331,25 @@ export const IDEAS_LIST_CLASSMAP: ClassMap = {
 
 
   'Large Cap Bears': {
-    'style': 'list__option--bulllist',
+    'style': 'list__option--bearlist',
     'imgName': 'img_list-largecap.svg',
-    'coloredImgName': 'img_list-largecap--color.svg',
+    'coloredImgName': 'img_list-largecap--red.svg',
     'greyImgName': 'img_list-largecap--grey.svg',
     'description': 'This list contains companies who have exceeded earnings expectations on a quartly basis'
   },
 
   'Small Cap Bears': {
-    'style': 'list__option--bulllist',
+    'style': 'list__option--bearlist',
     'imgName': 'img_list-smallcap.svg',
-    'coloredImgName': 'img_list-smallcap--color.svg',
+    'coloredImgName': 'img_list-smallcap--red.svg',
     'greyImgName': 'img_list-smallcap--grey.svg',
     'description': 'This list contains companies who have exceeded earnings expectations on a quartly basis'
   },
 
   'Analyst Bears': {
-    'style': 'list__option--bulllist',
+    'style': 'list__option--bearlist',
     'imgName': 'img_list-analystdarlings.svg',
-    'coloredImgName': 'img_list-analystdarlings--color.svg',
+    'coloredImgName': 'img_list-analystdarlings--red.svg',
     'greyImgName': 'img_list-analystdarlings--grey.svg',
     'description': 'This list contains companies who have exceeded earnings expectations on a quartly basis'
   },

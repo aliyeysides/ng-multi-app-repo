@@ -17,32 +17,29 @@ h1, h2, h3, h4, h5, h6 {
   color: $font-color;
   cursor: default;
   letter-spacing: 0.3px;
+  line-height: 1.3;
 }
 
 h1 {
   font-weight: 300;
   font-size: 28px;
   margin-bottom: 20px;
-  line-height: 1.3;
 }
 
-h2 {
+h2 { 
   font-weight: 600;
   font-size: 24px;
   margin-bottom: 20px;
-  line-height: 1.3;
 }
 
 h3 {
   font-weight: 400;
   font-size: 28px;
-  line-height: 1.3;
 }
 
 h4 {
   font-size: 18px;
   font-weight: 600;
-  line-height: 1.3;
 }
 
 h6 {
@@ -117,7 +114,7 @@ iframe {
 }
 
 textarea, input, button {
-  outline: none;
+  outline: none !important;
 }
 
 input:focus {
@@ -170,7 +167,7 @@ a.quick-link {
   }
 
   svg g {
-    fill: $font-color;
+    fill: $link-grey;
   }
 
   &:hover {
@@ -210,12 +207,29 @@ a.quick-link {
 
     .form-inline {
       .form-group {
+        position: relative;
+        color: $font-color;
+
         .form-control {
+          font-weight: 600;
+          color: $font-color;
+
           &:focus {
             border-bottom: 2px solid #1199ff;
             background-color: #ffffff;
             border-radius: 5px 5px 0 0;
           }
+        }
+
+        button {
+          display: block;
+          position: absolute;
+          right:10px;
+          color: $link-grey;
+          background-color: transparent;
+          font-size: 24px;
+          outline: none !important;
+          cursor: pointer;
         }
 
         .search-box {
@@ -230,13 +244,17 @@ a.quick-link {
           border-radius: 0;
           outline: none;
           color: $font-color;
-          border-bottom: 2px solid #FFFFFF;
+          border-bottom: 3px solid rgba(0, 0, 0, 0.05);
+          color: $font-color;
         }
       }
 
       &:hover {
         .search-box {
-          border-bottom: 2px solid #1199ff;
+          border-bottom: 3px solid #1199ff;
+        }
+        button {
+          color: $link-blue;
         }
       }
     }
@@ -255,7 +273,7 @@ a.quick-link {
 
       .search__entry {
         height: 60px;
-        border-bottom: 2px solid #ffffff;
+        border-bottom: 3px solid #ffffff;
         color: $font-color;
         width: 420px;
         cursor: pointer;
@@ -275,7 +293,7 @@ a.quick-link {
         font-weight: 400;
         line-height: 1.3;
         margin: 15px 0;
-        color: #484848;
+        color: $font-color;
       }
     }
   }
@@ -283,7 +301,7 @@ a.quick-link {
   .section-header__actions {
     float: right;
     height: 45px;
-    border-left: 1px dashed rgba(0, 0, 0, 0.2);
+    border-left: $border-dashed--MD;
     margin-left: 15px;
     margin-top: 8px;
 
@@ -302,18 +320,18 @@ a.quick-link {
       }
 
       svg g {
-        fill: $font-color--MD;
+        fill: $link-grey;
       }
 
       i {
         font-size: 18px;
-        color: $font-color--MD;
+        color: $link-grey;
       }
 
       span {
         font-size: 12px;
         font-weight: 400;
-        color: $font-color--MD;
+        color: $font-color;
         line-height: 1.75;
       }
 
@@ -421,7 +439,7 @@ a.quick-link {
           h5 {
             font-size: 20px;
             padding-bottom: 18px;
-            border-bottom: 3px solid #efefef;
+            border-bottom: $border-line--LT;
             line-height: 1.3;
           }
           .header__post-date {
@@ -531,6 +549,19 @@ a.quick-link {
   border-left: .3em solid transparent;
 }
 
+.dropdown-toggle.original-order::after {
+  display: none;
+  width: 0;
+  height: 0;
+  margin-right: .3em;
+  margin-top: 0;
+  content: "";
+  border-top: .3em solid transparent;
+  border-right: .3em solid transparent;
+  border-left: .3em solid transparent;
+  color:transparent;
+}
+
 .dropdown-toggle {
   width: 100%;
   display: block;
@@ -560,6 +591,7 @@ a.quick-link {
   font-weight: 400;
   line-height: 1.4;
   white-space: nowrap;
+  color:$font-color;
 }
 
 .dropdown-menu > li > a:focus,
@@ -573,28 +605,13 @@ a.quick-link {
   background-color: $link-blue;
 
   a {
-    color: #ffffff;
+    color: #EFF8FF;
     font-weight: 600;
   }
 }
 
 .dropdown-menu:last-child {
   border-bottom: 0px solid #ffffff;
-}
-
-:focus {
-  outline-color: transparent;
-  outline-style: none;
-}
-
-textarea, input, button {
-  outline: none;
-}
-
-input:focus {
-  border-color: transparent;
-  outline: 0;
-  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0), 0 0 0px rgba(255, 255, 255, 0);
 }
 
 /*----------------------------------------------------*\
@@ -609,14 +626,14 @@ input:focus {
 
 .insights__container {
   width: 100%;
-  border: 1px solid #cccccc;
+  border: $border-line--LT2;
   background-color: #ffffff;
   overflow: hidden;
   border-radius: 5px;
 
   .post-head {
     width: 100%;
-    background-color: #313540;
+    background-color: $background--DK;
     overflow: hidden;
 
     h2, h4 {
@@ -628,7 +645,7 @@ input:focus {
     .divider-h {
       display: block;
       float: left;
-      border-left: 1px dotted rgba(255, 255, 255, 0.5);
+      border-left: $border-dashed--LT;
     }
 
     .header__post-date {
@@ -828,7 +845,7 @@ input:focus {
       height: 15px;
 
       .col-header {
-        color: #eaeaea;
+        color: $font-color--LT;
         font-size: 9px;
         line-height: 1;
         font-weight: 400;

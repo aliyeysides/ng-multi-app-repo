@@ -18,6 +18,7 @@ import {Idea} from '../../../../shared/models/idea';
             <img class="align-absolute"
                  (error)="stock.logo_url='assets/imgs/img_NO-LOGO--stock.svg'"
                  src="{{ stock.logo_url != 'N/A' ? stock.logo_url : 'assets/imgs/img_NO-LOGO--stock.svg' }}">
+            <!--<p class="align-absolute">{{ stock.symbol }}</p>-->
           </div>
           <div class="symbol clearfix">
             <div class="rating">
