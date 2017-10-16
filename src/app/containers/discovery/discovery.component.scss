@@ -18,6 +18,10 @@
     width: 100%;
     min-width: 860px;
 
+/*------------------------------------*\
+  #SEEDED STOCK
+\*------------------------------------*/
+
     .discovery__base-stock {
       padding: 0px 25px 0px 45px;
 
@@ -42,6 +46,13 @@
           img {
             max-width: 112px;
             height: auto;
+          }
+
+          p {
+            display: inline-block;
+            width: 100px;
+            font-size: 12px;
+            text-align: center;
           }
         }
 
@@ -286,6 +297,11 @@
   }
 }
 
+
+/*------------------------------------*\
+  #RESULTS
+\*------------------------------------*/
+
 .discovery-results__slider.selected-slider .slider__scroll {
   display: block !important;
 }
@@ -361,20 +377,14 @@
         perspective: 800px;
 
         &:hover {
-          //-ms-transform: scale(1.05); /* IE 9 */
-          //-webkit-transform: scale(1.05); /* Safari */
-          //transform: scale(1.05); /* Standard syntax */
-
           .tile__front {
             border: 2px solid $link-blue !important;
           }
         }
 
-        &:active {
-          //-ms-transform: scale(1.05); /* IE 9 */
-          //-webkit-transform: scale(1.05); /* Safari */
-          //transform: scale(1.05); /* Standard syntax */
-        }
+/*------------------------------------*\
+  #TILE/CARD
+\*------------------------------------*/
 
         .discovery__tile {
           position: relative;
@@ -410,6 +420,13 @@
                 img {
                   max-height: 75px;
                   max-width: 160px;
+                }
+
+                p {
+                  display: inline-block;
+                  width: 150px;
+                  font-size: 12px;
+                  text-align: center;
                 }
               }
 

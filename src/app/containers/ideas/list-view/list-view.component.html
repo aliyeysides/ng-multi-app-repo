@@ -24,8 +24,7 @@
         </a>
         <ul class="top-sort-menu dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
           <li [ngClass]="{'selected' : orderByObject['field'] == 'PGR' }" class="dropdown-submenu">
-            <a class="dropdown-toggle dropdown-subtoggle" data-toggle="dropdown" tabindex="-1" href="#">Power Gauge
-              Rating</a>
+            <a class="dropdown-toggle dropdown-subtoggle" data-toggle="dropdown" tabindex="-1" href="#">Power Gauge Rating</a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
               <li [ngClass]="{'selected' : orderByObject['field'] == 'PGR' && orderByObject['ascending'] == false }"
                   (click)="setOrderByObject('PGR', false, $event)"><a class="dropdown-subtoggle" tabindex="-1" href="#">Bullish to Bearish</a>
@@ -36,7 +35,7 @@
             </ul>
           </li>
           <li (click)="clearOrderByObject()" [ngClass]="{'selected' : orderByObject['field'] == '' }" class="dropdown-submenu">
-            <a class="dropdown-toggle" data-toggle="dropdown" tabindex="-1" href="#">Original Order</a>
+            <a class="dropdown-toggle original-order" data-toggle="dropdown" tabindex="-1" href="#">Original Order</a>
           </li>
           <li [ngClass]="{'selected' : orderByObject['field'] == 'name' }" class="dropdown-submenu">
             <a class="dropdown-toggle dropdown-subtoggle" data-toggle="dropdown" tabindex="-1" href="#">Company
@@ -545,20 +544,20 @@
               <p>{{idea['meta-info'].name}}</p>
             </div>
             <div class="stock-panel__price row">
-              <div class="col-4">
-                <p
-                  [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}"
-                  class="current-price">{{idea['meta-info'].Last | decimal}}</p>
+              <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
+                <p class="current-price"
+                   [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
+                  ${{selectedStock?.Last | decimal}}</p>
               </div>
-              <div class="col-4">
-                <p
-                  [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}"
-                  class="price-change">{{idea['meta-info'].Change | decimal}}</p>
+              <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                <p class="price-change"
+                   [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
+                  {{selectedStock?.Change | decimal}}</p>
               </div>
-              <div class="col-4">
-                <p
-                  [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}"
-                  class="percent-change">({{idea['meta-info']["Percentage "] | decimal}}%)</p>
+              <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                <p class="percent-change"
+                   [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
+                  ({{ selectedStock ? (selectedStock["Percentage "] | decimal) : null }}%)</p>
               </div>
             </div>
             <div class="stock-panel__industry row no-gutters">

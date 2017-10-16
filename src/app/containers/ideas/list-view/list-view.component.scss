@@ -47,6 +47,14 @@
         &:hover  {
           background-color: rgba(255,255,255,0.2);
         }
+
+        &:active  {
+          background-color: rgba(255,255,255,0.2);
+        }
+      }
+
+      .sort-toggle.opened {
+          background-color: rgba(255,255,255,0.2);
       }
     }
 
@@ -64,7 +72,6 @@
           font-size: 24px;
           display: inline-block;
           padding:5px;
-          cursor: help;
         }
       }
     }
@@ -245,7 +252,7 @@
 
             .nav-item {
               height: 60px;
-              padding-top: 7px;
+              padding-top: 8px;
 
               &:hover {
                 background-color: rgba(255, 255, 255, 0.2);
@@ -255,13 +262,13 @@
                 color: #ffffff;
                 text-transform: uppercase;
                 font-weight: 600;
-                font-size: 12px;
-                margin-top: 6px;
+                font-size: 10px;
+                margin-top: 7px;
               }
 
               svg {
-                height: 25px;
-                width: 25px;
+                height: 22px;
+                width: 22px;
               }
 
               svg g {
@@ -695,12 +702,16 @@
 }
 
 .panel-view__container {
+  background-color: $background--LT;
 
   .quick-view__panel {
-    padding: 20px 30px;
-    height: 490px;
-    margin-bottom: 40px;
+    background-color: #ffffff;
+    padding: 20px 25px;
+    height: 500px;
+    margin: 10px 15px 10px;
     position: relative;
+    border: $border-line--LT2;
+    border-radius: 8px;
 
     .quick-view__data {
       position: relative;
@@ -709,7 +720,7 @@
         float: left;
 
         img {
-          width: 60px;
+          width: 56px;
           height: auto;
           margin-right: 15px;
         }

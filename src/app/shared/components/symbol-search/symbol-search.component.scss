@@ -9,7 +9,7 @@
 
     .form-control {
       width: 100%;
-      font-weight: 300 !important;
+      font-weight: 300;
       background-color: #ffffff;
 
       &:focus {
@@ -18,6 +18,10 @@
         box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0), 0 0 0px rgba(0, 0, 0, 0);
         border-bottom: 1px solid #1199ff;
       }
+    }
+
+    button {
+      display: none;
     }
 
     .search-box {
@@ -54,7 +58,7 @@
   }
 }
 
-
+ 
 
 
 
