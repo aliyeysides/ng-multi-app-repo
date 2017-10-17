@@ -31,12 +31,12 @@ import {Observable} from 'rxjs/Observable';
               </div>
               <div class="col-6">
                 <p class="company">{{ post['data']['meta-info'].name }}</p>
-              </div>
+              </div> 
               <div class="col-6">
                 <p class="pick-date">{{ post['post_date_formatted'] }}</p>
               </div>
               <div class="col-6">
-                <p class="pick-date">{{ post['post_date_formatted'] }}</p>
+                <p class="industry">{{ post['data']['meta-info'].industry }}</p>
               </div>
               <div class="col-12">
                 <a (click)="openCommentaryModal(post)">Commentary &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
