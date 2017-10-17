@@ -94,6 +94,7 @@
   }
 
   .side-nav {
+    height:100%;
 
     .side-nav__section {
       padding: 10px 0px;
@@ -205,12 +206,12 @@
   height: 50px;
   border-bottom: $border-line--LT2;
   overflow: hidden;
-  padding: 0 0px 0 60px;
+  padding: 0 0 0 60px;
   background-color: #ffffff;
 }
 
 .navbar.opened {
-  padding: 0 0px 0 180px;
+  padding: 0 0 0 180px;
 }
 
 
@@ -247,7 +248,7 @@
   top: 0;
   right: 0;
   background-color: $background--LT;
-  overflow-x: hidden;
+  overflow: hidden;
   padding: 0;
   transition: 0.5s;
   box-shadow: -7px 0 20px 0px rgba(0, 0, 0, 0.2);

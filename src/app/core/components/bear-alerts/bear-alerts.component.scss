@@ -2,21 +2,20 @@
 
 
 .alerts__container {
-	padding:0;
+	padding:0 0 50px;
+	height: 100vh;
+	overflow-y: scroll;
 
 	.alerts__section {
 
 		h4 {
 			line-height: 1;
-			padding: 15px 15px;
+			padding: 12px 15px 10px;
 			color: $font-color--MD;
 		}
 
 		.alerts__list {
 			width: 100%;
-			height: 200px;
-			overflow-y: scroll;
-			overflow: hidden;
 			background-color: #ffffff;
 			border-top: $border-line--LT2;
 			border-bottom: $border-line--LT2;

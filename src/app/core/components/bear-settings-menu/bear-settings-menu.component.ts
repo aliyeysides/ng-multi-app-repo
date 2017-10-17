@@ -67,7 +67,7 @@ export class BearSettingsMenuComponent implements OnInit {
     },
     {
       title: 'Edit Email/User Name',
-      icon: 'fa fa-pencil',
+      icon: 'fa fa-pencil-square-o',
       href: 'https://mh214.infusionsoft.com/app/form/bear_upgrade-form',
       target: '_blank',
       fn: noop
