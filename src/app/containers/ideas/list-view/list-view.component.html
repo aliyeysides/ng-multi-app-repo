@@ -122,7 +122,7 @@
       <!-- LIST: HOLDING  -->
       <div [ngBusy]="symbolListLoading" class="current-list  current-list--holding ">
         <div *ngIf="!ideaList?.length" class="list__container">
-          <p class="empty-list__text">There are currently no stocks in this list.</p>
+          <p class="empty-list__text">Search for a stock to add to your User list</p>
         </div>
         <ul *ngIf="ideaList?.length" class="list__container">
           <li [ngClass]="{'active selected' : selectedStock == idea}"

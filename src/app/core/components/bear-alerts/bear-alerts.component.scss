@@ -2,13 +2,15 @@
 
 
 .alerts__container {
-	padding:0;
+	padding:0 0 50px;
+	height: 100vh;
+	overflow-y: scroll;
 
 	.alerts__section {
 
 		h4 {
 			line-height: 1;
-			padding: 15px 15px;
+			padding: 12px 15px 10px;
 			color: $font-color--MD;
 		}
 

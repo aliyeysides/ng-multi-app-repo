@@ -26,6 +26,8 @@ $list-color--orange: #F3823C;
 $list-color--blue: #0A5FFF;
 
 
+
+
 /*  Fonts  */
 
 
@@ -35,7 +37,6 @@ $font-stack: 'Open Sans', Helvetica, sans-serif;
 $font-color: #454D5F;
 $font-color--MD: #7C828F;
 $font-color--LT: #DBDCE0;
-$font-color--subhead: #7C828F;
 $font-color--Blue: #003366;
 
 
@@ -71,8 +72,8 @@ $border-line--LT: 3px solid #f8f8f8;
 $border-line--LT2: 1px solid #eaeaea;
 $border-line--MD: 1px solid #7C828F;
 
-$border-dashed--W: 1px solid rgba(0,0,0,0.4);
-$border-dashed--LT: 1px solid rgba(0,0,0,0.4);
+$border-dashed--W: 1px solid rgba(255,255,255,0.4);
+$border-dashed--LT: 1px solid rgba(255,255,255,0.4);
 $border-dashed--MD: 3px solid #eaeaea;
 
 $chart-border--LT: 1px solid #dddddd;
