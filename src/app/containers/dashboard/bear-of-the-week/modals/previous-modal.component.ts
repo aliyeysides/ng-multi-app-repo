@@ -31,7 +31,7 @@ import {Observable} from 'rxjs/Observable';
               </div>
               <div class="col-6">
                 <p class="company">{{ post['data']['meta-info'].name }}</p>
-              </div>
+              </div> 
               <div class="col-6">
                 <p class="pick-date">{{ post['post_date_formatted'] }}</p>
               </div>
