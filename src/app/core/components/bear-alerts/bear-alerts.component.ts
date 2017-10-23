@@ -354,22 +354,24 @@ export class BearAlertsComponent implements OnInit {
 
   ngOnInit() {
     this.authService.currentUser$
-      .takeUntil(this.ngUnsubscribe)
+      // .takeUntil(this.ngUnsubscribe)
       .map(usr => this.uid = usr['UID'])
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
-      .map((res) => {
+      .flatMap((res) => {
         this.holdingListId = res[2]['user_lists'][0]['list_id'];
         this.watchingListId = res[2]['user_lists'][1]['list_id'];
-        return this.getAlertSidePanelData({
-          components: 'alerts',
-          date: moment().format('YYYY-MM-DD'),
-          startDate: moment().format('YYYY-MM-DD'),
-          endDate: moment().add(1, 'day').format('YYYY-MM-DD'),
-          listId1: this.holdingListId,
-          listId2: this.watchingListId
-        })
+        return this.signalService.getSignalDataforList(this.holdingListId.toString(),'1',this.uid)
+        // return this.getAlertSidePanelData({
+        //   components: 'alerts',
+        //   date: moment().format('YYYY-MM-DD'),
+        //   startDate: moment().format('YYYY-MM-DD'),
+        //   endDate: moment().add(1, 'day').format('YYYY-MM-DD'),
+        //   listId1: this.holdingListId,
+        //   listId2: this.watchingListId
+        // })
       })
-      .subscribe()
+      // .switchMap(() => this.signalService.getSignalDataforList(this.holdingListId.toString(),'1',this.uid))
+      .subscribe(res => console.log('res',res))
 
   }
 

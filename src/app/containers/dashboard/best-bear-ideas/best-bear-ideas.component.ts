@@ -25,7 +25,7 @@ import {Subscription} from 'rxjs/Subscription';
           <div class="col-header col-header--ticker col-3">Ticker</div>
           <div class="col-header col-1"></div>
           <div class="col-header col-3">Last Price</div>
-          <div class="col-header col-3">% Chg</div>
+          <div class="col-header col-3">Chg</div>
         </div>
       </div>
       <ul [ngBusy]="loading" class="post-body post-body--bearlist">
@@ -45,8 +45,9 @@ import {Subscription} from 'rxjs/Subscription';
               }}</p>
           </div>
           <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">{{ stock?.Change
-              }}%</p>
+            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">
+              {{ stock?.Change | decimal
+              }}</p>
           </div>
         </li>
       </ul>
@@ -69,7 +70,15 @@ export class BestBearIdeasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loading = this.authService.currentUser$
+    this.loading = this.refreshData();
+
+    setInterval(() => {
+      this.refreshData()
+    }, 1000 * 60);
+  }
+
+  refreshData() {
+    return this.authService.currentUser$
       .map(usr => this.uid = usr['UID'])
       .takeUntil(this.ngUnsubscribe)
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
@@ -77,13 +86,13 @@ export class BestBearIdeasComponent implements OnInit {
         this.bestBearIdeaList = res[0]['idea_lists'].filter(list => list.name === 'Best Bear Ideas')[0];
         // return Observable.combineLatest(
         return this.ideasService.getListSymbols(this.bestBearIdeaList['list_id'].toString(), this.uid)
-          // this.signalService.getSignalDataforList(this.bestBearIdeaList['list_id'].toString(), '1', this.uid)
+        // this.signalService.getSignalDataforList(this.bestBearIdeaList['list_id'].toString(), '1', this.uid)
         // );
       })
       .take(1)
       .subscribe(res => {
         this.bestBearIdeas = res['symbols'];
-      })
+      });
   }
 
   viewBearList() {

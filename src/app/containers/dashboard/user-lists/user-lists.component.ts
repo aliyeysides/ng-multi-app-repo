@@ -9,6 +9,7 @@ import {BearSearchComponent} from '../../../core/components/bear-search/bear-sea
 import {SymbolSearchService} from '../../../core/services/symbol-search.service';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
+import {NotificationsService} from 'angular2-notifications/dist';
 
 @Component({
   selector: 'cpt-user-lists',
@@ -35,7 +36,7 @@ import {Subscription} from 'rxjs/Subscription';
           <div class="col-header col-header--ticker col-3">Ticker</div>
           <div class="col-header col-1"></div>
           <div class="col-header col-3">Last Price</div>
-          <div class="col-header col-3">% Chg</div>
+          <div class="col-header col-3">Chg</div>
         </div>
       </div>
       <ul [ngBusy]="loading" *ngIf="currentList === 'Holding'" class="post-body post-body--userlist">
@@ -50,12 +51,14 @@ import {Subscription} from 'rxjs/Subscription';
             <i class="fa fa-bell" aria-hidden="true"></i>
           </div>
           <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Last }}</p>
+            <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Last | decimal
+              }}</p>
           </div>
           <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Change }}%</p>
+            <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
+              {{ item.Change | decimal }}</p>
           </div>
-          <div (click)="removeFromList('Holding', item.symbol)" class="button__remove-stock">
+          <div (click)="removeFromList('Holding', item)" class="button__remove-stock">
             <a><i class="fa fa-times" aria-hidden="true"></i></a>
           </div>
         </li>
@@ -72,12 +75,14 @@ import {Subscription} from 'rxjs/Subscription';
             <i class="fa fa-bell" aria-hidden="true"></i>
           </div>
           <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Last }}</p>
+            <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Last | decimal
+              }}</p>
           </div>
           <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Change }}%</p>
+            <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
+              {{ item.Change | decimal }}</p>
           </div>
-          <div (click)="removeFromList('Watching', item.symbol)" class="button__remove-stock">
+          <div (click)="removeFromList('Watching', item)" class="button__remove-stock">
             <a><i class="fa fa-times" aria-hidden="true"></i></a>
           </div>
         </li>
@@ -106,6 +111,7 @@ export class UserListsComponent implements OnInit, OnDestroy {
               private ideasService: IdeasService,
               private authService: AuthService,
               private signalService: SignalService,
+              private toast: NotificationsService,
               private searchService: SymbolSearchService) {
   }
 
@@ -119,7 +125,15 @@ export class UserListsComponent implements OnInit, OnDestroy {
   }
 
   public updateData() {
-    this.loading = this.authService.currentUser$
+    this.loading = this.refreshData();
+
+    setInterval(() => {
+      this.refreshData();
+    }, 1000 * 60);
+  }
+
+  public refreshData() {
+    return this.authService.currentUser$
       .map(usr => this.uid = usr['UID'])
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
       .map(res => {
@@ -155,24 +169,30 @@ export class UserListsComponent implements OnInit, OnDestroy {
     this.router.navigate(['/ideas']);
   }
 
-  removeFromList(list: string, symbol: string) {
-    console.log('list', list, 'symbol', symbol);
+  removeFromList(list: string, item: Idea) {
     let listId;
-    if (list === 'Holding') listId = this.holdingList['list_id'];
-    if (list === 'Watching') listId = this.watchingList['list_id'];
-    this.loading = this.ideasService.deleteSymbolFromList(listId.toString(), symbol)
-      .take(1)
-      .map(res => {
-        return Observable.combineLatest(
-          this.ideasService.getListSymbols(this.holdingList['list_id'].toString(), this.uid),
-          this.ideasService.getListSymbols(this.watchingList['list_id'].toString(), this.uid)
-        )
-      })
-      .flatMap(res => res)
+    if (list === 'Holding') {
+      listId = this.holdingList['list_id'];
+      this.holdingListIdeas = this.holdingListIdeas.filter(idea => idea.symbol != item.symbol);
+    }
+    if (list === 'Watching') {
+      listId = this.watchingList['list_id'];
+      this.watchingListIdeas = this.watchingListIdeas.filter(idea => idea.symbol != item.symbol);
+    }
+    this.ideasService.deleteSymbolFromList(listId.toString(), item.symbol)
+      .takeLast(1)
       .subscribe(res => {
-        this.holdingListIdeas = res[0]['symbols'];
-        this.watchingListIdeas = res[1]['symbols'];
-      })
+        },
+        (err) => {
+          Observable.combineLatest(
+            this.ideasService.getListSymbols(this.holdingList['list_id'].toString(), this.uid),
+            this.ideasService.getListSymbols(this.watchingList['list_id'].toString(), this.uid)
+          ).take(1).subscribe(res => {
+            this.holdingListIdeas = res[0]['symbols'];
+            this.watchingListIdeas = res[1]['symbols'];
+          });
+          this.toast.error('Oops...', 'Something went wrong trying to remove ' + item.symbol + '. Please try again.');
+        })
   }
 
 }

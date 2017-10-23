@@ -51,7 +51,11 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.updateData();
+    this.loading = this.updateData();
+
+    setInterval(() => {
+      this.refreshList()
+    }, 1000 * 60)
   }
 
   ngOnDestroy() {
@@ -60,7 +64,7 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
   }
 
   updateData() {
-    this.loading = this.authService.currentUser$
+    return this.authService.currentUser$
       .map(usr => this.uid = usr['UID'])
       .flatMap(uid => this.ideaService.selectedList)
       .takeUntil(this.ngUnsubscribe)
@@ -80,7 +84,7 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
   }
 
   refreshList() {
-    this.symbolListLoading = this.ideaService.selectedList
+    return this.ideaService.selectedList
       .filter(x => x !== undefined)
       .filter(x => x['list_id'] !== undefined)
       .flatMap(list => {
@@ -93,7 +97,7 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
         this.clearIdeasLists();
         this.ideaList = stocks['symbols'];
         this.assignStockData(4);
-        // if (this.ideaList) this.selectStock(this.selectedStock as Idea)
+        if (this.ideaList) this.selectStock(this.ideaList[0] as Idea);
       });
   }
 

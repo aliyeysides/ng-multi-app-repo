@@ -95,6 +95,10 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
         this.holdingListId = res[2]['user_lists'][0]['list_id'];
         this.watchingListId = res[2]['user_lists'][1]['list_id'];
       });
+
+    setInterval(() => {
+      this.updateData();
+    }, 1000 * 60)
   }
 
   ngOnDestroy() {
