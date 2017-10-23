@@ -73,30 +73,4 @@ export class IdeasComponent implements OnInit {
       .subscribe(res => this.list.refreshList());
   }
 
-  //   let listId;
-  //   if (params['list'] === 'Holding') {
-  //     listId = this.holdingListId;
-  //     // this.holdingListIdeas = this.holdingListIdeas.filter(idea => idea.symbol != params['symbol']);
-  //   }
-  //   if (params['list'] === 'Watching') {
-  //     listId = this.watchingListId;
-  //     // this.watchingListIdeas = this.watchingListIdeas.filter(idea => idea.symbol != params['symbol']);
-  //   }
-  //   // Object.assign()
-  //   this.list.refreshList();
-  //   this.ideasService.deleteSymbolFromList(listId.toString(), params['symbol'])
-  //     .takeLast(1)
-  //     .subscribe(res => {
-  //       },
-  //       (err) => {
-  //         Observable.combineLatest(
-  //           this.ideasService.getListSymbols(this.holdingListId, this.uid),
-  //           this.ideasService.getListSymbols(this.watchingListId, this.uid)
-  //         ).take(1).subscribe(res => {
-  //           // this.holdingListIdeas = res[0]['symbols'];
-  //           // this.watchingListIdeas = res[1]['symbols'];
-  //         });
-  //         this.toast.error('Oops...', 'Something went wrong trying to remove ' + params['symbol'] + '. Please try again.');
-  //       })
-  // }
 }

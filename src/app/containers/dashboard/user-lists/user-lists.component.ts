@@ -58,7 +58,7 @@ import {NotificationsService} from 'angular2-notifications/dist';
             <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
               {{ item.Change | decimal }}</p>
           </div>
-          <div (click)="removeFromList('Holding', item)" class="button__remove-stock">
+          <div (click)="removeFromList('Holding', item.symbol)" class="button__remove-stock">
             <a><i class="fa fa-times" aria-hidden="true"></i></a>
           </div>
         </li>
@@ -82,7 +82,7 @@ import {NotificationsService} from 'angular2-notifications/dist';
             <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
               {{ item.Change | decimal }}</p>
           </div>
-          <div (click)="removeFromList('Watching', item)" class="button__remove-stock">
+          <div (click)="removeFromList('Watching', item.symbol)" class="button__remove-stock">
             <a><i class="fa fa-times" aria-hidden="true"></i></a>
           </div>
         </li>
@@ -181,30 +181,24 @@ export class UserListsComponent implements OnInit, OnDestroy {
     this.router.navigate(['/ideas']);
   }
 
-  removeFromList(list: string, item: Idea) {
+  removeFromList(list: string, symbol: string) {
+    console.log('list', list, 'symbol', symbol);
     let listId;
-    if (list === 'Holding') {
-      listId = this.holdingList['list_id'];
-      this.holdingListIdeas = this.holdingListIdeas.filter(idea => idea.symbol != item.symbol);
-    }
-    if (list === 'Watching') {
-      listId = this.watchingList['list_id'];
-      this.watchingListIdeas = this.watchingListIdeas.filter(idea => idea.symbol != item.symbol);
-    }
-    this.ideasService.deleteSymbolFromList(listId.toString(), item.symbol)
-      .takeLast(1)
+    if (list === 'Holding') listId = this.holdingList['list_id'];
+    if (list === 'Watching') listId = this.watchingList['list_id'];
+    this.loading = this.ideasService.deleteSymbolFromList(listId.toString(), symbol)
+      .take(1)
+      .map(res => {
+        return Observable.combineLatest(
+          this.ideasService.getListSymbols(this.holdingList['list_id'].toString(), this.uid),
+          this.ideasService.getListSymbols(this.watchingList['list_id'].toString(), this.uid)
+        )
+      })
+      .flatMap(res => res)
       .subscribe(res => {
-        },
-        (err) => {
-          Observable.combineLatest(
-            this.ideasService.getListSymbols(this.holdingList['list_id'].toString(), this.uid),
-            this.ideasService.getListSymbols(this.watchingList['list_id'].toString(), this.uid)
-          ).take(1).subscribe(res => {
-            this.holdingListIdeas = res[0]['symbols'];
-            this.watchingListIdeas = res[1]['symbols'];
-          });
-          this.toast.error('Oops...', 'Something went wrong trying to remove ' + item.symbol + '. Please try again.');
-        })
+        this.holdingListIdeas = res[0]['symbols'];
+        this.watchingListIdeas = res[1]['symbols'];
+      })
   }
 
 }
