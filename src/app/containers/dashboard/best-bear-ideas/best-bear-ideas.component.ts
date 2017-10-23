@@ -6,6 +6,7 @@ import {Subject} from 'rxjs/Subject';
 import {Idea, IdeaList} from '../../../shared/models/idea';
 import {SignalService} from '../../../core/services/signal.service';
 import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'cpt-best-bear-ideas',
@@ -27,7 +28,7 @@ import {Observable} from 'rxjs/Observable';
           <div class="col-header col-3">% Chg</div>
         </div>
       </div>
-      <ul class="post-body post-body--bearlist">
+      <ul [ngBusy]="loading" class="post-body post-body--bearlist">
         <li *ngFor="let stock of bestBearIdeas" class="row no-gutters">
           <div class="col-2 stock__PGR">
             <img class="align-absolute" src="{{ appendPGRImage(stock?.PGR) }}">
@@ -59,6 +60,7 @@ export class BestBearIdeasComponent implements OnInit {
 
   public bestBearIdeaList: IdeaList;
   public bestBearIdeas: Array<Idea>;
+  public loading: Subscription;
 
   constructor(private router: Router,
               private authService: AuthService,
@@ -67,7 +69,7 @@ export class BestBearIdeasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.currentUser$
+    this.loading = this.authService.currentUser$
       .map(usr => this.uid = usr['UID'])
       .takeUntil(this.ngUnsubscribe)
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
@@ -78,6 +80,7 @@ export class BestBearIdeasComponent implements OnInit {
           // this.signalService.getSignalDataforList(this.bestBearIdeaList['list_id'].toString(), '1', this.uid)
         // );
       })
+      .take(1)
       .subscribe(res => {
         this.bestBearIdeas = res['symbols'];
       })
