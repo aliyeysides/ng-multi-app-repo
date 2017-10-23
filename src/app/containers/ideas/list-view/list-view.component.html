@@ -497,7 +497,7 @@
                   </svg>
                 </a>
                 <a *ngIf="idea.is_holding_stock"
-                   (click)="removeFromList('Holding', selectedStock.symbol, $event)"
+                   (click)="removeFromList('Holding', idea.symbol, $event)"
                    class="button__hold">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -509,7 +509,7 @@
                   </svg>
                 </a>
                 <a *ngIf="!idea.is_watching_stock"
-                   (click)="addToList('Watching', selectedStock.symbol, $event)"
+                   (click)="addToList('Watching', idea.symbol, $event)"
                    class="button__watch">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -521,7 +521,7 @@
                   </svg>
                 </a>
                 <a *ngIf="idea.is_watching_stock"
-                   (click)="removeFromList('Watching', selectedStock.symbol, $event)"
+                   (click)="removeFromList('Watching', idea.symbol, $event)"
                    class="button__watch">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -538,18 +538,18 @@
             <div class="stock-panel__price row">
               <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
                 <p class="current-price"
-                   [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
-                  ${{selectedStock?.Last | decimal}}</p>
+                   [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">
+                  ${{idea?.Last | decimal}}</p>
               </div>
               <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="price-change"
-                   [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
-                  {{selectedStock?.Change | decimal}}</p>
+                   [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">
+                  {{idea?.Change | decimal}}</p>
               </div>
               <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="percent-change"
-                   [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
-                  ({{ selectedStock ? (selectedStock["Percentage "] | decimal) : null }}%)</p>
+                   [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">
+                  ({{ idea ? (idea["Percentage "] | decimal) : null }}%)</p>
               </div>
             </div>
             <div class="stock-panel__industry row no-gutters">
