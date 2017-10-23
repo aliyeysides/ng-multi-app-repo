@@ -117,6 +117,19 @@ export class UserListsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.updateData();
+    this.searchService.addStock$
+      .takeUntil(this.ngUnsubscribe)
+      .map(res => {
+        return Observable.combineLatest(
+          this.ideasService.getListSymbols(this.holdingList['list_id'].toString(), this.uid),
+          this.ideasService.getListSymbols(this.watchingList['list_id'].toString(), this.uid)
+        )
+      })
+      .flatMap(res => res)
+      .subscribe(res => {
+        this.holdingListIdeas = res[0]['symbols'];
+        this.watchingListIdeas = res[1]['symbols'];
+      })
   }
 
   ngOnDestroy() {

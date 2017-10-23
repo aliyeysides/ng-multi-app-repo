@@ -149,6 +149,7 @@ export class SymbolSearchComponent implements OnInit, OnDestroy {
     this.loading = this.ideasService.addStockIntoList(listId.toString(), symbol)
       .takeLast(1)
       .subscribe();
+    this.symbolSearchService.emitAddToList();
   }
 
 }
