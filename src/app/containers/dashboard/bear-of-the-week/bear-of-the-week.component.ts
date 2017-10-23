@@ -92,8 +92,21 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loading = this.wordpressService.getWordPressJson('48', 1)
-      .takeUntil(this.ngUnsubscribe)
+    this.loading = this.refreshData();
+
+    setInterval(() => {
+      this.refreshData()
+    }, 1000 * 60);
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  public refreshData() {
+    return this.wordpressService.getWordPressJson('48', 1)
+      .take(1)
       .filter(x => x !== undefined)
       .flatMap(res => Observable.of(res['0']['48'][0]))
       .map(post => {
@@ -109,11 +122,6 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
         this.stockDataMeta = data['meta-info'];
         this.stockDataPGR = data['pgr']['PGR Value'];
       })
-  }
-
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
   }
 
   public openPreviousModal() {

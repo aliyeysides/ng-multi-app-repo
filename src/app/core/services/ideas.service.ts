@@ -99,10 +99,8 @@ export class IdeasService {
     return this.http.get(deleteSymbolFromListUrl, {
       search: this.deleteSymbolFromListParams,
       withCredentials: true
-    }).map(res => {
-      this.toast.success('Success!', 'Successfully removed');
-      return res.json()
-    })
+    }).map(res => res.json())
+      .catch(res => res.json())
   }
 
 }
