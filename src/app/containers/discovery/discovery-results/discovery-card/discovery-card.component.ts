@@ -6,12 +6,12 @@ import {Idea} from '../../../../shared/models/idea';
 @Component({
   selector: 'cpt-discovery-card',
   template: `
-    <div class="discovery__tile"
+    <div (click)="cornerFlip(stock.symbol)" class="discovery__tile"
          (mouseenter)="toggleMouseOver(stock.symbol)" (mouseleave)="toggleMouseOver(stock.symbol)"
          [ngClass]="{'selected' : showDogEar[stock.symbol] == true, 'flipped' : cardFlipped[stock.symbol] == true }">
       <div class="tile__front">
         <div class="tile__contents">
-          <div (click)="cornerFlip(stock.symbol)" class="cornerFlip">
+          <div (click)="cornerFlip(stock.symbol);$event.stopPropagation()" class="cornerFlip">
             <a></a>
           </div>
           <div class="logo clearfix">
