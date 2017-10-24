@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import {SignalService} from '../../services/signal.service';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -321,7 +321,7 @@ import {Observable} from 'rxjs/Observable';
   `,
   styleUrls: ['./bear-alerts.component.scss']
 })
-export class BearAlertsComponent implements OnInit {
+export class BearAlertsComponent implements AfterViewInit {
   @ViewChild('nav') nav;
 
   @HostListener('click') onClick() {
@@ -352,15 +352,14 @@ export class BearAlertsComponent implements OnInit {
               private ideasService: IdeasService) {
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.authService.currentUser$
-      // .takeUntil(this.ngUnsubscribe)
       .map(usr => this.uid = usr['UID'])
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
       .flatMap((res) => {
         this.holdingListId = res[2]['user_lists'][0]['list_id'];
         this.watchingListId = res[2]['user_lists'][1]['list_id'];
-        return this.signalService.getSignalDataforList(this.holdingListId.toString(),'1',this.uid)
+        return this.signalService.getSignalDataForList(this.holdingListId.toString(),'1',this.uid)
         // return this.getAlertSidePanelData({
         //   components: 'alerts',
         //   date: moment().format('YYYY-MM-DD'),
@@ -370,9 +369,8 @@ export class BearAlertsComponent implements OnInit {
         //   listId2: this.watchingListId
         // })
       })
-      // .switchMap(() => this.signalService.getSignalDataforList(this.holdingListId.toString(),'1',this.uid))
+      .take(1)
       .subscribe(res => console.log('res',res))
-
   }
 
   public toggleNav(el: HTMLElement, size: string, darken: boolean): void {

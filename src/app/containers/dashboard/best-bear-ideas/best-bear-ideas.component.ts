@@ -92,7 +92,6 @@ export class BestBearIdeasComponent implements OnInit {
       .take(1)
       .subscribe(res => {
         this.bestBearIdeas = res['symbols'];
-        console.log('bestBear', this.bestBearIdeas);
       });
   }
 

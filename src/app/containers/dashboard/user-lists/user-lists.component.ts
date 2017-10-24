@@ -161,7 +161,6 @@ export class UserListsComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.holdingListIdeas = res[0]['symbols'];
         this.watchingListIdeas = res[1]['symbols'];
-        console.log('user lists', this.holdingListIdeas, this.watchingListIdeas);
       })
   }
 
