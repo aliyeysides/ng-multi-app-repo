@@ -25,7 +25,7 @@ import {Subscription} from 'rxjs/Subscription';
           <div class="col-header col-header--ticker col-3">Ticker</div>
           <div class="col-header col-1"></div>
           <div class="col-header col-3">Last Price</div>
-          <div class="col-header col-3">Chg</div>
+          <div class="col-header col-3">% Chg</div>
         </div>
       </div>
       <ul [ngBusy]="loading" class="post-body post-body--bearlist">
@@ -41,13 +41,13 @@ import {Subscription} from 'rxjs/Subscription';
             <i class="fa fa-play" aria-hidden="true"></i>
           </div>
           <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">$ {{ stock?.Last
+            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">{{ stock?.Last
               }}</p>
           </div>
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">
-              {{ stock?.Change | decimal
-              }}</p>
+              {{ stock['Percentage '] | decimal
+              }}%</p>
           </div>
         </li>
       </ul>
@@ -92,6 +92,7 @@ export class BestBearIdeasComponent implements OnInit {
       .take(1)
       .subscribe(res => {
         this.bestBearIdeas = res['symbols'];
+        console.log('bestBear', this.bestBearIdeas);
       });
   }
 

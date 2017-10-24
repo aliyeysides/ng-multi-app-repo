@@ -36,7 +36,7 @@ import {NotificationsService} from 'angular2-notifications/dist';
           <div class="col-header col-header--ticker col-3">Ticker</div>
           <div class="col-header col-1"></div>
           <div class="col-header col-3">Last Price</div>
-          <div class="col-header col-3">Chg</div>
+          <div class="col-header col-3">% Chg</div>
         </div>
       </div>
       <ul [ngBusy]="loading" *ngIf="currentList === 'Holding'" class="post-body post-body--userlist">
@@ -56,7 +56,7 @@ import {NotificationsService} from 'angular2-notifications/dist';
           </div>
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
-              {{ item.Change | decimal }}</p>
+              {{ item['Percentage '] | decimal }}%</p>
           </div>
           <div (click)="removeFromList('Holding', item.symbol)" class="button__remove-stock">
             <a><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -80,7 +80,7 @@ import {NotificationsService} from 'angular2-notifications/dist';
           </div>
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
-              {{ item.Change | decimal }}</p>
+              {{ item['Percentage '] | decimal }}%</p>
           </div>
           <div (click)="removeFromList('Watching', item.symbol)" class="button__remove-stock">
             <a><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -161,6 +161,7 @@ export class UserListsComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.holdingListIdeas = res[0]['symbols'];
         this.watchingListIdeas = res[1]['symbols'];
+        console.log('user lists', this.holdingListIdeas, this.watchingListIdeas);
       })
   }
 
