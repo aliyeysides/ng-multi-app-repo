@@ -97,7 +97,8 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
         this.clearIdeasLists();
         this.ideaList = stocks['symbols'];
         this.assignStockData(4);
-        if (this.ideaList) this.selectStock(this.ideaList[0] as Idea);
+        const selectedStock = this.ideaList.filter(idea => idea['symbol'] === this.selectedStock['symbol'])[0];
+        this.selectStock(selectedStock as Idea);
       });
   }
 

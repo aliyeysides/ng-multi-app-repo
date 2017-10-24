@@ -82,7 +82,9 @@ import {Observable} from 'rxjs/Observable';
                       <img src="./assets/imgs/icon_arrow--up.svg">
                     </div>
                     <div class="col-11">
-                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="down-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
+                        class="down-change"><i class="fa fa-long-arrow-right"
+                                               aria-hidden="true"></i> <b>$0.41</b></span></p>
                     </div>
                   </li>
                 </ul>
@@ -103,7 +105,8 @@ import {Observable} from 'rxjs/Observable';
                       <img src="./assets/imgs/icon_arrow--up.svg">
                     </div>
                     <div class="col-11">
-                      <p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                      <p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i
+                        class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
                     </div>
                   </li>
                   <li class="row no-gutters">
@@ -111,7 +114,9 @@ import {Observable} from 'rxjs/Observable';
                       <img src="./assets/imgs/icon_arrow--down.svg">
                     </div>
                     <div class="col-11">
-                      <p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                      <p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
+                        class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span>
+                      </p>
                     </div>
                   </li>
                 </ul>
@@ -159,7 +164,9 @@ import {Observable} from 'rxjs/Observable';
                       <img src="./assets/imgs/icon_arrow--up.svg">
                     </div>
                     <div class="col-11">
-                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="down-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
+                        class="down-change"><i class="fa fa-long-arrow-right"
+                                               aria-hidden="true"></i> <b>$0.41</b></span></p>
                     </div>
                   </li>
                 </ul>
@@ -180,7 +187,9 @@ import {Observable} from 'rxjs/Observable';
                       <img src="./assets/imgs/icon_arrow--up.svg">
                     </div>
                     <div class="col-11">
-                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="down-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
+                        class="down-change"><i class="fa fa-long-arrow-right"
+                                               aria-hidden="true"></i> <b>$0.41</b></span></p>
                     </div>
                   </li>
                 </ul>
@@ -201,7 +210,9 @@ import {Observable} from 'rxjs/Observable';
                       <img src="./assets/imgs/icon_arrow--up.svg">
                     </div>
                     <div class="col-11">
-                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="down-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
+                        class="down-change"><i class="fa fa-long-arrow-right"
+                                               aria-hidden="true"></i> <b>$0.41</b></span></p>
                     </div>
                   </li>
                 </ul>
@@ -222,7 +233,9 @@ import {Observable} from 'rxjs/Observable';
                       <img src="./assets/imgs/icon_arrow--up.svg">
                     </div>
                     <div class="col-11">
-                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="down-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
+                        class="down-change"><i class="fa fa-long-arrow-right"
+                                               aria-hidden="true"></i> <b>$0.41</b></span></p>
                     </div>
                   </li>
                 </ul>
@@ -243,7 +256,8 @@ import {Observable} from 'rxjs/Observable';
                       <img src="./assets/imgs/icon_arrow--up.svg">
                     </div>
                     <div class="col-11">
-                      <p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                      <p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i
+                        class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
                     </div>
                   </li>
                   <li class="row no-gutters">
@@ -251,7 +265,9 @@ import {Observable} from 'rxjs/Observable';
                       <img src="./assets/imgs/icon_arrow--down.svg">
                     </div>
                     <div class="col-11">
-                      <p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                      <p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
+                        class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span>
+                      </p>
                     </div>
                   </li>
                 </ul>
@@ -299,7 +315,8 @@ import {Observable} from 'rxjs/Observable';
                       <img src="./assets/imgs/icon_arrow--up.svg">
                     </div>
                     <div class="col-11">
-                      <p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                      <p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i
+                        class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
                     </div>
                   </li>
                   <li class="row no-gutters">
@@ -307,7 +324,9 @@ import {Observable} from 'rxjs/Observable';
                       <img src="./assets/imgs/icon_arrow--down.svg">
                     </div>
                     <div class="col-11">
-                      <p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
+                      <p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
+                        class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span>
+                      </p>
                     </div>
                   </li>
                 </ul>
@@ -333,10 +352,14 @@ export class BearAlertsComponent implements AfterViewInit {
   }
 
   private ngUnsubscribe: Subject<void> = new Subject<void>();
-  private allItems: any[];
   private uid: string;
   private holdingListId: number;
   private watchingListId: number;
+  private bestBearsListId: number;
+
+  public holdingListAlerts: object[];
+  public watchingListAlerts: object[];
+  public allItems = [];
 
   public alertList: Array<object>;
   public date: string;
@@ -355,22 +378,37 @@ export class BearAlertsComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.authService.currentUser$
       .map(usr => this.uid = usr['UID'])
+      .filter(x => x != undefined)
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
       .flatMap((res) => {
         this.holdingListId = res[2]['user_lists'][0]['list_id'];
         this.watchingListId = res[2]['user_lists'][1]['list_id'];
-        return this.signalService.getSignalDataForList(this.holdingListId.toString(),'1',this.uid)
-        // return this.getAlertSidePanelData({
-        //   components: 'alerts',
-        //   date: moment().format('YYYY-MM-DD'),
-        //   startDate: moment().format('YYYY-MM-DD'),
-        //   endDate: moment().add(1, 'day').format('YYYY-MM-DD'),
-        //   listId1: this.holdingListId,
-        //   listId2: this.watchingListId
-        // })
+        this.bestBearsListId = res[0]['idea_lists'][0]['list_id'];
+        return Observable.combineLatest(
+          this.signalService.getAlertsData({
+            components: 'alerts',
+            date: moment().format('YYYY-MM-DD'),
+            startDate: moment().format('YYYY-MM-DD'),
+            endDate: moment().add(365, 'day').format('YYYY-MM-DD'),
+            listId1: this.holdingListId,
+          }),
+          this.signalService.getAlertsData({
+            components: 'alerts',
+            date: moment().format('YYYY-MM-DD'),
+            startDate: moment().format('YYYY-MM-DD'),
+            endDate: moment().add(365, 'day').format('YYYY-MM-DD'),
+            listId1: this.watchingListId,
+          }),
+          this.signalService.getSignalDataForList(this.bestBearsListId.toString(), '1', this.uid)
+        );
       })
       .take(1)
-      .subscribe(res => console.log('res',res))
+      .subscribe(res => {
+        console.log('res', res);
+        this.holdingListAlerts = this.getAlertSidePanelData(res[0]);
+        this.watchingListAlerts = this.getAlertSidePanelData(res[1]);
+        // this.getAlertSidePanelData(res[0]);
+      })
   }
 
   public toggleNav(el: HTMLElement, size: string, darken: boolean): void {
@@ -382,78 +420,71 @@ export class BearAlertsComponent implements AfterViewInit {
     }
   }
 
-  public getAlertSidePanelData(query) {
-    this.signalService.getAlertsData(query)
-      .subscribe(res => {
+  public getAlertSidePanelData(res) {
+    this.alertCount.upCount = 0;
+    this.alertCount.downCount = 0;
+    let alertList = res['alerts'];
 
-          this.alertCount.upCount = 0;
-          this.alertCount.downCount = 0;
-          this.alertList = res['alerts'];
-          this.allItems = [];
+    for (var key in alertList['earnings_surprise_alerts']) {
+      for (var obj in alertList['earnings_surprise_alerts'][key]) {
+        let jsonObj = {};
+        jsonObj['symbol'] = obj;
+        jsonObj['alert_type'] = 'earnings_surprise_alerts';
+        jsonObj['quarter'] = alertList['earnings_surprise_alerts'][key][obj]['quarter'];
+        jsonObj['pgr'] = this.calculatePGR(alertList['earnings_surprise_alerts'][key][obj]['data'][3]);
+        jsonObj['new_value'] = alertList['earnings_surprise_alerts'][key][obj]['data'][0];
+        jsonObj['old_value'] = alertList['earnings_surprise_alerts'][key][obj]['data'][1];
+        jsonObj['per_change'] = alertList['earnings_surprise_alerts'][key][obj]['data'][2];
+        this.allItems.push(jsonObj);
+        if (jsonObj['per_change'] > 0) {
+          this.alertCount.upCount++;
+        } else if (jsonObj['per_change'] < 0) {
+          this.alertCount.downCount++;
+        } else {
+        }
+      }
+    }
+    for (var key in alertList['estimate_revision_alerts']) {
+      for (var obj in alertList['estimate_revision_alerts'][key]) {
+        let jsonObj = {};
+        jsonObj['symbol'] = obj;
+        jsonObj['alert_type'] = 'estimate_revision_alerts';
+        jsonObj['quarter'] = alertList['estimate_revision_alerts'][key][obj]['quarter'];
+        jsonObj['pgr'] = this.calculatePGR(alertList['estimate_revision_alerts'][key][obj]['data'][3]);
+        jsonObj['new_value'] = alertList['estimate_revision_alerts'][key][obj]['data'][0];
+        jsonObj['old_value'] = alertList['estimate_revision_alerts'][key][obj]['data'][1];
+        jsonObj['per_change'] = alertList['estimate_revision_alerts'][key][obj]['data'][2];
+        this.allItems.push(jsonObj);
+        if (jsonObj['per_change'] > 0) {
+          this.alertCount.upCount++;
+        } else {
+          this.alertCount.downCount++;
+        }
+      }
+    }
 
-          for (var key in this.alertList['earnings_surprise_alerts']) {
-            for (var obj in this.alertList['earnings_surprise_alerts'][key]) {
-              let jsonObj = {};
-              jsonObj['symbol'] = obj;
-              jsonObj['alert_type'] = 'earnings_surprise_alerts';
-              jsonObj['quarter'] = this.alertList['earnings_surprise_alerts'][key][obj]['quarter'];
-              jsonObj['pgr'] = this.calculatePGR(this.alertList['earnings_surprise_alerts'][key][obj]['data'][3]);
-              jsonObj['new_value'] = this.alertList['earnings_surprise_alerts'][key][obj]['data'][0];
-              jsonObj['old_value'] = this.alertList['earnings_surprise_alerts'][key][obj]['data'][1];
-              jsonObj['per_change'] = this.alertList['earnings_surprise_alerts'][key][obj]['data'][2];
-              this.allItems.push(jsonObj);
-              if (jsonObj['per_change'] > 0) {
-                this.alertCount.upCount++;
-              } else if (jsonObj['per_change'] < 0) {
-                this.alertCount.downCount++;
-              } else {
-              }
+    if (alertList['pgr_change_alerts']['DataAvailable'] == true) {
+      for (var key in alertList['pgr_change_alerts']) {
+        if (key != 'DataAvailable') {
+          for (var obj in alertList['pgr_change_alerts'][key]) {
+            let jsonObj = {};
+            jsonObj['symbol'] = obj;
+            jsonObj['alert_type'] = 'pgr_change_alerts';
+            jsonObj['pgr'] = this.calculatePGR(alertList['pgr_change_alerts'][key][obj]['corrected_pgr']);
+            jsonObj['per_change'] = alertList['pgr_change_alerts'][key][obj]['chg_direction'];
+            this.allItems.push(jsonObj);
+            if (jsonObj['per_change'] > 0) {
+              this.alertCount.upCount++;
+            } else {
+              this.alertCount.downCount++;
             }
           }
-          for (var key in this.alertList['estimate_revision_alerts']) {
-            for (var obj in this.alertList['estimate_revision_alerts'][key]) {
-              let jsonObj = {};
-              jsonObj['symbol'] = obj;
-              jsonObj['alert_type'] = 'estimate_revision_alerts';
-              jsonObj['quarter'] = this.alertList['estimate_revision_alerts'][key][obj]['quarter'];
-              jsonObj['pgr'] = this.calculatePGR(this.alertList['estimate_revision_alerts'][key][obj]['data'][3]);
-              jsonObj['new_value'] = this.alertList['estimate_revision_alerts'][key][obj]['data'][0];
-              jsonObj['old_value'] = this.alertList['estimate_revision_alerts'][key][obj]['data'][1];
-              jsonObj['per_change'] = this.alertList['estimate_revision_alerts'][key][obj]['data'][2];
-              this.allItems.push(jsonObj);
-              if (jsonObj['per_change'] > 0) {
-                this.alertCount.upCount++;
-              } else {
-                this.alertCount.downCount++;
-              }
-            }
-          }
-
-          if (this.alertList['pgr_change_alerts']['DataAvailable'] == true) {
-            for (var key in this.alertList['pgr_change_alerts']) {
-              if (key != 'DataAvailable') {
-                for (var obj in this.alertList['pgr_change_alerts'][key]) {
-                  let jsonObj = {};
-                  jsonObj['symbol'] = obj;
-                  jsonObj['alert_type'] = 'pgr_change_alerts';
-                  jsonObj['pgr'] = this.calculatePGR(this.alertList['pgr_change_alerts'][key][obj]['corrected_pgr']);
-                  jsonObj['per_change'] = this.alertList['pgr_change_alerts'][key][obj]['chg_direction'];
-                  this.allItems.push(jsonObj);
-                  if (jsonObj['per_change'] > 0) {
-                    this.alertCount.upCount++;
-                  } else {
-                    this.alertCount.downCount++;
-                  }
-                }
-              }
-            }
-          }
-          console.log('alertList', this.alertList);
-          console.log('allItems', this.allItems);
-          // this.setPage(1);
-        },
-        err => console.log('err', err));
-
+        }
+      }
+    }
+    console.log('allItems', this.allItems);
+    // this.setPage(1);
+    return alertList;
   }
 
   public calculatePGR(pgr) {
