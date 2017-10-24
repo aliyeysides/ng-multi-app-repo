@@ -21,7 +21,6 @@ import {Observable} from 'rxjs/Observable';
         </a>
       </div>
       <div class="post-body post-body--insights" [ngBusy]="loading">
-        <h1>{{ title }}</h1>
         <div [innerHtml]="commentary"></div>
       </div>
       <div (click)="openCommentaryModal()" class="link__read-all">
