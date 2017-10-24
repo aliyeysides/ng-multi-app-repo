@@ -533,23 +533,23 @@
                   </svg>
                 </a>
               </div>
-              <p>{{idea['meta-info'].name}}</p>
+              <p>{{ idea['meta-info'].name }}</p>
             </div>
             <div class="stock-panel__price row">
               <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
                 <p class="current-price"
                    [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">
-                  ${{idea?.Last | decimal}}</p>
+                  ${{ idea['meta-info']['Last'] | decimal }}</p>
               </div>
               <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="price-change"
                    [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">
-                  {{idea?.Change | decimal}}</p>
+                  {{ idea['meta-info']['Change'] | decimal }}</p>
               </div>
               <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="percent-change"
                    [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">
-                  ({{ idea ? (idea["Percentage "] | decimal) : null }}%)</p>
+                  ({{ idea['meta-info']["Percentage "] | decimal }}%)</p>
               </div>
             </div>
             <div class="stock-panel__industry row no-gutters">

@@ -153,6 +153,7 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
           this.getSelectedStockData(stock as Idea, res => {
             this.clearOrderByObject();
             this.panelViewIdeasList.push(res);
+            console.log('panels', this.panelViewIdeasList);
             this.loadedStockIdeas++;
           })
         }
