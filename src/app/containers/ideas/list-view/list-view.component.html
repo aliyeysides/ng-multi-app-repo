@@ -450,7 +450,7 @@
     </div>
   </div>
 </div>
-<div [ngBusy]="loading" infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="1000"
+<div infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="1000"
      (scrolled)="onScroll()" [scrollWindow]="false" *ngIf="currentView == 'panel-view'"
      class="view-option--panel">
   <div *ngIf="!ideaList?.length">
@@ -461,7 +461,7 @@
     <!--  PANEL  -->
     <div *ngFor="let idea of panelViewIdeasList | orderBy:orderByObject?.field:orderByObject?.ascending"
          class="panel-view__container col-md-6">
-      <div class="quick-view__panel">
+      <div [ngBusy]="loading" class="quick-view__panel">
         <div class="quick-view__data row">
 
           <div class="col-lg-8">
