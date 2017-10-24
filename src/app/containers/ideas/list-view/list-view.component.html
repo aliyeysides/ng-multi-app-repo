@@ -538,23 +538,23 @@
             <div class="stock-panel__price row">
               <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
                 <p class="current-price"
-                   [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">
+                   [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}">
                   ${{ idea['meta-info']['Last'] | decimal }}</p>
               </div>
               <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="price-change"
-                   [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">
+                   [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}">
                   {{ idea['meta-info']['Change'] | decimal }}</p>
               </div>
               <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="percent-change"
-                   [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">
+                   [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}">
                   ({{ idea['meta-info']["Percentage "] | decimal }}%)</p>
               </div>
             </div>
             <div class="stock-panel__industry row no-gutters">
               <div class="col-12">
-                <p>INDUSTRY: <span class="industry">{{idea?.industry_name}}</span></p>
+                <p>INDUSTRY: <span class="industry">{{idea['meta-info'].industry_name}}</span></p>
               </div>
               <div class="col-12">
                 <p>STRENGTH: <span class="industry-strength"
