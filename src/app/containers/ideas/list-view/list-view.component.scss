@@ -144,6 +144,12 @@
   .sort-header {
     border-bottom: $border-line--LT2;
 
+    .col__company-name {
+      @media screen and (max-width:990px) {
+        display:none;
+      }
+    }
+
     p {
       color: $font-color--MD;
       text-align: center;
@@ -153,6 +159,11 @@
       line-height: 23px;
       font-weight: 600;
       margin-top:2px;
+
+      @media screen and (max-width:990px) {
+        font-size: 10px;
+        white-space: nowrap;
+      }
     }
 
     p.active {
@@ -190,10 +201,15 @@
 
         .stock__PGR {
           position: relative;
+
+          img {
+            height: 21px;
+            width:auto;
+          }
         }
 
         .stock__ticker {
-          font-size: 24px;
+          font-size: 22px;
           font-weight: 700;
           line-height: 60px;
           white-space: nowrap;
@@ -203,7 +219,11 @@
           font-size: 16px;
           font-weight: 300;
           float: left;
-          line-height: 60px
+          line-height: 60px;
+
+          @media screen and (max-width:990px) {
+            display:none;
+          }
         }
 
         .stock__price {
@@ -497,6 +517,11 @@
             overflow: visible;
           }
         }
+
+        @media screen and (max-width:990px) {
+          border-bottom: 3px solid #f8f8f8;
+          margin-bottom: 15px;
+        }
       }
 
       .quick-view__pgr {
@@ -515,7 +540,7 @@
 
         .pgr__text {
           font-weight: 700;
-          font-size: 17px;
+          font-size: 16px;
           text-transform: uppercase;
           white-space: nowrap;
 
@@ -524,11 +549,11 @@
           }
 
           @media screen and (max-width: 1479px) and (min-width: 1280px) {
-            font-size: 23px;
+            font-size: 22px;
           }
 
           @media screen and (max-width: 1279px) and (min-width: 1025px) {
-            font-size: 20px;
+            font-size: 17px;
           }
         }
 
