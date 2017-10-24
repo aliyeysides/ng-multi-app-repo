@@ -26,7 +26,10 @@ import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
           </g>
         </svg>
         <a>Collapse Menu</a>
-      </div> 
+      </div>
+      <div class="versioning">
+        <p>Master the Bear V1</p>
+      </div>
     </div>
 
     <div *ngIf="!isOpen" class="sidebar-collapsed">

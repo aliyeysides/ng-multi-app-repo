@@ -1,7 +1,7 @@
 <div
   [ngClass]="{'list-view__actionbar--userlist' : checkIfUserList(currentList?.name), 'list-view__actionbar--bearlist' : !checkIfUserList(currentList?.name)}"
   class="list-view__actionbar row no-gutters">
-  <div class="list__header col-lg-6">
+  <div class="list__header col-6">
     <p class="list__title">
       <span *ngIf="checkIfUserList(currentList?.name)">
         <i class="fa fa-user-circle"
@@ -83,7 +83,7 @@
     </ul>
   </div>
 
-  <div class="list__header col-lg-6">
+  <div class="list__header col-6">
     <a (click)="gotoListView()" [ngClass]="{'active selected' : currentView == 'list-view'}"
        class="view-toggle view-toggle--list-view active">
       <i class="fa fa-list align-absolute" aria-hidden="true"></i>
@@ -103,19 +103,19 @@
   <div class="row no-gutters">
     <div class="current-list__container col-md-6">
       <div class="sort-header row no-gutters">
-        <div class="col-lg-2 col-xl-2 ">
-          <p class="">Rating</p>
+        <div class="col-md-3 col-lg-2 col-xl-2 ">
+          <p>Rating</p>
         </div>
-        <div class="col-lg-3 col-xl-2 ">
+        <div class="col-md-3 col-lg-3 col-xl-2 ">
           <p style="text-align: left;">Ticker</p>
         </div>
-        <div class="col-lg-3 col-xl-4 ">
+        <div class="col__company-name col-lg-3 col-xl-4">
           <p style="text-align: left;">Company</p>
         </div>
-        <div class="col-lg-2 col-xl-2 ">
+        <div class="col-md-3 col-lg-2 col-xl-2 ">
           <p>Price</p>
         </div>
-        <div class="col-lg-2 col-xl-2 ">
+        <div class="col-md-3 col-lg-2 col-xl-2 ">
           <p>% Chg</p>
         </div>
       </div>
@@ -197,21 +197,21 @@
                 </svg>
               </div>
             </div>
-            <div class="col-lg-2 col-xl-2 stock__PGR">
+            <div class="col-md-3 col-lg-2 col-xl-2 stock__PGR">
               <img class="align-absolute" src="{{appendPGRImage(idea.PGR)}}">
             </div>
-            <div class="col-lg-3 col-xl-2 stock__ticker">
-              <p class="">{{ idea.symbol }}</p>
+            <div class="col-md-3 col-lg-3 col-xl-2 stock__ticker">
+              <p>{{ idea.symbol }}</p>
             </div>
-            <div class="col-lg-3 col-xl-4 stock__company-name">
-              <p class="">{{ idea.name }}</p>
+            <div class="col-md-3 col-lg-3 col-xl-4 stock__company-name">
+              <p>{{ idea.name }}</p>
             </div>
-            <div class="col-lg-2 col-xl-2 stock__price">
+            <div class="col-md-3 col-lg-2 col-xl-2 stock__price">
               <p class="data"
                  [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">${{
                 idea.Last | decimal}}</p>
             </div>
-            <div class="col-lg-2 col-xl-2 stock__price">
+            <div class="col-md-3 col-lg-2 col-xl-2 stock__price">
               <p class="data"
                  [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">{{
                 idea["Percentage "] | decimal}}%</p>
