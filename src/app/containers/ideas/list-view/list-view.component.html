@@ -208,7 +208,7 @@
             </div>
             <div class="col-md-3 col-lg-2 col-xl-2 stock__price">
               <p class="data"
-                 [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">${{
+                 [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">{{
                 idea.Last | decimal}}</p>
             </div>
             <div class="col-md-3 col-lg-2 col-xl-2 stock__price">
@@ -312,7 +312,7 @@
               <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
                 <p class="current-price"
                    [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
-                  ${{selectedStock?.Last | decimal}}</p>
+                  {{selectedStock?.Last | decimal}}</p>
               </div>
               <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="price-change"
@@ -539,7 +539,7 @@
               <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
                 <p class="current-price"
                    [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}">
-                  ${{ idea['meta-info']['Last'] | decimal }}</p>
+                  {{ idea['meta-info']['Last'] | decimal }}</p>
               </div>
               <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="price-change"

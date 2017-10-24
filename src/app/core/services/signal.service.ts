@@ -91,8 +91,8 @@ export class SignalService {
     return this.utilService.getJson(alertsLookupUrl, this.alertsLookupParams);
   }
 
-  public getSignalDataforList(listId: string, period: string, uid: string) {
-    const signalsLookupUrl = `${this.apiHostName}${this.apiPrependText}/signals/getSignalDataFromList?`;
+  public getSignalDataForList(listId: string, period: string, uid: string) {
+    const signalsLookupUrl = `${this.apiHostName}${this.apiPrependText}/signals/getSignalDataForList?`;
     this.signalsLookupParams.set('list_ID', listId);
     this.signalsLookupParams.set('period', period);
     this.signalsLookupParams.set('uid', uid);
