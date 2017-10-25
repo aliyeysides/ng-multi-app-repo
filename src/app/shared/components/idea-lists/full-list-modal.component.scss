@@ -24,7 +24,7 @@
 
         .idea-list__list {
           width: 100%;
-          padding:10px 0 45px;
+          padding: 15px 12px 45px;
           height: 630px;
           overflow-y: scroll;
 
@@ -121,7 +121,8 @@
               float:right;
               height: 40px;
               padding:10px 0 0 20px;
-              border-left: 1px dashed rgba(0,0,0,0.2);
+              border-left: $border-dashed--MD;
+              cursor: pointer;
 
               i {
                 color: $link-blue;
@@ -141,8 +142,8 @@
           .list-description__body {
 
             .body__section {
-              padding-bottom: 10px;
-              border-bottom: 3px solid #efefef;
+              padding-bottom: 15px;
+              border-bottom: $border-line--LT;
               margin-bottom: 45px;
 
               h6 {

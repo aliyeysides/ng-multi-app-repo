@@ -9,6 +9,13 @@ export class SymbolSearchService {
   private _isOpen: Subject<boolean> = new Subject<boolean>();
   isOpen = this._isOpen.asObservable();
 
+  private _addStock: Subject<void> = new Subject<void>();
+  addStock$ = this._addStock.asObservable();
+
+  emitAddToList() {
+    this._addStock.next();
+  }
+
   setSearchOpen(val: boolean) {
     this._isOpen.next(val);
   }

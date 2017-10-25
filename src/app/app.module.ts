@@ -19,6 +19,10 @@ import {BusyModule} from 'angular2-busy';
 import {AuthGuard} from './shared/auth.guard';
 import {loadingMaskConfig} from '../loading-mask-config';
 import {IdeasService} from './core/services/ideas.service';
+import {SignalService} from './core/services/signal.service';
+
+import {SimpleNotificationsModule} from 'angular2-notifications';
+import {NotificationsService} from 'angular2-notifications/dist';
 
 @NgModule({
   declarations: [
@@ -31,10 +35,11 @@ import {IdeasService} from './core/services/ideas.service';
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
     BusyModule.forRoot(loadingMaskConfig),
+    SimpleNotificationsModule.forRoot(),
     ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES,
   ],
-  providers: [UtilService, AuthService, AuthGuard, IdeasService],
+  providers: [UtilService, AuthService, AuthGuard, IdeasService, SignalService, NotificationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

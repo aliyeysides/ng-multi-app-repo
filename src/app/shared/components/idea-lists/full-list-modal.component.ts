@@ -42,7 +42,7 @@ interface SelectedList {
           <div class="idea-list__right-col col-sm-6 col-md-7 col-lg-8 col-xl-8">
             <div class="idea-list__descriptions">
               <div class="list-description__header">
-                <img src="assets/imgs/{{ appendListColoredImageUrl(list?.name) }}">
+                <img src="assets/imgs/{{ appendListColoredImageUrl(selectedList?.name) }}">
                 <h3>{{ selectedList ? selectedList['name'] : 'Select a List to learn more...' }}</h3>
                 <a (click)="viewList(selectedList)" class="post-head__button">
                   <i class="fa fa-external-link-square" aria-hidden="true"></i>
@@ -93,7 +93,6 @@ export class FullListModalComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.allLists = res[0]['idea_lists'].concat(res[1]['theme_lists']);
         this.getWordPressPostListDescriptions();
-        this.selectList(this.allLists[0]);
       });
   }
 
@@ -107,7 +106,7 @@ export class FullListModalComponent implements OnInit, OnDestroy {
   }
 
   public appendListColoredImageUrl(listName: string) {
-    return this.classMap[listName] ? this.classMap[listName].coloredImgName : '/img_list-classicbears.svg';
+    return this.classMap[listName] ? this.classMap[listName].coloredImgName : '/img_list-classicbears--red.svg';
   }
 
   public selectList(list: object) {
@@ -136,6 +135,7 @@ export class FullListModalComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe)
       .subscribe(val => {
         this.wordPressPosts = val['0']['45'];
+        this.selectList(this.allLists[0]);
       });
   }
 

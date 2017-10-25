@@ -17,32 +17,29 @@ h1, h2, h3, h4, h5, h6 {
   color: $font-color;
   cursor: default;
   letter-spacing: 0.3px;
+  line-height: 1.3;
 }
 
 h1 {
   font-weight: 300;
   font-size: 28px;
   margin-bottom: 20px;
-  line-height: 1.3;
 }
 
-h2 {
+h2 { 
   font-weight: 600;
   font-size: 24px;
   margin-bottom: 20px;
-  line-height: 1.3;
 }
 
 h3 {
   font-weight: 400;
   font-size: 28px;
-  line-height: 1.3;
 }
 
 h4 {
   font-size: 18px;
   font-weight: 600;
-  line-height: 1.3;
 }
 
 h6 {
@@ -117,7 +114,7 @@ iframe {
 }
 
 textarea, input, button {
-  outline: none;
+  outline: none !important;
 }
 
 input:focus {
@@ -135,7 +132,7 @@ input:focus {
 }
 
 .neutral-grey {
-  color: $font-color--subhead;
+  color: $font-color--MD;
 }
 
 .bullish, .Bullish {
@@ -154,13 +151,92 @@ input:focus {
   color: $veryBearish-red !important;
 }
 
+
+/*------------------------------------*\
+  #LOADING
+\*------------------------------------*/
+
+
+
+
+
+.loading.loading-main {
+  background-image: linear-gradient(-135deg, #B0004D 0%, #6E008C 52%, #0096D4 100%);
+  width: 100%;
+  height: 100vh;
+  position: relative;
+
+  .loading__contents {
+    position: absolute;
+    z-index: 5001;
+    width:100%;
+    padding-top: 60px;
+
+    .row {
+      display: relative;
+      height: 60px;
+
+      img {
+        width: 170px;
+        height: auto;
+        margin: 0px auto;
+      }
+    }
+
+    h3 {
+      text-align: center;
+      color: #ffffff;
+      margin-bottom:15px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ffffff;
+      font-size: 48px;
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+
+    p {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 400;
+      text-align: center;
+    }
+  }
+
+  .loading__watermark {
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    z-index: 5000;
+    opacity: 0.9;
+    background-color: rgba(0,0,0,0.3);
+    background-image: url(./assets/imgs/loading_splash.png);
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100vh;
+
+    svg {
+      height: 300px;
+      width: 300px;
+      opacity: 0.2;
+    }
+  }
+}
+
+
+
+
 /*------------------------------------*\
   #NAV QUICK LINKS
 \*------------------------------------*/
 
 a.quick-link {
   display: inline-block;
-  width: 6.3%;
+  width: 6.125%;
   height: 50px;
   position: relative;
 
@@ -170,7 +246,7 @@ a.quick-link {
   }
 
   svg g {
-    fill: $font-color;
+    fill: $link-grey;
   }
 
   &:hover {
@@ -192,7 +268,7 @@ a.quick-link {
 \*------------------------------------*/
 
 .section-header {
-  background-color: #F8f8f8;
+  background-color: $background--LT;
   padding: 0px 25px;
   height: 64px;
 
@@ -210,18 +286,36 @@ a.quick-link {
 
     .form-inline {
       .form-group {
+        position: relative;
+        color: $font-color;
+
         .form-control {
+          font-weight: 600;
+          color: $font-color;
+
           &:focus {
             border-bottom: 2px solid #1199ff;
             background-color: #ffffff;
+            border-radius: 5px 5px 0 0;
           }
+        }
+
+        button {
+          display: block;
+          position: absolute;
+          right:10px;
+          color: $link-grey;
+          background-color: transparent;
+          font-size: 24px;
+          outline: none !important;
+          cursor: pointer;
         }
 
         .search-box {
           font-family: $font-stack;
-          background-color: #f8f8f8;
+          background-color: $background--LT;
           height: 50px;
-          width: 375px;
+          width: 360px;
           text-align: left;
           padding: 0 15px 0;
           border: 0;
@@ -229,13 +323,17 @@ a.quick-link {
           border-radius: 0;
           outline: none;
           color: $font-color;
-          border-bottom: 2px solid #FFFFFF;
+          border-bottom: 3px solid rgba(0, 0, 0, 0.05);
+          color: $font-color;
         }
       }
 
       &:hover {
         .search-box {
-          border-bottom: 2px solid #1199ff;
+          border-bottom: 3px solid #1199ff;
+        }
+        button {
+          color: $link-blue;
         }
       }
     }
@@ -244,8 +342,9 @@ a.quick-link {
       top: 50px;
       background-color: #ffffff;
       box-shadow: 0px 20px 40px 3px rgba(0, 0, 0, 0.3);
-      width: 375px;
+      width: 360px;
       overflow-x: hidden;
+      border-radius: 0 0 5px 5px;
 
       p {
         cursor: pointer !important;
@@ -253,7 +352,7 @@ a.quick-link {
 
       .search__entry {
         height: 60px;
-        border-bottom: 2px solid #ffffff;
+        border-bottom: 3px solid #ffffff;
         color: $font-color;
         width: 420px;
         cursor: pointer;
@@ -273,7 +372,7 @@ a.quick-link {
         font-weight: 400;
         line-height: 1.3;
         margin: 15px 0;
-        color: #484848;
+        color: $font-color;
       }
     }
   }
@@ -281,7 +380,7 @@ a.quick-link {
   .section-header__actions {
     float: right;
     height: 45px;
-    border-left: 1px dashed rgba(0, 0, 0, 0.2);
+    border-left: $border-dashed--MD;
     margin-left: 15px;
     margin-top: 8px;
 
@@ -300,18 +399,18 @@ a.quick-link {
       }
 
       svg g {
-        fill: $font-color--subhead;
+        fill: $link-grey;
       }
 
       i {
         font-size: 18px;
-        color: $font-color--subhead;
+        color: $link-grey;
       }
 
       span {
         font-size: 12px;
         font-weight: 400;
-        color: $font-color--subhead;
+        color: $font-color;
         line-height: 1.75;
       }
 
@@ -363,7 +462,7 @@ a.quick-link {
   margin: 0px auto;
   position: relative;
   width: 100%;
-  padding: 50px 15px;
+  padding: 50px 15px 10px;
   max-width: 1024px;
 
   .modal-content {
@@ -390,11 +489,11 @@ a.quick-link {
 
 .modal-dialog.modal-dialog--popup {
   border-radius: 0.5rem;
-  padding-top: 50px;
+  padding-top: 50px 0 10px;
 
   .modal-content {
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     margin: 0px auto;
     position: relative;
     display: flex;
@@ -419,12 +518,65 @@ a.quick-link {
           h5 {
             font-size: 20px;
             padding-bottom: 18px;
-            border-bottom: 3px solid #efefef;
+            border-bottom: $border-line--LT;
             line-height: 1.3;
           }
           .header__post-date {
             color: #B0004D;
             padding: 10px 0;
+          }
+        }
+      }
+    }
+
+    .post-body--previous-pick {
+      ul {
+        li {
+          margin-bottom:25px;
+
+          img {
+            float: left;
+            display: inline-block;
+            height: 24px;
+            width: auto;
+            margin-right:6px;
+          }
+
+          .ticker {
+            float: left;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1;
+          }
+
+          .company {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.3;
+          }
+
+          .industry {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 30px;
+            color: $font-color--MD;
+            font-style: italic;
+          }
+
+          .pick-date {
+            color: #B0004D;
+            line-height: 30px;
+            font-size: 16px;
+            font-weight: 600;
+          }
+
+          a {
+            cursor: pointer;
+            color: $link-blue;
+            text-decoration: none;
+            font-size: 14px;
+            line-height: 1;
+            text-align: center;
           }
         }
       }
@@ -529,6 +681,19 @@ a.quick-link {
   border-left: .3em solid transparent;
 }
 
+.dropdown-toggle.original-order::after {
+  display: none;
+  width: 0;
+  height: 0;
+  margin-right: .3em;
+  margin-top: 0;
+  content: "";
+  border-top: .3em solid transparent;
+  border-right: .3em solid transparent;
+  border-left: .3em solid transparent;
+  color:transparent;
+}
+
 .dropdown-toggle {
   width: 100%;
   display: block;
@@ -558,6 +723,7 @@ a.quick-link {
   font-weight: 400;
   line-height: 1.4;
   white-space: nowrap;
+  color:$font-color;
 }
 
 .dropdown-menu > li > a:focus,
@@ -571,28 +737,13 @@ a.quick-link {
   background-color: $link-blue;
 
   a {
-    color: #ffffff;
+    color: #EFF8FF;
     font-weight: 600;
   }
 }
 
 .dropdown-menu:last-child {
   border-bottom: 0px solid #ffffff;
-}
-
-:focus {
-  outline-color: transparent;
-  outline-style: none;
-}
-
-textarea, input, button {
-  outline: none;
-}
-
-input:focus {
-  border-color: transparent;
-  outline: 0;
-  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0), 0 0 0px rgba(255, 255, 255, 0);
 }
 
 /*----------------------------------------------------*\
@@ -607,14 +758,15 @@ input:focus {
 
 .insights__container {
   width: 100%;
-  border: 1px solid #cccccc;
+  border: $border-line--LT2;
   background-color: #ffffff;
   overflow: hidden;
   border-radius: 5px;
+  position: relative;
 
   .post-head {
     width: 100%;
-    background-color: #313540;
+    background-color: $background--DK;
     overflow: hidden;
 
     h2, h4 {
@@ -626,7 +778,7 @@ input:focus {
     .divider-h {
       display: block;
       float: left;
-      border-left: 1px dotted rgba(255, 255, 255, 0.5);
+      border-left: $border-dashed--LT;
     }
 
     .header__post-date {
@@ -660,8 +812,31 @@ input:focus {
     }
   }
 
+  .post-body {
+    position: relative;
+  }
+
   .post-footer {
-    
+    padding: 15px 0px 5px;
+    width: 100%;
+
+    .post-footer__button {
+        width: 100%;
+        background-color: transparent;
+
+      a {
+        color: $link-blue;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        text-align: center;
+        line-height: 30px;
+
+        &:hover {
+          color: $link-blue;
+        }
+      }
+    }
   }
 
   .post-head--insights {
@@ -717,11 +892,7 @@ input:focus {
   }
 
   .post-body {
-    padding: 15px 20px
-  }
-
-  .post-footer {
-    padding: 15px 20px;
+    padding: 15px 20px 5px;
   }
 }
 
@@ -811,7 +982,7 @@ input:focus {
       height: 15px;
 
       .col-header {
-        color: #eaeaea;
+        color: $font-color--LT;
         font-size: 9px;
         line-height: 1;
         font-weight: 400;
@@ -829,6 +1000,7 @@ input:focus {
     overflow: hidden;
     overflow-y: scroll;
     padding: 4px 0;
+    position: relative;
 
     li {
       padding: 6px 0;
@@ -898,12 +1070,14 @@ input:focus {
       .stock__price {
         font-size: 14px;
         font-weight: 600;
-        text-align: center;
+        text-align: right;
+        padding-right:6%;
 
         p {
           display: inline-block;
           vertical-align: middle;
           line-height: 20px;
+          white-space: nowrap;
         }
       }
 
@@ -920,7 +1094,7 @@ input:focus {
             opacity: 0.5;
 
           i {
-            color:$font-color--subhead;
+            color:$font-color--MD;
             font-size: 14px;
           }
 
@@ -955,21 +1129,21 @@ input:focus {
 
 .Bearish-H1 {
   color: #9F2C53;
-  font-size: 24px !important;
+  font-size: 32px !important;
   font-weight: 300 !important;
   font-family: $font-stack;
-  line-height: 1.75;
+  line-height: 1.5;
   margin-bottom: 20px;
   padding: 0;
 }
 
 .Bearish-H2 {
   color: #0070C0;
-  font-size: 19px !important;
+  font-size: 22px !important;
   font-weight: 600 !important;
   font-family: $font-stack;
   line-height: 1.5;
-  margin-bottom: 15px;
+  margin: 30px 0 15px;
   padding: 0;
 }
 
@@ -997,33 +1171,51 @@ input:focus {
 
 .Bearish-P {
   color: $font-color;
-  font-size: 11px !important;
+  font-size: 13px !important;
   font-weight: 400 !important;
   font-family: $font-stack;
-  line-height: 1.25;
+  line-height: 1.5;
   margin-bottom: 20px;
   padding: 0;
 }
 
 .Bearish-caption {
   color: $font-color;
-  font-size: 9px !important;
+  font-size: 10px !important;
   font-weight: 300 !important;
   font-family: $font-stack;
   line-height: 1.5;
-  margin: 10px 20px;
+  margin: 10px 20px 40px;
   padding: 0;
   font-style: italic;
 }
 
-.MsoNormal {
-  color: $font-color;
-  font-size: 10px;
-  font-weight: 400;
-  font-family: $font-stack;
-  line-height: 1.25;
+.Bearish-bullets {
+  margin-left: 40px;
   margin-bottom: 20px;
+
+  li {
+    padding:10px 0;
+    color: $font-color;
+    font-size: 14px;
+    line-height: 1.5;
+
+    &::before {
+      content: "● ";
+      margin-right: 5px;
+    }
+  }
+}
+
+.Bearish-tickers {
+  color: $font-color;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  font-family: $font-stack;
+  line-height: 1.2;
+  margin: 10px 0px;
   padding: 0;
+  font-style: italic;
 }
 
 .hide-ticker {

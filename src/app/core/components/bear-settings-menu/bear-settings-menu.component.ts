@@ -3,7 +3,7 @@ import {noop} from 'rxjs/util/noop';
 import {AuthService} from '../../services/auth.service';
 import {Subject} from 'rxjs/Subject';
 
-@Component({
+@Component({ 
   selector: 'cpt-bear-settings-menu',
   template: `
     <a class="quick-link">
@@ -59,13 +59,6 @@ export class BearSettingsMenuComponent implements OnInit {
 
   public items: object[] = [
     {
-      title: 'Upgrade',
-      icon: 'fa fa-upload',
-      href: 'https://mh214.infusionsoft.com/app/orderForms/Chaikin-Analytics---Annual-Subscription',
-      target: '_blank',
-      fn: noop
-    },
-    {
       title: 'User guide',
       icon: 'fa fa-book',
       href: 'https://www.chaikinanalytics.com/analytics-resource-guide/',
@@ -73,9 +66,30 @@ export class BearSettingsMenuComponent implements OnInit {
       fn: noop
     },
     {
+      title: 'Edit Email/User Name',
+      icon: 'fa fa-pencil-square-o',
+      href: 'https://mh214.infusionsoft.com/app/form/bear_upgrade-form',
+      target: '_blank',
+      fn: noop
+    },
+    {
+      title: 'Upgrade',
+      icon: 'fa fa-upload',
+      href: 'https://mh214.infusionsoft.com/app/form/email_loginid_change',
+      target: '_blank',
+      fn: noop
+    },
+    {
+      title: 'Cancel',
+      icon: 'fa fa-ban',
+      href: 'https://mh214.infusionsoft.com/app/form/ber_cancellation_form',
+      target: '_blank',
+      fn: noop
+    },
+    {
       title: 'Support/Contact',
       icon: 'fa fa-life-ring',
-      href: '#',
+      href: 'mailto:info@chaikinanalytics.com?subject="Mastering the Bear support request" ',
       target: '',
       fn: noop
     },

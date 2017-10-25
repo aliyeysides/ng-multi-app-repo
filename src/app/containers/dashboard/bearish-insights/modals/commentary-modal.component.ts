@@ -19,10 +19,11 @@ import {PreviousInsightsModalComponent} from './previous-modal.component';
       </div>
       <div class="post-body">
         <div class="post-body post-body--insights">
-          <h1>{{ title }}</h1>
           <div [innerHtml]="commentary"></div>
           <div class="post-footer">
-            <button type="button" class="btn btn-default pull-right" (click)="bsModalRef.hide()">Close</button>
+            <button type="button" class="post-footer__button" (click)="bsModalRef.hide()">
+              <a><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Close</a>
+            </button>
           </div>
         </div>
       </div>

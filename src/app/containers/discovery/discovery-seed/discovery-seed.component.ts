@@ -11,6 +11,7 @@ import {SignalService} from '../../../core/services/signal.service';
           <img class="align-absolute"
                (error)="stock ? stock.logo_url='assets/imgs/img_NO-LOGO--stock.svg' : null"
                src="{{ stock && stock.logo_url != 'N/A' ? stock?.logo_url : 'assets/imgs/img_NO-LOGO--stock.svg' }}">
+          <!--<p class="align-absolute">{{ stock ? stock['name'] : null }}</p>-->
         </div>
         <div class="base-stock__symbol">
           <p class="ticker"><img class="" src="{{ appendPGRImage(stock ? stock['PGR'] : null) }}">
@@ -20,7 +21,7 @@ import {SignalService} from '../../../core/services/signal.service';
         </div>
         <div class="base-stock__price">
           <p class="last-price" [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
-            {{ stock ? stock['Last'] : null }}</p>
+            {{ stock ? stock['Last'].toFixed(2) : null }}</p>
           <p class="change" [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
             {{ stock ? stock['Change'] : null }}</p>
           <p class="percentage" [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
@@ -29,7 +30,7 @@ import {SignalService} from '../../../core/services/signal.service';
         <div class="base-stock__PGR">
           <p class="PGR__text"
              [ngClass]="{'veryBullish':stock?.PGR==5,'bullish':stock?.PGR==4,'neutral':stock?.PGR==3,'bearish':stock?.PGR==2,'veryBearish':stock?.PGR==1}">
-            <span>Overall Rating:</span> {{ appendPGRText(stock ? stock['PGR'] : null) }}</p>
+            <span>Power Gauge:</span> {{ appendPGRText(stock ? stock['PGR'] : null) }}</p>
           <ul *ngIf="stock" class="pgr__sliders">
             <li class="">
               <div class="sliderBar-container">

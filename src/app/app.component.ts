@@ -27,6 +27,9 @@ import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
         </svg>
         <a>Collapse Menu</a>
       </div>
+      <div class="versioning">
+        <p>Master the Bear V1</p>
+      </div>
     </div>
 
     <div *ngIf="!isOpen" class="sidebar-collapsed">
@@ -62,11 +65,16 @@ import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
     <div class="container-fluid container-main" [class.opened]="isOpen">
       <router-outlet></router-outlet>
     </div>
+    '<simple-notifications [options]="options"></simple-notifications>'
   `,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   isOpen = true;
+  options = {
+    position: ['top', 'right'],
+    timeOut: 5000,
+  };
 
   toggleMenu() {
     this.isOpen = !this.isOpen;

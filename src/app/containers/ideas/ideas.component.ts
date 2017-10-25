@@ -3,6 +3,8 @@ import {IdeasService} from '../../core/services/ideas.service';
 import {Subscription} from 'rxjs/Subscription';
 import {AuthService} from '../../core/services/auth.service';
 import {ListViewComponent} from './list-view/list-view.component';
+import {NotificationsService} from 'angular2-notifications/dist';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'cpt-ideas',
@@ -32,6 +34,7 @@ export class IdeasComponent implements OnInit {
   public watchingListId: string;
 
   constructor(private ideasService: IdeasService,
+              private toast: NotificationsService,
               private authService: AuthService) {
   }
 
@@ -69,4 +72,5 @@ export class IdeasComponent implements OnInit {
       .take(1)
       .subscribe(res => this.list.refreshList());
   }
+
 }

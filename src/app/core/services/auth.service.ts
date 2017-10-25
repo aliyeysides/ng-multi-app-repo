@@ -4,13 +4,14 @@ import {Subject} from 'rxjs/Subject';
 import {UtilService} from './util.service';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../../shared/models/user';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AuthService {
 
   private apiHostName: string = this.utilService.getApiHostName();
 
-  private currentUser: Subject<User> = new Subject<User>();
+  private currentUser: BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
   currentUser$ = this.currentUser.asObservable();
 
   private loginParams: URLSearchParams;

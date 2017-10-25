@@ -1,18 +1,18 @@
 <div
   [ngClass]="{'list-view__actionbar--userlist' : checkIfUserList(currentList?.name), 'list-view__actionbar--bearlist' : !checkIfUserList(currentList?.name)}"
   class="list-view__actionbar row no-gutters">
-  <div class="list__header col-lg-6">
+  <div class="list__header col-6">
     <p class="list__title">
       <span *ngIf="checkIfUserList(currentList?.name)">
-        <i tooltip="User List" class="fa fa-user-circle"
+        <i class="fa fa-user-circle"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
       <span *ngIf="checkIfBearList(currentList?.name)">
-        <i tooltip="Idea List" class="fa fa-lightbulb-o"
+        <i class="fa fa-lightbulb-o"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
       <span *ngIf="checkIfThemeList(currentList?.name)">
-        <i tooltip="Theme List" class="fa fa-flag"
+        <i class="fa fa-flag"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
     </p>
@@ -24,8 +24,7 @@
         </a>
         <ul class="top-sort-menu dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
           <li [ngClass]="{'selected' : orderByObject['field'] == 'PGR' }" class="dropdown-submenu">
-            <a class="dropdown-toggle dropdown-subtoggle" data-toggle="dropdown" tabindex="-1" href="#">Power Gauge
-              Rating</a>
+            <a class="dropdown-toggle dropdown-subtoggle" data-toggle="dropdown" tabindex="-1" href="#">Power Gauge Rating</a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
               <li [ngClass]="{'selected' : orderByObject['field'] == 'PGR' && orderByObject['ascending'] == false }"
                   (click)="setOrderByObject('PGR', false, $event)"><a class="dropdown-subtoggle" tabindex="-1" href="#">Bullish to Bearish</a>
@@ -35,8 +34,8 @@
               </li>
             </ul>
           </li>
-          <li [ngClass]="{'selected' : orderByObject['field'] == '' }" class="dropdown-submenu">
-            <a class="dropdown-toggle" data-toggle="dropdown" tabindex="-1" href="#">Original Order</a>
+          <li (click)="clearOrderByObject()" [ngClass]="{'selected' : orderByObject['field'] == '' }" class="dropdown-submenu">
+            <a class="dropdown-toggle original-order" data-toggle="dropdown" tabindex="-1" href="#">Original Order</a>
           </li>
           <li [ngClass]="{'selected' : orderByObject['field'] == 'name' }" class="dropdown-submenu">
             <a class="dropdown-toggle dropdown-subtoggle" data-toggle="dropdown" tabindex="-1" href="#">Company
@@ -84,7 +83,7 @@
     </ul>
   </div>
 
-  <div class="list__header col-lg-6">
+  <div class="list__header col-6">
     <a (click)="gotoListView()" [ngClass]="{'active selected' : currentView == 'list-view'}"
        class="view-toggle view-toggle--list-view active">
       <i class="fa fa-list align-absolute" aria-hidden="true"></i>
@@ -104,26 +103,26 @@
   <div class="row no-gutters">
     <div class="current-list__container col-md-6">
       <div class="sort-header row no-gutters">
-        <div class="col-lg-2 col-xl-2 ">
-          <p class="">Rating</p>
+        <div class="col-md-3 col-lg-2 col-xl-2 ">
+          <p>Rating</p>
         </div>
-        <div class="col-lg-3 col-xl-2 ">
+        <div class="col-md-3 col-lg-3 col-xl-2 ">
           <p style="text-align: left;">Ticker</p>
         </div>
-        <div class="col-lg-3 col-xl-4 ">
+        <div class="col__company-name col-lg-3 col-xl-4">
           <p style="text-align: left;">Company</p>
         </div>
-        <div class="col-lg-2 col-xl-2 ">
+        <div class="col-md-3 col-lg-2 col-xl-2 ">
           <p>Price</p>
         </div>
-        <div class="col-lg-2 col-xl-2 ">
+        <div class="col-md-3 col-lg-2 col-xl-2 ">
           <p>% Chg</p>
         </div>
       </div>
       <!-- LIST: HOLDING  -->
       <div [ngBusy]="symbolListLoading" class="current-list  current-list--holding ">
         <div *ngIf="!ideaList?.length" class="list__container">
-          <p class="empty-list__text">There are currently no stocks in this list.</p>
+          <p class="empty-list__text">Search for a stock to add to your User list</p>
         </div>
         <ul *ngIf="ideaList?.length" class="list__container">
           <li [ngClass]="{'active selected' : selectedStock == idea}"
@@ -133,12 +132,10 @@
             <div *ngIf="popupOptionsMap[idea.symbol] == true" class="stock-options__popup">
               <ul class="nav nav-justified">
                 <li *ngIf="!idea.is_holding_stock" (click)="addToList('Holding', idea.symbol, $event)" class="nav-item">
-                  <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
-                       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <defs></defs>
-                    <g id="icon_portfolio" fill="#000000" stroke="none" stroke-width="1" fill-rule="evenodd">
-                      <path
-                        d="M107.142857,64 L192.857143,64 L192.857143,42.5 L107.142857,42.5 L107.142857,64 Z M300,171.5 L300,252.125 C300,266.90625 287.946429,279 273.214286,279 L26.7857143,279 C12.0535714,279 0,266.90625 0,252.125 L0,171.5 L112.5,171.5 L112.5,198.375 C112.5,204.253906 117.354911,209.125 123.214286,209.125 L176.785714,209.125 C182.645089,209.125 187.5,204.253906 187.5,198.375 L187.5,171.5 L300,171.5 Z M171.428571,171.5 L171.428571,193 L128.571429,193 L128.571429,171.5 L171.428571,171.5 Z M300,90.875 L300,155.375 L0,155.375 L0,90.875 C0,76.09375 12.0535714,64 26.7857143,64 L85.7142857,64 L85.7142857,37.125 C85.7142857,28.2226562 92.9129464,21 101.785714,21 L198.214286,21 C207.087054,21 214.285714,28.2226562 214.285714,37.125 L214.285714,64 L273.214286,64 C287.946429,64 300,76.09375 300,90.875 Z"></path>
+                    <g id="icon_holding--PLUS" fill="#1199ff" stroke="none" stroke-width="1" fill-rule="evenodd">
+                      <path d="M213.966667,212.966667 L181,212.966667 L181,233.033333 L213.966667,233.033333 L213.966667,266 L234.033333,266 L234.033333,233.033333 L267,233.033333 L267,212.966667 L234.033333,212.966667 L234.033333,180 L213.966667,180 L213.966667,212.966667 Z M300.000007,185.274347 C297.559,180.398718 294.6656,175.788924 291.374844,171.5 L300,171.5 L300,185.274334 Z M158.459408,279 L26.7857143,279 C12.0535714,279 0,266.90625 0,252.125 L0,171.5 L112.5,171.5 L112.5,198.375 C112.5,204.253906 117.354911,209.125 123.214286,209.125 L139.203224,209.125 C138.411994,213.798601 138,218.601187 138,223.5 C138,244.681735 145.702518,264.06445 158.459408,279 Z M143.600382,193 L128.571429,193 L128.571429,171.5 L155.625156,171.5 C150.642052,177.994603 146.570096,185.224969 143.600388,192.999999 Z M275.17234,155.375 C260.819295,144.471456 242.915393,138 223.5,138 C204.084607,138 186.180705,144.471456 171.82766,155.375 L0,155.375 L0,90.875 C0,76.09375 12.0535714,64 26.7857143,64 L85.7142857,64 L85.7142857,37.125 C85.7142857,28.2226562 92.9129464,21 101.785714,21 L198.214286,21 C207.087054,21 214.285714,28.2226562 214.285714,37.125 L214.285714,64 L273.214286,64 C287.946429,64 300,76.09375 300,90.875 L300,155.375 L275.17234,155.375 Z M107.142857,64 L192.857143,64 L192.857143,42.5 L107.142857,42.5 L107.142857,64 Z M223.5,300 C181.250217,300 147,265.749783 147,223.5 C147,181.250217 181.250217,147 223.5,147 C265.749783,147 300,181.250217 300,223.5 C300,265.749783 265.749783,300 223.5,300 Z" id="Combined-Shape"></path>
                     </g>
                   </svg>
                   <p>Add</p>
@@ -157,12 +154,10 @@
                 </li>
                 <li *ngIf="!idea.is_watching_stock" (click)="addToList('Watching', idea.symbol, $event)"
                     class="nav-item">
-                  <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
-                       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <defs></defs>
-                    <g id="icon_watching" stroke="none" stroke-width="1" fill="#000000" fill-rule="evenodd">
-                      <path
-                        d="M117.857143,53.5714286 L46.875,53.5714286 C44.53125,53.5714286 42.3549107,55.078125 41.6852679,57.421875 L0,203.571429 L0,289.285714 C0,295.145089 4.85491071,300 10.7142857,300 L96.4285714,300 C102.287946,300 107.142857,295.145089 107.142857,289.285714 L107.142857,192.857143 C113.002232,192.857143 117.857143,188.002232 117.857143,182.142857 L117.857143,53.5714286 Z M171.428571,53.5714286 L128.571429,53.5714286 L128.571429,171.428571 L171.428571,171.428571 L171.428571,53.5714286 Z M300,203.571429 L258.314732,57.421875 C257.645089,55.078125 255.46875,53.5714286 253.125,53.5714286 L182.142857,53.5714286 L182.142857,182.142857 C182.142857,188.002232 186.997768,192.857143 192.857143,192.857143 L192.857143,289.285714 C192.857143,295.145089 197.712054,300 203.571429,300 L289.285714,300 C295.145089,300 300,295.145089 300,289.285714 L300,203.571429 Z M123.214286,5.35714286 C123.214286,2.34375 120.870536,0 117.857143,0 L69.6428571,0 C66.6294643,0 64.2857143,2.34375 64.2857143,5.35714286 L64.2857143,42.8571429 L123.214286,42.8571429 L123.214286,5.35714286 Z M235.714286,5.35714286 C235.714286,2.34375 233.370536,0 230.357143,0 L182.142857,0 C179.129464,0 176.785714,2.34375 176.785714,5.35714286 L176.785714,42.8571429 L235.714286,42.8571429 L235.714286,5.35714286 Z"></path>
+                    <g id="icon_watching--PLUS" fill="#000000" stroke="none" stroke-width="1" fill-rule="evenodd">
+                      <path d="M213.966667,211.966667 L181,211.966667 L181,232.033333 L213.966667,232.033333 L213.966667,265 L234.033333,265 L234.033333,232.033333 L267,232.033333 L267,211.966667 L234.033333,211.966667 L234.033333,179 L213.966667,179 L213.966667,211.966667 Z M171.428571,154.68002 C165.189102,159.477775 159.630502,165.11725 154.922645,171.428571 L128.571429,171.428571 L128.571429,53.5714286 L171.428571,53.5714286 L171.428571,154.68002 Z M300,260.725666 L300,289.285714 C300,295.145089 295.145089,300 289.285714,300 L259.659152,300 C277.129395,291.834943 291.383287,277.936554 300.000007,260.725653 Z M182.142857,147.649982 L182.142857,53.5714286 L253.125,53.5714286 C255.46875,53.5714286 257.645089,55.078125 258.314732,57.421875 L290.107658,168.888637 C274.43528,149.441678 250.420595,137 223.5,137 C208.498306,137 194.399,140.863583 182.14284,147.649992 Z M117.857143,53.5714286 L117.857143,182.142857 C117.857143,188.002232 113.002232,192.857143 107.142857,192.857143 L107.142857,289.285714 C107.142857,295.145089 102.287946,300 96.4285714,300 L10.7142857,300 C4.85491071,300 0,295.145089 0,289.285714 L0,203.571429 L41.6852679,57.421875 C42.3549107,55.078125 44.53125,53.5714286 46.875,53.5714286 L117.857143,53.5714286 Z M123.214286,5.35714286 L123.214286,42.8571429 L64.2857143,42.8571429 L64.2857143,5.35714286 C64.2857143,2.34375 66.6294643,0 69.6428571,0 L117.857143,0 C120.870536,0 123.214286,2.34375 123.214286,5.35714286 Z M235.714286,5.35714286 L235.714286,42.8571429 L176.785714,42.8571429 L176.785714,5.35714286 C176.785714,2.34375 179.129464,0 182.142857,0 L230.357143,0 C233.370536,0 235.714286,2.34375 235.714286,5.35714286 Z M223.5,300 C181.250217,300 147,265.749783 147,223.5 C147,181.250217 181.250217,147 223.5,147 C265.749783,147 300,181.250217 300,223.5 C300,265.749783 265.749783,300 223.5,300 Z" id="Combined-Shape"></path>
                     </g>
                   </svg>
                   <p>Watch</p>
@@ -202,21 +197,21 @@
                 </svg>
               </div>
             </div>
-            <div class="col-lg-2 col-xl-2 stock__PGR">
+            <div class="col-md-3 col-lg-2 col-xl-2 stock__PGR">
               <img class="align-absolute" src="{{appendPGRImage(idea.PGR)}}">
             </div>
-            <div class="col-lg-3 col-xl-2 stock__ticker">
-              <p class="">{{ idea.symbol }}</p>
+            <div class="col-md-3 col-lg-3 col-xl-2 stock__ticker">
+              <p>{{ idea.symbol }}</p>
             </div>
-            <div class="col-lg-3 col-xl-4 stock__company-name">
-              <p class="">{{ idea.name }}</p>
+            <div class="col-md-3 col-lg-3 col-xl-4 stock__company-name">
+              <p>{{ idea.name }}</p>
             </div>
-            <div class="col-lg-2 col-xl-2 stock__price">
+            <div class="col-md-3 col-lg-2 col-xl-2 stock__price">
               <p class="data"
-                 [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">${{
+                 [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">{{
                 idea.Last | decimal}}</p>
             </div>
-            <div class="col-lg-2 col-xl-2 stock__price">
+            <div class="col-md-3 col-lg-2 col-xl-2 stock__price">
               <p class="data"
                  [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">{{
                 idea["Percentage "] | decimal}}%</p>
@@ -269,12 +264,10 @@
               <div class="button__add-to-list">
                 <a *ngIf="!selectedStock.is_holding_stock" (click)="addToList('Holding', selectedStock.symbol, $event)"
                    class="button__hold">
-                  <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
-                       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <defs></defs>
-                    <g id="icon_portfolio" fill="#000000" stroke="none" stroke-width="1" fill-rule="evenodd">
-                      <path
-                        d="M107.142857,64 L192.857143,64 L192.857143,42.5 L107.142857,42.5 L107.142857,64 Z M300,171.5 L300,252.125 C300,266.90625 287.946429,279 273.214286,279 L26.7857143,279 C12.0535714,279 0,266.90625 0,252.125 L0,171.5 L112.5,171.5 L112.5,198.375 C112.5,204.253906 117.354911,209.125 123.214286,209.125 L176.785714,209.125 C182.645089,209.125 187.5,204.253906 187.5,198.375 L187.5,171.5 L300,171.5 Z M171.428571,171.5 L171.428571,193 L128.571429,193 L128.571429,171.5 L171.428571,171.5 Z M300,90.875 L300,155.375 L0,155.375 L0,90.875 C0,76.09375 12.0535714,64 26.7857143,64 L85.7142857,64 L85.7142857,37.125 C85.7142857,28.2226562 92.9129464,21 101.785714,21 L198.214286,21 C207.087054,21 214.285714,28.2226562 214.285714,37.125 L214.285714,64 L273.214286,64 C287.946429,64 300,76.09375 300,90.875 Z"></path>
+                    <g id="icon_holding--PLUS" fill="#1199ff" stroke="none" stroke-width="1" fill-rule="evenodd">
+                      <path d="M213.966667,212.966667 L181,212.966667 L181,233.033333 L213.966667,233.033333 L213.966667,266 L234.033333,266 L234.033333,233.033333 L267,233.033333 L267,212.966667 L234.033333,212.966667 L234.033333,180 L213.966667,180 L213.966667,212.966667 Z M300.000007,185.274347 C297.559,180.398718 294.6656,175.788924 291.374844,171.5 L300,171.5 L300,185.274334 Z M158.459408,279 L26.7857143,279 C12.0535714,279 0,266.90625 0,252.125 L0,171.5 L112.5,171.5 L112.5,198.375 C112.5,204.253906 117.354911,209.125 123.214286,209.125 L139.203224,209.125 C138.411994,213.798601 138,218.601187 138,223.5 C138,244.681735 145.702518,264.06445 158.459408,279 Z M143.600382,193 L128.571429,193 L128.571429,171.5 L155.625156,171.5 C150.642052,177.994603 146.570096,185.224969 143.600388,192.999999 Z M275.17234,155.375 C260.819295,144.471456 242.915393,138 223.5,138 C204.084607,138 186.180705,144.471456 171.82766,155.375 L0,155.375 L0,90.875 C0,76.09375 12.0535714,64 26.7857143,64 L85.7142857,64 L85.7142857,37.125 C85.7142857,28.2226562 92.9129464,21 101.785714,21 L198.214286,21 C207.087054,21 214.285714,28.2226562 214.285714,37.125 L214.285714,64 L273.214286,64 C287.946429,64 300,76.09375 300,90.875 L300,155.375 L275.17234,155.375 Z M107.142857,64 L192.857143,64 L192.857143,42.5 L107.142857,42.5 L107.142857,64 Z M223.5,300 C181.250217,300 147,265.749783 147,223.5 C147,181.250217 181.250217,147 223.5,147 C265.749783,147 300,181.250217 300,223.5 C300,265.749783 265.749783,300 223.5,300 Z" id="Combined-Shape"></path>
                     </g>
                   </svg>
                 </a>
@@ -293,12 +286,10 @@
                 <a *ngIf="!selectedStock.is_watching_stock"
                    (click)="addToList('Watching', selectedStock.symbol, $event)"
                    class="button__watch">
-                  <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
-                       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <defs></defs>
-                    <g id="icon_watching" stroke="none" stroke-width="1" fill="#000000" fill-rule="evenodd">
-                      <path
-                        d="M117.857143,53.5714286 L46.875,53.5714286 C44.53125,53.5714286 42.3549107,55.078125 41.6852679,57.421875 L0,203.571429 L0,289.285714 C0,295.145089 4.85491071,300 10.7142857,300 L96.4285714,300 C102.287946,300 107.142857,295.145089 107.142857,289.285714 L107.142857,192.857143 C113.002232,192.857143 117.857143,188.002232 117.857143,182.142857 L117.857143,53.5714286 Z M171.428571,53.5714286 L128.571429,53.5714286 L128.571429,171.428571 L171.428571,171.428571 L171.428571,53.5714286 Z M300,203.571429 L258.314732,57.421875 C257.645089,55.078125 255.46875,53.5714286 253.125,53.5714286 L182.142857,53.5714286 L182.142857,182.142857 C182.142857,188.002232 186.997768,192.857143 192.857143,192.857143 L192.857143,289.285714 C192.857143,295.145089 197.712054,300 203.571429,300 L289.285714,300 C295.145089,300 300,295.145089 300,289.285714 L300,203.571429 Z M123.214286,5.35714286 C123.214286,2.34375 120.870536,0 117.857143,0 L69.6428571,0 C66.6294643,0 64.2857143,2.34375 64.2857143,5.35714286 L64.2857143,42.8571429 L123.214286,42.8571429 L123.214286,5.35714286 Z M235.714286,5.35714286 C235.714286,2.34375 233.370536,0 230.357143,0 L182.142857,0 C179.129464,0 176.785714,2.34375 176.785714,5.35714286 L176.785714,42.8571429 L235.714286,42.8571429 L235.714286,5.35714286 Z"></path>
+                    <g id="icon_watching--PLUS" fill="#000000" stroke="none" stroke-width="1" fill-rule="evenodd">
+                      <path d="M213.966667,211.966667 L181,211.966667 L181,232.033333 L213.966667,232.033333 L213.966667,265 L234.033333,265 L234.033333,232.033333 L267,232.033333 L267,211.966667 L234.033333,211.966667 L234.033333,179 L213.966667,179 L213.966667,211.966667 Z M171.428571,154.68002 C165.189102,159.477775 159.630502,165.11725 154.922645,171.428571 L128.571429,171.428571 L128.571429,53.5714286 L171.428571,53.5714286 L171.428571,154.68002 Z M300,260.725666 L300,289.285714 C300,295.145089 295.145089,300 289.285714,300 L259.659152,300 C277.129395,291.834943 291.383287,277.936554 300.000007,260.725653 Z M182.142857,147.649982 L182.142857,53.5714286 L253.125,53.5714286 C255.46875,53.5714286 257.645089,55.078125 258.314732,57.421875 L290.107658,168.888637 C274.43528,149.441678 250.420595,137 223.5,137 C208.498306,137 194.399,140.863583 182.14284,147.649992 Z M117.857143,53.5714286 L117.857143,182.142857 C117.857143,188.002232 113.002232,192.857143 107.142857,192.857143 L107.142857,289.285714 C107.142857,295.145089 102.287946,300 96.4285714,300 L10.7142857,300 C4.85491071,300 0,295.145089 0,289.285714 L0,203.571429 L41.6852679,57.421875 C42.3549107,55.078125 44.53125,53.5714286 46.875,53.5714286 L117.857143,53.5714286 Z M123.214286,5.35714286 L123.214286,42.8571429 L64.2857143,42.8571429 L64.2857143,5.35714286 C64.2857143,2.34375 66.6294643,0 69.6428571,0 L117.857143,0 C120.870536,0 123.214286,2.34375 123.214286,5.35714286 Z M235.714286,5.35714286 L235.714286,42.8571429 L176.785714,42.8571429 L176.785714,5.35714286 C176.785714,2.34375 179.129464,0 182.142857,0 L230.357143,0 C233.370536,0 235.714286,2.34375 235.714286,5.35714286 Z M223.5,300 C181.250217,300 147,265.749783 147,223.5 C147,181.250217 181.250217,147 223.5,147 C265.749783,147 300,181.250217 300,223.5 C300,265.749783 265.749783,300 223.5,300 Z" id="Combined-Shape"></path>
                     </g>
                   </svg>
                 </a>
@@ -321,7 +312,7 @@
               <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
                 <p class="current-price"
                    [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
-                  ${{selectedStock?.Last | decimal}}</p>
+                  {{selectedStock?.Last | decimal}}</p>
               </div>
               <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="price-change"
@@ -345,10 +336,10 @@
               </div>
             </div>
             <div class="stock-panel__details row no-gutters">
-              <div class="col-lg-6">
-                <p>Mkt&nbsp;Cap:<span>{{selectedStock?.market_cap | marketCap | number:'.2-2' }} B</span></p>
+              <div class="col-md-6">
+                <p>Mkt&nbsp;Cap:<span>{{selectedStock?.market_cap | marketCap | number:'.2-2' }}B</span></p>
               </div>
-              <div class="col-lg-6">
+              <div class="col-md-6">
                 <p>Yield:<span>{{selectedStock?.div_yield | decimal }}%</span></p>
               </div>
             </div>
@@ -459,7 +450,7 @@
     </div>
   </div>
 </div>
-<div [ngBusy]="loading" infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="1000"
+<div infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="1000"
      (scrolled)="onScroll()" [scrollWindow]="false" *ngIf="currentView == 'panel-view'"
      class="view-option--panel">
   <div *ngIf="!ideaList?.length">
@@ -470,7 +461,7 @@
     <!--  PANEL  -->
     <div *ngFor="let idea of panelViewIdeasList | orderBy:orderByObject?.field:orderByObject?.ascending"
          class="panel-view__container col-md-6">
-      <div class="quick-view__panel">
+      <div [ngBusy]="loading" class="quick-view__panel">
         <div class="quick-view__data row">
 
           <div class="col-lg-8">
@@ -494,7 +485,7 @@
             </div>
             <div class="stock-panel__company-name row">
               <div class="button__add-to-list">
-                <a *ngIf="!idea.is_holding_stock" (click)="addToList('Holding', idea.symbol, $event)"
+                <a *ngIf="!idea.is_holding_stock" (click)="addToList('Holding', idea['meta-info'].symbol, $event)"
                    class="button__hold">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -506,7 +497,7 @@
                   </svg>
                 </a>
                 <a *ngIf="idea.is_holding_stock"
-                   (click)="removeFromList('Holding', selectedStock.symbol, $event)"
+                   (click)="removeFromList('Holding', idea.symbol, $event)"
                    class="button__hold">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -518,7 +509,7 @@
                   </svg>
                 </a>
                 <a *ngIf="!idea.is_watching_stock"
-                   (click)="addToList('Watching', selectedStock.symbol, $event)"
+                   (click)="addToList('Watching', idea['meta-info'].symbol, $event)"
                    class="button__watch">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -530,7 +521,7 @@
                   </svg>
                 </a>
                 <a *ngIf="idea.is_watching_stock"
-                   (click)="removeFromList('Watching', selectedStock.symbol, $event)"
+                   (click)="removeFromList('Watching', idea.symbol, $event)"
                    class="button__watch">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -542,28 +533,28 @@
                   </svg>
                 </a>
               </div>
-              <p>{{idea['meta-info'].name}}</p>
+              <p>{{ idea['meta-info'].name }}</p>
             </div>
             <div class="stock-panel__price row">
-              <div class="col-4">
-                <p
-                  [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}"
-                  class="current-price">{{idea['meta-info'].Last | decimal}}</p>
+              <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
+                <p class="current-price"
+                   [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}">
+                  {{ idea['meta-info']['Last'] | decimal }}</p>
               </div>
-              <div class="col-4">
-                <p
-                  [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}"
-                  class="price-change">{{idea['meta-info'].Change | decimal}}</p>
+              <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                <p class="price-change"
+                   [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}">
+                  {{ idea['meta-info']['Change'] | decimal }}</p>
               </div>
-              <div class="col-4">
-                <p
-                  [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}"
-                  class="percent-change">({{idea['meta-info']["Percentage "] | decimal}}%)</p>
+              <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                <p class="percent-change"
+                   [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}">
+                  ({{ idea['meta-info']["Percentage "] | decimal }}%)</p>
               </div>
             </div>
             <div class="stock-panel__industry row no-gutters">
               <div class="col-12">
-                <p>INDUSTRY: <span class="industry">{{idea?.industry_name}}</span></p>
+                <p>INDUSTRY: <span class="industry">{{idea['meta-info'].industry_name}}</span></p>
               </div>
               <div class="col-12">
                 <p>STRENGTH: <span class="industry-strength"

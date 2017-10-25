@@ -47,6 +47,14 @@
         &:hover  {
           background-color: rgba(255,255,255,0.2);
         }
+
+        &:active  {
+          background-color: rgba(255,255,255,0.2);
+        }
+      }
+
+      .sort-toggle.opened {
+          background-color: rgba(255,255,255,0.2);
       }
     }
 
@@ -64,7 +72,6 @@
           font-size: 24px;
           display: inline-block;
           padding:5px;
-          cursor: help;
         }
       }
     }
@@ -135,17 +142,28 @@
   border-left: $border-line--W;
 
   .sort-header {
-    border-bottom: 3px solid #eeeeee;
+    border-bottom: $border-line--LT2;
+
+    .col__company-name {
+      @media screen and (max-width:990px) {
+        display:none;
+      }
+    }
 
     p {
       color: $font-color--MD;
       text-align: center;
       text-transform: uppercase;
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 0;
-      line-height: 24px;
-      font-weight: 400;
+      line-height: 23px;
+      font-weight: 600;
       margin-top:2px;
+
+      @media screen and (max-width:990px) {
+        font-size: 10px;
+        white-space: nowrap;
+      }
     }
 
     p.active {
@@ -157,7 +175,7 @@
     height: 100vh;
     overflow-y: scroll;
     background-color: $background--LT;
-    padding-bottom: 342px;
+    padding-bottom: 337px;
 
     .list__container {
 
@@ -183,10 +201,15 @@
 
         .stock__PGR {
           position: relative;
+
+          img {
+            height: 21px;
+            width:auto;
+          }
         }
 
         .stock__ticker {
-          font-size: 24px;
+          font-size: 22px;
           font-weight: 700;
           line-height: 60px;
           white-space: nowrap;
@@ -196,7 +219,11 @@
           font-size: 16px;
           font-weight: 300;
           float: left;
-          line-height: 60px
+          line-height: 60px;
+
+          @media screen and (max-width:990px) {
+            display:none;
+          }
         }
 
         .stock__price {
@@ -221,7 +248,7 @@
           }
 
           svg g {
-            fill: $link-grey;
+            fill: #ffffff;
           }
 
           &:hover {
@@ -245,7 +272,7 @@
 
             .nav-item {
               height: 60px;
-              padding-top: 7px;
+              padding-top: 8px;
 
               &:hover {
                 background-color: rgba(255, 255, 255, 0.2);
@@ -255,13 +282,13 @@
                 color: #ffffff;
                 text-transform: uppercase;
                 font-weight: 600;
-                font-size: 12px;
-                margin-top: 6px;
+                font-size: 10px;
+                margin-top: 7px;
               }
 
               svg {
-                height: 25px;
-                width: 25px;
+                height: 22px;
+                width: 22px;
               }
 
               svg g {
@@ -295,7 +322,7 @@
         }
 
         &:hover {
-          background-color: $background--LT-hover;
+          background-color: $background--LT2;
         }
       }
 
@@ -432,8 +459,8 @@
         padding: 7px 0px 7px 0;
 
         p {
-          font-weight: 400;
-          font-size: 12px;
+          font-weight: 600;
+          font-size: 11px;
           line-height: 1.7;
           color: $font-color--MD;
           text-transform: uppercase;
@@ -441,6 +468,7 @@
           white-space: nowrap;
           overflow: hidden;
           padding-right:3px;
+          letter-spacing: 0.02em;
 
           span {
             font-size: 16px;
@@ -466,8 +494,8 @@
         padding:10px 0;
 
         p {
-          font-weight: 400;
-          font-size: 12px;
+          font-weight: 600;
+          font-size: 11px;
           line-height: 1.4;
           color: $font-color--MD;
           text-transform: uppercase;
@@ -489,6 +517,11 @@
             overflow: visible;
           }
         }
+
+        @media screen and (max-width:990px) {
+          border-bottom: 3px solid #f8f8f8;
+          margin-bottom: 15px;
+        }
       }
 
       .quick-view__pgr {
@@ -507,7 +540,7 @@
 
         .pgr__text {
           font-weight: 700;
-          font-size: 17px;
+          font-size: 16px;
           text-transform: uppercase;
           white-space: nowrap;
 
@@ -516,11 +549,11 @@
           }
 
           @media screen and (max-width: 1479px) and (min-width: 1280px) {
-            font-size: 23px;
+            font-size: 22px;
           }
 
           @media screen and (max-width: 1279px) and (min-width: 1025px) {
-            font-size: 20px;
+            font-size: 17px;
           }
         }
 
@@ -594,19 +627,13 @@
 
       .news-panel__header {
         width: 100%;
-        margin-bottom: 5px;
 
         p {
-          color:$font-color--subhead;
+          color:$font-color--MD;
           font-size: 18px;
           font-weight: 600;
           text-transform: uppercase;
-        }
-
-        span {
-          font-weight: 800;
-          color: $font-color;
-
+          line-height:1;
         }
       }
 
@@ -618,14 +645,14 @@
           position: relative;
           margin: 10px 0 15px;
           padding: 5px 5px 10px;
-          border-bottom: 3px solid #f8f8f8;
+          border-bottom: $border-line--LT;
 
           h2 {
             font-size: 16px;
             font-weight: 400;
             line-height: 1.5;
             margin: 0;
-            padding: 0 0 3px;
+            padding: 0 0 5px;
             color: $font-color;
             cursor: pointer;
 
@@ -646,7 +673,7 @@
 
             a {
               text-decoration: none;
-              color: $font-color--Blue;
+              color: $font-color--MD;
             }
           }
 
@@ -681,14 +708,14 @@
 
 
 /*------------------------------------*\
-  #VIEW OPTION-PANEL
+  #PANEL VIEW
 \*------------------------------------*/
 
 .view-option--panel {
   height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
-  margin-bottom: 200px;
+  padding-bottom: 300px;
 
   .empty-list__text {
     text-align: center;
@@ -700,12 +727,16 @@
 }
 
 .panel-view__container {
+  background-color: $background--LT;
 
   .quick-view__panel {
-    padding: 20px 30px;
-    height: 490px;
-    margin-bottom: 40px;
+    background-color: #ffffff;
+    padding: 20px 25px;
+    height: 500px;
+    margin: 10px 15px 10px;
     position: relative;
+    border: $border-line--LT2;
+    border-radius: 8px;
 
     .quick-view__data {
       position: relative;
@@ -714,7 +745,7 @@
         float: left;
 
         img {
-          width: 60px;
+          width: 56px;
           height: auto;
           margin-right: 15px;
         }
@@ -801,8 +832,8 @@
       }
 
       .stock-panel__industry {
-        border-bottom: 3px solid #f8f8f8;
-        border-top: 3px solid #f8f8f8;
+        border-bottom: $border-line--LT;
+        border-top: $border-line--LT;
         padding: 7px 0px;
 
         p {

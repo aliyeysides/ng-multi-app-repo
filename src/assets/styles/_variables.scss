@@ -3,7 +3,7 @@
 
 $veryBullish-green: #24A300;
 $bullish-green: #7ED321;
-$neutral-yellow: #FF9900;
+$neutral-yellow: #ffbe00;
 $bearish-red: #FD4500;
 $veryBearish-red: #EB001C;
 
@@ -16,7 +16,7 @@ $weak: #EB001C;
 
 
 $link-blue: #1199ff;
-$link-grey: #B5B8BF;
+$link-grey: #7C828F;
 
 
 $list-color--green: #2FB71A;
@@ -26,6 +26,8 @@ $list-color--orange: #F3823C;
 $list-color--blue: #0A5FFF;
 
 
+
+
 /*  Fonts  */
 
 
@@ -33,9 +35,8 @@ $font-stack: 'Open Sans', Helvetica, sans-serif;
 
 
 $font-color: #454D5F;
-$font-color--MD: #B5B8BF;
+$font-color--MD: #7C828F;
 $font-color--LT: #DBDCE0;
-$font-color--subhead: #7C828F;
 $font-color--Blue: #003366;
 
 
@@ -45,16 +46,13 @@ $font-color--Blue: #003366;
 /*  Backgrounds  */
 
 
-$background--LT: #F8F8F9;
-$background--LT2: #EBEBED;
+$background--LT: #F8F8F8;
+$background--LT2: #efefef;
 $background--LT3: #DBDCE0;
-$background--LT-hover: #EBEBED;
+$background--LT-hover: #eaeaea;
 $background--MD: #7C828F;
-$background--MD-hover: #7C828F;
-$background--DK: #454D5F;
-$background--DK2: #313540;
+$background--DK: #313540;
 $background--LT-blue: #EFF8FF;
-$background--sidebar: #454D5F;
 
 
 
@@ -68,13 +66,15 @@ $background--sidebar: #454D5F;
 /*  Lines & Borders  */
 
 
-$border-line--W: 2px solid #FFFFFF;
+$border-line--W: 3px solid #FFFFFF;
 
 $border-line--LT: 3px solid #f8f8f8;
+$border-line--LT2: 1px solid #eaeaea;
 $border-line--MD: 1px solid #7C828F;
 
-$border-dashed--LT: 1px dashed rgba(0,0,0,0.2);
-$border-dashed--MD: 1px dashed #7C828F;
+$border-dashed--W: 1px solid rgba(255,255,255,0.4);
+$border-dashed--LT: 1px solid rgba(255,255,255,0.4);
+$border-dashed--MD: 3px solid #eaeaea;
 
 $chart-border--LT: 1px solid #dddddd;
 

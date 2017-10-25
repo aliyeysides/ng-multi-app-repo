@@ -5,18 +5,22 @@
 
 .discovery__container {
   overflow: hidden;
-  padding-top:210px;
+  padding-top:200px;
   position: relative;
   height:100vh;
 
   .body__top {
-    background-color: #f8f8f8;
-    height: 210px;
+    background-color: $background--LT;
+    height: 200px;
     position: absolute;
     top:0;
     z-index: 400;
     width: 100%;
     min-width: 860px;
+
+/*------------------------------------*\
+  #SEEDED STOCK
+\*------------------------------------*/
 
     .discovery__base-stock {
       padding: 0px 25px 0px 45px;
@@ -37,11 +41,18 @@
           top: 10px;
           left: -15px;
           overflow: hidden;
-          border:1px solid #cccccc;
+          border:$border-line--LT2;
 
           img {
             max-width: 112px;
             height: auto;
+          }
+
+          p {
+            display: inline-block;
+            width: 100px;
+            font-size: 12px;
+            text-align: center;
           }
         }
 
@@ -77,7 +88,7 @@
 
           .company-industry {
             font-size: 14px;
-            color: $font-color--subhead;
+            color: $font-color--MD;
             line-height: 2;
             font-weight: 400;
             font-style: italic;
@@ -163,7 +174,7 @@
               left: 0%;
               position: absolute;
               margin-top: -3px;
-              margin-left: 0px;
+              margin-left: -3px;
               z-index: 1;
               height: 19px;
               width: 19px;
@@ -225,7 +236,7 @@
           }
 
           .PGR__text {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             margin-bottom:5px;
             text-transform: uppercase;
@@ -285,6 +296,11 @@
     overflow-x: hidden;
   }
 }
+
+
+/*------------------------------------*\
+  #RESULTS
+\*------------------------------------*/
 
 .discovery-results__slider.selected-slider .slider__scroll {
   display: block !important;
@@ -361,20 +377,14 @@
         perspective: 800px;
 
         &:hover {
-          //-ms-transform: scale(1.05); /* IE 9 */
-          //-webkit-transform: scale(1.05); /* Safari */
-          //transform: scale(1.05); /* Standard syntax */
-
           .tile__front {
             border: 2px solid $link-blue !important;
           }
         }
 
-        &:active {
-          //-ms-transform: scale(1.05); /* IE 9 */
-          //-webkit-transform: scale(1.05); /* Safari */
-          //transform: scale(1.05); /* Standard syntax */
-        }
+/*------------------------------------*\
+  #TILE/CARD
+\*------------------------------------*/
 
         .discovery__tile {
           position: relative;
@@ -410,6 +420,13 @@
                 img {
                   max-height: 75px;
                   max-width: 160px;
+                }
+
+                p {
+                  display: inline-block;
+                  width: 150px;
+                  font-size: 12px;
+                  text-align: center;
                 }
               }
 
@@ -671,7 +688,7 @@
       left: 50%;
       position: absolute;
       margin-top: -2px;
-      margin-left: -12px;
+      margin-left: -9px;
       z-index: 1;
       height: 18px;
       width: 18px;

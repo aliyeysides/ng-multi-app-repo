@@ -22,15 +22,25 @@ import {Observable} from 'rxjs/Observable';
         </button>
       </div>
       <div class="post-body post-body--previous-pick">
-        <ul [ngBusy]="loading">
-          <li *ngFor="let post of posts">
+        <ul class="container" [ngBusy]="loading">
+          <li class="row" *ngFor="let post of posts">
             <ng-container *ngIf="post['data']">
-              <img class="rating" src="{{ appendPGRImage(post['data']['pgr']['PGR Value']) }}">
-              <p class="ticker">{{ post.ticker }}</p>
-              <p class="company">{{ post['data']['meta-info'].name }}</p>
-              <p class="industry">{{ post['data']['meta-info'].industry_name }}</p>
-              <p class="pick-date">{{ post['post_date_formatted'] }}</p>
-              <a (click)="openCommentaryModal(post)">Commentary</a>
+              <div class="col-6">
+                <img class="rating" src="{{ appendPGRImage(post['data']['pgr']['PGR Value']) }}">
+                <p class="ticker">{{ post.ticker }}</p>
+              </div>
+              <div class="col-6">
+                <p class="company">{{ post['data']['meta-info'].name }}</p>
+              </div> 
+              <div class="col-6">
+                <p class="pick-date">{{ post['post_date_formatted'] }}</p>
+              </div>
+              <div class="col-6">
+                <p class="industry">{{ post['data']['meta-info'].industry_name }}</p>
+              </div>
+              <div class="col-12">
+                <a (click)="openCommentaryModal(post)">Commentary &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+              </div>
             </ng-container>
           </li>
         </ul>
@@ -78,7 +88,6 @@ export class PreviousBearsModalComponent implements OnInit, OnDestroy {
       .toArray()
       .subscribe(posts => {
         this.posts = posts;
-        console.log('posts in sub:', posts);
       });
   }
 

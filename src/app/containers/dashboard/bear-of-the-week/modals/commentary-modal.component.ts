@@ -19,7 +19,9 @@ import {BsModalRef} from 'ngx-bootstrap';
       <div class="post-body">
         <div [innerHtml]="commentary"></div>
         <div class="post-footer">
-          <button type="button" class="btn btn-default pull-right" (click)="bsModalRef.hide()">Close</button>
+          <button type="button" class="post-footer__button" (click)="bsModalRef.hide()">
+            <a><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Close</a>
+          </button>
         </div>
       </div>
     </div>
