@@ -8,20 +8,27 @@ import {SignalService} from '../../../core/services/signal.service';
   template: `
     <div class="discovery-results__container container-fluid">
       <div *ngFor="let list of lists" class="discovery-results__slider row no-gutters">
-        <div *ngIf="endIndex[list['list_key']] != list['stocks'].length && list['stocks'].length > 5" (click)="scrollRight(list['list_key'])" class="slider__scroll slider__scroll--right">
-          <img class="align-absolute" src="./assets/imgs/scroll-r.svg">
-        </div>
-        <div *ngIf="startIndex[list['list_key']] && startIndex[list['list_key']] != 0" (click)="scrollLeft(list['list_key'])" class="slider__scroll slider__scroll--left">
-          <img class="align-absolute" src="./assets/imgs/scroll-l.svg">
-        </div>
-        <div class="discovery-slider__label">
-          <p>{{ list.list_name }}</p>
-        </div>
-        <ul class="discovery-slider__tiles">
-          <li *ngFor="let stock of ( list['stocks'].slice(startIndex[list.list_key], endIndex[list.list_key] || 5) )" class="tile__wrapper">
-            <cpt-discovery-card (addToListClicked)="addToList($event)" (viewDiscoveryClicked)="viewDiscovery(list['list_key'], $event)" [stock]="stock"></cpt-discovery-card>
-          </li>
-        </ul>
+        <!--<ng-container *ngIf="list.is_active == true">-->
+          <div *ngIf="endIndex[list['list_key']] != list['stocks'].length && list['stocks'].length > 5"
+               (click)="scrollRight(list['list_key'])" class="slider__scroll slider__scroll--right">
+            <img class="align-absolute" src="./assets/imgs/scroll-r.svg">
+          </div>
+          <div *ngIf="startIndex[list['list_key']] && startIndex[list['list_key']] != 0"
+               (click)="scrollLeft(list['list_key'])" class="slider__scroll slider__scroll--left">
+            <img class="align-absolute" src="./assets/imgs/scroll-l.svg">
+          </div>
+          <div class="discovery-slider__label">
+            <p>{{ list.list_name }}</p>
+          </div>
+          <ul class="discovery-slider__tiles">
+            <li *ngFor="let stock of ( list['stocks'].slice(startIndex[list.list_key], endIndex[list.list_key] || 5) )"
+                class="tile__wrapper">
+              <cpt-discovery-card (addToListClicked)="addToList($event)"
+                                  (viewDiscoveryClicked)="viewDiscovery(list['list_key'], $event)"
+                                  [stock]="stock"></cpt-discovery-card>
+            </li>
+          </ul>
+        <!--</ng-container>-->
       </div>
     </div>
   `,
@@ -31,10 +38,12 @@ export class DiscoveryResultsComponent implements AfterViewInit, OnDestroy {
 
   @Output('viewDiscoveryClicked') public viewDiscoveryClicked = new EventEmitter<string>();
   @Output('addToListClicked') public addToListClicked = new EventEmitter<object>();
+
   @Input('results')
   set results(val: object[]) {
     this._results.next(val);
   }
+
   get results() {
     return this._results.getValue();
   }

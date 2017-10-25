@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {UtilService} from './util.service';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class SignalService {
@@ -25,9 +26,16 @@ export class SignalService {
   private apiHostName = this.utilService.getApiHostName();
   private apiPrependText = '/CPTRestSecure/app';
 
+  private _alertsOpen: Subject<void> = new Subject<void>();
+  alertsOpen$ = this._alertsOpen.asObservable();
+
   constructor(private utilService: UtilService) {
     this.alertsLookupParams = new URLSearchParams();
     this.signalsLookupParams = new URLSearchParams();
+  }
+
+  openAlerts() {
+    this._alertsOpen.next();
   }
 
   public parseSignal(signal) {
@@ -97,6 +105,74 @@ export class SignalService {
     this.signalsLookupParams.set('period', period);
     this.signalsLookupParams.set('uid', uid);
     return this.utilService.getJson(signalsLookupUrl, this.signalsLookupParams);
+  }
+
+  public parseAlertData(res) {
+    let alertList = res['alerts'];
+    let result = [];
+
+    for (var key in alertList['earnings_surprise_alerts']) {
+      for (var obj in alertList['earnings_surprise_alerts'][key]) {
+        let jsonObj = {};
+        jsonObj['symbol'] = obj;
+        jsonObj['alert_type'] = 'earnings_surprise_alerts';
+        jsonObj['alert_text'] = 'Earnings Surprise';
+        jsonObj['quarter'] = alertList['earnings_surprise_alerts'][key][obj]['quarter'];
+        jsonObj['pgr'] = this.calculatePGR(alertList['earnings_surprise_alerts'][key][obj]['data'][3]);
+        jsonObj['new_value'] = alertList['earnings_surprise_alerts'][key][obj]['data'][0];
+        jsonObj['old_value'] = alertList['earnings_surprise_alerts'][key][obj]['data'][1];
+        jsonObj['per_change'] = alertList['earnings_surprise_alerts'][key][obj]['data'][2];
+        result.push(jsonObj);
+      }
+    }
+    for (var key in alertList['estimate_revision_alerts']) {
+      for (var obj in alertList['estimate_revision_alerts'][key]) {
+        let jsonObj = {};
+        jsonObj['symbol'] = obj;
+        jsonObj['alert_type'] = 'estimate_revision_alerts';
+        jsonObj['alert_text'] = 'Estimate Revision';
+        jsonObj['quarter'] = alertList['estimate_revision_alerts'][key][obj]['quarter'];
+        jsonObj['pgr'] = this.calculatePGR(alertList['estimate_revision_alerts'][key][obj]['data'][3]);
+        jsonObj['new_value'] = alertList['estimate_revision_alerts'][key][obj]['data'][0];
+        jsonObj['old_value'] = alertList['estimate_revision_alerts'][key][obj]['data'][1];
+        jsonObj['per_change'] = alertList['estimate_revision_alerts'][key][obj]['data'][2];
+        result.push(jsonObj);
+      }
+    }
+
+    if (alertList['pgr_change_alerts']['DataAvailable'] == true) {
+      for (var key in alertList['pgr_change_alerts']) {
+        if (key != 'DataAvailable') {
+          for (var obj in alertList['pgr_change_alerts'][key]) {
+            let jsonObj = {};
+            jsonObj['symbol'] = obj;
+            jsonObj['alert_type'] = 'pgr_change_alerts';
+            jsonObj['alert_text'] = 'PGR Revision';
+            jsonObj['pgr'] = this.calculatePGR(alertList['pgr_change_alerts'][key][obj]['corrected_pgr']);
+            jsonObj['per_change'] = alertList['pgr_change_alerts'][key][obj]['chg_direction'];
+            result.push(jsonObj);
+          }
+        }
+      }
+    }
+    return result;
+  }
+
+  private calculatePGR(pgr) {
+    if (pgr >= 0 && pgr < 15) {
+      pgr = 1;
+    } else if (pgr >= 15 && pgr < 29) {
+      pgr = 2;
+    } else if (pgr >= 29 && pgr < 59) {
+      pgr = 3;
+    } else if (pgr >= 59 && pgr < 85) {
+      pgr = 4;
+    } else if (pgr >= 85) {
+      pgr = 5;
+    } else {
+      pgr = 0;
+    }
+    return pgr;
   }
 
   public appendPGRImage(pgr) {

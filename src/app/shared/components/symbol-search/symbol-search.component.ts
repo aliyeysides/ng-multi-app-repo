@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild,
   ViewEncapsulation
 } from '@angular/core';
@@ -71,7 +72,7 @@ import {Subscription} from 'rxjs/Subscription';
   styleUrls: ['./symbol-search.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SymbolSearchComponent implements AfterViewInit, OnDestroy {
+export class SymbolSearchComponent implements AfterContentInit, OnDestroy {
   @Input('placeholder') placeholder: string;
   @ViewChild('search') search: ElementRef;
 
@@ -98,8 +99,8 @@ export class SymbolSearchComponent implements AfterViewInit, OnDestroy {
       .forEach(e => this.navEndLocation = router.routerState.root.firstChild.component['name']);
   }
 
-  ngAfterViewInit() {
-    this.search.nativeElement.focus();
+  ngAfterContentInit() {
+    // this.search.nativeElement.focus();
     this.authService.currentUser$
       .takeUntil(this.ngUnsubscribe)
       .map(usr => this.uid = usr['UID'])

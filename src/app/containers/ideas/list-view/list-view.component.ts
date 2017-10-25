@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output, HostListener } from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output, HostListener, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
@@ -14,7 +14,7 @@ import {UtilService} from '../../../core/services/util.service';
   styleUrls: ['./list-view.component.scss'],
 })
 
-export class ListViewComponent implements AfterViewInit, OnDestroy {
+export class ListViewComponent implements OnInit, OnDestroy {
   @Output('addToListClicked') addToListClicked: EventEmitter<object> = new EventEmitter<object>();
   @Output('removeFromListClicked') removeFromListClicked: EventEmitter<object> = new EventEmitter<object>();
 
@@ -52,7 +52,7 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
               private ideaService: IdeasService) {
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.loading = this.updateData();
 
     setInterval(() => {
@@ -165,7 +165,7 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
 
     this.chartData = data;
     this.drawchart();
-    
+
   }
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -173,7 +173,7 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
   }
   public drawchart(){
     if(this.chartData!= null){
-      this.ideaService.areaChartWithBrushing.init({ data: this.chartData, id: 'area-chart' }); 
+      this.ideaService.areaChartWithBrushing.init({ data: this.chartData, id: 'area-chart' });
     }
   }
 

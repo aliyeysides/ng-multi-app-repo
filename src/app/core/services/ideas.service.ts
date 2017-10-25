@@ -6,6 +6,7 @@ import {IdeaList} from '../../shared/models/idea';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import * as d3 from 'd3';
 import {NotificationsService} from 'angular2-notifications/dist';
+import {Subject} from 'rxjs/Subject';
 
 
 @Injectable()
@@ -35,6 +36,9 @@ export class IdeasService {
 
   private _selectedList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>(this.defaultList);
   selectedList = this._selectedList.asObservable();
+
+  private _updateAlerts: Subject<void> = new Subject<void>();
+  updateAlerts$ = this._updateAlerts.asObservable();
 
   setSelectedList(list: IdeaList) {
     this._selectedList.next(list);
@@ -88,6 +92,7 @@ export class IdeasService {
       const result = res.json();
       Object.keys(result).forEach((key) => {
         this.toast.success('Success!', 'Successfully added ' + key);
+        this._updateAlerts.next();
       });
       return res.json()
     })
@@ -166,7 +171,7 @@ export class IdeasService {
       let template = document.createElement('div');
      // template.className = 'tooltip-container cpt-tool-tip';
      // template.style = 'position: absolute; pointer-events: none; display: none; top: 38.5px; left: 490.5px;'
-  
+
       template.innerHTML = `
         <div class="tooltip-container cpt-tool-tip" style= "position: absolute; pointer-events: none; display: none; top: 38.5px; left: 490.5px;" >
         <table class="tooltip" > <tbody>
@@ -272,11 +277,11 @@ export class IdeasService {
       /*self.hoverLineGroup.append("line").attr("class", "hoverLineY hover-line").attr("opacity", 1).attr("stroke", "#000").style("stroke-dasharray", ("3, 3"));
       self.hoverLineGroup.append("line").attr("class", "hoverLineX hover-line").attr("opacity", 1).attr("stroke", "#000").style("stroke-dasharray", ("3, 3"));
   */
-      //draw main GROUP which append with main SVG for draw chart 
+      //draw main GROUP which append with main SVG for draw chart
       self.parentGroup = self.mainSVG.append("g").attr("class", "parentGroup").attr("transform", "translate(" + self.margins.left + "," + self.margins.top + ")");
       self.dummyParentGroup = self.mainSVG.append("g").attr("class", "dummyGroup").attr("transform", "translate(" + (self.margins.left + self.areaChartMargins.left) + "," + (self.margins.top + self.areaChartMargins.top) + ")");
       self.visibleXAxis = self.mainSVG.append("g").attr("class", "dummyGroup").attr("transform", "translate(" + (self.margins.left + self.areaChartMargins.left) + "," + (self.margins.top + self.areaChartMargins.top) + ")");
-      
+
       // Actual width and height for charts
       self.chartWidth = self.width - self.margins.left - self.margins.right;
       self.chartHeight = self.height - self.margins.top - self.margins.bottom;
@@ -302,7 +307,7 @@ export class IdeasService {
 
       /*self.areaGroup.append("rect").attr("class", "area-background")
         .attr("x", 0).attr("y", 0).attr("width", self.scaleWidth)
-        .attr("height", (self.scaleHeight))  
+        .attr("height", (self.scaleHeight))
         .attr("fill", "cyan").attr("opacity", "0.5");*/
 
 
@@ -321,7 +326,7 @@ export class IdeasService {
       self.visibleXAxis.append("g").attr("class", "xAxisGroupDummy axis");
       self.parentGroup.append("g").attr("class", "xAxisGroupAdvance");
 
-      // Draw Group for y Axis in which append y Axis  
+      // Draw Group for y Axis in which append y Axis
       self.parentGroup.append("g").attr("class", "yAxisGroup yAxis axis");
 
       //Parent sector group for all other sectors.
@@ -330,13 +335,13 @@ export class IdeasService {
 
       /*self.parentSectorGroup.append("rect").attr("class", "parentSectorGroup-background")
         .attr("x", 0).attr("y", 0).attr("width", self.scaleWidth)
-        .attr("height", (self.chartHeight - (self.scaleHeight + self.areaChartMargins.top + self.areaChartMargins.bottom)))  
+        .attr("height", (self.chartHeight - (self.scaleHeight + self.areaChartMargins.top + self.areaChartMargins.bottom)))
         .attr("fill", "blue").attr("opacity", "0.5");*/
 
-      //Outermost group for bar 
+      //Outermost group for bar
       self.mainPGRGroup = self.parentSectorGroup.append("g").attr("class", "main-pgr-group")
 
-      //actual container group for bars. 
+      //actual container group for bars.
       self.pgrBarChartGroup = self.mainPGRGroup.append("g").attr("class", "pgr-bars-group")
         .attr("transform", "translate(" + (0) + "," + (0) + ")");
 
@@ -348,7 +353,7 @@ export class IdeasService {
       /*
           self.pgrBarChartGroup.append("rect").attr("class", "parentSectorGroup-background")
             .attr("x", 0).attr("y", 0).attr("width", self.scaleWidth)
-            .attr("height", (self.pgrBarHeight))  
+            .attr("height", (self.pgrBarHeight))
             .attr("fill", "red").attr("opacity", "0.5");*/
 
 
@@ -403,8 +408,8 @@ export class IdeasService {
           .on("brush", function() { self.brushed(self); d3.selectAll(".navHandles").attr("opacity", 1); });*/
         //console.log(self.brush.extent()[1]);
         //console.log(d3.event.selection.map(self.brush.invert));
-        //  self.brush.extent([startingExtentIndex, self.chartData.xAxisData.length - 1]);        
-        //  self.brush.event(d3.select(".brush").transition().delay(100));      
+        //  self.brush.extent([startingExtentIndex, self.chartData.xAxisData.length - 1]);
+        //  self.brush.event(d3.select(".brush").transition().delay(100));
       }
 
       d3.select(".brush").call(self.brush)
@@ -776,14 +781,14 @@ export class IdeasService {
       if((self.candleData.length - rightExtent) < 10) {
         rightExtent = self.candleData.length - 1;
       }
-      
+
       self.brush.extent([Math.round(leftExtent), rightExtent]);
-      
+
       self.updateBrushParameters(self);
-      
+
       d3.select(".brush").call(self.brush);
       var args = { identity: self.chartUId, type : 'zoom' };
-      
+
       self.updateScales();
       var mouseX = parseInt(d3.select(".hoverLineX").attr("xposition"));
       var mouseY =  parseInt(d3.select(".hoverLineX").attr("yposition"));

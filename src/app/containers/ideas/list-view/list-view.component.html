@@ -7,11 +7,11 @@
         <i class="fa fa-user-circle"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
-      <span *ngIf="checkIfBearList(currentList?.name)">
+      <span *ngIf="currentList?.is_bullish_or_bearish == 'Bearish'">
         <i class="fa fa-lightbulb-o"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
-      <span *ngIf="checkIfThemeList(currentList?.name)">
+      <span *ngIf="currentList?.ideas_or_themes_list == 'Themes'">
         <i class="fa fa-flag"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
@@ -407,7 +407,7 @@
           </div>
         </div>
 
-        <div class="quick-view__chart-container row" class="col-12" style="height:230px">
+        <div class="quick-view__chart-container row no-gutters" style="height:230px">
           <div class="quick-view__chart" style="height: 100%; width: 100%;">
             <div class="panel__chart" id="area-chart" style="height: 100%; width: 100%;" (window:resize)="onResize($event)">
               <!--<chart-profile (click)="updateChart()" [classId]="selectedStock.symbol+'-chart-container-panel'"-->
