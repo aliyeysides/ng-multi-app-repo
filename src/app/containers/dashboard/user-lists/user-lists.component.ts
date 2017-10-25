@@ -148,7 +148,7 @@ export class UserListsComponent implements OnInit, OnDestroy {
     return this.authService.currentUser$
       .map(usr => this.uid = usr['UID'])
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
-      .map(res => {
+      .flatMap(res => {
         this.holdingList = res[2]['user_lists'][0];
         this.watchingList = res[2]['user_lists'][1];
         return Observable.combineLatest(
@@ -156,7 +156,6 @@ export class UserListsComponent implements OnInit, OnDestroy {
           this.ideasService.getListSymbols(this.watchingList['list_id'].toString(), this.uid)
         )
       })
-      .flatMap(res => res)
       .take(1)
       .subscribe(res => {
         this.holdingListIdeas = res[0]['symbols'];

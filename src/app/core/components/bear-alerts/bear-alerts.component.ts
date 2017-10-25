@@ -418,6 +418,7 @@ export class BearAlertsComponent implements AfterViewInit {
       })
       .take(1)
       .subscribe(res => {
+        console.log('res', res);
         this.holdingListAlerts = this.parseAlertData(res[0]);
         this.watchingListAlerts = this.parseAlertData(res[1]);
         console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts);
