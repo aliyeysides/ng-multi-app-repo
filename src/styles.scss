@@ -2,6 +2,20 @@
 @import 'variables';
 @import '../node_modules/bootstrap/scss/bootstrap';
 
+html, body {
+  overflow: hidden;
+  height: 100vh;
+  line-height: 1;
+}
+
+div {
+  display: block;
+}
+
+table {
+  width: 100%;
+}
+ 
 p, h1, h2, h3, h4, h5, h6, span, label, li, a, button {
   font-family: $font-stack;
   padding: 0;
@@ -52,28 +66,23 @@ ul, li {
   padding: 0;
 }
 
-html, body {
-  overflow: hidden;
-  height: 100vh;
-  line-height: 1;
-}
-
-div {
-  display: block;
-}
-
-table {
-  width: 100%;
-}
-
 button {
   border: 0;
-  outline: 0;
+  outline: 0 !important;
 }
 
 input, input:focus {
   outline: none !important;
   box-shadow: none !important;
+  outline-color: transparent;
+  outline-style: none;
+  border-color: transparent;
+  outline: 0;
+  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0), 0 0 0px rgba(255, 255, 255, 0);
+}
+
+textarea {
+  outline: none !important;
 }
 
 iframe {
@@ -106,21 +115,6 @@ iframe {
 
 ::-webkit-scrollbar {
   display: none;
-}
-
-:focus {
-  outline-color: transparent;
-  outline-style: none;
-}
-
-textarea, input, button {
-  outline: none !important;
-}
-
-input:focus {
-  border-color: transparent;
-  outline: 0;
-  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0), 0 0 0px rgba(255, 255, 255, 0);
 }
 
 .container-fluid {
@@ -1539,11 +1533,156 @@ a.quick-link {
 
 
 
-.tick {
-  line {
-    stroke:#efefef !important;
+
+g.hoverLineGroup {
+}
+
+g.parentGroup {
+
+  g.area-clip-path {
+    #areaClip {
+      .areaPathViewport {
+      }
+    }
+  }
+
+  g.areaGroup {
+    .area-chart {
+    }
+    .area-line-chart {
+      stroke-width:3;
+      shape-rendering: geometricPrecision !important;
+    }
+    .close-line-chart {
+      stroke-width:2;
+      shape-rendering: geometricPrecision !important;
+    }
+
+  }
+
+  g.brush-backgroud-group {
+    transform: translate(10px, 165px) !important;
+    .brush-background-rect {
+    }
+  }
+
+  g.x.brush {
+    transform: translate(10px, 165px) !important;
+
+    .overlay {
+    }
+    .selection {
+    }
+    .handle {
+      .navHandles {
+      }
+    }
+    .handle--e {
+      .navHandles {
+      }
+    }
+    .handle--w {
+      .navHandles {
+      }
+    }
+  }
+
+  g.xAxisGroupAdvance {
+  }
+
+  g.axis {
+    .domain {
+    }
+
+    g.tick {
+
+      line {
+        stroke:none !important;
+      }
+
+      text {
+        fill: #999999;
+
+        tspan {
+        }
+      }
+    }
+  }
+
+  g.yAxis {
+  }
+
+  g.yAxisGroup {
+  }
+
+  g.parentSectorGroup {
+
+    g.main-pgr-group {
+      g.pgr-bars-group {
+        g.pgr-clip-path {
+          #pgrClip {
+            .areaPathViewport {
+            }
+          }
+        }
+        .rel-strength {
+        }
+      }
+    }
   }
 }
+
+g.dummyGroup {
+
+  g.xAxisGroupDummy {
+  }
+
+  g.axis {
+    .domain {
+    }
+
+    g.tick {
+
+      line {
+        stroke:none !important;
+      }
+
+      text {
+        fill: #999999;
+        transform: translate(0px, -4px) !important;
+
+        tspan {
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

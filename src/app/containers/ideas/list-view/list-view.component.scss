@@ -582,11 +582,19 @@
     }
 
     .quick-view__chart-container {
-      padding:0;
+      border-top: $border-line--LT;
+      border-bottom: $border-line--LT;
+      padding:5px 0 10px;
+      height: 200px;
 
       .quick-view__chart {
-        padding:0;
+        height: 100%;
         width: 100%;
+
+        .panel__chart {
+          height: 100%;
+          width: 100%;
+        }
       }
     }
 

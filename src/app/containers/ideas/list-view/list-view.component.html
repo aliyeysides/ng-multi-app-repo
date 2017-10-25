@@ -308,6 +308,7 @@
               </div>
               <p>{{selectedStock.name}}</p>
             </div>
+<!-- QUICKVIEW PANEL - - - DATA  -->
             <div class="stock-panel__price row">
               <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
                 <p class="current-price"
@@ -344,7 +345,7 @@
               </div>
             </div>
           </div>
-
+<!-- QUICKVIEW PANEL - - - PGR  -->
           <div class="quick-view__pgr col-lg-4">
             <p class="pgr__title">Power Gauge:</p>
             <p class="pgr__text" [ngClass]="appendPGRClass(selectedStock.PGR)">
@@ -406,15 +407,16 @@
             </ul>
           </div>
         </div>
-
-        <div class="quick-view__chart-container row no-gutters" style="height:230px">
-          <div class="quick-view__chart" style="height: 100%; width: 100%;">
-            <div class="panel__chart" id="area-chart" style="height: 100%; width: 100%;" (window:resize)="onResize($event)">
+<!-- QUICKVIEW PANEL - - - CHART  -->
+        <div class="quick-view__chart-container row no-gutters">
+          <div class="quick-view__chart">
+            <div class="panel__chart" id="area-chart" (window:resize)="onResize($event)">
               <!--<chart-profile (click)="updateChart()" [classId]="selectedStock.symbol+'-chart-container-panel'"-->
               <!--[chartInit]="_chartPanelData"></chart-profile>-->
             </div>
           </div>
         </div>
+<!-- QUICKVIEW PANEL - - - DISCOVERY  -->
         <div class="quick-view__similar row no-gutters">
           <div (click)="goToStockDiscovery(selectedStock.symbol, $event)"
                tooltip="Discover similar stocks" class="icon__discover col-md-3 col-lg-2">
@@ -431,6 +433,7 @@
             <p (click)="goToStockDiscovery(idea, $event)">{{idea}}</p>
           </div>
         </div>
+<!-- QUICKVIEW PANEL - - - NEWS  -->
         <div class="quick-view__news row">
           <div class="news-panel__header">
             <p><i class="fa fa-newspaper-o" aria-hidden="true"></i> Headlines</p>
