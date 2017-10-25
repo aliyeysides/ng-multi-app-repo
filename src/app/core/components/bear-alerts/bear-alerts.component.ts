@@ -22,7 +22,7 @@ import {Observable} from 'rxjs/Observable';
             id="icon"></path>
         </g>
       </svg>
-      <span *ngIf="allItems?.length>0" class="badge badge-danger">{{ allItems?.length }}</span>
+      <span *ngIf="allItems>0" class="badge badge-danger">{{ allItems }}</span>
     </a>
     <div #nav id="notificationSideNav" class="sidenav sidenav--alerts">
 
@@ -363,14 +363,8 @@ export class BearAlertsComponent implements AfterViewInit {
 
   public holdingListAlerts: object[];
   public watchingListAlerts: object[];
-  public allItems = [];
-
-  public alertList: Array<object>;
+  public allItems: number;
   public date: string;
-  public alertCount: any = {
-    downCount: null,
-    upCount: null
-  };
   public loading: Subscription;
 
   constructor(private el: ElementRef,
@@ -384,9 +378,10 @@ export class BearAlertsComponent implements AfterViewInit {
     this.ideasService.updateAlerts$
       .takeUntil(this.ngUnsubscribe)
       .subscribe(() => {
-        this.allItems = [];
+        this.allItems = 0;
         this.updateData();
       })
+    // this.signalService.
   }
 
   public updateData() {
@@ -418,10 +413,9 @@ export class BearAlertsComponent implements AfterViewInit {
       })
       .take(1)
       .subscribe(res => {
-        console.log('res', res);
-        this.holdingListAlerts = this.parseAlertData(res[0]);
-        this.watchingListAlerts = this.parseAlertData(res[1]);
-        console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts);
+        this.holdingListAlerts = this.signalService.parseAlertData(res[0]);
+        this.watchingListAlerts = this.signalService.parseAlertData(res[1]);
+        this.allItems = this.holdingListAlerts.length + this.watchingListAlerts.length;
         // this.parseAlertData(res[0]);
       })
   }
@@ -435,93 +429,4 @@ export class BearAlertsComponent implements AfterViewInit {
     }
   }
 
-  private parseAlertData(res) {
-    this.alertCount.upCount = 0;
-    this.alertCount.downCount = 0;
-    let alertList = res['alerts'];
-    let result = [];
-
-    for (var key in alertList['earnings_surprise_alerts']) {
-      for (var obj in alertList['earnings_surprise_alerts'][key]) {
-        let jsonObj = {};
-        jsonObj['symbol'] = obj;
-        jsonObj['alert_type'] = 'earnings_surprise_alerts';
-        jsonObj['alert_text'] = 'Earnings Surprise';
-        jsonObj['quarter'] = alertList['earnings_surprise_alerts'][key][obj]['quarter'];
-        jsonObj['pgr'] = this.calculatePGR(alertList['earnings_surprise_alerts'][key][obj]['data'][3]);
-        jsonObj['new_value'] = alertList['earnings_surprise_alerts'][key][obj]['data'][0];
-        jsonObj['old_value'] = alertList['earnings_surprise_alerts'][key][obj]['data'][1];
-        jsonObj['per_change'] = alertList['earnings_surprise_alerts'][key][obj]['data'][2];
-        this.allItems.push(jsonObj);
-        result.push(jsonObj);
-        if (jsonObj['per_change'] > 0) {
-          this.alertCount.upCount++;
-        } else if (jsonObj['per_change'] < 0) {
-          this.alertCount.downCount++;
-        } else {
-        }
-      }
-    }
-    for (var key in alertList['estimate_revision_alerts']) {
-      for (var obj in alertList['estimate_revision_alerts'][key]) {
-        let jsonObj = {};
-        jsonObj['symbol'] = obj;
-        jsonObj['alert_type'] = 'estimate_revision_alerts';
-        jsonObj['alert_text'] = 'Estimate Revision';
-        jsonObj['quarter'] = alertList['estimate_revision_alerts'][key][obj]['quarter'];
-        jsonObj['pgr'] = this.calculatePGR(alertList['estimate_revision_alerts'][key][obj]['data'][3]);
-        jsonObj['new_value'] = alertList['estimate_revision_alerts'][key][obj]['data'][0];
-        jsonObj['old_value'] = alertList['estimate_revision_alerts'][key][obj]['data'][1];
-        jsonObj['per_change'] = alertList['estimate_revision_alerts'][key][obj]['data'][2];
-        this.allItems.push(jsonObj);
-        result.push(jsonObj);
-        if (jsonObj['per_change'] > 0) {
-          this.alertCount.upCount++;
-        } else {
-          this.alertCount.downCount++;
-        }
-      }
-    }
-
-    if (alertList['pgr_change_alerts']['DataAvailable'] == true) {
-      for (var key in alertList['pgr_change_alerts']) {
-        if (key != 'DataAvailable') {
-          for (var obj in alertList['pgr_change_alerts'][key]) {
-            let jsonObj = {};
-            jsonObj['symbol'] = obj;
-            jsonObj['alert_type'] = 'pgr_change_alerts';
-            jsonObj['alert_text'] = 'PGR Revision';
-            jsonObj['pgr'] = this.calculatePGR(alertList['pgr_change_alerts'][key][obj]['corrected_pgr']);
-            jsonObj['per_change'] = alertList['pgr_change_alerts'][key][obj]['chg_direction'];
-            this.allItems.push(jsonObj);
-            result.push(jsonObj);
-            if (jsonObj['per_change'] > 0) {
-              this.alertCount.upCount++;
-            } else {
-              this.alertCount.downCount++;
-            }
-          }
-        }
-      }
-    }
-    console.log('allItems', this.allItems);
-    return result;
-  }
-
-  private calculatePGR(pgr) {
-    if (pgr >= 0 && pgr < 15) {
-      pgr = 1;
-    } else if (pgr >= 15 && pgr < 29) {
-      pgr = 2;
-    } else if (pgr >= 29 && pgr < 59) {
-      pgr = 3;
-    } else if (pgr >= 59 && pgr < 85) {
-      pgr = 4;
-    } else if (pgr >= 85) {
-      pgr = 5;
-    } else {
-      pgr = 0;
-    }
-    return pgr;
-  }
 }

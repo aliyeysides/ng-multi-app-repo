@@ -5,11 +5,12 @@ import {IdeasService} from '../../../core/services/ideas.service';
 import {Idea, IdeaList} from '../../../shared/models/idea';
 import {Observable} from 'rxjs/Observable';
 import {SignalService} from '../../../core/services/signal.service';
-import {BearSearchComponent} from '../../../core/components/bear-search/bear-search.component';
 import {SymbolSearchService} from '../../../core/services/symbol-search.service';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {NotificationsService} from 'angular2-notifications/dist';
+
+import * as moment from 'moment';
 
 @Component({
   selector: 'cpt-user-lists',
@@ -47,7 +48,8 @@ import {NotificationsService} from 'angular2-notifications/dist';
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ item.symbol }}</p>
           </div>
-          <div class="col-1 stock__alert bell--yellow">
+          <div *ngIf="getAlertsForItem(item, holdingListAlerts).length>0" class="col-1 stock__alert"
+               [ngClass]="getBellColors(item, holdingListAlerts)">
             <i class="fa fa-bell" aria-hidden="true"></i>
           </div>
           <div class="col-3 stock__price">
@@ -71,7 +73,8 @@ import {NotificationsService} from 'angular2-notifications/dist';
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ item.symbol }}</p>
           </div>
-          <div class="col-1 stock__alert bell--yellow">
+          <div *ngIf="getAlertsForItem(item, watchingListAlerts).length>0" class="col-1 stock__alert"
+               [ngClass]="getBellColors(item, watchingListAlerts)">
             <i class="fa fa-bell" aria-hidden="true"></i>
           </div>
           <div class="col-3 stock__price">
@@ -101,6 +104,9 @@ export class UserListsComponent implements OnInit, OnDestroy {
   public currentList = 'Holding';
   public holdingListIdeas: Array<Idea>;
   public watchingListIdeas: Array<Idea>;
+
+  public holdingListAlerts: object[];
+  public watchingListAlerts: object[];
 
   public holdingList: IdeaList;
   public watchingList: IdeaList;
@@ -153,14 +159,32 @@ export class UserListsComponent implements OnInit, OnDestroy {
         this.watchingList = res[2]['user_lists'][1];
         return Observable.combineLatest(
           this.ideasService.getListSymbols(this.holdingList['list_id'].toString(), this.uid),
-          this.ideasService.getListSymbols(this.watchingList['list_id'].toString(), this.uid)
+          this.ideasService.getListSymbols(this.watchingList['list_id'].toString(), this.uid),
+          this.signalService.getAlertsData({
+            components: 'alerts',
+            date: moment().format('YYYY-MM-DD'),
+            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
+            endDate: moment().format('YYYY-MM-DD'),
+            listId1: this.holdingList['list_id'],
+          }),
+          this.signalService.getAlertsData({
+            components: 'alerts',
+            date: moment().format('YYYY-MM-DD'),
+            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
+            endDate: moment().format('YYYY-MM-DD'),
+            listId1: this.watchingList['list_id'],
+          })
         )
       })
       .take(1)
       .subscribe(res => {
         this.holdingListIdeas = res[0]['symbols'];
         this.watchingListIdeas = res[1]['symbols'];
+        this.holdingListAlerts = this.signalService.parseAlertData(res[2]);
+        this.watchingListAlerts = this.signalService.parseAlertData(res[3]);
+        console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts);
       })
+
   }
 
   public appendPGRImage(pgr: number) {
@@ -198,6 +222,18 @@ export class UserListsComponent implements OnInit, OnDestroy {
         this.holdingListIdeas = res[0]['symbols'];
         this.watchingListIdeas = res[1]['symbols'];
       })
+  }
+
+  getAlertsForItem(item: Idea, alerts: object[]) {
+    return alerts.filter(alert => item.symbol === alert['symbol']);
+  }
+
+  getBellColors(item: Idea, alerts: object[]) {
+    return {
+      'bell--yellow': this.getAlertsForItem(item, alerts).length > 1,
+      'bell--green': this.getAlertsForItem(item, alerts).length == 1 && this.getAlertsForItem(item, alerts)[0]['per_change'] > 0,
+      'bell--red': this.getAlertsForItem(item, alerts).length == 1 && this.getAlertsForItem(item, alerts)[0]['per_change'] < 0
+    };
   }
 
 }
