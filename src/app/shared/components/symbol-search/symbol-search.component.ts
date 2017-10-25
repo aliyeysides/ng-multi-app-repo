@@ -99,7 +99,7 @@ export class SymbolSearchComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.search.nativeElement.focus();
+    // this.search.nativeElement.focus();
     this.authService.currentUser$
       .takeUntil(this.ngUnsubscribe)
       .map(usr => this.uid = usr['UID'])

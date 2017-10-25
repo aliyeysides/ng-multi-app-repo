@@ -22,7 +22,7 @@ import {Observable} from 'rxjs/Observable';
             id="icon"></path>
         </g>
       </svg>
-      <!--<span class="badge badge-danger">{{ allItems?.length }}</span>-->
+      <span *ngIf="allItems?.length>0" class="badge badge-danger">{{ allItems?.length }}</span>
     </a>
     <div #nav id="notificationSideNav" class="sidenav sidenav--alerts">
 
@@ -46,233 +46,237 @@ import {Observable} from 'rxjs/Observable';
           <h4><i class="fa fa-briefcase" aria-hidden="true"></i> &nbsp;HOLDING</h4>
 
           <ul class="alerts__list container container-fluid">
-
-            <li class="alert__entry row">
+            <span *ngIf="holdingListAlerts?.length==0">No Alerts.</span>
+            <li *ngFor="let alert of this.holdingListAlerts" class="alert__entry row">
               <div class="col-4 alert__stock">
                 <p class="ticker">
                   <img class="rating" src="./assets/imgs/arc_Bearish.svg">
-                  <span>GOOGL</span>
+                  <span>{{ alert['symbol'] }}</span>
                 </p>
               </div>
               <div class="col-8 alert__info">
                 <ul class="container container-fluid">
                   <li class="row no-gutters">
-                    <div class="col-1 alert__icon">
-                      <img src="./assets/imgs/icon_arrow--down.svg">
-                    </div>
+                    <!--<div class="col-1 alert__icon">-->
+                    <!--<img src="./assets/imgs/icon_arrow&#45;&#45;down.svg">-->
+                    <!--</div>-->
                     <div class="col-11">
-                      <p class="alert__text">Power Gauge Turned Very Bullish</p>
+                      <p class="alert__text">{{ alert['alert_text'] }}</p>
+                      <p *ngIf="alert['alert_type'] == 'earnings_surprise_alerts'">Q{{ alert['quarter'] }} Est.
+                        {{ alert['old_value'].toFixed(2) }} Act. <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{ alert['new_value'].toFixed(2) }}</p>
                     </div>
                   </li>
                 </ul>
               </div>
             </li>
 
-            <li class="alert__entry row">
-              <div class="col-4 alert__stock">
-                <p class="ticker">
-                  <img class="rating" src="./assets/imgs/arc_Bullish.svg">
-                  <span>AMZN</span>
-                </p>
-              </div>
-              <div class="col-8 alert__info">
-                <ul class="container container-fluid">
-                  <li class="row no-gutters">
-                    <div class="col-1 alert__icon">
-                      <img src="./assets/imgs/icon_arrow--up.svg">
-                    </div>
-                    <div class="col-11">
-                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
-                        class="down-change"><i class="fa fa-long-arrow-right"
-                                               aria-hidden="true"></i> <b>$0.41</b></span></p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
+            <!--<li class="alert__entry row">-->
+            <!--<div class="col-4 alert__stock">-->
+            <!--<p class="ticker">-->
+            <!--<img class="rating" src="./assets/imgs/arc_Bullish.svg">-->
+            <!--<span>AMZN</span>-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--<div class="col-8 alert__info">-->
+            <!--<ul class="container container-fluid">-->
+            <!--<li class="row no-gutters">-->
+            <!--<div class="col-1 alert__icon">-->
+            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
+            <!--</div>-->
+            <!--<div class="col-11">-->
+            <!--<p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
+            <!--class="down-change"><i class="fa fa-long-arrow-right"-->
+            <!--aria-hidden="true"></i> <b>$0.41</b></span></p>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</li>-->
 
-            <li class="alert__entry row">
-              <div class="col-4 alert__stock">
-                <p class="ticker">
-                  <img class="rating" src="./assets/imgs/arc_VeryBullish.svg">
-                  <span>AAPL</span>
-                </p>
-              </div>
-              <div class="col-8 alert__info">
-                <ul class="container container-fluid">
-                  <li class="row no-gutters">
-                    <div class="col-1 alert__icon">
-                      <img src="./assets/imgs/icon_arrow--up.svg">
-                    </div>
-                    <div class="col-11">
-                      <p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i
-                        class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
-                    </div>
-                  </li>
-                  <li class="row no-gutters">
-                    <div class="col-1 alert__icon">
-                      <img src="./assets/imgs/icon_arrow--down.svg">
-                    </div>
-                    <div class="col-11">
-                      <p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
-                        class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span>
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
+            <!--<li class="alert__entry row">-->
+            <!--<div class="col-4 alert__stock">-->
+            <!--<p class="ticker">-->
+            <!--<img class="rating" src="./assets/imgs/arc_VeryBullish.svg">-->
+            <!--<span>AAPL</span>-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--<div class="col-8 alert__info">-->
+            <!--<ul class="container container-fluid">-->
+            <!--<li class="row no-gutters">-->
+            <!--<div class="col-1 alert__icon">-->
+            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
+            <!--</div>-->
+            <!--<div class="col-11">-->
+            <!--<p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i-->
+            <!--class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--<li class="row no-gutters">-->
+            <!--<div class="col-1 alert__icon">-->
+            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;down.svg">-->
+            <!--</div>-->
+            <!--<div class="col-11">-->
+            <!--<p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
+            <!--class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span>-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</li>-->
           </ul>
         </div>
 
         <div class="alerts__section">
           <h4><i class="fa fa-binoculars" aria-hidden="true"></i> &nbsp;WATCHING</h4>
           <ul class="alerts__list container container-fluid">
-
-            <li class="alert__entry row">
+            <span *ngIf="watchingListAlerts?.length==0">No Alerts.</span>
+            <li *ngFor="let alert of watchingListAlerts" class="alert__entry row">
               <div class="col-4 alert__stock">
                 <p class="ticker">
                   <img class="rating" src="./assets/imgs/arc_Bearish.svg">
-                  <span>GOOGL</span>
+                  <span>{{ alert['symbol'] }}</span>
                 </p>
               </div>
               <div class="col-8 alert__info">
                 <ul class="container container-fluid">
                   <li class="row no-gutters">
-                    <div class="col-1 alert__icon">
-                      <img src="./assets/imgs/icon_arrow--down.svg">
-                    </div>
+                    <!--<div class="col-1 alert__icon">-->
+                    <!--<img src="./assets/imgs/icon_arrow&#45;&#45;down.svg">-->
+                    <!--</div>-->
                     <div class="col-11">
-                      <p class="alert__text">Power Gauge Turned Very Bullish</p>
+                      <p class="alert__text">{{ alert['alert_text'] }}</p>
+                      <p *ngIf="alert['alert_type'] == 'earnings_surprise_alerts'">Q{{ alert['quarter'] }} Est.
+                        {{ alert['old_value'].toFixed(2) }} Act. <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{ alert['new_value'].toFixed(2) }}</p>
                     </div>
                   </li>
                 </ul>
               </div>
             </li>
 
-            <li class="alert__entry row">
-              <div class="col-4 alert__stock">
-                <p class="ticker">
-                  <img class="rating" src="./assets/imgs/arc_Bullish.svg">
-                  <span>AMZN</span>
-                </p>
-              </div>
-              <div class="col-8 alert__info">
-                <ul class="container container-fluid">
-                  <li class="row no-gutters">
-                    <div class="col-1 alert__icon">
-                      <img src="./assets/imgs/icon_arrow--up.svg">
-                    </div>
-                    <div class="col-11">
-                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
-                        class="down-change"><i class="fa fa-long-arrow-right"
-                                               aria-hidden="true"></i> <b>$0.41</b></span></p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
+            <!--<li class="alert__entry row">-->
+            <!--<div class="col-4 alert__stock">-->
+            <!--<p class="ticker">-->
+            <!--<img class="rating" src="./assets/imgs/arc_Bullish.svg">-->
+            <!--<span>AMZN</span>-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--<div class="col-8 alert__info">-->
+            <!--<ul class="container container-fluid">-->
+            <!--<li class="row no-gutters">-->
+            <!--<div class="col-1 alert__icon">-->
+            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
+            <!--</div>-->
+            <!--<div class="col-11">-->
+            <!--<p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
+            <!--class="down-change"><i class="fa fa-long-arrow-right"-->
+            <!--aria-hidden="true"></i> <b>$0.41</b></span></p>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</li>-->
 
-            <li class="alert__entry row">
-              <div class="col-4 alert__stock">
-                <p class="ticker">
-                  <img class="rating" src="./assets/imgs/arc_Bullish.svg">
-                  <span>AMZN</span>
-                </p>
-              </div>
-              <div class="col-8 alert__info">
-                <ul class="container container-fluid">
-                  <li class="row no-gutters">
-                    <div class="col-1 alert__icon">
-                      <img src="./assets/imgs/icon_arrow--up.svg">
-                    </div>
-                    <div class="col-11">
-                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
-                        class="down-change"><i class="fa fa-long-arrow-right"
-                                               aria-hidden="true"></i> <b>$0.41</b></span></p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
+            <!--<li class="alert__entry row">-->
+            <!--<div class="col-4 alert__stock">-->
+            <!--<p class="ticker">-->
+            <!--<img class="rating" src="./assets/imgs/arc_Bullish.svg">-->
+            <!--<span>AMZN</span>-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--<div class="col-8 alert__info">-->
+            <!--<ul class="container container-fluid">-->
+            <!--<li class="row no-gutters">-->
+            <!--<div class="col-1 alert__icon">-->
+            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
+            <!--</div>-->
+            <!--<div class="col-11">-->
+            <!--<p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
+            <!--class="down-change"><i class="fa fa-long-arrow-right"-->
+            <!--aria-hidden="true"></i> <b>$0.41</b></span></p>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</li>-->
 
-            <li class="alert__entry row">
-              <div class="col-4 alert__stock">
-                <p class="ticker">
-                  <img class="rating" src="./assets/imgs/arc_Bullish.svg">
-                  <span>AMZN</span>
-                </p>
-              </div>
-              <div class="col-8 alert__info">
-                <ul class="container container-fluid">
-                  <li class="row no-gutters">
-                    <div class="col-1 alert__icon">
-                      <img src="./assets/imgs/icon_arrow--up.svg">
-                    </div>
-                    <div class="col-11">
-                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
-                        class="down-change"><i class="fa fa-long-arrow-right"
-                                               aria-hidden="true"></i> <b>$0.41</b></span></p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
+            <!--<li class="alert__entry row">-->
+            <!--<div class="col-4 alert__stock">-->
+            <!--<p class="ticker">-->
+            <!--<img class="rating" src="./assets/imgs/arc_Bullish.svg">-->
+            <!--<span>AMZN</span>-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--<div class="col-8 alert__info">-->
+            <!--<ul class="container container-fluid">-->
+            <!--<li class="row no-gutters">-->
+            <!--<div class="col-1 alert__icon">-->
+            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
+            <!--</div>-->
+            <!--<div class="col-11">-->
+            <!--<p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
+            <!--class="down-change"><i class="fa fa-long-arrow-right"-->
+            <!--aria-hidden="true"></i> <b>$0.41</b></span></p>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</li>-->
 
-            <li class="alert__entry row">
-              <div class="col-4 alert__stock">
-                <p class="ticker">
-                  <img class="rating" src="./assets/imgs/arc_Bullish.svg">
-                  <span>AMZN</span>
-                </p>
-              </div>
-              <div class="col-8 alert__info">
-                <ul class="container container-fluid">
-                  <li class="row no-gutters">
-                    <div class="col-1 alert__icon">
-                      <img src="./assets/imgs/icon_arrow--up.svg">
-                    </div>
-                    <div class="col-11">
-                      <p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
-                        class="down-change"><i class="fa fa-long-arrow-right"
-                                               aria-hidden="true"></i> <b>$0.41</b></span></p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
+            <!--<li class="alert__entry row">-->
+            <!--<div class="col-4 alert__stock">-->
+            <!--<p class="ticker">-->
+            <!--<img class="rating" src="./assets/imgs/arc_Bullish.svg">-->
+            <!--<span>AMZN</span>-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--<div class="col-8 alert__info">-->
+            <!--<ul class="container container-fluid">-->
+            <!--<li class="row no-gutters">-->
+            <!--<div class="col-1 alert__icon">-->
+            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
+            <!--</div>-->
+            <!--<div class="col-11">-->
+            <!--<p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
+            <!--class="down-change"><i class="fa fa-long-arrow-right"-->
+            <!--aria-hidden="true"></i> <b>$0.41</b></span></p>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</li>-->
 
-            <li class="alert__entry row">
-              <div class="col-4 alert__stock">
-                <p class="ticker">
-                  <img class="rating" src="./assets/imgs/arc_VeryBullish.svg">
-                  <span>AAPL</span>
-                </p>
-              </div>
-              <div class="col-8 alert__info">
-                <ul class="container container-fluid">
-                  <li class="row no-gutters">
-                    <div class="col-1 alert__icon">
-                      <img src="./assets/imgs/icon_arrow--up.svg">
-                    </div>
-                    <div class="col-11">
-                      <p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i
-                        class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>
-                    </div>
-                  </li>
-                  <li class="row no-gutters">
-                    <div class="col-1 alert__icon">
-                      <img src="./assets/imgs/icon_arrow--down.svg">
-                    </div>
-                    <div class="col-11">
-                      <p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span
-                        class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span>
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
+            <!--<li class="alert__entry row">-->
+            <!--<div class="col-4 alert__stock">-->
+            <!--<p class="ticker">-->
+            <!--<img class="rating" src="./assets/imgs/arc_VeryBullish.svg">-->
+            <!--<span>AAPL</span>-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--<div class="col-8 alert__info">-->
+            <!--<ul class="container container-fluid">-->
+            <!--<li class="row no-gutters">-->
+            <!--<div class="col-1 alert__icon">-->
+            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
+            <!--</div>-->
+            <!--<div class="col-11">-->
+            <!--<p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i-->
+            <!--class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--<li class="row no-gutters">-->
+            <!--<div class="col-1 alert__icon">-->
+            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;down.svg">-->
+            <!--</div>-->
+            <!--<div class="col-11">-->
+            <!--<p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
+            <!--class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span>-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</li>-->
           </ul>
         </div>
 
@@ -376,6 +380,16 @@ export class BearAlertsComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.updateData();
+    this.ideasService.updateAlerts$
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(() => {
+        this.allItems = [];
+        this.updateData();
+      })
+  }
+
+  public updateData() {
     this.authService.currentUser$
       .map(usr => this.uid = usr['UID'])
       .filter(x => x != undefined)
@@ -388,15 +402,15 @@ export class BearAlertsComponent implements AfterViewInit {
           this.signalService.getAlertsData({
             components: 'alerts',
             date: moment().format('YYYY-MM-DD'),
-            startDate: moment().format('YYYY-MM-DD'),
-            endDate: moment().add(365, 'day').format('YYYY-MM-DD'),
+            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
+            endDate: moment().format('YYYY-MM-DD'),
             listId1: this.holdingListId,
           }),
           this.signalService.getAlertsData({
             components: 'alerts',
             date: moment().format('YYYY-MM-DD'),
-            startDate: moment().format('YYYY-MM-DD'),
-            endDate: moment().add(365, 'day').format('YYYY-MM-DD'),
+            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
+            endDate: moment().format('YYYY-MM-DD'),
             listId1: this.watchingListId,
           }),
           this.signalService.getSignalDataForList(this.bestBearsListId.toString(), '1', this.uid)
@@ -404,10 +418,10 @@ export class BearAlertsComponent implements AfterViewInit {
       })
       .take(1)
       .subscribe(res => {
-        console.log('res', res);
-        this.holdingListAlerts = this.getAlertSidePanelData(res[0]);
-        this.watchingListAlerts = this.getAlertSidePanelData(res[1]);
-        // this.getAlertSidePanelData(res[0]);
+        this.holdingListAlerts = this.parseAlertData(res[0]);
+        this.watchingListAlerts = this.parseAlertData(res[1]);
+        console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts);
+        // this.parseAlertData(res[0]);
       })
   }
 
@@ -420,22 +434,25 @@ export class BearAlertsComponent implements AfterViewInit {
     }
   }
 
-  public getAlertSidePanelData(res) {
+  private parseAlertData(res) {
     this.alertCount.upCount = 0;
     this.alertCount.downCount = 0;
     let alertList = res['alerts'];
+    let result = [];
 
     for (var key in alertList['earnings_surprise_alerts']) {
       for (var obj in alertList['earnings_surprise_alerts'][key]) {
         let jsonObj = {};
         jsonObj['symbol'] = obj;
         jsonObj['alert_type'] = 'earnings_surprise_alerts';
+        jsonObj['alert_text'] = 'Earnings Surprise';
         jsonObj['quarter'] = alertList['earnings_surprise_alerts'][key][obj]['quarter'];
         jsonObj['pgr'] = this.calculatePGR(alertList['earnings_surprise_alerts'][key][obj]['data'][3]);
         jsonObj['new_value'] = alertList['earnings_surprise_alerts'][key][obj]['data'][0];
         jsonObj['old_value'] = alertList['earnings_surprise_alerts'][key][obj]['data'][1];
         jsonObj['per_change'] = alertList['earnings_surprise_alerts'][key][obj]['data'][2];
         this.allItems.push(jsonObj);
+        result.push(jsonObj);
         if (jsonObj['per_change'] > 0) {
           this.alertCount.upCount++;
         } else if (jsonObj['per_change'] < 0) {
@@ -449,12 +466,14 @@ export class BearAlertsComponent implements AfterViewInit {
         let jsonObj = {};
         jsonObj['symbol'] = obj;
         jsonObj['alert_type'] = 'estimate_revision_alerts';
+        jsonObj['alert_text'] = 'Estimate Revision';
         jsonObj['quarter'] = alertList['estimate_revision_alerts'][key][obj]['quarter'];
         jsonObj['pgr'] = this.calculatePGR(alertList['estimate_revision_alerts'][key][obj]['data'][3]);
         jsonObj['new_value'] = alertList['estimate_revision_alerts'][key][obj]['data'][0];
         jsonObj['old_value'] = alertList['estimate_revision_alerts'][key][obj]['data'][1];
         jsonObj['per_change'] = alertList['estimate_revision_alerts'][key][obj]['data'][2];
         this.allItems.push(jsonObj);
+        result.push(jsonObj);
         if (jsonObj['per_change'] > 0) {
           this.alertCount.upCount++;
         } else {
@@ -470,9 +489,11 @@ export class BearAlertsComponent implements AfterViewInit {
             let jsonObj = {};
             jsonObj['symbol'] = obj;
             jsonObj['alert_type'] = 'pgr_change_alerts';
+            jsonObj['alert_text'] = 'PGR Revision';
             jsonObj['pgr'] = this.calculatePGR(alertList['pgr_change_alerts'][key][obj]['corrected_pgr']);
             jsonObj['per_change'] = alertList['pgr_change_alerts'][key][obj]['chg_direction'];
             this.allItems.push(jsonObj);
+            result.push(jsonObj);
             if (jsonObj['per_change'] > 0) {
               this.alertCount.upCount++;
             } else {
@@ -483,11 +504,10 @@ export class BearAlertsComponent implements AfterViewInit {
       }
     }
     console.log('allItems', this.allItems);
-    // this.setPage(1);
-    return alertList;
+    return result;
   }
 
-  public calculatePGR(pgr) {
+  private calculatePGR(pgr) {
     if (pgr >= 0 && pgr < 15) {
       pgr = 1;
     } else if (pgr >= 15 && pgr < 29) {
