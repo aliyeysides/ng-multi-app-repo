@@ -356,10 +356,6 @@
     overflow-y: scroll;
     height: 100vh;
 
-    @media screen and (max-width: 1199px) {
-      padding: 25px 15px 450px;
-    }
-
     .quick-view__data {
       position: relative;
 
@@ -519,13 +515,20 @@
         }
 
         @media screen and (max-width:990px) {
-          border-bottom: 3px solid #f8f8f8;
+          border-bottom: $border-line--LT;
           margin-bottom: 15px;
         }
       }
 
       .quick-view__pgr {
         border-left: $border-line--LT;
+
+        @media screen and (max-width: 990px) {
+          border-left: none;
+          border-bottom: $border-line--LT;
+          margin-bottom: 15px;
+          padding-bottom: 15px;
+        }
 
         .pgr__title {
           font-weight: 600;
@@ -579,9 +582,10 @@
     }
 
     .quick-view__chart-container {
+      padding:0;
 
       .quick-view__chart {
-        padding-top: 10px;
+        padding:0;
         width: 100%;
       }
     }
