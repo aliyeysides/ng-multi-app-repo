@@ -142,7 +142,15 @@ export class UserListsComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.holdingListIdeas = res[0]['symbols'];
         this.watchingListIdeas = res[1]['symbols'];
-      })
+      });
+
+    this.ideasService.updateAlerts$
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(() => this.refreshData());
+
+    setInterval(() => {
+      this.refreshData();
+    }, 1000 * 60);
   }
 
   ngOnDestroy() {
@@ -152,10 +160,6 @@ export class UserListsComponent implements OnInit, OnDestroy {
 
   public updateData() {
     this.loading = this.refreshData();
-
-    setInterval(() => {
-      this.refreshData();
-    }, 1000 * 60);
   }
 
   public refreshData() {
