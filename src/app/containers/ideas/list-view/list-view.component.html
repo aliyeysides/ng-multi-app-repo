@@ -416,9 +416,9 @@
           </div>
         </div>
 
-        <div class="quick-view__chart-container row">
+        <div class="quick-view__chart-container row" class="col-12" style="height:230px">
           <div class="quick-view__chart" style="height: 100%; width: 100%;">
-            <div class="panel__chart" style="height: 100%; width: 100%;">
+            <div class="panel__chart" id="area-chart" style="height: 100%; width: 100%;" (window:resize)="onResize($event)">
               <!--<chart-profile (click)="updateChart()" [classId]="selectedStock.symbol+'-chart-container-panel'"-->
               <!--[chartInit]="_chartPanelData"></chart-profile>-->
             </div>
