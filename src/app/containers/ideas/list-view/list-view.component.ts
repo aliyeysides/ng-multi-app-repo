@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output, HostListener } from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
@@ -42,6 +42,8 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
 
   public loading: Subscription;
   public headlinesLoading: Subscription;
+
+  public chartData: object = null;
 
   constructor(private router: Router,
               private authService: AuthService,
@@ -144,6 +146,35 @@ export class ListViewComponent implements AfterViewInit, OnDestroy {
     this.selectedStockPGR = res['pgr'];
     this.selectedStockChartPoints = res['chart-points'];
     this.selectedStockSimilars = res['discovery-similars'].stocks;
+
+
+    let data = {
+      "yAxisData": {
+        "lineData": (this.selectedStockChartPoints['closePrice']).reverse(),
+        "rectData": (this.selectedStockChartPoints['pgr']).reverse(),
+        "areaData": (this.selectedStockChartPoints['dema']).reverse()
+      },
+    "xAxisData": (this.selectedStockChartPoints['dates']).reverse(),
+    "xAxisFormatedData": (this.selectedStockChartPoints['dates']).reverse()
+    }
+    for (let i = 0; i < data.xAxisData.length; i++){
+      data.yAxisData.lineData[i] = parseFloat(data.yAxisData.lineData[i]);
+      data.yAxisData.rectData[i] = parseInt(data.yAxisData.rectData[i]);
+      data.yAxisData.areaData[i] = parseFloat(data.yAxisData.areaData[i]);
+    }
+
+    this.chartData = data;
+    this.drawchart();
+    
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.drawchart();
+  }
+  public drawchart(){
+    if(this.chartData!= null){
+      this.ideaService.areaChartWithBrushing.init({ data: this.chartData, id: 'area-chart' }); 
+    }
   }
 
   public assignStockData(amount: number) {
