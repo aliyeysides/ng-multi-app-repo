@@ -48,9 +48,13 @@ import * as moment from 'moment';
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ item.symbol }}</p>
           </div>
-          <div (click)="openAlerts();$event.stopPropagation()" *ngIf="getAlertsForItem(item, holdingListAlerts).length>0" class="col-1 stock__alert"
-               [ngClass]="getBellColors(item, holdingListAlerts)">
-            <i class="fa fa-bell" aria-hidden="true"></i>
+          <div class="col-1">
+            <div (click)="openAlerts();$event.stopPropagation()"
+                 *ngIf="getAlertsForItem(item, holdingListAlerts).length>0"
+                 class="stock__alert"
+                 [ngClass]="getBellColors(item, holdingListAlerts)">
+              <i class="fa fa-bell" aria-hidden="true"></i>
+            </div>
           </div>
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Last | decimal
@@ -73,9 +77,13 @@ import * as moment from 'moment';
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ item.symbol }}</p>
           </div>
-          <div (click)="openAlerts();$event.stopPropagation()" *ngIf="getAlertsForItem(item, watchingListAlerts).length>0" class="col-1 stock__alert"
-               [ngClass]="getBellColors(item, watchingListAlerts)">
-            <i class="fa fa-bell" aria-hidden="true"></i>
+          <div class="col-1">
+            <div (click)="openAlerts();$event.stopPropagation()"
+                 *ngIf="getAlertsForItem(item, watchingListAlerts).length>0"
+                 class="stock__alert"
+                 [ngClass]="getBellColors(item, watchingListAlerts)">
+              <i class="fa fa-bell" aria-hidden="true"></i>
+            </div>
           </div>
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Last | decimal
