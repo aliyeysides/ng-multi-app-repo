@@ -52,7 +52,7 @@ ul, li {
   padding: 0;
 }
 
-body {
+html, body {
   overflow: hidden;
   height: 100vh;
   line-height: 1;
@@ -152,12 +152,12 @@ input:focus {
 }
 
 
+
+
+
 /*------------------------------------*\
   #LOADING
 \*------------------------------------*/
-
-
-
 
 
 .loading.loading-main {
@@ -165,6 +165,7 @@ input:focus {
   width: 100%;
   height: 100vh;
   position: relative;
+  background-color: rgba(0,0,0,1);
 
   .loading__contents {
     position: absolute;
@@ -212,8 +213,8 @@ input:focus {
     right:0;
     left:0;
     z-index: 5000;
-    opacity: 0.9;
-    background-color: rgba(0,0,0,0.3);
+    opacity: 0.8;
+    background-color: rgba(0,0,0,0.5);
     background-image: url(./assets/imgs/loading_splash.png);
     background-size: 100% 100%;
     width: 100%;
@@ -1129,18 +1130,22 @@ a.quick-link {
 
 .Bearish-H1 {
   color: #9F2C53;
-  font-size: 32px !important;
-  font-weight: 300 !important;
+  font-size: 32px;
+  font-weight: 300;
   font-family: $font-stack;
   line-height: 1.5;
   margin-bottom: 20px;
   padding: 0;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 26px !important;
+  }
 }
 
 .Bearish-H2 {
   color: #0070C0;
-  font-size: 22px !important;
-  font-weight: 600 !important;
+  font-size: 22px;
+  font-weight: 600;
   font-family: $font-stack;
   line-height: 1.5;
   margin: 30px 0 15px;
@@ -1149,8 +1154,8 @@ a.quick-link {
 
 .Bearish-H3 {
   color: $font-color;
-  font-size: 14px !important;
-  font-weight: 600 !important;
+  font-size: 14px;
+  font-weight: 600;
   font-family: $font-stack;
   line-height: 1.2;
   margin-bottom: 10px;
@@ -1160,8 +1165,8 @@ a.quick-link {
 
 .Bearish-H4 {
   color: $font-color;
-  font-size: 14px !important;
-  font-weight: 600 !important;
+  font-size: 14px;
+  font-weight: 600;
   font-family: $font-stack;
   line-height: 1.2;
   margin-bottom: 10px;
@@ -1171,8 +1176,8 @@ a.quick-link {
 
 .Bearish-P {
   color: $font-color;
-  font-size: 13px !important;
-  font-weight: 400 !important;
+  font-size: 13px;
+  font-weight: 400;
   font-family: $font-stack;
   line-height: 1.5;
   margin-bottom: 20px;
@@ -1181,8 +1186,8 @@ a.quick-link {
 
 .Bearish-caption {
   color: $font-color;
-  font-size: 10px !important;
-  font-weight: 300 !important;
+  font-size: 10px;
+  font-weight: 300;
   font-family: $font-stack;
   line-height: 1.5;
   margin: 10px 20px 40px;
@@ -1192,18 +1197,22 @@ a.quick-link {
 
 .Bearish-bullets {
   margin-left: 40px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   li {
-    padding:10px 0;
+    padding:7px 0;
     color: $font-color;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.5;
 
     &::before {
       content: "● ";
       margin-right: 5px;
     }
+  }
+
+  @media screen and (max-width: 1024px) {
+      margin-left: 10px;
   }
 }
 
@@ -1522,10 +1531,19 @@ a.quick-link {
 }
 
 
+/*----------------------------------------------------*\
+
+                         CHART
+
+\*----------------------------------------------------*/
 
 
 
-
+.tick {
+  line {
+    stroke:#efefef !important;
+  }
+}
 
 
 
