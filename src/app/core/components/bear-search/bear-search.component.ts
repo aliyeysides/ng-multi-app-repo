@@ -57,7 +57,7 @@ export class BearSearchComponent implements OnInit {
     this.searchService.isOpen
       .takeUntil(this.ngUnsubscribe)
       .subscribe(open => {
-        if (open === true) this.toggleNav(this.nav.nativeElement, '500px', true);
+        if (open === true) this.onClick();
       });
   }
 

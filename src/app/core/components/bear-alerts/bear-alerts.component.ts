@@ -376,12 +376,14 @@ export class BearAlertsComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.updateData();
     this.ideasService.updateAlerts$
-      .takeUntil(this.ngUnsubscribe)
       .subscribe(() => {
         this.allItems = 0;
         this.updateData();
-      })
-    // this.signalService.
+      });
+    this.signalService.alertsOpen$
+      .subscribe(() => {
+        this.onClick();
+    })
   }
 
   public updateData() {

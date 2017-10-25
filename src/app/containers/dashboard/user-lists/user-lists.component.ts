@@ -48,7 +48,7 @@ import * as moment from 'moment';
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ item.symbol }}</p>
           </div>
-          <div *ngIf="getAlertsForItem(item, holdingListAlerts).length>0" class="col-1 stock__alert"
+          <div (click)="openAlerts();$event.stopPropagation()" *ngIf="getAlertsForItem(item, holdingListAlerts).length>0" class="col-1 stock__alert"
                [ngClass]="getBellColors(item, holdingListAlerts)">
             <i class="fa fa-bell" aria-hidden="true"></i>
           </div>
@@ -73,7 +73,7 @@ import * as moment from 'moment';
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ item.symbol }}</p>
           </div>
-          <div *ngIf="getAlertsForItem(item, watchingListAlerts).length>0" class="col-1 stock__alert"
+          <div (click)="openAlerts();$event.stopPropagation()" *ngIf="getAlertsForItem(item, watchingListAlerts).length>0" class="col-1 stock__alert"
                [ngClass]="getBellColors(item, watchingListAlerts)">
             <i class="fa fa-bell" aria-hidden="true"></i>
           </div>
@@ -182,7 +182,6 @@ export class UserListsComponent implements OnInit, OnDestroy {
         this.watchingListIdeas = res[1]['symbols'];
         this.holdingListAlerts = this.signalService.parseAlertData(res[2]);
         this.watchingListAlerts = this.signalService.parseAlertData(res[3]);
-        console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts);
       })
 
   }
@@ -205,7 +204,6 @@ export class UserListsComponent implements OnInit, OnDestroy {
   }
 
   removeFromList(list: string, symbol: string) {
-    console.log('list', list, 'symbol', symbol);
     let listId;
     if (list === 'Holding') listId = this.holdingList['list_id'];
     if (list === 'Watching') listId = this.watchingList['list_id'];
@@ -234,6 +232,10 @@ export class UserListsComponent implements OnInit, OnDestroy {
       'bell--green': this.getAlertsForItem(item, alerts).length == 1 && this.getAlertsForItem(item, alerts)[0]['per_change'] > 0,
       'bell--red': this.getAlertsForItem(item, alerts).length == 1 && this.getAlertsForItem(item, alerts)[0]['per_change'] < 0
     };
+  }
+
+  openAlerts() {
+    this.signalService.openAlerts();
   }
 
 }

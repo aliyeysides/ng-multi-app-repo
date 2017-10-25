@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {UtilService} from './util.service';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class SignalService {
@@ -25,9 +26,16 @@ export class SignalService {
   private apiHostName = this.utilService.getApiHostName();
   private apiPrependText = '/CPTRestSecure/app';
 
+  private _alertsOpen: Subject<void> = new Subject<void>();
+  alertsOpen$ = this._alertsOpen.asObservable();
+
   constructor(private utilService: UtilService) {
     this.alertsLookupParams = new URLSearchParams();
     this.signalsLookupParams = new URLSearchParams();
+  }
+
+  openAlerts() {
+    this._alertsOpen.next();
   }
 
   public parseSignal(signal) {
