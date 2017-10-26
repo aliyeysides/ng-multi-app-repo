@@ -50,7 +50,7 @@ import {Observable} from 'rxjs/Observable';
             <li *ngFor="let alert of this.holdingListAlerts" class="alert__entry row">
               <div class="col-4 alert__stock">
                 <p class="ticker">
-                  <img class="rating" src="./assets/imgs/arc_Bearish.svg">
+                  <!--<img class="rating" src="./assets/imgs/arc_Bearish.svg">-->
                   <span>{{ alert['symbol'] }}</span>
                 </p>
               </div>
@@ -79,7 +79,7 @@ import {Observable} from 'rxjs/Observable';
             <li *ngFor="let alert of watchingListAlerts" class="alert__entry row">
               <div class="col-4 alert__stock">
                 <p class="ticker">
-                  <img class="rating" src="./assets/imgs/arc_Bearish.svg">
+                  <!--<img class="rating" src="./assets/imgs/arc_Bearish.svg">-->
                   <span>{{ alert['symbol'] }}</span>
                 </p>
               </div>
@@ -101,9 +101,9 @@ import {Observable} from 'rxjs/Observable';
           </ul>
         </div>
 
-        <!--<div class="alerts__section">-->
-          <!--<h4><i class="fa fa-lightbulb-o" aria-hidden="true"></i> &nbsp;BEST BEAR IDEAS</h4>-->
-          <!--<ul class="alerts__list container container-fluid">-->
+        <div class="alerts__section">
+          <h4><i class="fa fa-lightbulb-o" aria-hidden="true"></i> &nbsp;BEST BEAR IDEAS</h4>
+          <ul class="alerts__list container container-fluid">
 
             <!--<li class="alert__entry row">-->
               <!--<div class="col-4 alert__stock">-->
@@ -125,8 +125,8 @@ import {Observable} from 'rxjs/Observable';
                 <!--</ul>-->
               <!--</div>-->
             <!--</li>-->
-          <!--</ul>-->
-        <!--</div>-->
+          </ul>
+        </div>
 
       </div>
     </div>

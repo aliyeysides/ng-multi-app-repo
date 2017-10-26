@@ -31,7 +31,7 @@ import {Subscription} from 'rxjs/Subscription';
       <ul [ngBusy]="loading" class="post-body post-body--bearlist">
         <li *ngFor="let stock of bestBearIdeas" class="row no-gutters">
           <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="{{ appendPGRImage(stock?.PGR) }}">
+            <img class="align-absolute" src="{{ appendPGRImage(stock?.PGR, stock?.raw_PGR) }}">
           </div>
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ stock?.symbol }}</p>
@@ -100,8 +100,8 @@ export class BestBearIdeasComponent implements OnInit {
     this.router.navigate(['/ideas']);
   }
 
-  public appendPGRImage(pgr: number) {
-    return this.signalService.appendPGRImage(pgr);
+  public appendPGRImage(pgr: number, rawPgr: number) {
+    return this.signalService.appendPGRImage(pgr, rawPgr);
   }
 
 }

@@ -8,7 +8,6 @@ import {SignalService} from '../../../core/services/signal.service';
   template: `
     <div class="discovery-results__container container-fluid">
       <div *ngFor="let list of lists" class="discovery-results__slider row no-gutters">
-        <!--<ng-container *ngIf="list.is_active == true">-->
           <div *ngIf="endIndex[list['list_key']] != list['stocks'].length && list['stocks'].length > 5"
                (click)="scrollRight(list['list_key'])" class="slider__scroll slider__scroll--right">
             <img class="align-absolute" src="./assets/imgs/scroll-r.svg">
@@ -28,7 +27,6 @@ import {SignalService} from '../../../core/services/signal.service';
                                   [stock]="stock"></cpt-discovery-card>
             </li>
           </ul>
-        <!--</ng-container>-->
       </div>
     </div>
   `,
@@ -61,9 +59,10 @@ export class DiscoveryResultsComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this._results
       .takeUntil(this.ngUnsubscribe)
-      .subscribe(res => {
-        this.lists = res;
-      })
+      .filter(x => x != undefined)
+      .map(res => {
+        return res.filter(x => x['is_active'] == true);
+      }).subscribe(res => this.lists = res)
   }
 
   ngOnDestroy() {

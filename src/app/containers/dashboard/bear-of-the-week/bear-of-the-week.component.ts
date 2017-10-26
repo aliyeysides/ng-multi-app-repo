@@ -119,6 +119,7 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
         return this.ideasService.getStockCardData(this.ticker);
       })
       .subscribe(data => {
+        console.log('data', data);
         this.stockDataMeta = data['meta-info'];
         this.stockDataPGR = data['pgr']['PGR Value'];
       })
@@ -134,7 +135,7 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
     this.bearModalRef.content.date = this.post['post_date_formatted'];
   }
 
-  public appendPGRImage(pgr: number) {
-    return this.signalService.appendPGRImage(pgr);
+  public appendPGRImage(pgr: number, rawPgr: number) {
+    return this.signalService.appendPGRImage(pgr, rawPgr);
   }
 }

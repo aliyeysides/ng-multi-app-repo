@@ -21,7 +21,7 @@ import {Idea} from '../../../../shared/models/idea';
           </div>
           <div class="symbol clearfix">
             <div class="rating">
-              <img src="{{ appendPGRImage(stock ? stock['PGR'] : null) }}">
+              <img src="{{ appendPGRImage(stock ? stock['PGR'] : null, stock ? stock['raw_PGR'] : null) }}">
               <p class="ticker">{{ stock.symbol }}</p>
             </div>
           </div>
@@ -42,7 +42,7 @@ import {Idea} from '../../../../shared/models/idea';
         <div class="tile__contents">
           <div class="symbol clearfix">
             <div class="rating">
-              <img src="{{ appendPGRImage(stock ? stock['PGR'] : null) }}">
+              <img src="{{ appendPGRImage(stock ? stock['PGR'] : null, stock ? stock['raw_PGR'] : null) }}">
               <p class="ticker">{{ stock.symbol }}</p>
             </div>
             <div class="tile__pgr container-fluid">
@@ -185,8 +185,8 @@ export class DiscoveryCardComponent implements AfterViewInit {
     return this.signalService.appendSliderBarClass(pgr);
   }
 
-  public appendPGRImage(pgr: number) {
-    return this.signalService.appendPGRImage(pgr);
+  public appendPGRImage(pgr: number, rawPgr: number) {
+    return this.signalService.appendPGRImage(pgr, rawPgr);
   }
 
   public addToList(list: string, symbol: string) {
