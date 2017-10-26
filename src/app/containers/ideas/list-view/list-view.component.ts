@@ -8,6 +8,8 @@ import {IdeasService} from '../../../core/services/ideas.service';
 import {AuthService} from '../../../core/services/auth.service';
 import {UtilService} from '../../../core/services/util.service';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'cpt-list-view',
   templateUrl: './list-view.component.html',
@@ -163,6 +165,8 @@ export class ListViewComponent implements OnInit, OnDestroy {
       data.yAxisData.rectData[i] = parseInt(data.yAxisData.rectData[i]);
       data.yAxisData.areaData[i] = parseFloat(data.yAxisData.areaData[i]);
     }
+
+    data.xAxisFormatedData = data.xAxisFormatedData.map(res => moment(res).format('MMM DD YYYY'));
 
     this.chartData = data;
     this.drawchart();
