@@ -84,7 +84,7 @@ export class IdeasService {
   }
 
   public addStockIntoList(listId: string, symbol: string) {
-    const allowed = 10;
+    const allowed = 30;
     const addStockIntoListUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/addStockIntoList?`;
     this.addStockIntoListParams.set('listId', listId);
     this.addStockIntoListParams.set('symbol', symbol);
@@ -582,7 +582,7 @@ export class IdeasService {
         .attr("fill", "none")
         .style("opacity", 1)
         .style('shape-rendering', 'geometricPrecision')
- 
+
 
       self.areaGroup.append("path")
         .attr("d", lineFunction(self.chartData.yAxisData.lineData))
@@ -667,12 +667,12 @@ export class IdeasService {
         .attr("rx", 0);
 
       d3.selectAll(".handle--e")
-        .attr("height", 18)     
+        .attr("height", 18)
         .attr("ry", 2)
         .attr("rx", 2);
 
       d3.selectAll(".handle--w")
-        .attr("height", 18)     
+        .attr("height", 18)
         .attr("ry", 2)
         .attr("rx", 2);
 
