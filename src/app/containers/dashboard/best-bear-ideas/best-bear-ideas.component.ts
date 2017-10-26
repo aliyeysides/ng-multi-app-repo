@@ -38,7 +38,7 @@ import {Subscription} from 'rxjs/Subscription';
           </div>
           <div class="col-1 stock__alert"
                [ngClass]="{'down-alert':stock?.Change<0,'up-alert':stock?.Change>0,'flat-alert':stock?.Change===0}">
-            <i class="fa fa-play" aria-hidden="true"></i>
+            <!--<i class="fa fa-play" aria-hidden="true"></i>-->
           </div>
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">{{ stock?.Last
