@@ -80,6 +80,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
         this.clearOrderByObject();
         this.clearIdeasLists();
         this.ideaList = stocks['symbols'];
+        console.log('ideas', this.ideaList);
         this.assignStockData(4);
         if (this.ideaList) this.selectStock(this.ideaList[0] as Idea);
       });
@@ -95,10 +96,10 @@ export class ListViewComponent implements OnInit, OnDestroy {
       })
       .take(1)
       .subscribe(stocks => {
-        this.clearOrderByObject();
+        // this.clearOrderByObject();
         this.clearIdeasLists();
         this.ideaList = stocks['symbols'];
-        this.assignStockData(4);
+        // this.assignStockData(4);
         const selectedStock = this.ideaList.filter(idea => idea['symbol'] === this.selectedStock['symbol'])[0];
         this.selectStock(selectedStock as Idea);
       });
@@ -156,7 +157,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
       },
     "xAxisData": (this.selectedStockChartPoints['dates']).reverse(),
     "xAxisFormatedData": (this.selectedStockChartPoints['dates'])
-    }
+    };
     for (let i = 0; i < data.xAxisData.length; i++){
       data.yAxisData.lineData[i] = parseFloat(data.yAxisData.lineData[i]);
       data.yAxisData.rectData[i] = parseInt(data.yAxisData.rectData[i]);
@@ -183,8 +184,11 @@ export class ListViewComponent implements OnInit, OnDestroy {
       this.ideaList.map((stock, index) => {
         if (index >= this.loadedStockIdeas && index < loadNum) {
           this.getSelectedStockData(stock as Idea, res => {
-            this.clearOrderByObject();
+            console.log('panel:', res, 'idea:', stock);
+            Object.assign(res, stock);
+            // this.clearOrderByObject();
             this.panelViewIdeasList.push(res);
+            console.log('panels:', this.panelViewIdeasList);
             this.loadedStockIdeas++;
           })
         }
