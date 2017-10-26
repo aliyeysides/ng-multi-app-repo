@@ -1560,37 +1560,12 @@ a.quick-link {
 
 g.hoverLineGroup {
 }
-
 g.parentGroup {
-
-  g.area-clip-path {
-    #areaClip {
-      .areaPathViewport {
-      }
-    }
-  }
-
-  g.areaGroup {
-    .area-chart {
-    }
-    .area-line-chart {
-    }
-    .close-line-chart {
-    }
-
-  }
-
   g.brush-backgroud-group {
     display: none;
-
-    .brush-background-rect {
-    }
   }
-
   g.brush {
-    height: 8px;
     transform: translate(10px, 189px) !important;
-
     .overlay {
       cursor: col-resize;
       opacity: 0.1;
@@ -1603,93 +1578,30 @@ g.parentGroup {
       fill-opacity:0.5;
     }
     .handle {
-      height: 18px;
-      fill: #2C58BB !important;
-      opacity: .8;
-
-      .navHandles {
-      }
-    }
-    .handle--e {
-
-      .navHandles {
-      }
-    }
-    .handle--w {
-
-      .navHandles {
-      }
+      opacity: .75;
     }
   }
-
-  g.xAxisGroupAdvance {
-  }
-
   g.axis {
-    .domain {
-    }
-
     g.tick {
-
       line {
         stroke:none !important;
       }
-
-      text {
-        fill: #999999;
-
-        tspan {
-        }
-      }
     }
   }
-
-  g.yAxis {
-  }
-
-  g.yAxisGroup {
-  }
-
   g.parentSectorGroup {
-
     g.main-pgr-group {
       transform: translate(0px, 2px);
-
-      g.pgr-bars-group {
-        g.pgr-clip-path {
-          #pgrClip {
-            .areaPathViewport {
-            }
-          }
-        }
-        .rel-strength {
-        }
-      }
     }
   }
 }
-
 g.dummyGroup {
-
-  g.xAxisGroupDummy {
-  }
-
   g.axis {
-    .domain {
-    }
-
     g.tick {
-
       line {
         stroke:none !important;
       }
-
       text {
         fill: #999999;
-        transform: translate(0px, 0px) !important;
-
-        tspan {
-        }
       }
     }
   }
