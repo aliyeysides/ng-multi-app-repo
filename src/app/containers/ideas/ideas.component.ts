@@ -59,7 +59,7 @@ export class IdeasComponent implements OnInit {
     let listId;
     if (params['list'] === 'Holding') listId = this.holdingListId;
     if (params['list'] === 'Watching') listId = this.watchingListId;
-    this.ideasService.addStockIntoList(listId.toString(), params['symbol'])
+    this.symbolListLoading = this.ideasService.addStockIntoList(listId.toString(), params['symbol'])
       .take(1)
       .subscribe(res => this.list.refreshList());
   }

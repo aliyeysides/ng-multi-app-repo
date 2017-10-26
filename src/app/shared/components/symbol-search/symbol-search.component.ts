@@ -160,7 +160,7 @@ export class SymbolSearchComponent implements AfterContentInit, OnDestroy {
 
   addToList(listId: string, symbol: string) {
     this.loading = this.ideasService.addStockIntoList(listId.toString(), symbol)
-      .takeLast(1)
+      .take(1)
       .subscribe();
     this.symbolSearchService.emitAddToList();
   }

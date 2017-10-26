@@ -94,11 +94,10 @@ export class IdeasService {
       .filter(x => x != undefined)
       .map(usr => usr['UID'])
       .flatMap(uid => this.getListSymbols(listId, uid))
-      .map(res => {
-        return res['symbols'].length < allowed;
-      })
+      .map(res => res['symbols'].length < allowed)
       .flatMap(allowed => {
         if (allowed) {
+
           return this.http.get(addStockIntoListUrl, {
             search: this.addStockIntoListParams,
             withCredentials: true
@@ -108,13 +107,14 @@ export class IdeasService {
               this.toast.success('Success!', 'Successfully added ' + key);
               this._updateAlerts.next();
             });
-            return res.json()
-          })
+            return result as Observable<any>;
+          }).catch((err) => Observable.throw(err))
+
         } else {
           this.toast.error('Oops...', "You have reached the 30 stock limit for what can be added to your user list. To add a stock, you must first remove something from your list.");
-          return Observable.throw('error')
+          return Observable.throw("You have reached the 30 stock limit for what can be added to your user list. To add a stock, you must first remove something from your list.")
         }
-      })
+      });
   }
 
   public deleteSymbolFromList(listId: string, symbol: string) {
