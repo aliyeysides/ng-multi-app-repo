@@ -4,7 +4,7 @@
 
 html, body {
   overflow: hidden;
-  height: 100vh;
+  height: 100%;
   line-height: 1;
 }
 
@@ -332,7 +332,7 @@ a.quick-link {
           font-family: $font-stack;
           background-color: $background--LT;
           height: 50px;
-          width: 360px;
+          width: 350px;
           text-align: left;
           padding: 0 15px 0;
           border: 0;
@@ -342,6 +342,14 @@ a.quick-link {
           color: $font-color;
           border-bottom: 3px solid rgba(0, 0, 0, 0.05);
           color: $font-color;
+
+          @media screen and (max-width: 1023px) {
+            width: 330px;
+          }
+
+          @media screen and (max-width: 991px) {
+            width: 310px;
+          }
         }
       }
 
@@ -359,9 +367,17 @@ a.quick-link {
       top: 50px;
       background-color: #ffffff;
       box-shadow: 0px 20px 40px 3px rgba(0, 0, 0, 0.3);
-      width: 360px;
+      width: 350px;
       overflow-x: hidden;
       border-radius: 0 0 5px 5px;
+
+      @media screen and (max-width: 1023px) {
+        width: 330px;
+      }
+
+      @media screen and (max-width: 991px) {
+        width: 310px;
+      }
 
       p {
         cursor: pointer !important;
@@ -371,7 +387,7 @@ a.quick-link {
         height: 60px;
         border-bottom: 3px solid #ffffff;
         color: $font-color;
-        width: 420px;
+        width: 410px;
         cursor: pointer;
 
         .search__company {
@@ -403,7 +419,7 @@ a.quick-link {
 
     a {
       display: inline-block;
-      margin-left: 15px;
+      margin-left: 10px;
       padding-top: 5px;
       height: 40px;
       width: 40px;
@@ -1150,7 +1166,7 @@ a.quick-link {
   font-weight: 300;
   font-family: $font-stack;
   line-height: 1.5;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   padding: 0;
 
   @media screen and (max-width: 1024px) {
@@ -1164,7 +1180,7 @@ a.quick-link {
   font-weight: 600;
   font-family: $font-stack;
   line-height: 1.5;
-  margin: 30px 0 15px;
+  margin: 25px 0 10px;
   padding: 0;
 }
 

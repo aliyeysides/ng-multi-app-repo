@@ -33,7 +33,7 @@ import {SignalService} from '../../../core/services/signal.service';
              [ngClass]="{'veryBullish':stock?.PGR==5,'bullish':stock?.PGR==4,'neutral':stock?.PGR==3,'bearish':stock?.PGR==2,'veryBearish':stock?.PGR==1}">
             <span>Power Gauge:</span> {{ appendPGRText(stock ? stock['PGR'] : null, stock ? stock['raw_PGR'] : null) }}</p>
           <ul *ngIf="stock" class="pgr__sliders">
-            <li class="">
+            <li>
               <div class="sliderBar-container">
                 <div class="sliderProgress">
                   <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['financial'])"></div>
@@ -47,7 +47,7 @@ import {SignalService} from '../../../core/services/signal.service';
                 </div>
               </div>
             </li>
-            <li class="">
+            <li>
               <div class="sliderBar-container">
                 <div class="sliderProgress">
                   <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['earning'])"></div>
@@ -61,7 +61,7 @@ import {SignalService} from '../../../core/services/signal.service';
                 </div>
               </div>
             </li>
-            <li class="">
+            <li>
               <div class="sliderBar-container">
                 <div class="sliderProgress">
                   <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['technical'])"></div>
@@ -75,7 +75,7 @@ import {SignalService} from '../../../core/services/signal.service';
                 </div>
               </div>
             </li>
-            <li class="">
+            <li>
               <div class="sliderBar-container">
                 <div class="sliderProgress">
                   <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['expert'])"></div>

@@ -16,21 +16,21 @@
     top:0;
     z-index: 400;
     width: 100%;
-    min-width: 860px;
+    min-width: 800px;
 
 /*------------------------------------*\
   #SEEDED STOCK
 \*------------------------------------*/
 
     .discovery__base-stock {
-      padding: 0px 25px 0px 45px;
+      padding: 0px 30px 0px 35px;
 
       .row {
         position: relative;
         height: 130px;
         background: transparent;
         padding: 10px;
-        min-width: 960px;
+        min-width: 940px;
 
         .base-stock__logo {
           position: absolute;
@@ -130,6 +130,10 @@
           padding:3px 3% 0;
           border-right: 3px solid rgba(0, 0, 0, 0.05);
 
+          @media screen and (max-width: 1150px) {
+            padding:3px 1.5% 0;
+          }
+
           .pgr__sliders {
             margin-top: 7px;
 
@@ -138,7 +142,6 @@
               width: 210px;
 
               .sliderBar-container {
-
 
                 .pgr__label {
                   width: 35%;
@@ -262,6 +265,10 @@
         .base-stock__factors {
           padding: 2px 3% 0;
           overflow: hidden;
+
+          @media screen and (max-width: 1150px) {
+            padding: 2px 1.5% 0;
+          }
 
           ul {
 
