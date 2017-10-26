@@ -101,9 +101,9 @@ import {Observable} from 'rxjs/Observable';
           </ul>
         </div>
 
-        <!--<div class="alerts__section">-->
-          <!--<h4><i class="fa fa-lightbulb-o" aria-hidden="true"></i> &nbsp;BEST BEAR IDEAS</h4>-->
-          <!--<ul class="alerts__list container container-fluid">-->
+        <div class="alerts__section">
+          <h4><i class="fa fa-lightbulb-o" aria-hidden="true"></i> &nbsp;BEST BEAR IDEAS</h4>
+          <ul class="alerts__list container container-fluid">
 
             <!--<li class="alert__entry row">-->
               <!--<div class="col-4 alert__stock">-->
@@ -125,8 +125,8 @@ import {Observable} from 'rxjs/Observable';
                 <!--</ul>-->
               <!--</div>-->
             <!--</li>-->
-          <!--</ul>-->
-        <!--</div>-->
+          </ul>
+        </div>
 
       </div>
     </div>
