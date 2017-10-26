@@ -414,6 +414,8 @@ export class IdeasService {
 
       d3.select(".brush").call(self.brush)
         .selectAll("rect").attr("y", 3)
+        .attr("ry", 5)
+        .attr("rx", 5)
         .attr("height", self.brushHeight)
         .attr("fill", "#000")
         .attr("opacity", .3);
@@ -470,7 +472,7 @@ export class IdeasService {
       let xAxisGroupDummy = d3.select(".xAxisGroupDummy").attr("transform", "translate(" + (self.areaChartMargins.left) + "," + (self.chartHeight + 5) + ")")
         //.attr("clip-path","url(#xAxisClip)")
         .call(self.xAxisDummy).attr("fill", "none").attr("display", "block")
-        .selectAll("text")
+        .selectAll("text").attr("fill", "#999999")
         .text('')
         .selectAll('tspan')
         .data(function(d, i) {
@@ -508,7 +510,7 @@ export class IdeasService {
         .call(self.yAxis)
         .attr("fill", "none")
         .selectAll("text")
-        .attr("fill", "black")
+        .attr("fill", "#999999")
 
 
       d3.selectAll(".close-line").remove();
@@ -536,17 +538,19 @@ export class IdeasService {
         .attr("d", lineFunction(self.chartData.yAxisData.areaData))
         .attr("class", "area-line-chart")
         .attr("stroke", "#1199ff")
-        .attr("stroke-width", 3)
+        .attr("stroke-width", 2.5)
+        .attr("stroke-linejoin", "round")
         .attr("fill", "none")
         .style("opacity", 1)
         .style('shape-rendering', 'geometricPrecision')
-
+ 
 
       self.areaGroup.append("path")
         .attr("d", lineFunction(self.chartData.yAxisData.lineData))
         .attr("class", "close-line-chart")
         .attr("stroke", "#ff9c17")
-        .attr("stroke-width", 2)
+        .attr("stroke-width", 1.5)
+        .attr("stroke-linejoin", "round")
         .attr("fill", "none")
         .style("opacity", 1)
         .style("stroke-dasharray", ("3, 3"))
@@ -614,11 +618,18 @@ export class IdeasService {
         .attr("fill", "#2C58BB")
         .attr("opacity", 0.5)
         .attr("y", -.5)
+        .attr("ry", 0)
+        .attr("rx", 0);
 
       d3.selectAll(".handle--e")
-        .attr("height", 18);
+        .attr("height", 18)     
+        .attr("ry", 2)
+        .attr("rx", 2);
+
       d3.selectAll(".handle--w")
-        .attr("height", 18);
+        .attr("height", 18)     
+        .attr("ry", 2)
+        .attr("rx", 2);
 
       var d0 = d3.event.selection.map(self.brushXScale.invert);
       // d1 = d0.map(d3.timeMonth.round),
@@ -654,7 +665,7 @@ export class IdeasService {
       self.yScale.domain([self.yMin, self.yMax]);
 
       d3.select(".yAxisGroup").call(self.yAxis)
-        .attr("fill", "none").selectAll("text").attr("fill", "black");
+        .attr("fill", "none").selectAll("text").attr("fill", "#999999");
       //Updating candle yScale
       /*      self.candleYMin = d3.min(self.lowValuesArr.slice(min, dataIndex + 1));
             self.candleYMax = d3.max(self.highValuesArr.slice(min, dataIndex + 1));*/

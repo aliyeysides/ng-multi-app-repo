@@ -374,7 +374,7 @@
           width: 54px;
           height: auto;
           margin-right: 15px;
-          margin-top: 5px;
+          margin-top: 4px;
         }
       }
 
@@ -461,7 +461,7 @@
       .stock-panel__industry {
         border-bottom: $border-line--LT;
         border-top: $border-line--LT;
-        padding: 7px 0px 7px 0;
+        padding: 7px 0px;
 
         p {
           font-weight: 600;
@@ -592,7 +592,7 @@
 
     .quick-view__chart-container {
       border-top: $border-line--LT;
-      padding:15px 0;
+      padding:15px 0 0px;
 
       @media screen and (max-width: 991px) {
         border-top: none;
@@ -612,7 +612,7 @@
     .quick-view__similar {
       background-color: $background--LT;
       height: 50px;
-      margin-bottom: 20px;
+      margin: 20px 0;
       border-radius: 5px;
 
       .icon__discover {
@@ -651,7 +651,7 @@
     }
 
     .quick-view__news {
-      padding: 0 15px;
+      padding: 0px;
 
       .news-panel__header {
         p {
@@ -664,7 +664,7 @@
         }
         .news__attribute {
           font-size: 10px;
-          line-height:18px;
+          line-height:16px;
           float: right;
           color: $font-color--MD;   
           font-weight: 400;
@@ -729,7 +729,7 @@
           display: block;
           font-weight: 400;
           line-height: 1.6;
-          margin: 10px 0 0;
+          margin: 15px 0 0;
           padding: 0;
         }
       }
@@ -780,9 +780,10 @@
         float: left;
 
         img {
-          width: 56px;
+          width: 54px;
           height: auto;
           margin-right: 15px;
+          margin-top: 4px;
         }
       }
 
@@ -819,7 +820,7 @@
       }
 
       .stock-panel__company-name {
-        margin: 10px 0 10px;
+        margin: 10px 0;
 
         .button__add-to-list {
           float: left;
@@ -872,8 +873,8 @@
         padding: 7px 0px;
 
         p {
-          font-weight: 400;
-          font-size: 12px;
+          font-weight: 600;
+          font-size: 11px;
           line-height: 1.7;
           color: $font-color--MD;
           text-transform: uppercase;
@@ -881,6 +882,7 @@
           white-space: nowrap;
           overflow: hidden;
           padding-right:3px;
+          letter-spacing: 0.02em;
 
           span {
             font-size: 16px;
@@ -907,8 +909,8 @@
         margin-bottom: 5px;
 
         p {
-          font-weight: 400;
-          font-size: 12px;
+          font-weight: 600;
+          font-size: 11px;
           line-height: 1.4;
           color: $font-color--MD;
           text-transform: uppercase;
@@ -930,10 +932,22 @@
             overflow: visible;
           }
         }
+
+        @media screen and (max-width:991px) {
+          border-bottom: $border-line--LT;
+          margin-bottom: 15px;
+        }
       }
 
       .quick-view__pgr {
-        border-left: 3px solid #f8f8f8;
+        border-left: $border-line--LT;
+
+        @media screen and (max-width: 991px) {
+          border-left: none;
+          border-bottom: $border-line--LT;
+          margin-bottom: 15px;
+          padding-bottom: 15px;
+        }
 
         .pgr__title {
           font-weight: 600;
@@ -948,7 +962,7 @@
 
         .pgr__text {
           font-weight: 700;
-          font-size: 17px;
+          font-size: 16px;
           text-transform: uppercase;
           white-space: nowrap;
 
@@ -957,7 +971,11 @@
           }
 
           @media screen and (max-width: 1479px) and (min-width: 1280px) {
-            font-size: 23px;
+            font-size: 22px;
+          }
+
+          @media screen and (max-width: 1279px) and (min-width: 992px) {
+            font-size: 17px;
           }
         }
 
@@ -965,7 +983,7 @@
           margin-top: 8px;
 
           li {
-            margin: 3px 0 3px;
+            margin: 3px 0 6px;
 
             .sliderBar-container {
 
@@ -983,19 +1001,29 @@
     }
 
     .quick-view__chart-container {
+      border-top: $border-line--LT;
+      padding:15px 0 0px;
+
+      @media screen and (max-width: 991px) {
+        border-top: none;
+      }
 
       .quick-view__chart {
-        padding-top: 20px;
+        height: 210px;
         width: 100%;
+
+        .panel__chart {
+          height: 100%;
+          width: 100%;
+        }
       }
     }
 
     .quick-view__similar {
-      background-color: $background--LT-blue;
-      height: 40px;
-      margin-top: 10px;
-      margin-bottom: 35px;
-      border-radius: 20px;
+      background-color: $background--LT;
+      height: 50px;
+      margin: 20px 0 20px;
+      border-radius: 5px;
 
       .icon__discover {
         cursor: pointer;
@@ -1006,13 +1034,19 @@
         }
 
         svg g {
-          fill: $link-blue;
+          fill: $link-grey;
+        }
+
+        &:hover {
+          svg g {
+            fill: $link-blue;
+          }
         }
       }
 
       .similar-stock {
         font-size: 16px;
-        line-height: 40px;
+        line-height: 50px;
         font-weight: 700;
         text-align: left;
 
