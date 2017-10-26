@@ -150,12 +150,12 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
     let data = {
       "yAxisData": {
-        "lineData": (this.selectedStockChartPoints['closePrice']).reverse(),
+        "lineData": (this.selectedStockChartPoints['dema']).reverse(),
         "rectData": (this.selectedStockChartPoints['pgr']).reverse(),
-        "areaData": (this.selectedStockChartPoints['dema']).reverse()
+        "areaData": (this.selectedStockChartPoints['closePrice']).reverse()
       },
     "xAxisData": (this.selectedStockChartPoints['dates']).reverse(),
-    "xAxisFormatedData": (this.selectedStockChartPoints['dates']).reverse()
+    "xAxisFormatedData": (this.selectedStockChartPoints['dates'])
     }
     for (let i = 0; i < data.xAxisData.length; i++){
       data.yAxisData.lineData[i] = parseFloat(data.yAxisData.lineData[i]);
