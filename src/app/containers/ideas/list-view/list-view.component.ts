@@ -275,6 +275,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public gotoListView() {
     this.currentView = 'list-view';
+    this.refreshList();
   }
 
   public translateIndustryStrength(listRating: number): string {
