@@ -54,6 +54,10 @@
       }
     }
 
+    .list-sort__button.open  {
+      background-color: rgba(255,255,255,0.2);
+    }
+
     .list__title {
       font-size: 21px;
       float: left;
