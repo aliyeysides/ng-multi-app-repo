@@ -43,7 +43,7 @@ import * as moment from 'moment';
       <ul [ngBusy]="loading" *ngIf="currentList === 'Holding'" class="post-body post-body--userlist">
         <li *ngFor="let item of holdingListIdeas" class="row no-gutters">
           <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="{{ appendPGRImage(item.PGR) }}">
+            <img class="align-absolute" src="{{ appendPGRImage(item.PGR, item.raw_PGR) }}">
           </div>
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ item.symbol }}</p>
@@ -72,7 +72,7 @@ import * as moment from 'moment';
       <ul [ngBusy]="loading" *ngIf="currentList === 'Watching'" class="post-body post-body--userlist">
         <li *ngFor="let item of watchingListIdeas" class="row no-gutters">
           <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="{{ appendPGRImage(item.PGR) }}">
+            <img class="align-absolute" src="{{ appendPGRImage(item.PGR, item.raw_PGR) }}">
           </div>
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ item.symbol }}</p>
@@ -198,8 +198,8 @@ export class UserListsComponent implements OnInit, OnDestroy {
 
   }
 
-  public appendPGRImage(pgr: number) {
-    return this.signalService.appendPGRImage(pgr);
+  public appendPGRImage(pgr: number, rawPgr: number) {
+    return this.signalService.appendPGRImage(pgr, rawPgr);
   }
 
   openSearch() {

@@ -281,12 +281,12 @@ export class ListViewComponent implements OnInit, OnDestroy {
     return listRating >= 50 ? 'Strong' : 'Weak';
   }
 
-  public appendPGRImage(pgr) {
-    return this.signalService.appendPGRImage(pgr);
+  public appendPGRImage(pgr, rawPgr) {
+    return this.signalService.appendPGRImage(pgr, rawPgr);
   }
 
-  public appendPGRText(pgr) {
-    return this.signalService.appendPGRText(pgr);
+  public appendPGRText(pgr, rawPgr) {
+    return this.signalService.appendPGRText(pgr, rawPgr);
   }
 
   public appendPGRClass(pgr) {

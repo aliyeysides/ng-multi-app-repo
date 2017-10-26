@@ -198,7 +198,7 @@
               </div>
             </div>
             <div class="col-md-3 col-lg-2 col-xl-2 stock__PGR">
-              <img class="align-absolute" src="{{appendPGRImage(idea.PGR)}}">
+              <img class="align-absolute" src="{{appendPGRImage(idea.PGR, idea.raw_PGR)}}">
             </div>
             <div class="col-md-3 col-lg-3 col-xl-2 stock__ticker">
               <p>{{ idea.symbol }}</p>
@@ -244,7 +244,7 @@
           <div class="col-lg-8">
             <div class="clearfix">
               <div class="stock-panel__PGR">
-                <img src="{{ appendPGRImage(selectedStock.PGR) }}">
+                <img src="{{ appendPGRImage(selectedStock.PGR, selectedStock.raw_PGR) }}">
               </div>
               <div class="stock-panel__ticker">
                 <p>{{selectedStock?.symbol}}</p>
@@ -349,7 +349,7 @@
           <div class="quick-view__pgr col-lg-4">
             <p class="pgr__title">Power Gauge:</p>
             <p class="pgr__text" [ngClass]="appendPGRClass(selectedStock.PGR)">
-              {{ appendPGRText(selectedStock.PGR) }}
+              {{ appendPGRText(selectedStock.PGR, selectedStock.raw_PGR) }}
             </p>
             <ul class="pgr__sliders row">
               <li class="col-12">
@@ -473,7 +473,7 @@
           <div class="col-lg-8">
             <div class="clearfix">
               <div class="stock-panel__PGR">
-                <img src="{{ appendPGRImage(idea.pgr['Corrected PGR Value']) }}">
+                <img src="{{ appendPGRImage(idea.pgr['Corrected PGR Value'], idea.pgr['PGR Value']) }}">
               </div>
               <div class="stock-panel__ticker">
                 <p>{{idea['meta-info'].symbol}}</p>
@@ -581,7 +581,7 @@
           <div class="quick-view__pgr col-lg-4">
             <p class="pgr__title">Power Gauge:</p>
             <p class="pgr__text" [ngClass]="appendPGRClass(idea.pgr['Corrected PGR Value'])">
-              {{ appendPGRText(idea.pgr['Corrected PGR Value']) }}
+              {{ appendPGRText(idea.pgr['Corrected PGR Value'], idea.pgr['PGR Value']) }}
             </p>
             <ul class="pgr__sliders row">
               <li class="col-12">

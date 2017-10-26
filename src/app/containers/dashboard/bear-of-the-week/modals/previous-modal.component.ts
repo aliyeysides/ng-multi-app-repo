@@ -96,8 +96,8 @@ export class PreviousBearsModalComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  public appendPGRImage(pgr: number) {
-    return this.signalService.appendPGRImage(pgr);
+  public appendPGRImage(pgr: number, rawPgr: number) {
+    return this.signalService.appendPGRImage(pgr, rawPgr);
   }
 
   public openCommentaryModal(post) {

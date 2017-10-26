@@ -118,7 +118,7 @@ export class SignalService {
         jsonObj['alert_type'] = 'earnings_surprise_alerts';
         jsonObj['alert_text'] = 'Earnings Surprise';
         jsonObj['quarter'] = alertList['earnings_surprise_alerts'][key][obj]['quarter'];
-        jsonObj['pgr'] = this.calculatePGR(alertList['earnings_surprise_alerts'][key][obj]['data'][3]);
+        // jsonObj['pgr'] = this.calculatePGR(alertList['earnings_surprise_alerts'][key][obj]['data'][3]);
         jsonObj['new_value'] = alertList['earnings_surprise_alerts'][key][obj]['data'][0];
         jsonObj['old_value'] = alertList['earnings_surprise_alerts'][key][obj]['data'][1];
         jsonObj['per_change'] = alertList['earnings_surprise_alerts'][key][obj]['data'][2];
@@ -132,7 +132,7 @@ export class SignalService {
         jsonObj['alert_type'] = 'estimate_revision_alerts';
         jsonObj['alert_text'] = 'Estimate Revision';
         jsonObj['quarter'] = alertList['estimate_revision_alerts'][key][obj]['quarter'];
-        jsonObj['pgr'] = this.calculatePGR(alertList['estimate_revision_alerts'][key][obj]['data'][3]);
+        // jsonObj['pgr'] = this.calculatePGR(alertList['estimate_revision_alerts'][key][obj]['data'][3]);
         jsonObj['new_value'] = alertList['estimate_revision_alerts'][key][obj]['data'][0];
         jsonObj['old_value'] = alertList['estimate_revision_alerts'][key][obj]['data'][1];
         jsonObj['per_change'] = alertList['estimate_revision_alerts'][key][obj]['data'][2];
@@ -148,7 +148,7 @@ export class SignalService {
             jsonObj['symbol'] = obj;
             jsonObj['alert_type'] = 'pgr_change_alerts';
             jsonObj['alert_text'] = 'PGR Revision';
-            jsonObj['pgr'] = this.calculatePGR(alertList['pgr_change_alerts'][key][obj]['corrected_pgr']);
+            // jsonObj['pgr'] = this.calculatePGR(alertList['pgr_change_alerts'][key][obj]['corrected_pgr']);
             jsonObj['per_change'] = alertList['pgr_change_alerts'][key][obj]['chg_direction'];
             result.push(jsonObj);
           }
@@ -175,14 +175,16 @@ export class SignalService {
     return pgr;
   }
 
-  public appendPGRImage(pgr) {
+  public appendPGRImage(pgr, rawPgr) {
     const imageUrl = 'assets/imgs/';
     if (pgr === 1) {
       return imageUrl + 'arc_VeryBearish.svg';
     } else if (pgr === 2) {
       return imageUrl + 'arc_Bearish.svg';
     } else if (pgr === 3) {
-      return imageUrl + 'arc_Neutral.svg';
+      if (pgr == rawPgr) return imageUrl + 'arc_Neutral.svg';
+      if (pgr < rawPgr) return imageUrl + 'pgr-neutral-pos.svg';
+      if (pgr > rawPgr) return imageUrl + 'pgr-neutral-neg.svg';
     } else if (pgr === 4) {
       return imageUrl + 'arc_Bullish.svg';
     } else if (pgr === 5) {
@@ -192,12 +194,15 @@ export class SignalService {
     }
   }
 
-  public appendPGRText(pgr): string {
+  public appendPGRText(pgr, rawPgr): string {
     if (pgr === 1) {
       return 'Very Bearish';
     } else if (pgr === 2) {
       return 'Bearish';
     } else if (pgr === 3) {
+      if (pgr == rawPgr) return 'Neutral';
+      if (pgr < rawPgr) return 'Neutral +';
+      if (pgr > rawPgr) return 'Neutral -';
       return 'Neutral';
     } else if (pgr === 4) {
       return 'Bullish';

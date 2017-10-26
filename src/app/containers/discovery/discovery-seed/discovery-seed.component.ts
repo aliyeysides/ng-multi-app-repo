@@ -14,7 +14,8 @@ import {SignalService} from '../../../core/services/signal.service';
           <!--<p class="align-absolute">{{ stock ? stock['name'] : null }}</p>-->
         </div>
         <div class="base-stock__symbol">
-          <p class="ticker"><img class="" src="{{ appendPGRImage(stock ? stock['PGR'] : null) }}">
+          <p class="ticker">
+            <img class="" src="{{ appendPGRImage(stock ? stock['PGR'] : null, stock ? stock['raw_PGR'] : null) }}">
             {{ stock ? stock['symbol'] : null }}</p>
           <p class="company-name">{{ stock ? stock['name'] : null }}</p>
           <p class="company-industry">{{ stock ? stock['industry'] : null }}</p>
@@ -30,7 +31,7 @@ import {SignalService} from '../../../core/services/signal.service';
         <div class="base-stock__PGR">
           <p class="PGR__text"
              [ngClass]="{'veryBullish':stock?.PGR==5,'bullish':stock?.PGR==4,'neutral':stock?.PGR==3,'bearish':stock?.PGR==2,'veryBearish':stock?.PGR==1}">
-            <span>Power Gauge:</span> {{ appendPGRText(stock ? stock['PGR'] : null) }}</p>
+            <span>Power Gauge:</span> {{ appendPGRText(stock ? stock['PGR'] : null, stock ? stock['raw_PGR'] : null) }}</p>
           <ul *ngIf="stock" class="pgr__sliders">
             <li class="">
               <div class="sliderBar-container">
@@ -122,12 +123,12 @@ export class DiscoverySeedComponent implements AfterViewInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  public appendPGRImage(pgr: number) {
-    return this.signalService.appendPGRImage(pgr);
+  public appendPGRImage(pgr: number, rawPgr: number) {
+    return this.signalService.appendPGRImage(pgr, rawPgr);
   }
 
-  public appendPGRText(pgr: number) {
-    return this.signalService.appendPGRText(pgr);
+  public appendPGRText(pgr: number, rawPgr: number) {
+    return this.signalService.appendPGRText(pgr, rawPgr);
   }
 
   public appendSliderClass(pgr) {
