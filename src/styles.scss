@@ -68,7 +68,7 @@ ul, li {
 
 button {
   border: 0;
-  outline: 0 !important;
+  outline: 0;
 }
 
 input, input:focus {
@@ -79,6 +79,14 @@ input, input:focus {
   border-color: transparent;
   outline: 0;
   box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0), 0 0 0px rgba(255, 255, 255, 0);
+}
+
+:focus {
+  outline: none !important;
+  outline-color: transparent;
+  outline-style: none;
+  border-color: transparent;
+  outline: 0;
 }
 
 textarea {
@@ -208,7 +216,7 @@ iframe {
     left:0;
     z-index: 5000;
     opacity: 0.8;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0);
     background-image: url(./assets/imgs/loading_splash.png);
     background-size: 100% 100%;
     width: 100%;
@@ -231,7 +239,7 @@ iframe {
 
 a.quick-link {
   display: inline-block;
-  width: 6.125%;
+  width: 6.6%;
   height: 50px;
   position: relative;
 
@@ -250,13 +258,27 @@ a.quick-link {
       fill: $link-blue;
     }
   }
+
+  span.badge {
+    transform: translate(3px, -18px);
+    border-radius: 0.75rem;
+    background-color: $link-blue;
+    border: 2px solid #ffffff;
+  }
 }
+
+
+
+
 
 /*----------------------------------------------------*\
 
                   SHARED COMPONENTS
 
 \*----------------------------------------------------*/
+
+
+
 
 /*------------------------------------*\
   #SECTION HEADERS
@@ -1525,13 +1547,15 @@ a.quick-link {
 }
 
 
+
+
+
+
 /*----------------------------------------------------*\
 
                          CHART
 
 \*----------------------------------------------------*/
-
-
 
 
 g.hoverLineGroup {
@@ -1550,38 +1574,49 @@ g.parentGroup {
     .area-chart {
     }
     .area-line-chart {
-      stroke-width:3;
-      shape-rendering: geometricPrecision !important;
     }
     .close-line-chart {
-      stroke-width:2;
-      shape-rendering: geometricPrecision !important;
     }
 
   }
 
   g.brush-backgroud-group {
-    transform: translate(10px, 165px) !important;
+    display: none;
+
     .brush-background-rect {
     }
   }
 
-  g.x.brush {
-    transform: translate(10px, 165px) !important;
+  g.brush {
+    height: 8px;
+    transform: translate(10px, 189px) !important;
 
     .overlay {
+      cursor: col-resize;
+      opacity: 0.1;
+      fill: #2C58BB;
+      height: 8px;
     }
     .selection {
+      height: 15px;
+      fill: #2C58BB !important;
+      fill-opacity:0.5;
     }
     .handle {
+      height: 18px;
+      fill: #2C58BB !important;
+      opacity: .8;
+
       .navHandles {
       }
     }
     .handle--e {
+
       .navHandles {
       }
     }
     .handle--w {
+
       .navHandles {
       }
     }
@@ -1618,6 +1653,8 @@ g.parentGroup {
   g.parentSectorGroup {
 
     g.main-pgr-group {
+      transform: translate(0px, 2px);
+
       g.pgr-bars-group {
         g.pgr-clip-path {
           #pgrClip {
@@ -1649,7 +1686,7 @@ g.dummyGroup {
 
       text {
         fill: #999999;
-        transform: translate(0px, -4px) !important;
+        transform: translate(0px, 0px) !important;
 
         tspan {
         }
