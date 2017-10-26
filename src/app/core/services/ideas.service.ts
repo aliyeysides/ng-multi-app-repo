@@ -7,6 +7,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import * as d3 from 'd3';
 import {NotificationsService} from 'angular2-notifications/dist';
 import {Subject} from 'rxjs/Subject';
+import {AuthService} from './auth.service';
 
 
 @Injectable()
@@ -46,7 +47,8 @@ export class IdeasService {
 
   constructor(private utilService: UtilService,
               private toast: NotificationsService,
-              private http: Http) {
+              private http: Http,
+              private authService: AuthService) {
     this.ideaListsParams = new URLSearchParams();
     this.listSymbolsParams = new URLSearchParams();
     this.stockCardParams = new URLSearchParams();
@@ -82,20 +84,37 @@ export class IdeasService {
   }
 
   public addStockIntoList(listId: string, symbol: string) {
+    const allowed = 10;
     const addStockIntoListUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/addStockIntoList?`;
     this.addStockIntoListParams.set('listId', listId);
     this.addStockIntoListParams.set('symbol', symbol);
-    return this.http.get(addStockIntoListUrl, {
-      search: this.addStockIntoListParams,
-      withCredentials: true
-    }).map(res => {
-      const result = res.json();
-      Object.keys(result).forEach((key) => {
-        this.toast.success('Success!', 'Successfully added ' + key);
-        this._updateAlerts.next();
-      });
-      return res.json()
-    })
+
+    return this.authService
+      .currentUser$
+      .filter(x => x != undefined)
+      .map(usr => usr['UID'])
+      .flatMap(uid => this.getListSymbols(listId, uid))
+      .map(res => {
+        return res['symbols'].length < allowed;
+      })
+      .flatMap(allowed => {
+        if (allowed) {
+          return this.http.get(addStockIntoListUrl, {
+            search: this.addStockIntoListParams,
+            withCredentials: true
+          }).map(res => {
+            const result = res.json();
+            Object.keys(result).forEach((key) => {
+              this.toast.success('Success!', 'Successfully added ' + key);
+              this._updateAlerts.next();
+            });
+            return res.json()
+          })
+        } else {
+          this.toast.error('Oops...', "You have reached the 30 stock limit for what can be added to your user list. To add a stock, you must first remove something from your list.");
+          return Observable.throw('error')
+        }
+      })
   }
 
   public deleteSymbolFromList(listId: string, symbol: string) {
@@ -125,7 +144,7 @@ export class IdeasService {
     yScale: null,
     dummyScale: null,
     xAxis: null,
-    xAxisDummy:null,
+    xAxisDummy: null,
     yAxis: null,
     chartWidth: null,
     chartHeight: null,
@@ -134,12 +153,12 @@ export class IdeasService {
     pgrBarHeight: null,
     brushHeight: 5,
     sectorHeightFactor: 10,
-    margins: { left: 10, top: 5, right: 30, bottom: 35 },
-    areaChartMargins: { left: 10, right: 0, bottom: 0, top: 5 },
-    sectorMargins: { left: 0, right: 0, bottom: 0, top: 15 },
+    margins: {left: 10, top: 5, right: 30, bottom: 35},
+    areaChartMargins: {left: 10, right: 0, bottom: 0, top: 5},
+    sectorMargins: {left: 0, right: 0, bottom: 0, top: 15},
     parentGroup: null,
     dummyParentGroup: null,
-    visibleXAxis : null,
+    visibleXAxis: null,
     parentSectorGroup: null,
     mainPGRGroup: null,
     pgrBarChartGroup: null,
@@ -167,10 +186,10 @@ export class IdeasService {
       5: "VERY BULLISH"
 
     },
-    appendToolTip: function(id){
+    appendToolTip: function (id) {
       let template = document.createElement('div');
-     // template.className = 'tooltip-container cpt-tool-tip';
-     // template.style = 'position: absolute; pointer-events: none; display: none; top: 38.5px; left: 490.5px;'
+      // template.className = 'tooltip-container cpt-tool-tip';
+      // template.style = 'position: absolute; pointer-events: none; display: none; top: 38.5px; left: 490.5px;'
 
       template.innerHTML = `
         <div class="tooltip-container cpt-tool-tip" style= "position: absolute; pointer-events: none; display: none; top: 38.5px; left: 490.5px;" >
@@ -198,10 +217,10 @@ export class IdeasService {
                                     </div>`;
 
       //this.selectorElement.append
-   //   (document.getElementById(`${id}`).parentElement).appendChild(template);
-     // console.log((document.getElementById(`${id}`))//.appendChild(template);
+      //   (document.getElementById(`${id}`).parentElement).appendChild(template);
+      // console.log((document.getElementById(`${id}`))//.appendChild(template);
     },
-    init: function(initParams) {
+    init: function (initParams) {
       let self = this;
       self.instance = this;
       //Adjust margin
@@ -216,7 +235,7 @@ export class IdeasService {
       self.appendToolTip(self.id);
       self.setupChart(initParams);
     },
-    svgOnMouseMove: function(mouseX, mouseY) {
+    svgOnMouseMove: function (mouseX, mouseY) {
       var self = this;
       d3.selectAll('.hoverLineY').remove();
       d3.selectAll('.hoverLineX').remove();
@@ -230,21 +249,21 @@ export class IdeasService {
       if (yIndex < self.yMin || yIndex > self.yMax) {
         d3.select(".cpt-tool-tip").style("display", "none");
       }
-     /* $("#tool-heading").html(self.chartData.xAxisData[dataIndex])
-      $("#tool-pgr").html(self.chartData.yAxisData.rectData[dataIndex])
-      $("#tool-close-price").html(self.chartData.yAxisData.lineData[dataIndex]);
-      $("#tool-trend").html(self.chartData.yAxisData.areaData[dataIndex])*/
+      /* $("#tool-heading").html(self.chartData.xAxisData[dataIndex])
+       $("#tool-pgr").html(self.chartData.yAxisData.rectData[dataIndex])
+       $("#tool-close-price").html(self.chartData.yAxisData.lineData[dataIndex]);
+       $("#tool-trend").html(self.chartData.yAxisData.areaData[dataIndex])*/
 
       /*self.hoverLineGroup.append("line").attr("class", "hoverLineY hover-line").attr("opacity", 1).attr("stroke", "#000").style("stroke-dasharray", ("3, 3"));
-      self.hoverLineGroup.append("line").attr("class", "hoverLineX hover-line").attr("opacity", 1).attr("stroke", "#000").style("stroke-dasharray", ("3, 3"));
-      d3.select(".hoverLineY").attr("x1", 0).attr("x2", self.chartWidth).attr("y1", mouseY).attr("y2", mouseY);
-      d3.select(".hoverLineX").attr("x1", mouseX).attr("x2", mouseX).attr("y1", 0).attr("y2", self.chartHeight).attr("xposition",mouseX).attr("yposition",mouseY);*/
+       self.hoverLineGroup.append("line").attr("class", "hoverLineX hover-line").attr("opacity", 1).attr("stroke", "#000").style("stroke-dasharray", ("3, 3"));
+       d3.select(".hoverLineY").attr("x1", 0).attr("x2", self.chartWidth).attr("y1", mouseY).attr("y2", mouseY);
+       d3.select(".hoverLineX").attr("x1", mouseX).attr("x2", mouseX).attr("y1", 0).attr("y2", self.chartHeight).attr("xposition",mouseX).attr("yposition",mouseY);*/
 
       d3.select(".cpt-tool-tip").style("left", (mouseX + 15) + "px");
       d3.select(".cpt-tool-tip").style("top", mouseY + "px");
 
     },
-    setupChart: function(response) {
+    setupChart: function (response) {
       let self = this;
       if (self.mainSVG) {
         self.mainSVG.remove();
@@ -254,29 +273,29 @@ export class IdeasService {
         .attr("preserveAspectRatio", "none")
         .attr("viewBox", "0 0 " + self.width + " " + self.height + "")
         .attr("type", "chart").style("cursor", "crosshair")
-        .on("mousemove", function() {
+        .on("mousemove", function () {
           /*var val = d3.select(this).attr("value");
-          var heading = xAxisData[val];
-          var yHeadingValueMap=[{"headingName":yAxisLabel,"headingVal":yAxisData[val]}];
-          toolTipManager.showToolTip(d3.event,"",heading, false,yHeadingValueMap,d3.event.pageY*.95);*/
+           var heading = xAxisData[val];
+           var yHeadingValueMap=[{"headingName":yAxisLabel,"headingVal":yAxisData[val]}];
+           toolTipManager.showToolTip(d3.event,"",heading, false,yHeadingValueMap,d3.event.pageY*.95);*/
           d3.select(".cpt-tool-tip").style("display", "block");
           let mouseX = d3.mouse(this)[0];
           let mouseY = d3.mouse(this)[1];
           self.svgOnMouseMove(mouseX, mouseY);
         })
-        .on("mouseleave", function() {
+        .on("mouseleave", function () {
           d3.select(".cpt-tool-tip").style("display", "none")
           //toolTipManager.hideTooTip();
         });
 
       /*self.mainSVG.append("rect").attr("class", "hoverYAxis").attr('width',self.width)
-        .attr('height',self.height).attr('x',0).attr('y',0).attr('fill','oldlace');*/
+       .attr('height',self.height).attr('x',0).attr('y',0).attr('fill','oldlace');*/
 
       self.hoverLineGroup = self.mainSVG.append("g").attr("class", "hoverLineGroup");
 
       /*self.hoverLineGroup.append("line").attr("class", "hoverLineY hover-line").attr("opacity", 1).attr("stroke", "#000").style("stroke-dasharray", ("3, 3"));
-      self.hoverLineGroup.append("line").attr("class", "hoverLineX hover-line").attr("opacity", 1).attr("stroke", "#000").style("stroke-dasharray", ("3, 3"));
-  */
+       self.hoverLineGroup.append("line").attr("class", "hoverLineX hover-line").attr("opacity", 1).attr("stroke", "#000").style("stroke-dasharray", ("3, 3"));
+       */
       //draw main GROUP which append with main SVG for draw chart
       self.parentGroup = self.mainSVG.append("g").attr("class", "parentGroup").attr("transform", "translate(" + self.margins.left + "," + self.margins.top + ")");
       self.dummyParentGroup = self.mainSVG.append("g").attr("class", "dummyGroup").attr("transform", "translate(" + (self.margins.left + self.areaChartMargins.left) + "," + (self.margins.top + self.areaChartMargins.top) + ")");
@@ -306,9 +325,9 @@ export class IdeasService {
         .attr("transform", "translate(" + self.areaChartMargins.left + "," + self.areaChartMargins.top + ")");
 
       /*self.areaGroup.append("rect").attr("class", "area-background")
-        .attr("x", 0).attr("y", 0).attr("width", self.scaleWidth)
-        .attr("height", (self.scaleHeight))
-        .attr("fill", "cyan").attr("opacity", "0.5");*/
+       .attr("x", 0).attr("y", 0).attr("width", self.scaleWidth)
+       .attr("height", (self.scaleHeight))
+       .attr("fill", "cyan").attr("opacity", "0.5");*/
 
 
       //create background rectangle for brush
@@ -334,9 +353,9 @@ export class IdeasService {
         .attr("transform", "translate(" + self.areaChartMargins.left + "," + (self.scaleHeight + self.areaChartMargins.bottom + self.areaChartMargins.top) + ")");
 
       /*self.parentSectorGroup.append("rect").attr("class", "parentSectorGroup-background")
-        .attr("x", 0).attr("y", 0).attr("width", self.scaleWidth)
-        .attr("height", (self.chartHeight - (self.scaleHeight + self.areaChartMargins.top + self.areaChartMargins.bottom)))
-        .attr("fill", "blue").attr("opacity", "0.5");*/
+       .attr("x", 0).attr("y", 0).attr("width", self.scaleWidth)
+       .attr("height", (self.chartHeight - (self.scaleHeight + self.areaChartMargins.top + self.areaChartMargins.bottom)))
+       .attr("fill", "blue").attr("opacity", "0.5");*/
 
       //Outermost group for bar
       self.mainPGRGroup = self.parentSectorGroup.append("g").attr("class", "main-pgr-group")
@@ -351,10 +370,10 @@ export class IdeasService {
 
       self.pgrBarHeight = self.chartHeight - (self.scaleHeight + self.areaChartMargins.top + self.areaChartMargins.bottom);
       /*
-          self.pgrBarChartGroup.append("rect").attr("class", "parentSectorGroup-background")
-            .attr("x", 0).attr("y", 0).attr("width", self.scaleWidth)
-            .attr("height", (self.pgrBarHeight))
-            .attr("fill", "red").attr("opacity", "0.5");*/
+       self.pgrBarChartGroup.append("rect").attr("class", "parentSectorGroup-background")
+       .attr("x", 0).attr("y", 0).attr("width", self.scaleWidth)
+       .attr("height", (self.pgrBarHeight))
+       .attr("fill", "red").attr("opacity", "0.5");*/
 
 
       self.chartData = response.data;
@@ -363,7 +382,7 @@ export class IdeasService {
 
 
     },
-    updateChart: function(response) {
+    updateChart: function (response) {
       var self = this;
 
       // calculate maximum and minimum value for y scaling
@@ -371,11 +390,11 @@ export class IdeasService {
       self.yMax = d3.max(self.chartData.yAxisData.lineData.concat(self.chartData.yAxisData.areaData));
 
       /*d3.select(".parentSectorGroup")
-        .attr("transform","translate(" + (0) + "," + (self.scaleHeight + self.areaChartMargins.bottom + self.areaChartMargins.top) +")")*/
+       .attr("transform","translate(" + (0) + "," + (self.scaleHeight + self.areaChartMargins.bottom + self.areaChartMargins.top) +")")*/
 
       /*d3.select(".parentSectorGroup-background")
-        .attr("x", 0).attr("y", 0).attr("width", self.scaleWidth)
-        .attr("height", (self.chartHeight - (self.scaleHeight + self.areaChartMargins.top + self.areaChartMargins.bottom)))  */
+       .attr("x", 0).attr("y", 0).attr("width", self.scaleWidth)
+       .attr("height", (self.chartHeight - (self.scaleHeight + self.areaChartMargins.top + self.areaChartMargins.bottom)))  */
 
       d3.select(".brush-background-rect").attr("width", self.scaleWidth);
 
@@ -401,11 +420,13 @@ export class IdeasService {
         self.brush = d3.brushX()
           .extent([[0, 0], [self.scaleWidth, self.scaleHeight]])
           .handleSize(self.brushHeight)
-          .on("brush", function() { self.brushed(self) });
+          .on("brush", function () {
+            self.brushed(self)
+          });
 
         //have to write it in else too for a reason.
         /*self.brush.extent([[self.brushXScale.range()[0], startingExtentIndex], [self.brushXScale.range()[1], self.chartData.xAxisData.length - 1]])
-          .on("brush", function() { self.brushed(self); d3.selectAll(".navHandles").attr("opacity", 1); });*/
+         .on("brush", function() { self.brushed(self); d3.selectAll(".navHandles").attr("opacity", 1); });*/
         //console.log(self.brush.extent()[1]);
         //console.log(d3.event.selection.map(self.brush.invert));
         //  self.brush.extent([startingExtentIndex, self.chartData.xAxisData.length - 1]);
@@ -436,68 +457,74 @@ export class IdeasService {
         .tickPadding(7);
 
       let xAxisGroup = d3.select(".xAxisGroup").attr("transform", "translate(" + (self.areaChartMargins.left) + "," + (self.chartHeight + 5) + ")")
-        //.attr("clip-path","url(#xAxisClip)")
+      //.attr("clip-path","url(#xAxisClip)")
         .call(self.xAxis).attr("fill", "none").attr("display", "block")
         .selectAll("text")
         .text('')
         .selectAll('tspan')
-        .data(function(d, i) {
+        .data(function (d, i) {
           var dateLabel = self.chartData.xAxisFormatedData[d];
           /*var axisDate = Common.getESTDate(self.xAxisData[d]);
-          if(self.apiType == self.apiTypes.INTRA) {
-            var finalLabelObject = self.getMinuteWiseXAxisLabels(previousDateAdvance, d);
-            previousDateAdvance = finalLabelObject.previousDate;
-            dateLabel = finalLabelObject.label;
-          } else {
-            var finalLabelObject = self.getDailyXAxisLabels(previousDateAdvance, d);
-            previousDateAdvance = finalLabelObject.previousDate;
-            dateLabel = finalLabelObject.label;
-          }  */
+           if(self.apiType == self.apiTypes.INTRA) {
+           var finalLabelObject = self.getMinuteWiseXAxisLabels(previousDateAdvance, d);
+           previousDateAdvance = finalLabelObject.previousDate;
+           dateLabel = finalLabelObject.label;
+           } else {
+           var finalLabelObject = self.getDailyXAxisLabels(previousDateAdvance, d);
+           previousDateAdvance = finalLabelObject.previousDate;
+           dateLabel = finalLabelObject.label;
+           }  */
           return (dateLabel.toString()).split(" ");
         })
         .enter()
         .append('tspan')
         .attr('x', 0)
-        .attr('dy', function(d, i) { return (1.4 * i) + 'em'; })
+        .attr('dy', function (d, i) {
+          return (1.4 * i) + 'em';
+        })
         .text(String);
 
       self.xAxisDummy = d3.axisBottom(self.xScale)
         .tickValues(self.getTicksIndex(0, self.chartData.xAxisData.length, maxStringLength, self.scaleWidth))
-      //  .tickSizeInner(0)
-      //  .tickSizeOuter(0)
+        //  .tickSizeInner(0)
+        //  .tickSizeOuter(0)
         .tickPadding(4);
 
       let xAxisGroupDummy = d3.select(".xAxisGroupDummy").attr("transform", "translate(" + (self.areaChartMargins.left) + "," + (self.chartHeight + 5) + ")")
-        //.attr("clip-path","url(#xAxisClip)")
+      //.attr("clip-path","url(#xAxisClip)")
         .call(self.xAxisDummy).attr("fill", "none").attr("display", "block")
         .selectAll("text")
         .text('')
         .selectAll('tspan')
-        .data(function(d, i) {
+        .data(function (d, i) {
           var dateLabel = self.chartData.xAxisFormatedData[d];
           /*var axisDate = Common.getESTDate(self.xAxisData[d]);
-          if(self.apiType == self.apiTypes.INTRA) {
-            var finalLabelObject = self.getMinuteWiseXAxisLabels(previousDateAdvance, d);
-            previousDateAdvance = finalLabelObject.previousDate;
-            dateLabel = finalLabelObject.label;
-          } else {
-            var finalLabelObject = self.getDailyXAxisLabels(previousDateAdvance, d);
-            previousDateAdvance = finalLabelObject.previousDate;
-            dateLabel = finalLabelObject.label;
-          }  */
+           if(self.apiType == self.apiTypes.INTRA) {
+           var finalLabelObject = self.getMinuteWiseXAxisLabels(previousDateAdvance, d);
+           previousDateAdvance = finalLabelObject.previousDate;
+           dateLabel = finalLabelObject.label;
+           } else {
+           var finalLabelObject = self.getDailyXAxisLabels(previousDateAdvance, d);
+           previousDateAdvance = finalLabelObject.previousDate;
+           dateLabel = finalLabelObject.label;
+           }  */
           return (dateLabel.toString()).split(" ");
         })
         .enter()
         .append('tspan')
         .attr('x', 0)
-        .attr('dy', function(d, i) { return (1.4 * i) + 'em'; })
+        .attr('dy', function (d, i) {
+          return (1.4 * i) + 'em';
+        })
         .text(String);
 
       //scaling for y-axis
       self.yScale = d3.scaleLinear().domain([self.yMin, self.yMax]).range([self.scaleHeight, 0]);
 
       self.yAxis = d3.axisRight(self.yScale)
-        .tickFormat(function(d) { return d.toFixed(2); })
+        .tickFormat(function (d) {
+          return d.toFixed(2);
+        })
         .tickSizeInner(-self.scaleWidth)
         .tickSizeOuter(0)
         .tickPadding(5)
@@ -513,15 +540,27 @@ export class IdeasService {
 
       d3.selectAll(".close-line").remove();
       let lineFunction = d3.line()
-        .x(function(d, i) { return self.dummyScale(i); })
-        .y(function(d, i) { return self.yScale(d); })
-        .defined(function(d) { return d; })
+        .x(function (d, i) {
+          return self.dummyScale(i);
+        })
+        .y(function (d, i) {
+          return self.yScale(d);
+        })
+        .defined(function (d) {
+          return d;
+        })
 
       let area = d3.area()
-        .x(function(d, i) { return self.dummyScale(i); })
+        .x(function (d, i) {
+          return self.dummyScale(i);
+        })
         .y0(self.yScale(self.yMin))
-        .y1(function(d, i) { return self.yScale(d); })
-        .defined(function(d) { return d; })
+        .y1(function (d, i) {
+          return self.yScale(d);
+        })
+        .defined(function (d) {
+          return d;
+        })
 
       self.areaGroup.append("path")
         .attr("d", area(self.chartData.yAxisData.areaData))
@@ -557,10 +596,16 @@ export class IdeasService {
         .enter()
         .append("svg:rect")
         .attr("class", "rel-strength")
-        .attr("id", function(d, i) { return "strength" + i; })
-        .attr("x", function(d, i) { return self.xScale(i) - rectwidth / 2; })
-        .attr("y", function(d) { return 0; })
-        .attr("width", function(d, i) {
+        .attr("id", function (d, i) {
+          return "strength" + i;
+        })
+        .attr("x", function (d, i) {
+          return self.xScale(i) - rectwidth / 2;
+        })
+        .attr("y", function (d) {
+          return 0;
+        })
+        .attr("width", function (d, i) {
           if (d == null) {
             return 0;
           }
@@ -568,7 +613,7 @@ export class IdeasService {
             return rectwidth;
           }
         })
-        .attr("height", function(d, i) {
+        .attr("height", function (d, i) {
           if (d == null) {
             return 0;
           }
@@ -576,17 +621,17 @@ export class IdeasService {
             return self.pgrBarHeight;
           }
         })
-        .attr("fill", function(d, index) {
+        .attr("fill", function (d, index) {
           return self.palette[d];
         })
-        .attr("stroke", function(d, index) {
+        .attr("stroke", function (d, index) {
           return self.palette[d];
         });
 
       self.updateScales();
 
       d3.selectAll('.axis path').style('display', 'none');
-      d3.selectAll('.xAxisGroupDummy line').style('display','none');
+      d3.selectAll('.xAxisGroupDummy line').style('display', 'none');
       d3.selectAll("line").style('shape-rendering', 'geometricPrecision')
         .style('stroke', '#c6c6c6');
 
@@ -603,7 +648,7 @@ export class IdeasService {
         .attr("height", self.brushHeight);
       d3.select(".brush").selectAll(".selection").attr("height", self.brushHeight)
     },
-    brushed: function(ref) {
+    brushed: function (ref) {
 
       var self = ref;
       if (d3.event.sourceEvent.type === "brush") return;
@@ -629,7 +674,7 @@ export class IdeasService {
       }
       d0[0] = Math.floor(d0[0]);
       d0[1] = Math.floor(d0[1])
-      if((d0[0]>=d0[1]) && (d0[0]-d0[1])<5){
+      if ((d0[0] >= d0[1]) && (d0[0] - d0[1]) < 5) {
         return;
       } else if ((d0[0] <= d0[1]) && (d0[1] - d0[0]) < 5) {
         return;
@@ -638,14 +683,26 @@ export class IdeasService {
       let rectwidth = self.scaleWidth / (d0[1] - d0[0] + 1);
 
       let lineFunction = d3.line()
-        .x(function(d, i) { return self.dummyScale(i); })
-        .y(function(d, i) { return self.yScale(d); })
-        .defined(function(d) { return d; })
+        .x(function (d, i) {
+          return self.dummyScale(i);
+        })
+        .y(function (d, i) {
+          return self.yScale(d);
+        })
+        .defined(function (d) {
+          return d;
+        })
       let area = d3.area()
-        .x(function(d, i) { return self.dummyScale(i); })
+        .x(function (d, i) {
+          return self.dummyScale(i);
+        })
         .y0(self.yScale(self.yMin))
-        .y1(function(d, i) { return self.yScale(d); })
-        .defined(function(d) { return d; })
+        .y1(function (d, i) {
+          return self.yScale(d);
+        })
+        .defined(function (d) {
+          return d;
+        })
 
       self.yMin = d3.min((self.chartData.yAxisData.lineData.slice(d0[0], d0[1] + 1)).concat((self.chartData.yAxisData.areaData.slice(d0[0], d0[1] + 1))));
       self.yMax = d3.max((self.chartData.yAxisData.lineData.slice(d0[0], d0[1] + 1)).concat((self.chartData.yAxisData.areaData.slice(d0[0], d0[1] + 1))));
@@ -657,7 +714,7 @@ export class IdeasService {
         .attr("fill", "none").selectAll("text").attr("fill", "black");
       //Updating candle yScale
       /*      self.candleYMin = d3.min(self.lowValuesArr.slice(min, dataIndex + 1));
-            self.candleYMax = d3.max(self.highValuesArr.slice(min, dataIndex + 1));*/
+       self.candleYMax = d3.max(self.highValuesArr.slice(min, dataIndex + 1));*/
 
 
       d3.select(".xAxisGroup")
@@ -667,24 +724,26 @@ export class IdeasService {
         .selectAll("text")
         .text('')
         .selectAll('tspan')
-        .data(function(d, i) {
+        .data(function (d, i) {
           var dateLabel = self.chartData.xAxisFormatedData[d];
           /*var axisDate = Common.getESTDate(self.xAxisData[d]);
-          if(self.apiType == self.apiTypes.INTRA) {
-            var finalLabelObject = self.getMinuteWiseXAxisLabels(previousDateAdvance, d);
-            previousDateAdvance = finalLabelObject.previousDate;
-            dateLabel = finalLabelObject.label;
-          } else {
-            var finalLabelObject = self.getDailyXAxisLabels(previousDateAdvance, d);
-            previousDateAdvance = finalLabelObject.previousDate;
-            dateLabel = finalLabelObject.label;
-          }  */
+           if(self.apiType == self.apiTypes.INTRA) {
+           var finalLabelObject = self.getMinuteWiseXAxisLabels(previousDateAdvance, d);
+           previousDateAdvance = finalLabelObject.previousDate;
+           dateLabel = finalLabelObject.label;
+           } else {
+           var finalLabelObject = self.getDailyXAxisLabels(previousDateAdvance, d);
+           previousDateAdvance = finalLabelObject.previousDate;
+           dateLabel = finalLabelObject.label;
+           }  */
           return (dateLabel.toString()).split(" ");
         })
         .enter()
         .append('tspan')
         .attr('x', 0)
-        .attr('dy', function(d, i) { return (1.4 * i) + 'em'; })
+        .attr('dy', function (d, i) {
+          return (1.4 * i) + 'em';
+        })
         .text(String);
 
       d3.select(".xAxisGroupDummy")
@@ -694,24 +753,26 @@ export class IdeasService {
         .selectAll("text")
         .text('')
         .selectAll('tspan')
-        .data(function(d, i) {
+        .data(function (d, i) {
           var dateLabel = self.chartData.xAxisFormatedData[d];
           /*var axisDate = Common.getESTDate(self.xAxisData[d]);
-          if(self.apiType == self.apiTypes.INTRA) {
-            var finalLabelObject = self.getMinuteWiseXAxisLabels(previousDateAdvance, d);
-            previousDateAdvance = finalLabelObject.previousDate;
-            dateLabel = finalLabelObject.label;
-          } else {
-            var finalLabelObject = self.getDailyXAxisLabels(previousDateAdvance, d);
-            previousDateAdvance = finalLabelObject.previousDate;
-            dateLabel = finalLabelObject.label;
-          }  */
+           if(self.apiType == self.apiTypes.INTRA) {
+           var finalLabelObject = self.getMinuteWiseXAxisLabels(previousDateAdvance, d);
+           previousDateAdvance = finalLabelObject.previousDate;
+           dateLabel = finalLabelObject.label;
+           } else {
+           var finalLabelObject = self.getDailyXAxisLabels(previousDateAdvance, d);
+           previousDateAdvance = finalLabelObject.previousDate;
+           dateLabel = finalLabelObject.label;
+           }  */
           return (dateLabel.toString()).split(" ");
         })
         .enter()
         .append('tspan')
         .attr('x', 0)
-        .attr('dy', function(d, i) { return (1.4 * i) + 'em'; })
+        .attr('dy', function (d, i) {
+          return (1.4 * i) + 'em';
+        })
         .text(String);
 
       self.areaGroup.selectAll("#areaChart")
@@ -725,9 +786,13 @@ export class IdeasService {
 
       self.pgrBarChartGroup.selectAll("rect.rel-strength")
         .data(self.chartData.yAxisData.rectData)
-        .attr("x", function(d, i) { return self.xScale(i) - rectwidth / 2; })
-        .attr("y", function(d) { return 0; })
-        .attr("width", function(d, i) {
+        .attr("x", function (d, i) {
+          return self.xScale(i) - rectwidth / 2;
+        })
+        .attr("y", function (d) {
+          return 0;
+        })
+        .attr("width", function (d, i) {
           if (d == null) {
             return 0;
           }
@@ -735,7 +800,7 @@ export class IdeasService {
             return rectwidth;
           }
         })
-        .attr("height", function(d, i) {
+        .attr("height", function (d, i) {
           if (d == null) {
             return 0;
           }
@@ -743,10 +808,10 @@ export class IdeasService {
             return self.pgrBarHeight;
           }
         })
-        .attr("fill", function(d, index) {
+        .attr("fill", function (d, index) {
           return self.palette[d];
         })
-        .attr("stroke", function(d, index) {
+        .attr("stroke", function (d, index) {
           return self.palette[d];
         });
 
@@ -765,40 +830,40 @@ export class IdeasService {
       d3.selectAll(".handle--w")
         .attr("height", 18);
       /*d3.select(".brush").selectAll(".handle")
-        .append("rect")
-        .attr("class", "navHandles")
-        .attr("fill", "#000")
-        .attr("opacity", 1)
-        .attr("x", 0)
-        .attr("y", -.5)
-        .attr("width", 7)
-        .attr("height", self.brushHeight);*/
+       .append("rect")
+       .attr("class", "navHandles")
+       .attr("fill", "#000")
+       .attr("opacity", 1)
+       .attr("x", 0)
+       .attr("y", -.5)
+       .attr("width", 7)
+       .attr("height", self.brushHeight);*/
 
     },
-    zoomed: function(self) {
+    zoomed: function (self) {
       /*var leftExtent = Math.max(0, self.xScale.invert(0));
-      var rightExtent = self.brush.extent()[1];
-      if((self.candleData.length - rightExtent) < 10) {
-        rightExtent = self.candleData.length - 1;
-      }
+       var rightExtent = self.brush.extent()[1];
+       if((self.candleData.length - rightExtent) < 10) {
+       rightExtent = self.candleData.length - 1;
+       }
 
-      self.brush.extent([Math.round(leftExtent), rightExtent]);
+       self.brush.extent([Math.round(leftExtent), rightExtent]);
 
-      self.updateBrushParameters(self);
+       self.updateBrushParameters(self);
 
-      d3.select(".brush").call(self.brush);
-      var args = { identity: self.chartUId, type : 'zoom' };
+       d3.select(".brush").call(self.brush);
+       var args = { identity: self.chartUId, type : 'zoom' };
 
-      self.updateScales();
-      var mouseX = parseInt(d3.select(".hoverLineX").attr("xposition"));
-      var mouseY =  parseInt(d3.select(".hoverLineX").attr("yposition"));
-      self.svgOnMouseMove(mouseX,mouseY);*/
+       self.updateScales();
+       var mouseX = parseInt(d3.select(".hoverLineX").attr("xposition"));
+       var mouseY =  parseInt(d3.select(".hoverLineX").attr("yposition"));
+       self.svgOnMouseMove(mouseX,mouseY);*/
     },
-    updateScales: function() {
+    updateScales: function () {
 
 
     },
-    getTicksIndex: function(minVal, maxVal, maxCharacterLength, svgWidth) {
+    getTicksIndex: function (minVal, maxVal, maxCharacterLength, svgWidth) {
       let tickArray = [];
       //let maxTickWidth = 2 * 6.5 * maxCharacterLength;
       let maxTickWidth = maxCharacterLength
@@ -820,25 +885,25 @@ export class IdeasService {
       return tickArray;
 
     },
-    textLength: function(xAxis) {
+    textLength: function (xAxis) {
       var textWidth = 0;
       var dummyCanvas = document.createElement('canvas');
       dummyCanvas.id = "dummyCanvas";
       dummyCanvas.width = 1000;
       dummyCanvas.height = 1000;
       let dummyCanvasContext = dummyCanvas.getContext("2d");
-      xAxis.forEach(function(value, index, arr) {
+      xAxis.forEach(function (value, index, arr) {
         if (textWidth < (dummyCanvasContext.measureText(value).width)) {
           textWidth = dummyCanvasContext.measureText(value).width;
         }
       });
       return textWidth;
     },
-    getNoOfTicks: function(resObj) {
+    getNoOfTicks: function (resObj) {
       /* This method return total no of tick in integer which are drawn on particular width.
-      1. displacementFactor is for increase or decrease textLength which result to dec. and inc. number of ticks.
-      2. maxCharacterLength is a text length of single tick.
-      3. width is total space on which ticks are to be drawn. */
+       1. displacementFactor is for increase or decrease textLength which result to dec. and inc. number of ticks.
+       2. maxCharacterLength is a text length of single tick.
+       3. width is total space on which ticks are to be drawn. */
       var displacementFactor = resObj.displacement;
       var maxCharacterLength = resObj.textWidth;
       var width = resObj.chartWidth;
