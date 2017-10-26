@@ -40,6 +40,9 @@ import {Subject} from 'rxjs/Subject';
               {{choice.title}}</a>
           </li>
         </ul>
+        <div class="terms__container">
+          <p> <a>Terms &amp; Conditions</a> <span> | </span> <a>Attributions</a> </p>
+        </div>
       </div>
 
     </div>

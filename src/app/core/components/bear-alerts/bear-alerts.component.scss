@@ -20,6 +20,14 @@
 			border-top: $border-line--LT2;
 			border-bottom: $border-line--LT2;
 
+			.empty-list__text {
+		        text-align: center;
+		        font-size: 18px;
+		        font-weight: 400;
+		        line-height: 1.3;
+		        margin: 10px 0;
+		    }
+
 			.alert__entry {
 				padding:10px;
 

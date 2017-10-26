@@ -150,11 +150,11 @@ export class IdeasService {
     palette: {
       "-1": "grey",
       "0": "white",
-      "1": "#b41923",
-      "2": "#b41923",
-      "3": "#fed833",
-      "4": "#15b328",
-      "5": "#15b328"
+      "1": "#EB001C",
+      "2": "#EB001C",
+      "3": "#ffbe00",
+      "4": "#24A300",
+      "5": "#24A300"
     },
     description: {
       //new description adding for rating -1 according to specification des 18
@@ -536,21 +536,21 @@ export class IdeasService {
         .attr("d", lineFunction(self.chartData.yAxisData.areaData))
         .attr("class", "area-line-chart")
         .attr("stroke", "#1199ff")
-        .attr("stroke-width", 1)
+        .attr("stroke-width", 3)
         .attr("fill", "none")
         .style("opacity", 1)
-        .style('shape-rendering', 'crispEdges')
+        .style('shape-rendering', 'geometricPrecision')
 
 
       self.areaGroup.append("path")
         .attr("d", lineFunction(self.chartData.yAxisData.lineData))
         .attr("class", "close-line-chart")
         .attr("stroke", "#ff9c17")
-        .attr("stroke-width", 1)
+        .attr("stroke-width", 2)
         .attr("fill", "none")
         .style("opacity", 1)
         .style("stroke-dasharray", ("3, 3"))
-        .style('shape-rendering', 'crispEdges')
+        .style('shape-rendering', 'geometricPrecision')
 
       self.pgrBarChartGroup.selectAll("rect.rel-strength")
         .data(self.chartData.yAxisData.rectData)
@@ -587,7 +587,7 @@ export class IdeasService {
 
       d3.selectAll('.axis path').style('display', 'none');
       d3.selectAll('.xAxisGroupDummy line').style('display','none');
-      d3.selectAll("line").style('shape-rendering', 'crispEdges')
+      d3.selectAll("line").style('shape-rendering', 'geometricPrecision')
         .style('stroke', '#c6c6c6');
 
       self.areaGroup.attr("clip-path", "url(#areaClip)");
@@ -596,8 +596,8 @@ export class IdeasService {
       d3.select(".brush").selectAll(".handle")
         .append("rect")
         .attr("class", "navHandles")
-        .attr("fill", "#000")
-        .attr("x", 0).attr("opacity", .5)
+        .attr("fill", "#2C58BB")
+        .attr("x", 0).attr("opacity", .75)
         .attr("y", 0)
         .attr("width", 7)
         .attr("height", self.brushHeight);
@@ -611,8 +611,8 @@ export class IdeasService {
       // if (!d3.event.selection) return; // Ignore empty selections.
       d3.select(".brush").selectAll(".selection")
         .attr("height", 2.5 * self.brushHeight)
-        .attr("fill", "#000")
-        .attr("opacity", 1)
+        .attr("fill", "#2C58BB")
+        .attr("opacity", 0.5)
         .attr("y", -.5)
 
       d3.selectAll(".handle--e")

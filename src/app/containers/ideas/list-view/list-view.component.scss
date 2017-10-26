@@ -145,7 +145,7 @@
     border-bottom: $border-line--LT2;
 
     .col__company-name {
-      @media screen and (max-width:990px) {
+      @media screen and (max-width:991px) {
         display:none;
       }
     }
@@ -160,7 +160,7 @@
       font-weight: 600;
       margin-top:2px;
 
-      @media screen and (max-width:990px) {
+      @media screen and (max-width:991px) {
         font-size: 10px;
         white-space: nowrap;
       }
@@ -173,9 +173,11 @@
 
   .current-list {
     height: 100vh;
+    overflow: hidden;
     overflow-y: scroll;
     background-color: $background--LT;
     padding-bottom: 337px;
+
 
     .list__container {
 
@@ -221,7 +223,7 @@
           float: left;
           line-height: 60px;
 
-          @media screen and (max-width:990px) {
+          @media screen and (max-width:991px) {
             display:none;
           }
         }
@@ -265,10 +267,15 @@
           background-color: $link-blue;
           z-index: 100;
           height: 60px;
-          width: 260px;
+          width: 36%;
+
+          @media screen and (max-width: 1024px) {
+            width: 48%;
+          }
 
           .nav {
             z-index: 100;
+            position: relative;
 
             .nav-item {
               height: 60px;
@@ -299,9 +306,9 @@
 
           .stock__options-button {
             display: block;
-            margin-right: 255px;
+            position: absolute;
             cursor: pointer;
-            width: 5000px;
+            left:-30px;
 
             svg {
               float: right;
@@ -311,6 +318,7 @@
 
             svg g {
               fill: $link-grey;
+              opacity: 0.5;
             }
 
             &:hover {
@@ -363,9 +371,10 @@
         float: left;
 
         img {
-          width: 60px;
+          width: 54px;
           height: auto;
           margin-right: 15px;
+          margin-top: 5px;
         }
       }
 
@@ -375,7 +384,7 @@
         p {
           font-size: 36px;
           line-height: 1;
-          font-weight: 800;
+          font-weight: 700;
         }
       }
 
@@ -402,7 +411,7 @@
       }
 
       .stock-panel__company-name {
-        margin: 10px 0 10px;
+        margin: 10px 0;
 
         .button__add-to-list {
           float: left;
@@ -514,7 +523,7 @@
           }
         }
 
-        @media screen and (max-width:990px) {
+        @media screen and (max-width:991px) {
           border-bottom: $border-line--LT;
           margin-bottom: 15px;
         }
@@ -523,7 +532,7 @@
       .quick-view__pgr {
         border-left: $border-line--LT;
 
-        @media screen and (max-width: 990px) {
+        @media screen and (max-width: 991px) {
           border-left: none;
           border-bottom: $border-line--LT;
           margin-bottom: 15px;
@@ -555,7 +564,7 @@
             font-size: 22px;
           }
 
-          @media screen and (max-width: 1279px) and (min-width: 1025px) {
+          @media screen and (max-width: 1279px) and (min-width: 992px) {
             font-size: 17px;
           }
         }
@@ -564,7 +573,7 @@
           margin-top: 8px;
 
           li {
-            margin: 3px 0 3px;
+            margin: 3px 0 6px;
 
             .sliderBar-container {
 
@@ -583,12 +592,14 @@
 
     .quick-view__chart-container {
       border-top: $border-line--LT;
-      border-bottom: $border-line--LT;
-      padding:5px 0 10px;
-      height: 200px;
+      padding:15px 0;
+
+      @media screen and (max-width: 991px) {
+        border-top: none;
+      }
 
       .quick-view__chart {
-        height: 100%;
+        height: 210px;
         width: 100%;
 
         .panel__chart {
@@ -599,11 +610,10 @@
     }
 
     .quick-view__similar {
-      background-color: $background--LT-blue;
-      height: 40px;
-      margin-top: 10px;
-      margin-bottom: 25px;
-      border-radius: 20px;
+      background-color: $background--LT;
+      height: 50px;
+      margin-bottom: 20px;
+      border-radius: 5px;
 
       .icon__discover {
         cursor: pointer;
@@ -614,13 +624,19 @@
         }
 
         svg g {
-          fill: $link-blue;
+          fill: $link-grey;
+        }
+
+        &:hover {
+          svg g {
+            fill: $link-blue;
+          }
         }
       }
 
       .similar-stock {
         font-size: 16px;
-        line-height: 40px;
+        line-height: 50px;
         font-weight: 700;
         text-align: left;
 
@@ -638,14 +654,21 @@
       padding: 0 15px;
 
       .news-panel__header {
-        width: 100%;
-
         p {
           color:$font-color--MD;
           font-size: 18px;
           font-weight: 600;
           text-transform: uppercase;
-          line-height:1;
+          line-height:18px;
+          white-space: nowrap;
+        }
+        .news__attribute {
+          font-size: 10px;
+          line-height:18px;
+          float: right;
+          color: $font-color--MD;   
+          font-weight: 400;
+          text-transform: initial;
         }
       }
 
@@ -769,7 +792,7 @@
         p {
           font-size: 36px;
           line-height: 1;
-          font-weight: 800;
+          font-weight: 700;
         }
       }
 

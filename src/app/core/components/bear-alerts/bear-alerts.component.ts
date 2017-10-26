@@ -22,7 +22,7 @@ import {Observable} from 'rxjs/Observable';
             id="icon"></path>
         </g>
       </svg>
-      <span *ngIf="allItems>0" class="badge badge-danger">{{ allItems }}</span>
+      <span *ngIf="allItems>0" class="badge badge-danger align-absolute">{{ allItems }}</span>
     </a>
     <div #nav id="notificationSideNav" class="sidenav sidenav--alerts">
 
@@ -46,7 +46,7 @@ import {Observable} from 'rxjs/Observable';
           <h4><i class="fa fa-briefcase" aria-hidden="true"></i> &nbsp;HOLDING</h4>
 
           <ul class="alerts__list container container-fluid">
-            <span *ngIf="holdingListAlerts?.length==0">No Alerts.</span>
+            <p class="empty-list__text" *ngIf="holdingListAlerts?.length==0">No Alerts.</p>
             <li *ngFor="let alert of this.holdingListAlerts" class="alert__entry row">
               <div class="col-4 alert__stock">
                 <p class="ticker">
@@ -69,68 +69,13 @@ import {Observable} from 'rxjs/Observable';
                 </ul>
               </div>
             </li>
-
-            <!--<li class="alert__entry row">-->
-            <!--<div class="col-4 alert__stock">-->
-            <!--<p class="ticker">-->
-            <!--<img class="rating" src="./assets/imgs/arc_Bullish.svg">-->
-            <!--<span>AMZN</span>-->
-            <!--</p>-->
-            <!--</div>-->
-            <!--<div class="col-8 alert__info">-->
-            <!--<ul class="container container-fluid">-->
-            <!--<li class="row no-gutters">-->
-            <!--<div class="col-1 alert__icon">-->
-            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
-            <!--</div>-->
-            <!--<div class="col-11">-->
-            <!--<p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
-            <!--class="down-change"><i class="fa fa-long-arrow-right"-->
-            <!--aria-hidden="true"></i> <b>$0.41</b></span></p>-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-            <!--</li>-->
-
-            <!--<li class="alert__entry row">-->
-            <!--<div class="col-4 alert__stock">-->
-            <!--<p class="ticker">-->
-            <!--<img class="rating" src="./assets/imgs/arc_VeryBullish.svg">-->
-            <!--<span>AAPL</span>-->
-            <!--</p>-->
-            <!--</div>-->
-            <!--<div class="col-8 alert__info">-->
-            <!--<ul class="container container-fluid">-->
-            <!--<li class="row no-gutters">-->
-            <!--<div class="col-1 alert__icon">-->
-            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
-            <!--</div>-->
-            <!--<div class="col-11">-->
-            <!--<p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i-->
-            <!--class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--<li class="row no-gutters">-->
-            <!--<div class="col-1 alert__icon">-->
-            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;down.svg">-->
-            <!--</div>-->
-            <!--<div class="col-11">-->
-            <!--<p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
-            <!--class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span>-->
-            <!--</p>-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-            <!--</li>-->
           </ul>
         </div>
 
         <div class="alerts__section">
           <h4><i class="fa fa-binoculars" aria-hidden="true"></i> &nbsp;WATCHING</h4>
           <ul class="alerts__list container container-fluid">
-            <span *ngIf="watchingListAlerts?.length==0">No Alerts.</span>
+            <p class="empty-list__text" *ngIf="watchingListAlerts?.length==0">No Alerts.</p>
             <li *ngFor="let alert of watchingListAlerts" class="alert__entry row">
               <div class="col-4 alert__stock">
                 <p class="ticker">
@@ -153,135 +98,11 @@ import {Observable} from 'rxjs/Observable';
                 </ul>
               </div>
             </li>
-
-            <!--<li class="alert__entry row">-->
-            <!--<div class="col-4 alert__stock">-->
-            <!--<p class="ticker">-->
-            <!--<img class="rating" src="./assets/imgs/arc_Bullish.svg">-->
-            <!--<span>AMZN</span>-->
-            <!--</p>-->
-            <!--</div>-->
-            <!--<div class="col-8 alert__info">-->
-            <!--<ul class="container container-fluid">-->
-            <!--<li class="row no-gutters">-->
-            <!--<div class="col-1 alert__icon">-->
-            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
-            <!--</div>-->
-            <!--<div class="col-11">-->
-            <!--<p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
-            <!--class="down-change"><i class="fa fa-long-arrow-right"-->
-            <!--aria-hidden="true"></i> <b>$0.41</b></span></p>-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-            <!--</li>-->
-
-            <!--<li class="alert__entry row">-->
-            <!--<div class="col-4 alert__stock">-->
-            <!--<p class="ticker">-->
-            <!--<img class="rating" src="./assets/imgs/arc_Bullish.svg">-->
-            <!--<span>AMZN</span>-->
-            <!--</p>-->
-            <!--</div>-->
-            <!--<div class="col-8 alert__info">-->
-            <!--<ul class="container container-fluid">-->
-            <!--<li class="row no-gutters">-->
-            <!--<div class="col-1 alert__icon">-->
-            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
-            <!--</div>-->
-            <!--<div class="col-11">-->
-            <!--<p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
-            <!--class="down-change"><i class="fa fa-long-arrow-right"-->
-            <!--aria-hidden="true"></i> <b>$0.41</b></span></p>-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-            <!--</li>-->
-
-            <!--<li class="alert__entry row">-->
-            <!--<div class="col-4 alert__stock">-->
-            <!--<p class="ticker">-->
-            <!--<img class="rating" src="./assets/imgs/arc_Bullish.svg">-->
-            <!--<span>AMZN</span>-->
-            <!--</p>-->
-            <!--</div>-->
-            <!--<div class="col-8 alert__info">-->
-            <!--<ul class="container container-fluid">-->
-            <!--<li class="row no-gutters">-->
-            <!--<div class="col-1 alert__icon">-->
-            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
-            <!--</div>-->
-            <!--<div class="col-11">-->
-            <!--<p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
-            <!--class="down-change"><i class="fa fa-long-arrow-right"-->
-            <!--aria-hidden="true"></i> <b>$0.41</b></span></p>-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-            <!--</li>-->
-
-            <!--<li class="alert__entry row">-->
-            <!--<div class="col-4 alert__stock">-->
-            <!--<p class="ticker">-->
-            <!--<img class="rating" src="./assets/imgs/arc_Bullish.svg">-->
-            <!--<span>AMZN</span>-->
-            <!--</p>-->
-            <!--</div>-->
-            <!--<div class="col-8 alert__info">-->
-            <!--<ul class="container container-fluid">-->
-            <!--<li class="row no-gutters">-->
-            <!--<div class="col-1 alert__icon">-->
-            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
-            <!--</div>-->
-            <!--<div class="col-11">-->
-            <!--<p class="alert__text">Bullish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
-            <!--class="down-change"><i class="fa fa-long-arrow-right"-->
-            <!--aria-hidden="true"></i> <b>$0.41</b></span></p>-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-            <!--</li>-->
-
-            <!--<li class="alert__entry row">-->
-            <!--<div class="col-4 alert__stock">-->
-            <!--<p class="ticker">-->
-            <!--<img class="rating" src="./assets/imgs/arc_VeryBullish.svg">-->
-            <!--<span>AAPL</span>-->
-            <!--</p>-->
-            <!--</div>-->
-            <!--<div class="col-8 alert__info">-->
-            <!--<ul class="container container-fluid">-->
-            <!--<li class="row no-gutters">-->
-            <!--<div class="col-1 alert__icon">-->
-            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;up.svg">-->
-            <!--</div>-->
-            <!--<div class="col-11">-->
-            <!--<p class="alert__text">Estimate Revision<br>Q2: <b>$0.30</b> <span class="up-change"><i-->
-            <!--class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span></p>-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--<li class="row no-gutters">-->
-            <!--<div class="col-1 alert__icon">-->
-            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;down.svg">-->
-            <!--</div>-->
-            <!--<div class="col-11">-->
-            <!--<p class="alert__text">Bearish Earnings Surprise<br>Q2 Est. <b>$0.30</b> Act. <span-->
-            <!--class="up-change"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <b>$0.41</b></span>-->
-            <!--</p>-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-            <!--</li>-->
           </ul>
         </div>
 
         <div class="alerts__section">
-          <h4><i class="fa fa-lightbulb-o" aria-hidden="true"></i> &nbsp;BEST BEARS</h4>
+          <h4><i class="fa fa-lightbulb-o" aria-hidden="true"></i> &nbsp;BEST BEAR IDEAS</h4>
           <ul class="alerts__list container container-fluid">
 
             <li class="alert__entry row">

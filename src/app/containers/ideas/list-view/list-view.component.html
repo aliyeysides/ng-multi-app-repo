@@ -434,12 +434,15 @@
           </div>
         </div>
 <!-- QUICKVIEW PANEL - - - NEWS  -->
-        <div class="quick-view__news row">
-          <div class="news-panel__header">
-            <p><i class="fa fa-newspaper-o" aria-hidden="true"></i> Headlines</p>
+        <div class="quick-view__news row no-gutters">
+          <div class="news-panel__header col-6">
+            <p>Headlines</p>
+          </div>
+          <div class="news-panel__header col-6">
+            <p class="news__attribute">News from XIgnite &mdash; updated 3 minutes ago.</p>
           </div>
           <ul *ngIf="!headlines?.length" class="news-panel__container">
-            <p class="news__none">There are no headlines for this symbol</p>
+            <p class="news__none">There are currently no headlines for this symbol</p>
           </ul>
           <ul *ngIf="headlines?.length" class="news-panel__container">
             <li *ngFor="let headline of headlines; let i = index" class="headline clearfix">
