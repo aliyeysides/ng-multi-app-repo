@@ -62,7 +62,8 @@ import {Observable} from 'rxjs/Observable';
                         <span>Q{{ alert['quarter'] }} Est.
                         <b>{{ alert['old_value'].toFixed(2) }}</b></span>
                         <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
-                        <span> Act. <b>{{ alert['new_value'].toFixed(2) }}</b></span>
+                        <span [ngClass]="{'up-change': alert['per_change']>0, 'down-change':alert['per_change']<0}"> Act. <b>{{ alert['new_value'].toFixed(2)
+                          }}</b></span>
                       </p>
                     </div>
                   </li>
@@ -91,7 +92,8 @@ import {Observable} from 'rxjs/Observable';
                         <span>Q{{ alert['quarter'] }} Est.
                         <b>{{ alert['old_value'].toFixed(2) }}</b></span>
                         <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
-                        <span> Act. <b>{{ alert['new_value'].toFixed(2) }}</b></span>
+                        <span [ngClass]="{'up-change': alert['per_change']>0, 'down-change': alert['per_change']<0}">Act. <b>{{ alert['new_value'].toFixed(2)
+                          }}</b></span>
                       </p>
                     </div>
                   </li>
@@ -106,24 +108,24 @@ import {Observable} from 'rxjs/Observable';
           <ul class="alerts__list container container-fluid">
 
             <!--<li class="alert__entry row">-->
-              <!--<div class="col-4 alert__stock">-->
-                <!--<p class="ticker">-->
-                  <!--<img class="rating" src="./assets/imgs/arc_Bearish.svg">-->
-                  <!--<span>GOOGL</span>-->
-                <!--</p>-->
-              <!--</div>-->
-              <!--<div class="col-8 alert__info">-->
-                <!--<ul class="container container-fluid">-->
-                  <!--<li class="row no-gutters">-->
-                    <!--<div class="col-1 alert__icon">-->
-                      <!--<img src="./assets/imgs/icon_arrow&#45;&#45;down.svg">-->
-                    <!--</div>-->
-                    <!--<div class="col-11">-->
-                      <!--<p class="alert__text">Power Gauge Turned Very Bullish</p>-->
-                    <!--</div>-->
-                  <!--</li>-->
-                <!--</ul>-->
-              <!--</div>-->
+            <!--<div class="col-4 alert__stock">-->
+            <!--<p class="ticker">-->
+            <!--<img class="rating" src="./assets/imgs/arc_Bearish.svg">-->
+            <!--<span>GOOGL</span>-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--<div class="col-8 alert__info">-->
+            <!--<ul class="container container-fluid">-->
+            <!--<li class="row no-gutters">-->
+            <!--<div class="col-1 alert__icon">-->
+            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;down.svg">-->
+            <!--</div>-->
+            <!--<div class="col-11">-->
+            <!--<p class="alert__text">Power Gauge Turned Very Bullish</p>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
             <!--</li>-->
           </ul>
         </div>
@@ -172,7 +174,7 @@ export class BearAlertsComponent implements AfterViewInit {
     this.signalService.alertsOpen$
       .subscribe(() => {
         this.onClick();
-    })
+      })
   }
 
   public updateData() {
