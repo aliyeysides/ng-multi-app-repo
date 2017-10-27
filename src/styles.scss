@@ -246,6 +246,7 @@ a.quick-link {
   svg {
     width: 30px;
     height: 30px;
+    cursor: pointer;
   }
 
   svg g {
@@ -1602,6 +1603,10 @@ g.dummyGroup {
       }
       text {
         fill: #999999;
+
+        tspan {
+          //display: inline-block;
+        }
       }
     }
   }
