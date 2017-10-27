@@ -41,7 +41,7 @@ import {Subject} from 'rxjs/Subject';
           </li>
         </ul>
         <div class="terms__container">
-          <p> <a>Terms &amp; Conditions</a> <span> | </span> <a>Attributions</a> </p>
+          <p> <a href="http://www.masteringthebear.com/disclaimer" target="_blank">Terms &amp; Conditions</a> <span> | </span> <a href="http://www.masteringthebear.com/attributions/" target="_blank">Attributions</a> </p>
         </div>
       </div>
 
@@ -64,7 +64,7 @@ export class BearSettingsMenuComponent implements OnInit {
     {
       title: 'User guide',
       icon: 'fa fa-book',
-      href: 'https://www.chaikinanalytics.com/analytics-resource-guide/',
+      href: 'http://www.masteringthebear.com/user-guide',
       target: '_blank',
       fn: noop
     },

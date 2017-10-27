@@ -69,10 +69,15 @@
 						}
 
 						.alert__text {
-							font-size: 14px;
+							font-size: 16px;
 							font-weight: 400;
 							line-height: 1.4;
-							margin:0px 0 5px 10px;
+							margin:0px 0 5px 0px;
+
+							span {
+								display: inline-block;
+								margin-right:15px;
+							}
 						}
 
 						&:first-child {
