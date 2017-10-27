@@ -79,6 +79,12 @@ export class AppComponent {
     timeOut: 5000,
   };
 
+  constructor() {
+    const mobHeight = (window.screen.height);
+    const mobWidth = (window.screen.width);
+    if (+mobHeight <= 1024) this.isOpen = false;
+  }
+
   toggleMenu() {
     this.isOpen = !this.isOpen;
   }
