@@ -153,7 +153,7 @@ export class IdeasService {
     pgrBarHeight: null,
     brushHeight: 5,
     sectorHeightFactor: 10,
-    margins: {left: 10, top: 5, right: 30, bottom: 35},
+    margins: {left: 0, top: 5, right: 30, bottom: 35},
     areaChartMargins: {left: 10, right: 0, bottom: 0, top: 5},
     sectorMargins: {left: 0, right: 0, bottom: 0, top: 15},
     parentGroup: null,
@@ -516,7 +516,7 @@ export class IdeasService {
         .append('tspan')
         .attr('dy', 0)
         .attr('x', function (d, i) {
-          return (1.4 * i) + 'em';
+          return (2 * i) + 'em';
         })
         .text(String);
 
