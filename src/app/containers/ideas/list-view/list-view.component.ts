@@ -45,7 +45,6 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public headlines: any;
   public orderByObject: object = {};
-  // public loadStockIdeasFromIndex = 0;
   public panelViewIdeasList: Array<object> = [];
 
   public loading: Subscription;
@@ -108,7 +107,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
         this.ideaList = stocks['symbols'];
         const alreadyLoaded = this.panelViewIdeasList.length;
         this.panelViewIdeasList = [];
-        this.assignStockData(alreadyLoaded);
+        if (this.currentView == 'panel-view') this.assignStockData(alreadyLoaded);
         const selectedStock = this.ideaList.filter(idea => idea['symbol'] === this.selectedStock['symbol'])[0];
         this.selectStock(selectedStock as Idea);
       });
