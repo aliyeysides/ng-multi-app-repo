@@ -28,7 +28,8 @@ import {SignalService} from '../../../core/services/signal.service';
           <div class="row no-gutters">
             <div class="col-6">
               <p class="ticker">
-                <img class="rating" src="{{ appendPGRImage(stockDataPGR) }}">
+                <img class="rating"
+                     src="{{ appendPGRImage(stockDataPGR ? stockDataPGR['Corrected PGR Value'] : null, stockDataPGR ? stockDataPGR['PGR Value'] : null) }}">
                 <span [innerHTML]="ticker"></span>
               </p>
             </div>
@@ -120,7 +121,7 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
       })
       .subscribe(data => {
         this.stockDataMeta = data['meta-info'];
-        this.stockDataPGR = data['pgr']['PGR Value'];
+        this.stockDataPGR = data['pgr'];
       })
   }
 

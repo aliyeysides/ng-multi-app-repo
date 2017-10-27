@@ -9,6 +9,7 @@ import {AuthService} from '../../../core/services/auth.service';
 import {UtilService} from '../../../core/services/util.service';
 
 import * as moment from 'moment';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'cpt-list-view',
@@ -17,6 +18,11 @@ import * as moment from 'moment';
 })
 
 export class ListViewComponent implements OnInit, OnDestroy {
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.drawchart();
+  }
+
   @Output('addToListClicked') addToListClicked: EventEmitter<object> = new EventEmitter<object>();
   @Output('removeFromListClicked') removeFromListClicked: EventEmitter<object> = new EventEmitter<object>();
 
@@ -39,11 +45,11 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public headlines: any;
   public orderByObject: object = {};
-  public loadedStockIdeas: number = 0;
-  public panelViewIdeasList: Array<object>;
+  public panelViewIdeasList: Array<object> = [];
 
   public loading: Subscription;
   public headlinesLoading: Subscription;
+  public panelLoading: Subscription;
 
   public chartData: object = null;
 
@@ -55,7 +61,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loading = this.updateData();
+    this.loading = this.initDataLoad();
 
     setInterval(() => {
       this.refreshList()
@@ -67,7 +73,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  updateData() {
+  initDataLoad() {
     return this.authService.currentUser$
       .map(usr => this.uid = usr['UID'])
       .flatMap(uid => this.ideaService.selectedList)
@@ -76,14 +82,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
       .filter(x => x['list_id'] !== undefined)
       .flatMap(list => {
         this.currentList = list;
+        this.gotoListView();
         return this.ideaService.getListSymbols(list['list_id'].toString(), this.uid)
       })
       .subscribe(stocks => {
         this.clearOrderByObject();
-        this.clearIdeasLists();
+        this.panelViewIdeasList = [];
+        this.ideaList = [];
         this.ideaList = stocks['symbols'];
-        console.log('ideas', this.ideaList);
-        this.assignStockData(4);
         if (this.ideaList) this.selectStock(this.ideaList[0] as Idea);
       });
   }
@@ -98,10 +104,10 @@ export class ListViewComponent implements OnInit, OnDestroy {
       })
       .take(1)
       .subscribe(stocks => {
-        // this.clearOrderByObject();
-        this.clearIdeasLists();
         this.ideaList = stocks['symbols'];
-        // this.assignStockData(4);
+        const alreadyLoaded = this.panelViewIdeasList.length;
+        this.panelViewIdeasList = [];
+        if (this.currentView == 'panel-view') this.assignStockData(alreadyLoaded);
         const selectedStock = this.ideaList.filter(idea => idea['symbol'] === this.selectedStock['symbol'])[0];
         this.selectStock(selectedStock as Idea);
       });
@@ -121,8 +127,9 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public getSelectedStockData(stock: Idea, callback?) {
     if (stock) {
-      this.loading = this.ideaService.getStockCardData(stock.symbol)
-        .takeUntil(this.ngUnsubscribe)
+      this.panelLoading = this.ideaService.getStockCardData(stock.symbol)
+        .filter(x => x != undefined)
+        .take(1)
         .subscribe(res => {
           return callback(res);
         });
@@ -132,7 +139,8 @@ export class ListViewComponent implements OnInit, OnDestroy {
   public getSelectedStockHeadlines(stock: Idea) {
     if (stock) {
       this.headlinesLoading = this.ideaService.getHeadlines(stock.symbol)
-        .takeUntil(this.ngUnsubscribe)
+        .filter(x => x != undefined)
+        .take(1)
         .subscribe(res => {
           this.headlines = res['headlines'].filter((item, index) => index < 7);
         })
@@ -141,6 +149,8 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public setOrderByObject(val: string, order: boolean, e: Event) {
     e.preventDefault();
+    const panelView = document.getElementsByClassName('view-option--panel')[0];
+    if (panelView) panelView.scrollTo(0, 0);
     this.orderByObject['field'] = val;
     this.orderByObject['ascending'] = order;
   }
@@ -157,10 +167,10 @@ export class ListViewComponent implements OnInit, OnDestroy {
         "rectData": (this.selectedStockChartPoints['pgr']).reverse(),
         "areaData": (this.selectedStockChartPoints['closePrice']).reverse()
       },
-    "xAxisData": (this.selectedStockChartPoints['dates']).reverse(),
-    "xAxisFormatedData": (this.selectedStockChartPoints['dates'])
+      "xAxisData": (this.selectedStockChartPoints['dates']).reverse(),
+      "xAxisFormatedData": (this.selectedStockChartPoints['dates'])
     };
-    for (let i = 0; i < data.xAxisData.length; i++){
+    for (let i = 0; i < data.xAxisData.length; i++) {
       data.yAxisData.lineData[i] = parseFloat(data.yAxisData.lineData[i]);
       data.yAxisData.rectData[i] = parseInt(data.yAxisData.rectData[i]);
       data.yAxisData.areaData[i] = parseFloat(data.yAxisData.areaData[i]);
@@ -172,31 +182,28 @@ export class ListViewComponent implements OnInit, OnDestroy {
     this.drawchart();
 
   }
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.drawchart();
-  }
-  public drawchart(){
-    if(this.chartData!= null){
-      this.ideaService.areaChartWithBrushing.init({ data: this.chartData, id: 'area-chart' });
+
+  public drawchart() {
+    if (this.chartData != null) {
+      this.ideaService.areaChartWithBrushing.init({data: this.chartData, id: 'area-chart'});
     }
   }
 
   public assignStockData(amount: number) {
-    let loadNum = this.loadedStockIdeas + amount; // 0 + 4
-    if (this.ideaList && this.loadedStockIdeas < this.ideaList.length) {
-      this.ideaList.map((stock, index) => {
-        if (index >= this.loadedStockIdeas && index < loadNum) {
-          this.getSelectedStockData(stock as Idea, res => {
-            console.log('panel:', res, 'idea:', stock);
-            Object.assign(res, stock);
-            // this.clearOrderByObject();
-            this.panelViewIdeasList.push(res);
-            console.log('panels:', this.panelViewIdeasList);
-            this.loadedStockIdeas++;
-          })
-        }
-      })
+    this.clearOrderByObject();
+    let startingIndex = this.panelViewIdeasList.length;
+    if (this.ideaList && this.panelViewIdeasList.length < this.ideaList.length) {
+      const listOfStocksToLoad = this.ideaList.slice(startingIndex,this.ideaList.length).filter((stock, index) => { if (amount > index) return stock });
+      this.panelLoading = Observable.from(listOfStocksToLoad)
+        .concatMap(stock => {
+          return Observable.combineLatest(
+            this.ideaService.getStockCardData(stock['symbol']),
+            Observable.of(stock))
+        })
+        .subscribe(([data, res]) => {
+          Object.assign(data, res);
+          this.panelViewIdeasList.push(data);
+        })
     }
   }
 
@@ -278,10 +285,13 @@ export class ListViewComponent implements OnInit, OnDestroy {
   }
 
   public gotoPanelView() {
+    this.clearOrderByObject();
+    this.assignStockData(4);
     this.currentView = 'panel-view';
   }
 
   public gotoListView() {
+    this.panelViewIdeasList = [];
     this.currentView = 'list-view';
     this.refreshList();
   }
@@ -312,12 +322,6 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public clearOrderByObject() {
     this.orderByObject = {};
-  }
-
-  private clearIdeasLists() {
-    this.loadedStockIdeas = 0;
-    this.panelViewIdeasList = [];
-    this.ideaList = [];
   }
 
 }
