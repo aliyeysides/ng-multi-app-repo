@@ -37,6 +37,7 @@
     left:0px;
     right:0;
     padding: 20px 30px;
+    text-decoration: none;
 
     @media screen and (max-height:500px) {
       display:none;
@@ -58,6 +59,7 @@
         &:hover {
           color:$link-blue;
           opacity: 1;
+          text-decoration: underline;
         }
       }
 

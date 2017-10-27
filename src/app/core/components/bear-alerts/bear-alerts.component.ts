@@ -50,20 +50,20 @@ import {Observable} from 'rxjs/Observable';
             <li *ngFor="let alert of this.holdingListAlerts" class="alert__entry row">
               <div class="col-4 alert__stock">
                 <p class="ticker">
-                  <!--<img class="rating" src="./assets/imgs/arc_Bearish.svg">-->
                   <span>{{ alert['symbol'] }}</span>
                 </p>
               </div>
               <div class="col-8 alert__info">
                 <ul class="container container-fluid">
                   <li class="row no-gutters">
-                    <!--<div class="col-1 alert__icon">-->
-                    <!--<img src="./assets/imgs/icon_arrow&#45;&#45;down.svg">-->
-                    <!--</div>-->
                     <div class="col-11">
                       <p class="alert__text">{{ alert['alert_text'] }}</p>
-                      <p *ngIf="alert['alert_type'] == 'earnings_surprise_alerts'">Q{{ alert['quarter'] }} Est.
-                        {{ alert['old_value'].toFixed(2) }} Act. <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{ alert['new_value'].toFixed(2) }}</p>
+                      <p class="alert__text" *ngIf="alert['alert_type'] == 'earnings_surprise_alerts'">
+                        <span>Q{{ alert['quarter'] }} Est.
+                        <b>{{ alert['old_value'].toFixed(2) }}</b></span>
+                        <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                        <span> Act. <b>{{ alert['new_value'].toFixed(2) }}</b></span>
+                      </p>
                     </div>
                   </li>
                 </ul>
@@ -79,20 +79,20 @@ import {Observable} from 'rxjs/Observable';
             <li *ngFor="let alert of watchingListAlerts" class="alert__entry row">
               <div class="col-4 alert__stock">
                 <p class="ticker">
-                  <!--<img class="rating" src="./assets/imgs/arc_Bearish.svg">-->
                   <span>{{ alert['symbol'] }}</span>
                 </p>
               </div>
               <div class="col-8 alert__info">
                 <ul class="container container-fluid">
                   <li class="row no-gutters">
-                    <!--<div class="col-1 alert__icon">-->
-                    <!--<img src="./assets/imgs/icon_arrow&#45;&#45;down.svg">-->
-                    <!--</div>-->
                     <div class="col-11">
                       <p class="alert__text">{{ alert['alert_text'] }}</p>
-                      <p *ngIf="alert['alert_type'] == 'earnings_surprise_alerts'">Q{{ alert['quarter'] }} Est.
-                        {{ alert['old_value'].toFixed(2) }} Act. <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{ alert['new_value'].toFixed(2) }}</p>
+                      <p class="alert__text" *ngIf="alert['alert_type'] == 'earnings_surprise_alerts'">
+                        <span>Q{{ alert['quarter'] }} Est.
+                        <b>{{ alert['old_value'].toFixed(2) }}</b></span>
+                        <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                        <span> Act. <b>{{ alert['new_value'].toFixed(2) }}</b></span>
+                      </p>
                     </div>
                   </li>
                 </ul>
