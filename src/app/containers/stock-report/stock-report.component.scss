@@ -20,12 +20,13 @@
 	    top:0;
 	    z-index: 400;
 	    width: 100%;
-	    min-width:860px;
+	    min-width:800px;
 	}
 
 	.body__bottom {
 		z-index: 1;
 		height: 100%;
 		border-top: $border-dashed--MD;
+		posistion:relative;
 	}
 }
