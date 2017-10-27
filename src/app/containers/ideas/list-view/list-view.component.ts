@@ -191,6 +191,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
   }
 
   public assignStockData(amount: number) {
+    this.clearOrderByObject();
     let startingIndex = this.panelViewIdeasList.length;
     if (this.ideaList && this.panelViewIdeasList.length < this.ideaList.length) {
       const listOfStocksToLoad = this.ideaList.slice(startingIndex,this.ideaList.length).filter((stock, index) => { if (amount > index) return stock });
@@ -285,6 +286,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
   }
 
   public gotoPanelView() {
+    this.clearOrderByObject();
     this.assignStockData(4);
     this.currentView = 'panel-view';
   }
