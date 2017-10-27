@@ -1,4 +1,4 @@
-import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, HostListener, ViewChild, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'cpt-root',
@@ -73,11 +73,22 @@ import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    const height = event.target.innerHeight;
+    if (+height <= 1024) this.isOpen = false;
+  }
   isOpen = true;
   options = {
     position: ['top', 'right'],
     timeOut: 5000,
   };
+
+  constructor() {
+    const mobHeight = (window.screen.height);
+    const mobWidth = (window.screen.width);
+    if (+mobHeight <= 1024) this.isOpen = false;
+  }
 
   toggleMenu() {
     this.isOpen = !this.isOpen;
