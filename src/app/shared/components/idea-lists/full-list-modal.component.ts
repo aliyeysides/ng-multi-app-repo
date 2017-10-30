@@ -6,6 +6,7 @@ import {Subject} from 'rxjs/Subject';
 import {IDEAS_LIST_CLASSMAP} from '../../models/idea-list-class-map';
 import {WordpressService} from '../../../core/services/wordpress.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../../../core/services/auth.service';
 
 interface SelectedList {
   name?: string;
@@ -81,13 +82,16 @@ export class FullListModalComponent implements OnInit, OnDestroy {
 
   constructor(public bsModalRef: BsModalRef,
               private router: Router,
+              private authService: AuthService,
               private wordpressService: WordpressService,
               private ideasService: IdeasService) {
   }
 
   ngOnInit() {
     this.title = 'Idea List Descriptions';
-    this.ideasService.getIdeasList('1051819', 'Bear')
+    this.authService.currentUser$
+      .map(usr => usr['UID'])
+      .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x != undefined)
       .subscribe(res => {
@@ -131,7 +135,7 @@ export class FullListModalComponent implements OnInit, OnDestroy {
   }
 
   private getWordPressPostListDescriptions() {
-    this.wordpressService.getWordPressJson('45', this.allLists.length)
+    this.wordpressService.getWordPressJson('45', 100)
       .takeUntil(this.ngUnsubscribe)
       .subscribe(val => {
         this.wordPressPosts = val['0']['45'];
