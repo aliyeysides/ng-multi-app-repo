@@ -48,7 +48,7 @@ import {Router} from '@angular/router';
         <p class="">Idea lists updated daily</p>
       </div>
     </div>
-  `, 
+  `,
   styleUrls: ['./idea-lists.component.scss']
 })
 export class IdeaListsComponent implements AfterViewInit, OnDestroy {
