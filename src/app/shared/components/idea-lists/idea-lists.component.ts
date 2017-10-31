@@ -28,7 +28,7 @@ import {Router} from '@angular/router';
       <div class="idea-lists__container row no-gutters">
         <ul>
           <li
-            [ngClass]="{'selected': isSelected(list), 'list__option--userlist': list['name'] === 'Holding' || list['name'] === 'Watching' }"
+            [ngClass]="{'selected': selectedList.list_id === list.list_id, 'list__option--userlist': list['name'] === 'Holding' || list['name'] === 'Watching' }"
             (click)="emitListSelected(list)"
             *ngFor="let list of lists" class="list__option">
             <ng-container *ngIf="list">
@@ -106,10 +106,6 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
 
   public appendListImageUrl(listName: string) {
     return this.classMap[listName] ? this.classMap[listName].imgName : '/img_list-classicbears.svg';
-  }
-
-  public isSelected(list) {
-    return this.selectedList === list;
   }
 
 }
