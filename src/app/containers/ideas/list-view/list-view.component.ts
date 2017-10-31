@@ -90,7 +90,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
         this.panelViewIdeasList = [];
         this.ideaList = [];
         this.ideaList = stocks['symbols'];
-        if (this.ideaList) this.selectStock(this.ideaList[0] as Idea);
+        this.selectStock(this.ideaList[0] as Idea);
       });
   }
 
@@ -108,8 +108,10 @@ export class ListViewComponent implements OnInit, OnDestroy {
         const alreadyLoaded = this.panelViewIdeasList.length;
         this.panelViewIdeasList = [];
         if (this.currentView == 'panel-view') this.assignStockData(alreadyLoaded);
-        const selectedStock = this.ideaList.filter(idea => idea['symbol'] === this.selectedStock['symbol'])[0];
-        this.selectStock(selectedStock as Idea);
+        if (this.selectedStock) {
+          const selectedStock = this.ideaList.filter(idea => idea['symbol'] === this.selectedStock['symbol'])[0];
+          this.selectStock(selectedStock as Idea);
+        }
       });
   }
 
@@ -193,7 +195,9 @@ export class ListViewComponent implements OnInit, OnDestroy {
     this.clearOrderByObject();
     let startingIndex = this.panelViewIdeasList.length;
     if (this.ideaList && this.panelViewIdeasList.length < this.ideaList.length) {
-      const listOfStocksToLoad = this.ideaList.slice(startingIndex,this.ideaList.length).filter((stock, index) => { if (amount > index) return stock });
+      const listOfStocksToLoad = this.ideaList.slice(startingIndex, this.ideaList.length).filter((stock, index) => {
+        if (amount > index) return stock
+      });
       this.panelLoading = Observable.from(listOfStocksToLoad)
         .concatMap(stock => {
           return Observable.combineLatest(

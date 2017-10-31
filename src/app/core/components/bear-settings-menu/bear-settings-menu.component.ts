@@ -3,7 +3,7 @@ import {noop} from 'rxjs/util/noop';
 import {AuthService} from '../../services/auth.service';
 import {Subject} from 'rxjs/Subject';
 
-@Component({ 
+@Component({
   selector: 'cpt-bear-settings-menu',
   template: `
     <a class="quick-link">
@@ -41,7 +41,7 @@ import {Subject} from 'rxjs/Subject';
           </li>
         </ul>
         <div class="terms__container">
-          <p> <a href="http://www.masteringthebear.com/disclaimer" target="_blank">Terms &amp; Conditions</a> <span> | </span> <a href="http://www.masteringthebear.com/attributions/" target="_blank">Attributions</a> </p>
+          <p> <a href="http://www.masteringthebear.com/terms-and-conditions" target="_blank">Terms &amp; Conditions</a> <span> | </span> <a href="http://www.masteringthebear.com/attributions/" target="_blank">Attributions</a> </p>
         </div>
       </div>
 
@@ -69,7 +69,7 @@ export class BearSettingsMenuComponent implements OnInit {
       fn: noop
     },
     {
-      title: 'Edit Email/User Name',
+      title: 'Edit User Name',
       icon: 'fa fa-pencil-square-o',
       href: 'https://mh214.infusionsoft.com/app/form/bear_upgrade-form',
       target: '_blank',
@@ -83,14 +83,14 @@ export class BearSettingsMenuComponent implements OnInit {
       fn: noop
     },
     {
-      title: 'Cancel',
+      title: 'Modify Subscription',
       icon: 'fa fa-ban',
       href: 'https://mh214.infusionsoft.com/app/form/ber_cancellation_form',
       target: '_blank',
       fn: noop
     },
     {
-      title: 'Support/Contact',
+      title: 'Contact Us',
       icon: 'fa fa-life-ring',
       href: 'mailto:info@chaikinanalytics.com?subject="Mastering the Bear support request" ',
       target: '',
