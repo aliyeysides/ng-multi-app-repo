@@ -139,7 +139,7 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
     if (params.list === 'Holding') params.list = this.holdingListId;
     if (params.list === 'Watching') params.list = this.watchingListId;
     this.loading = this.ideasService.addStockIntoList(params.list.toString(), params.symbol)
-      .takeLast(1)
+      .take(1)
       .subscribe()
   }
 
