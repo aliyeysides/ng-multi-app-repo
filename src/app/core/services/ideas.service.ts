@@ -480,9 +480,9 @@ export class IdeasService {
         })
         .enter()
         .append('tspan')
-        .attr('x', 0)
-        .attr('dy', function (d, i) {
-          return (1.4 * i) + 'em';
+        .attr('dy', 0)
+        .attr('x', function (d, i) {
+          return (2 * i) + 'em';
         })
         .text(String);
 
@@ -751,8 +751,8 @@ export class IdeasService {
         })
         .enter()
         .append('tspan')
-        .attr('x', 0)
-        .attr('dy', function (d, i) {
+        .attr('dy', 0)
+        .attr('x', function (d, i) {
           return (1.4 * i) + 'em';
         })
         .text(String);
@@ -780,8 +780,8 @@ export class IdeasService {
         })
         .enter()
         .append('tspan')
-        .attr('x', 0)
-        .attr('dy', function (d, i) {
+        .attr('dy', 0)
+        .attr('x', function (d, i) {
           return (1.4 * i) + 'em';
         })
         .text(String);
