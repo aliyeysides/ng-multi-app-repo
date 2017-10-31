@@ -109,7 +109,10 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
   public updateData() {
     window.scrollTo(0,0);
     this.route.params
-      .map(params => params.symbol)
+      .map(params => {
+        console.log('params', params);
+        return params.symbol;
+      })
       .switchMap(val => this.discoveryService.getDiscoveryResultLists(val))
       .takeUntil(this.ngUnsubscribe)
       .subscribe(res => {

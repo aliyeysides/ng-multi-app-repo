@@ -430,7 +430,7 @@
             </svg>
           </div>
           <div *ngFor="let idea of selectedStockSimilars" class="similar-stock col-md-3 col-lg-2">
-            <p (click)="goToStockDiscovery(idea, $event)">{{idea}}</p>
+            <p (click)="goToStockView(idea, $event)">{{idea}}</p>
           </div>
         </div>
 <!-- QUICKVIEW PANEL - - - NEWS  -->
@@ -663,7 +663,7 @@
           </div>
           <div *ngFor="let stock of idea['discovery-similars'].stocks"
                class="similar-stock similar-stock-1 col-md-3 col-lg-2">
-            <p (click)="goToStockDiscovery(stock, $event)">{{stock}}</p>
+            <p (click)="goToStockView(stock, $event)">{{stock}}</p>
           </div>
         </div>
       </div>
