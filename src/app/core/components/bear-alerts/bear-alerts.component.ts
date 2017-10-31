@@ -61,7 +61,6 @@ import {Observable} from 'rxjs/Observable';
                       <p class="alert__text" *ngIf="alert['alert_type'] == 'earnings_surprise_alerts'">
                         <span>Q{{ alert['quarter'] }} Est.
                         <b>{{ alert['old_value'].toFixed(2) }}</b></span>
-                        <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
                         <span [ngClass]="{'up-change': alert['per_change']>0, 'down-change':alert['per_change']<0}"> Act. <b>{{ alert['new_value'].toFixed(2)
                           }}</b></span>
                       </p>
@@ -91,7 +90,6 @@ import {Observable} from 'rxjs/Observable';
                       <p class="alert__text" *ngIf="alert['alert_type'] == 'earnings_surprise_alerts'">
                         <span>Q{{ alert['quarter'] }} Est.
                         <b>{{ alert['old_value'].toFixed(2) }}</b></span>
-                        <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
                         <span [ngClass]="{'up-change': alert['per_change']>0, 'down-change': alert['per_change']<0}">Act. <b>{{ alert['new_value'].toFixed(2)
                           }}</b></span>
                       </p>
