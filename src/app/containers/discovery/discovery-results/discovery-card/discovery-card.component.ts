@@ -30,7 +30,7 @@ import {Idea} from '../../../../shared/models/idea';
               {{ stock.Last | decimal }}</p>
             <p class="percentage"
                [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
-              ({{ stock.Percentage | decimal }}%)</p>
+              (<span *ngIf="stock?.Change>0" class="up-change">+</span>{{ stock.Percentage | decimal }}%)</p>
           </div>
           <div class="mainFactor">
             <p class="factor">{{ stock.most_significant_shared_factor }}</p>

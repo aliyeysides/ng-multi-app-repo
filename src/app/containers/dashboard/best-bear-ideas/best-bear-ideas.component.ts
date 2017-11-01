@@ -41,13 +41,13 @@ import {Subscription} from 'rxjs/Subscription';
             <!--<i class="fa fa-play" aria-hidden="true"></i>-->
           </div>
           <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">{{ stock?.Last
+            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">{{ stock?.Last | decimal
               }}</p>
           </div>
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">
-              {{ stock['Percentage '] | decimal
-              }}%</p>
+              (<span *ngIf="stock?.Change>0" class="up-change">+</span>{{ stock['Percentage '] | decimal
+              }}%)</p>
           </div>
         </li>
       </ul>
@@ -84,10 +84,7 @@ export class BestBearIdeasComponent implements OnInit {
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
       .flatMap(res => {
         this.bestBearIdeaList = res[0]['idea_lists'].filter(list => list.name === 'Best Bear Ideas')[0];
-        // return Observable.combineLatest(
         return this.ideasService.getListSymbols(this.bestBearIdeaList['list_id'].toString(), this.uid)
-        // this.signalService.getSignalDataforList(this.bestBearIdeaList['list_id'].toString(), '1', this.uid)
-        // );
       })
       .take(1)
       .subscribe(res => {
