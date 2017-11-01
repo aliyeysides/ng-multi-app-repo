@@ -84,10 +84,7 @@ export class BestBearIdeasComponent implements OnInit {
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
       .flatMap(res => {
         this.bestBearIdeaList = res[0]['idea_lists'].filter(list => list.name === 'Best Bear Ideas')[0];
-        // return Observable.combineLatest(
         return this.ideasService.getListSymbols(this.bestBearIdeaList['list_id'].toString(), this.uid)
-        // this.signalService.getSignalDataforList(this.bestBearIdeaList['list_id'].toString(), '1', this.uid)
-        // );
       })
       .take(1)
       .subscribe(res => {
