@@ -207,6 +207,7 @@ export class BearAlertsComponent implements AfterViewInit {
         this.holdingListAlerts = this.signalService.parseAlertData(res[0]);
         this.watchingListAlerts = this.signalService.parseAlertData(res[1]);
         this.allItems = this.holdingListAlerts.length + this.watchingListAlerts.length;
+        console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts);
         // this.parseAlertData(res[0]);
       })
   }
