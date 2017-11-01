@@ -27,7 +27,8 @@ import {Subscription} from 'rxjs/Subscription';
     <div (mousedown)="$event.preventDefault();" *ngIf="searchResults && symbolSearchForm.value && focus == true"
          class="search__dropdown">
       <ul [ngBusy]="loading" *ngFor="let result of searchResults" class="container">
-        <li (click)="onClick(result.Symbol)" class="row search__entry">
+        <li (click)="onClick(result.Symbol)" class="row search__entry"
+            [ngClass]="{'search--match': result.Symbol == symbolSearchForm.value.toUpperCase() }">
           <div class="col-3 search__company">
             <p class="company-ticker">
               {{ result.Symbol }}
