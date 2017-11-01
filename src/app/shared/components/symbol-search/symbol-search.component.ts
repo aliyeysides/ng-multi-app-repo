@@ -21,7 +21,7 @@ import {Subscription} from 'rxjs/Subscription';
                class="form-control search-box"
                placeholder="{{ placeholder }}"
                aria-describedby="basic-addon1">
-        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <button type="submit"><i (click)="search.focus()" class="fa fa-search" aria-hidden="true"></i></button>
       </div>
     </form>
     <div (mousedown)="$event.preventDefault();" *ngIf="searchResults && symbolSearchForm.value && focus == true"
