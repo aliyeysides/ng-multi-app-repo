@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="51px" height="25px" viewBox="0 0 51 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45 (43475) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="100%" y1="99.9999642%" x2="0%" y2="99.9999642%" id="linearGradient-2">
+            <stop stop-color="#24A300" offset="0%"></stop>
+            <stop stop-color="#61C600" offset="15.784275%"></stop>
+            <stop stop-color="#FFBE00" offset="49.7297588%"></stop>
+            <stop stop-color="#EF5A00" offset="80.5537501%"></stop>
+            <stop stop-color="#E00000" offset="100%"></stop>
+        </linearGradient>
+        <path d="M25.0543722,3.43292309e-05 C11.2170449,3.43292309e-05 0,10.884117 0,24.3095926 L9.90053516,24.3095926 C9.90053516,16.1893563 16.6847528,9.60603972 25.0543722,9.60603972 C33.4236378,9.60603972 40.2669409,16.1893563 40.2669409,24.3095926 L50.1087443,24.3095926 C50.1087443,10.884117 38.8909919,3.43292309e-05 25.0543722,3.43292309e-05 Z" id="path-3"></path>
+        <linearGradient x1="50%" y1="-26.3277395%" x2="50%" y2="154.299402%" id="linearGradient-4">
+            <stop stop-color="#FFFFFF" stop-opacity="0.5" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0.5" offset="100%"></stop>
+        </linearGradient>
+        <path d="M5.16166628,24.3095926 L9.90053516,24.3095926 C9.90053516,17.7084248 16.6522027,9.69220609 25.0543722,9.69220609 L25.0543722,9.69220609 C33.4558341,9.69220609 40.2669409,17.7084248 40.2669409,24.3095926 L40.2669409,24.3095926 L44.9467243,24.3095926 C44.9467243,13.3953002 36.040736,4.9691905 25.0543722,4.9691905 L25.0543722,4.9691905 C14.0680084,4.9691905 5.16166628,13.3953002 5.16166628,24.3095926" id="path-5"></path>
+    </defs>
+    <g id="Comps" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home-v4_Search" transform="translate(-21.000000, -16.000000)">
+            <g id="LEFT-SIDEBAR" transform="translate(-31.000000, -34.000000)">
+                <g id="Arc-logo" transform="translate(52.000000, 50.000000)">
+                    <g id="Group-4">
+                        <g id="Fill-1">
+                            <use fill="url(#linearGradient-1)" xlink:href="#path-3"></use>
+                            <use fill="url(#linearGradient-2)" xlink:href="#path-3"></use>
+                        </g>
+                        <g id="Fill-3">
+                            <use fill="url(#linearGradient-2)" xlink:href="#path-5"></use>
+                            <use fill="url(#linearGradient-4)" style="mix-blend-mode: multiply;" xlink:href="#path-5"></use>
+                        </g>
+                        <polyline id="Fill-5" fill="#9A0013" points="-3.53805352e-05 24.3096269 5.76026955 19.5066242 9.90049978 24.3096269"></polyline>
+                        <polyline id="Fill-8" fill="#417900" points="50.1084967 24.3096269 44.3481918 19.5066242 40.267047 24.3096269"></polyline>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

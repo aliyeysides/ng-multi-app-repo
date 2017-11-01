@@ -1,0 +1,32 @@
+
+@import 'variables';
+
+
+
+
+
+
+.stock-view__container {
+  position: relative;
+  background-color: #FFFFFF;
+  height: 100%;
+  overflow:hidden;
+  padding-top:64px;
+
+  	.body__top {
+	    background-color: $background--LT;
+	    height: 64px;
+	    position: absolute;
+	    top:0;
+	    z-index: 400;
+	    width: 100%;
+	    min-width:800px;
+	}
+
+	.body__bottom {
+		z-index: 1;
+		height: 100%;
+		border-top: $border-dashed--MD;
+		posistion:relative;
+	}
+}

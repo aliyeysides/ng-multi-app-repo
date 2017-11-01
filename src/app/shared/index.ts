@@ -1,20 +1,36 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+
+import {SHARED_COMPONENTS} from './components/index';
+
+import {FullListModalComponent} from "app/shared/components/idea-lists";
+import {BusyModule} from 'angular2-busy';
+import {PipesModule} from './pipes/index';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    ReactiveFormsModule,
+    RouterModule,
+    BusyModule,
+    PipesModule
   ],
   exports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    ReactiveFormsModule,
+    RouterModule,
+    BusyModule,
+    PipesModule,
+    ...SHARED_COMPONENTS
   ],
-  declarations: [],
+  entryComponents: [
+    FullListModalComponent
+  ],
+  declarations: [...SHARED_COMPONENTS],
   providers: []
 })
 export class SharedModule {

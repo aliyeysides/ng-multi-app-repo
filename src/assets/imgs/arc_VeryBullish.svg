@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="100px" viewBox="0 0 200 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>IP_arc-VBull</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="IP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="IP_arc-VBull" fill="#24A300">
+            <path d="M200,100 L160,100 C160,66.5960572 133.404458,40 100.000773,40 C66.5955424,40 40,66.5960572 40,100 L0,100 C0,44.7715501 44.7712039,0 100.000773,0 C155.228796,0 200,44.7715501 200,100 Z M52,100 C52,72.3861138 73.2136329,50 100,50 C126.785127,50 149,72.3861138 149,100 L52,100 Z" id="VeryBullish"></path>
+        </g>
+    </g>
+</svg>

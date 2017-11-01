@@ -1,0 +1,92 @@
+@import 'variables';
+
+
+.alerts__container {
+	padding:0 0 50px;
+	height: 100vh;
+	overflow-y: scroll;
+
+	.alerts__section {
+
+		h4 {
+			line-height: 1;
+			padding: 12px 15px 10px;
+			color: $font-color--MD;
+		}
+
+		.alerts__list {
+			width: 100%;
+			background-color: #ffffff;
+			border-top: $border-line--LT2;
+			border-bottom: $border-line--LT2;
+
+			.empty-list__text {
+		        text-align: center;
+		        font-size: 18px;
+		        font-weight: 400;
+		        line-height: 1.3;
+		        margin: 10px 0;
+		    }
+
+			.alert__entry {
+				padding:10px;
+
+				.alert__stock {
+
+					.ticker {
+						font-size: 22px;
+	        			font-weight: 700;
+	        			white-space: nowrap;
+
+						img {
+							display: inline-block;
+							height: 16px;
+							width: auto;
+							margin-right:5px;
+							margin-top:-4px;
+							margin-left:10px;
+						}
+
+						span {
+							display: inline-block;
+							line-height: 1;
+						}
+					}
+				}
+
+				.alert__info {
+					li {  
+						margin-top:6px;
+
+						.alert__icon {
+							padding-top:1px;
+							float: right;
+
+							img {
+								height: 16px;
+								width: 16px;
+							}
+						}
+
+						.alert__text {
+							font-size: 16px;
+							font-weight: 400;
+							line-height: 1.4;
+							margin:0px 0 5px 0px;
+
+							span {
+								display: inline-block;
+								margin-right:15px;
+							}
+						}
+
+						&:first-child {
+							margin-top: 0px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

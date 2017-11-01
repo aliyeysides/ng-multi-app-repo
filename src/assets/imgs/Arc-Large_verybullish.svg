@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="119px" height="61px" viewBox="0 0 119 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>Bullish Arc Large</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#00AD00" offset="0%"></stop>
+            <stop stop-color="#007400" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="StockSummary_sheet" transform="translate(-649.000000, -90.000000)" fill="url(#linearGradient-1)">
+            <g id="Stock-Overview" transform="translate(72.000000, 51.000000)">
+                <g id="Group-2" transform="translate(531.000000, 7.000000)">
+                    <g id="PGR-Rating" transform="translate(1.000000, 32.000000)">
+                        <g id="Bullish-Arc-Large" transform="translate(45.000000, 0.000000)">
+                            <path d="M32.5960853,60.2846359 C32.5960853,44.4477712 44.8901132,31.6090909 60.0558362,31.6090909 C75.2208573,31.6090909 87.5148852,44.4477712 87.5148852,60.2846359 L32.5960853,60.2846359 Z M0,60.5121101 C0,27.091949 26.6350286,0 59.4905028,0 C92.3464416,0 118.98147,27.091949 118.98147,60.5121101 L95.6127563,60.5121101 C95.6127563,40.2984059 79.3629453,23.9117767 59.4905028,23.9117767 C39.6180603,23.9117767 23.5080816,40.2984059 23.5080816,60.5121101 L0,60.5121101 Z" id="Combined-Shape"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

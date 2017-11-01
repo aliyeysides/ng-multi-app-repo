@@ -1,0 +1,61 @@
+@import 'variables';
+
+
+
+/*------------------------------------*\
+  #SIDE BAR
+\*------------------------------------*/
+
+
+
+
+
+.side-nav {
+
+	.side-nav__section {
+		padding: 10px 0px;
+		width: 100%;
+
+		li {
+			height: 50px;
+			padding: 0 0px 0 15px;
+			cursor: pointer;
+
+
+			img {
+				float: left;
+				width: 20px;
+				height: 20px;
+				margin-top: 16px;
+				margin-right: 13px;
+			}
+
+			a {
+				float: left;
+				font-size: 15px;
+				font-weight: 400;
+				color: #ffffff;
+				line-height: 50px;
+				text-decoration: none;
+			}
+
+			&:hover {
+				background-color: $background--DK;
+
+				a {
+					color: #ffffff;
+				}
+			}
+		}
+
+		li.selected {
+			background-color: $link-blue;
+			font-weight: 600;
+		}
+
+	  	li.active {
+	    	background-color: $link-blue;
+	    	font-weight: 600;
+	  	}
+	}
+}

@@ -1,0 +1,75 @@
+@import 'variables';
+
+
+
+.market-summary__contents {
+	width: 78%;
+	padding-left: 25px;
+	height: 50px;
+	float: left;
+
+	.market-summary__title {
+		display: inline-block;
+		float: left;
+		height: 50px;
+		margin-right:5%;
+		padding-top:5px;
+
+		h4 {
+			text-transform: uppercase;
+			font-size: 18px;
+			font-weight: 600;
+			line-height: 1.4;
+			color: #7E7E7E;
+		}
+
+		p.current-time {
+			font-weight: 400;
+			font-size: 11px;
+			color: #7E7E7E;
+		}
+	}
+
+	.indice {
+		display: inline-block;
+		float: left;
+		font-weight: 700;
+		font-size: 18px;
+		color: #4A4A4A;
+		line-height: 50px;
+		margin-right: 5%;
+
+		span {
+			margin-right: 5px;
+			margin-top:-6px;
+
+			img {
+				width: 13px;
+				height: 13px;
+				margin-top: -3px;
+				display: inline-block;
+				vertical-align: middle;
+			}
+		}
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeInDown {
+  animation-name: fadeInDown;
+}
