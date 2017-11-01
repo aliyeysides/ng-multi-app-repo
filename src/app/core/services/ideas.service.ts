@@ -21,7 +21,7 @@ export class IdeasService {
   private addStockIntoListParams: URLSearchParams;
   private deleteSymbolFromListParams: URLSearchParams;
 
-  private _selectedList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>({} as IdeaList);
+  private _selectedList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>({name: 'default'} as IdeaList);
   selectedList = this._selectedList.asObservable();
 
   private _updateAlerts: Subject<void> = new Subject<void>();
