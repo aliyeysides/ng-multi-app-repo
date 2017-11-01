@@ -12,7 +12,7 @@ import {Observable} from 'rxjs/Observable';
   template: `
     <div class="insights__container insights__container--large insights__container--mainbear">
       <div class="post-head post-head--insights">
-        <h2>Mastering the Bear</h2>
+        <h2>Mastering The Bear</h2>
         <div class="divider-h"></div>
         <p class="header__post-date">{{ post ? post['post_date_formatted'] : null }}</p>
         <a (click)="openPreviousModal()" class="post-head__button">

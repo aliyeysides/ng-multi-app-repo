@@ -7,11 +7,11 @@
         <i class="fa fa-user-circle"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
-      <span *ngIf="currentList?.is_bullish_or_bearish == 'Bearish'">
+      <span *ngIf="currentList ? currentList['is_bullish_or_bearish'] == 'Bearish' : null">
         <i class="fa fa-lightbulb-o"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
-      <span *ngIf="currentList?.ideas_or_themes_list == 'Themes'">
+      <span *ngIf="currentList ? currentList['ideas_or_themes_list'] == 'Themes' : null">
         <i class="fa fa-flag"
            aria-hidden="true"></i>&nbsp;{{ currentList?.name }}
       </span>
