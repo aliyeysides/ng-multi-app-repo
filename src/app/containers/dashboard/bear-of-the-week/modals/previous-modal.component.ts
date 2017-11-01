@@ -26,7 +26,7 @@ import {Observable} from 'rxjs/Observable';
           <li class="row" *ngFor="let post of posts">
             <ng-container *ngIf="post['data']">
               <div class="col-6">
-                <img class="rating" src="{{ appendPGRImage(post['data']['pgr']['PGR Value']) }}">
+                <img class="rating" src="{{ appendPGRImage(post['data']['pgr']['Corrected PGR Value'], post['data']['pgr']['PGR Value']) }}">
                 <p class="ticker">{{ post.ticker }}</p>
               </div>
               <div class="col-6">
