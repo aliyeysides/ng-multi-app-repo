@@ -41,7 +41,7 @@ import * as moment from 'moment';
         </div>
       </div>
       <ul [ngBusy]="loading" *ngIf="currentList === 'Holding'" class="post-body post-body--userlist">
-        <ng-container *ngIf="holdingListIdeas.length>0">
+        <ng-container *ngIf="holdingListIdeas?.length>0">
           <li *ngFor="let item of holdingListIdeas" class="row no-gutters">
             <div class="col-2 stock__PGR">
               <img class="align-absolute" src="{{ appendPGRImage(item.PGR, item.raw_PGR) }}">
@@ -70,12 +70,12 @@ import * as moment from 'moment';
             </div>
           </li>
         </ng-container>
-        <ng-container *ngIf="holdingListIdeas.length==0">
+        <ng-container *ngIf="holdingListIdeas?.length==0">
           <p>Search for a stock to add to your Holding list</p>
         </ng-container>
       </ul>
       <ul [ngBusy]="loading" *ngIf="currentList === 'Watching'" class="post-body post-body--userlist">
-        <ng-container *ngIf="watchingListIdeas.length>0">
+        <ng-container *ngIf="watchingListIdeas?.length>0">
           <li *ngFor="let item of watchingListIdeas" class="row no-gutters">
             <div class="col-2 stock__PGR">
               <img class="align-absolute" src="{{ appendPGRImage(item.PGR, item.raw_PGR) }}">
@@ -104,7 +104,7 @@ import * as moment from 'moment';
             </div>
           </li>
         </ng-container>
-        <ng-container *ngIf="watchingListIdeas.length==0">
+        <ng-container *ngIf="watchingListIdeas?.length==0">
           <p>Search for a stock to add to your Watching list</p>
         </ng-container>
       </ul>
