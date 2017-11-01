@@ -58,12 +58,12 @@ import * as moment from 'moment';
               </div>
             </div>
             <div class="col-3 stock__price">
-              <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Last | decimal
-                }}</p>
+              <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
+                {{ item.Last | decimal}}</p>
             </div>
             <div class="col-3 stock__price">
               <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
-                {{ item['Percentage '] | decimal }}%</p>
+                (<span *ngIf="item?.Change>0" class="up-change">+</span>{{ item['Percentage '] | decimal }}%)</p>
             </div>
             <div (click)="removeFromList('Holding', item.symbol)" class="button__remove-stock">
               <a><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -92,12 +92,12 @@ import * as moment from 'moment';
               </div>
             </div>
             <div class="col-3 stock__price">
-              <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Last | decimal
-                }}</p>
+              <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
+                {{ item.Last | decimal}}</p>
             </div>
             <div class="col-3 stock__price">
               <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
-                {{ item['Percentage '] | decimal }}%</p>
+                (<span *ngIf="item?.Change>0" class="up-change">+</span>{{ item['Percentage '] | decimal }}%)</p>
             </div>
             <div (click)="removeFromList('Watching', item.symbol)" class="button__remove-stock">
               <a><i class="fa fa-times" aria-hidden="true"></i></a>
