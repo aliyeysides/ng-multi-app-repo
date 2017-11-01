@@ -41,13 +41,13 @@ import {Subscription} from 'rxjs/Subscription';
             <!--<i class="fa fa-play" aria-hidden="true"></i>-->
           </div>
           <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">{{ stock?.Last
+            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">{{ stock?.Last | decimal
               }}</p>
           </div>
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">
-              {{ stock['Percentage '] | decimal
-              }}%</p>
+              (<span *ngIf="stock?.Change>0" class="up-change">+</span>{{ stock['Percentage '] | decimal
+              }}%)</p>
           </div>
         </li>
       </ul>

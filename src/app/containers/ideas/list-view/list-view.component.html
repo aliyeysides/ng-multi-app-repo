@@ -224,8 +224,8 @@
             </div>
             <div class="col-md-3 col-lg-2 col-xl-2 stock__price">
               <p class="data"
-                 [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">{{
-                idea["Percentage "] | decimal}}%</p>
+                 [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">
+                (<span *ngIf="idea?.Change>0" class="up-change">+</span>{{ idea["Percentage "] | decimal}}%)</p>
             </div>
             <div (click)="toggleOptions(idea, $event)"
                  class="stock__options-button">
@@ -335,12 +335,12 @@
               <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="price-change"
                    [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
-                  {{selectedStock?.Change | decimal}}</p>
+                  <span *ngIf="selectedStock?.Change>0" class="up-change">+</span>{{selectedStock?.Change | decimal}}</p>
               </div>
               <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="percent-change"
                    [ngClass]="{'up-change' : selectedStock['Percentage '] > 0, 'down-change' : selectedStock['Percentage '] < 0}">
-                  ({{ selectedStock ? (selectedStock["Percentage "] | decimal) : null }}%)</p>
+                  (<span *ngIf="selectedStock?.Change>0" class="up-change">+</span>{{ selectedStock ? (selectedStock["Percentage "] | decimal) : null }}%)</p>
               </div>
             </div>
             <div class="stock-panel__industry row no-gutters">
@@ -567,12 +567,12 @@
               <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="price-change"
                    [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}">
-                  {{ idea['meta-info']['Change'] | decimal }}</p>
+                  <span *ngIf="idea?.Change>0" class="up-change">+</span>{{ idea['meta-info']['Change'] | decimal }}</p>
               </div>
               <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <p class="percent-change"
                    [ngClass]="{'up-change' : idea['meta-info']['Percentage '] > 0, 'down-change' : idea['meta-info']['Percentage '] < 0}">
-                  ({{ idea['meta-info']["Percentage "] | decimal }}%)</p>
+                  (<span *ngIf="idea?.Change>0" class="up-change">+</span>{{ idea['meta-info']["Percentage "] | decimal }}%)</p>
               </div>
             </div>
             <div class="stock-panel__industry row no-gutters">
