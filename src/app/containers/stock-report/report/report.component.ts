@@ -5,7 +5,7 @@ import {SafeUrl} from '@angular/platform-browser';
 @Component({
   selector: 'cpt-report',
   template: `
-    <div>
+    <div class="scroll-wrapper">
       <iframe #iframe class="stock-view__iframe" id="iframeId" [src]="src"
               (load)="src ? onLoad() : null"></iframe>
     </div>

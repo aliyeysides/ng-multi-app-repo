@@ -28,7 +28,7 @@ import {Component, HostListener, ViewChild, ViewEncapsulation} from '@angular/co
         <a>Collapse Menu</a>
       </div>
       <div class="versioning">
-        <p>Master the Bear v1</p>
+        <p>Mastering The Bear v1</p>
       </div>
     </div>
 
