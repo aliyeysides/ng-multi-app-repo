@@ -1,27 +1,26 @@
-# ChaikinBearProduct
+## Init
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+Run `npm i` to install all the dependencies defined in the project's package.json file.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+Run `npm run start` for a dev server. Navigate to `http://localhost:4202/`. The app will automatically reload if you change any of the source files.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `npm run build` to build the project in ahead-of-time compilation. Alternatively, run `npm run build-jit` to run a just-in-time build. You must specify the desired environment by appending an npm parameter `-- --env=staging`. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+**Please use jit compilation for now to avoid known issues!**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Deploy
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+After running a build, deploy the output `dist/` folder to the desired server using `npm run deploy-{{environmentName}}`. Here are some predefined deploy scripts (package.json):
+	
+	"deploy-dev": "rsync -avzhe ssh ./dist/ root@172.31.77.41:/usr/share/apache-tomcat-8.5.6/webapps/ideas",
+    "deploy-demo": "rsync -avzhe ssh ./dist/ root@172.31.77.61:/usr/share/apache-tomcat-8.5.6/webapps/ideas",
+    "deploy-qa": "rsync -avzhe ssh ./dist/ root@172.31.77.51:/usr/share/apache-tomcat-8.5.6/webapps/ideas",
+    "deploy-staging-1": "rsync -avzhe ssh ./dist/ root@192.168.111.71:/usr/share/apache-tomcat-8.5.6/webapps/ideas",
+    "deploy-staging-2": "rsync -avzhe ssh ./dist/ root@192.168.111.73:/usr/share/apache-tomcat-8.5.6/webapps/ideas",
 
 ## Further help
 
