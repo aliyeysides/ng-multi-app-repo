@@ -71,7 +71,7 @@ import * as moment from 'moment';
           </li>
         </ng-container>
         <ng-container *ngIf="holdingListIdeas?.length==0">
-          <p>Search for a stock to add to your Holding list</p>
+          <p class="empty-list__text">Search for a stock to add to your Holding list</p>
         </ng-container>
       </ul>
       <ul [ngBusy]="loading" *ngIf="currentList === 'Watching'" class="post-body post-body--userlist">
