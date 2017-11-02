@@ -11,7 +11,7 @@
     "deploy-demo": "rsync -avzhe ssh ./dist/ root@172.31.77.61:/usr/share/apache-tomcat-8.5.6/webapps/ideas",
     "deploy-qa": "rsync -avzhe ssh ./dist/ root@172.31.77.51:/usr/share/apache-tomcat-8.5.6/webapps/ideas",
     "deploy-staging-1": "rsync -avzhe ssh ./dist/ root@192.168.111.71:/usr/share/apache-tomcat-8.5.6/webapps/ideas",
-    "deploy-staging-2": "rsync -avzhe ssh ./dist/ root@192.168.111.72:/usr/share/apache-tomcat-8.5.6/webapps/ideas",
+    "deploy-staging-2": "rsync -avzhe ssh ./dist/ root@192.168.111.73:/usr/share/apache-tomcat-8.5.6/webapps/ideas",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
