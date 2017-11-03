@@ -5,6 +5,7 @@ import {AuthService} from '../../core/services/auth.service';
 import {ListViewComponent} from './list-view/list-view.component';
 import {NotificationsService} from 'angular2-notifications/dist';
 import {Observable} from 'rxjs/Observable';
+import {IdeaList} from '../../shared/models/idea';
 
 @Component({
   selector: 'cpt-ideas',
@@ -26,6 +27,7 @@ export class IdeasComponent implements OnInit {
 
   private uid: string;
   public allLists: object[];
+  private defaultList: IdeaList;
 
   public loading: Subscription;
   public symbolListLoading: Subscription;
@@ -48,11 +50,18 @@ export class IdeasComponent implements OnInit {
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
       .filter(x => x !== undefined)
       .take(1)
-      .subscribe(res => {
+      .map(res => {
         this.holdingListId = res[2]['user_lists'][0]['list_id'];
         this.watchingListId = res[2]['user_lists'][1]['list_id'];
         this.allLists = res[2]['user_lists'].concat(res[0]['idea_lists']).concat(res[1]['theme_lists']);
+        this.defaultList = res[0]['idea_lists'].filter(x => x['name'] == "Best Bear Ideas")[0];
+      })
+      .flatMap(() => this.ideasService.selectedList)
+      .take(1)
+      .subscribe(list =>  {
+        if (list['name'] == 'default') this.ideasService.setSelectedList(this.defaultList)
       });
+
   }
 
   addToList(params: object) {

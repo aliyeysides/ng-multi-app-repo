@@ -58,7 +58,7 @@
   }
 }
 
- 
+
 
 
 
@@ -133,6 +133,26 @@
         .company-ticker {
           color: #ffffff;
         }
+      }
+    }
+
+  }
+
+  .search--match {
+    background-color: $link-blue;
+
+    .company-name {
+      color: #ffffff;
+    }
+
+    svg g {
+      fill: #ffffff;
+    }
+
+    .search__company {
+
+      .company-ticker {
+        color: #ffffff;
       }
     }
   }

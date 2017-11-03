@@ -31,7 +31,7 @@ export interface MarketData {
         SPY&nbsp;
         <span [@fadeInDown]="fadeInDownSPYState" (@fadeInDown.done)="resetSPY()"
               [ngClass]="{'up-change':SPY?.change>0,'down-change':SPY?.change<0}">
-          {{SPY?.percent_change}}%
+          <span *ngIf="SPY?.change>0" class="up-change">+</span>{{SPY?.percent_change}}%
         </span>
       </p>
       <p class="indice">
@@ -43,7 +43,7 @@ export interface MarketData {
         DIA&nbsp;
         <span [@fadeInDown]="fadeInDownDJIState" (@fadeInDown.done)="resetDJI()"
               [ngClass]="{'up-change':DJI?.change>0,'down-change':DJI?.change<0}">
-          {{DJI?.percent_change}}%
+          <span *ngIf="DJI?.change>0" class="up-change">+</span>{{DJI?.percent_change}}%
         </span>
       </p>
       <p class="indice">
@@ -55,7 +55,7 @@ export interface MarketData {
         QQQ&nbsp;
         <span [@fadeInDown]="fadeInDownQQQState" (@fadeInDown.done)="resetQQQ()"
               [ngClass]="{'up-change':QQQ?.change>0,'down-change':QQQ?.change<0}">
-          {{QQQ?.percent_change}}%
+          <span *ngIf="QQQ?.change>0" class="up-change">+</span>{{QQQ?.percent_change}}%
         </span>
       </p>
     </div>
@@ -87,7 +87,7 @@ export class MarketSummaryComponent implements OnInit, OnDestroy {
       this.initialMarketSectorData();
       this.presentDate = moment(new Date, 'America/New_York');
       this.currentTime = this.presentDate.format('h:mma');
-    }, 1000 * 60 );
+    }, 1000 * 60);
   }
 
   ngOnDestroy() {
@@ -138,11 +138,13 @@ export class MarketSummaryComponent implements OnInit, OnDestroy {
       this.fadeInDownSPYState = 'inactive';
     });
   }
+
   public resetDJI() {
     this.zone.run(() => {
       this.fadeInDownDJIState = 'inactive';
     });
   }
+
   public resetQQQ() {
     this.zone.run(() => {
       this.fadeInDownQQQState = 'inactive';

@@ -1,4 +1,5 @@
-import {Component, HostListener, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, HostListener, ViewEncapsulation} from '@angular/core';
+import {Angulartics2GoogleTagManager} from 'angulartics2';
 
 @Component({
   selector: 'cpt-root',
@@ -28,7 +29,7 @@ import {Component, HostListener, ViewChild, ViewEncapsulation} from '@angular/co
         <a>Collapse Menu</a>
       </div>
       <div class="versioning">
-        <p>Master the Bear v1</p>
+        <p>Mastering The Bear v1</p>
       </div>
     </div>
 
@@ -84,7 +85,7 @@ export class AppComponent {
     timeOut: 5000,
   };
 
-  constructor() {
+  constructor(angulartics2GoogleTagManager: Angulartics2GoogleTagManager) {
     const mobHeight = (window.screen.height);
     const mobWidth = (window.screen.width);
     if (+mobHeight <= 1024) this.isOpen = false;

@@ -24,9 +24,9 @@ import {SignalService} from '../../../core/services/signal.service';
           <p class="last-price" [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
             {{ stock ? stock['Last'].toFixed(2) : null }}</p>
           <p class="change" [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
-            {{ stock ? stock['Change'].toFixed(2) : null }}</p>
+            <span *ngIf="stock?.Change>0" class="up-change">+</span>{{ stock ? stock['Change'].toFixed(2) : null }}</p>
           <p class="percentage" [ngClass]="{'up-change' : stock?.Change > 0, 'down-change' : stock?.Change < 0 }">
-            ({{ stock ? stock['Percentage'].toFixed(2) : null }}%)</p>
+            (<span *ngIf="stock?.Change>0" class="up-change">+</span>{{ stock ? stock['Percentage'].toFixed(2) : null }}%)</p>
         </div>
         <div class="base-stock__PGR">
           <p class="PGR__text"

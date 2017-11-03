@@ -41,62 +41,72 @@ import * as moment from 'moment';
         </div>
       </div>
       <ul [ngBusy]="loading" *ngIf="currentList === 'Holding'" class="post-body post-body--userlist">
-        <li *ngFor="let item of holdingListIdeas" class="row no-gutters">
-          <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="{{ appendPGRImage(item.PGR, item.raw_PGR) }}">
-          </div>
-          <div class="col-3 stock__ticker">
-            <p class="ticker">{{ item.symbol }}</p>
-          </div>
-          <div class="col-1">
-            <div (click)="openAlerts();$event.stopPropagation()"
-                 *ngIf="getAlertsForItem(item, holdingListAlerts).length>0"
-                 class="stock__alert"
-                 [ngClass]="getBellColors(item, holdingListAlerts)">
-              <i class="fa fa-bell" aria-hidden="true"></i>
+        <ng-container *ngIf="holdingListIdeas?.length>0">
+          <li *ngFor="let item of holdingListIdeas" class="row no-gutters">
+            <div class="col-2 stock__PGR">
+              <img class="align-absolute" src="{{ appendPGRImage(item.PGR, item.raw_PGR) }}">
             </div>
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Last | decimal
-              }}</p>
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
-              {{ item['Percentage '] | decimal }}%</p>
-          </div>
-          <div (click)="removeFromList('Holding', item.symbol)" class="button__remove-stock">
-            <a><i class="fa fa-times" aria-hidden="true"></i></a>
-          </div>
-        </li>
+            <div class="col-3 stock__ticker">
+              <p class="ticker">{{ item.symbol }}</p>
+            </div>
+            <div class="col-1">
+              <div (click)="openAlerts();$event.stopPropagation()"
+                   *ngIf="getAlertsForItem(item, holdingListAlerts).length>0"
+                   class="stock__alert"
+                   [ngClass]="getBellColors(item, holdingListAlerts)">
+                <i class="fa fa-bell" aria-hidden="true"></i>
+              </div>
+            </div>
+            <div class="col-3 stock__price">
+              <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
+                {{ item.Last | decimal}}</p>
+            </div>
+            <div class="col-3 stock__price">
+              <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
+                (<span *ngIf="item?.Change>0" class="up-change">+</span>{{ item['Percentage '] | decimal }}%)</p>
+            </div>
+            <div (click)="removeFromList('Holding', item.symbol)" class="button__remove-stock">
+              <a><i class="fa fa-times" aria-hidden="true"></i></a>
+            </div>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="holdingListIdeas?.length==0">
+          <p class="empty-list__text">Search for a stock to add to your Holding list</p>
+        </ng-container>
       </ul>
       <ul [ngBusy]="loading" *ngIf="currentList === 'Watching'" class="post-body post-body--userlist">
-        <li *ngFor="let item of watchingListIdeas" class="row no-gutters">
-          <div class="col-2 stock__PGR">
-            <img class="align-absolute" src="{{ appendPGRImage(item.PGR, item.raw_PGR) }}">
-          </div>
-          <div class="col-3 stock__ticker">
-            <p class="ticker">{{ item.symbol }}</p>
-          </div>
-          <div class="col-1">
-            <div (click)="openAlerts();$event.stopPropagation()"
-                 *ngIf="getAlertsForItem(item, watchingListAlerts).length>0"
-                 class="stock__alert"
-                 [ngClass]="getBellColors(item, watchingListAlerts)">
-              <i class="fa fa-bell" aria-hidden="true"></i>
+        <ng-container *ngIf="watchingListIdeas?.length>0">
+          <li *ngFor="let item of watchingListIdeas" class="row no-gutters">
+            <div class="col-2 stock__PGR">
+              <img class="align-absolute" src="{{ appendPGRImage(item.PGR, item.raw_PGR) }}">
             </div>
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">{{ item.Last | decimal
-              }}</p>
-          </div>
-          <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
-              {{ item['Percentage '] | decimal }}%</p>
-          </div>
-          <div (click)="removeFromList('Watching', item.symbol)" class="button__remove-stock">
-            <a><i class="fa fa-times" aria-hidden="true"></i></a>
-          </div>
-        </li>
+            <div class="col-3 stock__ticker">
+              <p class="ticker">{{ item.symbol }}</p>
+            </div>
+            <div class="col-1">
+              <div (click)="openAlerts();$event.stopPropagation()"
+                   *ngIf="getAlertsForItem(item, watchingListAlerts).length>0"
+                   class="stock__alert"
+                   [ngClass]="getBellColors(item, watchingListAlerts)">
+                <i class="fa fa-bell" aria-hidden="true"></i>
+              </div>
+            </div>
+            <div class="col-3 stock__price">
+              <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
+                {{ item.Last | decimal}}</p>
+            </div>
+            <div class="col-3 stock__price">
+              <p class="data" [ngClass]="{'up-change':item?.Change>0,'down-change':item?.Change<0}">
+                (<span *ngIf="item?.Change>0" class="up-change">+</span>{{ item['Percentage '] | decimal }}%)</p>
+            </div>
+            <div (click)="removeFromList('Watching', item.symbol)" class="button__remove-stock">
+              <a><i class="fa fa-times" aria-hidden="true"></i></a>
+            </div>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="watchingListIdeas?.length==0">
+          <p>Search for a stock to add to your Watching list</p>
+        </ng-container>
       </ul>
     </div>
   `,
