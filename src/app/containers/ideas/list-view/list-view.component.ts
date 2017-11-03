@@ -134,7 +134,10 @@ export class InteractiveChart{
     this.chartData = data;
   }
   public init(){
-    document.getElementById(this.id).innerHTML = "";
+    if (document.getElementById(this.id)){
+      document.getElementById(this.id).innerHTML = "";
+    }
+    
     if (this.mainSVG == null) {
       this.margins.bottom = this.margins.bottom + this.brushHeight;
     }
@@ -680,7 +683,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public drawchart() {
     
-    if (this.chartData != null) {
+    if (this.chartData != null && (document.getElementById('area-chart'))) {
       let chartObj = new InteractiveChart(this.chartData, 'area-chart');
       chartObj.init();
     }
