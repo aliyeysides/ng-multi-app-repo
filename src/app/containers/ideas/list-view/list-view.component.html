@@ -658,11 +658,12 @@
         </div>
 
         <div class="quick-view__chart-container row no-gutters">
-          <div class="quick-view__chart" style="height: 100%; width: 100%;">
-            <div class="panel__chart" style="height: 100%; width: 100%;">
+          <div class="quick-view__chart" >
+          <panel-chart [idea]="idea"> </panel-chart>
+           <!--  <div class="panel__chart" [id]="idea['meta-info'].symbol" > -->
               <!--<chart-profile (click)="updateChart()" [classId]="idea['meta-info'].symbol+'-chart-container-panel'"-->
               <!--[chartInit]="_chartPanelData"></chart-profile>-->
-            </div>
+           <!--  </div> -->
           </div>
         </div>
 
