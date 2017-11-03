@@ -9,7 +9,6 @@ import {NotificationsService} from 'angular2-notifications/dist';
 import {Subject} from 'rxjs/Subject';
 import {AuthService} from './auth.service';
 
-
 @Injectable()
 export class IdeasService {
 
@@ -252,7 +251,7 @@ export class IdeasService {
     setupChart: function (response) {
       let self = this;
       if (self.mainSVG) {
-        self.mainSVG.remove();
+          self.mainSVG.remove();
       }
       // draw SVG for chart
       self.mainSVG = d3.select(`#${self.id}`).append("svg")
@@ -297,7 +296,7 @@ export class IdeasService {
       self.scaleWidth = self.chartWidth - self.areaChartMargins.left - self.areaChartMargins.right;
 
       self.scaleHeight = self.scaleHeight - self.areaChartMargins.top - self.areaChartMargins.bottom;
-
+ 
       self.parentGroup.append("g").attr("class", "area-clip-path")
         .attr("transform", "translate(" + self.areaChartMargins.left + "," + self.areaChartMargins.top + ")")
         .append("defs").append("clipPath").attr("id", "areaClip").append("rect").attr("class", "areaPathViewport").attr("width", self.scaleWidth)
