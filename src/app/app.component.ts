@@ -95,7 +95,7 @@ export class AppComponent {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         gtag('config', 'UA-109099815-2', {
-          'page_location': 'https://dev.chaikinanalytics.com/ideas/' + event.urlAfterRedirects,
+          'page_location': 'https://app.chaikinanalytics.com/ideas/' + event.urlAfterRedirects,
           'page_path': event.urlAfterRedirects
         });
       }
