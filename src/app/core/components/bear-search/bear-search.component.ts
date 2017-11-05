@@ -2,6 +2,8 @@ import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/c
 import {SymbolSearchService} from '../../services/symbol-search.service';
 import {Subject} from 'rxjs/Subject';
 
+declare let gtag: Function;
+
 @Component({
   selector: 'cpt-bear-search',
   template: `

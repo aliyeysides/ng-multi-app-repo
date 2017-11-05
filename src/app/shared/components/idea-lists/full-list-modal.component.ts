@@ -8,6 +8,8 @@ import {WordpressService} from '../../../core/services/wordpress.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
 
+declare let gtag: Function;
+
 interface SelectedList {
   name?: string;
   tagline?: string;
@@ -32,7 +34,7 @@ interface SelectedList {
         <div class="idea-list__container row no-gutters">
           <div class="idea-list__left-col col-sm-6 col-md-5 col-lg-4 col-xl-4">
             <ul class="idea-list__list">
-              <li (click)="selectList(list)" *ngFor="let list of allLists" class="list__option" [ngClass]="{'selected':selectedList===list}">
+              <li (click)="selectList(list);trackList(list)" *ngFor="let list of allLists" class="list__option" [ngClass]="{'selected':selectedList===list}">
                 <div class="list__image">
                   <img src="assets/imgs/{{ appendListImageUrl(list?.name) }}">
                 </div>
@@ -118,6 +120,13 @@ export class FullListModalComponent implements OnInit, OnDestroy {
     const matchingPost = this.wordPressPosts.filter(post => post['post_title'] === this.selectedList['name']);
     const htmlStr = matchingPost[0]['post_content'];
     this.parseDomString(htmlStr);
+  }
+
+  public trackList(list) {
+    gtag('event', 'list_desc_clicked', {
+      'event_category': 'engagement',
+      'event_label': list['name']
+    });
   }
 
   public viewList(list) {

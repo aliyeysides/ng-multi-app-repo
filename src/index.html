@@ -136,10 +136,15 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109099815-2"></script>
 <script>
-//  window.dataLayer = window.dataLayer || [];
-//  function gtag(){dataLayer.push(arguments);}
-//  gtag('js', new Date());
-//  gtag('config', 'UA-109099815-2');
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'UA-109099815-2', {
+    'page_title': 'homepage',
+    'page_location': 'https://dev.chaikinanalytics.com/ideas'
+  });
 </script>
 </body>
 </html>

@@ -11,6 +11,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {NotificationsService} from 'angular2-notifications/dist';
 
 import * as moment from 'moment';
+declare let gtag: Function;
 
 @Component({
   selector: 'cpt-user-lists',
@@ -222,6 +223,10 @@ export class UserListsComponent implements OnInit, OnDestroy {
     } else if (this.currentList === 'Watching') {
       this.ideasService.setSelectedList(this.watchingList);
     }
+    gtag('event', 'list_clicked', {
+      'event_category': 'engagement',
+      'event_label': this.currentList
+    });
     this.router.navigate(['/ideas']);
   }
 

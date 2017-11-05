@@ -8,6 +8,7 @@ import {NotificationsService} from 'angular2-notifications/dist';
 import {Subject} from 'rxjs/Subject';
 import {AuthService} from './auth.service';
 
+declare let gtag: Function;
 
 @Injectable()
 export class IdeasService {
@@ -79,6 +80,10 @@ export class IdeasService {
       .filter(x => x != undefined)
       .map(usr => usr['UID'])
       .flatMap(uid => this.getListSymbols(listId, uid))
+      .do(res => gtag('event', 'add_to_user_list_clicked', {
+        'event_category': 'engagement',
+        'event_label': symbol
+      }))
       .map(res => res['symbols'].length < allowed)
       .flatMap(allowed => {
         if (allowed) {
@@ -106,6 +111,10 @@ export class IdeasService {
     const deleteSymbolFromListUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/deleteSymbolFromList?`;
     this.deleteSymbolFromListParams.set('symbol', symbol);
     this.deleteSymbolFromListParams.set('listId', listId);
+    gtag('event', 'remove_from_user_list_clicked', {
+      'event_category': 'engagement',
+      'event_label': symbol
+    });
     return this.http.get(deleteSymbolFromListUrl, {
       search: this.deleteSymbolFromListParams,
       withCredentials: true

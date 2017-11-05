@@ -9,6 +9,8 @@ import {Subscription} from 'rxjs/Subscription';
 import {IdeasService} from '../../../core/services/ideas.service';
 import {Router} from '@angular/router';
 
+declare let gtag: Function;
+
 @Component({
   selector: 'cpt-idea-lists',
   template: `
@@ -16,7 +18,8 @@ import {Router} from '@angular/router';
       <div class="section-header section-header--ideas">
         <h1>Idea Lists</h1>
         <div class="section-header__actions">
-          <a class="long" (click)="openFullList()">List Descriptions <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+          <a class="long" (click)="openFullList()">List Descriptions <i class="fa fa-long-arrow-right"
+                                                                        aria-hidden="true"></i></a>
         </div>
       </div>
       <div class="slider__scroll slider__scroll--right">
@@ -53,6 +56,7 @@ import {Router} from '@angular/router';
 })
 export class IdeaListsComponent implements AfterViewInit, OnDestroy {
   @Output('listSelected') listSelected: EventEmitter<IdeaList> = new EventEmitter<IdeaList>();
+
   @Input('lists')
   set lists(lists: object[]) {
     this._lists.next(lists);
@@ -102,6 +106,11 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
     this.selectedList = list;
     this.ideasService.setSelectedList(list);
     this.router.navigate(['/ideas']);
+    gtag('event', 'list_clicked', {
+      'event_category': 'engagement',
+      'event_label': list['name'],
+      'list_id': list['list_id']
+    });
   }
 
   public appendListImageUrl(listName: string) {
