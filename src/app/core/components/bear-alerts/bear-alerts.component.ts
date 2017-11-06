@@ -211,18 +211,18 @@ export class BearAlertsComponent implements AfterViewInit {
           this.signalService.getAlertsData({
             components: 'alerts',
             date: moment().format('YYYY-MM-DD'),
-            startDate: moment().add(-30, 'day').format('YYYY-MM-DD'),
+            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
             endDate: moment().format('YYYY-MM-DD'),
             listId1: this.holdingListId,
           }),
           this.signalService.getAlertsData({
             components: 'alerts',
             date: moment().format('YYYY-MM-DD'),
-            startDate: moment().add(-30, 'day').format('YYYY-MM-DD'),
+            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
             endDate: moment().format('YYYY-MM-DD'),
             listId1: this.watchingListId,
           }),
-          this.signalService.getSignalDataForList(this.bestBearsListId.toString(), '365', this.uid)
+          this.signalService.getSignalDataForList(this.bestBearsListId.toString(), '1', this.uid)
         );
       })
       .take(1)
