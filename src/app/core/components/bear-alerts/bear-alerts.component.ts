@@ -59,12 +59,17 @@ import {Observable} from 'rxjs/Observable';
                 <ul class="container container-fluid">
                   <li class="row no-gutters">
                     <div class="col-11">
+                      <img src="{{ alert['pgr_url'] }}">
                       <p class="alert__text">{{ alert['alert_text'] }}</p>
-                      <p class="alert__text" *ngIf="alert['alert_type'] == 'earnings_surprise_alerts'">
+                      <p class="alert__text" *ngIf="alert['alert_type'] == 'earnings_surprise_alerts' || alert['alert_type'] == 'estimate_revision_alerts'">
                         <span>Q{{ alert['quarter'] }} Est.
                         <b>{{ alert['old_value'].toFixed(2) }}</b></span>
                         <span [ngClass]="{'up-change': alert['per_change']>0, 'down-change':alert['per_change']<0}"> Act. <b>{{ alert['new_value'].toFixed(2)
                           }}</b></span>
+                      </p>
+                      <p class="alert__text" *ngIf="alert['alert_type'] == 'pgr_change_alerts'">
+                        <span *ngIf="alert['chg_direction']==1">Upgraded</span>
+                        <span *ngIf="alert['chg_direction']==-1">Downgraded</span>
                       </p>
                     </div>
                   </li>
@@ -88,12 +93,17 @@ import {Observable} from 'rxjs/Observable';
                 <ul class="container container-fluid">
                   <li class="row no-gutters">
                     <div class="col-11">
+                      <img src="{{ alert['pgr_url'] }}">
                       <p class="alert__text">{{ alert['alert_text'] }}</p>
-                      <p class="alert__text" *ngIf="alert['alert_type'] == 'earnings_surprise_alerts'">
+                      <p class="alert__text" *ngIf="alert['alert_type'] == 'earnings_surprise_alerts' || alert['alert_type'] == 'estimate_revision_alerts'">
                         <span>Q{{ alert['quarter'] }} Est.
                         <b>{{ alert['old_value'].toFixed(2) }}</b></span>
-                        <span [ngClass]="{'up-change': alert['per_change']>0, 'down-change': alert['per_change']<0}">Act. <b>{{ alert['new_value'].toFixed(2)
+                        <span [ngClass]="{'up-change': alert['per_change']>0, 'down-change':alert['per_change']<0}"> Act. <b>{{ alert['new_value'].toFixed(2)
                           }}</b></span>
+                      </p>
+                      <p class="alert__text" *ngIf="alert['alert_type'] == 'pgr_change_alerts'">
+                        <span *ngIf="alert['chg_direction']==1">Upgraded</span>
+                        <span *ngIf="alert['chg_direction']==-1">Downgraded</span>
                       </p>
                     </div>
                   </li>
@@ -191,18 +201,18 @@ export class BearAlertsComponent implements AfterViewInit {
           this.signalService.getAlertsData({
             components: 'alerts',
             date: moment().format('YYYY-MM-DD'),
-            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
+            startDate: moment().add(-30, 'day').format('YYYY-MM-DD'),
             endDate: moment().format('YYYY-MM-DD'),
             listId1: this.holdingListId,
           }),
           this.signalService.getAlertsData({
             components: 'alerts',
             date: moment().format('YYYY-MM-DD'),
-            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
+            startDate: moment().add(-30, 'day').format('YYYY-MM-DD'),
             endDate: moment().format('YYYY-MM-DD'),
             listId1: this.watchingListId,
           }),
-          // this.signalService.getSignalDataForList(this.bestBearsListId.toString(), '1', this.uid)
+          this.signalService.getSignalDataForList(this.bestBearsListId.toString(), '30', this.uid)
         );
       })
       .take(1)
@@ -210,8 +220,7 @@ export class BearAlertsComponent implements AfterViewInit {
         this.holdingListAlerts = this.signalService.parseAlertData(res[0]);
         this.watchingListAlerts = this.signalService.parseAlertData(res[1]);
         this.allItems = this.holdingListAlerts.length + this.watchingListAlerts.length;
-        console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts);
-        // this.parseAlertData(res[0]);
+        console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts, res[2]);
       })
   }
 

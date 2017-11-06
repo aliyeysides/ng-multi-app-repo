@@ -118,10 +118,12 @@ export class SignalService {
         jsonObj['alert_type'] = 'earnings_surprise_alerts';
         jsonObj['alert_text'] = 'Earnings Surprise';
         jsonObj['quarter'] = alertList['earnings_surprise_alerts'][key][obj]['quarter'];
-        // jsonObj['pgr'] = this.calculatePGR(alertList['earnings_surprise_alerts'][key][obj]['data'][3]);
         jsonObj['new_value'] = alertList['earnings_surprise_alerts'][key][obj]['data'][0];
         jsonObj['old_value'] = alertList['earnings_surprise_alerts'][key][obj]['data'][1];
         jsonObj['per_change'] = alertList['earnings_surprise_alerts'][key][obj]['data'][2];
+        jsonObj['pgr'] = this.calculatePGR(alertList['earnings_surprise_alerts'][key][obj]['data'][3]);
+        jsonObj['raw_pgr'] = this.calculatePGR(alertList['earnings_surprise_alerts'][key][obj]['data'][4]);
+        jsonObj['pgr_url'] = this.appendPGRImage(jsonObj['pgr'], jsonObj['raw_pgr']);
         result.push(jsonObj);
       }
     }
@@ -132,10 +134,12 @@ export class SignalService {
         jsonObj['alert_type'] = 'estimate_revision_alerts';
         jsonObj['alert_text'] = 'Estimate Revision';
         jsonObj['quarter'] = alertList['estimate_revision_alerts'][key][obj]['quarter'];
-        // jsonObj['pgr'] = this.calculatePGR(alertList['estimate_revision_alerts'][key][obj]['data'][3]);
         jsonObj['new_value'] = alertList['estimate_revision_alerts'][key][obj]['data'][0];
         jsonObj['old_value'] = alertList['estimate_revision_alerts'][key][obj]['data'][1];
         jsonObj['per_change'] = alertList['estimate_revision_alerts'][key][obj]['data'][2];
+        jsonObj['pgr'] = this.calculatePGR(alertList['estimate_revision_alerts'][key][obj]['data'][3]);
+        jsonObj['raw_pgr'] = this.calculatePGR(alertList['estimate_revision_alerts'][key][obj]['data'][4]);
+        jsonObj['pgr_url'] = this.appendPGRImage(jsonObj['pgr'], jsonObj['raw_pgr']);
         result.push(jsonObj);
       }
     }
@@ -148,8 +152,9 @@ export class SignalService {
             jsonObj['symbol'] = obj;
             jsonObj['alert_type'] = 'pgr_change_alerts';
             jsonObj['alert_text'] = 'PGR Revision';
-            // jsonObj['pgr'] = this.calculatePGR(alertList['pgr_change_alerts'][key][obj]['corrected_pgr']);
-            jsonObj['per_change'] = alertList['pgr_change_alerts'][key][obj]['chg_direction'];
+            jsonObj['chg_direction'] = alertList['pgr_change_alerts'][key][obj]['chg_direction'];
+            jsonObj['pgr'] = this.calculatePGR(alertList['pgr_change_alerts'][key][obj]['corrected_pgr']);
+            // jsonObj['pgr_url'] = this.appendPGRImage(jsonObj['pgr']);
             result.push(jsonObj);
           }
         }
