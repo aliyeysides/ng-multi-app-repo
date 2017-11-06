@@ -9,7 +9,7 @@ import {InteractiveChart} from '../../../core/services/chart.sevice';
 import {AuthService} from '../../../core/services/auth.service';
 import {UtilService} from '../../../core/services/util.service';
 
-import * as moment from 'moment';
+declare let gtag: Function;
 import {Observable} from 'rxjs/Observable';
 
 @Component({
@@ -118,6 +118,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public onScroll() {
     this.assignStockData(2);
+    gtag('event', 'panel_view_scrolled', { 'event_category': 'engagement' })
   }
 
   public selectStock(stock: Idea) {
@@ -126,6 +127,13 @@ export class ListViewComponent implements OnInit, OnDestroy {
       this.getSelectedStockData(stock, this.assignSelectedStock.bind(this));
       this.getSelectedStockHeadlines(stock);
     }
+  }
+
+  public trackSelectedStock(stock: Idea) {
+    gtag('event', 'stock_selected', {
+      'event_category': 'engagement',
+      'event_label': stock['name']
+    });
   }
 
   public getSelectedStockData(stock: Idea, callback?) {
@@ -152,6 +160,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public setOrderByObject(val: string, order: boolean, e: Event) {
     e.preventDefault();
+    gtag('event', 'sort_by_clicked', { 'event_label': val });
     const panelView = document.getElementsByClassName('view-option--panel')[0];
     if (panelView) panelView.scrollTo(0, 0);
     this.orderByObject['field'] = val;
@@ -162,14 +171,14 @@ export class ListViewComponent implements OnInit, OnDestroy {
     this.selectedStockPGR = res['pgr'];
     this.selectedStockChartPoints = res['chart-points'];
     this.selectedStockSimilars = res['discovery-similars'].stocks;
-    
+
     this.chartData = this.selectedStockChartPoints;
     this.drawchart();
 
   }
 
   public drawchart() {
-    
+
     if (this.chartData != null && (document.getElementById('area-chart'))) {
       let chartObj = new InteractiveChart(this.chartData, 'area-chart');
       chartObj.init();
@@ -278,6 +287,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
     this.clearOrderByObject();
     this.assignStockData(4);
     this.currentView = 'panel-view';
+    gtag('event', 'panel_view_clicked', { 'event_category': 'engagement' })
   }
 
   public gotoListView() {

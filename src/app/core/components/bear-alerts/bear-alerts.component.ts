@@ -3,6 +3,8 @@ import {SignalService} from '../../services/signal.service';
 import {Subscription} from 'rxjs/Subscription';
 
 import * as moment from 'moment';
+declare let gtag: Function;
+
 import {AuthService} from '../../services/auth.service';
 import {Subject} from 'rxjs/Subject';
 import {IdeasService} from '../../services/ideas.service';
@@ -138,6 +140,7 @@ export class BearAlertsComponent implements AfterViewInit {
 
   @HostListener('click') onClick() {
     this.toggleNav(this.nav.nativeElement, '500px', true);
+    gtag('event', 'alerts_opened', {'event_category': 'engagement'});
   }
 
   @HostListener('document:click', ['$event']) offClick(e: Event) {
