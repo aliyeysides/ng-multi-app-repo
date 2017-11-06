@@ -154,7 +154,9 @@ export class SignalService {
             jsonObj['alert_text'] = 'PGR Revision';
             jsonObj['chg_direction'] = alertList['pgr_change_alerts'][key][obj]['chg_direction'];
             jsonObj['pgr'] = this.calculatePGR(alertList['pgr_change_alerts'][key][obj]['corrected_pgr']);
-            // jsonObj['pgr_url'] = this.appendPGRImage(jsonObj['pgr']);
+            jsonObj['raw_pgr'] = this.calculatePGR(alertList['pgr_change_alerts'][key][obj]['raw_pgr']);
+            jsonObj['pgr_url'] = this.appendPGRImage(jsonObj['pgr'], jsonObj['raw_pgr']);
+            jsonObj['new_rating'] = this.appendPGRText(jsonObj['pgr'], jsonObj['raw_pgr']);
             result.push(jsonObj);
           }
         }
