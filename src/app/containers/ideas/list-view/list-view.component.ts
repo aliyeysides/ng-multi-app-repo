@@ -4,7 +4,8 @@ import {Subscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
 import {Idea, IdeaList} from '../../../shared/models/idea';
 import {SignalService} from "app/core/services/signal.service";
-import {IdeasService,InteractiveChart} from '../../../core/services/ideas.service';
+import {IdeasService} from '../../../core/services/ideas.service';
+import {InteractiveChart} from '../../../core/services/chart.sevice';
 import {AuthService} from '../../../core/services/auth.service';
 import {UtilService} from '../../../core/services/util.service';
 

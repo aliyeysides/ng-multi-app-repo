@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, Output, HostListener, OnInit, AfterViewChecked } from '@angular/core';
-import { IdeasService, InteractiveChart } from '../../../core/services/ideas.service';
+import { IdeasService } from '../../../core/services/ideas.service';
+import { InteractiveChart } from '../../../core/services/chart.sevice';
 import { Subscription } from 'rxjs/Subscription';
 import * as d3 from 'd3';
 
