@@ -106,7 +106,7 @@ declare let gtag: Function;
           </li>
         </ng-container>
         <ng-container *ngIf="watchingListIdeas?.length==0">
-          <p>Search for a stock to add to your Watching list</p>
+          <p class="empty-list__text">Search for a stock to add to your Watching list</p>
         </ng-container>
       </ul>
     </div>
