@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {FullListModalComponent} from './full-list-modal.component';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
@@ -22,14 +22,14 @@ declare let gtag: Function;
                                                                         aria-hidden="true"></i></a>
         </div>
       </div>
-      <div class="slider__scroll slider__scroll--right">
+      <div (click)="scrollRight()" class="slider__scroll slider__scroll--right">
         <img class="align-absolute" src="./assets/imgs/scroll-r.svg">
       </div>
-      <div class="slider__scroll slider__scroll--left">
+      <div (click)="scrollLeft()" class="slider__scroll slider__scroll--left">
         <img class="align-absolute" src="./assets/imgs/scroll-l.svg">
       </div>
       <div class="idea-lists__container row no-gutters">
-        <ul>
+        <ul #list>
           <li
             [ngClass]="{'selected': selectedList.list_id === list.list_id, 'list__option--userlist': list['name'] === 'Holding' || list['name'] === 'Watching' }"
             (click)="emitListSelected(list)"
@@ -55,6 +55,7 @@ declare let gtag: Function;
   styleUrls: ['./idea-lists.component.scss']
 })
 export class IdeaListsComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('list') list: ElementRef;
   @Output('listSelected') listSelected: EventEmitter<IdeaList> = new EventEmitter<IdeaList>();
 
   @Input('lists')
@@ -100,6 +101,14 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
 
   public openFullList() {
     this.fullListModalRef = this.modalService.show(FullListModalComponent, this.config);
+  }
+
+  public scrollRight() {
+    this.list.nativeElement.scrollLeft += 100;
+  }
+
+  public scrollLeft() {
+    this.list.nativeElement.scrollLeft -= 100;
   }
 
   public emitListSelected(list: IdeaList) {
