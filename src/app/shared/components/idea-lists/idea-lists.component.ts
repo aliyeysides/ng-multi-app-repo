@@ -80,6 +80,7 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
     ignoreBackdropClick: false,
     class: 'modal-dialog--fullscreen',
   };
+  public left: number;
 
   constructor(private modalService: BsModalService,
               private ideasService: IdeasService,
@@ -104,11 +105,13 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
   }
 
   public scrollRight() {
-    this.list.nativeElement.scrollLeft += 100;
+    this.left = this.list.nativeElement.scrollLeft;
+    this.list.nativeElement.scrollTo({left: this.left+=110, top: 0, behavior: 'smooth'});
   }
 
   public scrollLeft() {
-    this.list.nativeElement.scrollLeft -= 100;
+    this.left = this.list.nativeElement.scrollLeft;
+    this.list.nativeElement.scrollTo({left: this.left-=110, top: 0, behavior: 'smooth'});
   }
 
   public emitListSelected(list: IdeaList) {
