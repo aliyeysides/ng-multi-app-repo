@@ -1,10 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IdeasService} from '../../core/services/ideas.service';
 import {Subscription} from 'rxjs/Subscription';
 import {AuthService} from '../../core/services/auth.service';
 import {ListViewComponent} from './list-view/list-view.component';
-import {NotificationsService} from 'angular2-notifications/dist';
-import {Observable} from 'rxjs/Observable';
 import {IdeaList} from '../../shared/models/idea';
 import {SymbolSearchService} from '../../core/services/symbol-search.service';
 import {Subject} from 'rxjs/Subject';
@@ -24,7 +22,7 @@ import {Subject} from 'rxjs/Subject';
   `,
   styleUrls: ['./ideas.component.scss']
 })
-export class IdeasComponent implements OnInit {
+export class IdeasComponent implements OnInit, OnDestroy {
   @ViewChild('list') list: ListViewComponent;
 
   private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -47,6 +45,11 @@ export class IdeasComponent implements OnInit {
     this.updateData();
     this.symbolService.addStock$
       .takeUntil(this.ngUnsubscribe).subscribe(res => this.list.refreshList());
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   updateData() {
