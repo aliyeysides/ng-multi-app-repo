@@ -1,5 +1,7 @@
 import {Component, HostListener, ViewEncapsulation} from '@angular/core';
-import {Angulartics2GoogleTagManager} from 'angulartics2';
+import {NavigationEnd, Router} from '@angular/router';
+
+declare let gtag: Function;
 
 @Component({
   selector: 'cpt-root',
@@ -76,8 +78,9 @@ import {Angulartics2GoogleTagManager} from 'angulartics2';
 export class AppComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    const height = event.target.innerHeight;
-    if (+height <= 1024) this.isOpen = false;
+    const width = event.target.innerWidth;
+    if (+width <= 1024) this.isOpen = false;
+    if (+width > 1024) this.isOpen = true;
   }
   isOpen = true;
   options = {
@@ -85,10 +88,18 @@ export class AppComponent {
     timeOut: 5000,
   };
 
-  constructor(angulartics2GoogleTagManager: Angulartics2GoogleTagManager) {
-    const mobHeight = (window.screen.height);
+  constructor(private router: Router) {
     const mobWidth = (window.screen.width);
-    if (+mobHeight <= 1024) this.isOpen = false;
+    if (+mobWidth <= 1024) this.isOpen = false;
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        gtag('config', 'UA-109099815-2', {
+          'page_location': 'https://app.chaikinanalytics.com/ideas/' + event.urlAfterRedirects,
+          'page_path': event.urlAfterRedirects
+        });
+      }
+    });
   }
 
   toggleMenu() {

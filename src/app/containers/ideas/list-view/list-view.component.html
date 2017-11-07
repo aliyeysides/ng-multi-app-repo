@@ -132,7 +132,7 @@
         </div>
         <ul *ngIf="ideaList?.length" class="list__container">
           <li [ngClass]="{'active selected' : selectedStock == idea}"
-              (click)="toggleOptions(idea, $event); selectStock(idea)" class="row no-gutters list__entry"
+              (click)="toggleOptions(idea, $event); selectStock(idea);trackSelectedStock(idea)" class="row no-gutters list__entry"
               *ngFor="let idea of ideaList | orderBy:orderByObject?.field:orderByObject?.ascending ">
             <div *ngIf="popupOptionsMap[idea.symbol] == true" class="stock-options__popup">
               <ul class="nav nav-justified">
