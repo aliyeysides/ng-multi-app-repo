@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {FullListModalComponent} from './full-list-modal.component';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
@@ -9,6 +9,8 @@ import {Subscription} from 'rxjs/Subscription';
 import {IdeasService} from '../../../core/services/ideas.service';
 import {Router} from '@angular/router';
 
+declare let gtag: Function;
+
 @Component({
   selector: 'cpt-idea-lists',
   template: `
@@ -16,17 +18,18 @@ import {Router} from '@angular/router';
       <div class="section-header section-header--ideas">
         <h1>Idea Lists</h1>
         <div class="section-header__actions">
-          <a class="long" (click)="openFullList()">List Descriptions <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+          <a class="long" (click)="openFullList()">List Descriptions <i class="fa fa-long-arrow-right"
+                                                                        aria-hidden="true"></i></a>
         </div>
       </div>
-      <div class="slider__scroll slider__scroll--right">
+      <div (click)="scrollRight()" class="slider__scroll slider__scroll--right">
         <img class="align-absolute" src="./assets/imgs/scroll-r.svg">
       </div>
-      <div class="slider__scroll slider__scroll--left">
+      <div (click)="scrollLeft()" class="slider__scroll slider__scroll--left">
         <img class="align-absolute" src="./assets/imgs/scroll-l.svg">
       </div>
       <div class="idea-lists__container row no-gutters">
-        <ul>
+        <ul #list>
           <li
             [ngClass]="{'selected': selectedList.list_id === list.list_id, 'list__option--userlist': list['name'] === 'Holding' || list['name'] === 'Watching' }"
             (click)="emitListSelected(list)"
@@ -52,7 +55,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./idea-lists.component.scss']
 })
 export class IdeaListsComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('list') list: ElementRef;
   @Output('listSelected') listSelected: EventEmitter<IdeaList> = new EventEmitter<IdeaList>();
+
   @Input('lists')
   set lists(lists: object[]) {
     this._lists.next(lists);
@@ -75,6 +80,7 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
     ignoreBackdropClick: false,
     class: 'modal-dialog--fullscreen',
   };
+  public left: number;
 
   constructor(private modalService: BsModalService,
               private ideasService: IdeasService,
@@ -98,10 +104,25 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
     this.fullListModalRef = this.modalService.show(FullListModalComponent, this.config);
   }
 
+  public scrollRight() {
+    this.left = this.list.nativeElement.scrollLeft;
+    this.list.nativeElement.scrollTo({left: this.left+=110, top: 0, behavior: 'smooth'});
+  }
+
+  public scrollLeft() {
+    this.left = this.list.nativeElement.scrollLeft;
+    this.list.nativeElement.scrollTo({left: this.left-=110, top: 0, behavior: 'smooth'});
+  }
+
   public emitListSelected(list: IdeaList) {
     this.selectedList = list;
     this.ideasService.setSelectedList(list);
     this.router.navigate(['/ideas']);
+    gtag('event', 'list_clicked', {
+      'event_category': 'engagement',
+      'event_label': list['name'],
+      'list_id': list['list_id']
+    });
   }
 
   public appendListImageUrl(listName: string) {

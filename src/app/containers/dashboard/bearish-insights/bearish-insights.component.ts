@@ -7,6 +7,8 @@ import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
 
+declare let gtag: Function;
+
 @Component({
   selector: 'cpt-bearish-insights',
   template: `
@@ -84,6 +86,10 @@ export class BearishInsightsComponent implements OnInit, OnDestroy {
     this.insightsModalRef.content.title = this.title;
     this.insightsModalRef.content.commentary = this.commentary;
     this.insightsModalRef.content.date = this.post['post_date_formatted'];
+    gtag('event', 'insight_opened', {
+      'event_category': 'engagement',
+      'event_label': this.title
+    });
   }
 
 }

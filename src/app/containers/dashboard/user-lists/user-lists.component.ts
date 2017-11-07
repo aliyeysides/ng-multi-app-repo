@@ -11,6 +11,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {NotificationsService} from 'angular2-notifications/dist';
 
 import * as moment from 'moment';
+declare let gtag: Function;
 
 @Component({
   selector: 'cpt-user-lists',
@@ -105,7 +106,7 @@ import * as moment from 'moment';
           </li>
         </ng-container>
         <ng-container *ngIf="watchingListIdeas?.length==0">
-          <p>Search for a stock to add to your Watching list</p>
+          <p class="empty-list__text">Search for a stock to add to your Watching list</p>
         </ng-container>
       </ul>
     </div>
@@ -222,6 +223,10 @@ export class UserListsComponent implements OnInit, OnDestroy {
     } else if (this.currentList === 'Watching') {
       this.ideasService.setSelectedList(this.watchingList);
     }
+    gtag('event', 'list_clicked', {
+      'event_category': 'engagement',
+      'event_label': this.currentList
+    });
     this.router.navigate(['/ideas']);
   }
 

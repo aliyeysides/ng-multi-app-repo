@@ -10,6 +10,8 @@ import {Idea} from '../../../shared/models/idea';
 import {Subscription} from 'rxjs/Subscription';
 import {SignalService} from '../../../core/services/signal.service';
 
+declare let gtag: Function;
+
 @Component({
   selector: 'cpt-bear-of-the-week',
   template: `
@@ -133,6 +135,10 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
     this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
     this.bearModalRef.content.commentary = this.wordpressService.getInsightPostBody(this.post);
     this.bearModalRef.content.date = this.post['post_date_formatted'];
+    gtag('event', 'bear_of_the_week_opened', {
+      'event_category': 'engagement',
+      'event_label': this.ticker
+    });
   }
 
   public appendPGRImage(pgr: number, rawPgr: number) {

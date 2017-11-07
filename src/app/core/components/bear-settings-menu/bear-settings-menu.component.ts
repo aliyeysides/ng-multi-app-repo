@@ -1,7 +1,8 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
-import {noop} from 'rxjs/util/noop';
 import {AuthService} from '../../services/auth.service';
 import {Subject} from 'rxjs/Subject';
+
+declare let gtag: Function;
 
 @Component({
   selector: 'cpt-bear-settings-menu',
@@ -66,35 +67,45 @@ export class BearSettingsMenuComponent implements OnInit {
       icon: 'fa fa-book',
       href: 'http://www.masteringthebear.com/user-guide',
       target: '_blank',
-      fn: noop
+      fn: () => {
+        gtag('event', 'user_guide_clicked');
+      }
     },
     {
       title: 'Edit User Name',
       icon: 'fa fa-pencil-square-o',
       href: 'https://mh214.infusionsoft.com/app/form/bear_upgrade-form',
       target: '_blank',
-      fn: noop
+      fn: () => {
+        gtag('event', 'edit_user_name_clicked');
+      }
     },
     {
       title: 'Upgrade',
       icon: 'fa fa-upload',
       href: 'https://mh214.infusionsoft.com/app/form/email_loginid_change',
       target: '_blank',
-      fn: noop
+      fn: () => {
+        gtag('event', 'upgrade_clicked');
+      }
     },
     {
       title: 'Modify Subscription',
       icon: 'fa fa-ban',
       href: 'https://mh214.infusionsoft.com/app/form/ber_cancellation_form',
       target: '_blank',
-      fn: noop
+      fn: () => {
+        gtag('event', 'modify_sub_clicked');
+      }
     },
     {
       title: 'Contact Us',
       icon: 'fa fa-life-ring',
       href: 'mailto:info@chaikinanalytics.com?subject="Mastering the Bear support request" ',
       target: '',
-      fn: noop
+      fn: () => {
+        gtag('event', 'contact_us_clicked');
+      }
     },
     {
       title: 'Log out',
@@ -124,6 +135,7 @@ export class BearSettingsMenuComponent implements OnInit {
   }
 
   public logOutSession(): void {
+    gtag('event', 'logout_clicked');
     this.authService.logOutSession()
       .takeUntil(this.ngUnsubscribe)
       .subscribe();

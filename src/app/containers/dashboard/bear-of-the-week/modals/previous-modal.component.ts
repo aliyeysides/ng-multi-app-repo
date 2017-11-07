@@ -8,6 +8,8 @@ import {WeeklyCommentaryModalComponent} from './commentary-modal.component';
 import {Subscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
 
+declare let gtag: Function;
+
 @Component({
   selector: 'cpt-bear-weekly-previous-modal',
   template: `
@@ -103,5 +105,9 @@ export class PreviousBearsModalComponent implements OnInit, OnDestroy {
   public openCommentaryModal(post) {
     this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
     this.bearModalRef.content.commentary = this.wordpressService.getInsightPostBody(post);
+    gtag('event', 'bear_of_the_week_opened', {
+      'event_category': 'engagement',
+      'event_label': post['ticker']
+    });
   }
 }

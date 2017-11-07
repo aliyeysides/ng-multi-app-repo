@@ -6,6 +6,8 @@ import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import {InsightsCommentaryModalComponent} from './commentary-modal.component';
 
+declare let gtag: Function;
+
 @Component({
   selector: 'cpt-bear-previous-insights-modal',
   template: `
@@ -76,5 +78,9 @@ export class PreviousInsightsModalComponent implements OnInit, OnDestroy {
     this.insightsModalRef.content.title = post['post_title'];
     this.insightsModalRef.content.commentary = this.wordpressService.getInsightPostBody(post);
     this.insightsModalRef.content.date = post['post_date_formatted'];
+    gtag('event', 'insight_opened', {
+      'event_category': 'engagement',
+      'event_label': post['post_title']
+    });
   }
 }
