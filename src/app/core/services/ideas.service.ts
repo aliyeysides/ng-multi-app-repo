@@ -118,7 +118,10 @@ export class IdeasService {
     return this.http.get(deleteSymbolFromListUrl, {
       search: this.deleteSymbolFromListParams,
       withCredentials: true
-    }).map(res => res.json())
+    }).map(res => {
+      this._updateAlerts.next();
+      return res.json();
+    })
       .catch(res => res.json())
   }
 
