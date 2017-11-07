@@ -80,6 +80,7 @@ export class AppComponent {
   onResize(event) {
     const width = event.target.innerWidth;
     if (+width <= 1024) this.isOpen = false;
+    if (+width > 1024) this.isOpen = true;
   }
   isOpen = true;
   options = {
