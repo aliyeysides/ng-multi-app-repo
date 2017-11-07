@@ -7,6 +7,7 @@ import {NotificationsService} from 'angular2-notifications/dist';
 import {Observable} from 'rxjs/Observable';
 import {IdeaList} from '../../shared/models/idea';
 import {SymbolSearchService} from '../../core/services/symbol-search.service';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-ideas',
@@ -26,6 +27,7 @@ import {SymbolSearchService} from '../../core/services/symbol-search.service';
 export class IdeasComponent implements OnInit {
   @ViewChild('list') list: ListViewComponent;
 
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   private uid: string;
   public allLists: object[];
   private defaultList: IdeaList;
@@ -43,7 +45,8 @@ export class IdeasComponent implements OnInit {
 
   ngOnInit() {
     this.updateData();
-    this.symbolService.addStock$.subscribe(res => this.list.refreshList());
+    this.symbolService.addStock$
+      .takeUntil(this.ngUnsubscribe).subscribe(res => this.list.refreshList());
   }
 
   updateData() {
