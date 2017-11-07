@@ -3,8 +3,6 @@ import {IdeasService} from '../../core/services/ideas.service';
 import {Subscription} from 'rxjs/Subscription';
 import {AuthService} from '../../core/services/auth.service';
 import {ListViewComponent} from './list-view/list-view.component';
-import {NotificationsService} from 'angular2-notifications/dist';
-import {Observable} from 'rxjs/Observable';
 import {IdeaList} from '../../shared/models/idea';
 import {SymbolSearchService} from '../../core/services/symbol-search.service';
 import {Subject} from 'rxjs/Subject';
