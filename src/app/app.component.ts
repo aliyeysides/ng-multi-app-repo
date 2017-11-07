@@ -78,8 +78,8 @@ declare let gtag: Function;
 export class AppComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    const height = event.target.innerHeight;
-    if (+height <= 1024) this.isOpen = false;
+    const width = event.target.innerWidth;
+    if (+width <= 1024) this.isOpen = false;
   }
   isOpen = true;
   options = {
@@ -88,9 +88,8 @@ export class AppComponent {
   };
 
   constructor(private router: Router) {
-    const mobHeight = (window.screen.height);
     const mobWidth = (window.screen.width);
-    if (+mobHeight <= 1024) this.isOpen = false;
+    if (+mobWidth <= 1024) this.isOpen = false;
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
