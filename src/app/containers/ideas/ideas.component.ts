@@ -6,6 +6,7 @@ import {ListViewComponent} from './list-view/list-view.component';
 import {NotificationsService} from 'angular2-notifications/dist';
 import {Observable} from 'rxjs/Observable';
 import {IdeaList} from '../../shared/models/idea';
+import {SymbolSearchService} from '../../core/services/symbol-search.service';
 
 @Component({
   selector: 'cpt-ideas',
@@ -36,12 +37,13 @@ export class IdeasComponent implements OnInit {
   public watchingListId: string;
 
   constructor(private ideasService: IdeasService,
-              private toast: NotificationsService,
+              private symbolService: SymbolSearchService,
               private authService: AuthService) {
   }
 
   ngOnInit() {
     this.updateData();
+    this.symbolService.addStock$.subscribe(res => this.list.refreshList());
   }
 
   updateData() {
