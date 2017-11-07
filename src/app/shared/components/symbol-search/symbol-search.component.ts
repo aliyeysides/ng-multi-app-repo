@@ -12,6 +12,8 @@ import {IdeasService} from '../../../core/services/ideas.service';
 import {AuthService} from '../../../core/services/auth.service';
 import {Subscription} from 'rxjs/Subscription';
 
+declare let gtag: Function;
+
 @Component({
   selector: 'cpt-symbol-search',
   template: `
@@ -143,6 +145,7 @@ export class SymbolSearchComponent implements AfterContentInit, OnDestroy {
     } else {
       this.gotoReport(symbol);
     }
+    gtag('event', 'search', { 'search_term': symbol });
   }
 
   onSubmit() {
@@ -153,6 +156,7 @@ export class SymbolSearchComponent implements AfterContentInit, OnDestroy {
         this.gotoReport(this.searchResults[0].Symbol);
       }
     }
+    gtag('event', 'search', { 'search_term': this.searchResults[0].Symbol });
   }
 
   toggleFocus() {
@@ -164,6 +168,7 @@ export class SymbolSearchComponent implements AfterContentInit, OnDestroy {
       .take(1)
       .subscribe();
     this.symbolSearchService.emitAddToList();
+    gtag('event', 'search', { 'search_term': symbol });
   }
 
 }

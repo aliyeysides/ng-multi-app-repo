@@ -3,6 +3,8 @@ import {SignalService} from '../../services/signal.service';
 import {Subscription} from 'rxjs/Subscription';
 
 import * as moment from 'moment';
+declare let gtag: Function;
+
 import {AuthService} from '../../services/auth.service';
 import {Subject} from 'rxjs/Subject';
 import {IdeasService} from '../../services/ideas.service';
@@ -50,6 +52,7 @@ import {Observable} from 'rxjs/Observable';
             <li *ngFor="let alert of this.holdingListAlerts" class="alert__entry row">
               <div class="col-4 alert__stock">
                 <p class="ticker">
+                  <img class="rating" src="{{ alert['pgr_url'] }}">
                   <span>{{ alert['symbol'] }}</span>
                 </p>
               </div>
@@ -58,11 +61,20 @@ import {Observable} from 'rxjs/Observable';
                   <li class="row no-gutters">
                     <div class="col-11">
                       <p class="alert__text">{{ alert['alert_text'] }}</p>
-                      <p class="alert__text" *ngIf="alert['alert_type'] == 'earnings_surprise_alerts'">
+                      <p class="alert__text"
+                         *ngIf="alert['alert_type'] == 'earnings_surprise_alerts' || alert['alert_type'] == 'estimate_revision_alerts'">
                         <span>Q{{ alert['quarter'] }} Est.
                         <b>{{ alert['old_value'].toFixed(2) }}</b></span>
                         <span [ngClass]="{'up-change': alert['per_change']>0, 'down-change':alert['per_change']<0}"> Act. <b>{{ alert['new_value'].toFixed(2)
                           }}</b></span>
+                      </p>
+                      <p class="alert__text" *ngIf="alert['alert_type'] == 'pgr_change_alerts'">
+                        <span
+                          [ngClass]="{'up-change':alert['chg_direction']==1,'down-change':alert['chg_direction']==-1}"
+                          *ngIf="alert['chg_direction']==1">Rating Upgraded to {{ alert['new_rating'] }}</span>
+                        <span
+                          [ngClass]="{'up-change':alert['chg_direction']==1,'down-change':alert['chg_direction']==-1}"
+                          *ngIf="alert['chg_direction']==-1">Rating Downgraded to {{ alert['new_rating'] }}</span>
                       </p>
                     </div>
                   </li>
@@ -79,6 +91,7 @@ import {Observable} from 'rxjs/Observable';
             <li *ngFor="let alert of watchingListAlerts" class="alert__entry row">
               <div class="col-4 alert__stock">
                 <p class="ticker">
+                  <img class="rating" src="{{ alert['pgr_url'] }}">
                   <span>{{ alert['symbol'] }}</span>
                 </p>
               </div>
@@ -87,11 +100,20 @@ import {Observable} from 'rxjs/Observable';
                   <li class="row no-gutters">
                     <div class="col-11">
                       <p class="alert__text">{{ alert['alert_text'] }}</p>
-                      <p class="alert__text" *ngIf="alert['alert_type'] == 'earnings_surprise_alerts'">
+                      <p class="alert__text"
+                         *ngIf="alert['alert_type'] == 'earnings_surprise_alerts' || alert['alert_type'] == 'estimate_revision_alerts'">
                         <span>Q{{ alert['quarter'] }} Est.
                         <b>{{ alert['old_value'].toFixed(2) }}</b></span>
-                        <span [ngClass]="{'up-change': alert['per_change']>0, 'down-change': alert['per_change']<0}">Act. <b>{{ alert['new_value'].toFixed(2)
+                        <span [ngClass]="{'up-change': alert['per_change']>0, 'down-change':alert['per_change']<0}"> Act. <b>{{ alert['new_value'].toFixed(2)
                           }}</b></span>
+                      </p>
+                      <p class="alert__text" *ngIf="alert['alert_type'] == 'pgr_change_alerts'">
+                        <span
+                          [ngClass]="{'up-change':alert['chg_direction']==1,'down-change':alert['chg_direction']==-1}"
+                          *ngIf="alert['chg_direction']==1">Rating Upgraded to {{ alert['new_rating'] }}</span>
+                        <span
+                          [ngClass]="{'up-change':alert['chg_direction']==1,'down-change':alert['chg_direction']==-1}"
+                          *ngIf="alert['chg_direction']==-1">Rating Downgraded to {{ alert['new_rating'] }}</span>
                       </p>
                     </div>
                   </li>
@@ -138,6 +160,7 @@ export class BearAlertsComponent implements AfterViewInit {
 
   @HostListener('click') onClick() {
     this.toggleNav(this.nav.nativeElement, '500px', true);
+    gtag('event', 'alerts_opened', {'event_category': 'engagement'});
   }
 
   @HostListener('document:click', ['$event']) offClick(e: Event) {
@@ -199,7 +222,7 @@ export class BearAlertsComponent implements AfterViewInit {
             endDate: moment().format('YYYY-MM-DD'),
             listId1: this.watchingListId,
           }),
-          // this.signalService.getSignalDataForList(this.bestBearsListId.toString(), '1', this.uid)
+          this.signalService.getSignalDataForList(this.bestBearsListId.toString(), '1', this.uid)
         );
       })
       .take(1)
@@ -207,8 +230,7 @@ export class BearAlertsComponent implements AfterViewInit {
         this.holdingListAlerts = this.signalService.parseAlertData(res[0]);
         this.watchingListAlerts = this.signalService.parseAlertData(res[1]);
         this.allItems = this.holdingListAlerts.length + this.watchingListAlerts.length;
-        console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts);
-        // this.parseAlertData(res[0]);
+        console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts, res[2]);
       })
   }
 

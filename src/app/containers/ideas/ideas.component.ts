@@ -6,6 +6,8 @@ import {ListViewComponent} from './list-view/list-view.component';
 import {NotificationsService} from 'angular2-notifications/dist';
 import {Observable} from 'rxjs/Observable';
 import {IdeaList} from '../../shared/models/idea';
+import {SymbolSearchService} from '../../core/services/symbol-search.service';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-ideas',
@@ -25,6 +27,7 @@ import {IdeaList} from '../../shared/models/idea';
 export class IdeasComponent implements OnInit {
   @ViewChild('list') list: ListViewComponent;
 
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   private uid: string;
   public allLists: object[];
   private defaultList: IdeaList;
@@ -36,12 +39,14 @@ export class IdeasComponent implements OnInit {
   public watchingListId: string;
 
   constructor(private ideasService: IdeasService,
-              private toast: NotificationsService,
+              private symbolService: SymbolSearchService,
               private authService: AuthService) {
   }
 
   ngOnInit() {
     this.updateData();
+    this.symbolService.addStock$
+      .takeUntil(this.ngUnsubscribe).subscribe(res => this.list.refreshList());
   }
 
   updateData() {

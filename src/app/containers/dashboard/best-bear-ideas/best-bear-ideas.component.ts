@@ -5,8 +5,9 @@ import {AuthService} from '../../../core/services/auth.service';
 import {Subject} from 'rxjs/Subject';
 import {Idea, IdeaList} from '../../../shared/models/idea';
 import {SignalService} from '../../../core/services/signal.service';
-import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
+
+declare let gtag: Function;
 
 @Component({
   selector: 'cpt-best-bear-ideas',
@@ -94,6 +95,10 @@ export class BestBearIdeasComponent implements OnInit {
 
   viewBearList() {
     this.ideasService.setSelectedList(this.bestBearIdeaList);
+    gtag('event', 'list_clicked', {
+      'event_category': 'engagement',
+      'event_label': 'Best Bear Ideas'
+    });
     this.router.navigate(['/ideas']);
   }
 
