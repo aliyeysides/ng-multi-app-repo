@@ -92,8 +92,6 @@ export class IdeaListsComponent implements AfterViewInit, OnDestroy {
       .subscribe(list => {
         this.selectedList = list;
       });
-
-    console.log('list ref', this.list.nativeElement.scrollLeft);
   }
 
   ngOnDestroy() {
