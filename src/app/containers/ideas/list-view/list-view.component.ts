@@ -11,6 +11,7 @@ import {UtilService} from '../../../core/services/util.service';
 
 declare let gtag: Function;
 import {Observable} from 'rxjs/Observable';
+import {SymbolSearchService} from '../../../core/services/symbol-search.service';
 
 @Component({
   selector: 'cpt-list-view',
@@ -57,6 +58,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
               private authService: AuthService,
               private utilService: UtilService,
+              private searchService: SymbolSearchService,
               private signalService: SignalService,
               private ideaService: IdeasService) {
   }
@@ -322,6 +324,10 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public clearOrderByObject() {
     this.orderByObject = {};
+  }
+
+  public openSearch() {
+    this.searchService.setSearchOpen(true);
   }
 
 }
