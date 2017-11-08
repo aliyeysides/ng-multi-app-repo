@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'variables';
-@import '../node_modules/bootstrap/scss/bootstrap';
+@import '../../variables';
+@import '../../../node_modules/bootstrap/scss/bootstrap';
 
 html, body {
   overflow: hidden;
@@ -15,7 +15,7 @@ div {
 table {
   width: 100%;
 }
- 
+
 p, h1, h2, h3, h4, h5, h6, span, label, li, a, button {
   font-family: $font-stack;
   padding: 0;
@@ -40,7 +40,7 @@ h1 {
   margin-bottom: 20px;
 }
 
-h2 { 
+h2 {
   font-weight: 600;
   font-size: 24px;
   margin-bottom: 20px;
@@ -217,7 +217,7 @@ iframe {
     z-index: 99;
     opacity: 0.8;
     background-color: rgba(0,0,0,0);
-    background-image: url(./assets/imgs/loading_splash.png);
+    background-image: url(../../assets/imgs/loading_splash.png);
     background-size: 100% 100%;
     width: 100%;
     height: 100vh;
