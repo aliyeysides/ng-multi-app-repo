@@ -24,8 +24,6 @@ import {SignalService} from '../core/services/signal.service';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {NotificationsService} from 'angular2-notifications/dist';
 
-import {Angulartics2Module, Angulartics2GoogleTagManager} from 'angulartics2';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +36,6 @@ import {Angulartics2Module, Angulartics2GoogleTagManager} from 'angulartics2';
     RouterModule.forRoot(ROUTES, {useHash: true}),
     BusyModule.forRoot(loadingMaskConfig),
     SimpleNotificationsModule.forRoot(),
-    Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
     ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES,
   ],
