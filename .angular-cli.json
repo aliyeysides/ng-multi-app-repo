@@ -12,8 +12,8 @@
         "assets",
         "favicon.ico"
       ],
-      "index": "bear-index.html",
-      "main": "bear-main.ts",
+      "index": "app/bear/index.html",
+      "main": "app/bear/main.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
@@ -27,7 +27,7 @@
       "styles": [
         "../node_modules/angular2-busy/build/style/busy.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "app/bear/bear-styles.scss"
+        "app/bear/styles.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -48,8 +48,8 @@
         "assets",
         "favicon.ico"
       ],
-      "index": "psp-index.html",
-      "main": "psp-main.ts",
+      "index": "app/psp/index.html",
+      "main": "app/psp/main.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
@@ -63,7 +63,7 @@
       "styles": [
         "../node_modules/angular2-busy/build/style/busy.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "app/psp/psp-styles.scss"
+        "app/psp/styles.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

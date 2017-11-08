@@ -9,8 +9,8 @@ import {AppComponent} from './app.component';
 import {SharedModule} from '../shared/index';
 
 import {ROUTES} from './app.routes';
-import {APP_CORE_MODULES} from '../core/components/index';
-import {APP_CONTAINER_MODULES} from '../containers/index';
+import {APP_CORE_MODULES} from '../core/components/bear/index';
+import {APP_CONTAINER_MODULES} from '../containers/bear/index';
 
 import {UtilService} from '../core/services/util.service';
 import {AuthService} from '../core/services/auth.service';
