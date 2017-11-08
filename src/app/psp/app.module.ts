@@ -10,7 +10,7 @@ import {SharedModule} from '../shared/index';
 
 import {ROUTES} from './app.routes';
 import {APP_CORE_MODULES} from '../core/components/bear/index';
-import {APP_CONTAINER_MODULES} from '../containers/bear/index';
+import {APP_CONTAINER_MODULES} from '../containers/psp/index';
 
 import {UtilService} from '../core/services/util.service';
 import {AuthService} from '../core/services/auth.service';
@@ -37,7 +37,7 @@ import {NotificationsService} from 'angular2-notifications/dist';
     BusyModule.forRoot(loadingMaskConfig),
     SimpleNotificationsModule.forRoot(),
     // ...APP_CORE_MODULES,
-    // ...APP_CONTAINER_MODULES,
+    ...APP_CONTAINER_MODULES,
   ],
   providers: [UtilService, AuthService, AuthGuard, IdeasService, SignalService, NotificationsService],
   bootstrap: [AppComponent]

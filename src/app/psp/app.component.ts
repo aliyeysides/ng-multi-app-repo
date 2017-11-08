@@ -19,39 +19,46 @@ declare let gtag: Function;
         <img src="assets/imgs/icon_psp_search.svg">
       </div>
     </div>
-    
-    <!--<div class="navbar">-->
-      <!--<div class="container&#45;&#45;nav">-->
-        <!--<div class="logo">-->
-          <!--<img src="assets/imgs/logo_powerpulse.svg">-->
-        <!--</div>-->
-        <!--<div class="nav-list">-->
-          <!--<ul>-->
-            <!--<li>-->
-              <!--<a><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;Health Check</a>-->
-            <!--</li>-->
-            <!--<li>-->
-              <!--<a><i class="fa fa-list" aria-hidden="true"></i> &nbsp;My Stocks</a>-->
-            <!--</li>-->
-            <!--<li>-->
-              <!--<a><i class="fa fa-heartbeat" aria-hidden="true"></i> &nbsp;Market Beat</a>-->
-            <!--</li>-->
-          <!--</ul>-->
-          <!--<ul>-->
-            <!--<li>-->
-              <!--<a><i class="fa fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>-->
-            <!--</li>-->
-          <!--</ul>-->
-          <!--<ul>-->
-            <!--<li>-->
-              <!--<a><i class="fa fa-user-times" aria-hidden="true"></i> &nbsp;Sign Out</a>-->
-            <!--</li>-->
-          <!--</ul>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    
-    <router-outlet></router-outlet>
+
+    <!-- App Container -->
+    <div class="container--main">
+
+      <!-- PANEL - Navigation - This sits below everything -->
+      <div class="container--nav">
+        <div class="logo">
+          <img src="assets/imgs/logo_powerpulse.svg">
+        </div>
+        <div class="nav-list">
+          <ul>
+            <li>
+              <a><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;Health Check</a>
+            </li>
+            <li>
+              <a><i class="fa fa-list" aria-hidden="true"></i> &nbsp;My Stocks</a>
+            </li>
+            <li>
+              <a><i class="fa fa-heartbeat" aria-hidden="true"></i> &nbsp;Market Beat</a>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <a><i class="fa fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <a><i class="fa fa-user-times" aria-hidden="true"></i> &nbsp;Sign Out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->
+      <div class="container--page">
+        <router-outlet></router-outlet>
+      </div>
+
+    </div>
   `,
   styleUrls: ['./app.component.scss']
 })
