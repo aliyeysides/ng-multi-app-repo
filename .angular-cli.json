@@ -5,14 +5,15 @@
   },
   "apps": [
     {
+      "name": "mastering-the-bear",
       "root": "src",
       "outDir": "dist",
       "assets": [
         "assets",
         "favicon.ico"
       ],
-      "index": "index.html",
-      "main": "main.ts",
+      "index": "app/bear/index.html",
+      "main": "app/bear/main.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
@@ -26,7 +27,43 @@
       "styles": [
         "../node_modules/angular2-busy/build/style/busy.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "styles.scss"
+        "app/bear/styles.scss"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "local": "environments/environment.local.ts",
+        "prod": "environments/environment.prod.ts",
+        "demo": "environments/environment.demo.ts",
+        "staging": "environments/environment.staging.ts",
+        "qa": "environments/environment.qa.ts"
+      }
+    },
+    {
+      "name": "power-pulse",
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "app/psp/index.html",
+      "main": "app/psp/main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "cpt",
+      "stylePreprocessorOptions": {
+        "includePaths": [
+          "assets/styles"
+        ]
+      },
+      "styles": [
+        "../node_modules/angular2-busy/build/style/busy.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "app/psp/styles.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
