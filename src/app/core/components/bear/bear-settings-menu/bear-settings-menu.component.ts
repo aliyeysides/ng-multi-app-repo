@@ -74,7 +74,7 @@ export class BearSettingsMenuComponent implements OnInit {
     {
       title: 'Edit User Name',
       icon: 'fa fa-pencil-square-o',
-      href: 'https://mh214.infusionsoft.com/app/form/bear_upgrade-form',
+      href: 'https://mh214.infusionsoft.com/app/form/email_loginid_change',
       target: '_blank',
       fn: () => {
         gtag('event', 'edit_user_name_clicked');
@@ -83,7 +83,7 @@ export class BearSettingsMenuComponent implements OnInit {
     {
       title: 'Upgrade',
       icon: 'fa fa-upload',
-      href: 'https://mh214.infusionsoft.com/app/form/email_loginid_change',
+      href: 'https://mh214.infusionsoft.com/app/form/bear_upgrade-form',
       target: '_blank',
       fn: () => {
         gtag('event', 'upgrade_clicked');
