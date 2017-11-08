@@ -71,7 +71,7 @@ declare let gtag: Function;
     <div class="container-fluid container-main" [class.opened]="isOpen">
       <router-outlet></router-outlet>
     </div>
-    '<simple-notifications [options]="options"></simple-notifications>'
+    <simple-notifications [options]="options"></simple-notifications>
   `,
   styleUrls: ['./app.component.scss']
 })

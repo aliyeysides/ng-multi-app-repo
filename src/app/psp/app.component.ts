@@ -13,7 +13,7 @@ declare let gtag: Function;
         <img src="assets/imgs/icon_sandwich.svg">
       </div>
       <div class="header__title">
-        <h1>Health Check</h1>
+        <h1>{{ title }}</h1>
       </div>
       <div class="header__search">
         <img src="assets/imgs/icon_psp_search.svg">
@@ -57,12 +57,13 @@ declare let gtag: Function;
       <div class="container--page">
         <router-outlet></router-outlet>
       </div>
-
+      <simple-notifications [options]="options"></simple-notifications>
     </div>
   `,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  public title: string;
   options = {
     position: ['top', 'right'],
     timeOut: 5000,
@@ -71,6 +72,11 @@ export class AppComponent {
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+        this.title = event.urlAfterRedirects.replace(/\W/g, ' ').trim().split(' ')
+          .map(x => {
+            x.charAt(0).toUpperCase();
+            return x;
+          }).join(' ');
         // TODO: need new ga id for psp;
         // gtag('config', 'UA-109099815-2', {
         //   'page_location': 'https://app.chaikinanalytics.com/ideas/' + event.urlAfterRedirects,
