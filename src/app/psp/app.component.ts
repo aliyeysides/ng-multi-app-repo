@@ -7,6 +7,7 @@ declare let gtag: Function;
   selector: 'cpt-root',
   encapsulation: ViewEncapsulation.None,
   template: `
+    <p>Test</p>
     <!--<div id="search-darken" class="darken"></div>-->
     <!--<div id="alerts-darken" class="darken"></div>-->
     <!--<div id="settings-darken" class="darken"></div>-->
