@@ -1,0 +1,385 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../../variables';
+@import '../../../node_modules/bootstrap/scss/bootstrap';
+
+p, a, h1, h2, h3, h4, h5, h6, span, label, li {
+  font-family: 'Rajdhani', 'Open Sans', sans-serif;
+  color:#484848;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom:30px;
+}
+
+h2 span {
+  font-weight: 600;
+}
+
+body {
+  height: 100%;
+}
+
+div {
+
+}
+
+ul, li {
+
+}
+
+table {
+
+}
+
+button {
+
+}
+
+
+
+
+
+/*                                      */
+/*               COMMON                 */
+/*                                      */
+
+
+.veryBullish, .strong {
+  color:#24A300;
+}
+
+.bullish {
+  color:#6ACC00;
+}
+
+.neutral, .hold {
+  color:#FF9900;
+}
+
+.bearish {
+  color:#FD4500;
+}
+
+.veryBearish, .weak {
+  color:#EB001C;
+}
+
+
+.align-middle {
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+}
+
+.up-change {
+  color:#00C04E;
+}
+
+.up-change span {
+  color:#00C04E;
+}
+
+.blue {
+  color:#4718E1;
+}
+
+.font-weight--semibold {
+  font-weight: 600;
+}
+
+.container--main {
+  position: relative;
+  width: 100%;
+  padding:0;
+  margin:0;
+}
+
+
+.container--nav {
+  position: absolute;
+  background-color: #484848;
+  top:0;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  color:#ffffff;
+  padding:20px;
+}
+
+.nav-list {
+  padding:15px 0;
+}
+.nav-list ul {
+  padding:10px 0;
+  margin:0;
+  border-top: 2px solid rgba(255,255,255,0.1);
+}
+.nav-list ul li {
+  height:60px;
+  font-size: 22px;
+}
+.nav-list ul li a {
+  color:#ffffff !important;
+  line-height: 60px;
+  text-decoration: none;
+
+}
+.nav-list ul li a i {
+  color:#ffffff;
+  font-size: 28px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.logo {
+
+}
+
+.nav-list {
+
+}
+
+.container--page {
+  position: absolute;
+  width: 100%;
+  background-color: #FFFFFF;
+  top:0;
+  z-index: 20;
+}
+
+
+
+.page__header {
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  background-image: linear-gradient(243deg, #21196B 5%, #00A3FF 100%);
+  z-index: 100;
+}
+
+.page__header .header__title {
+  width: 100%;
+  height: 60px;
+  position: absolute;
+}
+
+.header__title h1 {
+  text-align: center;
+  line-height: 64px;
+  color:#ffffff;
+}
+
+.page__header .header__search {
+  position: absolute;
+  display: flex;
+  width: 35px;
+  height: 60px;
+  right:10px;
+}
+
+.page__header .header__toggle {
+  position: absolute;
+  width: 35px;
+  height: 60px;
+  display: flex;
+  left:10px;
+}
+
+
+
+.page__contents {
+  top: 60px;
+  z-index: 30;
+  background-color: #ffffff;
+  width: 100%;
+}
+
+
+.duration__selector {
+  padding:10px 0 0;
+}
+
+.duration__toggle {
+  text-align: center;
+}
+
+.duration__toggle a {
+  height: 30px;
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  opacity: 0.5;
+}
+
+.duration__toggle.selected a {
+  color: #1199ff;
+  font-weight: 600;
+  height: 30px;
+  border-bottom: 2px solid #1199ff;
+  opacity: 1;
+
+}
+
+.contents {
+  border-bottom: 20px solid #F8F8F8;
+  margin-bottom:40px;
+  text-align: center;
+}
+
+.contents--intro {
+
+}
+
+.contents--intro p {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.contents--intro p.data--large {
+  font-size: 56px;
+  line-height: 1.25;
+}
+
+.contents--intro p.data--large span {
+  font-size: 38px;
+  vertical-align: baseline;
+}
+
+
+
+
+.powerBar-container {
+  padding:0px 25px;
+  margin: 10px 0;
+}
+
+
+
+.powerBar-container .label {
+  font-size: 12px;
+  font-weight: 600;
+
+}
+
+.powerBar-container .label a i {
+  color:#1199ff;
+  cursor: pointer;
+
+}
+
+.powerBar-container .powerBar {
+  width: 100%;
+  height: 36px;
+  margin-bottom:10px;
+}
+
+.powerBar-container .powerBar p {
+  color:#ffffff;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 38px;
+  white-space: nowrap;
+}
+
+.powerBar-container .powerBar .green {
+  height: 36px;
+  background-color: #009900;
+  float: left;
+  border-radius: 6px 0px 0px 6px;
+}
+
+.powerBar-container .powerBar .yellow {
+  width: 15%;
+  height: 36px;
+  background-color: #FF9900;
+  float: left;
+  margin: 0 1%;
+}
+
+.powerBar-container .powerBar .red {
+  height: 36px;
+  background-color: #CC0000;
+  float: left;
+  border-radius: 0 6px 6px 0;
+}
+
+.powerBar .green {
+  width: 63%;
+}
+
+.powerBar .red {
+  width: 20%;
+}
+
+
+.divider-grey {
+  width: 40%;
+  border-bottom:2px solid #eeeeee;
+  margin:18px auto;
+}
+
+.contents__quickview {
+  height: 46px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.contents__quickview p {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.contents__quickview p img {
+  margin-right:5px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top:-5px;
+  width: 38px;
+  height: 40px;
+}
+
+.quickview-data--left {
+  border-right:1px solid #efefef;
+}
+
+.quickview-data--right {
+  border-left:1px solid #efefef;
+}
+
+
+
+.dropdown-text {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: left;
+  border-bottom: 2px solid #1199ff;
+  width: 90%;
+
+}
+
+.dropdown-text::after {
+  content: '▾';
+  float: right;
+  font-weight: 12px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+.chart-actions {
+  margin-bottom:30px;
+}
+
+.chart-actions__toggle {
+  border-left:2px solid #efefef;
+}
