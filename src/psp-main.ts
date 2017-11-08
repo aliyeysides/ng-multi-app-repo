@@ -3,7 +3,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import 'angular2-notifications';
 
-import {AppModule} from './app/app.module';
+import {AppModule} from './app/psp/app.module';
 import {environment} from './environments/environment';
 
 if (environment.production) {
