@@ -127,26 +127,24 @@ import {Observable} from 'rxjs/Observable';
           <h4><i class="fa fa-lightbulb-o" aria-hidden="true"></i> &nbsp;BEST BEAR IDEAS</h4>
           <ul class="alerts__list container container-fluid">
 
-            <!--<li class="alert__entry row">-->
-            <!--<div class="col-4 alert__stock">-->
-            <!--<p class="ticker">-->
-            <!--<img class="rating" src="./assets/imgs/arc_Bearish.svg">-->
-            <!--<span>GOOGL</span>-->
-            <!--</p>-->
-            <!--</div>-->
-            <!--<div class="col-8 alert__info">-->
-            <!--<ul class="container container-fluid">-->
-            <!--<li class="row no-gutters">-->
-            <!--<div class="col-1 alert__icon">-->
-            <!--<img src="./assets/imgs/icon_arrow&#45;&#45;down.svg">-->
-            <!--</div>-->
-            <!--<div class="col-11">-->
-            <!--<p class="alert__text">Power Gauge Turned Very Bullish</p>-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-            <!--</li>-->
+            <p class="empty-list__text" *ngIf="bearListSignals?.length==0">No Alerts.</p>
+            <li *ngFor="let alert of bearListSignals" class="alert__entry row">
+              <div class="col-4 alert__stock">
+                <p class="ticker">
+                  <img class="rating" src="{{ alert['pgr_url'] }}">
+                  <span>{{ alert['Symbol'] }}</span>
+                </p>
+              </div>
+              <div class="col-8 alert__info">
+                <ul class="container container-fluid">
+                  <li class="row no-gutters">
+                    <div class="col-11">
+                      <p class="down-change">{{ alert['signal_text'] }}</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
           </ul>
         </div>
 
@@ -175,6 +173,7 @@ export class BearAlertsComponent implements AfterViewInit {
 
   public holdingListAlerts: object[];
   public watchingListAlerts: object[];
+  public bearListSignals: object[];
   public allItems: number;
   public date: string;
   public loading: Subscription;
@@ -229,8 +228,16 @@ export class BearAlertsComponent implements AfterViewInit {
       .subscribe(res => {
         this.holdingListAlerts = this.signalService.parseAlertData(res[0]);
         this.watchingListAlerts = this.signalService.parseAlertData(res[1]);
-        this.allItems = this.holdingListAlerts.length + this.watchingListAlerts.length;
-        console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts, res[2]);
+        this.bearListSignals = res[2].filter(x => {
+          if (x['Signals'] === '[000000000100]') {
+            return Object.assign(x, { signal_text: 'Rel. Strength Sell' });
+          }
+          if (x['Signals'] === '[000000010000]') {
+            return Object.assign(x, { signal_text: 'Money Flow Sell' });
+          }
+        });
+        this.allItems = this.holdingListAlerts.length + this.watchingListAlerts.length + this.bearListSignals.length;
+        console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts, this.bearListSignals);
       })
   }
 
