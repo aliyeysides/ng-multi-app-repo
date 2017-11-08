@@ -72,7 +72,7 @@ declare let gtag: Function;
           </li>
         </ng-container>
         <ng-container *ngIf="holdingListIdeas?.length==0">
-          <p class="empty-list__text">Search for a stock to add to your Holding list</p>
+          <p class="empty-list__text"><u class="search" (click)="openSearch();$event.stopPropagation()">Search</u> for a stock to add to your Holding list</p>
         </ng-container>
       </ul>
       <ul [ngBusy]="loading" *ngIf="currentList === 'Watching'" class="post-body post-body--userlist">
@@ -106,7 +106,7 @@ declare let gtag: Function;
           </li>
         </ng-container>
         <ng-container *ngIf="watchingListIdeas?.length==0">
-          <p class="empty-list__text">Search for a stock to add to your Watching list</p>
+          <p class="empty-list__text"><u class="search" (click)="openSearch();$event.stopPropagation()">Search</u> for a stock to add to your Watching list</p>
         </ng-container>
       </ul>
     </div>
