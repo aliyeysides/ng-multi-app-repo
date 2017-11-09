@@ -1,6 +1,7 @@
-import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {SymbolSearchService} from '../../../services/symbol-search.service';
-import {Subject} from 'rxjs/Subject';
+import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
+import {AuthService} from '../../../services/auth.service';
 
 declare let gtag: Function;
 
@@ -38,21 +39,12 @@ declare let gtag: Function;
   `,
   styleUrls: ['./bear-search.component.scss']
 })
-export class BearSearchComponent implements OnInit {
-  @ViewChild('nav') nav;
+export class BearSearchComponent extends BaseSettingsMenuComponent implements OnInit {
 
-  @HostListener('click') onClick() {
-    this.toggleNav(this.nav.nativeElement, '500px', true);
-  }
-
-  @HostListener('document:click', ['$event']) offClick(e: Event) {
-    if (!this.el.nativeElement.contains(e.target)) this.toggleNav(this.nav.nativeElement, '0', false);
-  }
-
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
-
-  constructor(private el: ElementRef,
+  constructor(public el: ElementRef,
+              public authService: AuthService,
               private searchService: SymbolSearchService) {
+    super(el, authService)
   }
 
   ngOnInit() {
@@ -61,15 +53,6 @@ export class BearSearchComponent implements OnInit {
       .subscribe(open => {
         if (open === true) this.onClick();
       });
-  }
-
-  public toggleNav(el: HTMLElement, size: string, darken: boolean): void {
-    el.style.width = size;
-    if (darken === true) {
-      document.getElementById('search-darken').style.visibility = 'visible';
-    } else if (darken === false) {
-      document.getElementById('search-darken').style.visibility = 'hidden';
-    }
   }
 
 }

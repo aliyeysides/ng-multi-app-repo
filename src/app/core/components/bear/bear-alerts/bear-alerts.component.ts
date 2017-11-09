@@ -9,6 +9,7 @@ import {AuthService} from '../../../services/auth.service';
 import {Subject} from 'rxjs/Subject';
 import {IdeasService} from '../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
+import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
 
 @Component({
   selector: 'cpt-bear-alerts',
@@ -153,19 +154,12 @@ import {Observable} from 'rxjs/Observable';
   `,
   styleUrls: ['./bear-alerts.component.scss']
 })
-export class BearAlertsComponent implements AfterViewInit {
-  @ViewChild('nav') nav;
-
+export class BearAlertsComponent extends BaseSettingsMenuComponent implements AfterViewInit {
   @HostListener('click') onClick() {
     this.toggleNav(this.nav.nativeElement, '500px', true);
     gtag('event', 'alerts_opened', {'event_category': 'engagement'});
   }
 
-  @HostListener('document:click', ['$event']) offClick(e: Event) {
-    if (!this.el.nativeElement.contains(e.target)) this.toggleNav(this.nav.nativeElement, '0', false);
-  }
-
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
   private uid: string;
   private holdingListId: number;
   private watchingListId: number;
@@ -178,10 +172,11 @@ export class BearAlertsComponent implements AfterViewInit {
   public date: string;
   public loading: Subscription;
 
-  constructor(private el: ElementRef,
+  constructor(public el: ElementRef,
+              public authService: AuthService,
               private signalService: SignalService,
-              private authService: AuthService,
               private ideasService: IdeasService) {
+    super(el, authService)
   }
 
   ngAfterViewInit() {
@@ -239,15 +234,6 @@ export class BearAlertsComponent implements AfterViewInit {
         this.allItems = this.holdingListAlerts.length + this.watchingListAlerts.length + this.bearListSignals.length;
         console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts, this.bearListSignals);
       })
-  }
-
-  public toggleNav(el: HTMLElement, size: string, darken: boolean): void {
-    el.style.width = size;
-    if (darken === true) {
-      document.getElementById('alerts-darken').style.visibility = 'visible';
-    } else if (darken === false) {
-      document.getElementById('alerts-darken').style.visibility = 'hidden';
-    }
   }
 
 }
