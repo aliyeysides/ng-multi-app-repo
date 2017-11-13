@@ -7,8 +7,8 @@ declare let gtag: Function;
   selector: 'cpt-root',
   encapsulation: ViewEncapsulation.None,
   template: `
-    <div id="search-darken" class="darken"></div>
-    <div id="alerts-darken" class="darken"></div>
+    <!--<div id="search-darken" class="darken"></div>-->
+    <!--<div id="alerts-darken" class="darken"></div>-->
     <div id="settings-darken" class="darken"></div>
 
     <div class="sidebar" [class.opened]="isOpen">

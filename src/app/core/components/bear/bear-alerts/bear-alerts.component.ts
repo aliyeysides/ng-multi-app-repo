@@ -155,7 +155,10 @@ import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
   styleUrls: ['./bear-alerts.component.scss']
 })
 export class BearAlertsComponent extends BaseSettingsMenuComponent implements AfterViewInit {
-  @HostListener('click') onClick() {
+  @ViewChild('nav') nav: ElementRef;
+
+  @HostListener('click', ['$event']) onClick(e: Event) {
+    if (typeof e.stopPropagation === 'function') e.stopPropagation();
     this.toggleNav(this.nav.nativeElement, '500px', true);
     gtag('event', 'alerts_opened', {'event_category': 'engagement'});
   }
@@ -188,7 +191,7 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
       });
     this.signalService.alertsOpen$
       .subscribe(() => {
-        this.onClick();
+        this.onClick({} as Event);
       })
   }
 

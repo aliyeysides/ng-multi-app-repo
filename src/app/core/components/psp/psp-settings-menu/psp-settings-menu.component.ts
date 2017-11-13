@@ -1,4 +1,4 @@
-import {Component, ElementRef} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
 import {AuthService} from '../../../services/auth.service';
 
@@ -24,7 +24,7 @@ declare let gtag: Function;
           </li>
         </ul>
         <ul>
-          <li>
+          <li (click)="logOutSession()">
             <a><i class="fa fa-user-times" aria-hidden="true"></i> &nbsp;Sign Out</a>
           </li>
         </ul>
@@ -34,6 +34,8 @@ declare let gtag: Function;
   styleUrls: ['./psp-settings-menu.component.scss']
 })
 export class PspSettingsMenuComponent extends BaseSettingsMenuComponent {
+  @ViewChild('nav') nav: ElementRef;
+
   constructor(public el: ElementRef, public authService: AuthService) {
     super(el, authService)
   }
