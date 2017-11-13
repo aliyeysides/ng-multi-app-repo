@@ -2,14 +2,13 @@ import {AfterViewInit, Component, ElementRef, HostListener, ViewChild} from '@an
 import {SignalService} from '../../../services/signal.service';
 import {Subscription} from 'rxjs/Subscription';
 
-import * as moment from 'moment';
-declare let gtag: Function;
-
 import {AuthService} from '../../../services/auth.service';
-import {Subject} from 'rxjs/Subject';
 import {IdeasService} from '../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
 import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
+
+import * as moment from 'moment';
+declare let gtag: Function;
 
 @Component({
   selector: 'cpt-bear-alerts',
@@ -140,6 +139,9 @@ import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
                 <ul class="container container-fluid">
                   <li class="row no-gutters">
                     <div class="col-11">
+                      <div class="col-1 stock__alert down-alert">
+                        <i class="fa fa-play" aria-hidden="true"></i>
+                      </div>
                       <p class="down-change">{{ alert['signal_text'] }}</p>
                     </div>
                   </li>
@@ -155,7 +157,10 @@ import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
   styleUrls: ['./bear-alerts.component.scss']
 })
 export class BearAlertsComponent extends BaseSettingsMenuComponent implements AfterViewInit {
-  @HostListener('click') onClick() {
+  @ViewChild('nav') nav: ElementRef;
+
+  @HostListener('click', ['$event']) onClick(e?: Event) {
+    if (e) e.stopPropagation();
     this.toggleNav(this.nav.nativeElement, '500px', true);
     gtag('event', 'alerts_opened', {'event_category': 'engagement'});
   }
@@ -225,11 +230,12 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
         this.watchingListAlerts = this.signalService.parseAlertData(res[1]);
         this.bearListSignals = res[2].filter(x => {
           if (x['Signals'] === '[000000000100]') {
-            return Object.assign(x, { signal_text: 'Rel. Strength Sell' });
+            return Object.assign(x, {signal_text: 'Rel. Strength Sell'});
           }
           if (x['Signals'] === '[000000010000]') {
-            return Object.assign(x, { signal_text: 'Money Flow Sell' });
+            return Object.assign(x, {signal_text: 'Money Flow Sell'});
           }
+          Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['pgrData'][0]['pgr_rating'], x['pgrData'][0]['neutral_status'])});
         });
         this.allItems = this.holdingListAlerts.length + this.watchingListAlerts.length + this.bearListSignals.length;
         console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts, this.bearListSignals);

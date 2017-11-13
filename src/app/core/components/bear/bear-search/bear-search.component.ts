@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {SymbolSearchService} from '../../../services/symbol-search.service';
 import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
 import {AuthService} from '../../../services/auth.service';
@@ -40,6 +40,7 @@ declare let gtag: Function;
   styleUrls: ['./bear-search.component.scss']
 })
 export class BearSearchComponent extends BaseSettingsMenuComponent implements OnInit {
+  @ViewChild('nav') nav: ElementRef;
 
   constructor(public el: ElementRef,
               public authService: AuthService,

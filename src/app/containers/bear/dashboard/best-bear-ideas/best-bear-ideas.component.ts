@@ -6,6 +6,7 @@ import {Subject} from 'rxjs/Subject';
 import {Idea, IdeaList} from '../../../../shared/models/idea';
 import {SignalService} from '../../../../core/services/signal.service';
 import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
 
 declare let gtag: Function;
 
@@ -37,12 +38,13 @@ declare let gtag: Function;
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ stock?.symbol }}</p>
           </div>
-          <div class="col-1 stock__alert"
-               [ngClass]="{'down-alert':stock?.Change<0,'up-alert':stock?.Change>0,'flat-alert':stock?.Change===0}">
-            <!--<i class="fa fa-play" aria-hidden="true"></i>-->
+          <div (click)="openAlerts();$event.stopPropagation()" class="col-1 stock__alert down-alert"
+               *ngIf="getAlertsForItem(stock, bestBearIdeasAlerts).length>0">
+            <i class="fa fa-play" aria-hidden="true"></i>
           </div>
           <div class="col-3 stock__price">
-            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">{{ stock?.Last | decimal
+            <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">
+              {{ stock?.Last | decimal
               }}</p>
           </div>
           <div class="col-3 stock__price">
@@ -62,6 +64,7 @@ export class BestBearIdeasComponent implements OnInit {
 
   public bestBearIdeaList: IdeaList;
   public bestBearIdeas: Array<Idea>;
+  public bestBearIdeasAlerts: object[];
   public loading: Subscription;
 
   constructor(private router: Router,
@@ -85,11 +88,14 @@ export class BestBearIdeasComponent implements OnInit {
       .flatMap(uid => this.ideasService.getIdeasList(uid, 'Bear'))
       .flatMap(res => {
         this.bestBearIdeaList = res[0]['idea_lists'].filter(list => list.name === 'Best Bear Ideas')[0];
-        return this.ideasService.getListSymbols(this.bestBearIdeaList['list_id'].toString(), this.uid)
+        return Observable.combineLatest(
+          this.ideasService.getListSymbols(this.bestBearIdeaList['list_id'].toString(), this.uid),
+          this.signalService.getSignalDataForList(this.bestBearIdeaList['list_id'].toString(), '1', this.uid));
       })
       .take(1)
       .subscribe(res => {
-        this.bestBearIdeas = res['symbols'];
+        this.bestBearIdeas = res[0]['symbols'];
+        this.bestBearIdeasAlerts = res[1];
       });
   }
 
@@ -104,6 +110,23 @@ export class BestBearIdeasComponent implements OnInit {
 
   public appendPGRImage(pgr: number, rawPgr: number) {
     return this.signalService.appendPGRImage(pgr, rawPgr);
+  }
+
+  getAlertsForItem(item: Idea, alerts: object[]) {
+    return alerts.filter(x => {
+      if (x['Symbol'] == item['symbol']) {
+        if (x['Signals'] === '[000000000100]') {
+          return Object.assign(x, {signal_text: 'Rel. Strength Sell'});
+        }
+        if (x['Signals'] === '[000000010000]') {
+          return Object.assign(x, {signal_text: 'Money Flow Sell'});
+        }
+      }
+    });
+  }
+
+  openAlerts() {
+    this.signalService.openAlerts();
   }
 
 }

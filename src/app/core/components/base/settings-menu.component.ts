@@ -1,4 +1,4 @@
-import {ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {ElementRef, HostListener, ViewChild} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {AuthService} from '../../services/auth.service';
 
@@ -7,7 +7,8 @@ declare let gtag: Function;
 export class BaseSettingsMenuComponent {
   @ViewChild('nav') nav;
 
-  @HostListener('click') onClick() {
+  @HostListener('click', ['$event']) onClick(e?: Event) {
+    if (e) e.stopPropagation();
     this.toggleNav(this.nav.nativeElement, '500px', true);
   }
 

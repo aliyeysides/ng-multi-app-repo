@@ -1,4 +1,4 @@
-import {Component, ElementRef} from '@angular/core';
+import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
 
@@ -51,6 +51,7 @@ declare let gtag: Function;
   styleUrls: ['./bear-settings-menu.component.scss']
 })
 export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
+  @ViewChild('nav') nav: ElementRef;
 
   public items: object[] = [
     {
