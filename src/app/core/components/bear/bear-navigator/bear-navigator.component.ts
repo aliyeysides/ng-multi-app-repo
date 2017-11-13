@@ -59,7 +59,7 @@ export class BearNavigatorComponent implements OnInit {
     },
     {
       label: 'Education',
-      icon: './assets/imgs/img_list-underten.svg',
+      icon: './assets/imgs/icon_education.svg',
       link: 'http://www.masteringthebear.com/user-guide',
       target: '_blank',
       fn: () => {
