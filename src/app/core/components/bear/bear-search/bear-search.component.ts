@@ -52,7 +52,7 @@ export class BearSearchComponent extends BaseSettingsMenuComponent implements On
     this.searchService.isOpen
       .takeUntil(this.ngUnsubscribe)
       .subscribe(open => {
-        if (open === true) this.onClick({} as Event);
+        if (open === true) this.onClick();
       });
   }
 

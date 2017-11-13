@@ -7,8 +7,8 @@ declare let gtag: Function;
 export class BaseSettingsMenuComponent {
   @ViewChild('nav') nav;
 
-  @HostListener('click', ['$event']) onClick(e: Event) {
-    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+  @HostListener('click', ['$event']) onClick(e?: Event) {
+    if (e) e.stopPropagation();
     this.toggleNav(this.nav.nativeElement, '500px', true);
   }
 

@@ -139,6 +139,9 @@ declare let gtag: Function;
                 <ul class="container container-fluid">
                   <li class="row no-gutters">
                     <div class="col-11">
+                      <div class="col-1 stock__alert down-alert">
+                        <i class="fa fa-play" aria-hidden="true"></i>
+                      </div>
                       <p class="down-change">{{ alert['signal_text'] }}</p>
                     </div>
                   </li>
@@ -156,8 +159,8 @@ declare let gtag: Function;
 export class BearAlertsComponent extends BaseSettingsMenuComponent implements AfterViewInit {
   @ViewChild('nav') nav: ElementRef;
 
-  @HostListener('click', ['$event']) onClick(e: Event) {
-    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+  @HostListener('click', ['$event']) onClick(e?: Event) {
+    if (e) e.stopPropagation();
     this.toggleNav(this.nav.nativeElement, '500px', true);
     gtag('event', 'alerts_opened', {'event_category': 'engagement'});
   }
@@ -190,7 +193,7 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
       });
     this.signalService.alertsOpen$
       .subscribe(() => {
-        this.onClick({} as Event);
+        this.onClick();
       })
   }
 
