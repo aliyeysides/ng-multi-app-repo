@@ -50,7 +50,7 @@ export class BearNavigatorComponent implements OnInit {
   public eduRoutes = [
     {
       label: 'Power Gauge',
-      icon: './assets/imgs/logo-chaikin-arch.svg',
+      icon: './assets/imgs/icon_aboutPGR.svg',
       link: 'http://www.masteringthebear.com/faq/',
       target: '_blank',
       fn: () => {
