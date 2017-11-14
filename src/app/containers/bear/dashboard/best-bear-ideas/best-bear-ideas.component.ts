@@ -38,9 +38,8 @@ declare let gtag: Function;
           <div class="col-3 stock__ticker">
             <p class="ticker">{{ stock?.symbol }}</p>
           </div>
-          <div (click)="openAlerts();$event.stopPropagation()" class="col-1 stock__alert down-alert"
-               *ngIf="getAlertsForItem(stock, bestBearIdeasAlerts).length>0">
-            <i class="fa fa-play" aria-hidden="true"></i>
+          <div (click)="openAlerts();$event.stopPropagation()" class="col-1 stock__alert down-alert">
+            <i *ngIf="getAlertsForItem(stock, bestBearIdeasAlerts).length>0" class="fa fa-play" aria-hidden="true"></i>
           </div>
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">

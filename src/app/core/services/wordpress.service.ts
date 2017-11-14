@@ -19,6 +19,7 @@ export class WordpressService {
   }
 
   public getInsightPostBody(post: object): string {
+    console.log('post', post);
     const dom = this.getInsightPostDom(post);
     console.log('dom', dom);
     return dom.body.innerHTML;
