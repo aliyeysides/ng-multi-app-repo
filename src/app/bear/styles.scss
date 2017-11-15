@@ -546,8 +546,12 @@ a.quick-link {
 
     .post-body {
       ul {
+          list-style: disc;
+          margin: 20px;
+
         li {
           margin-bottom: 20px;
+          padding:5px;
 
           h5 {
             font-size: 20px;
@@ -560,6 +564,10 @@ a.quick-link {
             padding: 10px 0;
           }
         }
+      }
+      h6 {
+        margin-bottom: 18px;
+        line-height: 1.3;
       }
     }
 

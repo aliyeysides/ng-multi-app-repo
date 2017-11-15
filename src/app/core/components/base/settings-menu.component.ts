@@ -8,7 +8,6 @@ export class BaseSettingsMenuComponent {
   @ViewChild('nav') nav;
 
   @HostListener('click', ['$event']) onClick(e?: Event) {
-    console.log('clicked');
     if (e) e.stopPropagation();
     this.toggleNav(this.nav.nativeElement, '500px', true);
   }

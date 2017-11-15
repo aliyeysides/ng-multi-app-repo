@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
 import {AuthService} from '../../../services/auth.service';
 
@@ -6,11 +6,12 @@ declare let gtag: Function;
 
 @Component({
   selector: 'cpt-psp-settings-menu',
-  template: `
-    <div class="header__toggle">
-      <img src="assets/imgs/icon_sandwich.svg">
-    </div>
-
+  template: `    
+    <a class="quick-link">
+      <div class="header__toggle quick-link">
+        <img src="assets/imgs/icon_sandwich.svg">
+      </div>
+    </a>
     <!-- PANEL - Navigation - This sits below everything -->
     <div #nav class="container--nav">
       <div class="logo">
@@ -36,7 +37,8 @@ declare let gtag: Function;
 export class PspSettingsMenuComponent extends BaseSettingsMenuComponent {
   @ViewChild('nav') nav: ElementRef;
 
-  constructor(public el: ElementRef, public authService: AuthService) {
+  constructor(public el: ElementRef,
+              public authService: AuthService) {
     super(el, authService)
   }
 }

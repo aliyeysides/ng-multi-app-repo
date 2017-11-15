@@ -54,16 +54,7 @@ export class BearNavigatorComponent implements OnInit {
       link: 'https://www.chaikinanalytics.com/stock-rating/',
       target: '_blank',
       fn: () => {
-        gtag('event', 'pgr_education_clicked');
-      }
-    },
-    {
-      label: 'Education',
-      icon: './assets/imgs/icon_education.svg',
-      link: 'http://www.masteringthebear.com/faq/',
-      target: '_blank',
-      fn: () => {
-        gtag('event', 'education_clicked');
+        gtag('event', 'pgr_education_clicked', {'event_category': 'engagement'});
       }
     }
   ];
