@@ -8,10 +8,10 @@ declare let gtag: Function;
   encapsulation: ViewEncapsulation.None,
   template: `
     <div id="settings-darken" class="darken"></div>
-    
+
     <!-- PANEL HEADER - Fixed to the top of each panel-->
     <div class="page__header">
-        <cpt-psp-settings-menu></cpt-psp-settings-menu>
+      <cpt-psp-settings-menu></cpt-psp-settings-menu>
       <div class="header__title">
         <h1>{{ title }}</h1>
       </div>

@@ -64,6 +64,15 @@ export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
       }
     },
     {
+      title: 'FAQ',
+      icon: 'fa fa-question-circle-o',
+      href: 'http://www.masteringthebear.com/faq/',
+      target: '_blank',
+      fn: () => {
+        gtag('event', 'faq_clicked');
+      }
+    },
+    {
       title: 'Edit User Name',
       icon: 'fa fa-pencil-square-o',
       href: 'https://mh214.infusionsoft.com/app/form/email_loginid_change',
