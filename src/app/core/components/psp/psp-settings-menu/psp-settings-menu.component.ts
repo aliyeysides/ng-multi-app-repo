@@ -46,8 +46,8 @@ export class PspSettingsMenuComponent extends BaseSettingsMenuComponent {
   }
 
   openNav() {
-    this.nav.nativeElement.style.width = "325px";
-    document.getElementById("container--main").style.marginLeft = "325px";
+    this.nav.nativeElement.style.width = "200px";
+    document.getElementById("container--main").style.marginLeft = "200px";
   }
 
   closeNav() {
