@@ -341,3 +341,8 @@
   visibility: hidden;
   transition: 0.5s;
 }
+
+#container--main {
+  transition: margin-left .5s;
+  padding: 20px;
+}

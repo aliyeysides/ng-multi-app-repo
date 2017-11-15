@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 
 declare let gtag: Function;
@@ -6,9 +6,8 @@ declare let gtag: Function;
 @Component({
   selector: 'cpt-root',
   encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./app.component.scss'],
   template: `
-    <div id="settings-darken" class="darken"></div>
-
     <!-- PANEL HEADER - Fixed to the top of each panel-->
     <div class="page__header">
       <cpt-psp-settings-menu></cpt-psp-settings-menu>
@@ -21,17 +20,17 @@ declare let gtag: Function;
     </div>
 
     <!-- App Container -->
-    <div class="container--main">
+    <div class="container--main" id="container--main">
       <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->
       <div class="container--page">
         <router-outlet></router-outlet>
       </div>
       <simple-notifications [options]="options"></simple-notifications>
     </div>
-  `,
-  styleUrls: ['./app.component.scss']
+  `
 })
 export class AppComponent {
+
   public title: string;
   options = {
     position: ['top', 'right'],
