@@ -237,7 +237,7 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
             return Object.assign(x, {signal_text: 'Money Flow Sell'});
           }
           if (x['Signals'] === '[000000010100]') {
-            return Object.assign(x, {signal_text: 'Rel. Strength && Money Flow Sell'});
+            return Object.assign(x, {signal_text: 'Rel. Strength & Money Flow Sell'});
           }
         });
         this.allItems = this.holdingListAlerts.length + this.watchingListAlerts.length + this.bearListSignals.length;
