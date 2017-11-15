@@ -188,6 +188,7 @@ button {
   width: 35px;
   height: 60px;
   right:10px;
+  z-index: 10;
 }
 
 .page__header .header__toggle {
@@ -196,6 +197,7 @@ button {
   height: 60px;
   display: flex;
   left:10px;
+  z-index: 10;
 }
 
 

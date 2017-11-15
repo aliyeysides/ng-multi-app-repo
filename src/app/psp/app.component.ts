@@ -14,9 +14,8 @@ declare let gtag: Function;
       <div class="header__title">
         <h1>{{ title }}</h1>
       </div>
-      <div class="header__search">
-        <img src="assets/imgs/icon_psp_search.svg">
-      </div>
+      <input #search class="search" type="search" placeholder="Search">
+      <cpt-psp-search (toggleSearchClicked)="toggleSearch($event);"></cpt-psp-search>
     </div>
 
     <!-- App Container -->
@@ -30,6 +29,7 @@ declare let gtag: Function;
   `
 })
 export class AppComponent {
+  @ViewChild('search') search: ElementRef;
 
   public title: string;
   options = {
@@ -52,6 +52,13 @@ export class AppComponent {
         // });
       }
     });
+  }
+
+  toggleSearch(val: boolean) {
+    console.log('in parent', this.search, val);
+    if (val == true) {
+      this.search.nativeElement.focus();
+    }
   }
 
 }
