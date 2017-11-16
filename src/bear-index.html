@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Power Pulse</title>
+  <title>Mastering The Bear</title>
   <base href="/">
 
   <!-- JS STARTS HERE -->
@@ -19,6 +19,79 @@
   <!-- Web animations pollyfill -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.2.2/web-animations.min.js"></script>
 
+  <!-- PRELOAD CSS STARTS HERE -->
+  <style type="text/css">
+
+    .loading-main {
+      background-image: linear-gradient(-135deg, #B0004D 0%, #6E008C 52%, #0096D4 100%);
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      background-color: rgba(0, 0, 0, 1)
+    }
+
+    .loading-main .loading__contents {
+      position: absolute;
+      z-index: 100;
+      width: 100%;
+      padding-top: 60px;
+    }
+
+    .loading-main .loading__contents .row {
+      display: relative;
+      height: 60px;
+    }
+
+    .loading-main .loading__contents .row img {
+      width: 170px;
+      height: auto;
+      margin: 0px auto;
+    }
+
+    .loading-main h3 {
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 15px;
+    }
+
+    .loading-main h1 {
+      text-align: center;
+      color: #ffffff;
+      font-size: 48px;
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+
+    .loading-main p {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 400;
+      text-align: center;
+    }
+
+    .loading-main .loading__watermark {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      z-index: 99;
+      opacity: 0.8;
+      background-color: rgba(0, 0, 0, 0);
+      background-image: url(assets/imgs/loading_splash.png);
+      background-size: 100% 100%;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .loading-main .loading__watermark svg {
+      height: 300px;
+      width: 300px;
+      opacity: 0.2;
+    }
+
+  </style>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
         integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
@@ -26,10 +99,9 @@
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
   <!-- GOOGLE FONT (OPEN SANS) -->
-  <link href="https://fonts.googleapis.com/css?family=Rajdhani:400,500,600,700" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700,800" rel="stylesheet">
   <!-- Enable bootstrap 4 theme -->
-  <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
 <!-- Enable bootstrap 4 theme -->
@@ -38,10 +110,10 @@
   <div class="loading loading-main">
     <div class="loading__contents container-fluid">
       <div class="row">
-        <img class="" src="../../assets/imgs/logo-chaikin-W.svg">
+        <img class="" src="assets/imgs/logo-chaikin-W.svg">
       </div>
       <!--<h3>WELCOMES YOU TO</h3>-->
-      <h1>Power Pulse</h1>
+      <h1>Mastering The Bear</h1>
       <p>Loading...</p>
     </div>
     <div class="loading__watermark">
