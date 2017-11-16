@@ -31,6 +31,13 @@
 			.alert__entry {
 				padding:10px;
 
+        .stock__alert.down-alert {
+          i {
+            transform: rotate(90deg);
+            color: $downChange;
+          }
+        }
+
 				.alert__stock {
 
 					.ticker {
@@ -55,7 +62,7 @@
 				}
 
 				.alert__info {
-					li {  
+					li {
 						margin-top:6px;
 
 						.alert__icon {
