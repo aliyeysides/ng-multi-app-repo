@@ -42,7 +42,7 @@ declare let gtag: Function;
           </li>
         </ul>
         <div class="terms__container">
-          <p> <a href="https://www.masteringthebear.com/terms-and-conditions" target="_blank">Terms &amp; Conditions</a> <span> | </span> <a href="https://www.masteringthebear.com/attributions/" target="_blank">Attributions</a> </p>
+          <p> <a href="https://masteringthebear.com/terms-and-conditions" target="_blank">Terms &amp; Conditions</a> <span> | </span> <a href="https://masteringthebear.com/attributions/" target="_blank">Attributions</a> </p>
         </div>
       </div>
 
@@ -57,7 +57,7 @@ export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
     {
       title: 'User guide',
       icon: 'fa fa-book',
-      href: 'https://www.masteringthebear.com/user-guide',
+      href: 'https://masteringthebear.com/user-guide',
       target: '_blank',
       fn: () => {
         gtag('event', 'user_guide_clicked');
@@ -66,7 +66,7 @@ export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
     {
       title: 'FAQ',
       icon: 'fa fa-question-circle-o',
-      href: 'https://www.masteringthebear.com/faq/',
+      href: 'https://masteringthebear.com/faq/',
       target: '_blank',
       fn: () => {
         gtag('event', 'faq_clicked');
