@@ -550,6 +550,14 @@ a.quick-link {
           margin: 20px;
 
         li {
+
+          &::before {
+            position: absolute;
+            left:-10px;
+          }
+        }
+
+        li {
           margin-bottom: 20px;
           padding:5px;
 
@@ -663,12 +671,6 @@ a.quick-link {
         font-size: 16px;
         line-height: 1.5;
         position: relative;
-
-        &::before {
-          content: '● ';
-          position: absolute;
-          left:-10px;
-        }
       }
 
       @media screen and (max-width: 1024px) {
@@ -935,12 +937,6 @@ a.quick-link {
         font-size: 16px;
         line-height: 1.5;
         position: relative;
-
-        &::before {
-          content: '● ';
-          position: absolute;
-          left:-10px;
-        }
       }
 
       @media screen and (max-width: 1024px) {
@@ -1358,11 +1354,6 @@ a.quick-link {
     color: $font-color;
     font-size: 16px;
     line-height: 1.5;
-
-    &::before {
-      content: "● ";
-      margin-right: 5px;
-    }
   }
 
   @media screen and (max-width: 1024px) {

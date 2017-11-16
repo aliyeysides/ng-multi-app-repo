@@ -42,7 +42,7 @@ declare let gtag: Function;
           </li>
         </ul>
         <div class="terms__container">
-          <p> <a href="http://www.masteringthebear.com/terms-and-conditions" target="_blank">Terms &amp; Conditions</a> <span> | </span> <a href="http://www.masteringthebear.com/attributions/" target="_blank">Attributions</a> </p>
+          <p> <a href="https://www.masteringthebear.com/terms-and-conditions" target="_blank">Terms &amp; Conditions</a> <span> | </span> <a href="https://www.masteringthebear.com/attributions/" target="_blank">Attributions</a> </p>
         </div>
       </div>
 
