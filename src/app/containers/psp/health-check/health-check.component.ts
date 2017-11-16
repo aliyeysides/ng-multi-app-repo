@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {HealthCheckService} from '../../../core/services/health-check.service';
+import {AuthService} from '../../../core/services/auth.service';
 
 @Component({
   selector: 'cpt-health-check',
@@ -84,10 +86,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HealthCheckComponent implements OnInit {
 
-  constructor() {
+  constructor(private authService: AuthService,
+              private healthCheck: HealthCheckService) {
   }
 
   ngOnInit() {
+    this.authService.currentUser$
+      .subscribe(usr => console.log('usr', usr));
+    // this.healthCheck.getChaikinCalculations();
   }
 
 }
