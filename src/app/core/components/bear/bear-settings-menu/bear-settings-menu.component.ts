@@ -57,7 +57,7 @@ export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
     {
       title: 'User guide',
       icon: 'fa fa-book',
-      href: 'http://www.masteringthebear.com/user-guide',
+      href: 'https://www.masteringthebear.com/user-guide',
       target: '_blank',
       fn: () => {
         gtag('event', 'user_guide_clicked');
@@ -66,7 +66,7 @@ export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
     {
       title: 'FAQ',
       icon: 'fa fa-question-circle-o',
-      href: 'http://www.masteringthebear.com/faq/',
+      href: 'https://www.masteringthebear.com/faq/',
       target: '_blank',
       fn: () => {
         gtag('event', 'faq_clicked');
