@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="20px" viewBox="0 0 34 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon/Collapse" transform="translate(-171.000000, -1.000000)" fill-rule="nonzero" fill="#E2E2E2">
+            <path d="M197.525035,12.1286858 L181.708985,27.5319274 C181.077954,28.1560242 180.057563,28.1560242 179.426533,27.5319274 L178.473273,26.5891427 C177.842242,25.9650459 177.842242,24.955868 178.473273,24.3317711 L192.208264,11 L178.486699,-2.33177114 C177.855668,-2.95586799 177.855668,-3.96504589 178.486699,-4.58914275 L179.439959,-5.53192736 C180.07099,-6.15602421 181.09138,-6.15602421 181.722411,-5.53192736 L197.538461,9.8713142 C198.156066,10.4954111 198.156066,11.5045889 197.525035,12.1286858 Z" id="Shape" transform="translate(188.000000, 11.000000) rotate(-270.000000) translate(-188.000000, -11.000000) "></path>
+        </g>
+    </g>
+</svg>
