@@ -35,7 +35,6 @@ export class AuthService {
       withCredentials: true
     }).map(res => {
       this.loggedIn = true;
-      console.log('res', res.json());
       return res.json();
     })
       .catch(this.utilService.handleError);
