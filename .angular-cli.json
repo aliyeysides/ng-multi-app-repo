@@ -12,7 +12,7 @@
         "assets",
         "favicon.ico"
       ],
-      "index": "app/bear/index.html",
+      "index": "bear-index.html",
       "main": "app/bear/main.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",
@@ -48,7 +48,7 @@
         "assets",
         "favicon.ico"
       ],
-      "index": "app/psp/index.html",
+      "index": "psp-index.html",
       "main": "app/psp/main.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",
