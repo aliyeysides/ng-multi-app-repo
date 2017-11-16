@@ -1,6 +1,6 @@
-import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
-import {Subject} from 'rxjs/Subject';
+import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
 
 declare let gtag: Function;
 
@@ -50,16 +50,8 @@ declare let gtag: Function;
   `,
   styleUrls: ['./bear-settings-menu.component.scss']
 })
-export class BearSettingsMenuComponent implements OnInit {
-  @ViewChild('nav') nav;
-
-  @HostListener('click') onClick() {
-    this.toggleNav(this.nav.nativeElement, '500px', true);
-  }
-
-  @HostListener('document:click', ['$event']) offClick(e: Event) {
-    if (!this.el.nativeElement.contains(e.target)) this.toggleNav(this.nav.nativeElement, '0', false);
-  }
+export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
+  @ViewChild('nav') nav: ElementRef;
 
   public items: object[] = [
     {
@@ -69,6 +61,15 @@ export class BearSettingsMenuComponent implements OnInit {
       target: '_blank',
       fn: () => {
         gtag('event', 'user_guide_clicked');
+      }
+    },
+    {
+      title: 'FAQ',
+      icon: 'fa fa-question-circle-o',
+      href: 'http://www.masteringthebear.com/faq/',
+      target: '_blank',
+      fn: () => {
+        gtag('event', 'faq_clicked');
       }
     },
     {
@@ -116,28 +117,8 @@ export class BearSettingsMenuComponent implements OnInit {
     }
   ];
 
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
-
-  constructor(private el: ElementRef,
-              private authService: AuthService) {
+  constructor(public el: ElementRef, public authService: AuthService) {
+    super(el, authService);
   }
 
-  ngOnInit() {
-  }
-
-  public toggleNav(el: HTMLElement, size: string, darken: boolean): void {
-    el.style.width = size;
-    if (darken === true) {
-      document.getElementById('settings-darken').style.visibility = 'visible';
-    } else if (darken === false) {
-      document.getElementById('settings-darken').style.visibility = 'hidden';
-    }
-  }
-
-  public logOutSession(): void {
-    gtag('event', 'logout_clicked');
-    this.authService.logOutSession()
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe();
-  }
 }

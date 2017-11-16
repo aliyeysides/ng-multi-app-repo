@@ -341,3 +341,18 @@
   visibility: hidden;
   transition: 0.5s;
 }
+
+#container--main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+.search {
+  width: 0;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  transition: all .5s ease;
+}
+.search:focus {
+  width: 200px;
+}

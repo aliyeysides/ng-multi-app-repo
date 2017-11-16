@@ -2,13 +2,13 @@ import {AfterViewInit, Component, ElementRef, HostListener, ViewChild} from '@an
 import {SignalService} from '../../../services/signal.service';
 import {Subscription} from 'rxjs/Subscription';
 
-import * as moment from 'moment';
-declare let gtag: Function;
-
 import {AuthService} from '../../../services/auth.service';
-import {Subject} from 'rxjs/Subject';
 import {IdeasService} from '../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
+import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
+
+import * as moment from 'moment';
+declare let gtag: Function;
 
 @Component({
   selector: 'cpt-bear-alerts',
@@ -135,7 +135,10 @@ import {Observable} from 'rxjs/Observable';
                   <span>{{ alert['Symbol'] }}</span>
                 </p>
               </div>
-              <div class="col-8 alert__info">
+              <div class="col-1 stock__alert down-alert">
+                <i class="fa fa-play" aria-hidden="true"></i>
+              </div>
+              <div class="col-7 alert__info">
                 <ul class="container container-fluid">
                   <li class="row no-gutters">
                     <div class="col-11">
@@ -153,19 +156,15 @@ import {Observable} from 'rxjs/Observable';
   `,
   styleUrls: ['./bear-alerts.component.scss']
 })
-export class BearAlertsComponent implements AfterViewInit {
-  @ViewChild('nav') nav;
+export class BearAlertsComponent extends BaseSettingsMenuComponent implements AfterViewInit {
+  @ViewChild('nav') nav: ElementRef;
 
-  @HostListener('click') onClick() {
+  @HostListener('click', ['$event']) onClick(e?: Event) {
+    if (e) e.stopPropagation();
     this.toggleNav(this.nav.nativeElement, '500px', true);
     gtag('event', 'alerts_opened', {'event_category': 'engagement'});
   }
 
-  @HostListener('document:click', ['$event']) offClick(e: Event) {
-    if (!this.el.nativeElement.contains(e.target)) this.toggleNav(this.nav.nativeElement, '0', false);
-  }
-
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
   private uid: string;
   private holdingListId: number;
   private watchingListId: number;
@@ -178,10 +177,11 @@ export class BearAlertsComponent implements AfterViewInit {
   public date: string;
   public loading: Subscription;
 
-  constructor(private el: ElementRef,
+  constructor(public el: ElementRef,
+              public authService: AuthService,
               private signalService: SignalService,
-              private authService: AuthService,
               private ideasService: IdeasService) {
+    super(el, authService)
   }
 
   ngAfterViewInit() {
@@ -229,25 +229,19 @@ export class BearAlertsComponent implements AfterViewInit {
         this.holdingListAlerts = this.signalService.parseAlertData(res[0]);
         this.watchingListAlerts = this.signalService.parseAlertData(res[1]);
         this.bearListSignals = res[2].filter(x => {
+          Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['pgrData'][0]['corrected_pgr'], x['pgrData'][0]['raw_pgr']) });
           if (x['Signals'] === '[000000000100]') {
-            return Object.assign(x, { signal_text: 'Rel. Strength Sell' });
+            return Object.assign(x, {signal_text: 'Rel. Strength Sell'});
           }
           if (x['Signals'] === '[000000010000]') {
-            return Object.assign(x, { signal_text: 'Money Flow Sell' });
+            return Object.assign(x, {signal_text: 'Money Flow Sell'});
+          }
+          if (x['Signals'] === '[000000010100]') {
+            return Object.assign(x, {signal_text: 'Rel. Strength & Money Flow Sell'});
           }
         });
         this.allItems = this.holdingListAlerts.length + this.watchingListAlerts.length + this.bearListSignals.length;
-        console.log('alerts:', this.holdingListAlerts, this.watchingListAlerts, this.bearListSignals);
       })
-  }
-
-  public toggleNav(el: HTMLElement, size: string, darken: boolean): void {
-    el.style.width = size;
-    if (darken === true) {
-      document.getElementById('alerts-darken').style.visibility = 'visible';
-    } else if (darken === false) {
-      document.getElementById('alerts-darken').style.visibility = 'hidden';
-    }
   }
 
 }

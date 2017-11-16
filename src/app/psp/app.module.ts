@@ -9,7 +9,7 @@ import {AppComponent} from './app.component';
 import {SharedModule} from '../shared/index';
 
 import {ROUTES} from './app.routes';
-import {APP_CORE_MODULES} from '../core/components/bear/index';
+import {APP_CORE_MODULES} from '../core/components/psp/index';
 import {APP_CONTAINER_MODULES} from '../containers/psp/index';
 
 import {UtilService} from '../core/services/util.service';
@@ -23,6 +23,7 @@ import {SignalService} from '../core/services/signal.service';
 
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {NotificationsService} from 'angular2-notifications/dist';
+import {WordpressService} from '../core/services/wordpress.service';
 
 @NgModule({
   declarations: [
@@ -36,10 +37,10 @@ import {NotificationsService} from 'angular2-notifications/dist';
     RouterModule.forRoot(ROUTES, {useHash: true}),
     BusyModule.forRoot(loadingMaskConfig),
     SimpleNotificationsModule.forRoot(),
-    // ...APP_CORE_MODULES,
+    ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES,
   ],
-  providers: [UtilService, AuthService, AuthGuard, IdeasService, SignalService, NotificationsService],
+  providers: [UtilService, AuthService, AuthGuard, IdeasService, SignalService, NotificationsService, WordpressService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
