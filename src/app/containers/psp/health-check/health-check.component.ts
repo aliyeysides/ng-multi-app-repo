@@ -21,7 +21,7 @@ import {AuthService} from '../../../core/services/auth.service';
     <!-- HEALTH-CHECK - Intro -->
       <div class="row contents contents--intro">
         <div class="col-12 col-md-4">
-          <p>On average, your stocks are&hellip;</p>
+          <p class="">On average, your stocks are&hellip;</p>
         </div>
         <div class="col-12 col-md-4">
           <p class="data green"><sub>up</sub> 3.04<sub>%</sub></p>
