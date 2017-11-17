@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HealthCheckService} from '../../../core/services/health-check.service';
 import {AuthService} from '../../../core/services/auth.service';
- 
+
 @Component({
   selector: 'cpt-health-check',
   template: `
@@ -761,6 +761,7 @@ import {AuthService} from '../../../core/services/auth.service';
   styleUrls: ['./health-check.component.scss']
 })
 export class HealthCheckComponent implements OnInit {
+  private uid: string;
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService) {
@@ -768,8 +769,12 @@ export class HealthCheckComponent implements OnInit {
 
   ngOnInit() {
     this.authService.currentUser$
-      .subscribe(usr => console.log('usr', usr));
-    // this.healthCheck.getChaikinCalculations();
+      .map(usr => this.uid = usr['UID'])
+      .flatMap(uid => {
+        console.log('uid', uid);
+        return this.healthCheck.getAuthorizedLists(uid);
+      })
+      .subscribe(res => console.log('res', res));
   }
 
 }
