@@ -183,19 +183,15 @@ export class UserListsComponent implements OnInit, OnDestroy {
         return Observable.combineLatest(
           this.ideasService.getListSymbols(this.holdingList['list_id'].toString(), this.uid),
           this.ideasService.getListSymbols(this.watchingList['list_id'].toString(), this.uid),
-          this.signalService.getAlertsData({
-            components: 'alerts',
-            date: moment().format('YYYY-MM-DD'),
-            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
-            endDate: moment().format('YYYY-MM-DD'),
-            listId1: this.holdingList['list_id'],
+          this.signalService.getAllAlerts({
+            list_id: this.holdingList['list_id'],
+            period: '1',
+            uid: this.uid
           }),
-          this.signalService.getAlertsData({
-            components: 'alerts',
-            date: moment().format('YYYY-MM-DD'),
-            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
-            endDate: moment().format('YYYY-MM-DD'),
-            listId1: this.watchingList['list_id'],
+          this.signalService.getAllAlerts({
+            list_id: this.watchingList['list_id'],
+            period: '1',
+            uid: this.uid
           })
         )
       })
@@ -203,8 +199,11 @@ export class UserListsComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.holdingListIdeas = res[0]['symbols'];
         this.watchingListIdeas = res[1]['symbols'];
-        this.holdingListAlerts = this.signalService.parseAlertData(res[2]);
-        this.watchingListAlerts = this.signalService.parseAlertData(res[3]);
+        this.holdingListAlerts = res[2]['EarningEstimate'].concat(res[2]['EarningSurprise'], res[2]['PGR']);
+        this.watchingListAlerts = res[3]['EarningEstimate'].concat(res[3]['EarningSurprise'], res[3]['PGR']);
+        console.log('User List holdingAlerts', this.holdingListAlerts, 'watchingAlerts', this.watchingListAlerts);
+        // this.holdingListAlerts = this.signalService.parseAlertData(res[2]);
+        // this.watchingListAlerts = this.signalService.parseAlertData(res[3]);
       })
 
   }
@@ -250,7 +249,7 @@ export class UserListsComponent implements OnInit, OnDestroy {
   }
 
   getAlertsForItem(item: Idea, alerts: object[]) {
-    return alerts.filter(alert => item.symbol === alert['symbol']);
+    return alerts.filter(alert => item.symbol === alert['Symbol']);
   }
 
   getBellColors(item: Idea, alerts: object[]) {
