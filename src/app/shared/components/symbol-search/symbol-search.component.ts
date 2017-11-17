@@ -1,6 +1,5 @@
 import {
-  AfterContentInit,
-  AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild,
+  AfterContentInit, Component, ElementRef, Input, OnDestroy, ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 
@@ -145,7 +144,7 @@ export class SymbolSearchComponent implements AfterContentInit, OnDestroy {
     } else {
       this.gotoReport(symbol);
     }
-    gtag('event', 'search', { 'search_term': symbol });
+    gtag('event', 'search', {'search_term': symbol});
   }
 
   onSubmit() {
@@ -156,7 +155,7 @@ export class SymbolSearchComponent implements AfterContentInit, OnDestroy {
         this.gotoReport(this.searchResults[0].Symbol);
       }
     }
-    gtag('event', 'search', { 'search_term': this.searchResults[0].Symbol });
+    gtag('event', 'search', {'search_term': this.searchResults[0].Symbol});
   }
 
   toggleFocus() {
@@ -168,7 +167,7 @@ export class SymbolSearchComponent implements AfterContentInit, OnDestroy {
       .take(1)
       .subscribe();
     this.symbolSearchService.emitAddToList();
-    gtag('event', 'search', { 'search_term': symbol });
+    gtag('event', 'search', {'search_term': symbol});
   }
 
 }
