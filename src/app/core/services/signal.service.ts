@@ -23,6 +23,7 @@ export class SignalService {
 
   private alertsLookupParams: URLSearchParams;
   private signalsLookupParams: URLSearchParams;
+  private allAlertsParams: URLSearchParams;
   private apiHostName = this.utilService.getApiHostName();
   private apiPrependText = '/CPTRestSecure/app';
 
@@ -32,6 +33,7 @@ export class SignalService {
   constructor(private utilService: UtilService) {
     this.alertsLookupParams = new URLSearchParams();
     this.signalsLookupParams = new URLSearchParams();
+    this.allAlertsParams = new URLSearchParams();
   }
 
   openAlerts() {
@@ -105,6 +107,14 @@ export class SignalService {
     this.signalsLookupParams.set('period', period);
     this.signalsLookupParams.set('uid', uid);
     return this.utilService.getJson(signalsLookupUrl, this.signalsLookupParams);
+  }
+
+  public getAllAlerts(query) {
+    const url = `${this.apiHostName}${this.apiPrependText}/alerts/getAllAlerts?`;
+    Object.keys(query).forEach((key) => {
+      this.allAlertsParams.set(key, query[key]);
+    });
+    return this.utilService.getJson(url, this.allAlertsParams);
   }
 
   public parseAlertData(res) {
