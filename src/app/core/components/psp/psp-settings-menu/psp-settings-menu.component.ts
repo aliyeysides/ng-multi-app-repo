@@ -33,15 +33,21 @@ declare let gtag: Function;
   `,
   styleUrls: ['./psp-settings-menu.component.scss']
 })
-export class PspSettingsMenuComponent {
+export class PspSettingsMenuComponent extends BaseSettingsMenuComponent {
   @ViewChild('nav') nav: ElementRef;
+
+  @HostListener('click', ['$event']) onClick(e?: Event) {
+    if (e) e.stopPropagation();
+    this.openNav();
+  }
 
   @HostListener('document:click', ['$event']) offClick(e: Event) {
     if (!this.el.nativeElement.contains(e.target)) this.closeNav();
   }
 
-  constructor(private el: ElementRef,
-              private authService: AuthService) {
+  constructor(public el: ElementRef,
+              public authService: AuthService) {
+    super(el, authService)
   }
 
   openNav() {
