@@ -5,14 +5,10 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <div class="nav-list">
       <ul>
-        <li>
-          <a><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;Health Check</a>
-        </li>
-        <li>
-          <a><i class="fa fa-list" aria-hidden="true"></i> &nbsp;My Stocks</a>
-        </li>
-        <li>
-          <a><i class="fa fa-heartbeat" aria-hidden="true"></i> &nbsp;Market Beat</a>
+        <li *ngFor="let route of routes"
+            routerLinkActive="active"
+            routerLink="{{ route.link }}">
+          <a><i class="{{ route.klass }}" aria-hidden="true"></i> &nbsp;{{ route.label }}</a>
         </li>
       </ul>
     </div>
@@ -21,8 +17,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PspNavigatorComponent {
   public routes = [
-    {link: '/health-check', icon: './assets/imgs/icon_home.svg', label: 'Health Check'},
-    {link: '/my-stocks', icon: './assets/imgs/icon_bulb.svg', label: 'My Stocks'},
-    {link: '/market-beat', icon: './assets/imgs/icon_discovery.svg', label: 'Market Beat'},
+    {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
+    {link: '/my-stocks', klass: 'fa fa-list', label: 'My Stocks'},
+    {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Beat'},
   ];
 }

@@ -36,6 +36,11 @@ declare let gtag: Function;
 export class PspSettingsMenuComponent extends BaseSettingsMenuComponent {
   @ViewChild('nav') nav: ElementRef;
 
+  @HostListener('click', ['$event']) onClick(e?: Event) {
+    if (e) e.stopPropagation();
+    this.openNav();
+  }
+
   @HostListener('document:click', ['$event']) offClick(e: Event) {
     if (!this.el.nativeElement.contains(e.target)) this.closeNav();
   }
