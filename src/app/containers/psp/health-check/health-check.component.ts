@@ -774,6 +774,7 @@ export class HealthCheckComponent implements OnInit {
         console.log('uid', uid);
         return this.healthCheck.getAuthorizedLists(uid);
       })
+      .take(1)
       .subscribe(res => console.log('res', res));
   }
 
