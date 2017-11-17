@@ -3,18 +3,16 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'cpt-psp-navigator',
   template: `
-    <div class="side-nav">
-      <div class="side-nav__rule">
-        <p>&ndash;&ndash;&ndash;&nbsp; NAVIGATION
-          &nbsp;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;</p>
-      </div>
-      <ul class="side-nav__section">
-        <li *ngFor="let route of routes"
-            routerLinkActive="active"
-            routerLink="{{ route.link }}">
-          <a>
-            <span class="text">{{ route.label }}</span>
-          </a>
+    <div class="nav-list">
+      <ul>
+        <li>
+          <a><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;Health Check</a>
+        </li>
+        <li>
+          <a><i class="fa fa-list" aria-hidden="true"></i> &nbsp;My Stocks</a>
+        </li>
+        <li>
+          <a><i class="fa fa-heartbeat" aria-hidden="true"></i> &nbsp;Market Beat</a>
         </li>
       </ul>
     </div>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="28px" viewBox="0 0 16 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Phone" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="PSP--StockView__AMZN" transform="translate(-349.000000, -1497.000000)" fill-rule="nonzero" fill="#DEDEDE">
+            <path d="M364.620028,1511.92951 L351.967188,1524.61453 C351.462363,1525.12849 350.646051,1525.12849 350.141226,1524.61453 L349.378619,1523.83812 C348.873794,1523.32416 348.873794,1522.49307 349.378619,1521.97911 L360.366611,1511 L349.389359,1500.02089 C348.884535,1499.50693 348.884535,1498.67584 349.389359,1498.16188 L350.151967,1497.38547 C350.656792,1496.87151 351.473104,1496.87151 351.977929,1497.38547 L364.630769,1510.07049 C365.124853,1510.58446 365.124853,1511.41554 364.620028,1511.92951 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

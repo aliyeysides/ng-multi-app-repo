@@ -8,8 +8,8 @@ declare let gtag: Function;
 @Component({
   selector: 'cpt-psp-settings-menu',
   template: `
-    <div (click)="openNav()" class="header__toggle quick-link">
-      <img src="assets/imgs/icon_sandwich.svg">
+    <div (click)="openNav()" class="header__button header__button--left">
+      <img class="align-middle" src="assets/imgs/icon_sandwich.svg">
     </div>
     <!--PANEL - Navigation - This sits below everything -->
     <nav #nav class="container--nav">
@@ -46,8 +46,8 @@ export class PspSettingsMenuComponent extends BaseSettingsMenuComponent {
   }
 
   openNav() {
-    this.nav.nativeElement.style.width = "200px";
-    document.getElementById("container--main").style.marginLeft = "200px";
+    this.nav.nativeElement.style.width = "320px";
+    document.getElementById("container--main").style.marginLeft = "320px";
   }
 
   closeNav() {
