@@ -66,33 +66,11 @@ import {AuthService} from '../../../core/services/auth.service';
           </div>
         </div>
 
-        <div class="col-12 section__movers-actions">
-          <div class="row no-gutters">
-            <div class="col-6 movers__dropdown">
-              <p class="dropdown__text">Top Movers</p>
-            </div>
-            <div class="col-2">
-            </div>
-            <div class="col-2 movers-actions__toggle">
-              <img class="align-middle" src="./assets/imgs/icon_chart--bars.svg">
-            </div>
-            <div class="col-2 movers-actions__toggle">
-              <img class="align-middle" src="./assets/imgs/icon_chart--spark.svg">
-            </div>
-          </div>
-          <div class="row no-gutters dropdown__container">
-            <div class="col-6">
-              <ul>
-                <li class="selected">→ Top Movers</li>
-                <li>All Movers</li>
-                <li>Bull Movers</li>
-                <li>Bear Movers</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
         <div class="col-12 section__movers section__movers--percent">
+          <div class="chart__header">
+            <h3 class="">Top Movers</h3>
+            <div class="divider__long divider__long--blue"></div>
+          </div>
           <ul>
             <li class="row no-gutters list-item__mover">
               <div class="col-4 mover__stock">
@@ -171,111 +149,6 @@ import {AuthService} from '../../../core/services/auth.service';
                 <div class="mover__bar negative sixtypercent">
                   <p class="data">-9.45%</p>
                 </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="col-12 section__movers section__movers--price">
-          <ul>
-            <li class="row no-gutters list-item__mover">
-              <div class="col-4 mover__stock">
-                <img src="./assets/imgs/arc_Bullish.svg">
-                <p class="ticker">CMCSA</p>
-              </div>
-              <div class="col-6">
-                <div class="mover__spark positive">
-                  <div class="open--line"></div>
-                </div>
-              </div>
-              <div class="col-2">
-                <p class="data green">13.43%</p>
-              </div>
-            </li>
-            <li class="row no-gutters list-item__mover">
-              <div class="col-4 mover__stock">
-                <img src="./assets/imgs/arc_Bullish.svg">
-                <p class="ticker">CMCSA</p>
-              </div>
-              <div class="col-6">
-                <div class="mover__spark positive">
-                  <div class="open--line"></div>
-                </div>
-              </div>
-              <div class="col-2">
-                <p class="data green">13.43%</p>
-              </div>
-            </li>
-            <li class="row no-gutters list-item__mover">
-              <div class="col-4 mover__stock">
-                <img src="./assets/imgs/arc_Bullish.svg">
-                <p class="ticker">CMCSA</p>
-              </div>
-              <div class="col-6">
-                <div class="mover__spark positive">
-                  <div class="open--line"></div>
-                </div>
-              </div>
-              <div class="col-2">
-                <p class="data green">13.43%</p>
-              </div>
-            </li>
-          </ul>
-          <div class="divider-grey"></div>
-          <ul class="movers__list">
-            <li class="row no-gutters list-item__mover">
-              <div class="col-4 mover__stock">
-                <img src="./assets/imgs/arc_Bullish.svg">
-                <p class="ticker">CMCSA</p>
-              </div>
-              <div class="col-6">
-                <div class="mover__spark positive">
-                  <div class="open--line"></div>
-                </div>
-              </div>
-              <div class="col-2">
-                <p class="data red">13.43%</p>
-              </div>
-            </li>
-            <li class="row no-gutters list-item__mover">
-              <div class="col-4 mover__stock">
-                <p class="ticker indice">S&P 500</p>
-              </div>
-              <div class="col-6">
-                <div class="mover__spark positive">
-                  <div class="open--line"></div>
-                </div>
-              </div>
-              <div class="col-2">
-                <p class="data red">-3.43%</p>
-              </div>
-            </li>
-            <li class="row no-gutters list-item__mover">
-              <div class="col-4 mover__stock">
-                <img src="./assets/imgs/arc_Bearish.svg">
-                <p class="ticker">CMCSA</p>
-              </div>
-              <div class="col-6">
-                <div class="mover__spark positive">
-                  <div class="open--line"></div>
-                </div>
-              </div>
-              <div class="col-2">
-                <p class="data red">-5.43%</p>
-              </div>
-            </li>
-            <li class="row no-gutters list-item__mover">
-              <div class="col-4 mover__stock">
-                <img src="./assets/imgs/arc_VeryBullish.svg">
-                <p class="ticker">CMCSA</p>
-              </div>
-              <div class="col-6">
-                <div class="mover__spark positive">
-                  <div class="open--line"></div>
-                </div>
-              </div>
-              <div class="col-2">
-                <p class="data red">-7.43%</p>
               </div>
             </li>
           </ul>
