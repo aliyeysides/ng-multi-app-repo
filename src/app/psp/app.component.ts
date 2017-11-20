@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 
 declare let gtag: Function;
@@ -12,15 +12,15 @@ declare let gtag: Function;
     <div class="page__header" id="page__header">
       <cpt-psp-settings-menu></cpt-psp-settings-menu>
       <div class="header__title">
-        <h1>{{ title }}</h1>
+        <h1 *ngIf="!globalSearch">{{ title }}</h1>
+        <cpt-symbol-search [placeholder]="'Search'" *ngIf="globalSearch"></cpt-symbol-search>
       </div>
-      <input #search class="search" type="search" placeholder="Search">
-      <cpt-psp-search (toggleSearchClicked)="toggleSearch($event);"></cpt-psp-search>
+      <cpt-psp-search (toggleSearchClicked)="toggleSearch()"></cpt-psp-search>
     </div>
 
     <!-- App Container -->
-    <div class="container--main" id="container--main">
-      <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->
+    <div class="container--main" id="container--main" [ngClass]="{'blur-me': globalSearch}">
+      <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->   
       <div class="container--page">
         <router-outlet></router-outlet>
       </div>
@@ -31,6 +31,7 @@ declare let gtag: Function;
 export class AppComponent {
   @ViewChild('search') search: ElementRef;
 
+  public globalSearch: boolean = false;
   public title: string;
   options = {
     position: ['top', 'right'],
@@ -54,11 +55,8 @@ export class AppComponent {
     });
   }
 
-  toggleSearch(val: boolean) {
-    console.log('in parent', this.search, val);
-    if (val == true) {
-      this.search.nativeElement.focus();
-    }
+  toggleSearch() {
+    this.globalSearch = !this.globalSearch;
   }
 
 }

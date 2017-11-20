@@ -6,7 +6,7 @@ p, a, h1, h2, h3, h4, h5, h6, span, label, li, table, td, th, tr {
   margin: 0;
   padding: 0;
 }
- 
+
 h1 {
   font-size: 32px;
   font-weight: 400;
@@ -23,7 +23,7 @@ h2 {
   color: #999999;
 
   span {
-    font-weight: 600; 
+    font-weight: 600;
     color: #999999;
   }
 }
@@ -293,7 +293,7 @@ button {
 
       li {
         height:60px;
-        font-size: 22px; 
+        font-size: 22px;
 
         a {
           color:#ffffff !important;
@@ -357,6 +357,10 @@ button {
   .header__button--right {
     right:3%;
   }
+}
+
+.blur-me {
+  filter: blur(10px);
 }
 
 
