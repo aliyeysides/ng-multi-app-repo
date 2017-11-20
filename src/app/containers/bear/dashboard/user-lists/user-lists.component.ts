@@ -201,15 +201,29 @@ export class UserListsComponent implements OnInit, OnDestroy {
         this.watchingListIdeas = res[1]['symbols'];
         this.holdingListAlerts = res[2]['EarningEstimate'].concat(res[2]['EarningSurprise'], res[2]['PGR']);
         this.watchingListAlerts = res[3]['EarningEstimate'].concat(res[3]['EarningSurprise'], res[3]['PGR']);
-        console.log('User List holdingAlerts', this.holdingListAlerts, 'watchingAlerts', this.watchingListAlerts);
-        // this.holdingListAlerts = this.signalService.parseAlertData(res[2]);
-        // this.watchingListAlerts = this.signalService.parseAlertData(res[3]);
+        this.holdingListAlerts.filter(this.assignDiffProp);
+        this.watchingListAlerts.filter(this.assignDiffProp)
       })
 
   }
 
   public appendPGRImage(pgr: number, rawPgr: number) {
     return this.signalService.appendPGRImage(pgr, rawPgr);
+  }
+
+  assignDiffProp(x) {
+    if (x['Text'] == 'Estimate Revision') {
+      return Object.assign(x, {diff: x['PercentageSurprise'] })
+    }
+    if (x['Text'] == 'Earnings Surprise') {
+      return Object.assign(x, {diff: x['ESTPercentageChange'] })
+    }
+    if (x['Text'] == 'Power Gauge turns Bullish') {
+      return Object.assign(x, {diff: 1 })
+    }
+    if (x['Text'] == 'Power Gauge turns Bearish') {
+      return Object.assign(x, {diff: -1 })
+    }
   }
 
   openSearch() {
@@ -255,8 +269,8 @@ export class UserListsComponent implements OnInit, OnDestroy {
   getBellColors(item: Idea, alerts: object[]) {
     return {
       'bell--yellow': this.getAlertsForItem(item, alerts).length > 1,
-      'bell--green': this.getAlertsForItem(item, alerts).length == 1 && this.getAlertsForItem(item, alerts)[0]['per_change'] > 0,
-      'bell--red': this.getAlertsForItem(item, alerts).length == 1 && this.getAlertsForItem(item, alerts)[0]['per_change'] < 0
+      'bell--green': this.getAlertsForItem(item, alerts).length == 1 && this.getAlertsForItem(item, alerts)[0]['diff'] > 0,
+      'bell--red': this.getAlertsForItem(item, alerts).length == 1 && this.getAlertsForItem(item, alerts)[0]['diff'] < 0
     };
   }
 
