@@ -183,19 +183,15 @@ export class UserListsComponent implements OnInit, OnDestroy {
         return Observable.combineLatest(
           this.ideasService.getListSymbols(this.holdingList['list_id'].toString(), this.uid),
           this.ideasService.getListSymbols(this.watchingList['list_id'].toString(), this.uid),
-          this.signalService.getAlertsData({
-            components: 'alerts',
-            date: moment().format('YYYY-MM-DD'),
-            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
-            endDate: moment().format('YYYY-MM-DD'),
-            listId1: this.holdingList['list_id'],
+          this.signalService.getAllAlerts({
+            list_id: this.holdingList['list_id'],
+            period: '1',
+            uid: this.uid
           }),
-          this.signalService.getAlertsData({
-            components: 'alerts',
-            date: moment().format('YYYY-MM-DD'),
-            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
-            endDate: moment().format('YYYY-MM-DD'),
-            listId1: this.watchingList['list_id'],
+          this.signalService.getAllAlerts({
+            list_id: this.watchingList['list_id'],
+            period: '1',
+            uid: this.uid
           })
         )
       })
@@ -203,14 +199,31 @@ export class UserListsComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.holdingListIdeas = res[0]['symbols'];
         this.watchingListIdeas = res[1]['symbols'];
-        this.holdingListAlerts = this.signalService.parseAlertData(res[2]);
-        this.watchingListAlerts = this.signalService.parseAlertData(res[3]);
+        this.holdingListAlerts = res[2]['EarningEstimate'].concat(res[2]['EarningSurprise'], res[2]['PGR']);
+        this.watchingListAlerts = res[3]['EarningEstimate'].concat(res[3]['EarningSurprise'], res[3]['PGR']);
+        this.holdingListAlerts.filter(this.assignDiffProp);
+        this.watchingListAlerts.filter(this.assignDiffProp)
       })
 
   }
 
   public appendPGRImage(pgr: number, rawPgr: number) {
     return this.signalService.appendPGRImage(pgr, rawPgr);
+  }
+
+  assignDiffProp(x) {
+    if (x['Text'] == 'Estimate Revision') {
+      return Object.assign(x, {diff: x['PercentageSurprise'] })
+    }
+    if (x['Text'] == 'Earnings Surprise') {
+      return Object.assign(x, {diff: x['ESTPercentageChange'] })
+    }
+    if (x['Text'] == 'Power Gauge turns Bullish') {
+      return Object.assign(x, {diff: 1 })
+    }
+    if (x['Text'] == 'Power Gauge turns Bearish') {
+      return Object.assign(x, {diff: -1 })
+    }
   }
 
   openSearch() {
@@ -250,14 +263,14 @@ export class UserListsComponent implements OnInit, OnDestroy {
   }
 
   getAlertsForItem(item: Idea, alerts: object[]) {
-    return alerts.filter(alert => item.symbol === alert['symbol']);
+    return alerts.filter(alert => item.symbol === alert['Symbol']);
   }
 
   getBellColors(item: Idea, alerts: object[]) {
     return {
       'bell--yellow': this.getAlertsForItem(item, alerts).length > 1,
-      'bell--green': this.getAlertsForItem(item, alerts).length == 1 && this.getAlertsForItem(item, alerts)[0]['per_change'] > 0,
-      'bell--red': this.getAlertsForItem(item, alerts).length == 1 && this.getAlertsForItem(item, alerts)[0]['per_change'] < 0
+      'bell--green': this.getAlertsForItem(item, alerts).length == 1 && this.getAlertsForItem(item, alerts)[0]['diff'] > 0,
+      'bell--red': this.getAlertsForItem(item, alerts).length == 1 && this.getAlertsForItem(item, alerts)[0]['diff'] < 0
     };
   }
 
