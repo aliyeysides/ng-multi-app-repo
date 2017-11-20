@@ -8,14 +8,10 @@ import {AuthService} from '../../../core/services/auth.service';
     <!-- PANEL CONTENTS -->
     <div class="container page__contents  page__contents--healthcheck">
 
-      <div class="row no-gutters contents contents--timespan">
-        <div class="col-4 timespan__toggle">
-          <p>Today</p>
+      <div class="row no-gutters contents">
+        <div class="col-12">
+          <h1>My Stock List</h1>
         </div>
-        <div class="col-4 timespan__toggle selected">
-            <p>This Week</p>
-        </div>
-        <div class="col-4"></div>
       </div>
 
     <!-- HEALTH-CHECK - Intro -->
