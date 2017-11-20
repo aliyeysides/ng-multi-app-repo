@@ -1,5 +1,5 @@
 import {
-  AfterContentInit, Component, ElementRef, Input, OnDestroy, ViewChild,
+  AfterContentInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 
@@ -77,6 +77,7 @@ declare let gtag: Function;
 export class SymbolSearchComponent implements AfterContentInit, OnDestroy {
   @Input('placeholder') placeholder: string;
   @ViewChild('search') search: ElementRef;
+  @Output('focused') focused: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private uid: string;
@@ -90,10 +91,10 @@ export class SymbolSearchComponent implements AfterContentInit, OnDestroy {
 
   public loading: Subscription;
 
-  constructor(private router: Router,
-              private authService: AuthService,
-              private ideasService: IdeasService,
-              private symbolSearchService: SymbolSearchService) {
+  constructor(public router: Router,
+              public authService: AuthService,
+              public ideasService: IdeasService,
+              public symbolSearchService: SymbolSearchService) {
     this.symbolSearchForm = new FormControl();
 
     router.events
@@ -160,6 +161,8 @@ export class SymbolSearchComponent implements AfterContentInit, OnDestroy {
 
   toggleFocus() {
     this.focus = !this.focus;
+    console.log('toggle symbol search', this.focus);
+    this.focused.emit(this.focus);
   }
 
   addToList(listId: string, symbol: string) {
