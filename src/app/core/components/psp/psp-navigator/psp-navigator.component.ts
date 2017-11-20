@@ -3,18 +3,12 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'cpt-psp-navigator',
   template: `
-    <div class="side-nav">
-      <div class="side-nav__rule">
-        <p>&ndash;&ndash;&ndash;&nbsp; NAVIGATION
-          &nbsp;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;</p>
-      </div>
-      <ul class="side-nav__section">
+    <div class="nav-list">
+      <ul>
         <li *ngFor="let route of routes"
             routerLinkActive="active"
             routerLink="{{ route.link }}">
-          <a>
-            <span class="text">{{ route.label }}</span>
-          </a>
+          <a><i class="{{ route.klass }}" aria-hidden="true"></i> &nbsp;{{ route.label }}</a>
         </li>
       </ul>
     </div>
@@ -23,8 +17,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PspNavigatorComponent {
   public routes = [
-    {link: '/health-check', icon: './assets/imgs/icon_home.svg', label: 'Health Check'},
-    {link: '/my-stocks', icon: './assets/imgs/icon_bulb.svg', label: 'My Stocks'},
-    {link: '/market-beat', icon: './assets/imgs/icon_discovery.svg', label: 'Market Beat'},
+    {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
+    {link: '/my-stocks', klass: 'fa fa-list', label: 'My Stocks'},
+    {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Beat'},
   ];
 }
