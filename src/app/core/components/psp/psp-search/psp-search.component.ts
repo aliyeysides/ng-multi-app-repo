@@ -19,7 +19,6 @@ export class PspSearchComponent implements OnInit {
   }
 
   toggleSearch() {
-    console.log('I clicked search icon');
     this.toggleSearchClicked.emit();
   }
 

@@ -13,14 +13,14 @@ declare let gtag: Function;
       <cpt-psp-settings-menu></cpt-psp-settings-menu>
       <div class="header__title">
         <h1 *ngIf="!globalSearch">{{ title }}</h1>
-        <cpt-symbol-search *ngIf="globalSearch"></cpt-symbol-search>
+        <cpt-symbol-search [placeholder]="'Search'" *ngIf="globalSearch"></cpt-symbol-search>
       </div>
       <cpt-psp-search (toggleSearchClicked)="toggleSearch()"></cpt-psp-search>
     </div>
 
     <!-- App Container -->
-    <div class="container--main" id="container--main">
-      <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->
+    <div class="container--main" id="container--main" [ngClass]="{'blur-me': globalSearch}">
+      <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->   
       <div class="container--page">
         <router-outlet></router-outlet>
       </div>
@@ -57,7 +57,6 @@ export class AppComponent {
 
   toggleSearch() {
     this.globalSearch = !this.globalSearch;
-    console.log('I changed value of globalSearch', this.globalSearch);
   }
 
 }
