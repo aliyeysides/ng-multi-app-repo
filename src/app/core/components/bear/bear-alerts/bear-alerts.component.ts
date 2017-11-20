@@ -53,28 +53,27 @@ declare let gtag: Function;
               <div class="col-4 alert__stock">
                 <p class="ticker">
                   <img class="rating" src="{{ alert['pgr_url'] }}">
-                  <span>{{ alert['symbol'] }}</span>
+                  <span>{{ alert['Symbol'] }}</span>
                 </p>
               </div>
               <div class="col-8 alert__info">
                 <ul class="container container-fluid">
                   <li class="row no-gutters">
                     <div class="col-11">
-                      <p class="alert__text">{{ alert['alert_text'] }}</p>
+                      <p class="alert__text">{{ alert['Text'] }}</p>
                       <p class="alert__text"
-                         *ngIf="alert['alert_type'] == 'earnings_surprise_alerts' || alert['alert_type'] == 'estimate_revision_alerts'">
-                        <span>Q{{ alert['quarter'] }} Est.
-                        <b>{{ alert['old_value'].toFixed(2) }}</b></span>
-                        <span [ngClass]="{'up-change': alert['per_change']>0, 'down-change':alert['per_change']<0}"> Act. <b>{{ alert['new_value'].toFixed(2)
+                         *ngIf="alert['Text'] == 'Earnings Surprise'">
+                        Est. <b>{{ alert['ConsensusEstimate'] }}</b>
+                        <span
+                          [ngClass]="{'up-change': +alert['PercentageSurprise']>0, 'down-change': +alert['PercentageSurprise']<0}"> Act. <b>{{ alert['ActualEPS']
                           }}</b></span>
                       </p>
-                      <p class="alert__text" *ngIf="alert['alert_type'] == 'pgr_change_alerts'">
+                      <p class="alert__text"
+                         *ngIf="alert['Text'] == 'Estimate Revision'">
+                        Est. <b>{{ alert['MeanESTPreviousDay'] }}</b>
                         <span
-                          [ngClass]="{'up-change':alert['chg_direction']==1,'down-change':alert['chg_direction']==-1}"
-                          *ngIf="alert['chg_direction']==1">Rating Upgraded to {{ alert['new_rating'] }}</span>
-                        <span
-                          [ngClass]="{'up-change':alert['chg_direction']==1,'down-change':alert['chg_direction']==-1}"
-                          *ngIf="alert['chg_direction']==-1">Rating Downgraded to {{ alert['new_rating'] }}</span>
+                          [ngClass]="{'up-change': +alert['ESTPercentageChange']>0, 'down-change': +alert['ESTPercentageChange']<0}">➞ <b>{{ alert['MeanESTCurrentDay']
+                          }}</b></span>
                       </p>
                     </div>
                   </li>
@@ -92,28 +91,27 @@ declare let gtag: Function;
               <div class="col-4 alert__stock">
                 <p class="ticker">
                   <img class="rating" src="{{ alert['pgr_url'] }}">
-                  <span>{{ alert['symbol'] }}</span>
+                  <span>{{ alert['Symbol'] }}</span>
                 </p>
               </div>
               <div class="col-8 alert__info">
                 <ul class="container container-fluid">
                   <li class="row no-gutters">
                     <div class="col-11">
-                      <p class="alert__text">{{ alert['alert_text'] }}</p>
+                      <p class="alert__text">{{ alert['Text'] }}</p>
                       <p class="alert__text"
-                         *ngIf="alert['alert_type'] == 'earnings_surprise_alerts' || alert['alert_type'] == 'estimate_revision_alerts'">
-                        <span>Q{{ alert['quarter'] }} Est.
-                        <b>{{ alert['old_value'].toFixed(2) }}</b></span>
-                        <span [ngClass]="{'up-change': alert['per_change']>0, 'down-change':alert['per_change']<0}"> Act. <b>{{ alert['new_value'].toFixed(2)
+                         *ngIf="alert['Text'] == 'Earnings Surprise'">
+                        Est. <b>{{ alert['ConsensusEstimate'] }}</b>
+                        <span
+                          [ngClass]="{'up-change': +alert['PercentageSurprise']>0, 'down-change': +alert['PercentageSurprise']<0}"> Act. <b>{{ alert['ActualEPS']
                           }}</b></span>
                       </p>
-                      <p class="alert__text" *ngIf="alert['alert_type'] == 'pgr_change_alerts'">
+                      <p class="alert__text"
+                         *ngIf="alert['Text'] == 'Estimate Revision'">
+                        Est. <b>{{ alert['MeanESTPreviousDay'] }}</b>
                         <span
-                          [ngClass]="{'up-change':alert['chg_direction']==1,'down-change':alert['chg_direction']==-1}"
-                          *ngIf="alert['chg_direction']==1">Rating Upgraded to {{ alert['new_rating'] }}</span>
-                        <span
-                          [ngClass]="{'up-change':alert['chg_direction']==1,'down-change':alert['chg_direction']==-1}"
-                          *ngIf="alert['chg_direction']==-1">Rating Downgraded to {{ alert['new_rating'] }}</span>
+                          [ngClass]="{'up-change': +alert['ESTPercentageChange']>0, 'down-change': +alert['ESTPercentageChange']<0}">➞ <b>{{ alert['MeanESTCurrentDay']
+                          }}</b></span>
                       </p>
                     </div>
                   </li>
@@ -207,29 +205,27 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
         this.watchingListId = res[2]['user_lists'][1]['list_id'];
         this.bestBearsListId = res[0]['idea_lists'][0]['list_id'];
         return Observable.combineLatest(
-          this.signalService.getAlertsData({
-            components: 'alerts',
-            date: moment().format('YYYY-MM-DD'),
-            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
-            endDate: moment().format('YYYY-MM-DD'),
-            listId1: this.holdingListId,
+          this.signalService.getAllAlerts({
+            list_id: this.holdingListId,
+            period: '1',
+            uid: this.uid
           }),
-          this.signalService.getAlertsData({
-            components: 'alerts',
-            date: moment().format('YYYY-MM-DD'),
-            startDate: moment().add(-1, 'day').format('YYYY-MM-DD'),
-            endDate: moment().format('YYYY-MM-DD'),
-            listId1: this.watchingListId,
+          this.signalService.getAllAlerts({
+            list_id: this.watchingListId,
+            period: '1',
+            uid: this.uid
           }),
           this.signalService.getSignalDataForList(this.bestBearsListId.toString(), '1', this.uid)
-        );
+        )
       })
       .take(1)
       .subscribe(res => {
-        this.holdingListAlerts = this.signalService.parseAlertData(res[0]);
-        this.watchingListAlerts = this.signalService.parseAlertData(res[1]);
+        this.holdingListAlerts = res[0]['EarningEstimate'].concat(res[0]['EarningSurprise'], res[0]['PGR'])
+          .filter(this.assignPageUrl.bind(this));
+        this.watchingListAlerts = res[1]['EarningEstimate'].concat(res[1]['EarningSurprise'], res[1]['PGR'])
+          .filter(this.assignPageUrl.bind(this));
         this.bearListSignals = res[2].filter(x => {
-          Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['pgrData'][0]['corrected_pgr'], x['pgrData'][0]['raw_pgr']) });
+          Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['pgrData'][0]['pgr_rating'], x['pgrData'][0]['raw_pgr_rating"'])});
           if (x['Signals'] === '[000000000100]') {
             return Object.assign(x, {signal_text: 'Rel. Strength Sell'});
           }
@@ -242,6 +238,13 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
         });
         this.allItems = this.holdingListAlerts.length + this.watchingListAlerts.length + this.bearListSignals.length;
       })
+  }
+
+  assignPageUrl(x) {
+    if (x['Text'] == 'Estimate Revision' || x['Text'] == 'Earnings Surprise') {
+      return Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['pgrRating'], x['rawPgrRating'])});
+    }
+    return Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['Value'], 0) });
   }
 
 }
