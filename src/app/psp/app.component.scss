@@ -6,7 +6,7 @@ p, a, h1, h2, h3, h4, h5, h6, span, label, li, table, td, th, tr {
   margin: 0;
   padding: 0;
 }
-
+ 
 h1 {
   font-size: 32px;
   font-weight: 400;
@@ -375,7 +375,27 @@ button {
 }
 
 
+#search__wrap .form-inline .form-group .search-box {
+    font-family: "Open Sans", Helvetica, sans-serif;
+    height: 60px;
+    width: 80%;
+    text-align: left;
+    padding: 0 15px 0;
+    border: 0;
+    font-size: 32px;
+    border-radius: 0;
+    outline: none;
+    color: #ffffff;
+    border-bottom: 0px solid #f8f8f8;
+    background-color: transparent;
+}
 
+
+#search__wrap .form-inline .form-group .form-control {
+    width: 100%;
+    font-weight: 300;
+    background-color: transparent;
+}
 
 
 
