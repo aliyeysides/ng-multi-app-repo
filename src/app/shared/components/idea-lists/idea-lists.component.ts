@@ -6,7 +6,7 @@ import {Idea, IdeaList} from '../../models/idea';
 import {Subject} from 'rxjs/Subject';
 import {IDEAS_LIST_CLASSMAP} from '../../models/idea-list-class-map';
 import {Subscription} from 'rxjs/Subscription';
-import {IdeasService} from '../../../core/services/ideas.service';
+import {IdeasService} from '../../../services/ideas.service';
 import {Router} from '@angular/router';
 
 declare let gtag: Function;

@@ -15,7 +15,7 @@ declare let gtag: Function;
         <h1 *ngIf="!globalSearch">{{ title }}</h1>
         <cpt-psp-symbol-search [placeholder]="'Search'" *ngIf="globalSearch"></cpt-psp-symbol-search>
       </div>
-      <cpt-psp-search (toggleSearchClicked)="toggleSearch()"></cpt-psp-search>
+      <cpt-psp-search-btn (toggleSearchClicked)="toggleSearch()"></cpt-psp-search-btn>
     </div>
 
     <!-- App Container -->

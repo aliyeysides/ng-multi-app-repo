@@ -1,8 +1,8 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {Subject} from 'rxjs/Subject';
-import {AuthService} from '../core/services/auth.service';
-import {UtilService} from '../core/services/util.service';
+import {AuthService} from '../services/auth.service';
+import {UtilService} from '../services/util.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, OnDestroy {
