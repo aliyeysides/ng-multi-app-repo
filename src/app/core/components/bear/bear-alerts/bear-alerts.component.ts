@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {AuthService} from '../../../services/auth.service';
 import {IdeasService} from '../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
-import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
+import {BaseSettingsMenuComponent} from '../../../../shared/components/menus/settings-menu.component';
 
 import * as moment from 'moment';
 declare let gtag: Function;

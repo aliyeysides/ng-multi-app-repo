@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {UtilService} from './util.service';
+import {Http, RequestOptions, Headers} from '@angular/http';
 
 @Injectable()
 export class HealthCheckService {
@@ -8,7 +9,8 @@ export class HealthCheckService {
   private calculationParams: URLSearchParams;
   private authorizedListsParams: URLSearchParams;
 
-  constructor(private utilService: UtilService) {
+  constructor(private utilService: UtilService,
+              private http: Http) {
     this.calculationParams = new URLSearchParams;
     this.authorizedListsParams = new URLSearchParams;
   }
@@ -27,7 +29,32 @@ export class HealthCheckService {
     this.authorizedListsParams.set('uid', uid);
     this.authorizedListsParams.set('rank', 'false');
     this.authorizedListsParams.set('responseType', 'custom');
-    return this.utilService.getJson(url, this.authorizedListsParams);
+
+    // let headers = new Headers({
+    //   'Content-Type': 'application/json',
+    //   'Accept': 'application/json',
+    //   'Access-Control-Allow-Headers': 'Content-Type',
+    // });
+    // headers.append('environment', 'desktop');
+    // headers.append('version', '1.3.4');
+
+    // let options = new RequestOptions({headers: headers, params: this.authorizedListsParams});
+
+    return this.http.get(url, {
+      search: this.authorizedListsParams,
+      withCredentials: true
+    }).map(res => res.json())
+      .catch(this.utilService.handleError);
+
+    // return this.utilService.getJson(url, this.authorizedListsParams);
+
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    // headers.append('authentication', `${student.token}`);
+    //
+    // let options = new RequestOptions({ headers: headers });
+    // return this.http
+    //   .put(url, JSON.stringify(student), options)
   }
 
 }

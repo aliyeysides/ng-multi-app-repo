@@ -4,6 +4,7 @@ import {UtilService} from './util.service';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../../shared/models/user';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {IdeasService} from './ideas.service';
 
 @Injectable()
 export class AuthService {
@@ -55,5 +56,19 @@ export class AuthService {
   public isLoggedIn(): boolean {
     return this.loggedIn;
   }
+
+  // public getBearHoldingListId() {
+  //   // const uid = this.currentUser.getValue()['UID'];
+  //   // this.ideasService.getIdeasList(uid, 'Bear')
+  //   //   .take(1)
+  //   //   .subscribe(res => {
+  //   //     this.holdingListId = res[2]['user_lists'][0]['list_id'];
+  //   //     this.watchingListId = res[2]['user_lists'][1]['list_id'];
+  //   //   });
+  // }
+  //
+  // public getBearWatchingListId() {
+  //   console.log('watchinglistId', this.currentUser.getValue());
+  // }
 
 }

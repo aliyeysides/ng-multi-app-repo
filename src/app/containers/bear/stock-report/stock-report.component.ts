@@ -16,7 +16,7 @@ import {IdeasService} from '../../../core/services/ideas.service';
         <div class="section-header">
           <h1>Stock view for</h1>
           <div class="section-header__search">
-            <cpt-symbol-search [placeholder]="symbol.toUpperCase()"></cpt-symbol-search>
+            <cpt-bear-symbol-search [placeholder]="symbol.toUpperCase()"></cpt-bear-symbol-search>
           </div>
           <div class="section-header__actions">
             <a (click)="gotoDiscovery(symbol)" class="discovery-icon">
