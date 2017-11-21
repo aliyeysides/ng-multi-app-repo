@@ -21,7 +21,7 @@ declare let gtag: Function;
     <!-- App Container -->
     <div class="container--main" id="container--main" [ngClass]="{'blur-me': globalSearch}">
       <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->   
-      <div class="container--page">
+      <div class="router__container">
         <router-outlet></router-outlet>
       </div>
       <simple-notifications [options]="options"></simple-notifications>

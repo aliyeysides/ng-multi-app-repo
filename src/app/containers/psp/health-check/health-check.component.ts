@@ -10,7 +10,7 @@ import {AuthService} from '../../../core/services/auth.service';
       <div class="row contents">
 
       <!-- HEALTH-CHECK - Intro -->
-        <div class="col-12 col-md-7 col-lg-8 section section--intro">
+        <div class="col-12 col-md-7 col-lg-8 section section--overview">
 
           <div class="row no-gutters">
             <div class="col-12">
@@ -18,14 +18,14 @@ import {AuthService} from '../../../core/services/auth.service';
             </div>
           </div>
 
-          <div class="row no-gutters">
-            <div class="col-12 col-md-4 align-items-center">
+          <div class="row no-gutters row--overview">
+            <div class="col-12 col-md-4">
               <p class="">Last week, your stocks were&hellip;</p>
             </div>
-            <div class="col-12 col-md-4 align-items-center">
+            <div class="col-12 col-md-4">
               <p class="data green"><sub>up</sub> 3.04<sub>%</sub></p>
             </div>
-            <div class="col-12 col-md-4 align-items-center">
+            <div class="col-12 col-md-4">
               <p>compared to the <span class="blue">S&amp;P 500</span> &mdash; <span class="up-change">up 0.13%</span></p>
             </div>
             <div class="col-12">
@@ -54,7 +54,7 @@ import {AuthService} from '../../../core/services/auth.service';
       <!-- HEALTH-CHECK - Stock Movements -->
         <div class="col-12 col-md-5 col-lg-4 section section--stockmovements">
 
-          <div class="row">
+          <div class="row section__header">
             <div class="col-12">
               <h2>Stock Movements</h2>
             </div>
@@ -71,12 +71,12 @@ import {AuthService} from '../../../core/services/auth.service';
             <div class="col-1"></div>
           </div>
 
-          <div class="row section__chart">
+          <div class="row">
             <div class="col-12 chart__header">
               <h3 class="ux-blue">Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
               <div class="divider__long divider__long--blue"></div>
             </div>
-            <ul class="col-12">
+            <ul class="col-12 section__chart">
               <li class="row no-gutters list-item__mover">
                 <div class="col-4 mover__stock">
                   <img src="./assets/imgs/arc_Bearish.svg">
@@ -114,7 +114,7 @@ import {AuthService} from '../../../core/services/auth.service';
             <div class="col-12">
               <div class="divider-grey"></div>
             </div>
-            <ul class="col-12">
+            <ul class="col-12 section__chart">
               <li class="row no-gutters list-item__mover">
                 <div class="col-4 mover__stock">
                   <img src="./assets/imgs/arc_VeryBearish.svg">
@@ -165,148 +165,149 @@ import {AuthService} from '../../../core/services/auth.service';
       <!-- HEALTH-CHECK - Ratings Changes -->
         <div class="col-12 col-md-7 col-lg-8 section section--ratingschanges">
 
-          <div class="row">
-            <div class="col-12">
+          <div class="row section__summary">
+            <div class="col-12 col-md-6">
               <h2>Ratings Changes</h2>
             </div>
-          </div>
-
-          <div class="row section__summary">
-            <div class="col-1"></div>
-            <div class="col-5 summary--left">
-              <p><img src="./assets/imgs/icon_circle-change--green.svg"> 2</p>
+            <div class="col-12 col-md-6">
+              <div class="row">
+                <div class="col-1"></div>
+                <div class="col-5 summary--left">
+                  <p><img src="./assets/imgs/icon_circle-change--green.svg"> 2</p>
+                </div>
+                <div class="col-5 summary--right">
+                  <p><img src="./assets/imgs/icon_circle-change--red.svg"> 3</p>
+                </div>
+                <div class="col-1"></div>
+              </div>
             </div>
-            <div class="col-5 summary--right">
-              <p><img src="./assets/imgs/icon_circle-change--red.svg"> 3</p>
-            </div>
-            <div class="col-1"></div>
           </div>
 
           <div class="row">
-            <div class="col-12">
+            <div class="col-12 col-md-6" style="padding-right:0;">
               <h3 class="green">Turned Bullish</h3>
               <div class="divider__long divider__long--green"></div>
-            </div>
-
-            <ul class="col-12">
-              <li class="row no-gutters list__entry">
-                <div class="col-2 list-entry__pgr">
-                  <img class="align-middle" src="./assets/imgs/arc_VeryBullish.svg">
-                </div>
-                <div class="col-4 list-entry__info">
-                  <p class="ticker">SHOP</p>
-                  <p class="company">Shopify Inc</p>
-                </div>
-                <div class="col-3 list-entry__data">
-                  <p class="data green">99.40</p>
-                </div>
-                <div class="col-3 list-entry__data">
-                  <p class="data green">3.12%</p>
-                </div>
-                <div class="button__slide">
-                  <img src="./assets/imgs/ui_slide.svg">
-                </div>
-                <div class="col-12 list-entry__overlay green">
-                  <div class="row no-gutters overlay__contents">
-                    <div class="button__slide">
-                      <img src="./assets/imgs/ui_slide.svg">
-                    </div>
-                    <div class="col-2">
-                      <img class="align-middle" src="./assets/imgs/icon_minus.svg">
-                    </div>
-                    <div class="col-4">
-                      <p class="ticker">SHOP</p>
-                    </div>
-                    <div class="col-2">
-                      <img class="align-middle" src="./assets/imgs/icon_arrow-up.svg">
-                    </div>
-                    <div class="col-4">
-                      <p class="data">-2.34%</p>
+              <ul class="stock__list">
+                <li class="row no-gutters list__entry">
+                  <div class="col-2 list-entry__pgr">
+                    <img class="align-middle" src="./assets/imgs/arc_VeryBullish.svg">
+                  </div>
+                  <div class="col-4 list-entry__info">
+                    <p class="ticker">SHOP</p>
+                    <p class="company">Shopify Inc</p>
+                  </div>
+                  <div class="col-3 list-entry__data">
+                    <p class="data green">99.40</p>
+                  </div>
+                  <div class="col-3 list-entry__data">
+                    <p class="data green">3.12%</p>
+                  </div>
+                  <div class="button__slide">
+                    <img src="./assets/imgs/ui_slide.svg">
+                  </div>
+                  <div class="col-12 list-entry__overlay green">
+                    <div class="row no-gutters overlay__contents">
+                      <div class="button__slide">
+                        <img src="./assets/imgs/ui_slide.svg">
+                      </div>
+                      <div class="col-2">
+                        <img class="align-middle" src="./assets/imgs/icon_minus.svg">
+                      </div>
+                      <div class="col-4">
+                        <p class="ticker">SHOP</p>
+                      </div>
+                      <div class="col-2">
+                        <img class="align-middle" src="./assets/imgs/icon_arrow-up.svg">
+                      </div>
+                      <div class="col-4">
+                        <p class="data">-2.34%</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li class="row no-gutters list__entry">
-                <div class="col-2 list-entry__pgr">
-                  <img class="align-middle" src="./assets/imgs/arc_Bullish.svg">
-                </div>
-                <div class="col-4 list-entry__info">
-                  <p class="ticker">JASO</p>
-                  <p class="company">Amazon.Com Inc</p>
-                </div>
-                <div class="col-3 list-entry__data">
-                  <p class="data green">34.52</p>
-                </div>
-                <div class="col-3 list-entry__data">
-                  <p class="data green">1.45%</p>
-                </div>
-                <div class="button__slide">
-                  <img src="./assets/imgs/ui_slide.svg">
-                </div>
-              </li>
-            </ul>
-
-            <div class="col-12">
-              <h3 class="red">Turned Bearish</h3>
-              <div class="divider__long divider__long--red"></div>
+                </li>
+                <li class="row no-gutters list__entry">
+                  <div class="col-2 list-entry__pgr">
+                    <img class="align-middle" src="./assets/imgs/arc_Bullish.svg">
+                  </div>
+                  <div class="col-4 list-entry__info">
+                    <p class="ticker">JASO</p>
+                    <p class="company">Amazon.Com Inc</p>
+                  </div>
+                  <div class="col-3 list-entry__data">
+                    <p class="data green">34.52</p>
+                  </div>
+                  <div class="col-3 list-entry__data">
+                    <p class="data green">1.45%</p>
+                  </div>
+                  <div class="button__slide">
+                    <img src="./assets/imgs/ui_slide.svg">
+                  </div>
+                </li>
+              </ul>
             </div>
 
-            <ul class="col-12">
-              <li class="row no-gutters list__entry">
-                <div class="col-2 list-entry__pgr">
-                  <img class="align-middle" src="./assets/imgs/arc_VeryBearish.svg">
-                </div>
-                <div class="col-4 list-entry__info">
-                  <p class="ticker">YUM</p>
-                  <p class="company">Shopify Inc</p>
-                </div>
-                <div class="col-3 list-entry__data">
-                  <p class="data red">99.40</p>
-                </div>
-                <div class="col-3 list-entry__data">
-                  <p class="data red">3.12%</p>
-                </div>
-                <div class="button__slide">
-                  <img src="./assets/imgs/ui_slide.svg">
-                </div>
-              </li>
-              <li class="row no-gutters list__entry">
-                <div class="col-2 list-entry__pgr">
-                  <img class="align-middle" src="./assets/imgs/arc_Bearish.svg">
-                </div>
-                <div class="col-4 list-entry__info">
-                  <p class="ticker">MINI</p>
-                  <p class="company">Amazon.Com Inc</p>
-                </div>
-                <div class="col-3 list-entry__data">
-                  <p class="data red">34.52</p>
-                </div>
-                <div class="col-3 list-entry__data">
-                  <p class="data red">1.45%</p>
-                </div>
-                <div class="button__slide">
-                  <img src="./assets/imgs/ui_slide.svg">
-                </div>
-              </li>
-              <li class="row no-gutters list__entry">
-                <div class="col-2 list-entry__pgr">
-                  <img class="align-middle" src="./assets/imgs/arc_Bearish.svg">
-                </div>
-                <div class="col-4 list-entry__info">
-                  <p class="ticker">TSLA</p>
-                  <p class="company">Tesla Motors</p>
-                </div>
-                <div class="col-3 list-entry__data">
-                  <p class="data red">34.52</p>
-                </div>
-                <div class="col-3 list-entry__data">
-                  <p class="data red">1.45%</p>
-                </div>
-                <div class="button__slide">
-                  <img src="./assets/imgs/ui_slide.svg">
-                </div>
-              </li>
-            </ul>
+
+            <div class="col-12 col-md-6" style="padding-right:0;">
+              <h3 class="red">Turned Bearish</h3>
+              <div class="divider__long divider__long--red"></div>
+              <ul class="stock__list">
+                <li class="row no-gutters list__entry">
+                  <div class="col-2 list-entry__pgr">
+                    <img class="align-middle" src="./assets/imgs/arc_VeryBearish.svg">
+                  </div>
+                  <div class="col-4 list-entry__info">
+                    <p class="ticker">YUM</p>
+                    <p class="company">Shopify Inc</p>
+                  </div>
+                  <div class="col-3 list-entry__data">
+                    <p class="data red">99.40</p>
+                  </div>
+                  <div class="col-3 list-entry__data">
+                    <p class="data red">3.12%</p>
+                  </div>
+                  <div class="button__slide">
+                    <img src="./assets/imgs/ui_slide.svg">
+                  </div>
+                </li>
+                <li class="row no-gutters list__entry">
+                  <div class="col-2 list-entry__pgr">
+                    <img class="align-middle" src="./assets/imgs/arc_Bearish.svg">
+                  </div>
+                  <div class="col-4 list-entry__info">
+                    <p class="ticker">MINI</p>
+                    <p class="company">Amazon.Com Inc</p>
+                  </div>
+                  <div class="col-3 list-entry__data">
+                    <p class="data red">34.52</p>
+                  </div>
+                  <div class="col-3 list-entry__data">
+                    <p class="data red">1.45%</p>
+                  </div>
+                  <div class="button__slide">
+                    <img src="./assets/imgs/ui_slide.svg">
+                  </div>
+                </li>
+                <li class="row no-gutters list__entry">
+                  <div class="col-2 list-entry__pgr">
+                    <img class="align-middle" src="./assets/imgs/arc_Bearish.svg">
+                  </div>
+                  <div class="col-4 list-entry__info">
+                    <p class="ticker">TSLA</p>
+                    <p class="company">Tesla Motors</p>
+                  </div>
+                  <div class="col-3 list-entry__data">
+                    <p class="data red">34.52</p>
+                  </div>
+                  <div class="col-3 list-entry__data">
+                    <p class="data red">1.45%</p>
+                  </div>
+                  <div class="button__slide">
+                    <img src="./assets/imgs/ui_slide.svg">
+                  </div>
+                </li>
+              </ul>
+            </div>
+
           </div>
 
           <div class="row">
@@ -338,84 +339,82 @@ import {AuthService} from '../../../core/services/auth.service';
           </div>
 
           <div class="row">
-            <div class="col-12">
+            <div class="col-12 col-md-6">
               <h3 class="ux-blue">Earnings Surprises</h3>
               <div class="divider__long divider__long--blue"></div>
+              <ul class="col-12 section__chart">
+                <li class="row no-gutters col-headers">
+                  <div class="col-3">
+                    <p>TICKER</p>
+                  </div>
+                  <div class="col-3">
+                    <p>ACT</p>
+                  </div>
+                  <div class="col-3">
+                    <p>EST</p>
+                  </div>
+                  <div class="col-3">
+                    <p>DIFF</p>
+                  </div>
+                </li>
+                <li class="row no-gutters earnings__entry">
+                  <div class="col-1 pgr">
+                    <img class="align-middle" src="./assets/imgs/arc_Bullish.svg">
+                  </div>
+                  <div class="col-2 ticker">
+                    <p>PGR</p>
+                  </div>
+                  <div class="col-3 data">
+                    <p>99.40</p>
+                  </div>
+                  <div class="col-3 data">
+                    <p>3.12%</p>
+                  </div>
+                  <div class="col-3 data">
+                    <p class="green">3.12%</p>
+                  </div>
+                </li>
+                <li class="row no-gutters earnings__entry">
+                  <div class="col-1 pgr">
+                    <img class="align-middle" src="./assets/imgs/arc_VeryBearish.svg">
+                  </div>
+                  <div class="col-2 ticker">
+                    <p class="">KPMG</p>
+                  </div>
+                  <div class="col-3 data">
+                    <p>99.40</p>
+                  </div>
+                  <div class="col-3 data">
+                    <p>3.12%</p>
+                  </div>
+                  <div class="col-3 data">
+                    <p class="green">3.12%</p>
+                  </div>
+                </li>
+                <li class="row no-gutters earnings__entry">
+                  <div class="col-1 pgr">
+                    <img class="align-middle" src="./assets/imgs/arc_Bearish.svg">
+                  </div>
+                  <div class="col-2 ticker">
+                    <p>SHOP</p>
+                  </div>
+                  <div class="col-3 data">
+                    <p>99.40</p>
+                  </div>
+                  <div class="col-3 data">
+                    <p>3.12%</p>
+                  </div>
+                  <div class="col-3 data">
+                    <p class="green">3.12%</p>
+                  </div>
+                </li>
+              </ul>
             </div>
-            <ul class="col-12">
-              <li class="row no-gutters col-headers">
-                <div class="col-3">
-                  <p>TICKER</p>
-                </div>
-                <div class="col-3">
-                  <p>ACT</p>
-                </div>
-                <div class="col-3">
-                  <p>EST</p>
-                </div>
-                <div class="col-3">
-                  <p>DIFF</p>
-                </div>
-              </li>
-              <li class="row no-gutters earnings__entry">
-                <div class="col-1 pgr">
-                  <img class="align-middle" src="./assets/imgs/arc_Bullish.svg">
-                </div>
-                <div class="col-2 ticker">
-                  <p>PGR</p>
-                </div>
-                <div class="col-3 data">
-                  <p>99.40</p>
-                </div>
-                <div class="col-3 data">
-                  <p>3.12%</p>
-                </div>
-                <div class="col-3 data">
-                  <p class="green">3.12%</p>
-                </div>
-              </li>
-              <li class="row no-gutters earnings__entry">
-                <div class="col-1 pgr">
-                  <img class="align-middle" src="./assets/imgs/arc_VeryBearish.svg">
-                </div>
-                <div class="col-2 ticker">
-                  <p class="">KPMG</p>
-                </div>
-                <div class="col-3 data">
-                  <p>99.40</p>
-                </div>
-                <div class="col-3 data">
-                  <p>3.12%</p>
-                </div>
-                <div class="col-3 data">
-                  <p class="green">3.12%</p>
-                </div>
-              </li>
-              <li class="row no-gutters earnings__entry">
-                <div class="col-1 pgr">
-                  <img class="align-middle" src="./assets/imgs/arc_Bearish.svg">
-                </div>
-                <div class="col-2 ticker">
-                  <p>SHOP</p>
-                </div>
-                <div class="col-3 data">
-                  <p>99.40</p>
-                </div>
-                <div class="col-3 data">
-                  <p>3.12%</p>
-                </div>
-                <div class="col-3 data">
-                  <p class="green">3.12%</p>
-                </div>
-              </li>
-            </ul>
 
-            <div class="col-12 section__chart">
-              <div class="chart__header">
-                <h3 class="ux-blue">Estimate Revisions</h3>
-                <div class="divider__long divider__long--blue"></div>
-              </div>
-              <ul>
+            <div class="col-12 col-md-6">
+              <h3 class="ux-blue">Estimate Revisions</h3>
+              <div class="divider__long divider__long--blue"></div>
+              <ul class="col-12 section__chart">
                 <li class="row no-gutters col-headers">
                   <div class="col-3">
                     <p>TICKER</p>
@@ -486,7 +485,7 @@ import {AuthService} from '../../../core/services/auth.service';
 
             <div class="col-12 section__chart">
 
-              <div class="row no-gutters">
+              <div class="row no-gutters reporting-calendar">
                 <div class="col-12 chart__header">
                   <h3 class="ux-blue">Reporting This Week</h3>
                   <div class="divider__long divider__long--blue"></div>

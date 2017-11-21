@@ -16,7 +16,9 @@ h2 {
   font-size: 35px;
   font-weight: 300;
   margin-bottom: 20px;
+  margin-top: 5px;
   color: #999999;
+
 }
 
 h3 {
@@ -147,10 +149,10 @@ button {
 
 #container--main {
   transition: margin-left .5s;
-  padding: 20px;
+  padding: 0px;
 }
 
-.container--main {
+.router__container {
   position: relative;
   width: 100%;
   padding:0;
@@ -161,29 +163,30 @@ button {
 
 .component {
   background-color: #ffffff;
-  padding-top:60px;
+  padding-top:30px;
 }
 
 .contents {
   text-align: center;
   padding-top:10px;
+  padding-bottom: 10px;
   display: block;
 }
 
 .section {
     float:right;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-bottom: 20px solid #eeeeee;
 }
 
-.section--stockmovements {
-  float: left;
-}
 
 .section__header {
 
 }
 
 .section__summary {
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 
   p {
     font-size: 48px;
@@ -208,8 +211,8 @@ button {
 }
 
 .section__chart {
-  margin-bottom: 15px;
-  margin-top: 15px;
+  margin-bottom: 25px;
+  margin-top: 10px;
   padding:0px;
 }
 
@@ -217,18 +220,13 @@ button {
   margin-bottom: 20px;
 }
 
-.row.contents {
-
-}
-
 
 .chart__header {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .col-headers {
   margin-bottom: 5px;
-  margin-top:-5px;
   padding:0 1% 0 3%;
 
   p {
