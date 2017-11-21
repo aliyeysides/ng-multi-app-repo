@@ -8,30 +8,24 @@ p, a, h1, h2, h3, h4, h5, h6, span, label, li, table, td, th, tr {
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 400;
-
-  span {
-    font-weight: 600;
-  }
 }
 
 h2 {
-  font-size: 26px;
-  font-weight: 400;
-  margin-bottom: 30px;
+  font-size: 35px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  margin-top: 5px;
   color: #999999;
 
-  span {
-    font-weight: 600;
-    color: #999999;
-  }
 }
 
 h3 {
   font-size: 22px;
-  font-weight: 500;
-  line-height: 1.4;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 5px;
 }
 
 h4 {
@@ -96,6 +90,10 @@ button {
   color:#4718E1;
 }
 
+.ux-blue {
+  color:#285DBC;
+}
+
 .green  {
   color:#00C04E;
 }
@@ -151,10 +149,10 @@ button {
 
 #container--main {
   transition: margin-left .5s;
-  padding: 20px;
+  padding: 0px;
 }
 
-.container--main {
+.router__container {
   position: relative;
   width: 100%;
   padding:0;
@@ -163,30 +161,32 @@ button {
 
 
 
-
-
-.page__contents {
-  top: 60px;
-  z-index: 30;
+.component {
   background-color: #ffffff;
-  width: 100%;
+  padding-top:30px;
 }
 
 .contents {
-  border-bottom: 20px solid #F8F8F8;
-  margin-bottom:40px;
-  padding-top: 10px;
-  padding-bottom: 10px;
   text-align: center;
-  background-color: #ffffff;
+  padding-top:10px;
+  padding-bottom: 10px;
+  display: block;
+}
+
+.section {
+    float:right;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-bottom: 20px solid #eeeeee;
 }
 
 
+.section__header {
 
-
+}
 
 .section__summary {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 
   p {
     font-size: 48px;
@@ -211,13 +211,18 @@ button {
 }
 
 .section__chart {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   margin-top: 10px;
   padding:0px;
 }
 
-.chart__header {
+.section__disclaimer {
   margin-bottom: 20px;
+}
+
+
+.chart__header {
+  margin-bottom: 10px;
 }
 
 .col-headers {
@@ -244,10 +249,6 @@ button {
     text-align: center;
     padding:0;
   }
-}
-
-.section__disclaimer {
-  margin-bottom: 20px;
 }
 
 .disclaimer {
@@ -451,11 +452,11 @@ button {
 }
 
 .divider__long {
-  width: 80%;
+  width: 70%;
   height: 2px;
   border-radius: 5px;
   margin: 5px auto 5px;
-  background: #dddddd;
+  background: #eeeeee;
 }
 
 .divider__long.divider__long--green {
