@@ -36,6 +36,7 @@ h4 {
 
 body {
   height: 100%;
+  overflow-x: hidden;
 }
 
 ul {
@@ -367,6 +368,7 @@ button {
   }
   .header__button--left {
     left:3%;
+    transition: left .5s;
   }
   .header__button--right {
     right:3%;
@@ -376,8 +378,6 @@ button {
 .blur-me {
   filter: blur(10px);
 }
-
-
 
 .header__title.header__search {
   .form-inline {
