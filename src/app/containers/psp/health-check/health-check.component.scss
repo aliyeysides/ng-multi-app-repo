@@ -107,6 +107,10 @@
 .list-item__mover {
   margin-bottom:15px;
   padding: 0 4%;
+
+  &:last-child {
+  	margin-bottom:0;
+  }
 }
 
 .mover__stock {
@@ -168,7 +172,7 @@
   	height: 36px;
   	overflow: hidden;
   	margin-bottom: 10px;
-  	padding:0 1% 0 3%;
+  	padding:0 0 0 3.5%;
 
 	.pgr {
 		img {
@@ -195,7 +199,7 @@
 }
 
 .reporting-calendar {
-  	padding:0 2% 15px;
+  	padding:0 2%;
 
 	.col-head {
 	  	float: left;

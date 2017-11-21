@@ -11,7 +11,7 @@ declare let gtag: Function;
     <!-- PANEL HEADER - Fixed to the top of each panel-->
     <div class="page__header" id="page__header">
       <cpt-psp-settings-menu></cpt-psp-settings-menu>
-      <div class="header__title">
+      <div class="header__title header__search">
         <h1 *ngIf="!globalSearch">{{ title }}</h1>
         <cpt-psp-symbol-search [placeholder]="'Search'" *ngIf="globalSearch"></cpt-psp-symbol-search>
       </div>

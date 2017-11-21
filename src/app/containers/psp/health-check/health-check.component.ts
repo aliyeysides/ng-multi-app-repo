@@ -184,7 +184,7 @@ import {AuthService} from '../../../core/services/auth.service';
           </div>
 
           <div class="row">
-            <div class="col-12 col-md-6" style="padding-right:0;">
+            <div class="col-12 col-md-6 section__contents">
               <h3 class="green">Turned Bullish</h3>
               <div class="divider__long divider__long--green"></div>
               <ul class="stock__list">
@@ -205,7 +205,7 @@ import {AuthService} from '../../../core/services/auth.service';
                   <div class="button__slide">
                     <img src="./assets/imgs/ui_slide.svg">
                   </div>
-                  <div class="col-12 list-entry__overlay green">
+                  <div class="col-12 list-entry__overlay green show">
                     <div class="row no-gutters overlay__contents">
                       <div class="button__slide">
                         <img src="./assets/imgs/ui_slide.svg">
@@ -247,7 +247,7 @@ import {AuthService} from '../../../core/services/auth.service';
             </div>
 
 
-            <div class="col-12 col-md-6" style="padding-right:0;">
+            <div class="col-12 col-md-6 section__contents">
               <h3 class="red">Turned Bearish</h3>
               <div class="divider__long divider__long--red"></div>
               <ul class="stock__list">
@@ -339,7 +339,7 @@ import {AuthService} from '../../../core/services/auth.service';
           </div>
 
           <div class="row">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 section__contents">
               <h3 class="ux-blue">Earnings Surprises</h3>
               <div class="divider__long divider__long--blue"></div>
               <ul class="col-12 section__chart">
@@ -411,7 +411,7 @@ import {AuthService} from '../../../core/services/auth.service';
               </ul>
             </div>
 
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 section__contents">
               <h3 class="ux-blue">Estimate Revisions</h3>
               <div class="divider__long divider__long--blue"></div>
               <ul class="col-12 section__chart">
