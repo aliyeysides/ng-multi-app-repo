@@ -5,9 +5,9 @@ import {
 
 import {FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
-import {SymbolSearchService} from '../../../../core/services/symbol-search.service';
-import {IdeasService} from '../../../../core/services/ideas.service';
-import {AuthService} from '../../../../core/services/auth.service';
+import {SymbolSearchService} from '../../../../services/symbol-search.service';
+import {IdeasService} from '../../../../services/ideas.service';
+import {AuthService} from '../../../../services/auth.service';
 import {Subscription} from 'rxjs/Subscription';
 import {BaseSymbolSearchComponent} from '../symbol-search.component';
 

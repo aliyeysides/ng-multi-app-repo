@@ -1,6 +1,6 @@
 import {ElementRef, HostListener, ViewChild} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
-import {AuthService} from '../../../core/services/auth.service';
+import {AuthService} from '../../../services/auth.service';
 
 declare let gtag: Function;
 

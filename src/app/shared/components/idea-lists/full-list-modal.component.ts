@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
 import {Subscription} from 'rxjs/Subscription';
-import {IdeasService} from '../../../core/services/ideas.service';
+import {IdeasService} from '../../../services/ideas.service';
 import {Subject} from 'rxjs/Subject';
 import {IDEAS_LIST_CLASSMAP} from '../../models/idea-list-class-map';
-import {WordpressService} from '../../../core/services/wordpress.service';
+import {WordpressService} from '../../../services/wordpress.service';
 import {Router} from '@angular/router';
-import {AuthService} from '../../../core/services/auth.service';
+import {AuthService} from '../../../services/auth.service';
 
 declare let gtag: Function;
 
