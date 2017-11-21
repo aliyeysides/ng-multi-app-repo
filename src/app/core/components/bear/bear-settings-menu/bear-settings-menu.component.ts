@@ -1,6 +1,6 @@
 import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
-import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
+import {BaseSettingsMenuComponent} from '../../../../shared/components/menus/settings-menu.component';
 
 declare let gtag: Function;
 

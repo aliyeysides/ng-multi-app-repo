@@ -13,7 +13,7 @@ declare let gtag: Function;
       <cpt-psp-settings-menu></cpt-psp-settings-menu>
       <div class="header__title">
         <h1 *ngIf="!globalSearch">{{ title }}</h1>
-        <cpt-symbol-search [placeholder]="'Search'" *ngIf="globalSearch"></cpt-symbol-search>
+        <cpt-psp-symbol-search [placeholder]="'Search'" *ngIf="globalSearch"></cpt-psp-symbol-search>
       </div>
       <cpt-psp-search (toggleSearchClicked)="toggleSearch()"></cpt-psp-search>
     </div>

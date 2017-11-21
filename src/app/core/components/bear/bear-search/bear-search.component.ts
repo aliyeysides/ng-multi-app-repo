@@ -1,6 +1,6 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {SymbolSearchService} from '../../../services/symbol-search.service';
-import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
+import {BaseSettingsMenuComponent} from '../../../../shared/components/menus/settings-menu.component';
 import {AuthService} from '../../../services/auth.service';
 
 declare let gtag: Function;
@@ -34,7 +34,7 @@ declare let gtag: Function;
         <h3>Search</h3>
       </div>
 
-      <cpt-symbol-search [placeholder]="'Ticker or Symbol'"></cpt-symbol-search>
+      <cpt-bear-symbol-search [placeholder]="'Ticker or Symbol'"></cpt-bear-symbol-search>
     </div>
   `,
   styleUrls: ['./bear-search.component.scss']

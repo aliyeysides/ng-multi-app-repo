@@ -1,5 +1,5 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
-import {BaseSettingsMenuComponent} from '../../base/settings-menu.component';
+import {BaseSettingsMenuComponent} from '../../../../shared/components/menus/settings-menu.component';
 import {AuthService} from '../../../services/auth.service';
 import {getBindingElementVariableDeclaration} from 'tslint';
 
