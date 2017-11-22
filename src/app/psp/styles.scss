@@ -7,78 +7,71 @@
 
 
 
+.component--mystocks {}
 
 
-
-
-
-.page__contents--mystocks .stock__list.stock__list--recent {
-  margin-top:0px;
+.component--mystocks .contents {
+  padding:0;
 }
+
 
 
 .stock__list {
-  margin-bottom:20px;
+
+  .col-headers {
+    margin: 15px 0 0;
+
+    i {
+      opacity: 0.5;
+    }
+  }
+
+  .list__entry {
+    height: 60px;
+    overflow: hidden;
+    margin: 10px 0;
+    position: relative;
+    padding:5px;
+
+    .list-entry__pgr {
+      position: relative;
+
+      img {
+        width: 44px;
+        height: auto;
+      }
+    }
+
+    .list-entry__info {
+      padding-left:5px;
+
+      .ticker {
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1;
+        text-align: left;
+      }
+
+      .company {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: left;
+        white-space: nowrap;
+      }
+    }
+
+    .list-entry__data {
+      .data {
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+      }
+    }
+  }
 }
 
-.page__contents--mystocks .stock__list {
-  margin-top:30px;
-}
 
-.stock__list .list__entry {
-  height: 60px;
-  overflow: hidden;
-  margin: 10px 0;
-  position: relative;
-  padding:5px;
-}
-
-
-.page__contents--mystocks .chart__header {
-  margin-top: 30px;
-}
-
-.page__contents--mystocks .chart__header h3 {
-  text-align: center;
-}
-
-.list__entry .list-entry__pgr {
-  position: relative;
-}
-
-.list-entry__pgr img {
-  width: 44px;
-  height: auto;
-}
-
-.list__entry  .list-entry__info {
-  padding-left:5px;
-}
-
-.list-entry__info .ticker {
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 1;
-  text-align: left;
-}
-
-.list-entry__info .company {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: left;
-  white-space: nowrap;
-}
-
-.list__entry .list-entry__data {
-
-}
-
-.list-entry__data .data {
-  font-size: 18px;
-  font-weight: 500;
-  text-align: center;
-}
 
 
 
@@ -89,6 +82,10 @@
   top:15px;
   cursor: pointer;
 }
+
+
+
+
 
 
 
@@ -116,14 +113,6 @@
   height: 60px;
 }
 
-.list-entry__overlay .button__remove {
-  position: absolute;
-  right:5%;
-  top:10px;
-  cursor: pointer;
-  width: 30px;
-}
-
 .list-entry__overlay .ticker {
   font-weight: 600;
   font-size: 36px;
@@ -140,6 +129,10 @@
   text-align: left;
 }
 
+.list-entry__overlay .icon {
+  width: 30px;
+  height: 30px;
+}
 
 
 

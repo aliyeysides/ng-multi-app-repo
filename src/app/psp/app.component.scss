@@ -8,16 +8,17 @@ p, a, h1, h2, h3, h4, h5, h6, span, label, li, table, td, th, tr {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 32px;
   font-weight: 400;
 }
 
 h2 {
-  font-size: 35px;
+  font-size: 28px;
   font-weight: 300;
   margin-bottom: 20px;
   margin-top: 5px;
   color: #999999;
+  text-transform: uppercase;
 }
 h3 {
   font-size: 22px;
@@ -127,6 +128,11 @@ button {
 }
 
 
+::placeholder {
+ color: #484848 !important;
+ font-size:32px !important;
+}
+
 
 
 /*                                                   */
@@ -179,7 +185,6 @@ button {
 }
 
 .section__header {
-
 }
 
 .section__summary {
@@ -254,7 +259,9 @@ button {
 
 
 
-/*             SIDE NAV              */
+/*                                                   */
+/*                    NAVIGATION                     */
+/*                                                   */
 
 
 
@@ -354,6 +361,20 @@ button {
 .blur-me {
   filter: blur(10px);
 }
+
+
+
+
+
+
+
+
+
+
+/*                                                   */
+/*                 SEARCH COMPONENT                  */
+/*                                                   */
+
 
 .header__title.header__search {
   .form-inline {
@@ -459,7 +480,6 @@ button {
         }
       }
     }
-
   }
 
   .search--match {
@@ -494,8 +514,6 @@ button {
 
 
 
-
-
 .search {
   display: none;
   width: 0;
@@ -506,7 +524,6 @@ button {
 .search:focus {
   width: 200px;
 }
-
 
 
 
@@ -560,10 +577,10 @@ button {
 }
 
 .divider__long {
-  width: 70%;
+  width: 80%;
   height: 2px;
   border-radius: 5px;
-  margin: 5px auto 5px;
+  margin: 5px auto 10px;
   background: #eeeeee;
 }
 
