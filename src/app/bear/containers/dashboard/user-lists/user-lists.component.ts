@@ -10,7 +10,6 @@ import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {NotificationsService} from 'angular2-notifications/dist';
 
-import * as moment from 'moment';
 declare let gtag: Function;
 
 @Component({
@@ -203,7 +202,6 @@ export class UserListsComponent implements OnInit, OnDestroy {
         this.watchingListAlerts = res[3]['EarningEstimate'].concat(res[3]['EarningSurprise'], res[3]['PGR']);
         this.holdingListAlerts.filter(this.assignDiffProp);
         this.watchingListAlerts.filter(this.assignDiffProp);
-        console.log('alerts', this.holdingListAlerts, this.watchingListAlerts);
       })
 
   }
