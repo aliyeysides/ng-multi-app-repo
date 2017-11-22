@@ -11,7 +11,6 @@ declare let gtag: Function;
     <div (click)="openNav()" class="header__button header__button--left" id="header_button--left">
       <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
     </div>
-    <!--PANEL - Navigation - This sits below everything -->
     <nav #nav class="container--nav">
       <div class="logo">
         <img src="assets/imgs/logo_powerpulse.svg">

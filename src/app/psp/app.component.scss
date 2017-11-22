@@ -18,40 +18,37 @@ h2 {
   margin-bottom: 20px;
   margin-top: 5px;
   color: #999999;
-
 }
-
 h3 {
   font-size: 22px;
   font-weight: 600;
   line-height: 1.2;
   margin-bottom: 5px;
 }
-
 h4 {
   font-size: 18px;
   font-weight: 600;
   line-height: 1.4;
 }
 
+
 body {
   height: 100%;
   overflow-x: hidden;
 }
-
 ul {
   padding:0;
   margin:0;
   list-style-type: none;
 }
-
 button {
   outline: none;
   border:0;
 }
-
-
-
+:focus {
+  outline: none;
+  border:0;
+}
 
 
 
@@ -121,14 +118,6 @@ button {
     transform: translate(-50%, -50%);
 }
 
-.align-middle--right {
-    position: absolute;
-    top: 50%;
-    right: 0%;
-    -webkit-transform: translate(0%, -50%);
-    transform: translate(0%, -50%);
-}
-
 .tab--slide {
   width: 50px;
   height: 5px;
@@ -172,6 +161,7 @@ button {
 .component {
   background-color: #ffffff;
   padding-top:30px;
+  position: relative;
 }
 
 .contents {
@@ -260,30 +250,12 @@ button {
   }
 }
 
-.col-headers--fixed {
-  position: fixed;
-  background-color: #ffffff;
-  z-index: 100;
-  width: 100%;
-  padding: 10px 0 0;
-  top: 59px;
-  left: 0px;
-
-  .col-headers {
-    text-align: center;
-    padding:0;
-  }
-}
 
 
 
 
+/*             SIDE NAV              */
 
-
-
-
-
-/*         NAV CONTAINER           */
 
 
 .container--nav {
@@ -314,6 +286,7 @@ button {
           color:#ffffff !important;
           line-height: 60px;
           text-decoration: none;
+          white-space: nowrap;
 
           i {
             color:#ffffff;
@@ -330,6 +303,9 @@ button {
     padding:30px 20px 0 20px;
   }
 }
+
+
+
 
 
 
