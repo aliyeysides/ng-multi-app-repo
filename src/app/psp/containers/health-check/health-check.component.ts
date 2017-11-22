@@ -205,7 +205,7 @@ import {AuthService} from '../../../services/auth.service';
                   <div class="button__slide">
                     <img src="./assets/imgs/ui_slide.svg">
                   </div>
-                  <div class="col-12 list-entry__overlay green show">
+                  <div class="col-12 list-entry__overlay green">
                     <div class="row no-gutters overlay__contents">
                       <div class="button__slide">
                         <img src="./assets/imgs/ui_slide.svg">
