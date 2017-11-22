@@ -202,7 +202,8 @@ export class UserListsComponent implements OnInit, OnDestroy {
         this.holdingListAlerts = res[2]['EarningEstimate'].concat(res[2]['EarningSurprise'], res[2]['PGR']);
         this.watchingListAlerts = res[3]['EarningEstimate'].concat(res[3]['EarningSurprise'], res[3]['PGR']);
         this.holdingListAlerts.filter(this.assignDiffProp);
-        this.watchingListAlerts.filter(this.assignDiffProp)
+        this.watchingListAlerts.filter(this.assignDiffProp);
+        console.log('alerts', this.holdingListAlerts, this.watchingListAlerts);
       })
 
   }
@@ -213,10 +214,10 @@ export class UserListsComponent implements OnInit, OnDestroy {
 
   assignDiffProp(x) {
     if (x['Text'] == 'Estimate Revision') {
-      return Object.assign(x, {diff: x['PercentageSurprise'] })
+      return Object.assign(x, {diff: x['ESTPercentageChange'] })
     }
     if (x['Text'] == 'Earnings Surprise') {
-      return Object.assign(x, {diff: x['ESTPercentageChange'] })
+      return Object.assign(x, {diff: x['PercentageSurprise'] })
     }
     if (x['Text'] == 'Power Gauge turns Bullish') {
       return Object.assign(x, {diff: 1 })
