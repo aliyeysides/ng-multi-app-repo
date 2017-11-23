@@ -51,14 +51,14 @@ export class PspSettingsMenuComponent extends BaseSettingsMenuComponent {
 
   openNav() {
     this.nav.nativeElement.style.width = "320px";
-    document.getElementById("header_button--right").style.display = "none";
-    document.getElementById("header_button--left").style.left = "330px";
+    document.getElementById("header_button--right").style.opacity = "0";
+    document.getElementById("header_button--left").style.left = "335px";
   }
 
   closeNav() {
     this.nav.nativeElement.style.width = "0";
-    document.getElementById("header_button--right").style.display = "block";
-    document.getElementById("header_button--left").style.left = "3%";
+    document.getElementById("header_button--right").style.opacity = "1";
+    document.getElementById("header_button--left").style.left = "5%";
   }
 
 }

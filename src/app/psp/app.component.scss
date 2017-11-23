@@ -8,7 +8,7 @@ p, a, h1, h2, h3, h4, h5, h6, span, label, li, table, td, th, tr {
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 400;
 }
 
@@ -129,8 +129,11 @@ button {
 
 
 ::placeholder {
- color: #484848 !important;
- font-size:32px !important;
+ color: #999999 !important;
+ font-size:36px !important;
+ text-align: center !important;
+ opacity: 0.6 !important;
+ vertical-align: baseline !important;
 }
 
 
@@ -181,7 +184,7 @@ button {
     float:right;
     padding-top: 30px;
     padding-bottom: 20px;
-    border-bottom: 10px solid #efefef;
+    //border-bottom: 10px solid #efefef;
 }
 
 .section__header {
@@ -327,34 +330,39 @@ button {
   height: 60px;
   background-image: linear-gradient(243deg, #21196B 5%, #00A3FF 100%);
   z-index: 100;
-  box-shadow: 0px 3px 10px rgba(0,0,0,0.15);
+  box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
 
   .header__title {
     width: 100%;
-    height: 60px;
     position: absolute;
 
     h1 {
       text-align: center;
-      line-height: 64px;
       color:#ffffff;
+    margin-top: 2%;
     }
   }
 
   .header__button {
     position: absolute;
-    display: flex;
-    width: 35px;
-    height: 60px;
+    height: 60%;
     z-index: 10;
     cursor: pointer;
+    margin: 3.2% 3%;
+
+    img {
+      width: auto;
+      height: 100%;
+    }
   }
   .header__button--left {
-    left:3%;
+    left:5%;
     transition: left .5s;
   }
   .header__button--right {
-    right:3%;
+    right:5%;
+    opacity: 1;
+    transition: opacity .5s;
   }
 }
 
@@ -368,25 +376,24 @@ button {
 
 
 
-
-
-
 /*                                                   */
 /*                 SEARCH COMPONENT                  */
 /*                                                   */
 
 
-.header__title.header__search {
+.header__search {
+  padding-top: 1.5%;
+
   .form-inline {
 
     .form-group {
       width: 100%;
-      padding: 5px 15%;
+      padding: 0% 15%;
       color: #484848;
 
       .search-box {
         font-family: "Rajdhani", sans-serif;
-        height: 50px;
+        height: 94%;
         width: 100%;
         text-align: left;
         padding: 0 15px;
@@ -395,7 +402,7 @@ button {
         border-radius: 3px;
         outline: none;
         border-bottom: 0px solid #f8f8f8;
-        background-color: rgba(255,255,255,0.9);
+        background-color: rgba(255,255,255,1);
       }
     }
   }
@@ -511,9 +518,6 @@ button {
   }
 }
 
-
-
-
 .search {
   display: none;
   width: 0;
@@ -524,6 +528,138 @@ button {
 .search:focus {
   width: 200px;
 }
+
+
+
+
+
+
+
+
+
+/*                                                   */
+/*                 STOCK LIST ENTRY                  */
+/*                                                   */
+
+
+.stock__list {
+
+  .col-headers {
+    margin: 5px 0 0;
+
+    i {
+      opacity: 0.5;
+    }
+  }
+
+  .list__entry {
+    height: 60px;
+    overflow: hidden;
+    margin: 10px 0;
+    position: relative;
+    padding:5px;
+
+    .list-entry__pgr {
+      position: relative;
+
+      img {
+        width: 44px;
+        height: auto;
+      }
+    }
+
+    .list-entry__info {
+      padding-left:5px;
+
+      .ticker {
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1;
+        text-align: left;
+      }
+
+      .company {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: left;
+        white-space: nowrap;
+      }
+    }
+
+    .list-entry__data {
+      .data {
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+.button__slide {
+  position: absolute;
+  right:2%;
+  top:15px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+.list-entry__overlay {
+  display: none;
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+}
+
+.list-entry__overlay.show {
+  display:block;
+}
+
+.list-entry__overlay.red {
+  background: rgba(253,0,31,0.9);
+}
+
+.list-entry__overlay.green {
+  background: rgba(0,192,78,0.95);
+}
+
+.overlay__contents {
+  height: 60px;
+}
+
+.list-entry__overlay .ticker {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 62px;
+  color:#ffffff;
+  text-align: left;
+}
+
+.list-entry__overlay .data {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 62px;
+  color:#ffffff;
+  text-align: left;
+}
+
+.list-entry__overlay .icon {
+  width: 30px;
+  height: 30px;
+}
+
 
 
 

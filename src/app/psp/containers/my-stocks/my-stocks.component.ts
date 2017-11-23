@@ -8,17 +8,17 @@ import { Component, OnInit } from '@angular/core';
           <div class="col-12 section list__current">
             <ul class="stock__list">
               <li class="row no-gutters col-headers">
-                <div class="col-2">
-                  <p style="text-align: left;">RATING <i class="fa fa-sort-desc" aria-hidden="true"></i></p>
+                <div class="col-2 sort sorted">
+                  <p>RATING</p>
                 </div>
-                <div class="col-4">
-                  <p style="text-align: left;">TICKER <i class="fa fa-sort" aria-hidden="true"></i></p>
+                <div class="col-4 sort">
+                  <p style="text-align: left;">TICKER</p>
                 </div>
-                <div class="col-3">
-                  <p>PRICE <i class="fa fa-sort" aria-hidden="true"></i></p>
+                <div class="col-3 sort">
+                  <p>PRICE</p>
                 </div>
-                <div class="col-3">
-                  <p>CHANGE <i class="fa fa-sort" aria-hidden="true"></i></p>
+                <div class="col-3 sort">
+                  <p>CHANGE</p>
                 </div>
               </li>
               <li class="row no-gutters list__entry">

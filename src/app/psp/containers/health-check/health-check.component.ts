@@ -19,6 +19,9 @@ import {AuthService} from '../../../services/auth.service';
           </div>
 
           <div class="row no-gutters row--overview">
+            <div class="col-12">
+              <div class="divider-grey"></div>
+            </div>
             <div class="col-12 col-md-4">
               <p class="">Last week, your stocks were&hellip;</p>
             </div>
@@ -47,6 +50,9 @@ import {AuthService} from '../../../services/auth.service';
                 </div>
               </div>
               <p class="label">Chaikin Power Bar &nbsp;<a> &nbsp;<i class="fa fa-info-circle" aria-hidden="true"></i></a></p>
+            </div>
+            <div class="col-12">
+              <div class="divider-grey"></div>
             </div>
           </div>
         </div>
