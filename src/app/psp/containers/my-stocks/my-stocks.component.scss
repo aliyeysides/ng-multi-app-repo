@@ -1,0 +1,26 @@
+@import 'variables';
+
+
+
+
+.component--mystocks {
+	.contents {
+		padding:0;
+	}
+	.col-headers {
+		padding: 0 1%;
+		.sort {
+			p {
+				display:inline-block;
+			}
+		}
+		.sorted {
+			p {
+				border-bottom: 2px solid #999999;
+				font-weight: 600;
+			}
+
+		}
+	}
+}
+

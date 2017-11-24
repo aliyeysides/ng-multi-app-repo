@@ -67,8 +67,8 @@
 		  height: 36px;
 		  background-color: #009900;
 		  float: left;
-		  border-radius: 7px 0px 0px 7px;
 		  width: 63%;
+		  border-radius: 25px;
 		}
 
 		.neutral {
@@ -77,14 +77,15 @@
 		  background-color: #FF9900;
 		  float: left;
 		  margin: 0 1%;
+		  border-radius: 25px;
 		}
 
 		.bearish {
 		  height: 36px;
 		  background-color: #CC0000;
 		  float: left;
-		  border-radius: 0 7px 7px 0;
 		  width: 20%;
+		  border-radius: 25px;
 		}
 	}
 }
@@ -161,6 +162,13 @@
 
 
 
+
+
+.section__contents {
+	.stock__list {
+		margin-bottom: 30px;
+	}
+}
 
 
 
@@ -305,6 +313,24 @@
 		}
 	}
 }
+
+
+.section.section--ratingschanges {
+	.button__slide {
+		display: none;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

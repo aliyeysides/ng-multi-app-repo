@@ -19,6 +19,9 @@ import {AuthService} from '../../../services/auth.service';
           </div>
 
           <div class="row no-gutters row--overview">
+            <div class="col-12">
+              <div class="divider-grey"></div>
+            </div>
             <div class="col-12 col-md-4">
               <p class="">Last week, your stocks were&hellip;</p>
             </div>
@@ -47,6 +50,9 @@ import {AuthService} from '../../../services/auth.service';
                 </div>
               </div>
               <p class="label">Chaikin Power Bar &nbsp;<a> &nbsp;<i class="fa fa-info-circle" aria-hidden="true"></i></a></p>
+            </div>
+            <div class="col-12">
+              <div class="divider-grey"></div>
             </div>
           </div>
         </div>
@@ -204,25 +210,6 @@ import {AuthService} from '../../../services/auth.service';
                   </div>
                   <div class="button__slide">
                     <img src="./assets/imgs/ui_slide.svg">
-                  </div>
-                  <div class="col-12 list-entry__overlay green">
-                    <div class="row no-gutters overlay__contents">
-                      <div class="button__slide">
-                        <img src="./assets/imgs/ui_slide.svg">
-                      </div>
-                      <div class="col-2">
-                        <img class="align-middle" src="./assets/imgs/icon_minus.svg">
-                      </div>
-                      <div class="col-4">
-                        <p class="ticker">SHOP</p>
-                      </div>
-                      <div class="col-2">
-                        <img class="align-middle" src="./assets/imgs/icon_arrow-up.svg">
-                      </div>
-                      <div class="col-4">
-                        <p class="data">-2.34%</p>
-                      </div>
-                    </div>
                   </div>
                 </li>
                 <li class="row no-gutters list__entry">
