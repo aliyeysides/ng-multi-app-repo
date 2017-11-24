@@ -58,7 +58,7 @@ export class PspSettingsMenuComponent extends BaseSettingsMenuComponent {
   closeNav() {
     this.nav.nativeElement.style.width = "0";
     document.getElementById("header_button--right").style.opacity = "1";
-    document.getElementById("header_button--left").style.left = "5%";
+    document.getElementById("header_button--left").style.left = "1em";
   }
 
 }

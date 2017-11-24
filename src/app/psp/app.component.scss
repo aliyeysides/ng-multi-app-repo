@@ -127,10 +127,13 @@ button {
   margin: 5px auto 0;
 }
 
+.blur-me {
+  filter: blur(10px);
+}
 
 ::placeholder {
  color: #999999 !important;
- font-size:36px !important;
+ font-size:30px !important;
  text-align: center !important;
  opacity: 0.6 !important;
  vertical-align: baseline !important;
@@ -184,7 +187,6 @@ button {
     float:right;
     padding-top: 30px;
     padding-bottom: 20px;
-    //border-bottom: 10px solid #efefef;
 }
 
 .section__header {
@@ -222,6 +224,7 @@ button {
 .section__contents {
   padding:0;
 }
+
 
 
 
@@ -327,7 +330,7 @@ button {
 .page__header {
   position: fixed;
   width: 100%;
-  height: 60px;
+  height: 50px;
   background-image: linear-gradient(243deg, #21196B 5%, #00A3FF 100%);
   z-index: 100;
   box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
@@ -339,7 +342,8 @@ button {
     h1 {
       text-align: center;
       color:#ffffff;
-    margin-top: 2%;
+      margin-top: .4em;
+      font-size: 30px;
     }
   }
 
@@ -348,7 +352,7 @@ button {
     height: 60%;
     z-index: 10;
     cursor: pointer;
-    margin: 3.2% 3%;
+    margin: .7em .7em;
 
     img {
       width: auto;
@@ -356,22 +360,15 @@ button {
     }
   }
   .header__button--left {
-    left:5%;
+    left:1em;
     transition: left .5s;
   }
   .header__button--right {
-    right:5%;
+    right:1em;
     opacity: 1;
     transition: opacity .5s;
   }
 }
-
-.blur-me {
-  filter: blur(10px);
-}
-
-
-
 
 
 
@@ -382,23 +379,23 @@ button {
 
 
 .header__search {
-  padding-top: 1.5%;
+
 
   .form-inline {
 
     .form-group {
       width: 100%;
-      padding: 0% 15%;
+      padding: .1em 15% 0;
       color: #484848;
 
       .search-box {
         font-family: "Rajdhani", sans-serif;
-        height: 94%;
+        height: 90%;
         width: 100%;
         text-align: left;
         padding: 0 15px;
         border: 0;
-        font-size: 32px;
+        font-size: 30px;
         border-radius: 3px;
         outline: none;
         border-bottom: 0px solid #f8f8f8;
@@ -408,6 +405,13 @@ button {
   }
 }
 
+.header__search .form-inline .form-group .form-control:focus {
+    border-color: transparent;
+    outline: 0;
+    box-shadow: inset 0 0px 5px rgba(0,0,0,0.18);
+    border-bottom: 0px solid #1199ff;
+}
+
 .search__dropdown ul {
   padding:0;
   margin:0 15px;
@@ -415,7 +419,7 @@ button {
 
 .header__title .search__dropdown {
   position: absolute;
-  top: 60px;
+  top: 50px;
   //width: 70%;
   z-index: 1003;
   //margin:0 15%;
@@ -426,7 +430,7 @@ button {
   background-color: rgba(255,255,255,0.9);
 
   .search__entry {
-    height: 60px;
+    height: 50px;
     color: $font-color;
     width: 100%;
 
@@ -445,7 +449,7 @@ button {
       .company-ticker {
         font-weight: 700;
         font-size: 28px;
-        line-height: 60px;
+        line-height: 50px;
         color: $font-color;
       }
     }

@@ -211,25 +211,6 @@ import {AuthService} from '../../../services/auth.service';
                   <div class="button__slide">
                     <img src="./assets/imgs/ui_slide.svg">
                   </div>
-                  <div class="col-12 list-entry__overlay green">
-                    <div class="row no-gutters overlay__contents">
-                      <div class="button__slide">
-                        <img src="./assets/imgs/ui_slide.svg">
-                      </div>
-                      <div class="col-2">
-                        <img class="align-middle" src="./assets/imgs/icon_minus.svg">
-                      </div>
-                      <div class="col-4">
-                        <p class="ticker">SHOP</p>
-                      </div>
-                      <div class="col-2">
-                        <img class="align-middle" src="./assets/imgs/icon_arrow-up.svg">
-                      </div>
-                      <div class="col-4">
-                        <p class="data">-2.34%</p>
-                      </div>
-                    </div>
-                  </div>
                 </li>
                 <li class="row no-gutters list__entry">
                   <div class="col-2 list-entry__pgr">
