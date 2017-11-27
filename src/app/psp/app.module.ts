@@ -23,7 +23,7 @@ import {SignalService} from '../services/signal.service';
 
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {NotificationsService} from 'angular2-notifications/dist';
-import {WordpressService} from '../services/wordpress.service';
+import {SymbolSearchService} from '../services/symbol-search.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,15 @@ import {WordpressService} from '../services/wordpress.service';
     ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES,
   ],
-  providers: [UtilService, AuthService, AuthGuard, IdeasService, SignalService, NotificationsService, WordpressService],
+  providers: [
+    UtilService,
+    AuthService,
+    AuthGuard,
+    IdeasService,
+    SignalService,
+    NotificationsService,
+    SymbolSearchService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

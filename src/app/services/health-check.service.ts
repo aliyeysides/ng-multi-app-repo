@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {UtilService} from './util.service';
-import {Http, RequestOptions, Headers} from '@angular/http';
+import {Http, URLSearchParams} from '@angular/http';
 
 @Injectable()
 export class HealthCheckService {
@@ -8,11 +8,13 @@ export class HealthCheckService {
   private apiHost = this.utilService.getApiHostName();
   private calculationParams: URLSearchParams;
   private authorizedListsParams: URLSearchParams;
+  private stockStatusParams: URLSearchParams;
 
   constructor(private utilService: UtilService,
               private http: Http) {
     this.calculationParams = new URLSearchParams;
     this.authorizedListsParams = new URLSearchParams;
+    this.stockStatusParams = new URLSearchParams;
   }
 
   public getChaikinCalculations(listId: string, startDate, endDate) {
@@ -22,6 +24,7 @@ export class HealthCheckService {
     this.calculationParams.set('startDate', startDate);
     this.calculationParams.set('endDate', endDate);
     this.calculationParams.set('listID', listId);
+    return this.utilService.getJson(url, this.calculationParams);
   }
 
   public getAuthorizedLists(uid: string) {
@@ -29,32 +32,16 @@ export class HealthCheckService {
     this.authorizedListsParams.set('uid', uid);
     this.authorizedListsParams.set('rank', 'false');
     this.authorizedListsParams.set('responseType', 'custom');
-
-    // let headers = new Headers({
-    //   'Content-Type': 'application/json',
-    //   'Accept': 'application/json',
-    //   'Access-Control-Allow-Headers': 'Content-Type',
-    // });
-    // headers.append('environment', 'desktop');
-    // headers.append('version', '1.3.4');
-
-    // let options = new RequestOptions({headers: headers, params: this.authorizedListsParams});
-
-    return this.http.get(url, {
-      search: this.authorizedListsParams,
-      withCredentials: true
-    }).map(res => res.json())
-      .catch(this.utilService.handleError);
-
-    // return this.utilService.getJson(url, this.authorizedListsParams);
-
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    // headers.append('authentication', `${student.token}`);
-    //
-    // let options = new RequestOptions({ headers: headers });
-    // return this.http
-    //   .put(url, JSON.stringify(student), options)
+    this.authorizedListsParams.set('environment', 'desktop');
+    this.authorizedListsParams.set('version', '1.3.4');
+    return this.utilService.getJson(url, this.authorizedListsParams);
   }
 
+  public getUserPortfolioStockStatus(listId: string, startDate, endDate) {
+    const url = `${this.apiHost}/CPTRestSecure/app/phcService/getUserPortfolioStocksStatus?`;
+    this.stockStatusParams.set('listId', listId);
+    this.stockStatusParams.set('startDate', startDate);
+    this.stockStatusParams.set('endDate', endDate);
+    return this.utilService.getJson(url, this.stockStatusParams);
+  }
 }

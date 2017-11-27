@@ -7,7 +7,6 @@ import {IdeasService} from '../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
 import {BaseSettingsMenuComponent} from '../../../shared/components/menus/settings-menu.component';
 
-import * as moment from 'moment';
 declare let gtag: Function;
 
 @Component({
