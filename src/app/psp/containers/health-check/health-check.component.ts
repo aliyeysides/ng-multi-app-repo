@@ -6,61 +6,89 @@ import {AuthService} from '../../../services/auth.service';
   selector: 'cpt-health-check',
   template: `
     <!-- PANEL CONTENTS -->
-    <div class="container-fluid component component--healthcheck">
+    <div class="container-fluid container__contents container__contents--mystocks">
       <div class="row contents">
 
       <!-- HEALTH-CHECK - Intro -->
-        <div class="col-12 col-md-7 col-lg-8 section section--overview">
+        <div class="col-12 col-lg-7 col-xl-8 section section--overview">
 
+          <div class="row">
+            <div class="col-12">
+              <h4>Over the last seven days...</h4>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="divider__long"></div>
+            </div>
+          </div>
+
+          <div class="row overview__summary">
+            <div class="col-12 portfolio">
+              <p class="data green"><sub>+</sub>3.04<sub>%</sub></p>
+              <p class="label">My Stock list 1</p>
+            </div>
+          </div>
           <div class="row no-gutters">
-            <div class="col-12">
-              <h4>My Stock List</h4>
+            <div class="col-3">
+            </div>
+            <div class="col-2">
+              <div class="divider__split"></div>
+            </div>
+            <div class="col-2">
+              <p class="divider__text">vs</p>
+            </div>
+            <div class="col-2">
+              <div class="divider__split"></div>
+            </div>
+            <div class="col-3">
+            </div>
+          </div>
+          <div class="row overview__summary">
+            <div class="col-12 market">
+              <p class="data red"><sub>-</sub>1.86<sub>%</sub></p>
+              <p class="label ux-blue">S&amp;P 500</p>
             </div>
           </div>
 
-          <div class="row no-gutters row--overview">
+          <div class="row">
             <div class="col-12">
-              <div class="divider-grey"></div>
-            </div>
-            <div class="col-12 col-md-4">
-              <p class="">Last week, your stocks were&hellip;</p>
-            </div>
-            <div class="col-12 col-md-4">
-              <p class="data green"><sub>up</sub> 3.04<sub>%</sub></p>
-            </div>
-            <div class="col-12 col-md-4">
-              <p>compared to the <span class="blue">S&amp;P 500</span> &mdash; <span class="up-change">up 0.13%</span></p>
-            </div>
-            <div class="col-12">
-              <div class="divider-grey"></div>
+              <div class="divider__long"></div>
             </div>
           </div>
 
-          <div class="row no-gutters row--powerbar">
+          <div class="row overview__powerbar">
             <div class="col-12">
-              <div class="powerbar">
-                <div class="bullish">
-                  <p>9</p>
-                </div>
-                <div class="neutral">
-                  <p>3</p>
-                </div>
-                <div class="bearish">
-                  <p>4</p>
-                </div>
+              <h3>Chaikin Power Bar</h3>
+            </div>
+            <div class="col-12 powerbar">
+              <div class="bullish">
+                <p>9</p>
               </div>
-              <p class="label">Chaikin Power Bar &nbsp;<a> &nbsp;<i class="fa fa-info-circle" aria-hidden="true"></i></a></p>
+              <div class="neutral">
+                <p>3</p>
+              </div>
+              <div class="bearish">
+                <p>4</p>
+              </div>
             </div>
             <div class="col-12">
-              <div class="divider-grey"></div>
+              <p class="label">What is this?</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="divider__long"></div>
             </div>
           </div>
         </div>
 
       <!-- HEALTH-CHECK - Stock Movements -->
-        <div class="col-12 col-md-5 col-lg-4 section section--stockmovements">
+        <div class="col-12 col-lg-5 col-xl-4 section section--stockmovements">
 
-          <div class="row section__header">
+          <div class="row">
             <div class="col-12">
               <h2>Stock Movements</h2>
             </div>
@@ -79,8 +107,7 @@ import {AuthService} from '../../../services/auth.service';
 
           <div class="row">
             <div class="col-12 chart__header">
-              <h3 class="ux-blue">Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
-              <div class="divider__long divider__long--blue"></div>
+              <h3 class="">Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
             </div>
             <ul class="col-12 section__chart">
               <li class="row no-gutters list-item__mover">
@@ -117,9 +144,6 @@ import {AuthService} from '../../../services/auth.service';
                 </div>
               </li>
             </ul>
-            <div class="col-12">
-              <div class="divider-grey"></div>
-            </div>
             <ul class="col-12 section__chart">
               <li class="row no-gutters list-item__mover">
                 <div class="col-4 mover__stock">
@@ -169,13 +193,13 @@ import {AuthService} from '../../../services/auth.service';
         </div>
 
       <!-- HEALTH-CHECK - Ratings Changes -->
-        <div class="col-12 col-md-7 col-lg-8 section section--ratingschanges">
+        <div class="col-12 col-lg-7 col-xl-8 section section--ratingschanges">
 
           <div class="row section__summary">
-            <div class="col-12 col-md-6">
+            <div class="col-12">
               <h2>Ratings Changes</h2>
             </div>
-            <div class="col-12 col-md-6">
+            <div class="col-12">
               <div class="row">
                 <div class="col-1"></div>
                 <div class="col-5 summary--left">
@@ -192,7 +216,6 @@ import {AuthService} from '../../../services/auth.service';
           <div class="row">
             <div class="col-12 col-md-6 section__contents">
               <h3 class="green">Turned Bullish</h3>
-              <div class="divider__long divider__long--green"></div>
               <ul class="stock__list">
                 <li class="row no-gutters list__entry">
                   <div class="col-2 list-entry__pgr">
@@ -236,7 +259,6 @@ import {AuthService} from '../../../services/auth.service';
 
             <div class="col-12 col-md-6 section__contents">
               <h3 class="red">Turned Bearish</h3>
-              <div class="divider__long divider__long--red"></div>
               <ul class="stock__list">
                 <li class="row no-gutters list__entry">
                   <div class="col-2 list-entry__pgr">
@@ -306,7 +328,7 @@ import {AuthService} from '../../../services/auth.service';
         </div>
 
       <!-- HEALTH-CHECK - Earnings Reports -->
-        <div class="col-12 col-md-7 col-lg-8 section section--earningsreports">
+        <div class="col-12 col-lg-7 col-xl-8 section section--earningsreports">
 
           <div class="row section__header">
             <div class="col-12">
@@ -328,8 +350,7 @@ import {AuthService} from '../../../services/auth.service';
           <div class="row">
             <div class="col-12 col-md-6 section__contents">
               <h3 class="ux-blue">Earnings Surprises</h3>
-              <div class="divider__long divider__long--blue"></div>
-              <ul class="col-12 section__chart">
+              <ul class="section__chart">
                 <li class="row no-gutters col-headers">
                   <div class="col-3">
                     <p>TICKER</p>
@@ -400,8 +421,7 @@ import {AuthService} from '../../../services/auth.service';
 
             <div class="col-12 col-md-6 section__contents">
               <h3 class="ux-blue">Estimate Revisions</h3>
-              <div class="divider__long divider__long--blue"></div>
-              <ul class="col-12 section__chart">
+              <ul class="section__chart">
                 <li class="row no-gutters col-headers">
                   <div class="col-3">
                     <p>TICKER</p>
@@ -475,7 +495,6 @@ import {AuthService} from '../../../services/auth.service';
               <div class="row no-gutters reporting-calendar">
                 <div class="col-12 chart__header">
                   <h3 class="ux-blue">Reporting This Week</h3>
-                  <div class="divider__long divider__long--blue"></div>
                 </div>
                 <div class="col-12 col-headers">
                   <div class="col-head">
@@ -522,7 +541,7 @@ import {AuthService} from '../../../services/auth.service';
         </div>
 
       <!-- HEALTH-CHECK - Power Grid -->
-        <div class="col-12 col-md-7 col-lg-8 section section--powergrid">
+        <div class="col-12 col-lg-7 col-xl-8 section section--powergrid">
 
           <div class="row">
             <div class="col-12">
@@ -628,7 +647,7 @@ import {AuthService} from '../../../services/auth.service';
         </div>
 
       <!-- HEALTH-CHECK - DISCLAIMER -->
-        <div  class="col-12 col-md-7 col-lg-8 section section--disclaimer">
+        <div  class="col-12 col-lg-7 col-xl-8 section section--disclaimer">
 
           <div class="row">
             <div class="col-12">
