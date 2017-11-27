@@ -9,10 +9,12 @@
 
 .section--overview {
 	.overview__summary {
-		margin:10px 0;
+		margin:0;
+		padding:10px 0 0;
+		position: relative;
 
 		.data {
-	  		font-size: 72px;
+	  		font-size: 60px;
 		  	line-height: 1;
 		  	font-weight: 400;
 
@@ -21,21 +23,26 @@
 			}
 		}
 
-		img {
-			width: 32px;
-			height: 32px;
-			margin-top: -5px;
-		}
-
 		.label {
-			font-size: 16px;
-			font-weight: 600;
-			line-height: 1.125;
+			font-size: 13px;
+			font-weight: 500;
+			line-height: 1.575;
 			text-transform: uppercase;
+			opacity: 0.5;
+		}
+		.list {
+			font-size: 18px;
+			font-weight: 600;
+			line-height: 1.8;	
 		}
 		.portfolio {
+			margin:5px 0;
 		}
 		.market {
+			margin:5px 0;
+		}
+		.vs-divider {
+			margin:5px 0;
 		}
 	}
 }
@@ -54,15 +61,14 @@
 }
 
 .section--stockmovements .section__chart {
-	margin-bottom: 0;
+
 }
 
 .list-item__mover {
   margin-bottom:10px;
-  //padding: 0 4%;
 
   &:last-child {
-  	//margin-bottom:0;
+  	margin-bottom:0;
   }
 }
 
@@ -89,7 +95,7 @@
 
 .mover__data {
 	.mover__bar {
-	  	border-radius: 10px;
+	  	border-radius: 8px;
 	  	height: 30px;
 
 	  	.data {
@@ -159,6 +165,7 @@
 .reporting-calendar {
 
 	.col-head {
+		margin:-10px 0 0;
 	  	float: left;
 	  	width: 20%;
 

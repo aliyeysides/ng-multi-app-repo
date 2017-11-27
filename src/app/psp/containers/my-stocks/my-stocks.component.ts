@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
         <div class="row no-gutters">
           <div class="col-12 list__current">
             <h3 class="ux-blue">My stock list 1 &nbsp;<i class="fa fa-pencil-square-o" aria-hidden="true"></i></h3>
-            <div class="divider__long divider__long--blue"></div>
             <ul class="stock__list">
               <li class="row no-gutters col-headers">
                 <div class="col-2 sort sorted">
