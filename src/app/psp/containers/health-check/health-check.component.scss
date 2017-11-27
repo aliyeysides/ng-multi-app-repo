@@ -8,87 +8,39 @@
 /*                                                   */
 
 .section--overview {
+	.overview__summary {
+		margin:10px 0;
 
-	p {
-	  font-weight: 400;
-	  font-size: 18px;
-	}
+		.data {
+	  		font-size: 72px;
+		  	line-height: 1;
+		  	font-weight: 400;
 
-	span {
-	  font-weight: 600;
-	}
-
-	.data {
-  		font-size: 56px;
-  		line-height: 1.25;
-
-		sub {
-		  bottom: 0;
-		}
-	}
-}
-
-
-
-/*                                                   */
-/*                      POWER BAR                    */
-/*                                                   */
-
-.row--powerbar {
-  	padding:0 5%;
-  	margin: 5px 0 0;
-
-	.label {
-	  font-size: 13px;
-	  font-weight: 600;
-
-		a {
-			i {
-			  color:#1199ff;
-			  cursor: pointer;
+			sub {
+			  bottom: 0;
 			}
 		}
-	}
 
-	.powerbar {
-	  	width: 100%;
-	  	height: 36px;
-	  	margin-bottom:10px;
-
-		p {
-		  color:#ffffff;
-		  font-weight: 600;
-		  font-size: 28px;
-		  line-height: 38px;
-		  white-space: nowrap;
+		img {
+			width: 32px;
+			height: 32px;
+			margin-top: -5px;
 		}
 
-		.bullish {
-		  height: 36px;
-		  background-color: #009900;
-		  float: left;
-		  width: 63%;
-		  border-radius: 25px;
+		.label {
+			font-size: 16px;
+			font-weight: 600;
+			line-height: 1.125;
+			text-transform: uppercase;
 		}
-
-		.neutral {
-		  width: 15%;
-		  height: 36px;
-		  background-color: #FF9900;
-		  float: left;
-		  margin: 0 1%;
-		  border-radius: 25px;
+		.portfolio {
 		}
-
-		.bearish {
-		  height: 36px;
-		  background-color: #CC0000;
-		  float: left;
-		  width: 20%;
-		  border-radius: 25px;
+		.market {
 		}
 	}
 }
+
+
 
 
 
@@ -106,11 +58,11 @@
 }
 
 .list-item__mover {
-  margin-bottom:15px;
-  padding: 0 4%;
+  margin-bottom:10px;
+  //padding: 0 4%;
 
   &:last-child {
-  	margin-bottom:0;
+  	//margin-bottom:0;
   }
 }
 
@@ -137,7 +89,7 @@
 
 .mover__data {
 	.mover__bar {
-	  	border-radius: 6px;
+	  	border-radius: 10px;
 	  	height: 30px;
 
 	  	.data {
@@ -179,8 +131,6 @@
 .earnings__entry {
   	height: 36px;
   	overflow: hidden;
-  	margin-bottom: 10px;
-  	padding:0 0 0 3.5%;
 
 	.pgr {
 		img {
@@ -207,7 +157,6 @@
 }
 
 .reporting-calendar {
-  	padding:0 2%;
 
 	.col-head {
 	  	float: left;
