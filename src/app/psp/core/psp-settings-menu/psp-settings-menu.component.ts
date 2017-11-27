@@ -1,16 +1,13 @@
-import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import {BaseSettingsMenuComponent} from '../../../shared/components/menus/settings-menu.component';
 import {AuthService} from '../../../services/auth.service';
-import {getBindingElementVariableDeclaration} from 'tslint';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 declare let gtag: Function;
 
 @Component({
   selector: 'cpt-psp-settings-menu',
   template: `
-    <div (click)="openNav()" class="header__button header__button--left" id="header_button--left">
-      <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
-    </div>
     <nav #nav class="container--nav">
       <div class="logo">
         <img src="assets/imgs/logo_powerpulse.svg">
@@ -32,30 +29,41 @@ declare let gtag: Function;
   `,
   styleUrls: ['./psp-settings-menu.component.scss']
 })
-export class PspSettingsMenuComponent extends BaseSettingsMenuComponent {
+export class PspSettingsMenuComponent extends BaseSettingsMenuComponent implements OnInit {
+  @Input('navOpened') navOpened: BehaviorSubject<boolean>;
+  @Input('btn') btn: ElementRef;
   @ViewChild('nav') nav: ElementRef;
 
   @HostListener('click', ['$event']) onClick(e?: Event) {
     if (e) e.stopPropagation();
-    this.openNav();
   }
 
-  @HostListener('document:click', ['$event']) offClick(e: Event) {
-    if (!this.el.nativeElement.contains(e.target)) this.closeNav();
+ @HostListener('document:click', ['$event']) offClick(e: Event) {
+    // console.log('this.btn', this.btn);
+    // if (!this.nav.nativeElement.contains(e.target) && !this.btn.nativeElement.contains(e.target)) this.closeNav();
   }
+
+  private opened: boolean = false;
 
   constructor(public el: ElementRef,
               public authService: AuthService) {
-    super(el, authService)
+    super(el, authService);
+  }
+
+  ngOnInit() {
+    this.navOpened
+      .subscribe(res => res === false ? this.closeNav() : this.openNav())
   }
 
   openNav() {
+    this.opened = true;
     this.nav.nativeElement.style.width = "320px";
     document.getElementById("header_button--right").style.right = "-335px";
     document.getElementById("header_button--left").style.left = "335px";
   }
 
   closeNav() {
+    this.opened = false;
     this.nav.nativeElement.style.width = "0";
     document.getElementById("header_button--right").style.right = "1em";
     document.getElementById("header_button--left").style.left = "1em";

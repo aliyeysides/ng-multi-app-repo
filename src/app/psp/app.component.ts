@@ -1,5 +1,6 @@
 import {Component, ElementRef, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 declare let gtag: Function;
 
@@ -10,17 +11,22 @@ declare let gtag: Function;
   template: `
     <!-- PANEL HEADER - Fixed to the top of each panel-->
     <div class="page__header" id="page__header">
-      <cpt-psp-settings-menu></cpt-psp-settings-menu>
-      <div class="header__title header__search">
-        <h1 *ngIf="!globalSearch">{{ title }}</h1>
-        <cpt-psp-symbol-search [placeholder]="'Search'" *ngIf="globalSearch"></cpt-psp-symbol-search>
+      <div #navBtn (click)="toggleNav()" class="header__button header__button--left" id="header_button--left">
+        <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
       </div>
-      <cpt-psp-search-btn (toggleSearchClicked)="toggleSearch()"></cpt-psp-search-btn>
+      <cpt-psp-settings-menu [btn]="navBtn" [navOpened]="navOpened"></cpt-psp-settings-menu>
+      <div class="header__title header__search">
+        <h1 *ngIf="!searchOpened">{{ title }}</h1>
+        <cpt-psp-symbol-search [placeholder]="'Search'" *ngIf="searchOpened"></cpt-psp-symbol-search>
+      </div>
+      <div (click)="toggleSearch()" class="header__button header__button--right" id="header_button--right">
+        <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
+      </div>
     </div>
 
     <!-- App Container -->
-    <div class="container--main" id="container--main" [ngClass]="{'blur-me': globalSearch}">
-      <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->   
+    <div class="container--main" id="container--main" [ngClass]="{'blur-me': searchOpened}">
+      <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->
       <div class="router__container">
         <router-outlet></router-outlet>
       </div>
@@ -31,7 +37,8 @@ declare let gtag: Function;
 export class AppComponent {
   @ViewChild('search') search: ElementRef;
 
-  public globalSearch: boolean = false;
+  public searchOpened: boolean = false;
+  public navOpened: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public title: string;
   options = {
     position: ['top', 'right'],
@@ -56,7 +63,11 @@ export class AppComponent {
   }
 
   toggleSearch() {
-    this.globalSearch = !this.globalSearch;
+    this.searchOpened = !this.searchOpened;
+  }
+
+  toggleNav() {
+    this.navOpened.next(!this.navOpened.getValue())
   }
 
 }
