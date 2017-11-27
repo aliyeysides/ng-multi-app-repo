@@ -1,10 +1,10 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {PortfolioStatus} from '../../../../shared/models/stock-status';
+import {PortfolioStatus} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 
 @Component({
-  selector: 'cpt-portfolio-overview',
+  selector: 'cpt-psp-portfolio-overview',
   template: `
     <div class="col-12 col-md-7 col-lg-8 section section--overview">
 

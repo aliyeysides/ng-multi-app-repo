@@ -1,10 +1,10 @@
 import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {StockStatus} from '../../../../shared/models/stock-status';
+import {StockStatus} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 
 @Component({
-  selector: 'cpt-stock-movements',
+  selector: 'cpt-psp-stock-movements',
   template: `
     <div class="col-12 col-md-5 col-lg-4 section section--stockmovements">
 
@@ -116,8 +116,7 @@ import {Subject} from 'rxjs/Subject';
       </div>
     </div>
   `,
-  styleUrls: ['../health-check.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['../health-check.component.scss']
 })
 export class StockMovementsComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -140,7 +139,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
     this._stocks
       .takeUntil(this.ngUnsubscribe)
       .subscribe(res => {
-        console.log(res, 'stocks in movements cmp');
         // this.parseStockStatus(res);
       });
   }

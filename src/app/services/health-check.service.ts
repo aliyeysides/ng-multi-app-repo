@@ -9,12 +9,22 @@ export class HealthCheckService {
   private calculationParams: URLSearchParams;
   private authorizedListsParams: URLSearchParams;
   private stockStatusParams: URLSearchParams;
+  private pgrWeeklyChangeParams: URLSearchParams;
+  private earningsSurpriseParams: URLSearchParams;
+  private analystRevisionsParams: URLSearchParams;
+  private phcParams: URLSearchParams;
+  private earningsReportParams: URLSearchParams;
 
   constructor(private utilService: UtilService,
               private http: Http) {
     this.calculationParams = new URLSearchParams;
     this.authorizedListsParams = new URLSearchParams;
     this.stockStatusParams = new URLSearchParams;
+    this.pgrWeeklyChangeParams = new URLSearchParams;
+    this.earningsSurpriseParams = new URLSearchParams;
+    this.analystRevisionsParams = new URLSearchParams;
+    this.earningsReportParams = new URLSearchParams;
+    this.phcParams = new URLSearchParams;
   }
 
   public getChaikinCalculations(listId: string, startDate, endDate) {
@@ -43,5 +53,44 @@ export class HealthCheckService {
     this.stockStatusParams.set('startDate', startDate);
     this.stockStatusParams.set('endDate', endDate);
     return this.utilService.getJson(url, this.stockStatusParams);
+  }
+
+  public getPGRWeeklyChangeDAta(listId: string, startDate, endDate) {
+    const url = `${this.apiHost}/CPTRestSecure/app/phcService/getPGRWeeklyChangeData?`;
+    this.pgrWeeklyChangeParams.set('listId', listId);
+    this.pgrWeeklyChangeParams.set('startDate', startDate);
+    this.pgrWeeklyChangeParams.set('endDate', endDate);
+    return this.utilService.getJson(url, this.pgrWeeklyChangeParams);
+  }
+
+  public getEarningsSurprise(listId: string, startDate, endDate) {
+    const url = `${this.apiHost}/CPTRestSecure/app/phcService/getEarningsSurprise?`;
+    this.earningsSurpriseParams.set('listId', listId);
+    this.earningsSurpriseParams.set('startDate', startDate);
+    this.earningsSurpriseParams.set('endDate', endDate);
+    return this.utilService.getJson(url, this.earningsSurpriseParams);
+  }
+
+  public getAnalystRevisions(listId: string, date) {
+    const url = `${this.apiHost}/CPTRestSecure/app/phcService/getAnalystRevisions?`;
+    this.analystRevisionsParams.set('listId', listId);
+    this.analystRevisionsParams.set('date', date);
+    return this.utilService.getJson(url, this.analystRevisionsParams);
+  }
+
+  public getExpectedEarningsReportsWithPGRValues(uid: string, listId: string, startDate, endDate) {
+    const url = `${this.apiHost}/CPTRestSecure/app/phcService/getExpectedEarningReportsWithPGRValues?`;
+    this.earningsReportParams.set('uid', uid);
+    this.earningsReportParams.set('listId', listId);
+    this.earningsReportParams.set('startDate', startDate);
+    this.earningsReportParams.set('endDate', endDate);
+    return this.utilService.getJson(url, this.earningsReportParams);
+  }
+
+
+  public getPHCGridData(listId: string) {
+    const url = `${this.apiHost}/CPTRestSecure/app/phcService/getPHCGridData?`;
+    this.phcParams.set('listId', listId);
+    return this.utilService.getJson(url, this.phcParams);
   }
 }
