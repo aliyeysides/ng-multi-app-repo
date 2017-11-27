@@ -3,8 +3,8 @@ import {HealthCheckService} from '../../../services/health-check.service';
 import {AuthService} from '../../../services/auth.service';
 
 import * as moment from 'moment';
+import {PortfolioStatus, StockStatus} from '../../../shared/models/stock-status';
 import {Observable} from 'rxjs/Observable';
-import {StockStatus} from '../../../shared/models/stock-status';
 
 @Component({
   selector: 'cpt-health-check',
@@ -14,47 +14,7 @@ import {StockStatus} from '../../../shared/models/stock-status';
       <div class="row contents">
 
       <!-- HEALTH-CHECK - Intro -->
-        <div class="col-12 col-md-7 col-lg-8 section section--overview">
-
-          <div class="row no-gutters">
-            <div class="col-12">
-              <h4>My Stock List</h4>
-            </div>
-          </div>
-
-          <div class="row no-gutters row--overview">
-            <div class="col-12 col-md-4">
-              <p class="">Last week, your stocks were&hellip;</p>
-            </div>
-            <div class="col-12 col-md-4">
-              <p class="data green"><sub>up</sub> 3.04<sub>%</sub></p>
-            </div>
-            <div class="col-12 col-md-4">
-              <p>compared to the <span class="blue">S&amp;P 500</span> &mdash; <span class="up-change">up 0.13%</span></p>
-            </div>
-            <div class="col-12">
-              <div class="divider-grey"></div>
-            </div>
-          </div>
-
-          <div class="row no-gutters row--powerbar">
-            <div class="col-12">
-              <div class="powerbar">
-                <div class="bullish">
-                  <p>9</p>
-                </div>
-                <div class="neutral">
-                  <p>3</p>
-                </div>
-                <div class="bearish">
-                  <p>4</p>
-                </div>
-              </div>
-              <p class="label">Chaikin Power Bar &nbsp;<a> &nbsp;<i class="fa fa-info-circle" aria-hidden="true"></i></a></p>
-            </div>
-          </div>
-        </div>
-
+        <cpt-portfolio-overview [status]="portfolioStatus"></cpt-portfolio-overview>
       <!-- HEALTH-CHECK - Stock Movements -->
         <cpt-stock-movements [stocks]="stocksStatus"></cpt-stock-movements>
 
@@ -555,6 +515,7 @@ export class HealthCheckComponent implements OnInit {
   private uid: string;
   private listId: string;
 
+  public portfolioStatus: PortfolioStatus;
   public stocksStatus: Array<StockStatus>;
 
   constructor(private authService: AuthService,
@@ -569,14 +530,15 @@ export class HealthCheckComponent implements OnInit {
       .switchMap(res => {
         const startDate = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
               endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
-        // return Observable.combineLatest(
-          // this.healthCheck.getChaikinCalculations(res, startDate, endDate),
-          return this.healthCheck.getUserPortfolioStockStatus(res, startDate, endDate)
-        // )
+        return Observable.combineLatest(
+          this.healthCheck.getChaikinCalculations(res, startDate, endDate),
+          this.healthCheck.getUserPortfolioStockStatus(res, startDate, endDate)
+        )
       })
       .subscribe(res => {
         console.log('res', res);
-        this.stocksStatus = res[0] as StockStatus[];
+        this.portfolioStatus = res[0][0] as PortfolioStatus;
+        this.stocksStatus = res[0][1] as StockStatus[];
       });
   }
 

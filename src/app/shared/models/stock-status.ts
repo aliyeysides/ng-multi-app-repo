@@ -7,3 +7,14 @@ export interface StockStatus {
   "closePrice": number,
   "arcColor": number
 }
+
+interface Ticker {
+  [key: string]: number;
+}
+
+export interface PortfolioStatus {
+  "SPYPercentageChange": number,
+  "LooserStockPercentageChanges": Ticker[],
+  "GainerStocksPercentageChanges": Ticker[],
+  "avgPercentageChange": number
+}

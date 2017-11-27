@@ -141,7 +141,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe)
       .subscribe(res => {
         console.log(res, 'stocks in movements cmp');
-        this.parseStockStatus(res);
+        // this.parseStockStatus(res);
       });
   }
 
