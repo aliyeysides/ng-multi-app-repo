@@ -15,25 +15,17 @@ import {Subject} from 'rxjs/Subject';
       </div>
 
       <div class="row section__summary">
-        <div class="col-1"></div>
-        <div class="col-5 summary--left">
+        <div class="col-6 summary--left">
           <p><img src="./assets/imgs/icon_circle-movement--green.svg"> 10</p>
         </div>
-        <div class="col-5 summary--right">
+        <div class="col-6 summary--right">
           <p><img src="./assets/imgs/icon_circle-movement--red.svg"> 4</p>
-        </div>
-        <div class="col-1"></div>
-      </div>
-
-      <div class="row">
-        <div class="col-12">
-          <div class="divider__long"></div>
         </div>
       </div>
 
       <div class="row">
         <div class="col-12 chart__header">
-          <h3 class="ux-blue">Last Week's Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
+          <h3 class="ux-blue">Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
         </div>
         <ul class="col-12 section__chart">
           <li class="row no-gutters list-item__mover">
