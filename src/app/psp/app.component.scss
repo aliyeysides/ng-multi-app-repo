@@ -18,16 +18,17 @@ h1 {
   font-weight: 400;
 }
 h2 {
-  font-size: 32px;
+  font-size:34px;
   line-height: 1.3;
   font-weight: 400;
-  margin: 15px 0 20px;
+  margin:25px 0 0px;
+  color:#999999;
+  //text-transform: uppercase;
 }
 h3 {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 600;
-  margin: 10px 0 20px;
-  text-transform: uppercase;
+  margin: 20px 0px 15px;
 }
 h4 {
   font-size: 18px;
@@ -163,7 +164,7 @@ button {
   position: relative;
   background-color: #ffffff;
   width: 100%;
-  padding-top:60px;
+  padding-top:50px;
 }
 
 
@@ -186,13 +187,13 @@ button {
 }
 
 .section__summary {
-  margin-bottom: 30px;
+  margin: 20px 0 25px;
   p {
     font-size: 48px;
     line-height: 1;
   }
   img {
-    margin-right: 10px;
+    margin-right: 5px;
     display: inline-block;
     vertical-align: middle;
     margin-top: -5px;
@@ -208,6 +209,7 @@ button {
 }
 
 .section__chart {
+  margin-bottom:25px;
 }
 
 
@@ -314,8 +316,7 @@ button {
   position: fixed;
   width: 100%;
   height: 45px;
-/* Rectangle: */
-background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,0.95) 100%);
+  background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,0.95) 100%);
   z-index: 100;
 
   .header__title {
@@ -368,7 +369,7 @@ background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,
 
   .form-inline {
     height: 100%;
-    padding: .15em 15% 0;
+    padding: .1em 15%;
 
     .form-group {
       width: 100%;
@@ -380,10 +381,10 @@ background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,
         width: 100%;
         height: 100%;
         text-align: left;
-        padding: 0 15px;
+        padding: 5px 15px;
         border: 0;
         font-size: 26px;
-        border-radius: 8px;
+        border-radius: 5px;
         outline: none;
         border-bottom: 0px solid #f8f8f8;
         background-color: rgba(255,255,255,0.25);
@@ -407,7 +408,7 @@ background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,
 
 .header__title .search__dropdown {
   position: absolute;
-  top: 50px;
+  top: 45px;
   //width: 70%;
   z-index: 1003;
   //margin:0 15%;
@@ -416,11 +417,13 @@ background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,
   border-radius: 0;
   opacity: 1;
   background-color: rgba(255,255,255,0.9);
+  height: 100vh;
 
   .search__entry {
-    height: 50px;
+    height: 60px;
     color: $font-color;
     width: 100%;
+    border-bottom: 0;
 
     .company-name {
       font-weight: 400;
@@ -437,7 +440,7 @@ background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,
       .company-ticker {
         font-weight: 700;
         font-size: 28px;
-        line-height: 50px;
+        line-height: 60px;
         color: $font-color;
       }
     }
@@ -658,57 +661,62 @@ background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,
 /*                                                   */
 
 .overview__powerbar {
-    text-align: center;
-    padding: 20px 0;
+  text-align: center;
+  padding: 10px 0;
 
-  .label {
-    font-size: 13px;
-    font-weight: 600;
+    .label {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.575;
+      color:#999999;
+      text-transform: uppercase;
 
     a {
       i {
         color:#1199ff;
         cursor: pointer;
+        margin-left:5px;
       }
     }
   }
 
   .powerbar {
+      display: block;
       width: 100%;
-      height: 50px;
-      margin-bottom:10px;
-      padding: 0 5%;
+      height: 40px;
+      margin:10px 0;
+      padding: 0 8%;
 
     p {
       color:#ffffff;
       font-weight: 500;
       font-size: 28px;
-      line-height: 55px;
+      line-height: 45px;
       white-space: nowrap;
     }
 
     .bullish {
-      height: 50px;
+      height: 40px;
       background-color: #009900;
       float: left;
-      width: 56%;
+      width: 60%;
       border-radius: 10px;
     }
 
     .neutral {
       width: 15%;
-      height: 50px;;
+      height: 40px;;
       background-color: #FF9900;
       float: left;
-      margin: 0 2%;
+      margin: 0 1.5%;
       border-radius: 10px;
     }
 
     .bearish {
-      height: 50px;
+      height: 40px;
       background-color: #CC0000;
       float: left;
-      width: 25%;
+      width: 22%;
       border-radius: 10px;
     }
   }
@@ -726,6 +734,7 @@ background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,
 
 
 .expand-collapse {
+  margin:25px 0 0;
   cursor: pointer;
 
   p {
@@ -752,9 +761,9 @@ background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,
 
 
 .divider {
-  width: 40%;
+  width: 30%;
   border-bottom:2px solid #eeeeee;
-  margin:0 auto;
+  margin:15px auto;
 }
 
 .divider__medium {
@@ -765,10 +774,10 @@ background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,
 }
 
 .divider__long {
-  width: 80%;
+  width: 50%;
   height: 2px;
   border-radius: 5px;
-  margin: 10px auto;
+  margin: 15px auto;
   background: #eeeeee;
 }
 
@@ -776,12 +785,14 @@ background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,
     width: 100%;
     height: 2px;
     border-radius: 5px;
-    margin: 14px auto 0;
+    margin: 0 auto;
     background: #eeeeee;
 }
 
 .divider__long.divider__long--green {
-  background: linear-gradient(to right, rgba(0,204,0,1) 0%,rgba(0,170,119,1) 100%);
+  background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,0.95) 100%);
+  width: 95%;
+  margin-top: 25px;
 }
 
 .divider__long.divider__long--red {
@@ -794,8 +805,9 @@ background-image: linear-gradient(225deg, rgba(0,204,0,0.95) 0%, rgba(0,163,255,
 
 
 .divider__text {
-  font-weight: 400;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 24px;
+  color:#999999;
 }
 
 

@@ -28,7 +28,7 @@ import {Observable} from 'rxjs/Observable';
         <cpt-psp-power-grid></cpt-psp-power-grid>
 
       <!-- HEALTH-CHECK - DISCLAIMER -->
-        <div  class="col-12 col-md-7 col-lg-8 section section--disclaimer">
+        <div  class="col-12 col-lg-8 col-xl-8 section section--disclaimer">
 
           <div class="row">
             <div class="col-12">

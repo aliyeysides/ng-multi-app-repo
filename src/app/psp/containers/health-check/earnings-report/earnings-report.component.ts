@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'cpt-psp-earnings-report',
   template: `
-    <div class="col-12 col-md-7 col-lg-8 section section--earningsreports">
+    <div class="col-12 col-lg-8 col-xl-8 section section--earningsreports">
 
       <div class="row section__header">
         <div class="col-12">
@@ -12,21 +12,26 @@ import { Component, OnInit } from '@angular/core';
       </div>
 
       <div class="row section__summary">
-        <div class="col-1"></div>
-        <div class="col-5 summary--left">
+        <div class="col-1 col-md-3"></div>
+        <div class="col-5 col-md-3 summary--left">
           <p><img src="./assets/imgs/icon_circle-earnings--green.svg"> 3</p>
         </div>
-        <div class="col-5 summary--right">
+        <div class="col-5 col-md-3 summary--right">
           <p><img src="./assets/imgs/icon_circle-earnings--red.svg"> 2</p>
         </div>
-        <div class="col-1"></div>
+        <div class="col-1 col-md-3"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="divider"></div>
+        </div>
       </div>
 
       <div class="row">
         <div class="col-12 col-md-6 section__contents">
           <h3 class="ux-blue">Earnings Surprises</h3>
-          <div class="divider__long divider__long--blue"></div>
-          <ul class="col-12 section__chart">
+          <ul class="section__chart">
             <li class="row no-gutters col-headers">
               <div class="col-3">
                 <p>TICKER</p>
@@ -95,10 +100,13 @@ import { Component, OnInit } from '@angular/core';
           </ul>
         </div>
 
+        <div class="col-12 hidden-md-up">
+          <div class="divider"></div>
+        </div>
+
         <div class="col-12 col-md-6 section__contents">
           <h3 class="ux-blue">Estimate Revisions</h3>
-          <div class="divider__long divider__long--blue"></div>
-          <ul class="col-12 section__chart">
+          <ul class="section__chart">
             <li class="row no-gutters col-headers">
               <div class="col-3">
                 <p>TICKER</p>
@@ -167,9 +175,18 @@ import { Component, OnInit } from '@angular/core';
           </ul>
         </div>
 
-        <div class="col-12 section__chart">
+        <div class="col-12 hidden-md-up">
+          <div class="divider"></div>
+        </div>
 
+        <div class="col-12 section__chart">
           <cpt-psp-reporting-calendar></cpt-psp-reporting-calendar>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="divider"></div>
         </div>
       </div>
 
@@ -177,6 +194,12 @@ import { Component, OnInit } from '@angular/core';
         <div class="col-12 expand-collapse">
           <img src="./assets/imgs/icon_chevron--up.svg">
           <p>COLLAPSE</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="divider__long divider__long--green"></div>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'cpt-psp-power-grid',
   template: `
-    <div class="col-12 col-md-7 col-lg-8 section section--powergrid">
+    <div class="col-12 col-lg-8 col-xl-8 section section--powergrid">
 
       <div class="row">
         <div class="col-12">
@@ -12,15 +12,20 @@ import { Component, OnInit } from '@angular/core';
       </div>
 
       <div class="row">
+        <div class="col-12">
+          <div class="divider"></div>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-12 chart__header">
           <h3 class="green">Strong Industries</h3>
-          <div class="divider__long divider__long--green"></div>
         </div>
 
         <div class="col-12 powerGrid">
           <div class="row col-headers">
             <div class="col-6">
-              <p>Strong Stocks</p>
+              <p>STRONG STOCKS</p>
             </div>
             <div class="col-6">
             </div>
@@ -40,7 +45,7 @@ import { Component, OnInit } from '@angular/core';
         <div class="col-12 powerGrid">
           <div class="row col-headers">
             <div class="col-6">
-              <p>Weak Stocks</p>
+              <p>WEAK STOCKS</p>
             </div>
             <div class="col-6">
             </div>
@@ -57,13 +62,12 @@ import { Component, OnInit } from '@angular/core';
 
         <div class="col-12 chart__header">
           <h3 class="red">Weak Industries</h3>
-          <div class="divider__long divider__long--red"></div>
         </div>
 
         <div class="col-12 powerGrid">
           <div class="row col-headers">
             <div class="col-6">
-              <p>Strong Stocks</p>
+              <p>STRONG GROUPS</p>
             </div>
             <div class="col-6">
             </div>
@@ -80,7 +84,7 @@ import { Component, OnInit } from '@angular/core';
         <div class="col-12 powerGrid">
           <div class="row col-headers">
             <div class="col-6">
-              <p>Weak Stocks</p>
+              <p>WEAK GROUPS</p>
             </div>
             <div class="col-6">
             </div>
