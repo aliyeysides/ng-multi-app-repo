@@ -1,11 +1,14 @@
 import {Injectable} from '@angular/core';
 import {UtilService} from './util.service';
 import {Http, URLSearchParams} from '@angular/http';
+import {PortfolioStatus, PrognosisData} from '../shared/models/health-check';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class HealthCheckService {
 
   private apiHost = this.utilService.getApiHostName();
+  private prognosisParams: URLSearchParams;
   private calculationParams: URLSearchParams;
   private authorizedListsParams: URLSearchParams;
   private stockStatusParams: URLSearchParams;
@@ -17,6 +20,7 @@ export class HealthCheckService {
 
   constructor(private utilService: UtilService,
               private http: Http) {
+    this.prognosisParams = new URLSearchParams;
     this.calculationParams = new URLSearchParams;
     this.authorizedListsParams = new URLSearchParams;
     this.stockStatusParams = new URLSearchParams;
@@ -25,6 +29,12 @@ export class HealthCheckService {
     this.analystRevisionsParams = new URLSearchParams;
     this.earningsReportParams = new URLSearchParams;
     this.phcParams = new URLSearchParams;
+  }
+
+  public getPrognosisData(listId: string): Observable<PrognosisData> {
+    const url = `${this.apiHost}/CPTRestSecure/app/phcService/getPrognosisData?`;
+    this.prognosisParams.set('listId', listId);
+    return this.utilService.getJson(url, this.prognosisParams)
   }
 
   public getChaikinCalculations(listId: string, startDate, endDate) {
@@ -47,7 +57,7 @@ export class HealthCheckService {
     return this.utilService.getJson(url, this.authorizedListsParams);
   }
 
-  public getUserPortfolioStockStatus(listId: string, startDate, endDate) {
+  public getUserPortfolioStockStatus(listId: string, startDate, endDate): Observable<PortfolioStatus> {
     const url = `${this.apiHost}/CPTRestSecure/app/phcService/getUserPortfolioStocksStatus?`;
     this.stockStatusParams.set('listId', listId);
     this.stockStatusParams.set('startDate', startDate);

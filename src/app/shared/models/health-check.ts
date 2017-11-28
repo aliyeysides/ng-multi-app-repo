@@ -20,11 +20,10 @@ export interface PortfolioStatus {
 }
 
 export interface PGRChanges {
-  // "DataAvailable": boolean,
-  // [key: string]: {
-  //   "SymbolsTurnedBullish": Ticker,
-  //   "SymbolsTurnedBearish": Ticker
-  // }
+  [key: string]: boolean | {
+    "SymbolsTurnedBullish": object[],
+    "SymbolsTurnedBearish": object[]
+  }
 }
 
 export interface EarningsReportSurprises {
@@ -52,4 +51,14 @@ export interface PHCGridData {
     "IndustryScore": number,
     "IndustryName": string
   }
+}
+
+export interface PrognosisData {
+  TotalSymbols: number,
+  PortfolioHealth: number,
+  BearishSymbolsCount: number,
+  BullishSymbolsCount: number,
+  LikelyOutperformPercentage: number,
+  NeutralSymbolsCount: number,
+  BearishSymbols: string
 }

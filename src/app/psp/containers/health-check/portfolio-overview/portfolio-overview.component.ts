@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {PortfolioStatus} from '../../../../shared/models/health-check';
+import {PortfolioStatus, PrognosisData} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 
 @Component({
@@ -66,13 +66,13 @@ import {Subject} from 'rxjs/Subject';
       <div class="row overview__powerbar">
         <div class="col-12 powerbar clearfix">
           <div class="bullish">
-            <p>9</p>
+            <p>{{ prognosisData?.BullishSymbolsCount }}</p>
           </div>
           <div class="neutral">
-            <p>3</p>
+            <p>{{ prognosisData?.NeutralSymbolsCount }}</p>
           </div>
           <div class="bearish">
-            <p>4</p>
+            <p>{{ prognosisData?.BearishSymbolsCount }}</p>
           </div>
         </div>
         <div class="col-12">
@@ -91,23 +91,26 @@ import {Subject} from 'rxjs/Subject';
 })
 export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
-  private _status: BehaviorSubject<PortfolioStatus> = new BehaviorSubject<PortfolioStatus>({} as PortfolioStatus);
-  @Input('status')
-  set status(val: PortfolioStatus) {
-    this._status.next(val);
+  private _data: BehaviorSubject<PrognosisData> = new BehaviorSubject<PrognosisData>({} as PrognosisData);
+
+  @Input('data')
+  set data(val: PrognosisData) {
+    this._data.next(val);
   }
 
-  get status() {
-    return this._status.getValue();
+  get data() {
+    return this._data.getValue();
   }
+
+  prognosisData: PrognosisData;
 
   constructor() {
   }
 
   ngOnInit() {
-    this._status
+    this._data
       .takeUntil(this.ngUnsubscribe)
-      .subscribe()
+      .subscribe(res => this.prognosisData = res);
   }
 
   ngOnDestroy() {
