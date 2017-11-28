@@ -6,9 +6,9 @@ import {Subject} from 'rxjs/Subject';
 @Component({
   selector: 'cpt-psp-stock-movements',
   template: `
-    <div class="col-12 col-md-5 col-lg-4 section section--stockmovements">
+    <div class="col-12 col-lg-4 col-xl-4 section section--stockmovements">
 
-      <div class="row section__header">
+      <div class="row">
         <div class="col-12">
           <h2>Stock Movements</h2>
         </div>
@@ -26,9 +26,14 @@ import {Subject} from 'rxjs/Subject';
       </div>
 
       <div class="row">
+        <div class="col-12">
+          <div class="divider__long"></div>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-12 chart__header">
-          <h3 class="ux-blue">Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
-          <div class="divider__long divider__long--blue"></div>
+          <h3 class="ux-blue">Last Week's Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
         </div>
         <ul class="col-12 section__chart">
           <li class="row no-gutters list-item__mover">
@@ -59,15 +64,12 @@ import {Subject} from 'rxjs/Subject';
               <p class="ticker">JGW</p>
             </div>
             <div class="col-8 mover__data">
-              <div class="mover__bar positive thirtypercent">
+              <div class="mover__bar positive" style="width: 38%;">
                 <p class="data">3.45%</p>
               </div>
             </div>
           </li>
         </ul>
-        <div class="col-12">
-          <div class="divider-grey"></div>
-        </div>
         <ul class="col-12 section__chart">
           <li class="row no-gutters list-item__mover">
             <div class="col-4 mover__stock">
@@ -75,7 +77,7 @@ import {Subject} from 'rxjs/Subject';
               <p class="ticker">YUM</p>
             </div>
             <div class="col-8 mover__data">
-              <div class="mover__bar negative thirtypercent">
+              <div class="mover__bar negative" style="width: 42%;">
                 <p class="data">-4.25%</p>
               </div>
             </div>
@@ -85,7 +87,7 @@ import {Subject} from 'rxjs/Subject';
               <p class="ticker indice">S&P 500</p>
             </div>
             <div class="col-8 mover__data">
-              <div class="mover__bar indice thirtyfivepercent">
+              <div class="mover__bar indice" style="width: 53%;">
                 <p class="data">-5.31%</p>
               </div>
             </div>
@@ -96,7 +98,7 @@ import {Subject} from 'rxjs/Subject';
               <p class="ticker">TSLA</p>
             </div>
             <div class="col-8 mover__data">
-              <div class="mover__bar negative fortypercent">
+              <div class="mover__bar negative" style="width: 67%;">
                 <p class="data">-6.73%</p>
               </div>
             </div>
@@ -107,12 +109,18 @@ import {Subject} from 'rxjs/Subject';
               <p class="ticker">ORLY</p>
             </div>
             <div class="col-8 mover__data">
-              <div class="mover__bar negative sixtypercent">
+              <div class="mover__bar negative"  style="width: 94%;">
                 <p class="data">-9.45%</p>
               </div>
             </div>
           </li>
         </ul>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="divider__long divider__long--green"></div>
+        </div>
       </div>
     </div>
   `,
