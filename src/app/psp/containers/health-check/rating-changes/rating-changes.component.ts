@@ -182,12 +182,37 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._alerts
       .takeUntil(this.ngUnsubscribe)
-      .subscribe(res => console.log('alerts', res))
+      .subscribe(res => {
+        console.log('alerts', res);
+        this.parseAlerts(res);
+      })
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  private parseAlerts(alerts: PGRChanges) {
+    let bearishAlerts = [];
+    let bullishAlerts = [];
+    if (alerts) {
+      const values = Object.values(alerts);
+      values.forEach(res => {
+        console.log('bear', res['SymbolsTurnedBearish']); // { AAPL: 1, AMZN: 2 }
+        console.log('bull', res['SymbolsTurnedBullish']);
+        // Object.values(res['SymbolsTurnedBearish']).forEach(res => {
+        //   console.log('bear', res);
+        //   bearishAlerts.push(res);
+        // });
+        // Object.values(res['SymbolsTurnedBullish']).forEach(res => {
+        //   console.log('bull', res);
+        //   bullishAlerts.push(res);
+        // });
+      });
+    }
+    console.log('bearishAlerts', bearishAlerts);
+    console.log('bullishAlerts', bullishAlerts);
   }
 
 }

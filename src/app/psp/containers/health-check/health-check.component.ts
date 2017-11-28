@@ -61,13 +61,13 @@ export class HealthCheckComponent implements OnInit {
       .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
       .map(res => this.listId = res[0]['User Lists'][0]['list_id'] )
       .switchMap(listId => {
-        const startDate = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
+        const startDate = moment().subtract(5, 'weeks').day(-2).format('YYYY-MM-DD'),
               endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
         return Observable.combineLatest(
           // this.healthCheck.getChaikinCalculations(listId, startDate, endDate),
           this.healthCheck.getPrognosisData(listId),
           this.healthCheck.getUserPortfolioStockStatus(listId, startDate, endDate),
-          this.healthCheck.getPGRWeeklyChangeDAta(listId, startDate, endDate),
+          this.healthCheck.getPGRWeeklyChangeDAta(listId, startDate, moment().format('YYYY-MM-DD')),
           // this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
           // this.healthCheck.getAnalystRevisions(listId, moment().format('YYYY-MM-DD') ),
           // this.healthCheck.getExpectedEarningsReportsWithPGRValues(this.uid, listId, startDate, endDate)
