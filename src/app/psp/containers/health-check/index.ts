@@ -9,9 +9,13 @@ import {RatingChangesComponent} from './rating-changes/rating-changes.component'
 import {EarningsReportComponent} from './earnings-report/earnings-report.component';
 import {PowerGridComponent} from './power-grid/power-grid.component';
 import {ReportingCalendarComponent} from './earnings-report/reporting-calendar/reporting-calendar.component';
+import {SharedModule} from '../../../shared/index';
 
 @NgModule({
-  imports: [routing],
+  imports: [
+    routing,
+    SharedModule
+  ],
   exports: [HealthCheckComponent],
   declarations: [
     HealthCheckComponent,

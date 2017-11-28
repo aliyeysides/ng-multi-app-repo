@@ -14,7 +14,7 @@ export class UtilService {
     return this.apiHostName;
   }
 
-  public getJson(url, params): Observable<Array<object>> {
+  public getJson(url, params) {
     return this.http.get(url, {
       search: params,
       withCredentials: true

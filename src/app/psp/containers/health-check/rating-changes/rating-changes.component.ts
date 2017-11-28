@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {PGRChanges} from '../../../../shared/models/health-check';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-psp-rating-changes',
@@ -162,11 +165,29 @@ import { Component, OnInit } from '@angular/core';
   `,
   styleUrls: ['../health-check.component.scss']
 })
-export class RatingChangesComponent implements OnInit {
+export class RatingChangesComponent implements OnInit, OnDestroy {
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
+  private _alerts: BehaviorSubject<PGRChanges> = new BehaviorSubject<PGRChanges>({} as PGRChanges);
+  @Input('alerts')
+  set alerts(val: PGRChanges) {
+    this._alerts.next(val);
+  }
+
+  get alerts() {
+    return this._alerts.getValue();
+  }
 
   constructor() { }
 
   ngOnInit() {
+    this._alerts
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(res => console.log('alerts', res))
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

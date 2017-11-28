@@ -3,7 +3,7 @@ import {HealthCheckService} from '../../../services/health-check.service';
 import {AuthService} from '../../../services/auth.service';
 
 import * as moment from 'moment';
-import {PortfolioStatus, StockStatus} from '../../../shared/models/health-check';
+import {PGRChanges, PortfolioStatus, PrognosisData, StockStatus} from '../../../shared/models/health-check';
 import {Observable} from 'rxjs/Observable';
 
 @Component({
@@ -14,12 +14,12 @@ import {Observable} from 'rxjs/Observable';
       <div class="row contents">
 
       <!-- HEALTH-CHECK - Intro -->
-        <cpt-psp-portfolio-overview [status]="portfolioStatus"></cpt-psp-portfolio-overview>
+        <cpt-psp-portfolio-overview [data]="prognosisData"></cpt-psp-portfolio-overview>
       <!-- HEALTH-CHECK - Stock Movements -->
         <cpt-psp-stock-movements [stocks]="stocksStatus"></cpt-psp-stock-movements>
 
       <!-- HEALTH-CHECK - Ratings Changes -->
-        <cpt-psp-rating-changes></cpt-psp-rating-changes>
+        <cpt-psp-rating-changes [alerts]="pgrChanges"></cpt-psp-rating-changes>
 
       <!-- HEALTH-CHECK - Earnings Reports -->
         <cpt-psp-earnings-report></cpt-psp-earnings-report>
@@ -48,6 +48,8 @@ export class HealthCheckComponent implements OnInit {
 
   public portfolioStatus: PortfolioStatus;
   public stocksStatus: Array<StockStatus>;
+  public prognosisData: PrognosisData;
+  public pgrChanges: PGRChanges;
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService) {
@@ -58,25 +60,27 @@ export class HealthCheckComponent implements OnInit {
       .map(usr => this.uid = usr['UID'])
       .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
       .map(res => this.listId = res[0]['User Lists'][0]['list_id'] )
-      .switchMap(res => {
+      .switchMap(listId => {
         const startDate = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
               endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
         return Observable.combineLatest(
-          // this.healthCheck.getChaikinCalculations(res, startDate, endDate),
-          // this.healthCheck.getUserPortfolioStockStatus(res, startDate, endDate),
-          // this.healthCheck.getPGRWeeklyChangeDAta(res, startDate, endDate),
-          // this.healthCheck.getEarningsSurprise(res, startDate, endDate),
-          // this.healthCheck.getAnalystRevisions(res, moment().format('YYYY-MM-DD') ),
-          // this.healthCheck.getExpectedEarningsReportsWithPGRValues(this.uid, res, startDate, endDate)
-          // this.healthCheck.getPHCGridData(res)
+          // this.healthCheck.getChaikinCalculations(listId, startDate, endDate),
+          this.healthCheck.getPrognosisData(listId),
+          this.healthCheck.getUserPortfolioStockStatus(listId, startDate, endDate),
+          this.healthCheck.getPGRWeeklyChangeDAta(listId, startDate, endDate),
+          // this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
+          // this.healthCheck.getAnalystRevisions(listId, moment().format('YYYY-MM-DD') ),
+          // this.healthCheck.getExpectedEarningsReportsWithPGRValues(this.uid, listId, startDate, endDate)
+          // this.healthCheck.getPHCGridData(listId)
         )
       })
       .take(1)
       .subscribe(res => {
         console.log('res', res);
-        // this.portfolioStatus = res[0][0] as PortfolioStatus;
+        this.prognosisData = res[0] as PrognosisData;
+        this.portfolioStatus = res[1][Object.keys(res[1])[0]] as PortfolioStatus;
+        this.pgrChanges = res[2] as PGRChanges;
         // this.stocksStatus = res[0][1] as StockStatus[];
-        // this.pgrChanges = res[0][2]
       });
   }
 
