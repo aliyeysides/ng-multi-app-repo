@@ -60,6 +60,10 @@ import { Component, OnInit } from '@angular/core';
           </div>
         </div>
 
+        <div class="col-12">
+          <div class="divider"></div>
+        </div>
+        
         <div class="col-12 chart__header">
           <h3 class="red">Weak Industries</h3>
         </div>

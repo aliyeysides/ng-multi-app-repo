@@ -32,7 +32,12 @@ import {Observable} from 'rxjs/Observable';
 
       <!-- HEALTH-CHECK - DISCLAIMER -->
         <div  class="col-12 col-lg-8 col-xl-8 section section--disclaimer">
-
+          <div class="row">
+            <div class="col-12">
+              <div class="divider__long divider__long--green"></div>
+            </div>
+          </div>
+        
           <div class="row">
             <div class="col-12">
               <h4>Disclaimer</h4>
