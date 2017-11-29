@@ -63,11 +63,6 @@ export interface PrognosisData {
   BearishSymbols: string
 }
 
-export interface ChaikinCalculations {
-  [key: string]: {
-    "SPYPercentageChange": number,
-    "avgPercentageChange": number,
-    "LooserStocksPercentageChanges": Array<object>,
-    "GainerStocksPercentageChanges": Array<object>
-  }
-}
+// export interface ChaikinCalculations {
+
+// }
