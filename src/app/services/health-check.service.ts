@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {UtilService} from './util.service';
-import {Http, URLSearchParams} from '@angular/http';
-import {PortfolioStatus, PrognosisData} from '../shared/models/health-check';
+import {URLSearchParams} from '@angular/http';
+import {PGRChanges, PortfolioStatus, PrognosisData} from '../shared/models/health-check';
 import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class HealthCheckService {
@@ -18,8 +19,9 @@ export class HealthCheckService {
   private phcParams: URLSearchParams;
   private earningsReportParams: URLSearchParams;
 
-  constructor(private utilService: UtilService,
-              private http: Http) {
+  private _portfolioStatus: Subject<PortfolioStatus> = new Subject<PortfolioStatus>();
+
+  constructor(private utilService: UtilService) {
     this.prognosisParams = new URLSearchParams;
     this.calculationParams = new URLSearchParams;
     this.authorizedListsParams = new URLSearchParams;
@@ -29,6 +31,13 @@ export class HealthCheckService {
     this.analystRevisionsParams = new URLSearchParams;
     this.earningsReportParams = new URLSearchParams;
     this.phcParams = new URLSearchParams;
+  }
+
+  public setPortfolioStatus(val: PortfolioStatus) {
+    this._portfolioStatus.next(val);
+  }
+  public getPortfolioStatus() {
+    return this._portfolioStatus;
   }
 
   public getPrognosisData(listId: string): Observable<PrognosisData> {
@@ -65,7 +74,7 @@ export class HealthCheckService {
     return this.utilService.getJson(url, this.stockStatusParams);
   }
 
-  public getPGRWeeklyChangeDAta(listId: string, startDate, endDate) {
+  public getPGRWeeklyChangeDAta(listId: string, startDate, endDate): Observable<PGRChanges> {
     const url = `${this.apiHost}/CPTRestSecure/app/phcService/getPGRWeeklyChangeData?`;
     this.pgrWeeklyChangeParams.set('listId', listId);
     this.pgrWeeklyChangeParams.set('startDate', startDate);

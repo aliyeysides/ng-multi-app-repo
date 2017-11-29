@@ -1,12 +1,14 @@
-import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {ChaikinCalculations, PortfolioStatus, PrognosisData} from '../../../../shared/models/health-check';
+import {PortfolioStatus, PrognosisData} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-psp-portfolio-overview',
   template: `
-    <div class="col-12 col-lg-8 col-xl-8 section section--overview">
+    <div class="col-12 col-lg-8 col-xl-8 section section--overview" [ngClass]="{
+    'section--overview--green': calculations?.avgPercentageChange > 0,
+    'section--overview--red': calculations?.avgPercentageChange < 0}">
       <div class="row overview__header">
         <div class="col-12">
           <p>My Stock List 1</p>
@@ -15,10 +17,16 @@ import {Subject} from 'rxjs/Subject';
 
       <div class="row no-gutters overview__summary">
         <div class="col-12">
-          <p class="data"><sub>+</sub>3.04<sub>%</sub></p>
+          <p class="data"><sub><span
+            *ngIf="isPortUp()">+</span></sub>{{ calculations?.avgPercentageChange | number:'.2-2' }}<sub>%</sub></p>
         </div>
         <div class="col-12">
-          <p>as compared to the <span class="market">S&amp;P 500</span>, currently <span class="market--change">up +0.13%</span></p>
+          <p>as compared to the <span class="market">S&amp;P 500</span>, currently
+            <span class="market--change"> 
+              <span *ngIf="isSPYUp()">up +</span>
+              <span *ngIf="!isSPYUp()">down</span>{{ calculations?.SPYPercentageChange | number:'.2-2' }}%
+            </span>
+          </p>
         </div>
       </div>
 
@@ -45,7 +53,7 @@ import {Subject} from 'rxjs/Subject';
 export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private _data: BehaviorSubject<PrognosisData> = new BehaviorSubject<PrognosisData>({} as PrognosisData);
-  private _calc: BehaviorSubject<ChaikinCalculations> = new BehaviorSubject<ChaikinCalculations>({} as ChaikinCalculations);
+  private _calc: BehaviorSubject<PortfolioStatus> = new BehaviorSubject<PortfolioStatus>({} as PortfolioStatus);
 
   @Input('data')
   set data(val: PrognosisData) {
@@ -57,7 +65,7 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   }
 
   @Input('calc')
-  set calc(val: ChaikinCalculations) {
+  set calc(val: PortfolioStatus) {
     this._calc.next(val);
   }
 
@@ -66,7 +74,7 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   }
 
   prognosisData: PrognosisData;
-  calculations: ChaikinCalculations;
+  calculations: PortfolioStatus;
 
   constructor() {
   }
@@ -78,12 +86,23 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
 
     this._calc
       .takeUntil(this.ngUnsubscribe)
-      .subscribe(res => this.calculations = res);
+      .subscribe(res => {
+        this.calculations = res;
+        console.log('calculations', res)
+      });
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  isPortUp(): boolean {
+    return this.calculations ? this.calculations.avgPercentageChange > 0 : null;
+  }
+
+  isSPYUp(): boolean {
+    return this.calculations ? this.calculations.SPYPercentageChange > 0 : null;
   }
 
 }

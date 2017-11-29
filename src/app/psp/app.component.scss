@@ -370,6 +370,14 @@ button {
   }
 }
 
+.page__header--green {
+  background: linear-gradient(to right, rgba(0,204,0,0.95) 0%,rgba(0,170,119,0.95) 80%);
+}
+
+.page__header--red {
+  background: linear-gradient(to right, rgba(255,50,50,0.95) 2%,rgba(170,0,119,0.95) 100%);
+}
+
 
 
 
