@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {PortfolioStatus, PrognosisData} from '../../../../shared/models/health-check';
+import {ChaikinCalculations, PortfolioStatus, PrognosisData} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 
 @Component({
@@ -92,6 +92,7 @@ import {Subject} from 'rxjs/Subject';
 export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private _data: BehaviorSubject<PrognosisData> = new BehaviorSubject<PrognosisData>({} as PrognosisData);
+  private _calc: BehaviorSubject<ChaikinCalculations> = new BehaviorSubject<ChaikinCalculations>({} as ChaikinCalculations);
 
   @Input('data')
   set data(val: PrognosisData) {
@@ -102,7 +103,17 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
     return this._data.getValue();
   }
 
+  @Input('calc')
+  set calc(val: ChaikinCalculations) {
+    this._calc.next(val);
+  }
+
+  get calc() {
+    return this._calc.getValue();
+  }
+
   prognosisData: PrognosisData;
+  calculations: ChaikinCalculations;
 
   constructor() {
   }
@@ -111,6 +122,10 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
     this._data
       .takeUntil(this.ngUnsubscribe)
       .subscribe(res => this.prognosisData = res);
+
+    this._calc
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(res => this.calculations = res);
   }
 
   ngOnDestroy() {
