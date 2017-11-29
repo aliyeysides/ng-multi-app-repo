@@ -11,7 +11,7 @@ import {Subject} from 'rxjs/Subject';
     'section--overview--red': calculations?.avgPercentageChange < 0}">
       <div class="row overview__header">
         <div class="col-12">
-          <p>My Stock List 1</p>
+          <p class="label">LAST WEEK</p>
         </div>
       </div>
 

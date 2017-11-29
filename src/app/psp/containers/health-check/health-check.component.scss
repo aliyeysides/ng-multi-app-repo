@@ -9,52 +9,57 @@
 
 .section--overview {
   	color:#ffffff;
-	padding-top:60px;
+	padding-top:55px;
 
 	.overview__header {
 
 		p {
 			display: inline-block;
 			background-color: #ffffff;
-			//background-color: rgba(255,255,255,0.875);
 			border-radius: 20px;
 			color:#484848;
 			font-weight: 600;
 			text-transform: uppercase;
-			padding:3px 20px 0px;
-			font-size: 16px;
-			//border: 2px solid #ffffff;
+			padding:3px 15px 0px;
+		}
+
+		.label {
+	      	font-size: 13px;
+	      	font-weight: 600;
 		}
 	}
 
 	.overview__summary {
 		margin:0;
 		position: relative;
-		padding: 10px 0px 20px;
+		padding: 5px 0px 20px;
 
 		p {
 	      	color:#ffffff;
 	      	font-weight: 400;
-	      	font-size: 22px;
-	      	line-height: 1.4;
-	      	letter-spacing: 0.015em;
+	      	font-size: 17px;
+	      	line-height: 1.5;
+	      	letter-spacing: 0.03em;
 
 	      	.market {
 	      		font-weight: 600;
-	      		display: inline-block;
-	      		//border-bottom: 4px dotted #ffffff;
 	      	}
-	      	.market--change {
-	      		font-weight: 600;
+
+	      	.list-name {
+	      		font-weight: 400;
+	      		display: inline-block;
+	      		border-bottom: 4px dotted rgba(255,255,255,0.6);
+	      		font-size: 21px;
+	      		margin: 5px 0;
 	      	}
 		}
 
 		.data {
-	  		font-size: 84px;
+	  		font-size: 76px;
 	      	letter-spacing: 0em;
-		  	line-height: 1;
+		  	line-height: 1.2;
 		  	font-weight: 300;
-	      	padding:5px 0 0;
+	      	padding:0;
 
 			sub {
 				bottom: 0;
@@ -62,7 +67,7 @@
 			}
 
 			span {
-				width: 45px;
+				width: 42px;
 				display: inline-block;
 
 				img, svg {
@@ -110,7 +115,7 @@
 		      	color:#ffffff;
 		      	font-weight: 500;
 		      	font-size: 28px;
-		      	line-height: 40px;
+		      	line-height: 38px;
 		      	white-space: nowrap;
 		    }
 
