@@ -104,10 +104,10 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
       return Math.max(a, b);
     });
     stocks.map(x => {
-      if (Math.abs(x['percentageChange']) == Math.abs(max)) {
+      if (Math.abs(x['percentageChange']) == max) {
         return Object.assign(x, {barWidth: 100 + '%'})
       }
-      const relWidth = x['percentageChange'] * 100 / max;
+      const relWidth = Math.abs(x['percentageChange']) * 100 / max;
       return Object.assign(x, {barWidth: relWidth + '%'})
     })
   }
