@@ -91,10 +91,7 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
 
     this._calc
       .takeUntil(this.ngUnsubscribe)
-      .subscribe(res => {
-        this.calculations = res;
-        console.log('calculations', res)
-      });
+      .subscribe(res => this.calculations = res);
   }
 
   ngOnDestroy() {
