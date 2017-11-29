@@ -32,7 +32,8 @@ import {Subject} from 'rxjs/Subject';
 
       <div class="row overview__powerbar">
         <div class="col-12">
-          <p class="label">Chaikin Power Bar <a> <i class="fa fa-info-circle" aria-hidden="true"></i></a></p>
+          <p class="label">Chaikin Power Bar <a> <i tooltip="{{ toolTipText }}" class="fa fa-info-circle"
+                                                    aria-hidden="true"></i></a></p>
         </div>
         <div class="col-12 powerbar clearfix">
           <div
@@ -56,6 +57,8 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private _data: BehaviorSubject<PrognosisData> = new BehaviorSubject<PrognosisData>({} as PrognosisData);
   private _calc: BehaviorSubject<PortfolioStatus> = new BehaviorSubject<PortfolioStatus>({} as PortfolioStatus);
+
+  toolTipText: string = "The Chaikin Power Bar is your list's report card. It gives the ratio of Bullish stocks (likely to outperform the market) to Bearish stocks (unlikely to perform in the short to medium term) as rated by the Chaikin Power Gauge Rating."
 
   @Input('data')
   set data(val: PrognosisData) {
@@ -88,10 +91,7 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
 
     this._calc
       .takeUntil(this.ngUnsubscribe)
-      .subscribe(res => {
-        this.calculations = res;
-        console.log('calculations', res)
-      });
+      .subscribe(res => this.calculations = res);
   }
 
   ngOnDestroy() {

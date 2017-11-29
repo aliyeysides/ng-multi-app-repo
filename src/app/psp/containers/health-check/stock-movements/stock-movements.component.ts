@@ -16,10 +16,10 @@ import {Subject} from 'rxjs/Subject';
 
       <div class="row section__summary">
         <div class="col-6 summary--left">
-          <p class=""><img src="./assets/imgs/icon_circle-movement--green.svg">10</p>
+          <p class=""><img src="./assets/imgs/icon_circle-movement--green.svg">{{ upStocks?.length }}</p>
         </div>
         <div class="col-6 summary--right">
-          <p class=""><img src="./assets/imgs/icon_circle-movement--red.svg">4</p>
+          <p class=""><img src="./assets/imgs/icon_circle-movement--red.svg">{{ downStocks?.length }}</p>
         </div>
       </div>
 
@@ -122,6 +122,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private _stocks: BehaviorSubject<StockStatus[]> = new BehaviorSubject<StockStatus[]>({} as StockStatus[]);
 
+  allStocks: StockStatus[];
   upStocks: StockStatus[];
   downStocks: StockStatus[];
 
@@ -138,8 +139,11 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._stocks
       .takeUntil(this.ngUnsubscribe)
+      .filter(x => x != undefined)
       .subscribe(res => {
-        // this.parseStockStatus(res);
+        console.log('stock status', res);
+        this.allStocks = res;
+        this.parseStockStatus(res);
       });
   }
 

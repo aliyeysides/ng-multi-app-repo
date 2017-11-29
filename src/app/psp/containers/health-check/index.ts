@@ -11,10 +11,13 @@ import {PowerGridComponent} from './power-grid/power-grid.component';
 import {ReportingCalendarComponent} from './earnings-report/reporting-calendar/reporting-calendar.component';
 import {SharedModule} from '../../../shared/index';
 
+import {TooltipModule} from 'ngx-bootstrap';
+
 @NgModule({
   imports: [
     routing,
-    SharedModule
+    SharedModule,
+    TooltipModule.forRoot()
   ],
   exports: [HealthCheckComponent],
   declarations: [
