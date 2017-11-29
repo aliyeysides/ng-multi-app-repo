@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
     <div class="row no-gutters reporting-calendar">
       <div class="col-12 chart__header">
         <h3 class="ux-blue">Reporting This Week</h3>
+        <div class="divider"></div>
       </div>
       <div class="col-12 col-headers">
         <div class="col-head">

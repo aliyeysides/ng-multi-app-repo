@@ -32,14 +32,14 @@
 	.overview__summary {
 		margin:0;
 		position: relative;
-		padding: 5px 0px 20px;
+		padding: 8px 0px 15px;
 
 		p {
 	      	color:#ffffff;
 	      	font-weight: 400;
-	      	font-size: 17px;
-	      	line-height: 1.5;
-	      	letter-spacing: 0.03em;
+	      	font-size: 18px;
+	      	line-height: 1.35;
+	      	letter-spacing: 0.02em;
 
 	      	.market {
 	      		font-weight: 600;
@@ -48,14 +48,15 @@
 	      	.list-name {
 	      		font-weight: 400;
 	      		display: inline-block;
-	      		border-bottom: 4px dotted rgba(255,255,255,0.6);
-	      		font-size: 21px;
-	      		margin: 5px 0;
+	      		border-bottom: 4px dotted rgba(255,255,255,0.75);
+	      		font-size: 22px;
+	      		margin: 5px 0 8px;
+	      		padding-bottom: 3px;
 	      	}
 		}
 
 		.data {
-	  		font-size: 76px;
+	  		font-size: 74px;
 	      	letter-spacing: 0em;
 		  	line-height: 1.2;
 		  	font-weight: 300;
@@ -64,15 +65,21 @@
 			sub {
 				bottom: 0;
 				font-weight: 300;
+
+				span.plus-minus {
+					margin-right: -5px;
+				}
 			}
 
-			span {
+			.icon__arrow {
 				width: 42px;
 				display: inline-block;
 
 				img, svg {
 					width: 100%;
 					height: auto;
+					display: inline-block;
+					margin-top: -7px;
 				}
 			}
 		}
@@ -127,22 +134,22 @@
 		      	border-radius: 25px 0px 0px 25px;
 		      	border: 2px solid #ffffff;
 		    }
-        .bullish--less {
-          height: 40px;
-          background-color: #009900;
-          float: left;
-          width: 28%;
-          border-radius: 25px 0px 0px 25px;
-          border: 2px solid #ffffff;
-        }
-        .bullish--same {
-          height: 40px;
-          background-color: #009900;
-          float: left;
-          width: 42%;
-          border-radius: 25px 0px 0px 25px;
-          border: 2px solid #ffffff;
-        }
+	        .bullish--less {
+	          height: 40px;
+	          background-color: #009900;
+	          float: left;
+	          width: 28%;
+	          border-radius: 25px 0px 0px 25px;
+	          border: 2px solid #ffffff;
+	        }
+	        .bullish--same {
+	          height: 40px;
+	          background-color: #009900;
+	          float: left;
+	          width: 42%;
+	          border-radius: 25px 0px 0px 25px;
+	          border: 2px solid #ffffff;
+	        }
 		    .neutral {
 		      	width: 16%;
 		      	height: 40px;
@@ -160,32 +167,39 @@
 		      	border-radius:0px 25px 25px 0px;
 		      	border: 2px solid #ffffff;
 		    }
-        .bearish--less {
-          height: 40px;
-          background-color: #CC0000;
-          float: left;
-          width: 28%;
-          border-radius:0px 25px 25px 0px;
-          border: 2px solid #ffffff;
-        }
-        .bearish--same {
-          height: 40px;
-          background-color: #CC0000;
-          float: left;
-          width: 42%;
-          border-radius:0px 25px 25px 0px;
-          border: 2px solid #ffffff;
-        }
+	        .bearish--less {
+	          height: 40px;
+	          background-color: #CC0000;
+	          float: left;
+	          width: 28%;
+	          border-radius:0px 25px 25px 0px;
+	          border: 2px solid #ffffff;
+	        }
+	        .bearish--same {
+	          height: 40px;
+	          background-color: #CC0000;
+	          float: left;
+	          width: 42%;
+	          border-radius:0px 25px 25px 0px;
+	          border: 2px solid #ffffff;
+	        }
 	  	}
 	}
 }
 
 .section--overview--green {
-  background: linear-gradient(to right, rgba(0,204,0,.93) 20%,rgba(0,170,119,.93) 100%);
+  background: linear-gradient(to left, rgba(0,204,0,.93) 20%,rgba(0,170,119,.93) 100%);
 }
 .section--overview--red {
-  background: linear-gradient(to right, rgba(255,50,50,0.9) 2%,rgba(170,0,119,0.9) 100%);
+  background: linear-gradient(to left, rgba(255,50,50,0.9) 20%,rgba(170,0,119,0.9) 100%);
 }
+
+
+
+
+
+
+
 
 
 /*     CONTENTS -- MOVERS     */

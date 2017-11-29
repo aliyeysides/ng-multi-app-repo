@@ -30,7 +30,8 @@ import {SignalService} from '../../../../services/signal.service';
 
       <div class="row">
         <div class="col-12 chart__header">
-          <h3 class="">Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
+          <h3>Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
+          <div class="divider"></div>
         </div>
         <ul class="col-12 section__chart">
           <li *ngFor="let stock of allStocks" class="row no-gutters list-item__mover">
@@ -46,12 +47,6 @@ import {SignalService} from '../../../../services/signal.service';
             </div>
           </li>
         </ul>
-      </div>
-
-      <div class="row">
-        <div class="col-12">
-          <div class="divider__long divider__long--green"></div>
-        </div>
       </div>
     </div>
   `,

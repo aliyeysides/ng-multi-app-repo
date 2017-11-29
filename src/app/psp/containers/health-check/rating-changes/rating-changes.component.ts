@@ -10,6 +10,12 @@ import {Subject} from 'rxjs/Subject';
 
       <div class="row">
         <div class="col-12">
+          <div class="divider__long"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
           <h2>Ratings Changes</h2>
         </div>
       </div>
@@ -24,14 +30,9 @@ import {Subject} from 'rxjs/Subject';
       </div>
 
       <div class="row">
-        <div class="col-12">
-          <div class="divider"></div>
-        </div>
-      </div>
-
-      <div class="row">
         <div class="col-12 col-md-6 section__contents">
           <h3 class="green">Turned Bullish</h3>
+          <div class="divider"></div>
           <ul class="stock__list">
             <li class="row no-gutters list__entry">
               <div class="col-2 list-entry__pgr">
@@ -72,12 +73,9 @@ import {Subject} from 'rxjs/Subject';
           </ul>
         </div>
 
-        <div class="col-12 hidden-md-up">
-          <div class="divider"></div>
-        </div>
-
         <div class="col-12 col-md-6 section__contents">
           <h3 class="red">Turned Bearish</h3>
+          <div class="divider"></div>
           <ul class="stock__list">
             <li class="row no-gutters list__entry">
               <div class="col-2 list-entry__pgr">
@@ -138,12 +136,6 @@ import {Subject} from 'rxjs/Subject';
       </div>
 
       <div class="row">
-        <div class="col-12">
-          <div class="divider"></div>
-        </div>
-      </div>
-
-      <div class="row">
         <div class="col-12 expand-collapse">
           <img src="./assets/imgs/icon_chevron--up.svg">
           <p>COLLAPSE</p>
@@ -152,7 +144,7 @@ import {Subject} from 'rxjs/Subject';
 
       <div class="row">
         <div class="col-12">
-          <div class="divider__long divider__long--green"></div>
+          <div class="divider__long"></div>
         </div>
       </div>
     </div>

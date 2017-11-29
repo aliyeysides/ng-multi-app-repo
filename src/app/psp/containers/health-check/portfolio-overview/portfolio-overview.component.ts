@@ -17,23 +17,30 @@ import {Subject} from 'rxjs/Subject';
 
       <div class="row no-gutters overview__summary">
         <div class="col-12">
-          <p class="data"><sub><span
-            *ngIf="isPortUp()">+</span></sub>{{ calculations?.avgPercentageChange | number:'.2-2' }}<sub>%</sub></p>
+          <p><span class="list-name">Greg's Stock List #2</span></p>
         </div>
         <div class="col-12">
-          <p>as compared to the <span class="market">S&amp;P 500</span>, currently
-            <span class="market--change"> 
-              <span *ngIf="isSPYUp()">up +</span>
-              <span *ngIf="!isSPYUp()">down</span>{{ calculations?.SPYPercentageChange | number:'.2-2' }}%
+          <p class="data">
+            <span class="icon__arrow">
+              <img src="./assets/imgs/icon__thin-arrow--up.svg">
             </span>
+            <sub><span class="plus-minus" *ngIf="isPortUp()">+</span></sub>{{ calculations?.avgPercentageChange | number:'.2-2' }}<sub>%</sub>
+          </p>
+        </div>
+        <div class="col-12" style="padding:0 10px;">
+          <p>Compared to the <span class="market">S&amp;P 500</span> ---
+            <span class="market market--change"> 
+              <span *ngIf="isSPYUp()">Up +</span>
+              <span *ngIf="!isSPYUp()">Down</span>{{ calculations?.SPYPercentageChange | number:'.2-2' }}%
+            </span>
+            over the same timespan
           </p>
         </div>
       </div>
 
       <div class="row overview__powerbar">
         <div class="col-12">
-          <p class="label">Chaikin Power Bar <a> <i tooltip="{{ toolTipText }}" class="fa fa-info-circle"
-                                                    aria-hidden="true"></i></a></p>
+          <p class="label">Chaikin Power Bar <a> <i tooltip="{{ toolTipText }}" class="fa fa-info-circle" aria-hidden="true"></i></a></p>
         </div>
         <div class="col-12 powerbar clearfix">
           <div
