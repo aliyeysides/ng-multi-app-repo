@@ -43,7 +43,7 @@ export class HealthCheckService {
     this.calculationParams.set('responseType', 'PHC');
     this.calculationParams.set('startDate', startDate);
     this.calculationParams.set('endDate', endDate);
-    this.calculationParams.set('listID', listId);
+    this.calculationParams.set('listId', listId);
     return this.utilService.getJson(url, this.calculationParams);
   }
 

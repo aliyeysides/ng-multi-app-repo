@@ -199,8 +199,8 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
     if (alerts) {
       const values = Object.values(alerts);
       values.forEach(res => {
-        console.log('bear', res['SymbolsTurnedBearish']); // { AAPL: 1, AMZN: 2 }
-        console.log('bull', res['SymbolsTurnedBullish']);
+        // console.log('bear', res['SymbolsTurnedBearish']); // { AAPL: 1, AMZN: 2 }
+        // console.log('bull', res['SymbolsTurnedBullish']);
         // Object.values(res['SymbolsTurnedBearish']).forEach(res => {
         //   console.log('bear', res);
         //   bearishAlerts.push(res);
@@ -211,8 +211,8 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
         // });
       });
     }
-    console.log('bearishAlerts', bearishAlerts);
-    console.log('bullishAlerts', bullishAlerts);
+    // console.log('bearishAlerts', bearishAlerts);
+    // console.log('bullishAlerts', bullishAlerts);
   }
 
 }
