@@ -1,7 +1,12 @@
-import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  Component, ElementRef, Input, OnDestroy, OnInit, QueryList, ViewChildren,
+  ViewEncapsulation
+} from '@angular/core';
 import {StockStatus} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
+import {SignalService} from '../../../../services/signal.service';
 
 @Component({
   selector: 'cpt-psp-stock-movements',
@@ -28,81 +33,15 @@ import {Subject} from 'rxjs/Subject';
           <h3 class="">Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
         </div>
         <ul class="col-12 section__chart">
-          <li class="row no-gutters list-item__mover">
+          <li *ngFor="let stock of allStocks" class="row no-gutters list-item__mover">
             <div class="col-4 mover__stock">
-              <img src="./assets/imgs/arc_Bearish.svg">
-              <p class="ticker">URBN</p>
+              <img src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
+              <p class="ticker">{{ stock.symbol }}</p>
             </div>
             <div class="col-8 mover__data">
-              <div class="mover__bar positive hundredpercent">
-                <p class="data">17.25%</p>
-              </div>
-            </div>
-          </li>
-          <li class="row no-gutters list-item__mover">
-            <div class="col-4 mover__stock">
-              <img src="./assets/imgs/arc_Bullish.svg">
-              <p class="ticker">CMCSA</p>
-            </div>
-            <div class="col-8 mover__data">
-              <div class="mover__bar positive seventypercent">
-                <p class="data">13.43%</p>
-              </div>
-            </div>
-          </li>
-          <li class="row no-gutters list-item__mover">
-            <div class="col-4 mover__stock">
-              <img src="./assets/imgs/arc_VeryBullish.svg">
-              <p class="ticker">JGW</p>
-            </div>
-            <div class="col-8 mover__data">
-              <div class="mover__bar positive" style="width: 38%;">
-                <p class="data">3.45%</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <ul class="col-12 section__chart">
-          <li class="row no-gutters list-item__mover">
-            <div class="col-4 mover__stock">
-              <img src="./assets/imgs/arc_VeryBearish.svg">
-              <p class="ticker">YUM</p>
-            </div>
-            <div class="col-8 mover__data">
-              <div class="mover__bar negative" style="width: 42%;">
-                <p class="data">-4.25%</p>
-              </div>
-            </div>
-          </li>
-          <li class="row no-gutters list-item__mover">
-            <div class="col-4 mover__stock">
-              <p class="ticker indice">S&P 500</p>
-            </div>
-            <div class="col-8 mover__data">
-              <div class="mover__bar indice" style="width: 53%;">
-                <p class="data">-5.31%</p>
-              </div>
-            </div>
-          </li>
-          <li class="row no-gutters list-item__mover">
-            <div class="col-4 mover__stock">
-              <img src="./assets/imgs/arc_Bearish.svg">
-              <p class="ticker">TSLA</p>
-            </div>
-            <div class="col-8 mover__data">
-              <div class="mover__bar negative" style="width: 67%;">
-                <p class="data">-6.73%</p>
-              </div>
-            </div>
-          </li>
-          <li class="row no-gutters list-item__mover">
-            <div class="col-4 mover__stock">
-              <img src="./assets/imgs/arc_Neutral.svg">
-              <p class="ticker">ORLY</p>
-            </div>
-            <div class="col-8 mover__data">
-              <div class="mover__bar negative"  style="width: 94%;">
-                <p class="data">-9.45%</p>
+              <div class="mover__bar" [style.width]="stock['barWidth']"
+                   [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0}">
+                <p class="data" #perChange>{{ stock.percentageChange }}%</p>
               </div>
             </div>
           </li>
@@ -118,7 +57,9 @@ import {Subject} from 'rxjs/Subject';
   `,
   styleUrls: ['../health-check.component.scss']
 })
-export class StockMovementsComponent implements OnInit, OnDestroy {
+export class StockMovementsComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChildren('perChange') perChange: QueryList<ElementRef>;
+
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private _stocks: BehaviorSubject<StockStatus[]> = new BehaviorSubject<StockStatus[]>({} as StockStatus[]);
 
@@ -130,21 +71,29 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
   set stocks(val: StockStatus[]) {
     this._stocks.next(val);
   }
+
   get stocks() {
     return this._stocks.getValue();
   }
 
-  constructor() { }
+  constructor(private signalService: SignalService) {
+  }
 
   ngOnInit() {
     this._stocks
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x != undefined)
       .subscribe(res => {
-        console.log('stock status', res);
-        this.allStocks = res;
+        this.allStocks = res.sort((x, y) => y['percentageChange'] - x['percentageChange']);
         this.parseStockStatus(res);
       });
+  }
+
+  ngAfterViewInit() {
+    this.perChange.changes.subscribe(el => console.log('changes sub', el));
+    // for (let item of this.perChange) {
+    //   console.log('item', item);
+    // }
   }
 
   ngOnDestroy() {
@@ -153,8 +102,42 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
   }
 
   public parseStockStatus(stocks: StockStatus[]) {
-    this.upStocks = stocks.filter(x => x['percentageChange'] > 0 );
-    this.downStocks = stocks.filter(x => x['percentageChange'] < 0 );
+    this.calculateBarWidth(stocks);
+    this.calculatePerDisplayWidth();
+    this.upStocks = stocks.filter(x => x['percentageChange'] > 0);
+    this.downStocks = stocks.filter(x => x['percentageChange'] < 0);
   }
+
+  public appendPGRImage(pgr, rawPgr) {
+    return this.signalService.appendPGRImage(pgr, rawPgr)
+  }
+
+  calculateBarWidth(stocks: StockStatus[]) {
+    const per_arr = stocks.map(x => Math.abs(x['percentageChange']));
+    const max = per_arr.reduce((a, b) => {
+      return Math.max(a, b);
+    });
+    stocks.map(x => {
+      if (Math.abs(x['percentageChange']) == max) {
+        return Object.assign(x, {barWidth: 100 + '%'})
+      }
+      const relWidth = Math.abs(x['percentageChange']) * 100 / max;
+      return Object.assign(x, {barWidth: relWidth + '%'})
+    })
+  }
+
+  calculatePerDisplayWidth() {
+    // const data = document.getElementsByClassName('percentage__change');
+    // console.log('perChange', this.perChange);
+    // Array.from(data).forEach(x => {
+    //   console.log('x', x);
+    //   console.log('percentWidth', this.percentWidth(x));
+    // });
+  }
+
+  percentWidth(el){
+  const pa = el.offsetParent || el;
+  return ((el.offsetWidth/pa.offsetWidth)*100).toFixed(2)+'%';
+}
 
 }
