@@ -1,4 +1,8 @@
-import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  Component, ElementRef, Input, OnDestroy, OnInit, QueryList, ViewChildren,
+  ViewEncapsulation
+} from '@angular/core';
 import {StockStatus} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
@@ -37,7 +41,7 @@ import {SignalService} from '../../../../services/signal.service';
             <div class="col-8 mover__data">
               <div class="mover__bar" [style.width]="stock['barWidth']"
                    [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0}">
-                <p class="data">{{ stock.percentageChange }}%</p>
+                <p class="data" #perChange>{{ stock.percentageChange }}%</p>
               </div>
             </div>
           </li>
@@ -53,7 +57,9 @@ import {SignalService} from '../../../../services/signal.service';
   `,
   styleUrls: ['../health-check.component.scss']
 })
-export class StockMovementsComponent implements OnInit, OnDestroy {
+export class StockMovementsComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChildren('perChange') perChange: QueryList<ElementRef>;
+
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private _stocks: BehaviorSubject<StockStatus[]> = new BehaviorSubject<StockStatus[]>({} as StockStatus[]);
 
@@ -83,6 +89,13 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
       });
   }
 
+  ngAfterViewInit() {
+    this.perChange.changes.subscribe(el => console.log('changes sub', el));
+    // for (let item of this.perChange) {
+    //   console.log('item', item);
+    // }
+  }
+
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
@@ -90,6 +103,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
 
   public parseStockStatus(stocks: StockStatus[]) {
     this.calculateBarWidth(stocks);
+    this.calculatePerDisplayWidth();
     this.upStocks = stocks.filter(x => x['percentageChange'] > 0);
     this.downStocks = stocks.filter(x => x['percentageChange'] < 0);
   }
@@ -111,5 +125,19 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
       return Object.assign(x, {barWidth: relWidth + '%'})
     })
   }
+
+  calculatePerDisplayWidth() {
+    // const data = document.getElementsByClassName('percentage__change');
+    // console.log('perChange', this.perChange);
+    // Array.from(data).forEach(x => {
+    //   console.log('x', x);
+    //   console.log('percentWidth', this.percentWidth(x));
+    // });
+  }
+
+  percentWidth(el){
+  const pa = el.offsetParent || el;
+  return ((el.offsetWidth/pa.offsetWidth)*100).toFixed(2)+'%';
+}
 
 }
