@@ -14,20 +14,22 @@ p, a, h1, h2, h3, h4, h5, h6, span, label, ul, li, table, td, th, tr {
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 400;
 }
 h2 {
-  font-size:25px;
-  line-height: 1.3;
+  font-size: 32px;
   font-weight: 400;
-  margin:35px 0 0;
-  text-transform: uppercase;
+  margin: 40px 0px 0;
+  //text-transform: uppercase;
+  opacity: 0.5;
+  line-height: 1;
 }
 h3 {
-  font-size: 20px;
+  font-size:24px;
+  line-height: 1.3;
   font-weight: 600;
-  margin: 20px 0px;
+  margin:20px 0 10px;
   //text-transform: uppercase;
 }
 h4 {
@@ -52,7 +54,7 @@ button {
 }
 
 ::placeholder {
- color: #ffffff !important;
+ color: #484848 !important;
  font-size:28px !important;
  line-height: 1.5 !important;
  text-align: center !important;
@@ -164,7 +166,6 @@ button {
   position: relative;
   background-color: #ffffff;
   width: 100%;
-  //padding-top:45px;
   text-align: center;
 }
 
@@ -183,25 +184,34 @@ button {
 }
 
 
+
+
+
 .section__summary {
-  margin: 20px 0 25px;
+  margin: 25px 0;
+  height: 60px;
+
   p {
     font-size: 64px;
-    line-height: 1;
+    line-height: 1.1;
     font-weight: 300;
   }
+
   img {
     display: inline-block;
     vertical-align: middle;
-    margin-top: -6px;
+    margin-top: -7px;
+    margin-right: 10%;
     width: 50px;
     height: 50px;
   }
+
   .summary--left {
-    border-right: 1px solid #efefef;
+    //border-right: 4px dotted #efefef;
   }
+
   .summary--right {
-    border-left: 1px solid #efefef;
+    border-left: 4px dotted #efefef;
   }
 }
 
@@ -317,7 +327,7 @@ button {
   background: linear-gradient(to right, rgba(0,204,0,0.95) 0%,rgba(0,170,119,0.95) 80%);
     color:#ffffff;
   z-index: 100;
-  border-bottom: 1px solid rgba(255,255,255,0.25);
+  //border-bottom: 1px solid rgba(255,255,255,0.25);
 
   .header__title {
     width: 100%;
@@ -326,9 +336,9 @@ button {
     h1 {
       text-align: center;
       color:#ffffff;
-      font-size: 30px;
-      line-height: 45px;
-      font-weight: 300;
+      font-size: 20px;
+      line-height: 48px;
+      font-weight: 600;
     }
   }
 
@@ -347,8 +357,11 @@ button {
   .header__button--left {
     left:1em;
     transition: left .5s;
-    z-index: 11;
+    z-index: 13;
 
+    img {
+      height: 90%;
+    }
   }
   .header__button--right {
     right:1em;
@@ -369,30 +382,28 @@ button {
 
   .form-inline {
     height: 100%;
-    padding: .1em 15%;
+    padding: 0 13%;
 
     .form-group {
       width: 100%;
       height: 100%;
-      color: #ffffff;
+      color: #484848;
 
       .search-box {
         font-family: "Rajdhani", sans-serif;
         width: 100%;
         height: 100%;
         text-align: left;
-        padding: 5px 15px;
+        padding: 0px 15px;
         border: 0;
-        font-size: 26px;
-        border-radius: 5px;
+        border-radius: 0px;
         outline: none;
         border-bottom: 0px solid #f8f8f8;
-        background-color: rgba(255,255,255,0.25);
-        color: #ffffff;
+        background-color: rgba(255,255,255,0.95);
+        color: #484848;
       }
     }
   }
-
 }
 
 .header__search .form-inline .form-group .form-control:focus {

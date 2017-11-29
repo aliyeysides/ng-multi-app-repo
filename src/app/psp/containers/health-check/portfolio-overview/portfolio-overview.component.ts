@@ -15,16 +15,16 @@ import {Subject} from 'rxjs/Subject';
 
       <div class="row no-gutters overview__summary">
         <div class="col-12">
-          <p class="data"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="#ffffff"><path d="M4.465 263.536l7.07 7.071c4.686 4.686 12.284 4.686 16.971 0L207 92.113V468c0 6.627 5.373 12 12 12h10c6.627 0 12-5.373 12-12V92.113l178.494 178.493c4.686 4.686 12.284 4.686 16.971 0l7.07-7.071c4.686-4.686 4.686-12.284 0-16.97l-211.05-211.05c-4.686-4.686-12.284-4.686-16.971 0L4.465 246.566c-4.687 4.686-4.687 12.284 0 16.97z"/></svg></span> <sub></sub>3.04<sub>%</sub></p>
+          <p class="data"><sub>+</sub>3.04<sub>%</sub></p>
         </div>
         <div class="col-12">
-          <p>Compared to the <span class="market">S&amp;P 500</span> &ndash;&ndash; Up <span class="market--change">+0.13%</span>.</p>
+          <p>as compared to the <span class="market">S&amp;P 500</span>, currently <span class="market--change">up +0.13%</span></p>
         </div>
       </div>
 
       <div class="row overview__powerbar">
         <div class="col-12">
-          <p class="label">Chaikin Power Bar</p>
+          <p class="label">Chaikin Power Bar <a> <i class="fa fa-info-circle" aria-hidden="true"></i></a></p>
         </div>
         <div class="col-12 powerbar clearfix">
           <div class="bullish">
@@ -36,9 +36,6 @@ import {Subject} from 'rxjs/Subject';
           <div class="bearish">
             <p>4</p>
           </div>
-        </div>
-        <div class="col-12">
-          <p class="label label--learnmore"><a><i class="fa fa-info-circle" aria-hidden="true"></i> What is this? </a></p>
         </div>
       </div>
     </div>

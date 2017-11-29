@@ -12,15 +12,11 @@ import { Component, OnInit } from '@angular/core';
       </div>
 
       <div class="row section__summary">
-        <div class="col-12">
-          <div class="row">
-            <div class="col-6 summary--left">
-              <p><img src="./assets/imgs/icon_circle-change--green.svg"> 2</p>
-            </div>
-            <div class="col-6 summary--right">
-              <p><img src="./assets/imgs/icon_circle-change--red.svg"> 3</p>
-            </div>
-          </div>
+        <div class="col-6 summary--left">
+          <p><img src="./assets/imgs/icon_circle-change--green.svg">2</p>
+        </div>
+        <div class="col-6 summary--right">
+          <p><img src="./assets/imgs/icon_circle-change--red.svg">3</p>
         </div>
       </div>
 
