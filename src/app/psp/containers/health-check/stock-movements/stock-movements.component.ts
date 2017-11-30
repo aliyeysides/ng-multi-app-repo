@@ -80,7 +80,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, AfterViewInit
       .filter(x => x != undefined)
       .subscribe(res => {
         this.allStocks = res
-          .filter(x => x['percentageChange'] != 0 )
+        // .filter(x => x['percentageChange'] != 0 ) // TODO: only filter for TOP MOVERS
           .sort((x, y) => y['percentageChange'] - x['percentageChange']);
         this.parseStockStatus(res);
       });
