@@ -34,7 +34,7 @@ import {Subscription} from 'rxjs/Subscription';
         <cpt-psp-power-grid></cpt-psp-power-grid>
 
         <!-- HEALTH-CHECK - DISCLAIMER -->
-        <div class="col-12 col-lg-8 col-xl-8 section section--disclaimer">
+        <div class="col-12 col-lg-8 col-xl-8 float-lg-left">
           <div class="row">
             <div class="col-12">
               <div class="divider__long divider__long--green"></div>

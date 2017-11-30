@@ -21,16 +21,15 @@ import {SignalService} from '../../../../services/signal.service';
 
       <div class="row section__summary">
         <div class="col-6 summary--left">
-          <p class=""><img src="./assets/imgs/icon_circle-movement--green.svg">{{ upStocks?.length }}</p>
+          <p><img src="./assets/imgs/icon_circle-movement--green.svg">{{ upStocks?.length }}</p>
         </div>
         <div class="col-6 summary--right">
-          <p class=""><img src="./assets/imgs/icon_circle-movement--red.svg">{{ downStocks?.length }}</p>
+          <p><img src="./assets/imgs/icon_circle-movement--red.svg">{{ downStocks?.length }}</p>
         </div>
       </div>
 
       <div class="row">
         <div class="col-12">
-          <div class="divider__long"></div>
           <h3>Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
           <div class="divider__long"></div>
         </div>

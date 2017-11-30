@@ -39,9 +39,6 @@ import {Subject} from 'rxjs/Subject';
       </div>
 
       <div class="row overview__powerbar">
-        <div class="col-12">
-          <p class="label">Chaikin Power Bar <a> <i tooltip="{{ toolTipText }}" class="fa fa-info-circle" aria-hidden="true"></i></a></p>
-        </div>
         <div class="col-12 powerbar clearfix">
           <div
             [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
@@ -54,6 +51,9 @@ import {Subject} from 'rxjs/Subject';
             [ngClass]="{'bearish--more':prognosisData?.BearishSymbolsCount>prognosisData?.BullishSymbolsCount, 'bearish--less':prognosisData?.BearishSymbolsCount<prognosisData?.BullishSymbolsCount,'bearish--same':prognosisData?.BearishSymbolsCount==prognosisData?.BullishSymbolsCount}">
             <p>{{ prognosisData?.BearishSymbolsCount }}</p>
           </div>
+        </div>
+        <div class="col-12">
+          <p class="label">Chaikin Power Bar <a> <i tooltip="{{ toolTipText }}" class="fa fa-info-circle" aria-hidden="true"></i></a></p>
         </div>
       </div>
     </div>

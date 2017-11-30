@@ -31,15 +31,14 @@ import {Subject} from 'rxjs/Subject';
 
       <div class="row">
         <div class="col-12 col-md-6">
-          <div class="divider__long"></div>
           <h3>Turned Bullish</h3>
           <div class="divider__long"></div>
           <ul class="stock__list">
             <li class="row list__entry">
-              <div class="col-3 list-entry__pgr">
+              <div class="col-2 list-entry__pgr">
                 <img class="align-middle" src="./assets/imgs/arc_VeryBullish.svg">
               </div>
-              <div class="col-3 list-entry__info">
+              <div class="col-4 list-entry__info">
                 <p class="ticker">SHOP</p>
                 <p class="company">Shopify Inc</p>
               </div>
@@ -54,10 +53,10 @@ import {Subject} from 'rxjs/Subject';
               </div>
             </li>
             <li class="row list__entry">
-              <div class="col-3 list-entry__pgr">
+              <div class="col-2 list-entry__pgr">
                 <img class="align-middle" src="./assets/imgs/arc_Bullish.svg">
               </div>
-              <div class="col-3 list-entry__info">
+              <div class="col-4 list-entry__info">
                 <p class="ticker">JASO</p>
                 <p class="company">Amazon.Com Inc</p>
               </div>
@@ -75,7 +74,6 @@ import {Subject} from 'rxjs/Subject';
         </div>
 
         <div class="col-12 col-md-6">
-          <div class="divider__long"></div>
           <h3>Turned Bearish</h3>
           <div class="divider__long"></div>
           <ul class="stock__list">
