@@ -11,7 +11,7 @@ import {SignalService} from '../../../../services/signal.service';
 @Component({
   selector: 'cpt-psp-stock-movements',
   template: `
-    <div class="col-12 col-lg-4 col-xl-4 section section--stockmovements">
+    <div id="HC--Stock-Movements" class="col-12 col-lg-4 col-xl-4 float-lg-left">
 
       <div class="row">
         <div class="col-12">
@@ -29,9 +29,10 @@ import {SignalService} from '../../../../services/signal.service';
       </div>
 
       <div class="row">
-        <div class="col-12 chart__header">
+        <div class="col-12">
+          <div class="divider__long"></div>
           <h3>Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
-          <div class="divider"></div>
+          <div class="divider__long"></div>
         </div>
         <ul class="col-12 section__chart">
           <li *ngFor="let stock of allStocks" class="row no-gutters list-item__mover">

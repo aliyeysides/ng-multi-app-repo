@@ -7,9 +7,9 @@ import {SignalService} from '../../../../services/signal.service';
 @Component({
   selector: 'cpt-psp-earnings-report',
   template: `
-    <div class="col-12 col-lg-8 col-xl-8 section section--earningsreports">
+    <div id="HC--Earnings" class="col-12 col-lg-8 col-xl-8 float-lg-right">
 
-      <div class="row section__header">
+      <div class="row">
         <div class="col-12">
           <h2>Earnings Reports</h2>
         </div>
@@ -25,9 +25,9 @@ import {SignalService} from '../../../../services/signal.service';
       </div>
 
       <div class="row">
-        <div class="col-12 col-md-6 section__contents">
-          <h3 class="ux-blue">Earnings Surprises</h3>
-          <div class="divider"></div>
+        <div class="col-12 col-md-6">
+          <h3 class="">Earnings Surprises</h3>
+          <div class="divider__long"></div>
           <ul class="section__chart">
             <li class="row no-gutters col-headers">
               <div class="col-3">
@@ -97,9 +97,9 @@ import {SignalService} from '../../../../services/signal.service';
           </ul>
         </div>
 
-        <div class="col-12 col-md-6 section__contents">
-          <h3 class="ux-blue">Estimate Revisions</h3>
-          <div class="divider"></div>
+        <div class="col-12 col-md-6">
+          <h3 class="">Estimate Revisions</h3>
+          <div class="divider__long"></div>
           <ul class="section__chart">
             <li class="row no-gutters col-headers">
               <div class="col-3">
@@ -169,7 +169,7 @@ import {SignalService} from '../../../../services/signal.service';
           </ul>
         </div>
 
-        <div class="col-12 section__chart">
+        <div class="col-12">
           <cpt-psp-reporting-calendar></cpt-psp-reporting-calendar>
         </div>
       </div>

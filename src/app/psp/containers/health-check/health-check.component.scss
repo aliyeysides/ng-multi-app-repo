@@ -9,11 +9,28 @@
 
 .section--overview {
   	color:#ffffff;
-	padding-top:55px;
+	padding-top:50px;
 
 	.overview__header {
+	      	.list-name {
+	      		font-weight: 500;
+	      		display: inline-block;
+	      		border-bottom: 4px dotted rgba(255,255,255,0.75);
+	      		font-size: 26px;
+	      		margin: 0px 0 8px;
+	      		padding-bottom: 0px;
+	      	}
+		
+	}
 
-		p {
+	.overview__summary {
+		margin:0;
+		position: relative;
+		padding: 0px 0px 15px;
+
+		.timespan {
+	      	font-size: 13px;
+	      	font-weight: 600;
 			display: inline-block;
 			background-color: #ffffff;
 			border-radius: 20px;
@@ -21,18 +38,8 @@
 			font-weight: 600;
 			text-transform: uppercase;
 			padding:3px 15px 0px;
+			margin: 10px 0;
 		}
-
-		.label {
-	      	font-size: 13px;
-	      	font-weight: 600;
-		}
-	}
-
-	.overview__summary {
-		margin:0;
-		position: relative;
-		padding: 8px 0px 15px;
 
 		p {
 	      	color:#ffffff;
@@ -45,18 +52,11 @@
 	      		font-weight: 600;
 	      	}
 
-	      	.list-name {
-	      		font-weight: 400;
-	      		display: inline-block;
-	      		border-bottom: 4px dotted rgba(255,255,255,0.75);
-	      		font-size: 22px;
-	      		margin: 5px 0 8px;
-	      		padding-bottom: 3px;
-	      	}
+
 		}
 
 		.data {
-	  		font-size: 74px;
+	  		font-size: 79px;
 	      	letter-spacing: 0em;
 		  	line-height: 1.2;
 		  	font-weight: 300;
@@ -72,7 +72,7 @@
 			}
 
 			.icon__arrow {
-				width: 42px;
+				width: 43px;
 				display: inline-block;
 
 				img, svg {
@@ -205,17 +205,11 @@
 /*     CONTENTS -- MOVERS     */
 
 
-.section--stockmovements {
-  display: block;
-  float: left;
-}
-
-.section--stockmovements .section__chart {
-
+#HC--Stock-Movements {
 }
 
 .list-item__mover {
-  margin-bottom:10px;
+  margin-bottom:20px;
 
   &:last-child {
   	margin-bottom:0;
@@ -272,21 +266,14 @@
 
 
 
-.section__contents {
-	.stock__list {
-		margin-bottom: 15px;
-	}
-}
 
 
-
-
-
-
-
-.section.section--ratingschanges {
+#HC--Ratings-Changes {
 	.button__slide {
 		display: none;
+	}
+	.stock__list {
+		margin: 15px 0;
 	}
 }
 
@@ -299,10 +286,13 @@
 /*     HC -- EARNINGS     */
 
 
+#HC--Earnings {
+}
+
 .earnings__entry {
   	height: 36px;
   	overflow: hidden;
-  	margin: 5px 0;
+  	margin: 8px 0;
 
 	.pgr {
 		img {
