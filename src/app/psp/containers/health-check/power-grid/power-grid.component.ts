@@ -6,7 +6,7 @@ import {Subject} from 'rxjs/Subject';
 @Component({
   selector: 'cpt-psp-power-grid',
   template: `
-    <div class="col-12 col-lg-8 col-xl-8 float-lg-left">
+    <div class="col-12 col-lg-8 col-xl-8 float-lg-right">
 
       <div class="row">
         <div class="col-12">
