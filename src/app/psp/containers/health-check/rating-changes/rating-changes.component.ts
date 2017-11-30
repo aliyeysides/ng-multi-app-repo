@@ -6,7 +6,13 @@ import {Subject} from 'rxjs/Subject';
 @Component({
   selector: 'cpt-psp-rating-changes',
   template: `
-    <div class="col-12 col-lg-8 col-xl-8 section section--ratingschanges">
+    <div id="HC--Ratings-Changes" class="col-12 col-lg-8 col-xl-8 float-lg-right">
+
+      <div class="row">
+        <div class="col-12">
+          <div class="divider__long divider__long--green"></div>
+        </div>
+      </div>
 
       <div class="row">
         <div class="col-12">
@@ -24,16 +30,11 @@ import {Subject} from 'rxjs/Subject';
       </div>
 
       <div class="row">
-        <div class="col-12">
-          <div class="divider"></div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12 col-md-6 section__contents">
-          <h3 class="green">Turned Bullish</h3>
+        <div class="col-12 col-md-6">
+          <h3>Turned Bullish</h3>
+          <div class="divider__long"></div>
           <ul class="stock__list">
-            <li class="row no-gutters list__entry">
+            <li class="row list__entry">
               <div class="col-2 list-entry__pgr">
                 <img class="align-middle" src="./assets/imgs/arc_VeryBullish.svg">
               </div>
@@ -51,7 +52,7 @@ import {Subject} from 'rxjs/Subject';
                 <img src="./assets/imgs/ui_slide.svg">
               </div>
             </li>
-            <li class="row no-gutters list__entry">
+            <li class="row list__entry">
               <div class="col-2 list-entry__pgr">
                 <img class="align-middle" src="./assets/imgs/arc_Bullish.svg">
               </div>
@@ -72,12 +73,9 @@ import {Subject} from 'rxjs/Subject';
           </ul>
         </div>
 
-        <div class="col-12 hidden-md-up">
-          <div class="divider"></div>
-        </div>
-
-        <div class="col-12 col-md-6 section__contents">
-          <h3 class="red">Turned Bearish</h3>
+        <div class="col-12 col-md-6">
+          <h3>Turned Bearish</h3>
+          <div class="divider__long"></div>
           <ul class="stock__list">
             <li class="row no-gutters list__entry">
               <div class="col-2 list-entry__pgr">
@@ -134,12 +132,6 @@ import {Subject} from 'rxjs/Subject';
               </div>
             </li>
           </ul>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12">
-          <div class="divider"></div>
         </div>
       </div>
 

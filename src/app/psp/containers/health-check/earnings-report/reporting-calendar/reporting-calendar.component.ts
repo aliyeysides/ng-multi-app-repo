@@ -5,7 +5,8 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <div class="row no-gutters reporting-calendar">
       <div class="col-12 chart__header">
-        <h3 class="ux-blue">Reporting This Week</h3>
+        <h3 class="">Reporting This Week</h3>
+        <div class="divider__long"></div>
       </div>
       <div class="col-12 col-headers">
         <div class="col-head">

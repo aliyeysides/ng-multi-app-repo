@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'cpt-psp-power-grid',
   template: `
-    <div class="col-12 col-lg-8 col-xl-8 section section--powergrid">
+    <div class="col-12 col-lg-8 col-xl-8 float-lg-left">
 
       <div class="row">
         <div class="col-12">
@@ -13,13 +13,13 @@ import { Component, OnInit } from '@angular/core';
 
       <div class="row">
         <div class="col-12">
-          <div class="divider"></div>
+          <div class="divider__long"></div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-12 chart__header">
-          <h3 class="green">Strong Industries</h3>
+        <div class="col-12">
+          <h3>Strong Industries</h3>
         </div>
 
         <div class="col-12 powerGrid">
@@ -61,11 +61,11 @@ import { Component, OnInit } from '@angular/core';
         </div>
 
         <div class="col-12">
-          <div class="divider"></div>
+          <div class="divider__long"></div>
         </div>
         
-        <div class="col-12 chart__header">
-          <h3 class="red">Weak Industries</h3>
+        <div class="col-12">
+          <h3>Weak Industries</h3>
         </div>
 
         <div class="col-12 powerGrid">

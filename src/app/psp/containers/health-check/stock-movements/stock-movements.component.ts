@@ -11,7 +11,7 @@ import {SignalService} from '../../../../services/signal.service';
 @Component({
   selector: 'cpt-psp-stock-movements',
   template: `
-    <div class="col-12 col-lg-4 col-xl-4 section section--stockmovements">
+    <div id="HC--Stock-Movements" class="col-12 col-lg-4 col-xl-4 float-lg-left">
 
       <div class="row">
         <div class="col-12">
@@ -21,16 +21,17 @@ import {SignalService} from '../../../../services/signal.service';
 
       <div class="row section__summary">
         <div class="col-6 summary--left">
-          <p class=""><img src="./assets/imgs/icon_circle-movement--green.svg">{{ upStocks?.length }}</p>
+          <p><img src="./assets/imgs/icon_circle-movement--green.svg">{{ upStocks?.length }}</p>
         </div>
         <div class="col-6 summary--right">
-          <p class=""><img src="./assets/imgs/icon_circle-movement--red.svg">{{ downStocks?.length }}</p>
+          <p><img src="./assets/imgs/icon_circle-movement--red.svg">{{ downStocks?.length }}</p>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-12 chart__header">
-          <h3 class="">Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
+        <div class="col-12">
+          <h3>Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
+          <div class="divider__long"></div>
         </div>
         <ul class="col-12 section__chart">
           <li *ngFor="let stock of allStocks" class="row no-gutters list-item__mover">
@@ -46,12 +47,6 @@ import {SignalService} from '../../../../services/signal.service';
             </div>
           </li>
         </ul>
-      </div>
-
-      <div class="row">
-        <div class="col-12">
-          <div class="divider__long divider__long--green"></div>
-        </div>
       </div>
     </div>
   `,

@@ -6,35 +6,39 @@ import {Subject} from 'rxjs/Subject';
 @Component({
   selector: 'cpt-psp-portfolio-overview',
   template: `
-    <div class="col-12 col-lg-8 col-xl-8 section section--overview" [ngClass]="{
+    <div class="col-12 col-lg-12 col-xl-12 section--overview" [ngClass]="{
     'section--overview--green': calculations?.avgPercentageChange > 0,
     'section--overview--red': calculations?.avgPercentageChange < 0}">
       <div class="row overview__header">
         <div class="col-12">
-          <p class="label">LAST WEEK</p>
+          <p><span class="list-name">Greg's Stock List #2</span></p>
         </div>
       </div>
 
       <div class="row no-gutters overview__summary">
         <div class="col-12">
-          <p class="data"><sub><span
-            *ngIf="isPortUp()">+</span></sub>{{ calculations?.avgPercentageChange | number:'.2-2' }}<sub>%</sub></p>
+          <p class="timespan">LAST WEEK</p>
         </div>
         <div class="col-12">
-          <p>as compared to the <span class="market">S&amp;P 500</span>, currently
-            <span class="market--change"> 
-              <span *ngIf="isSPYUp()">up +</span>
-              <span *ngIf="!isSPYUp()">down</span>{{ calculations?.SPYPercentageChange | number:'.2-2' }}%
+          <p class="data">
+            <span class="icon__arrow">
+              <img src="./assets/imgs/icon__thin-arrow--up.svg">
             </span>
+            <sub><span class="plus-minus" *ngIf="isPortUp()">+</span></sub>{{ calculations?.avgPercentageChange | number:'.2-2' }}<sub>%</sub>
+          </p>
+        </div>
+        <div class="col-12" style="padding:0 10px;">
+          <p>Compared to the <span class="market">S&amp;P 500</span> ---
+            <span class="market market--change"> 
+              <span *ngIf="isSPYUp()">Up +</span>
+              <span *ngIf="!isSPYUp()">Down</span>{{ calculations?.SPYPercentageChange | number:'.2-2' }}%
+            </span>
+            over the same timespan
           </p>
         </div>
       </div>
 
       <div class="row overview__powerbar">
-        <div class="col-12">
-          <p class="label">Chaikin Power Bar <a> <i tooltip="{{ toolTipText }}" class="fa fa-info-circle"
-                                                    aria-hidden="true"></i></a></p>
-        </div>
         <div class="col-12 powerbar clearfix">
           <div
             [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
@@ -47,6 +51,9 @@ import {Subject} from 'rxjs/Subject';
             [ngClass]="{'bearish--more':prognosisData?.BearishSymbolsCount>prognosisData?.BullishSymbolsCount, 'bearish--less':prognosisData?.BearishSymbolsCount<prognosisData?.BullishSymbolsCount,'bearish--same':prognosisData?.BearishSymbolsCount==prognosisData?.BullishSymbolsCount}">
             <p>{{ prognosisData?.BearishSymbolsCount }}</p>
           </div>
+        </div>
+        <div class="col-12">
+          <p class="label">Chaikin Power Bar <a> <i tooltip="{{ toolTipText }}" class="fa fa-info-circle" aria-hidden="true"></i></a></p>
         </div>
       </div>
     </div>
