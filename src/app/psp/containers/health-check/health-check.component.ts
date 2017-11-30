@@ -3,7 +3,11 @@ import {HealthCheckService} from '../../../services/health-check.service';
 import {AuthService} from '../../../services/auth.service';
 
 import * as moment from 'moment';
-import {PGRChanges, PortfolioStatus, PrognosisData, StockStatus} from '../../../shared/models/health-check';
+import {
+  EarningsAnalystRevisions,
+  EarningsReportSurprises, PGRChanges, PortfolioStatus, PrognosisData,
+  StockStatus
+} from '../../../shared/models/health-check';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -23,7 +27,8 @@ import {Subscription} from 'rxjs/Subscription';
         <cpt-psp-rating-changes [alerts]="pgrChanges"></cpt-psp-rating-changes>
 
         <!-- HEALTH-CHECK - Earnings Reports -->
-        <cpt-psp-earnings-report></cpt-psp-earnings-report>
+        <cpt-psp-earnings-report [surprises]="earningsSurprise"
+                                 [revisions]="analystRevisions"></cpt-psp-earnings-report>
 
         <!-- HEALTH-CHECK - Power Grid -->
         <cpt-psp-power-grid></cpt-psp-power-grid>
@@ -59,6 +64,8 @@ export class HealthCheckComponent implements OnInit {
   public stocksStatus: Array<StockStatus>;
   public prognosisData: PrognosisData;
   public pgrChanges: PGRChanges;
+  public earningsSurprise: EarningsReportSurprises;
+  public analystRevisions: EarningsAnalystRevisions;
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService) {
@@ -78,8 +85,8 @@ export class HealthCheckComponent implements OnInit {
           this.healthCheck.getPrognosisData(listId),
           this.healthCheck.getUserPortfolioStockStatus(listId, startDate, endDate),
           this.healthCheck.getPGRWeeklyChangeDAta(listId, startDate, endDate),
-          // this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
-          // this.healthCheck.getAnalystRevisions(listId, moment().format('YYYY-MM-DD') ),
+          this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
+          this.healthCheck.getAnalystRevisions(listId, moment().format('YYYY-MM-DD')),
           // this.healthCheck.getExpectedEarningsReportsWithPGRValues(this.uid, listId, startDate, endDate)
           // this.healthCheck.getPHCGridData(listId)
         )
@@ -92,6 +99,8 @@ export class HealthCheckComponent implements OnInit {
         this.prognosisData = res[1] as PrognosisData;
         this.stocksStatus = res[2][Object.keys(res[2])[0]] as Array<StockStatus>;
         this.pgrChanges = res[3] as PGRChanges;
+        this.earningsSurprise = res[4] as EarningsReportSurprises;
+        this.analystRevisions = res[5] as EarningsAnalystRevisions;
       });
   }
 

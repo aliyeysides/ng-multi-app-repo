@@ -175,7 +175,7 @@ export class SignalService {
     return result;
   }
 
-  private calculatePGR(pgr) {
+  public calculatePGR(pgr) {
     if (pgr >= 0 && pgr < 15) {
       pgr = 1;
     } else if (pgr >= 15 && pgr < 29) {
