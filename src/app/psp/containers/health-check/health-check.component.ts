@@ -5,7 +5,7 @@ import {AuthService} from '../../../services/auth.service';
 import * as moment from 'moment';
 import {
   EarningsAnalystRevisions,
-  EarningsReportSurprises, PGRChanges, PortfolioStatus, PrognosisData,
+  EarningsReportSurprises, PGRChanges, PHCGridData, PortfolioStatus, PrognosisData,
   StockStatus
 } from '../../../shared/models/health-check';
 import {Observable} from 'rxjs/Observable';
@@ -31,7 +31,7 @@ import {Subscription} from 'rxjs/Subscription';
                                  [revisions]="analystRevisions"></cpt-psp-earnings-report>
 
         <!-- HEALTH-CHECK - Power Grid -->
-        <cpt-psp-power-grid></cpt-psp-power-grid>
+        <cpt-psp-power-grid [data]="pgrGridData"></cpt-psp-power-grid>
 
         <!-- HEALTH-CHECK - DISCLAIMER -->
         <div class="col-12 col-lg-8 col-xl-8 float-lg-left">
@@ -66,6 +66,8 @@ export class HealthCheckComponent implements OnInit {
   public pgrChanges: PGRChanges;
   public earningsSurprise: EarningsReportSurprises;
   public analystRevisions: EarningsAnalystRevisions;
+  public expectedEarnings;
+  public pgrGridData: PHCGridData;
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService) {
@@ -87,8 +89,8 @@ export class HealthCheckComponent implements OnInit {
           this.healthCheck.getPGRWeeklyChangeDAta(listId, startDate, endDate),
           this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
           this.healthCheck.getAnalystRevisions(listId, moment().format('YYYY-MM-DD')),
-          // this.healthCheck.getExpectedEarningsReportsWithPGRValues(this.uid, listId, startDate, endDate)
-          // this.healthCheck.getPHCGridData(listId)
+          this.healthCheck.getExpectedEarningsReportsWithPGRValues(this.uid, listId, startDate, endDate),
+          this.healthCheck.getPHCGridData(listId)
         )
       })
       .take(1)
@@ -101,6 +103,8 @@ export class HealthCheckComponent implements OnInit {
         this.pgrChanges = res[3] as PGRChanges;
         this.earningsSurprise = res[4] as EarningsReportSurprises;
         this.analystRevisions = res[5] as EarningsAnalystRevisions;
+        this.expectedEarnings = res[6];
+        this.pgrGridData = res[7] as PHCGridData;
       });
   }
 
