@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {EarningsAnalystRevisions, EarningsReportSurprises} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
@@ -140,7 +140,7 @@ interface EarningsReportObj {
   `,
   styleUrls: ['../health-check.component.scss']
 })
-export class EarningsReportComponent implements OnInit {
+export class EarningsReportComponent implements OnInit, OnDestroy {
   private ngUnsubsribe: Subject<void> = new Subject<void>();
   private _surprises: BehaviorSubject<EarningsReportSurprises> = new BehaviorSubject<EarningsReportSurprises>({} as EarningsReportSurprises);
   private _revisions: BehaviorSubject<EarningsAnalystRevisions> = new BehaviorSubject<EarningsAnalystRevisions>({} as EarningsAnalystRevisions);
@@ -186,6 +186,11 @@ export class EarningsReportComponent implements OnInit {
       .subscribe(res => {
         this.allRevisions = this.earningsReportObjFactory(res);
       });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubsribe.next();
+    this.ngUnsubsribe.complete();
   }
 
   appendPGRUrl(pgr: number) {
