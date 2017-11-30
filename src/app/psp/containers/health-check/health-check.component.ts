@@ -89,7 +89,7 @@ export class HealthCheckComponent implements OnInit {
           this.healthCheck.getPGRWeeklyChangeDAta(listId, startDate, endDate),
           this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
           this.healthCheck.getAnalystRevisions(listId, moment().format('YYYY-MM-DD')),
-          this.healthCheck.getExpectedEarningsReportsWithPGRValues(this.uid, listId, startDate, endDate),
+          this.healthCheck.getExpectedEarningsReportsWithPGRValues(this.uid, listId, moment().isoWeekday(1).format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')),
           this.healthCheck.getPHCGridData(listId)
         )
       })

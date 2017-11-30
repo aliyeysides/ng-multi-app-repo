@@ -11,7 +11,7 @@ import {Subject} from 'rxjs/Subject';
     'section--overview--red': calculations?.avgPercentageChange < 0}">
       <div class="row overview__header">
         <div class="col-12">
-          <p><span class="list-name">Greg's Stock List #2</span></p>
+          <p><span class="list-name">My Stocks</span></p>
         </div>
       </div>
 
@@ -22,7 +22,8 @@ import {Subject} from 'rxjs/Subject';
         <div class="col-12">
           <p class="data">
             <span class="icon__arrow">
-              <img src="./assets/imgs/icon__thin-arrow--up.svg">
+              <img *ngIf="isPortUp()" src="./assets/imgs/icon__thin-arrow--up.svg">
+              <img *ngIf="!isPortUp()" src="./assets/imgs/icon__thin-arrow--down.svg">
             </span>
             <sub><span class="plus-minus" *ngIf="isPortUp()">+</span></sub>{{ calculations?.avgPercentageChange | number:'.2-2' }}<sub>%</sub>
           </p>

@@ -44,13 +44,15 @@ export interface EarningsAnalystRevisions {
   }
 }
 
+export interface PHCIndustryData {
+  "IndustryCode": number,
+  "SymbolPGRMappings": Array<Ticker>,
+  "IndustryScore": number,
+  "IndustryName": string
+}
+
 export interface PHCGridData {
-  "Industries": {
-    "IndustryCode": number,
-    "SymbolPGRMappings": Array<Ticker>,
-    "IndustryScore": number,
-    "IndustryName": string
-  }
+  "Industries": Array<PHCIndustryData>
 }
 
 export interface PrognosisData {
@@ -62,7 +64,3 @@ export interface PrognosisData {
   NeutralSymbolsCount: number,
   BearishSymbols: string
 }
-
-// export interface ChaikinCalculations {
-
-// }
