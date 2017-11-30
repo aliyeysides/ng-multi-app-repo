@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {EarningsAnalystRevisions, EarningsReportSurprises} from '../../../../shared/models/health-check';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-psp-earnings-report',
@@ -207,10 +210,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['../health-check.component.scss']
 })
 export class EarningsReportComponent implements OnInit {
+  private ngUnsubsribe: Subject<void> = new Subject<void>();
+  private _surprises: BehaviorSubject<EarningsReportSurprises> = new BehaviorSubject<EarningsReportSurprises>({} as EarningsReportSurprises);
+  private _revisions: BehaviorSubject<EarningsAnalystRevisions> = new BehaviorSubject<EarningsAnalystRevisions>({} as EarningsAnalystRevisions);
 
-  constructor() { }
+  @Input('surprises')
+  set surprises(val: EarningsReportSurprises) {
+    this._surprises.next(val);
+  }
+
+  get surprises() {
+    return this._surprises.getValue();
+  }
+
+  @Input('revisions')
+  set revisions(val: EarningsAnalystRevisions) {
+    this._revisions.next(val);
+  }
+
+  get revisions() {
+    return this._revisions.getValue();
+  }
+
+  constructor() {
+  }
 
   ngOnInit() {
+    this._surprises
+      .takeUntil(this.ngUnsubsribe)
+      .subscribe(res => console.log('surprises', res));
+
+    this._revisions
+      .takeUntil(this.ngUnsubsribe)
+      .subscribe(res => console.log('revisions', res));
   }
 
 }
