@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {PHCGridData} from '../../../../shared/models/health-check';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-psp-power-grid',
@@ -63,7 +66,7 @@ import { Component, OnInit } from '@angular/core';
         <div class="col-12">
           <div class="divider__long"></div>
         </div>
-        
+
         <div class="col-12">
           <h3>Weak Industries</h3>
         </div>
@@ -119,10 +122,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['../health-check.component.scss']
 })
 export class PowerGridComponent implements OnInit {
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
+  private _data: BehaviorSubject<PHCGridData> = new BehaviorSubject<PHCGridData>({} as PHCGridData);
+  @Input('data')
+  set data(val: PHCGridData) {
+    this._data.next(val);
+  }
 
-  constructor() { }
+  get data() {
+    return this._data.getValue();
+  }
+
+  constructor() {
+  }
 
   ngOnInit() {
+    this._data
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(res => console.log('grid data', res));
   }
 
 }
