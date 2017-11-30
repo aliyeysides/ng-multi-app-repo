@@ -84,7 +84,9 @@ export class StockMovementsComponent implements OnInit, OnDestroy, AfterViewInit
       .takeUntil(this.ngUnsubscribe)
       .filter(x => x != undefined)
       .subscribe(res => {
-        this.allStocks = res.sort((x, y) => y['percentageChange'] - x['percentageChange']);
+        this.allStocks = res
+          .filter(x => x['percentageChange'] != 0 )
+          .sort((x, y) => y['percentageChange'] - x['percentageChange']);
         this.parseStockStatus(res);
       });
   }
