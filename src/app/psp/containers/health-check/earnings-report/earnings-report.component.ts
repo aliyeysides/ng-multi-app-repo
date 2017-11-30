@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {EarningsAnalystRevisions, EarningsReportSurprises} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
+import {SignalService} from '../../../../services/signal.service';
 
 @Component({
   selector: 'cpt-psp-earnings-report',
@@ -232,7 +233,7 @@ export class EarningsReportComponent implements OnInit {
     return this._revisions.getValue();
   }
 
-  constructor() {
+  constructor(private signalSerivce: SignalService) {
   }
 
   ngOnInit() {
@@ -243,6 +244,10 @@ export class EarningsReportComponent implements OnInit {
     this._revisions
       .takeUntil(this.ngUnsubsribe)
       .subscribe(res => console.log('revisions', res));
+  }
+
+  appendPGRUrl(pgr: number) {
+    return this.signalSerivce.calculatePGR(pgr)
   }
 
 }
