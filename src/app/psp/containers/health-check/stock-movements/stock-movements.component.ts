@@ -32,21 +32,29 @@ import {SignalService} from '../../../../services/signal.service';
         <div class="col-12">
           <h3>Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
           <div class="divider__long"></div>
-        </div>
-        <ul class="col-12 section__chart">
-          <li *ngFor="let stock of allStocks" class="row no-gutters list-item__mover">
-            <div class="col-4 mover__stock">
-              <img src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
-              <p class="ticker">{{ stock.symbol }}</p>
-            </div>
-            <div class="col-8 mover__data">
-              <div class="mover__bar" [style.width]="stock['barWidth']"
-                   [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0}">
-                <p class="data" #perChange>{{ stock.percentageChange }}%</p>
+          <ul class="section__chart">
+            <li class="row no-gutters col-headers">
+              <div class="col-4">
+                <p class="text-left">RATING / TICKER</p>
               </div>
-            </div>
-          </li>
-        </ul>
+              <div class="col-8">
+                <p class="text-left">% CHANGE</p>
+              </div>
+            </li>
+            <li *ngFor="let stock of allStocks" class="row no-gutters list-item__mover">
+              <div class="col-4 mover__stock">
+                <img src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
+                <p class="ticker">{{ stock.symbol }}</p>
+              </div>
+              <div class="col-8 mover__data">
+                <div class="mover__bar" [style.width]="stock['barWidth']"
+                     [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0}">
+                  <p class="data" #perChange>{{ stock.percentageChange }}%</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   `,

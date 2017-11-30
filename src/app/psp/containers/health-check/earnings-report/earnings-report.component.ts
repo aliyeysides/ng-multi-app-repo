@@ -39,7 +39,7 @@ interface EarningsReportObj {
           <ul class="section__chart">
             <li class="row no-gutters col-headers">
               <div class="col-3">
-                <p>TICKER</p>
+                <p class="text-left">RATING / TICKER</p>
               </div>
               <div class="col-3">
                 <p>ACT</p>
@@ -54,7 +54,7 @@ interface EarningsReportObj {
             <ng-container *ngIf="allSurprises.length">
               <li *ngFor="let item of allSurprises" class="row no-gutters earnings__entry">
                 <div class="col-1 pgr">
-                  <img class="align-middle" src="{{ appendPGRImage(item.pgr) }}">
+                  <img class="align-absolute" src="{{ appendPGRImage(item.pgr) }}">
                 </div>
                 <div class="col-2 ticker">
                   <p>{{ item.symbol }}</p>
@@ -82,7 +82,7 @@ interface EarningsReportObj {
           <ul class="section__chart">
             <li class="row no-gutters col-headers">
               <div class="col-3">
-                <p>TICKER</p>
+                <p class="text-left">RATING / TICKER</p>
               </div>
               <div class="col-3">
                 <p>CURR</p>
@@ -97,7 +97,7 @@ interface EarningsReportObj {
             <ng-container *ngIf="allRevisions.length">
               <li *ngFor="let item of allRevisions" class="row no-gutters earnings__entry">
                 <div class="col-1 pgr">
-                  <img class="align-middle" src="{{ appendPGRImage(item.pgr) }}">
+                  <img class="align-absolute" src="{{ appendPGRImage(item.pgr) }}">
                 </div>
                 <div class="col-2 ticker">
                   <p>{{ item.symbol }}</p>

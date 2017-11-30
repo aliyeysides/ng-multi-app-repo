@@ -206,7 +206,7 @@
 }
 
 .list-item__mover {
-  margin-bottom:15px;
+  margin:15px 0;
 
   &:last-child {
   	margin-bottom:0;
@@ -318,7 +318,7 @@
 .reporting-calendar {
 
 	.col-head {
-		margin:-10px 0 0;
+		margin:15px 0 0;
 	  	float: left;
 	  	width: 20%;
 
@@ -347,6 +347,19 @@
 	  			font-size: 24px;
 	  			font-weight: 700;
 	  			border-radius: 100%;
+
+	  			i {
+	  				display:none;
+	  				padding-top:3px;
+	  			}
+	  		}
+	  		.selected {
+	  			span {
+	  				display: none;
+	  			}
+	  			i {
+	  				display:block;
+	  			}
 	  		}
 		}
 		.cal-day.green {
