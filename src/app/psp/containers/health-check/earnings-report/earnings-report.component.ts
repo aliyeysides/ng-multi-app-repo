@@ -4,6 +4,14 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 
+interface EarningsReportObj {
+  symbol: string,
+  curr: number,
+  prev: number,
+  diff: number,
+  pgr: number
+}
+
 @Component({
   selector: 'cpt-psp-earnings-report',
   template: `
@@ -17,10 +25,10 @@ import {SignalService} from '../../../../services/signal.service';
 
       <div class="row section__summary">
         <div class="col-6 summary--left">
-          <p><img src="./assets/imgs/icon_circle-earnings--green.svg">3</p>
+          <p><img src="./assets/imgs/icon_circle-earnings--green.svg">{{ upCount }}</p>
         </div>
         <div class="col-6 summary--right">
-          <p><img src="./assets/imgs/icon_circle-earnings--red.svg">2</p>
+          <p><img src="./assets/imgs/icon_circle-earnings--red.svg">{{ downCount }}</p>
         </div>
       </div>
 
@@ -43,57 +51,28 @@ import {SignalService} from '../../../../services/signal.service';
                 <p>DIFF</p>
               </div>
             </li>
-            <li class="row no-gutters earnings__entry">
-              <div class="col-1 pgr">
-                <img class="align-middle" src="./assets/imgs/arc_Bullish.svg">
-              </div>
-              <div class="col-2 ticker">
-                <p>PGR</p>
-              </div>
-              <div class="col-3 data">
-                <p>99.40</p>
-              </div>
-              <div class="col-3 data">
-                <p>3.12%</p>
-              </div>
-              <div class="col-3 data">
-                <p class="green">3.12%</p>
-              </div>
-            </li>
-            <li class="row no-gutters earnings__entry">
-              <div class="col-1 pgr">
-                <img class="align-middle" src="./assets/imgs/arc_VeryBearish.svg">
-              </div>
-              <div class="col-2 ticker">
-                <p class="">KPMG</p>
-              </div>
-              <div class="col-3 data">
-                <p>99.40</p>
-              </div>
-              <div class="col-3 data">
-                <p>3.12%</p>
-              </div>
-              <div class="col-3 data">
-                <p class="green">3.12%</p>
-              </div>
-            </li>
-            <li class="row no-gutters earnings__entry">
-              <div class="col-1 pgr">
-                <img class="align-middle" src="./assets/imgs/arc_Bearish.svg">
-              </div>
-              <div class="col-2 ticker">
-                <p>SHOP</p>
-              </div>
-              <div class="col-3 data">
-                <p>99.40</p>
-              </div>
-              <div class="col-3 data">
-                <p>3.12%</p>
-              </div>
-              <div class="col-3 data">
-                <p class="green">3.12%</p>
-              </div>
-            </li>
+            <ng-container *ngIf="allSurprises.length">
+              <li *ngFor="let item of allSurprises" class="row no-gutters earnings__entry">
+                <div class="col-1 pgr">
+                  <img class="align-middle" src="{{ appendPGRImage(item.pgr) }}">
+                </div>
+                <div class="col-2 ticker">
+                  <p>{{ item.symbol }}</p>
+                </div>
+                <div class="col-3 data">
+                  <p>{{ item.curr }}</p>
+                </div>
+                <div class="col-3 data">
+                  <p>{{ item.prev }}</p>
+                </div>
+                <div class="col-3 data">
+                  <p [ngClass]="{'green':item.diff>0,'red':item.diff<0}">{{ item.diff }}%</p>
+                </div>
+              </li>
+            </ng-container>
+            <ng-container *ngIf="!allSurprises.length">
+              <p>No Surprises.</p>
+            </ng-container>
           </ul>
         </div>
 
@@ -115,57 +94,28 @@ import {SignalService} from '../../../../services/signal.service';
                 <p>DIFF</p>
               </div>
             </li>
-            <li class="row no-gutters earnings__entry">
-              <div class="col-1 pgr">
-                <img class="align-middle" src="./assets/imgs/arc_VeryBullish.svg">
-              </div>
-              <div class="col-2 ticker">
-                <p>SHOP</p>
-              </div>
-              <div class="col-3 data">
-                <p>99.40</p>
-              </div>
-              <div class="col-3 data">
-                <p>3.12%</p>
-              </div>
-              <div class="col-3 data">
-                <p class="green">3.12%</p>
-              </div>
-            </li>
-            <li class="row no-gutters earnings__entry">
-              <div class="col-1 pgr">
-                <img class="align-middle" src="./assets/imgs/arc_VeryBullish.svg">
-              </div>
-              <div class="col-2 ticker">
-                <p class="">SHOP</p>
-              </div>
-              <div class="col-3 data">
-                <p>99.40</p>
-              </div>
-              <div class="col-3 data">
-                <p>3.12%</p>
-              </div>
-              <div class="col-3 data">
-                <p class="green">3.12%</p>
-              </div>
-            </li>
-            <li class="row no-gutters earnings__entry">
-              <div class="col-1 pgr">
-                <img class="align-middle" src="./assets/imgs/arc_VeryBullish.svg">
-              </div>
-              <div class="col-2 ticker">
-                <p>SHOP</p>
-              </div>
-              <div class="col-3 data">
-                <p>99.40</p>
-              </div>
-              <div class="col-3 data">
-                <p>3.12%</p>
-              </div>
-              <div class="col-3 data">
-                <p class="green">3.12%</p>
-              </div>
-            </li>
+            <ng-container *ngIf="allRevisions.length">
+              <li *ngFor="let item of allRevisions" class="row no-gutters earnings__entry">
+                <div class="col-1 pgr">
+                  <img class="align-middle" src="{{ appendPGRImage(item.pgr) }}">
+                </div>
+                <div class="col-2 ticker">
+                  <p>{{ item.symbol }}</p>
+                </div>
+                <div class="col-3 data">
+                  <p>{{ item.curr }}</p>
+                </div>
+                <div class="col-3 data">
+                  <p>{{ item.prev }}%</p>
+                </div>
+                <div class="col-3 data">
+                  <p [ngClass]="{'green':item.diff>0,'red':item.diff<0}">{{ item.diff }}%</p>
+                </div>
+              </li>
+            </ng-container>
+            <ng-container *ngIf="!allRevisions.length">
+              <p>No Revisions.</p>
+            </ng-container>
           </ul>
         </div>
 
@@ -195,6 +145,12 @@ export class EarningsReportComponent implements OnInit {
   private _surprises: BehaviorSubject<EarningsReportSurprises> = new BehaviorSubject<EarningsReportSurprises>({} as EarningsReportSurprises);
   private _revisions: BehaviorSubject<EarningsAnalystRevisions> = new BehaviorSubject<EarningsAnalystRevisions>({} as EarningsAnalystRevisions);
 
+  public allSurprises: object[] = [];
+  public allRevisions: object[] = [];
+
+  public upCount: number = 0;
+  public downCount: number = 0;
+
   @Input('surprises')
   set surprises(val: EarningsReportSurprises) {
     this._surprises.next(val);
@@ -219,15 +175,43 @@ export class EarningsReportComponent implements OnInit {
   ngOnInit() {
     this._surprises
       .takeUntil(this.ngUnsubsribe)
-      .subscribe(res => console.log('surprises', res));
+      .filter(x => x != undefined)
+      .subscribe(res => {
+        this.allSurprises = this.earningsReportObjFactory(res);
+      });
 
     this._revisions
       .takeUntil(this.ngUnsubsribe)
-      .subscribe(res => console.log('revisions', res));
+      .filter(x => x != undefined)
+      .subscribe(res => {
+        this.allRevisions = this.earningsReportObjFactory(res);
+      });
   }
 
   appendPGRUrl(pgr: number) {
     return this.signalSerivce.calculatePGR(pgr)
+  }
+
+  appendPGRImage(pgr) {
+    return this.signalSerivce.appendPGRImage(pgr, pgr); // TODO: need raw?
+  }
+
+  earningsReportObjFactory(res: EarningsReportSurprises | EarningsAnalystRevisions): Array<EarningsReportObj> {
+    let result = [];
+    Object.keys(res).forEach(key1 => {
+      Object.keys(res[key1]).forEach(key2 => {
+        let obj = Object.assign({}, {
+          symbol: key2,
+          curr: res[key1][key2][0],
+          prev: res[key1][key2][1],
+          diff: res[key1][key2][2],
+          pgr: this.appendPGRUrl(res[key1][key2][3])
+        });
+        result.push(obj);
+        obj.diff > 0 ? this.upCount++ : this.downCount++;
+      });
+    });
+    return result;
   }
 
 }
