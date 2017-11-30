@@ -34,11 +34,11 @@ import {Subject} from 'rxjs/Subject';
           <h3>Turned Bullish</h3>
           <div class="divider__long"></div>
           <ul class="stock__list">
-            <li class="row no-gutters col-headers">
-              <div class="col-2">
+            <li class="row col-headers">
+              <div class="col-3">
                 <p>RATING</p>
               </div>
-              <div class="col-4">
+              <div class="col-3" style="padding-left:0;">
                 <p class="text-left">TICKER</p>
               </div>
               <div class="col-3">
@@ -49,10 +49,10 @@ import {Subject} from 'rxjs/Subject';
               </div>
             </li>
             <li class="row list__entry">
-              <div class="col-2 list-entry__pgr">
+              <div class="col-3 list-entry__pgr">
                 <img class="align-absolute" src="./assets/imgs/arc_VeryBullish.svg">
               </div>
-              <div class="col-4 list-entry__info">
+              <div class="col-3 list-entry__info">
                 <p class="ticker">SHOP</p>
                 <p class="company">Shopify Inc</p>
               </div>
@@ -67,10 +67,10 @@ import {Subject} from 'rxjs/Subject';
               </div>
             </li>
             <li class="row list__entry">
-              <div class="col-2 list-entry__pgr">
+              <div class="col-3 list-entry__pgr">
                 <img class="align-absolute" src="./assets/imgs/arc_Bullish.svg">
               </div>
-              <div class="col-4 list-entry__info">
+              <div class="col-3 list-entry__info">
                 <p class="ticker">JASO</p>
                 <p class="company">Amazon.Com Inc</p>
               </div>
@@ -91,11 +91,11 @@ import {Subject} from 'rxjs/Subject';
           <h3>Turned Bearish</h3>
           <div class="divider__long"></div>
           <ul class="stock__list">
-            <li class="row no-gutters col-headers">
-              <div class="col-2">
+            <li class="row col-headers">
+              <div class="col-3">
                 <p>RATING</p>
               </div>
-              <div class="col-4">
+              <div class="col-3" style="padding-left:0;">
                 <p class="text-left">TICKER</p>
               </div>
               <div class="col-3">
@@ -105,11 +105,11 @@ import {Subject} from 'rxjs/Subject';
                 <p>CHG</p>
               </div>
             </li>
-            <li class="row no-gutters list__entry">
-              <div class="col-2 list-entry__pgr">
+            <li class="row list__entry">
+              <div class="col-3 list-entry__pgr">
                 <img class="align-absolute" src="./assets/imgs/arc_VeryBearish.svg">
               </div>
-              <div class="col-4 list-entry__info">
+              <div class="col-3 list-entry__info">
                 <p class="ticker">YUM</p>
                 <p class="company">Shopify Inc</p>
               </div>
@@ -123,11 +123,11 @@ import {Subject} from 'rxjs/Subject';
                 <img src="./assets/imgs/ui_slide.svg">
               </div>
             </li>
-            <li class="row no-gutters list__entry">
-              <div class="col-2 list-entry__pgr">
+            <li class="row list__entry">
+              <div class="col-3 list-entry__pgr">
                 <img class="align-absolute" src="./assets/imgs/arc_Bearish.svg">
               </div>
-              <div class="col-4 list-entry__info">
+              <div class="col-3 list-entry__info">
                 <p class="ticker">MINI</p>
                 <p class="company">Amazon.Com Inc</p>
               </div>
@@ -141,11 +141,11 @@ import {Subject} from 'rxjs/Subject';
                 <img src="./assets/imgs/ui_slide.svg">
               </div>
             </li>
-            <li class="row no-gutters list__entry">
-              <div class="col-2 list-entry__pgr">
+            <li class="row list__entry">
+              <div class="col-3 list-entry__pgr">
                 <img class="align-absolute" src="./assets/imgs/arc_Bearish.svg">
               </div>
-              <div class="col-4 list-entry__info">
+              <div class="col-3 list-entry__info">
                 <p class="ticker">TSLA</p>
                 <p class="company">Tesla Motors</p>
               </div>

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'cpt-market-beat',
   template: `
-    <div class="container--stockview bearish open">
+    <div class="component--stockview bearish open">
 
     <!-- STOCK VIEW HEADER -->
       <div class="stockview__header">
@@ -20,8 +20,7 @@ import { Component, OnInit } from '@angular/core';
       </div>
 
     <!-- STOCK VIEW CONTENTS -->
-      <div class="container-fluid contents--stockview">
-
+      <div class="container-fluid stockview__contents">
       <!-- STOCK VIEW TOP --> 
         <div class="row">
           <div class="col-12">
@@ -181,7 +180,9 @@ import { Component, OnInit } from '@angular/core';
           <div class="col-12 "></div>
         </div>
         <div class="row">
-          <div class="divider__long divider__long--red"></div>
+          <div class="col-12">
+            <div class="divider__long  divider__long--red"></div>
+          </div>
         </div>
 
       <!-- STOCK VIEW STATS -->
@@ -203,7 +204,9 @@ import { Component, OnInit } from '@angular/core';
           </div>
         </div>
         <div class="row">
-          <div class="divider-grey"></div>
+          <div class="col-12">
+            <div class="divider__long"></div>
+          </div>
         </div>
 
       <!-- STOCK VIEW STATS -->       
@@ -226,7 +229,9 @@ import { Component, OnInit } from '@angular/core';
           </div>
         </div>
         <div class="row">
-          <div class="divider-grey"></div>
+          <div class="col-12">
+            <div class="divider__long"></div>
+          </div>
         </div>
 
       <!-- STOCK VIEW STATS -->
@@ -241,7 +246,9 @@ import { Component, OnInit } from '@angular/core';
           </div>
         </div>
         <div class="row">
-          <div class="divider__long divider__long--red"></div>
+          <div class="col-12">
+            <div class="divider__long divider__long--red"></div>
+          </div>
         </div>
 
       <!-- STOCK VIEW NEWS -->
@@ -278,17 +285,17 @@ import { Component, OnInit } from '@angular/core';
       </div>
 
     <!-- STOCK VIEW BREAKDOWN -->
-      <div class="container-fluid contents contents--breakdown">
+      <div class="container-fluid stockview__contents--breakdown">
         <div class="row stock-info stock-info--overall-breakdown">
           <div class="col-12">
-            <h2>Power Gauge <span>Breakdown</span></h2>
+            <h2>Rating <span>Breakdown</span></h2>
           </div>        
           <div class="col-12">
             <p class="rating"><span>AMZN</span> is <span class="red">Bearish</span></p>
             <p class="paragraph"><span>Amazon.Com Inc:</span> Wodio ut vitae sagittis felis. Pellentesque quis vehicula enim, vitae suscipit nisl. Duis elit felis, pharetra sed lectus eu, pretium pretium lorem. Donec eu plac onec eu plact purus.</p>
             <p class="paragraph"> Duis elit felis, pharetra sed lectus eu, pretium pretium lorem. Donec eu plac onec eu urus.</p>
           </div>
-          <div class="col-12" style="padding-top: 15px;">
+          <div class="col-12">
             <div class="divider__long divider__long--red"></div>
           </div>  
         </div>
