@@ -54,8 +54,7 @@ interface EarningsReportObj {
             <ng-container *ngIf="allSurprises.length">
               <li *ngFor="let item of allSurprises" class="row no-gutters earnings__entry">
                 <div class="col-1 pgr">
-                  <!--<img class="align-middle" src="./assets/imgs/arc_Bullish.svg">-->
-                  {{ item.pgr }}
+                  <img class="align-middle" src="{{ appendPGRImage(item.pgr) }}">
                 </div>
                 <div class="col-2 ticker">
                   <p>{{ item.symbol }}</p>
@@ -67,7 +66,7 @@ interface EarningsReportObj {
                   <p>{{ item.prev }}</p>
                 </div>
                 <div class="col-3 data">
-                  <p class="green">{{ item.diff }}%</p>
+                  <p [ngClass]="{'green':item.diff>0,'red':item.diff<0}">{{ item.diff }}%</p>
                 </div>
               </li>
             </ng-container>
@@ -98,8 +97,7 @@ interface EarningsReportObj {
             <ng-container *ngIf="allRevisions.length">
               <li *ngFor="let item of allRevisions" class="row no-gutters earnings__entry">
                 <div class="col-1 pgr">
-                  <!--<img class="align-middle" src="./assets/imgs/arc_VeryBullish.svg">-->
-                  {{ item.pgr }}
+                  <img class="align-middle" src="{{ appendPGRImage(item.pgr) }}">
                 </div>
                 <div class="col-2 ticker">
                   <p>{{ item.symbol }}</p>
@@ -111,7 +109,7 @@ interface EarningsReportObj {
                   <p>{{ item.prev }}%</p>
                 </div>
                 <div class="col-3 data">
-                  <p class="green">{{ item.diff }}%</p>
+                  <p [ngClass]="{'green':item.diff>0,'red':item.diff<0}">{{ item.diff }}%</p>
                 </div>
               </li>
             </ng-container>
@@ -192,6 +190,10 @@ export class EarningsReportComponent implements OnInit {
 
   appendPGRUrl(pgr: number) {
     return this.signalSerivce.calculatePGR(pgr)
+  }
+
+  appendPGRImage(pgr) {
+    return this.signalSerivce.appendPGRImage(pgr, pgr); // TODO: need raw?
   }
 
   earningsReportObjFactory(res: EarningsReportSurprises | EarningsAnalystRevisions): Array<EarningsReportObj> {
