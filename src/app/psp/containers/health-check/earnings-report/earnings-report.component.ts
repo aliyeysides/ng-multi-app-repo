@@ -109,7 +109,7 @@ interface EarningsReportObj {
                   <p>{{ item.curr }}</p>
                 </div>
                 <div class="col-3 data">
-                  <p>{{ item.prev }}%</p>
+                  <p>{{ item.prev }}</p>
                 </div>
                 <div class="col-3 data">
                   <p [ngClass]="{'green':item.diff>0,'red':item.diff<0}">{{ item.diff | decimal }}%</p>
@@ -147,7 +147,6 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
   private ngUnsubsribe: Subject<void> = new Subject<void>();
   private _surprises: BehaviorSubject<EarningsReportSurprises> = new BehaviorSubject<EarningsReportSurprises>({} as EarningsReportSurprises);
   private _revisions: BehaviorSubject<EarningsAnalystRevisions> = new BehaviorSubject<EarningsAnalystRevisions>({} as EarningsAnalystRevisions);
-  // private _expected: BehaviorSubject<ExpectedEarningsReports> = new BehaviorSubject<ExpectedEarningsReports>({} as ExpectedEarningsReports);
 
   public allSurprises: object[] = [];
   public allRevisions: object[] = [];
@@ -174,13 +173,6 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
   }
 
   @Input('expected') expected: ExpectedEarningsReports;
-  // set expected(val: ExpectedEarningsReports) {
-  //   this._expected.next(val);
-  // }
-  //
-  // get expected() {
-  //   return this._expected.getValue();
-  // }
 
   constructor(private signalSerivce: SignalService) {
   }

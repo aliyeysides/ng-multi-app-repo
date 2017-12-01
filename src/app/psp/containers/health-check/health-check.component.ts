@@ -9,7 +9,6 @@ import {
   StockStatus
 } from '../../../shared/models/health-check';
 import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'cpt-health-check',
