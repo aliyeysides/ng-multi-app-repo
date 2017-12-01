@@ -1,5 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {EarningsAnalystRevisions, EarningsReportSurprises} from '../../../../shared/models/health-check';
+import {
+  EarningsAnalystRevisions, EarningsReportSurprises,
+  ExpectedEarningsReports
+} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
@@ -54,7 +57,7 @@ interface EarningsReportObj {
             <ng-container *ngIf="allSurprises.length">
               <li *ngFor="let item of allSurprises" class="row no-gutters earnings__entry">
                 <div class="col-1 pgr">
-                  <img class="align-absolute" src="{{ appendPGRImage(item.pgr) }}">
+                  <img class="align-absolute" src="{{ appendPGRImage(item.pgr, item.raw_pgr) }}">
                 </div>
                 <div class="col-2 ticker">
                   <p>{{ item.symbol }}</p>
@@ -66,7 +69,7 @@ interface EarningsReportObj {
                   <p>{{ item.prev }}</p>
                 </div>
                 <div class="col-3 data">
-                  <p [ngClass]="{'green':item.diff>0,'red':item.diff<0}">{{ item.diff }}%</p>
+                  <p [ngClass]="{'green':item.diff>0,'red':item.diff<0}">{{ item.diff | decimal }}%</p>
                 </div>
               </li>
             </ng-container>
@@ -97,7 +100,7 @@ interface EarningsReportObj {
             <ng-container *ngIf="allRevisions.length">
               <li *ngFor="let item of allRevisions" class="row no-gutters earnings__entry">
                 <div class="col-1 pgr">
-                  <img class="align-absolute" src="{{ appendPGRImage(item.pgr) }}">
+                  <img class="align-absolute" src="{{ appendPGRImage(item.pgr, item.raw_pgr) }}">
                 </div>
                 <div class="col-2 ticker">
                   <p>{{ item.symbol }}</p>
@@ -106,10 +109,10 @@ interface EarningsReportObj {
                   <p>{{ item.curr }}</p>
                 </div>
                 <div class="col-3 data">
-                  <p>{{ item.prev }}%</p>
+                  <p>{{ item.prev }}</p>
                 </div>
                 <div class="col-3 data">
-                  <p [ngClass]="{'green':item.diff>0,'red':item.diff<0}">{{ item.diff }}%</p>
+                  <p [ngClass]="{'green':item.diff>0,'red':item.diff<0}">{{ item.diff | decimal }}%</p>
                 </div>
               </li>
             </ng-container>
@@ -120,7 +123,7 @@ interface EarningsReportObj {
         </div>
 
         <div class="col-12">
-          <cpt-psp-reporting-calendar></cpt-psp-reporting-calendar>
+          <cpt-psp-reporting-calendar [data]="expected"></cpt-psp-reporting-calendar>
         </div>
       </div>
 
@@ -169,6 +172,8 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
     return this._revisions.getValue();
   }
 
+  @Input('expected') expected: ExpectedEarningsReports;
+
   constructor(private signalSerivce: SignalService) {
   }
 
@@ -197,8 +202,8 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
     return this.signalSerivce.calculatePGR(pgr)
   }
 
-  appendPGRImage(pgr) {
-    return this.signalSerivce.appendPGRImage(pgr, pgr); // TODO: need raw?
+  appendPGRImage(pgr, raw_pgr) {
+    return this.signalSerivce.appendPGRImage(pgr, raw_pgr);
   }
 
   earningsReportObjFactory(res: EarningsReportSurprises | EarningsAnalystRevisions): Array<EarningsReportObj> {
@@ -210,7 +215,8 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
           curr: res[key1][key2][0],
           prev: res[key1][key2][1],
           diff: res[key1][key2][2],
-          pgr: this.appendPGRUrl(res[key1][key2][3])
+          pgr: this.appendPGRUrl(res[key1][key2][3]),
+          raw_pgr: this.appendPGRUrl(res[key1][key2][4])
         });
         result.push(obj);
         obj.diff > 0 ? this.upCount++ : this.downCount++;
