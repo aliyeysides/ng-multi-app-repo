@@ -66,7 +66,7 @@ interface EarningsReportObj {
                   <p>{{ item.prev }}</p>
                 </div>
                 <div class="col-3 data">
-                  <p [ngClass]="{'green':item.diff>0,'red':item.diff<0}">{{ item.diff }}%</p>
+                  <p [ngClass]="{'green':item.diff>0,'red':item.diff<0}">{{ item.diff | decimal }}%</p>
                 </div>
               </li>
             </ng-container>
@@ -97,7 +97,7 @@ interface EarningsReportObj {
             <ng-container *ngIf="allRevisions.length">
               <li *ngFor="let item of allRevisions" class="row no-gutters earnings__entry">
                 <div class="col-1 pgr">
-                  <img class="align-absolute" src="{{ appendPGRImage(item.pgr) }}">
+                  <img class="align-absolute" src="{{ appendPGRImage(item.pgr, item.raw_pgr) }}">
                 </div>
                 <div class="col-2 ticker">
                   <p>{{ item.symbol }}</p>
@@ -109,7 +109,7 @@ interface EarningsReportObj {
                   <p>{{ item.prev }}%</p>
                 </div>
                 <div class="col-3 data">
-                  <p [ngClass]="{'green':item.diff>0,'red':item.diff<0}">{{ item.diff }}%</p>
+                  <p [ngClass]="{'green':item.diff>0,'red':item.diff<0}">{{ item.diff | decimal }}%</p>
                 </div>
               </li>
             </ng-container>
@@ -184,6 +184,7 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubsribe)
       .filter(x => x != undefined)
       .subscribe(res => {
+        console.log('revisions input', res);
         this.allRevisions = this.earningsReportObjFactory(res);
       });
   }
