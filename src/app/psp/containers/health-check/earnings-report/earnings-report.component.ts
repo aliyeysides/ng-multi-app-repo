@@ -54,7 +54,7 @@ interface EarningsReportObj {
             <ng-container *ngIf="allSurprises.length">
               <li *ngFor="let item of allSurprises" class="row no-gutters earnings__entry">
                 <div class="col-1 pgr">
-                  <img class="align-absolute" src="{{ appendPGRImage(item.pgr) }}">
+                  <img class="align-absolute" src="{{ appendPGRImage(item.pgr, item.raw_pgr) }}">
                 </div>
                 <div class="col-2 ticker">
                   <p>{{ item.symbol }}</p>
@@ -197,8 +197,8 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
     return this.signalSerivce.calculatePGR(pgr)
   }
 
-  appendPGRImage(pgr) {
-    return this.signalSerivce.appendPGRImage(pgr, pgr); // TODO: need raw?
+  appendPGRImage(pgr, raw_pgr) {
+    return this.signalSerivce.appendPGRImage(pgr, raw_pgr);
   }
 
   earningsReportObjFactory(res: EarningsReportSurprises | EarningsAnalystRevisions): Array<EarningsReportObj> {
@@ -210,7 +210,8 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
           curr: res[key1][key2][0],
           prev: res[key1][key2][1],
           diff: res[key1][key2][2],
-          pgr: this.appendPGRUrl(res[key1][key2][3])
+          pgr: this.appendPGRUrl(res[key1][key2][3]),
+          raw_pgr: this.appendPGRUrl(res[key1][key2][4])
         });
         result.push(obj);
         obj.diff > 0 ? this.upCount++ : this.downCount++;
