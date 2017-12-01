@@ -29,6 +29,7 @@
 
 		.timespan {
 	      	font-size: 16px;
+	      	line-height: 1;
 	      	font-weight: 700;
 			display: inline-block;
 			background-color: #ffffff;
@@ -36,7 +37,7 @@
 			color:#484848;
 			font-weight: 600;
 			text-transform: uppercase;
-			padding:3px 18px 2px;
+			padding:5px 15px 2px;
 			margin: 10px 0 10px;
 		}
 
@@ -203,6 +204,9 @@
 
 
 #HC--Stock-Movements {
+	h2 {
+		margin-top:25px;
+	}
 }
 
 .list-item__mover {
