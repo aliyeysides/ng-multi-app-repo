@@ -57,8 +57,8 @@ import {Subscription} from 'rxjs/Subscription';
   styleUrls: ['./health-check.component.scss']
 })
 export class HealthCheckComponent implements OnInit {
-  private uid: string;
-  private listId: string;
+  private _uid: string;
+  private _listId: string;
 
   public calculations: PortfolioStatus;
   public stocksStatus: Array<StockStatus>;
@@ -75,36 +75,35 @@ export class HealthCheckComponent implements OnInit {
 
   ngOnInit() {
     this.authService.currentUser$
-      .map(usr => this.uid = usr['UID'])
+      .map(usr => this._uid = usr['UID'])
       .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
       .take(1)
-      .map(res => this.listId = res[0]['User Lists'][0]['list_id'])
+      .map(res => this._listId = res[0]['User Lists'][0]['list_id'])
       .switchMap(listId => {
         const startDate = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
-          endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
+              endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
         return Observable.combineLatest(
           this.healthCheck.getChaikinCalculations(listId, startDate, endDate),
           this.healthCheck.getPrognosisData(listId),
           this.healthCheck.getUserPortfolioStockStatus(listId, startDate, endDate),
-          this.healthCheck.getPGRWeeklyChangeDAta(listId, startDate, endDate),
+          this.healthCheck.getPGRWeeklyChangeDAta(listId, moment().subtract(1, 'weeks').day(-1).format('YYYY-MM-DD'), moment().day(-1).format('YYYY-MM-DD')),
           this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
           this.healthCheck.getAnalystRevisions(listId, moment().day(-2).format('YYYY-MM-DD')),
-          this.healthCheck.getExpectedEarningsReportsWithPGRValues(this.uid, listId, moment().isoWeekday(1).format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')),
+          this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, listId, moment().isoWeekday(1).format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')),
           this.healthCheck.getPHCGridData(listId)
         )
       })
       .take(1)
       .subscribe(res => {
-        console.log('res', res);
-        this.calculations = res[0][Object.keys(res[0])[0]] as PortfolioStatus;
+        this.calculations = res[0][Object.keys(res[0])[0]];
         this.healthCheck.setPortfolioStatus(this.calculations);
-        this.prognosisData = res[1] as PrognosisData;
-        this.stocksStatus = res[2][Object.keys(res[2])[0]] as Array<StockStatus>;
-        this.pgrChanges = res[3] as PGRChanges;
-        this.earningsSurprise = res[4] as EarningsReportSurprises;
-        this.analystRevisions = res[5] as EarningsAnalystRevisions;
+        this.prognosisData = res[1];
+        this.stocksStatus = res[2][Object.keys(res[2])[0]];
+        this.pgrChanges = res[3];
+        this.earningsSurprise = res[4];
+        this.analystRevisions = res[5];
         this.expectedEarnings = res[6];
-        this.pgrGridData = res[7] as PHCGridData;
+        this.pgrGridData = res[7];
       });
   }
 

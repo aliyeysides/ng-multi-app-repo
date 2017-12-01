@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {PGRChanges} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
+import {SignalService} from '../../../../services/signal.service';
 
 @Component({
   selector: 'cpt-psp-rating-changes',
@@ -22,10 +23,10 @@ import {Subject} from 'rxjs/Subject';
 
       <div class="row section__summary">
         <div class="col-6 summary--left">
-          <p><img src="./assets/imgs/icon_circle-change--green.svg">2</p>
+          <p><img src="./assets/imgs/icon_circle-change--green.svg">{{ bullishAlerts?.length }}</p>
         </div>
         <div class="col-6 summary--right">
-          <p><img src="./assets/imgs/icon_circle-change--red.svg">3</p>
+          <p><img src="./assets/imgs/icon_circle-change--red.svg">{{ bearishAlerts?.length }}</p>
         </div>
       </div>
 
@@ -48,42 +49,29 @@ import {Subject} from 'rxjs/Subject';
                 <p>CHG</p>
               </div>
             </li>
-            <li class="row list__entry">
-              <div class="col-3 list-entry__pgr">
-                <img class="align-absolute" src="./assets/imgs/arc_VeryBullish.svg">
-              </div>
-              <div class="col-3 list-entry__info">
-                <p class="ticker">SHOP</p>
-                <p class="company">Shopify Inc</p>
-              </div>
-              <div class="col-3 list-entry__data">
-                <p class="data green">99.40</p>
-              </div>
-              <div class="col-3 list-entry__data">
-                <p class="data green">3.12%</p>
-              </div>
-              <div class="button__slide">
-                <img src="./assets/imgs/ui_slide.svg">
-              </div>
-            </li>
-            <li class="row list__entry">
-              <div class="col-3 list-entry__pgr">
-                <img class="align-absolute" src="./assets/imgs/arc_Bullish.svg">
-              </div>
-              <div class="col-3 list-entry__info">
-                <p class="ticker">JASO</p>
-                <p class="company">Amazon.Com Inc</p>
-              </div>
-              <div class="col-3 list-entry__data">
-                <p class="data green">34.52</p>
-              </div>
-              <div class="col-3 list-entry__data">
-                <p class="data green">1.45%</p>
-              </div>
-              <div class="button__slide">
-                <img src="./assets/imgs/ui_slide.svg">
-              </div>
-            </li>
+            <ng-container *ngIf="bullishAlerts.length">
+              <li *ngFor="let stock of bullishAlerts" class="row list__entry">
+                <div class="col-2 list-entry__pgr">
+                  <img class="align-absolute" src="{{ appendPGRImage(stock['corrected_pgr_rating'], stock['raw_pgr_rating']) }}">
+                </div>
+                <div class="col-4 list-entry__info">
+                  <p class="ticker">{{ stock['symbol'] }}</p>
+                  <p class="company">{{ stock['company'] }}</p>
+                </div>
+                <div class="col-3 list-entry__data">
+                  <p class="data green">{{ stock['lastPrice'] | decimal }}</p>
+                </div>
+                <div class="col-3 list-entry__data">
+                  <p class="data green">{{ stock['percentChange'] | decimal }}%</p>
+                </div>
+                <div class="button__slide">
+                  <img src="./assets/imgs/ui_slide.svg">
+                </div>
+              </li>
+            </ng-container>
+            <ng-container *ngIf="!bullishAlerts.length">
+              <p>None.</p>
+            </ng-container>
           </ul>
         </div>
 
@@ -105,60 +93,29 @@ import {Subject} from 'rxjs/Subject';
                 <p>CHG</p>
               </div>
             </li>
-            <li class="row list__entry">
-              <div class="col-3 list-entry__pgr">
-                <img class="align-absolute" src="./assets/imgs/arc_VeryBearish.svg">
-              </div>
-              <div class="col-3 list-entry__info">
-                <p class="ticker">YUM</p>
-                <p class="company">Shopify Inc</p>
-              </div>
-              <div class="col-3 list-entry__data">
-                <p class="data red">99.40</p>
-              </div>
-              <div class="col-3 list-entry__data">
-                <p class="data red">3.12%</p>
-              </div>
-              <div class="button__slide">
-                <img src="./assets/imgs/ui_slide.svg">
-              </div>
-            </li>
-            <li class="row list__entry">
-              <div class="col-3 list-entry__pgr">
-                <img class="align-absolute" src="./assets/imgs/arc_Bearish.svg">
-              </div>
-              <div class="col-3 list-entry__info">
-                <p class="ticker">MINI</p>
-                <p class="company">Amazon.Com Inc</p>
-              </div>
-              <div class="col-3 list-entry__data">
-                <p class="data red">34.52</p>
-              </div>
-              <div class="col-3 list-entry__data">
-                <p class="data red">1.45%</p>
-              </div>
-              <div class="button__slide">
-                <img src="./assets/imgs/ui_slide.svg">
-              </div>
-            </li>
-            <li class="row list__entry">
-              <div class="col-3 list-entry__pgr">
-                <img class="align-absolute" src="./assets/imgs/arc_Bearish.svg">
-              </div>
-              <div class="col-3 list-entry__info">
-                <p class="ticker">TSLA</p>
-                <p class="company">Tesla Motors</p>
-              </div>
-              <div class="col-3 list-entry__data">
-                <p class="data red">34.52</p>
-              </div>
-              <div class="col-3 list-entry__data">
-                <p class="data red">1.45%</p>
-              </div>
-              <div class="button__slide">
-                <img src="./assets/imgs/ui_slide.svg">
-              </div>
-            </li>
+            <ng-container *ngIf="bearishAlerts.length">
+              <li *ngFor="let stock of bearishAlerts" class="row list__entry">
+                <div class="col-2 list-entry__pgr">
+                  <img class="align-absolute" src="{{ appendPGRImage(stock['corrected_pgr_rating'], stock['raw_pgr_rating']) }}">
+                </div>
+                <div class="col-4 list-entry__info">
+                  <p class="ticker">{{ stock['symbol'] }}</p>
+                  <p class="company">{{ stock['company'] }}</p>
+                </div>
+                <div class="col-3 list-entry__data">
+                  <p class="data green">{{ stock['lastPrice'] | decimal }}</p>
+                </div>
+                <div class="col-3 list-entry__data">
+                  <p class="data green">{{ stock['percentChange'] | decimal }}%</p>
+                </div>
+                <div class="button__slide">
+                  <img src="./assets/imgs/ui_slide.svg">
+                </div>
+              </li>
+            </ng-container>
+            <ng-container *ngIf="!bearishAlerts.length">
+              <p>None.</p>
+            </ng-container>
           </ul>
         </div>
       </div>
@@ -180,8 +137,9 @@ import {Subject} from 'rxjs/Subject';
   styleUrls: ['../health-check.component.scss']
 })
 export class RatingChangesComponent implements OnInit, OnDestroy {
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
+  private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _alerts: BehaviorSubject<PGRChanges> = new BehaviorSubject<PGRChanges>({} as PGRChanges);
+
   @Input('alerts')
   set alerts(val: PGRChanges) {
     this._alerts.next(val);
@@ -191,42 +149,54 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
     return this._alerts.getValue();
   }
 
-  constructor() { }
+  bearishAlerts: Array<object> = [];
+  bullishAlerts: Array<object> = [];
+
+  constructor(private signalService: SignalService) {
+  }
 
   ngOnInit() {
     this._alerts
-      .takeUntil(this.ngUnsubscribe)
+      .takeUntil(this._ngUnsubscribe)
+      .filter(x => x != undefined)
       .subscribe(res => {
-        console.log('alerts', res);
         this.parseAlerts(res);
       })
   }
 
   ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    this._ngUnsubscribe.next();
+    this._ngUnsubscribe.complete();
+  }
+
+  appendPGRImage(pgr, raw_pgr) {
+    return this.signalService.appendPGRImage(pgr, raw_pgr);
   }
 
   private parseAlerts(alerts: PGRChanges) {
-    let bearishAlerts = [];
-    let bullishAlerts = [];
-    if (alerts) {
-      const values = Object.values(alerts);
-      values.forEach(res => {
-        // console.log('bear', res['SymbolsTurnedBearish']); // { AAPL: 1, AMZN: 2 }
-        // console.log('bull', res['SymbolsTurnedBullish']);
-        // Object.values(res['SymbolsTurnedBearish']).forEach(res => {
-        //   console.log('bear', res);
-        //   bearishAlerts.push(res);
-        // });
-        // Object.values(res['SymbolsTurnedBullish']).forEach(res => {
-        //   console.log('bull', res);
-        //   bullishAlerts.push(res);
-        // });
-      });
-    }
-    // console.log('bearishAlerts', bearishAlerts);
-    // console.log('bullishAlerts', bullishAlerts);
+    const keys = Object.keys(alerts);
+    keys.forEach(key1 => {
+      if (alerts['DataAvailable'] == true && key1 != 'DataAvailable') {
+        Object.keys(alerts[key1]).forEach(key2 => {
+          if (key2 == 'SymbolsTurnedBullish') {
+            Object.keys(alerts[key1][key2]).forEach(ticker => {
+              Object.values(alerts[key1][key2]).forEach(obj => {
+                Object.assign(obj, {symbol: ticker});
+                this.bullishAlerts.push(obj);
+              })
+            })
+          }
+          if (key2 == 'SymbolsTurnedBearish') {
+            Object.keys(alerts[key1][key2]).forEach(ticker => {
+              Object.values(alerts[key1][key2]).forEach(obj => {
+                Object.assign(obj, {symbol: ticker});
+                this.bearishAlerts.push(obj);
+              })
+            })
+          }
+        });
+      }
+    });
   }
 
 }

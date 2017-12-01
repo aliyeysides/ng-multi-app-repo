@@ -184,7 +184,6 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubsribe)
       .filter(x => x != undefined)
       .subscribe(res => {
-        console.log('revisions input', res);
         this.allRevisions = this.earningsReportObjFactory(res);
       });
   }
