@@ -52,7 +52,8 @@ import {SignalService} from '../../../../services/signal.service';
             <ng-container *ngIf="bullishAlerts.length">
               <li *ngFor="let stock of bullishAlerts" class="row list__entry">
                 <div class="col-2 list-entry__pgr">
-                  <img class="align-absolute" src="{{ appendPGRImage(stock['corrected_pgr_rating'], stock['raw_pgr_rating']) }}">
+                  <img class="align-absolute"
+                       src="{{ appendPGRImage(stock['corrected_pgr_rating'], stock['raw_pgr_rating']) }}">
                 </div>
                 <div class="col-4 list-entry__info">
                   <p class="ticker">{{ stock['symbol'] }}</p>
@@ -96,7 +97,8 @@ import {SignalService} from '../../../../services/signal.service';
             <ng-container *ngIf="bearishAlerts.length">
               <li *ngFor="let stock of bearishAlerts" class="row list__entry">
                 <div class="col-2 list-entry__pgr">
-                  <img class="align-absolute" src="{{ appendPGRImage(stock['corrected_pgr_rating'], stock['raw_pgr_rating']) }}">
+                  <img class="align-absolute"
+                       src="{{ appendPGRImage(stock['corrected_pgr_rating'], stock['raw_pgr_rating']) }}">
                 </div>
                 <div class="col-4 list-entry__info">
                   <p class="ticker">{{ stock['symbol'] }}</p>
@@ -180,18 +182,16 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
         Object.keys(alerts[key1]).forEach(key2 => {
           if (key2 == 'SymbolsTurnedBullish') {
             Object.keys(alerts[key1][key2]).forEach(ticker => {
-              Object.values(alerts[key1][key2]).forEach(obj => {
-                Object.assign(obj, {symbol: ticker});
-                this.bullishAlerts.push(obj);
-              })
+              let obj = alerts[key1][key2][ticker];
+              Object.assign(obj, {symbol: ticker});
+              this.bullishAlerts.push(obj);
             })
           }
           if (key2 == 'SymbolsTurnedBearish') {
             Object.keys(alerts[key1][key2]).forEach(ticker => {
-              Object.values(alerts[key1][key2]).forEach(obj => {
-                Object.assign(obj, {symbol: ticker});
-                this.bearishAlerts.push(obj);
-              })
+              let obj = alerts[key1][key2][ticker];
+              Object.assign(obj, {symbol: ticker});
+              this.bearishAlerts.push(obj);
             })
           }
         });

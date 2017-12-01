@@ -28,7 +28,8 @@ import {Subscription} from 'rxjs/Subscription';
 
         <!-- HEALTH-CHECK - Earnings Reports -->
         <cpt-psp-earnings-report [surprises]="earningsSurprise"
-                                 [revisions]="analystRevisions"></cpt-psp-earnings-report>
+                                 [revisions]="analystRevisions" 
+                                 [expected]="expectedEarnings"></cpt-psp-earnings-report>
 
         <!-- HEALTH-CHECK - Power Grid -->
         <cpt-psp-power-grid [data]="pgrGridData"></cpt-psp-power-grid>
@@ -81,7 +82,7 @@ export class HealthCheckComponent implements OnInit {
       .map(res => this._listId = res[0]['User Lists'][0]['list_id'])
       .switchMap(listId => {
         const startDate = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
-              endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
+          endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
         return Observable.combineLatest(
           this.healthCheck.getChaikinCalculations(listId, startDate, endDate),
           this.healthCheck.getPrognosisData(listId),

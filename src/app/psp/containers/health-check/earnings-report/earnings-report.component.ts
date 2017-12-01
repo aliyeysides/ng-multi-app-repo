@@ -1,5 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {EarningsAnalystRevisions, EarningsReportSurprises} from '../../../../shared/models/health-check';
+import {
+  EarningsAnalystRevisions, EarningsReportSurprises,
+  ExpectedEarningsReports
+} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
@@ -120,7 +123,7 @@ interface EarningsReportObj {
         </div>
 
         <div class="col-12">
-          <cpt-psp-reporting-calendar></cpt-psp-reporting-calendar>
+          <cpt-psp-reporting-calendar [data]="expected"></cpt-psp-reporting-calendar>
         </div>
       </div>
 
@@ -144,6 +147,7 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
   private ngUnsubsribe: Subject<void> = new Subject<void>();
   private _surprises: BehaviorSubject<EarningsReportSurprises> = new BehaviorSubject<EarningsReportSurprises>({} as EarningsReportSurprises);
   private _revisions: BehaviorSubject<EarningsAnalystRevisions> = new BehaviorSubject<EarningsAnalystRevisions>({} as EarningsAnalystRevisions);
+  // private _expected: BehaviorSubject<ExpectedEarningsReports> = new BehaviorSubject<ExpectedEarningsReports>({} as ExpectedEarningsReports);
 
   public allSurprises: object[] = [];
   public allRevisions: object[] = [];
@@ -168,6 +172,15 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
   get revisions() {
     return this._revisions.getValue();
   }
+
+  @Input('expected') expected: ExpectedEarningsReports;
+  // set expected(val: ExpectedEarningsReports) {
+  //   this._expected.next(val);
+  // }
+  //
+  // get expected() {
+  //   return this._expected.getValue();
+  // }
 
   constructor(private signalSerivce: SignalService) {
   }
