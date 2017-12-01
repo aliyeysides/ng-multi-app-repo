@@ -257,22 +257,54 @@ import { Component, OnInit } from '@angular/core';
           <div class="col-12">
             <h2>Recent News</h2>
           </div>
+
+          <div class="col-12">
+            <div class="divider__long"></div>
+          </div>
           <div class="col-1 chevron-slider chevron-slider--left">
             <img class="align-absolute"  src="./assets/imgs/ui_chevron--left.svg">
           </div>
-          <div class="col-10 news__slider">
-            <div class="row">
-              <div class="col-12">
-                <p class="headline">Google broadens takedown of extremist YouTube videos&nbsp;→</p>
+          <ul class="col-10 news__slider">
+            <li class="container">
+              <div class="row">
+                <div class="col-12">
+                  <p class="headline">Google broadens takedown of extremist YouTube videos&nbsp;→</p>
+                </div>
+                <div class="col-6">
+                  <p class="source">News Source</p>               
+                </div>
+                <div class="col-6">
+                  <p class="date">Date published</p>    
+                </div>              
               </div>
-              <div class="col-6">
-                <p class="source">News Source</p>               
+            </li>
+            <li class="container">
+              <div class="row">
+                <div class="col-12">
+                  <p class="headline">Google broadens takedown of extremist YouTube videos&nbsp;→</p>
+                </div>
+                <div class="col-6">
+                  <p class="source">News Source</p>               
+                </div>
+                <div class="col-6">
+                  <p class="date">Date published</p>    
+                </div>              
               </div>
-              <div class="col-6">
-                <p class="date">Date published</p>    
-              </div>              
-            </div>
-          </div>
+            </li>
+            <li class="container">
+              <div class="row">
+                <div class="col-12">
+                  <p class="headline">Google broadens takedown of extremist YouTube videos&nbsp;→</p>
+                </div>
+                <div class="col-6">
+                  <p class="source">News Source</p>               
+                </div>
+                <div class="col-6">
+                  <p class="date">Date published</p>    
+                </div>              
+              </div>
+            </li>
+          </ul>
           <div class="col-1 chevron-slider chevron-slider--right">
             <img class="align-absolute" src="./assets/imgs/ui_chevron--right.svg">
           </div>
@@ -293,7 +325,8 @@ import { Component, OnInit } from '@angular/core';
         <div class="row stock-info stock-info--overall-breakdown">
           <div class="col-12">
             <h2>Rating <span>Breakdown</span></h2>
-          </div>        
+          </div>    
+
           <div class="col-12 copy-block">
             <p class="rating"><span>AMZN</span> is <span class="red">Bearish</span></p>
             <p class="paragraph"><span>Amazon.Com Inc:</span> Wodio ut vitae sagittis felis. Pellentesque quis vehicula enim, vitae suscipit nisl. Duis elit felis, pharetra sed lectus eu, pretium pretium lorem. Donec eu plac onec eu plact purus.</p>
@@ -407,7 +440,7 @@ import { Component, OnInit } from '@angular/core';
                     <td class="data">0.68</td>
                   </tr>
                   <tr>
-                    <td class="label">% Earned on Equity</td>
+                    <td class="label">% Earn on Eqty</td>
                     <td class="data">35.40%</td>
                   </tr>
                   <tr>
@@ -441,7 +474,7 @@ import { Component, OnInit } from '@angular/core';
                 <table>
                   <th colspan="2">Dividends</th>
                   <tr>
-                    <td class="label">Dividends per Share</td>
+                    <td class="label">Div per Share</td>
                     <td class="data">0.68</td>
                   </tr>
                   <tr>
@@ -938,9 +971,9 @@ import { Component, OnInit } from '@angular/core';
           </div>
 
           <div class="col-12 chart-list">
-            <h3>Growth Comparison</h3>
-            <div class="divider__long"></div>
-            <ul class="">
+            <h4>Growth Comparison</h4>
+            <div class="divider"></div>
+            <ul>
               <li class="row no-gutters col-headers">
                 <div class="col-3">
                   <p>TICKER</p>
@@ -956,11 +989,8 @@ import { Component, OnInit } from '@angular/core';
                 </div>
               </li>
               <li class="row no-gutters">
-                <div class="col-1 pgr">
-                  <img class="align-absolute" src="./assets/imgs/arc_Bullish.svg">
-                </div>
-                <div class="col-2 ticker">
-                  <p>PGR</p>
+                <div class="col-3 ticker">
+                  <p><span><img src="./assets/imgs/arc_Bullish.svg"></span> PGR</p>
                 </div>
                 <div class="col-3 data">
                   <p>7.60%</p>
@@ -973,11 +1003,8 @@ import { Component, OnInit } from '@angular/core';
                 </div>
               </li>
               <li class="row no-gutters">
-                <div class="col-1 pgr">
-                  <img class="align-absolute" src="./assets/imgs/arc_VeryBearish.svg">
-                </div>
-                <div class="col-2 ticker">
-                  <p>KPMG</p>
+                <div class="col-3 ticker">
+                  <p><span><img src="./assets/imgs/arc_VeryBearish.svg"></span> KPMG</p>
                 </div>
                 <div class="col-3 data">
                   <p>7.60%</p>
@@ -990,11 +1017,8 @@ import { Component, OnInit } from '@angular/core';
                 </div>
               </li>
               <li class="row no-gutters">
-                <div class="col-1 pgr">
-                  <img class="align-absolute" src="./assets/imgs/arc_Bearish.svg">
-                </div>
-                <div class="col-2 ticker">
-                  <p>SHOP</p>
+                <div class="col-3 ticker">
+                  <p><span><img src="./assets/imgs/arc_Bearish.svg"></span> URBN</p>
                 </div>
                 <div class="col-3 data">
                   <p>7.60%</p>
@@ -1010,9 +1034,9 @@ import { Component, OnInit } from '@angular/core';
           </div>
 
           <div class="col-12 chart-list">
-            <h3>Revenue Compairson</h3>
-            <div class="divider__long"></div>
-            <ul class="">
+            <h4>Revenue Compairson</h4>
+            <div class="divider"></div>
+            <ul>
               <li class="row no-gutters col-headers">
                 <div class="col-3">
                   <p>TICKER</p>
@@ -1028,11 +1052,8 @@ import { Component, OnInit } from '@angular/core';
                 </div>
               </li>
               <li class="row no-gutters">
-                <div class="col-1 pgr">
-                  <img class="align-absolute" src="./assets/imgs/arc_Bullish.svg">
-                </div>
-                <div class="col-2 ticker">
-                  <p>PGR</p>
+                <div class="col-3 ticker">
+                  <p><span><img src="./assets/imgs/arc_VeryBearish.svg"></span> KPMG</p>
                 </div>
                 <div class="col-3 data">
                   <p>2.02</p>
@@ -1045,11 +1066,8 @@ import { Component, OnInit } from '@angular/core';
                 </div>
               </li>
               <li class="row no-gutters">
-                <div class="col-1 pgr">
-                  <img class="align-absolute" src="./assets/imgs/arc_VeryBearish.svg">
-                </div>
-                <div class="col-2 ticker">
-                  <p class="">KPMG</p>
+                <div class="col-3 ticker">
+                  <p><span><img src="./assets/imgs/arc_VeryBearish.svg"></span> KPMG</p>
                 </div>
                 <div class="col-3 data">
                   <p>2.02</p>
@@ -1062,11 +1080,8 @@ import { Component, OnInit } from '@angular/core';
                 </div>
               </li>
               <li class="row no-gutters">
-                <div class="col-1 pgr">
-                  <img class="align-absolute" src="./assets/imgs/arc_Bearish.svg">
-                </div>
-                <div class="col-2 ticker">
-                  <p>SHOP</p>
+                <div class="col-3 ticker">
+                  <p><span><img src="./assets/imgs/arc_VeryBearish.svg"></span> KPMG</p>
                 </div>
                 <div class="col-3 data">
                   <p>2.02</p>

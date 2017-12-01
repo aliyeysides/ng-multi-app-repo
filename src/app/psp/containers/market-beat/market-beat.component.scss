@@ -31,16 +31,60 @@
 .component--stockview.open {
 	display:block;
 }
-.component--stockview.bearish {
-	background: linear-gradient(to right, rgba(255,50,50,1) 2%,rgba(170,0,119,1) 100%); 
-}
+
 .component--stockview.bullish {
 	background: linear-gradient(to right, rgba(0,204,0,1) 0%,rgba(0,170,119,1) 100%);
+
+	.stock-info--chart-toggle {
+		.date-select.selected {
+			background-color: #FD001F;
+		}
+	}
 }
 
+.component--stockview.bearish {
+	background: linear-gradient(to right, rgba(255,50,50,1) 2%,rgba(170,0,119,1) 100%);
 
+	.stock-info {
+		h2 {
+			color:#FD001F;
+		}
+	}
+	.stock-info--stats {
+		.label {
+			color:#FD001F;
+		}
+	}
+	.stock-info--chart-toggle {
+		.date-select.selected {
+			background-color: #FD001F;
+		}
+	}
+	.stock-info--news {
 
+		.news__pagination {
+			p {
+				color:#FD001F;
 
+				span {
+					color:#FD001F;
+				}
+			}
+		}
+		.news__slider {
+			.source {
+				color:#FD001F;
+			}
+		}
+	}
+	.data-table {
+		table {
+			.label {
+				color:#FD001F;
+			}
+		}
+	}
+}
 
 
 
@@ -121,7 +165,7 @@
 
 .stock-info {
 	h1 {
-		font-weight: 300;
+		font-weight: 400;
 		font-size: 28px;
 		line-height: 1.3;
 		margin: 30px 0;
@@ -129,22 +173,22 @@
 
 		span {
 			font-weight: 600;
-			color: #999999;
 		}
 		span.red {
-			font-weight: 600;
 			color:#FD001F;
 		}
+		span.green {
+			color:#00C04E;
+		}
 		span.yellow {
-			font-weight: 600;
 			color:#FF9900;
 		}
 	}
 
 	h2 {
-		margin-top:15px;
-		margin-bottom:20px;
-		color:#FD001F;
+		margin-top:10px;
+		margin-bottom:25px;
+		font-size: 32px;
 	}
 
 	.label {
@@ -157,9 +201,43 @@
 	.ticker {
 		font-weight: 700;
 	}
-	.pgr {
-		img {
-			width: 100%;
+
+	.chart-list {
+		.divider {
+			margin-top:5px;
+			margin-bottom: 15px;
+		}
+		ul {
+			margin-bottom:25px;
+
+			li {
+				margin: 15px 0;
+
+				.data {
+					font-size: 16px;
+					font-weight: 500;
+					line-height: 1;
+				}
+
+				.ticker {
+					font-size: 17px;
+					text-align: left;
+					line-height: 1;
+
+					span {
+						display: inline-block;
+
+						img {
+							width: 100%;
+							width: 25px;
+							vertical-align: top;
+						}
+					}
+				}
+			}
+			.col-headers {
+				margin-bottom: 10px;
+			}
 		}
 	}
 
@@ -178,6 +256,7 @@
 		}
 	}
 }
+
 
 
 
@@ -283,23 +362,6 @@
 	}
 }
 
-.component--stockview.bearish {
-	.stock-info--chart-toggle {
-		.date-select.selected {
-			background-color: #FD001F;
-		}
-	}
-}
-
-.component--stockview.bullish {
-	.stock-info--chart-toggle {
-		.date-select.selected {
-			background-color: #FD001F;
-		}
-	}
-}
-
-
 
 
 
@@ -346,18 +408,6 @@
 	}
 }
 
-.component--stockview.bearish {
-	.stock-info--stats {
-		.label {
-			color:#FD001F;
-		}
-	}
-}
-
-
-
-
-
 
 
 
@@ -366,30 +416,47 @@
 
 
 .stock-info--news {
+	h2 {
+		margin-bottom: 0px;
+	}
+
 	.news__slider {
-		.headline {
-			font-weight: 400;
-			font-size: 20px;
-			line-height: 1.4;
-			margin-bottom: 5px;
-			font-family: 'Open Sans', sans-serif;
-			text-align: left;
-			opacity: 0.8;
-		}
+		width: 100%;
+	    list-style-type: none;
+	    margin: auto;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    overflow-x: scroll;
 
-		.source {
-			text-align: left;
-			font-size: 15px;
-			font-weight: 500;
-			line-height: 35px;
-		}
+		li {
+			display: inline-block;
+			margin-right:15px;
+		
+			.headline {
+				font-weight: 400;
+				font-size: 20px;
+				line-height: 1.4;
+				margin-bottom: 5px;
+				font-family: 'Open Sans', sans-serif;
+				text-align: left;
+				opacity: 0.8;
+				white-space: normal;
+			}
 
-		.date {
-			text-align: right;
-			font-size: 13px;
-			font-weight: 400;
-			font-style: italic;
-			line-height: 35px;
+			.source {
+				text-align: left;
+				font-size: 15px;
+				font-weight: 500;
+				line-height: 35px;
+			}
+
+			.date {
+				text-align: right;
+				font-size: 13px;
+				font-weight: 400;
+				font-style: italic;
+				line-height: 35px;
+			}
 		}
 
 		.news__pagination {
@@ -401,23 +468,6 @@
 					font-weight: 600;
 				}
 			}
-		}
-	}
-}
-
-.component--stockview.bearish {
-	.news__pagination {
-		p {
-			color:#FD001F;
-
-			span {
-				color:#FD001F;
-			}
-		}
-	}
-	.news__slider {
-		.source {
-			color:#FD001F;
 		}
 	}
 }
@@ -466,8 +516,7 @@
 
 
 
-
-
+/*           DATA TABLE            */
 
 
 
@@ -477,7 +526,7 @@
 		color: #484848;
 		width: 100%;
 		margin-top: 10px;
-		margin-bottom: 30px;
+		margin-bottom: 25px;
 
 		th {
 			text-align: center;
@@ -486,7 +535,6 @@
 			font-weight: 500;
 			border-bottom: 2px solid #f0f0f0;
 		}
-
 		td {
 			padding:10px 0 5px;
 			min-width: 50px;
