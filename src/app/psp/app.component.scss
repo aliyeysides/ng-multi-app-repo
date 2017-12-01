@@ -22,7 +22,7 @@ h2 {
   font-weight: 400;
   margin: 40px 0px 5px;
   //text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.5;
   line-height: 1;
 }
 h3 {
@@ -410,7 +410,7 @@ button {
         border-radius: 0px;
         outline: none;
         border-bottom: 0px solid #f8f8f8;
-        background-color: rgba(255,255,255,0.95);
+        background-color: rgba(255,255,255,1);
         color: #484848;
       }
     }
@@ -637,41 +637,37 @@ button {
 .list-entry__overlay.show {
   display:block;
 }
-
 .list-entry__overlay.red {
   background: rgba(253,0,31,0.9);
 }
-
 .list-entry__overlay.green {
   background: rgba(0,192,78,0.95);
 }
 
 .overlay__contents {
   height: 60px;
+
+  .ticker {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 62px;
+    color:#ffffff;
+    text-align: left;
+  }
+
+  .data {
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 62px;
+    color:#ffffff;
+    text-align: left;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
 }
-
-.list-entry__overlay .ticker {
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 62px;
-  color:#ffffff;
-  text-align: left;
-}
-
-.list-entry__overlay .data {
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 62px;
-  color:#ffffff;
-  text-align: left;
-}
-
-.list-entry__overlay .icon {
-  width: 30px;
-  height: 30px;
-}
-
-
 
 
 
@@ -729,7 +725,7 @@ button {
   height: 2px;
   border-radius: 5px;
   margin: 10px auto;
-  background: #dfdfdf;
+  background: #f0f0f0;
 }
 
 .divider__split {
@@ -744,21 +740,21 @@ button {
   background: linear-gradient(to left, rgba(0,204,0,0.95) 0%,rgba(0,170,119,0.95) 80%);
   width: 100%;
   margin: 15px 0;
-  height: 5px;
+  height: 3px;
 }
 
 .divider__long--red {
   background: linear-gradient(to right, rgba(255,50,50,1) 2%,rgba(170,0,119,1) 100%);
   width: 100%;
   margin: 15px 0;
-  height: 5px;
+  height: 3px;
 }
 
 .divider__long--blue {
   background-image: linear-gradient(-50deg, #6B0097 0%, #0096D4 100%);
   width: 100%;
   margin: 15px 0;
-  height: 5px;
+  height: 3px;
 }
 
 
