@@ -1,12 +1,24 @@
 import {
   AfterViewInit,
-  Component, ElementRef, Input, OnDestroy, OnInit, QueryList, ViewChildren,
-  ViewEncapsulation
+  Component, ElementRef, Input, OnDestroy, OnInit, QueryList, ViewChildren
 } from '@angular/core';
 import {StockStatus} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
+
+interface ToggleOptions {
+  currentToggleOptionText: string,
+  all?: FilterFunc,
+  bulls?: FilterFunc,
+  bears?: FilterFunc,
+  neutral?: FilterFunc,
+  movers?: FilterFunc
+}
+
+interface FilterFunc {
+  (stock: StockStatus): boolean
+}
 
 @Component({
   selector: 'cpt-psp-stock-movements',
@@ -37,7 +49,23 @@ import {SignalService} from '../../../../services/signal.service';
 
       <div class="row">
         <div class="col-12">
-          <h3>Top Movers &nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></h3>
+          <div class="btn-group" dropdown [autoClose]="true">
+            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+              {{ currentToggleOptionText }} <span class="caret"></span>
+            </button>
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+              <li (click)="selectToggleOption(toggleOptions.movers, $event);" role="menuitem"><a
+                class="dropdown-item">Top Movers</a></li>
+              <li (click)="selectToggleOption(toggleOptions.all, $event);" role="menuitem"><a
+                class="dropdown-item">All</a></li>
+              <li (click)="selectToggleOption(toggleOptions.bulls, $event)" role="menuitem"><a class="dropdown-item">Bulls</a>
+              </li>
+              <li (click)="selectToggleOption(toggleOptions.bears, $event)" role="menuitem"><a class="dropdown-item">Bears</a>
+              </li>
+              <li (click)="selectToggleOption(toggleOptions.neutral, $event)" role="menuitem"><a class="dropdown-item">Neutral</a>
+              </li>
+            </ul>
+          </div>
           <div class="divider__long"></div>
           <ul class="section__chart">
             <li class="row no-gutters col-headers">
@@ -65,12 +93,12 @@ import {SignalService} from '../../../../services/signal.service';
       </div>
     </div>
   `,
-  styleUrls: ['../health-check.component.scss']
+  styleUrls: ['../health-check.component.scss'],
 })
 export class StockMovementsComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChildren('perChange') perChange: QueryList<ElementRef>;
 
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
+  private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _stocks: BehaviorSubject<StockStatus[]> = new BehaviorSubject<StockStatus[]>({} as StockStatus[]);
 
   allStocks: StockStatus[];
@@ -86,31 +114,75 @@ export class StockMovementsComponent implements OnInit, OnDestroy, AfterViewInit
     return this._stocks.getValue();
   }
 
+  toggleOptions: ToggleOptions = {
+    currentToggleOptionText: 'Top Movers',
+    all(stock: StockStatus) {
+      // return stock['percentageChange'] != 0;
+      this.currentToggleOptionText = 'All';
+      return true;
+    },
+
+    bulls(stock: StockStatus) {
+      this.currentToggleOptionText = 'Bulls';
+      return stock['arcColor'] === 1;
+    },
+
+    bears(stock: StockStatus) {
+      this.currentToggleOptionText = 'Bears';
+      return stock['arcColor'] === -1;
+    },
+
+    neutral(stock: StockStatus) {
+      this.currentToggleOptionText = 'Neutral';
+      return stock['arcColor'] === 0;
+    },
+
+    movers(stock: StockStatus) {
+      this.currentToggleOptionText = 'Top Movers';
+      return true;
+    }
+  };
+  selectedToggleOption: Function = this.toggleOptions.movers;
+
   constructor(private signalService: SignalService) {
   }
 
   ngOnInit() {
-    this._stocks
-      .takeUntil(this.ngUnsubscribe)
-      .filter(x => x != undefined)
-      .subscribe(res => {
-        this.allStocks = res
-        // .filter(x => x['percentageChange'] != 0 ) // TODO: only filter for TOP MOVERS
-          .sort((x, y) => y['percentageChange'] - x['percentageChange']);
-        this.parseStockStatus(res);
-      });
+    this.updateData();
   }
 
   ngAfterViewInit() {
     this.perChange.changes.subscribe(el => console.log('changes sub', el));
-    // for (let item of this.perChange) {
-    //   console.log('item', item);
-    // }
   }
 
   ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    this._ngUnsubscribe.next();
+    this._ngUnsubscribe.complete();
+  }
+
+  updateData() {
+    this._stocks
+      .takeUntil(this._ngUnsubscribe)
+      .filter(x => x != undefined)
+      .subscribe(res => {
+        this.allStocks = res
+          .filter(x => this.selectedToggleOption(x))
+          .sort((x, y) => y['percentageChange'] - x['percentageChange']);
+
+        if (this.selectedToggleOption === this.toggleOptions.movers) {
+          const upmovers = this.allStocks.slice(0, 3);
+          const downmovers = this.allStocks.slice(this.allStocks.length - 3, this.allStocks.length);
+          this.allStocks = upmovers.concat(downmovers);
+        }
+
+        this.parseStockStatus(res);
+      });
+  }
+
+  selectToggleOption(fn: FilterFunc, e: Event) {
+    e.stopPropagation();
+    this.selectedToggleOption = fn;
+    this.updateData();
   }
 
   public parseStockStatus(stocks: StockStatus[]) {
@@ -147,9 +219,9 @@ export class StockMovementsComponent implements OnInit, OnDestroy, AfterViewInit
     // });
   }
 
-  percentWidth(el){
-  const pa = el.offsetParent || el;
-  return ((el.offsetWidth/pa.offsetWidth)*100).toFixed(2)+'%';
-}
+  percentWidth(el) {
+    const pa = el.offsetParent || el;
+    return ((el.offsetWidth / pa.offsetWidth) * 100).toFixed(2) + '%';
+  }
 
 }
