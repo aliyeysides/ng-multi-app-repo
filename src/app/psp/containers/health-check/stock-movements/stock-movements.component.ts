@@ -84,7 +84,7 @@ interface FilterFunc {
               <div class="col-8 mover__data">
                 <div class="mover__bar" [style.width]="stock['barWidth']"
                      [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0}">
-                  <p class="data" #perChange>{{ stock.percentageChange }}%</p>
+                  <p class="data" [ngClass]="{'data--right':stock['width']<25}">{{ stock.percentageChange }}%</p>
                 </div>
               </div>
             </li>
@@ -95,9 +95,7 @@ interface FilterFunc {
   `,
   styleUrls: ['../health-check.component.scss'],
 })
-export class StockMovementsComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChildren('perChange') perChange: QueryList<ElementRef>;
-
+export class StockMovementsComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _stocks: BehaviorSubject<StockStatus[]> = new BehaviorSubject<StockStatus[]>({} as StockStatus[]);
 
@@ -151,10 +149,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, AfterViewInit
     this.updateData();
   }
 
-  ngAfterViewInit() {
-    this.perChange.changes.subscribe(el => console.log('changes sub', el));
-  }
-
   ngOnDestroy() {
     this._ngUnsubscribe.next();
     this._ngUnsubscribe.complete();
@@ -170,9 +164,11 @@ export class StockMovementsComponent implements OnInit, OnDestroy, AfterViewInit
           .sort((x, y) => y['percentageChange'] - x['percentageChange']);
 
         if (this.selectedToggleOption === this.toggleOptions.movers) {
-          const upmovers = this.allStocks.slice(0, 3);
-          const downmovers = this.allStocks.slice(this.allStocks.length - 3, this.allStocks.length);
-          this.allStocks = upmovers.concat(downmovers);
+          if (this.allStocks.length >= 6) {
+            const upmovers = this.allStocks.slice(0, 3);
+            const downmovers = this.allStocks.slice(this.allStocks.length - 3, this.allStocks.length);
+            this.allStocks = upmovers.concat(downmovers);
+          }
         }
 
         this.parseStockStatus(res);
@@ -203,10 +199,10 @@ export class StockMovementsComponent implements OnInit, OnDestroy, AfterViewInit
     });
     stocks.map(x => {
       if (Math.abs(x['percentageChange']) == max) {
-        return Object.assign(x, {barWidth: 100 + '%'})
+        return Object.assign(x, {barWidth: 100 + '%', width: 100})
       }
       const relWidth = Math.abs(x['percentageChange']) * 100 / max;
-      return Object.assign(x, {barWidth: relWidth + '%'})
+      return Object.assign(x, {barWidth: relWidth + '%', width: relWidth})
     })
   }
 

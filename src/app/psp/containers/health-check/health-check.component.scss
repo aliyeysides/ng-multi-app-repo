@@ -251,6 +251,10 @@
 		  	text-align: right;
 		  	margin-right:8px;
 		}
+    .data--right {
+      padding-left: 120%;
+      color: black;
+    }
 	}
 	.mover__bar.positive {
 	  background: linear-gradient(to right, rgba(0,204,0,1) 0%,rgba(0,170,119,1) 100%);
