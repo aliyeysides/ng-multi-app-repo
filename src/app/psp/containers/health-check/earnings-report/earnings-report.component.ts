@@ -35,7 +35,7 @@ interface EarningsReportObj {
         </div>
       </div>
 
-      <div class="row">
+      <div *ngIf="!collapse" class="row">
         <div class="col-12 col-md-6">
           <h3 class="">Earnings Surprises</h3>
           <div class="divider__long"></div>
@@ -128,9 +128,13 @@ interface EarningsReportObj {
       </div>
 
       <div class="row">
-        <div class="col-12 expand-collapse">
+        <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
           <img src="./assets/imgs/icon_chevron--up.svg">
           <p>COLLAPSE</p>
+        </div>
+        <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+          <img src="./assets/imgs/icon_chevron--down.svg">
+          <p>EXPAND</p>
         </div>
       </div>
 
@@ -153,6 +157,7 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
 
   public upCount: number = 0;
   public downCount: number = 0;
+  public collapse: boolean = false;
 
   @Input('surprises')
   set surprises(val: EarningsReportSurprises) {
@@ -204,6 +209,10 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
 
   appendPGRImage(pgr, raw_pgr) {
     return this.signalSerivce.appendPGRImage(pgr, raw_pgr);
+  }
+
+  toggleCollapse() {
+    this.collapse = !this.collapse;
   }
 
   earningsReportObjFactory(res: EarningsReportSurprises | EarningsAnalystRevisions): Array<EarningsReportObj> {

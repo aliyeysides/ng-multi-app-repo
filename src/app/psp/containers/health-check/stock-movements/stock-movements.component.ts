@@ -47,7 +47,7 @@ interface FilterFunc {
         </div>
       </div>
 
-      <div class="row">
+      <div *ngIf="!collapse" class="row">
         <div class="col-12">
           <div class="btn-group" dropdown [autoClose]="true">
             <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
@@ -84,11 +84,21 @@ interface FilterFunc {
               <div class="col-8 mover__data">
                 <div class="mover__bar" [style.width]="stock['barWidth']"
                      [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0}">
-                  <p class="data" [ngClass]="{'data--right':stock['width']<25}">{{ stock.percentageChange }}%</p>
+                  <p class="data" [ngClass]="{'data--right':stock['width']<33}">{{ stock.percentageChange }}%</p>
                 </div>
               </div>
             </li>
           </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+          <img src="./assets/imgs/icon_chevron--up.svg">
+          <p>COLLAPSE</p>
+        </div>
+        <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+          <img src="./assets/imgs/icon_chevron--down.svg">
+          <p>EXPAND</p>
         </div>
       </div>
     </div>
@@ -102,6 +112,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
   allStocks: StockStatus[];
   upStocks: StockStatus[];
   downStocks: StockStatus[];
+  collapse: boolean = false;
 
   @Input('stocks')
   set stocks(val: StockStatus[]) {
@@ -179,6 +190,10 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
     e.stopPropagation();
     this.selectedToggleOption = fn;
     this.updateData();
+  }
+
+  toggleCollapse() {
+    this.collapse = !this.collapse;
   }
 
   public parseStockStatus(stocks: StockStatus[]) {

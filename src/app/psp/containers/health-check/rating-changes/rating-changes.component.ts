@@ -30,7 +30,7 @@ import {SignalService} from '../../../../services/signal.service';
         </div>
       </div>
 
-      <div class="row">
+      <div *ngIf="!collapse" class="row">
         <div class="col-12 col-md-6">
           <h3>Turned Bullish</h3>
           <div class="divider__long"></div>
@@ -123,9 +123,13 @@ import {SignalService} from '../../../../services/signal.service';
       </div>
 
       <div class="row">
-        <div class="col-12 expand-collapse">
+        <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
           <img src="./assets/imgs/icon_chevron--up.svg">
           <p>COLLAPSE</p>
+        </div>
+        <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+          <img src="./assets/imgs/icon_chevron--down.svg">
+          <p>EXPAND</p>
         </div>
       </div>
 
@@ -153,6 +157,7 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
 
   bearishAlerts: Array<object> = [];
   bullishAlerts: Array<object> = [];
+  collapse: boolean = false;
 
   constructor(private signalService: SignalService) {
   }
@@ -173,6 +178,10 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
 
   appendPGRImage(pgr, raw_pgr) {
     return this.signalService.appendPGRImage(pgr, raw_pgr);
+  }
+
+  toggleCollapse() {
+    this.collapse = !this.collapse;
   }
 
   private parseAlerts(alerts: PGRChanges) {
