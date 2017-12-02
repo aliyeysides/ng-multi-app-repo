@@ -1,7 +1,8 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {PortfolioStatus, PrognosisData} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
+import {HealthCheckService} from '../../../../services/health-check.service';
 
 @Component({
   selector: 'cpt-psp-portfolio-overview',
@@ -41,14 +42,14 @@ import {Subject} from 'rxjs/Subject';
 
       <div class="row overview__powerbar">
         <div class="col-12 powerbar clearfix">
-          <div
+          <div (click)="setToggleOptions('Bulls')"
             [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
             <p>{{ prognosisData?.BullishSymbolsCount }}</p>
           </div>
-          <div class="neutral">
+          <div (click)="setToggleOptions('Neutral')" class="neutral">
             <p>{{ prognosisData?.NeutralSymbolsCount }}</p>
           </div>
-          <div
+          <div (click)="setToggleOptions('Bears')"
             [ngClass]="{'bearish--more':prognosisData?.BearishSymbolsCount>prognosisData?.BullishSymbolsCount, 'bearish--less':prognosisData?.BearishSymbolsCount<prognosisData?.BullishSymbolsCount,'bearish--same':prognosisData?.BearishSymbolsCount==prognosisData?.BullishSymbolsCount}">
             <p>{{ prognosisData?.BearishSymbolsCount }}</p>
           </div>
@@ -89,7 +90,7 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   prognosisData: PrognosisData;
   calculations: PortfolioStatus;
 
-  constructor() {
+  constructor(private healthCheck: HealthCheckService) {
   }
 
   ngOnInit() {
@@ -113,6 +114,10 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
 
   isSPYUp(): boolean {
     return this.calculations ? this.calculations.SPYPercentageChange > 0 : null;
+  }
+
+  setToggleOptions(option: string) {
+    this.healthCheck.setToggleOptions(option);
   }
 
 }

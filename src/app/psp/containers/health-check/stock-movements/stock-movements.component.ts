@@ -6,6 +6,7 @@ import {StockStatus} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
+import {HealthCheckService} from '../../../../services/health-check.service';
 
 interface ToggleOptions {
   currentToggleOptionText: string,
@@ -153,11 +154,32 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
   };
   selectedToggleOption: Function = this.toggleOptions.movers;
 
-  constructor(private signalService: SignalService) {
+  constructor(private signalService: SignalService,
+              private healthCheck: HealthCheckService) {
   }
 
   ngOnInit() {
     this.updateData();
+    this.healthCheck.getToggleOptions()
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(res => {
+        if (res == 'Top Movers') {
+          this.selectedToggleOption = this.toggleOptions.movers;
+          this.updateData();
+        }
+        if (res == 'Bulls') {
+          this.selectedToggleOption = this.toggleOptions.bulls;
+          this.updateData();
+        }
+        if (res == 'Neutral') {
+          this.selectedToggleOption = this.toggleOptions.neutral;
+          this.updateData();
+        }
+        if (res == 'Bears') {
+          this.selectedToggleOption = this.toggleOptions.bears;
+          this.updateData();
+        }
+      })
   }
 
   ngOnDestroy() {
