@@ -110,7 +110,7 @@ export class ReportingCalendarComponent implements OnInit, OnDestroy {
   }
 
   parseExpectedEarningsReports(res: ExpectedEarningsReports) {
-    Object.keys(res['earningsReports'][0]).forEach(date => {
+    Object.keys(res['earningsReports']).forEach(date => {
       const day = moment(date).day();
       let obj = Object.assign(res['earningsReports'][0][date], {day: day});
       switch (day) {
