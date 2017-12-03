@@ -7,6 +7,27 @@ import {HealthCheckService} from '../../../../services/health-check.service';
 import {MarketsSummaryService} from '../../../../services/markets-summary.service';
 import {MarketData} from '../../../../bear/core/market-summary/market-summary.component';
 
+interface ListSymbolObj {
+  "is_watching_stock": boolean,
+  "symbol": string,
+  "raw_PGR": number,
+  "industry_name": string,
+  "Change": number,
+  "filter": number,
+  "Last": number,
+  "signals": string,
+  "market_cap": number,
+  "div_yield": number,
+  "name": string,
+  "list_rating": number,
+  "PGR": number,
+  "TechnicalRating ": number,
+  "Percentage ": number,
+  "industry_ListID ": number,
+  "is_holding_stock": boolean,
+  "SummaryRating ": number
+}
+
 interface ToggleOptions {
   currentToggleOptionText: string,
   all?: FilterFunc,
@@ -27,8 +48,8 @@ interface FilterFunc {
 
       <div class="row section__toggle">
         <div class="col-12 toggle toggle--timespan">
-          <p class="toggle__left selected">TODAY</p>
-          <p class="toggle__right">LAST WEEK</p>
+          <p (click)="selectTimespan('TODAY')" [ngClass]="{'selected':this.selectedTimespan==='TODAY'}" class="toggle__left">TODAY</p>
+          <p (click)="selectTimespan('WEEK')" [ngClass]="{'selected':this.selectedTimespan==='WEEK'}" class="toggle__right">LAST WEEK</p>
         </div>
       </div>
 
@@ -54,15 +75,15 @@ interface FilterFunc {
               {{ currentToggleOptionText }} <span class="caret"></span>
             </button>
             <ul *dropdownMenu class="dropdown-menu" role="menu">
-              <li (click)="selectToggleOption(toggleOptions.movers, $event);" role="menuitem"><a
+              <li (click)="selectToggleOption(toggleOptions.movers);" role="menuitem"><a
                 class="dropdown-item">Top Movers</a></li>
-              <li (click)="selectToggleOption(toggleOptions.all, $event);" role="menuitem"><a
+              <li (click)="selectToggleOption(toggleOptions.all);" role="menuitem"><a
                 class="dropdown-item">All</a></li>
-              <li (click)="selectToggleOption(toggleOptions.bulls, $event)" role="menuitem"><a class="dropdown-item">Bulls</a>
+              <li (click)="selectToggleOption(toggleOptions.bulls)" role="menuitem"><a class="dropdown-item">Bulls</a>
               </li>
-              <li (click)="selectToggleOption(toggleOptions.bears, $event)" role="menuitem"><a class="dropdown-item">Bears</a>
+              <li (click)="selectToggleOption(toggleOptions.bears)" role="menuitem"><a class="dropdown-item">Bears</a>
               </li>
-              <li (click)="selectToggleOption(toggleOptions.neutral, $event)" role="menuitem"><a class="dropdown-item">Neutral</a>
+              <li (click)="selectToggleOption(toggleOptions.neutral)" role="menuitem"><a class="dropdown-item">Neutral</a>
               </li>
             </ul>
           </div>
@@ -78,13 +99,14 @@ interface FilterFunc {
             </li>
             <li *ngFor="let stock of allStocks" class="row no-gutters list-item__mover">
               <div class="col-4 mover__stock">
-                <img *ngIf="stock.arcColor != 2" src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
+                <img *ngIf="stock.arcColor != 2"
+                     src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
                 <p class="ticker">{{ stock.symbol }}</p>
               </div>
               <div class="col-8 mover__data">
                 <div class="mover__bar" [style.width]="stock['barWidth']"
                      [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0,'indice':stock.arcColor==2}">
-                  <p class="data" [ngClass]="{'data--right':stock['width']<33}">{{ stock.percentageChange }}%</p>
+                  <p class="data" [ngClass]="{'data--right':stock['width']<25}">{{ stock.percentageChange | decimal }}%</p>
                 </div>
               </div>
             </li>
@@ -108,7 +130,8 @@ interface FilterFunc {
 export class StockMovementsComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _calc: BehaviorSubject<PortfolioStatus> = new BehaviorSubject<PortfolioStatus>({} as PortfolioStatus);
-  private _stocks: BehaviorSubject<StockStatus[]> = new BehaviorSubject<StockStatus[]>({} as StockStatus[]);
+  private _weeklyStocks: BehaviorSubject<StockStatus[]> = new BehaviorSubject<StockStatus[]>({} as StockStatus[]);
+  private _dailyStocks: BehaviorSubject<ListSymbolObj[]> = new BehaviorSubject<ListSymbolObj[]>({} as ListSymbolObj[]);
 
   allStocks: StockStatus[];
   upStocks: StockStatus[];
@@ -124,13 +147,22 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
     return this._calc.getValue();
   }
 
-  @Input('stocks')
-  set stocks(val: StockStatus[]) {
-    this._stocks.next(val);
+  @Input('weeklyStocks')
+  set weeklyStocks(val: StockStatus[]) {
+    this._weeklyStocks.next(val);
   }
 
-  get stocks() {
-    return this._stocks.getValue();
+  get weeklyStocks() {
+    return this._weeklyStocks.getValue();
+  }
+
+  @Input('dailyStocks')
+  set dailyStocks(val: ListSymbolObj[]) {
+    this._dailyStocks.next(val);
+  }
+
+  get dailyStocks() {
+    return this._dailyStocks.getValue();
   }
 
   toggleOptions: ToggleOptions = {
@@ -164,6 +196,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
   selectedToggleOption: Function = this.toggleOptions.movers;
   DaySPY: MarketData;
   calculations: PortfolioStatus;
+  selectedTimespan: string = 'WEEK';
 
   constructor(private signalService: SignalService,
               private healthCheck: HealthCheckService,
@@ -213,7 +246,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
   }
 
   updateData() {
-    this._stocks
+    this._weeklyStocks
       .takeUntil(this._ngUnsubscribe)
       .filter(x => x != undefined)
       .subscribe(res => {
@@ -234,23 +267,24 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
           }
         }
 
-        // this.allStocks.push(Object.assign({}, {
-        //   "symbol": this.DaySPY.symbol,
-        //   "corrected_pgr_rating": 0,
-        //   "percentageChange": this.DaySPY.percent_change,
-        //   "companyName": 'S&P500',
-        //   "raw_pgr_rating": 0,
-        //   "closePrice": 0,
-        //   "arcColor": 0
-        // }));
+        this._dailyStocks
+          .takeUntil(this._ngUnsubscribe)
+          .subscribe(res => {
+            console.log('daily', res);
+              // TODO: Need market to be open
+          });
+
         this.parseStockStatus(res);
       });
   }
 
-  selectToggleOption(fn: FilterFunc, e: Event) {
-    e.stopPropagation();
+  selectToggleOption(fn: FilterFunc) {
     this.selectedToggleOption = fn;
     this.updateData();
+  }
+
+  selectTimespan(mode: string) {
+    this.selectedTimespan = mode;
   }
 
   toggleCollapse() {
@@ -259,7 +293,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
 
   public parseStockStatus(stocks: StockStatus[]) {
     this.calculateBarWidth(stocks);
-    this.calculatePerDisplayWidth();
     this.upStocks = stocks.filter(x => x['percentageChange'] > 0);
     this.downStocks = stocks.filter(x => x['percentageChange'] < 0);
   }
@@ -280,20 +313,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
       const relWidth = Math.abs(x['percentageChange']) * 100 / max;
       return Object.assign(x, {barWidth: relWidth + '%', width: relWidth})
     })
-  }
-
-  calculatePerDisplayWidth() {
-    // const data = document.getElementsByClassName('percentage__change');
-    // console.log('perChange', this.perChange);
-    // Array.from(data).forEach(x => {
-    //   console.log('x', x);
-    //   console.log('percentWidth', this.percentWidth(x));
-    // });
-  }
-
-  percentWidth(el) {
-    const pa = el.offsetParent || el;
-    return ((el.offsetWidth / pa.offsetWidth) * 100).toFixed(2) + '%';
   }
 
 }
