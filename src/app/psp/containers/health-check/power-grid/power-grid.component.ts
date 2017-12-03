@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {PHCIndustryData, PHCGridData} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
+import {HealthCheckService} from '../../../../services/health-check.service';
 
 @Component({
   selector: 'cpt-psp-power-grid',
@@ -156,12 +157,12 @@ export class PowerGridComponent implements OnInit, OnDestroy {
   allIndustries: Array<PHCIndustryData>;
   strongIndustries: Array<PHCIndustryData>;
   weakIndustries: Array<PHCIndustryData>;
-
+  portUp: boolean;
   collapse: boolean = false;
 
   objectKeys = Object.keys;
 
-  constructor() {
+  constructor(private healthCheck: HealthCheckService) {
   }
 
   ngOnInit() {
@@ -173,6 +174,10 @@ export class PowerGridComponent implements OnInit, OnDestroy {
         this.strongIndustries = this.allIndustries.filter(x => x['IndustryScore'] > 0);
         this.weakIndustries = this.allIndustries.filter(x => x['IndustryScore'] < 0);
       });
+
+    this.healthCheck.getPortfolioStatus()
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(res => this.portUp = res['avgPercentageChange'] > 0);
   }
 
   ngOnDestroy() {

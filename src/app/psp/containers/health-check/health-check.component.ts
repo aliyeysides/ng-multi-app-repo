@@ -39,7 +39,7 @@ import {IdeasService} from '../../../services/ideas.service';
         <div class="col-12 col-lg-8 col-xl-8 float-lg-right">
           <div class="row">
             <div class="col-12">
-              <div class="divider__long divider__long--green"></div>
+              <div class="divider__long" [ngClass]="{'divider__long--green': calculations?.avgPercentageChange>0, 'divider__long--red': calculations?.avgPercentageChange<0}"></div>
             </div>
           </div>
 

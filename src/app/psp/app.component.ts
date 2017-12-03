@@ -33,7 +33,7 @@ declare let gtag: Function;
       </div>
   
         <!-- App Container -->
-      <div [ngBusy]="loading" class="container--main" id="container--main" [ngClass]="{'blur-me': searchOpened}">
+      <div [ngBusy]="loading" class="container--main" id="container--main" [ngClass]="{'blur-me': searchOpened || ( navOpened | async ) }">
         <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->
         <div class="router__container">
           <router-outlet></router-outlet>
@@ -81,6 +81,7 @@ export class AppComponent {
   }
 
   toggleNav() {
+    this.searchOpened = false;
     this.navOpened.next(!this.navOpened.getValue())
   }
 
