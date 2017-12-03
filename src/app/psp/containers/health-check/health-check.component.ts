@@ -20,7 +20,7 @@ import {Observable} from 'rxjs/Observable';
         <!-- HEALTH-CHECK - Intro -->
         <cpt-psp-portfolio-overview [calc]="calculations" [data]="prognosisData"></cpt-psp-portfolio-overview>
         <!-- HEALTH-CHECK - Stock Movements -->
-        <cpt-psp-stock-movements [stocks]="stocksStatus"></cpt-psp-stock-movements>
+        <cpt-psp-stock-movements [calc]="calculations" [stocks]="stocksStatus"></cpt-psp-stock-movements>
 
         <!-- HEALTH-CHECK - Ratings Changes -->
         <cpt-psp-rating-changes [alerts]="pgrChanges"></cpt-psp-rating-changes>
@@ -99,6 +99,16 @@ export class HealthCheckComponent implements OnInit {
         this.healthCheck.setPortfolioStatus(this.calculations);
         this.prognosisData = res[1];
         this.stocksStatus = res[2][Object.keys(res[2])[0]];
+        this.stocksStatus.push(Object.assign({}, {
+            "symbol": 'S&P 500',
+            "corrected_pgr_rating": 0,
+            "percentageChange": this.calculations.SPYPercentageChange,
+            "companyName": 'S&P500',
+            "raw_pgr_rating": 0,
+            "closePrice": 0,
+            "arcColor": 2
+        }));
+        console.log('stockStatus', this.stocksStatus);
         this.pgrChanges = res[3];
         this.earningsSurprise = res[4];
         this.analystRevisions = res[5];

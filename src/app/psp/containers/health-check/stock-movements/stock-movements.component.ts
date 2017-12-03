@@ -1,12 +1,11 @@
-import {
-  AfterViewInit,
-  Component, ElementRef, Input, OnDestroy, OnInit, QueryList, ViewChildren
-} from '@angular/core';
-import {StockStatus} from '../../../../shared/models/health-check';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {PortfolioStatus, StockStatus} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
+import {MarketsSummaryService} from '../../../../services/markets-summary.service';
+import {MarketData} from '../../../../bear/core/market-summary/market-summary.component';
 
 interface ToggleOptions {
   currentToggleOptionText: string,
@@ -79,12 +78,12 @@ interface FilterFunc {
             </li>
             <li *ngFor="let stock of allStocks" class="row no-gutters list-item__mover">
               <div class="col-4 mover__stock">
-                <img src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
+                <img *ngIf="stock.arcColor != 2" src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
                 <p class="ticker">{{ stock.symbol }}</p>
               </div>
               <div class="col-8 mover__data">
                 <div class="mover__bar" [style.width]="stock['barWidth']"
-                     [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0}">
+                     [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0,'indice':stock.arcColor==2}">
                   <p class="data" [ngClass]="{'data--right':stock['width']<33}">{{ stock.percentageChange }}%</p>
                 </div>
               </div>
@@ -108,12 +107,22 @@ interface FilterFunc {
 })
 export class StockMovementsComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
+  private _calc: BehaviorSubject<PortfolioStatus> = new BehaviorSubject<PortfolioStatus>({} as PortfolioStatus);
   private _stocks: BehaviorSubject<StockStatus[]> = new BehaviorSubject<StockStatus[]>({} as StockStatus[]);
 
   allStocks: StockStatus[];
   upStocks: StockStatus[];
   downStocks: StockStatus[];
   collapse: boolean = false;
+
+  @Input('calc')
+  set calc(val: PortfolioStatus) {
+    this._calc.next(val);
+  }
+
+  get calc() {
+    return this._calc.getValue();
+  }
 
   @Input('stocks')
   set stocks(val: StockStatus[]) {
@@ -134,17 +143,17 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
 
     bulls(stock: StockStatus) {
       this.currentToggleOptionText = 'Bulls';
-      return stock['arcColor'] === 1;
+      return stock['arcColor'] >= 1;
     },
 
     bears(stock: StockStatus) {
       this.currentToggleOptionText = 'Bears';
-      return stock['arcColor'] === -1;
+      return stock['arcColor'] === -1 || stock['arcColor'] === 2;
     },
 
     neutral(stock: StockStatus) {
       this.currentToggleOptionText = 'Neutral';
-      return stock['arcColor'] === 0;
+      return stock['arcColor'] === 0 || stock['arcColor'] === 2;
     },
 
     movers(stock: StockStatus) {
@@ -153,13 +162,17 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
     }
   };
   selectedToggleOption: Function = this.toggleOptions.movers;
+  DaySPY: MarketData;
+  calculations: PortfolioStatus;
 
   constructor(private signalService: SignalService,
-              private healthCheck: HealthCheckService) {
+              private healthCheck: HealthCheckService,
+              private marketsSummary: MarketsSummaryService) {
   }
 
   ngOnInit() {
     this.updateData();
+
     this.healthCheck.getToggleOptions()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
@@ -179,6 +192,18 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
           this.selectedToggleOption = this.toggleOptions.bears;
           this.updateData();
         }
+      });
+
+    this._calc
+      .takeUntil(this._ngUnsubscribe)
+      .filter(x => x != undefined)
+      .subscribe(res => this.calculations = res);
+
+    this.marketsSummary.initialMarketSectorData({components: 'majorMarketIndices,sectors'})
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(res => {
+        const indicies = res['market_indices'];
+        this.DaySPY = indicies[0];
       })
   }
 
@@ -197,13 +222,27 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
           .sort((x, y) => y['percentageChange'] - x['percentageChange']);
 
         if (this.selectedToggleOption === this.toggleOptions.movers) {
-          if (this.allStocks.length >= 6) {
-            const upmovers = this.allStocks.slice(0, 3);
-            const downmovers = this.allStocks.slice(this.allStocks.length - 3, this.allStocks.length);
-            this.allStocks = upmovers.concat(downmovers);
+          const stocks = this.allStocks.filter(x => x['symbol'] != 'S&P 500');
+          const SPY = this.allStocks.filter(x => x['symbol'] == 'S&P 500');
+          if (stocks.length >= 6) {
+            const upmovers = stocks.slice(0, 3);
+            const downmovers = stocks.slice(stocks.length - 3, stocks.length);
+            this.allStocks = upmovers
+              .concat(downmovers)
+              .concat(SPY)
+              .sort((x, y) => y['percentageChange'] - x['percentageChange']);
           }
         }
 
+        // this.allStocks.push(Object.assign({}, {
+        //   "symbol": this.DaySPY.symbol,
+        //   "corrected_pgr_rating": 0,
+        //   "percentageChange": this.DaySPY.percent_change,
+        //   "companyName": 'S&P500',
+        //   "raw_pgr_rating": 0,
+        //   "closePrice": 0,
+        //   "arcColor": 0
+        // }));
         this.parseStockStatus(res);
       });
   }
