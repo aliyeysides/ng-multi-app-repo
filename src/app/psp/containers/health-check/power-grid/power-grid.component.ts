@@ -7,7 +7,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
 @Component({
   selector: 'cpt-psp-power-grid',
   template: `
-    <div class="col-12 col-lg-8 col-xl-8 float-lg-right">
+    <div id="HC--PowerGrid" class="col-12 col-lg-8 col-xl-8 float-lg-right">
 
       <div class="row">
         <div class="col-12">
@@ -16,21 +16,17 @@ import {HealthCheckService} from '../../../../services/health-check.service';
       </div>
 
       <div *ngIf="!collapse" class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="divider__long"></div>
-          </div>
-        </div>
 
         <div class="row">
           <div class="col-12">
             <h3>Strong Industries</h3>
+            <div class="divider__long"></div>
           </div>
 
           <div class="col-12 col-md-6 powerGrid">
             <div class="row col-headers">
               <div class="col-6">
-                <p>STRONG STOCKS</p>
+                <h4>STRONG STOCKS</h4>
               </div>
               <div class="col-6">
               </div>
@@ -53,7 +49,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
           <div class="col-12 col-md-6 powerGrid">
             <div class="row col-headers">
               <div class="col-6">
-                <p>WEAK STOCKS</p>
+                <h4>WEAK STOCKS</h4>
               </div>
               <div class="col-6">
               </div>

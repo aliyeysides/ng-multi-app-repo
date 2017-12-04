@@ -38,16 +38,24 @@ import * as moment from 'moment';
           </p>
         </div>
         <div (click)="toggleDay('tuesday')" class="cal-day">
-          <span class="earnings-count">{{ weeklyData['tuesday'].length }}</span>
+          <p class="align-absolute">
+            <span class="earnings-count">{{ weeklyData['tuesday'].length }}</span>
+          </p>
         </div>
         <div (click)="toggleDay('wednesday')" class="cal-day">
-          <span class="earnings-count">{{ weeklyData['wednesday'].length }}</span>
+          <p class="align-absolute">
+            <span class="earnings-count">{{ weeklyData['wednesday'].length }}</span>
+          </p>
         </div>
         <div (click)="toggleDay('thursday')" class="cal-day">
-          <span class="earnings-count">{{ weeklyData['thursday'].length }}</span>
+          <p class="align-absolute">
+            <span class="earnings-count">{{ weeklyData['thursday'].length }}</span>
+          </p>
         </div>
         <div (click)="toggleDay('friday')" class="cal-day">
-          <span class="earnings-count">{{ weeklyData['friday'].length }}</span>
+          <p class="align-absolute">
+            <span class="earnings-count">{{ weeklyData['friday'].length }}</span>
+          </p>
         </div>
       </div>
 
@@ -57,7 +65,7 @@ import * as moment from 'moment';
             <p class="ticker">
               <span style="display: inline-block;">
                 <img width="30px;" class="" src="./assets/imgs/arc_VeryBullish.svg">
-              </span>BBB
+              </span> BBB
             </p>
           </div>
           <div class="col-7">
