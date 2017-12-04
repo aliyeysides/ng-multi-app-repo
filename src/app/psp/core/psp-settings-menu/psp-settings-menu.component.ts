@@ -38,9 +38,10 @@ export class PspSettingsMenuComponent extends BaseSettingsMenuComponent implemen
     if (e) e.stopPropagation();
   }
 
- @HostListener('document:click', ['$event']) offClick(e: Event) {
-    // console.log('this.btn', this.btn);
-    // if (!this.nav.nativeElement.contains(e.target) && !this.btn.nativeElement.contains(e.target)) this.closeNav();
+  @HostListener('document:click', ['$event']) offClick(e: Event) {
+    // e.stopPropagation();
+    // console.log('el', this.el.nativeElement, 'btn', this.btn.nativeElement);
+    //   if (!this.el.nativeElement.contains(e.target) && !this.btn.nativeElement.contains(e.target)) this.closeNav();
   }
 
   private opened: boolean = false;

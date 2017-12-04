@@ -3,6 +3,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {PGRChanges} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
+import {HealthCheckService} from '../../../../services/health-check.service';
 
 @Component({
   selector: 'cpt-psp-rating-changes',
@@ -11,7 +12,7 @@ import {SignalService} from '../../../../services/signal.service';
 
       <div class="row">
         <div class="col-12 hidden-md-up">
-          <div class="divider__long divider__long--green"></div>
+          <div class="divider__long" [ngClass]="{'divider__long--green': portUp, 'divider__long--red': !portUp}"></div>
         </div>
       </div>
 
@@ -30,7 +31,7 @@ import {SignalService} from '../../../../services/signal.service';
         </div>
       </div>
 
-      <div class="row">
+      <div *ngIf="!collapse" class="row">
         <div class="col-12 col-md-6">
           <h3>Turned Bullish</h3>
           <div class="divider__long"></div>
@@ -123,15 +124,19 @@ import {SignalService} from '../../../../services/signal.service';
       </div>
 
       <div class="row">
-        <div class="col-12 expand-collapse">
+        <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
           <img src="./assets/imgs/icon_chevron--up.svg">
           <p>COLLAPSE</p>
+        </div>
+        <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+          <img src="./assets/imgs/icon_chevron--down.svg">
+          <p>EXPAND</p>
         </div>
       </div>
 
       <div class="row">
         <div class="col-12">
-          <div class="divider__long divider__long--green"></div>
+          <div class="divider__long" [ngClass]="{'divider__long--green': portUp, 'divider__long--red': !portUp}"></div>
         </div>
       </div>
     </div>
@@ -153,8 +158,11 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
 
   bearishAlerts: Array<object> = [];
   bullishAlerts: Array<object> = [];
+  collapse: boolean = false;
+  portUp: boolean;
 
-  constructor(private signalService: SignalService) {
+  constructor(private signalService: SignalService,
+              private healthCheck: HealthCheckService) {
   }
 
   ngOnInit() {
@@ -163,7 +171,11 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
       .filter(x => x != undefined)
       .subscribe(res => {
         this.parseAlerts(res);
-      })
+      });
+
+    this.healthCheck.getPortfolioStatus()
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(res => this.portUp = res['avgPercentageChange'] > 0);
   }
 
   ngOnDestroy() {
@@ -173,6 +185,10 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
 
   appendPGRImage(pgr, raw_pgr) {
     return this.signalService.appendPGRImage(pgr, raw_pgr);
+  }
+
+  toggleCollapse() {
+    this.collapse = !this.collapse;
   }
 
   private parseAlerts(alerts: PGRChanges) {

@@ -106,4 +106,8 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       });
   }
 
+  onSubmit() {
+    // TODO: on submit
+  }
+
 }

@@ -4,6 +4,7 @@ import {URLSearchParams} from '@angular/http';
 import {PGRChanges, PortfolioStatus, PrognosisData} from '../shared/models/health-check';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class HealthCheckService {
@@ -20,6 +21,7 @@ export class HealthCheckService {
   private earningsReportParams: URLSearchParams;
 
   private _portfolioStatus: Subject<PortfolioStatus> = new Subject<PortfolioStatus>();
+  private _toggleOptions: BehaviorSubject<string> = new BehaviorSubject<string>('Top Movers');
 
   constructor(private utilService: UtilService) {
     this.prognosisParams = new URLSearchParams;
@@ -36,8 +38,17 @@ export class HealthCheckService {
   public setPortfolioStatus(val: PortfolioStatus) {
     this._portfolioStatus.next(val);
   }
+
   public getPortfolioStatus() {
     return this._portfolioStatus;
+  }
+
+  public setToggleOptions(val) {
+    this._toggleOptions.next(val);
+  }
+
+  public getToggleOptions() {
+    return this._toggleOptions;
   }
 
   public getPrognosisData(listId: string): Observable<PrognosisData> {
@@ -105,7 +116,6 @@ export class HealthCheckService {
     this.earningsReportParams.set('endDate', endDate);
     return this.utilService.getJson(url, this.earningsReportParams);
   }
-
 
   public getPHCGridData(listId: string) {
     const url = `${this.apiHost}/CPTRestSecure/app/phcService/getPHCGridData?`;

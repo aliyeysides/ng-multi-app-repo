@@ -9,6 +9,7 @@ import {
   StockStatus
 } from '../../../shared/models/health-check';
 import {Observable} from 'rxjs/Observable';
+import {IdeasService} from '../../../services/ideas.service';
 
 @Component({
   selector: 'cpt-health-check',
@@ -20,14 +21,15 @@ import {Observable} from 'rxjs/Observable';
         <!-- HEALTH-CHECK - Intro -->
         <cpt-psp-portfolio-overview [calc]="calculations" [data]="prognosisData"></cpt-psp-portfolio-overview>
         <!-- HEALTH-CHECK - Stock Movements -->
-        <cpt-psp-stock-movements [stocks]="stocksStatus"></cpt-psp-stock-movements>
+        <cpt-psp-stock-movements [calc]="calculations" [weeklyStocks]="stocksStatus"
+                                 [dailyStocks]="dailySymbolList"></cpt-psp-stock-movements>
 
         <!-- HEALTH-CHECK - Ratings Changes -->
         <cpt-psp-rating-changes [alerts]="pgrChanges"></cpt-psp-rating-changes>
 
         <!-- HEALTH-CHECK - Earnings Reports -->
         <cpt-psp-earnings-report [surprises]="earningsSurprise"
-                                 [revisions]="analystRevisions" 
+                                 [revisions]="analystRevisions"
                                  [expected]="expectedEarnings"></cpt-psp-earnings-report>
 
         <!-- HEALTH-CHECK - Power Grid -->
@@ -37,7 +39,7 @@ import {Observable} from 'rxjs/Observable';
         <div class="col-12 col-lg-8 col-xl-8 float-lg-right">
           <div class="row">
             <div class="col-12">
-              <div class="divider__long divider__long--green"></div>
+              <div class="divider__long" [ngClass]="{'divider__long--green': calculations?.avgPercentageChange>0, 'divider__long--red': calculations?.avgPercentageChange<0}"></div>
             </div>
           </div>
 
@@ -68,9 +70,11 @@ export class HealthCheckComponent implements OnInit {
   public analystRevisions: EarningsAnalystRevisions;
   public expectedEarnings;
   public pgrGridData: PHCGridData;
+  public dailySymbolList;
 
   constructor(private authService: AuthService,
-              private healthCheck: HealthCheckService) {
+              private healthCheck: HealthCheckService,
+              private ideasService: IdeasService) {
   }
 
   ngOnInit() {
@@ -90,7 +94,8 @@ export class HealthCheckComponent implements OnInit {
           this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
           this.healthCheck.getAnalystRevisions(listId, moment().day(-2).format('YYYY-MM-DD')),
           this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, listId, moment().isoWeekday(1).format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')),
-          this.healthCheck.getPHCGridData(listId)
+          this.healthCheck.getPHCGridData(listId),
+          this.ideasService.getListSymbols(listId, this._uid)
         )
       })
       .take(1)
@@ -99,11 +104,22 @@ export class HealthCheckComponent implements OnInit {
         this.healthCheck.setPortfolioStatus(this.calculations);
         this.prognosisData = res[1];
         this.stocksStatus = res[2][Object.keys(res[2])[0]];
+        this.stocksStatus.push(Object.assign({}, {
+          "symbol": 'S&P 500',
+          "corrected_pgr_rating": 0,
+          "percentageChange": this.calculations.SPYPercentageChange,
+          "companyName": 'S&P500',
+          "raw_pgr_rating": 0,
+          "closePrice": 0,
+          "arcColor": 2
+        }));
         this.pgrChanges = res[3];
         this.earningsSurprise = res[4];
         this.analystRevisions = res[5];
         this.expectedEarnings = res[6];
         this.pgrGridData = res[7];
+        this.dailySymbolList = res[8]['symbols'];
+        console.log('this.dailySymbolList', this.dailySymbolList);
       });
   }
 

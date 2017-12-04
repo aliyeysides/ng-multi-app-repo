@@ -6,6 +6,7 @@ import {
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
+import {HealthCheckService} from '../../../../services/health-check.service';
 
 interface EarningsReportObj {
   symbol: string,
@@ -35,7 +36,7 @@ interface EarningsReportObj {
         </div>
       </div>
 
-      <div class="row">
+      <div *ngIf="!collapse" class="row">
         <div class="col-12 col-md-6">
           <h3 class="">Earnings Surprises</h3>
           <div class="divider__long"></div>
@@ -128,15 +129,19 @@ interface EarningsReportObj {
       </div>
 
       <div class="row">
-        <div class="col-12 expand-collapse">
+        <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
           <img src="./assets/imgs/icon_chevron--up.svg">
           <p>COLLAPSE</p>
+        </div>
+        <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+          <img src="./assets/imgs/icon_chevron--down.svg">
+          <p>EXPAND</p>
         </div>
       </div>
 
       <div class="row">
         <div class="col-12">
-          <div class="divider__long divider__long--green"></div>
+          <div class="divider__long" [ngClass]="{'divider__long--green': portUp, 'divider__long--red': !portUp}"></div>
         </div>
       </div>
     </div>
@@ -144,7 +149,7 @@ interface EarningsReportObj {
   styleUrls: ['../health-check.component.scss']
 })
 export class EarningsReportComponent implements OnInit, OnDestroy {
-  private ngUnsubsribe: Subject<void> = new Subject<void>();
+  private _ngUnsubsribe: Subject<void> = new Subject<void>();
   private _surprises: BehaviorSubject<EarningsReportSurprises> = new BehaviorSubject<EarningsReportSurprises>({} as EarningsReportSurprises);
   private _revisions: BehaviorSubject<EarningsAnalystRevisions> = new BehaviorSubject<EarningsAnalystRevisions>({} as EarningsAnalystRevisions);
 
@@ -153,6 +158,8 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
 
   public upCount: number = 0;
   public downCount: number = 0;
+  public collapse: boolean = false;
+  public portUp: boolean;
 
   @Input('surprises')
   set surprises(val: EarningsReportSurprises) {
@@ -174,28 +181,33 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
 
   @Input('expected') expected: ExpectedEarningsReports;
 
-  constructor(private signalSerivce: SignalService) {
+  constructor(private signalSerivce: SignalService,
+              private healthCheck: HealthCheckService) {
   }
 
   ngOnInit() {
     this._surprises
-      .takeUntil(this.ngUnsubsribe)
+      .takeUntil(this._ngUnsubsribe)
       .filter(x => x != undefined)
       .subscribe(res => {
         this.allSurprises = this.earningsReportObjFactory(res);
       });
 
     this._revisions
-      .takeUntil(this.ngUnsubsribe)
+      .takeUntil(this._ngUnsubsribe)
       .filter(x => x != undefined)
       .subscribe(res => {
         this.allRevisions = this.earningsReportObjFactory(res);
       });
+
+    this.healthCheck.getPortfolioStatus()
+      .takeUntil(this._ngUnsubsribe)
+      .subscribe(res => this.portUp = res['avgPercentageChange'] > 0)
   }
 
   ngOnDestroy() {
-    this.ngUnsubsribe.next();
-    this.ngUnsubsribe.complete();
+    this._ngUnsubsribe.next();
+    this._ngUnsubsribe.complete();
   }
 
   appendPGRUrl(pgr: number) {
@@ -204,6 +216,10 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
 
   appendPGRImage(pgr, raw_pgr) {
     return this.signalSerivce.appendPGRImage(pgr, raw_pgr);
+  }
+
+  toggleCollapse() {
+    this.collapse = !this.collapse;
   }
 
   earningsReportObjFactory(res: EarningsReportSurprises | EarningsAnalystRevisions): Array<EarningsReportObj> {
