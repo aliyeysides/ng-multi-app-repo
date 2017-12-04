@@ -162,7 +162,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input('dailyStocks')
   set dailyStocks(val: ListSymbolObj[]) {
-    console.log('shots');
     this._dailyStocks.next(val);
   }
 
@@ -249,7 +248,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('upfuckingdate');
     this.updateData();
   }
 
@@ -268,7 +266,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
       .filter(x => x != undefined)
       .take(1)
       .subscribe(res => {
-        console.log('fired', res);
         res.map(x => { // ListSymbolObj needs to be a StockStatus;
           if (x['symbol'] != 'S&P 500') {
             Object.assign(x, {

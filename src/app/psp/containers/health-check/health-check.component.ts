@@ -131,11 +131,10 @@ export class HealthCheckComponent implements OnInit {
         )
       })
       .subscribe(res => {
-        this.dailySymbolList = res[1]['symbols'];
+        this.dailySymbolList = [];
+        this.dailySymbolList = res[1]['symbols'].filter(x => x['symbol'] != 'S&P 500');
         const indicies = res[2]['market_indices'];
-        this.dailySymbolList
-          .filter(x => x['symbol'] != 'S&P 500')
-          .push(Object.assign({}, { // Push Daily SPY into collection.
+        this.dailySymbolList.push(Object.assign({}, { // Push Daily SPY into collection.
             "symbol": 'S&P 500',
             "corrected_pgr_rating": 0,
             "percentageChange": indicies[0]['percent_change'],
