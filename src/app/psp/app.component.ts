@@ -4,7 +4,6 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 import {HealthCheckService} from '../services/health-check.service';
 import {PortfolioStatus} from '../shared/models/health-check';
-import {isNullOrUndefined} from 'util';
 import {Subscription} from 'rxjs/Subscription';
 
 declare let gtag: Function;
