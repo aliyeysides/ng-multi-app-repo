@@ -66,8 +66,6 @@ button {
 
 
 
-
-
 /*                                      */
 /*               COMMON                 */
 /*                                      */
@@ -144,7 +142,9 @@ button {
   filter: blur(10px);
 }
 
-
+.show .btn-primary {
+  box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
+}
 
 
 

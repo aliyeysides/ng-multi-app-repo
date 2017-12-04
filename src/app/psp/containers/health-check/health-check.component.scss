@@ -207,31 +207,74 @@
 	h2 {
 		margin-top:25px;
 	}
+	.btn-group {
+		width: 100%;
 
-	.btn {
-	    display: inline-block;
-	    font-weight: 600;
-	    text-align: center;
-	    white-space: nowrap;
-	    vertical-align: middle;
-	    -webkit-user-select: none;
-	    -moz-user-select: none;
-	    -ms-user-select: none;
-	    user-select: none;
-	    border: 0px solid #1199ff;
-	    padding: 0;
-	    font-size: 26px;
-	    line-height: 1;
-	    border-radius: 40px;
-	    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+		.btn {
+		    display: inline-block;
+		    font-weight: 600;
+		    text-align: center;
+		    white-space: nowrap;
+		    vertical-align: middle;
+		    -webkit-user-select: none;
+		    -moz-user-select: none;
+		    -ms-user-select: none;
+		    user-select: none;
+		    border: 0;
+		    padding: 0;
+		    margin: 20px auto -3px;
+		    font-size: 26px;
+		    line-height: 1;
+		    border-radius: 40px;
+		    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+		}
+		.btn-primary {
+	  		background-color: transparent;
+		    border-color: #ffffff;
+		    font-size: 26px;
+			color: #1199ff;
+			box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
+
+			span {
+				display: inline-block;
+				vertical-align: text-bottom;
+
+				svg {
+					width: 22px;
+					height: 22px;
+					margin-left: 20px;
+				}
+			}
+		}
+		.dropdown-toggle::after {
+		    display: none;
+		}
 	}
-	.btn-primary {
-  		background-color: transparent;
-	    border-color: #1199ff;
-	    font-size: 26px;
-		color: #1199ff;
+	.dropdown-menu {
+	    position: absolute;
+	    z-index: 1000;
+	    float: left;
+	    min-width: 100%;
+	    padding: 0.5rem 0;
+	    margin: 0.6rem 0 0;
+	    font-size: 22px;
+	    color: #484848;
+	    width: 100%;
+	    text-align: center;
+	    list-style: none;
+	    background-color: rgba(255,255,255, 0.97);
+	    background-clip: padding-box;
+	    border: 0px solid #f0f0f0;
+	    border-top:2px solid #1199ff;
+	    border-radius: 0 0 8px 8px;
+		box-shadow: 0 6px 20px rgba(50, 50, 50, 0.25);
+
+		.dropdown-item {
+			font-weight: 600;
+		}
 	}
 }
+
 
 
 .list-item__mover {
@@ -296,7 +339,11 @@
 	    }
 	}
 	.mover__bar.indice {
-	  background-image: linear-gradient(-50deg, #6B0097 0%, #0096D4 100%);
+	  	background-image: linear-gradient(-50deg, #6B0097 0%, #0096D4 100%);
+
+	  	.data--right {
+	      color:#4718E1;
+	    }
 	}
 }
 
@@ -422,8 +469,10 @@
 /*     HC -- POWERGRID     */
 
 
+#HC--PowerGrid {
+}
+
 .powerGrid {
-  	padding: 0 7%;
 
 	.col-headers {
 	  	padding:0;
@@ -461,8 +510,8 @@
 			.industry {
 			  	line-height: 40px;
 			  	padding: 5px 0;
-			  	font-size: 18px;
-			  	font-weight: 600;
+			  	font-size: 16px;
+			  	font-weight: 500;
 			  	overflow: hidden;
 			  	text-overflow: ellipsis;
 			  	white-space: nowrap;
