@@ -19,6 +19,7 @@ export class HealthCheckService {
   private analystRevisionsParams: URLSearchParams;
   private phcParams: URLSearchParams;
   private earningsReportParams: URLSearchParams;
+  private listSymbolsParams: URLSearchParams;
 
   private _portfolioStatus: Subject<PortfolioStatus> = new Subject<PortfolioStatus>();
   private _toggleOptions: BehaviorSubject<string> = new BehaviorSubject<string>('Top Movers');
@@ -33,6 +34,7 @@ export class HealthCheckService {
     this.analystRevisionsParams = new URLSearchParams;
     this.earningsReportParams = new URLSearchParams;
     this.phcParams = new URLSearchParams;
+    this.listSymbolsParams = new URLSearchParams;
   }
 
   public setPortfolioStatus(val: PortfolioStatus) {
@@ -75,6 +77,13 @@ export class HealthCheckService {
     this.authorizedListsParams.set('environment', 'desktop');
     this.authorizedListsParams.set('version', '1.3.4');
     return this.utilService.getJson(url, this.authorizedListsParams);
+  }
+
+  public getListSymbols(listId: string, uid: string): Observable<Array<object>> {
+    const listSymbolsUrl = `${this.apiHost}/CPTRestSecure/app/portfolio/getListSymbols?`;
+    this.listSymbolsParams.set('listId', listId);
+    this.listSymbolsParams.set('uid', uid);
+    return this.utilService.getJson(listSymbolsUrl, this.listSymbolsParams);
   }
 
   public getUserPortfolioStockStatus(listId: string, startDate, endDate): Observable<PortfolioStatus> {

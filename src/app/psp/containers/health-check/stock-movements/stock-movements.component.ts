@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, DoCheck, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {PortfolioStatus, StockStatus} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
@@ -63,10 +63,14 @@ interface FilterFunc {
 
       <div class="row section__summary">
         <div class="col-6 summary--left">
-          <p><img src="./assets/imgs/icon_circle-movement--green.svg">{{ upStocks?.length }}</p>
+          <p><img
+            src="./assets/imgs/icon_circle-movement--green.svg">{{ selectedTimespan == 'WEEK' ? upStocksWeekly : upStocksDaily
+            }}</p>
         </div>
         <div class="col-6 summary--right">
-          <p><img src="./assets/imgs/icon_circle-movement--red.svg">{{ downStocks?.length }}</p>
+          <p><img
+            src="./assets/imgs/icon_circle-movement--red.svg">{{ selectedTimespan == 'WEEK' ? downStocksWeekly : downStocksDaily
+            }}</p>
         </div>
       </div>
 
@@ -132,7 +136,7 @@ interface FilterFunc {
   `,
   styleUrls: ['../health-check.component.scss'],
 })
-export class StockMovementsComponent implements OnInit, OnDestroy {
+export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _calc: BehaviorSubject<PortfolioStatus> = new BehaviorSubject<PortfolioStatus>({} as PortfolioStatus);
   private _weeklyStocks: BehaviorSubject<StockStatus[]> = new BehaviorSubject<StockStatus[]>({} as StockStatus[]);
@@ -158,6 +162,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
 
   @Input('dailyStocks')
   set dailyStocks(val: ListSymbolObj[]) {
+    console.log('shots');
     this._dailyStocks.next(val);
   }
 
@@ -194,19 +199,21 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
     }
   };
   selectedToggleOption: Function = this.toggleOptions.movers;
-  DaySPY: MarketData;
   calculations: PortfolioStatus;
   selectedTimespan: string = 'WEEK';
 
   weeklyStockData: StockStatus[];
   dailyStockData;
-  upStocks: StockStatus[];
-  downStocks: StockStatus[];
+
+  upStocksWeekly: number;
+  upStocksDaily: number;
+  downStocksWeekly: number;
+  downStocksDaily: number;
+
   collapse: boolean = false;
 
   constructor(private signalService: SignalService,
-              private healthCheck: HealthCheckService,
-              private marketsSummary: MarketsSummaryService) {
+              private healthCheck: HealthCheckService) {
   }
 
   ngOnInit() {
@@ -234,13 +241,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .filter(x => x != undefined)
       .subscribe(res => this.calculations = res);
-
-    this.marketsSummary.initialMarketSectorData({components: 'majorMarketIndices,sectors'})
-      .takeUntil(this._ngUnsubscribe)
-      .subscribe(res => {
-        const indicies = res['market_indices'];
-        this.DaySPY = indicies[0];
-      })
   }
 
   ngOnDestroy() {
@@ -248,38 +248,45 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
     this._ngUnsubscribe.complete();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('upfuckingdate');
+    this.updateData();
+  }
+
   updateData() {
     this._weeklyStocks
-      .takeUntil(this._ngUnsubscribe)
       .filter(x => x != undefined)
+      .take(1)
       .subscribe(res => {
-        this.weeklyStockData = res
-          .filter(x => this.selectedToggleOption(x))
-          .sort((x, y) => y['percentageChange'] - x['percentageChange']);
+        this.weeklyStockData = this.parseStockStatus(res);
+        this.upStocksWeekly = this.weeklyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] > 0).length;
+        this.downStocksWeekly = this.weeklyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] < 0).length;
 
-        if (this.selectedToggleOption === this.toggleOptions.movers) {
-          const stocks = this.weeklyStockData.filter(x => x['symbol'] != 'S&P 500');
-          const SPY = this.weeklyStockData.filter(x => x['symbol'] == 'S&P 500');
-          if (stocks.length >= 6) {
-            const upmovers = stocks.slice(0, 3);
-            const downmovers = stocks.slice(stocks.length - 3, stocks.length);
-            this.weeklyStockData = upmovers
-              .concat(downmovers)
-              .concat(SPY)
-              .sort((x, y) => y['percentageChange'] - x['percentageChange']);
-          }
-        }
-
-        this._dailyStocks
-          .takeUntil(this._ngUnsubscribe)
-          .subscribe(res => {
-            console.log('daily', res);
-            // TODO: Need market to be open
-            this.dailyStockData = res;
-          });
-
-        this.parseStockStatus(res);
       });
+
+    this._dailyStocks
+      .filter(x => x != undefined)
+      .take(1)
+      .subscribe(res => {
+        console.log('fired', res);
+        res.map(x => { // ListSymbolObj needs to be a StockStatus;
+          if (x['symbol'] != 'S&P 500') {
+            Object.assign(x, {
+              symbol: x['symbol'],
+              corrected_pgr_rating: x['PGR'],
+              percentageChange: x['Percentage '],
+              companyName: x['name'],
+              raw_pgr_rating: x['raw_PGR'],
+              closePrice: x['Last'],
+              arcColor: this.appendArcColor(x)
+            })
+          }
+        });
+        this.dailyStockData = this.parseStockStatus(res);
+        this.upStocksDaily = this.dailyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] > 0).length;
+        this.downStocksDaily = this.dailyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] < 0).length;
+      });
+
   }
 
   selectToggleOption(fn: FilterFunc) {
@@ -289,20 +296,48 @@ export class StockMovementsComponent implements OnInit, OnDestroy {
 
   selectTimespan(mode: string) {
     this.selectedTimespan = mode;
+    this.updateData();
   }
 
   toggleCollapse() {
     this.collapse = !this.collapse;
   }
 
-  public parseStockStatus(stocks: StockStatus[]) {
-    this.calculateBarWidth(stocks);
-    this.upStocks = stocks.filter(x => x['percentageChange'] > 0);
-    this.downStocks = stocks.filter(x => x['percentageChange'] < 0);
+  public parseStockStatus(res) {
+    let result = res
+      .filter(x => this.selectedToggleOption(x))
+      .sort((x, y) => y['percentageChange'] - x['percentageChange']);
+
+    if (this.selectedToggleOption === this.toggleOptions.movers) {
+      const stocks = result.filter(x => x['symbol'] != 'S&P 500');
+      const SPY = result.filter(x => x['symbol'] == 'S&P 500');
+      if (stocks.length >= 6) {
+        const upmovers = stocks.slice(0, 3);
+        const downmovers = stocks.slice(stocks.length - 3, stocks.length);
+        result = upmovers
+          .concat(downmovers)
+          .concat(SPY)
+          .sort((x, y) => y['percentageChange'] - x['percentageChange']);
+      }
+    }
+    this.calculateBarWidth(result);
+    return result;
   }
 
   public appendPGRImage(pgr, rawPgr) {
     return this.signalService.appendPGRImage(pgr, rawPgr)
+  }
+
+  appendArcColor(stock: ListSymbolObj): number {
+    if (stock['PGR'] > 3) {
+      return 1;
+    }
+    if (stock['PGR'] === 3) {
+      return 0;
+    }
+    if (stock['PGR'] < 3) {
+      return -1;
+    }
   }
 
   calculateBarWidth(stocks: StockStatus[]) {

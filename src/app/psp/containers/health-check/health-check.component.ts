@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {AuthService} from '../../../services/auth.service';
 
@@ -9,7 +9,8 @@ import {
   StockStatus
 } from '../../../shared/models/health-check';
 import {Observable} from 'rxjs/Observable';
-import {IdeasService} from '../../../services/ideas.service';
+import {MarketsSummaryService} from '../../../services/markets-summary.service';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-health-check',
@@ -39,7 +40,8 @@ import {IdeasService} from '../../../services/ideas.service';
         <div class="col-12 col-lg-8 col-xl-8 float-lg-right">
           <div class="row">
             <div class="col-12">
-              <div class="divider__long" [ngClass]="{'divider__long--green': calculations?.avgPercentageChange>0, 'divider__long--red': calculations?.avgPercentageChange<0}"></div>
+              <div class="divider__long"
+                   [ngClass]="{'divider__long--green': calculations?.avgPercentageChange>0, 'divider__long--red': calculations?.avgPercentageChange<0}"></div>
             </div>
           </div>
 
@@ -61,6 +63,7 @@ import {IdeasService} from '../../../services/ideas.service';
 export class HealthCheckComponent implements OnInit {
   private _uid: string;
   private _listId: string;
+  private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
   public calculations: PortfolioStatus;
   public stocksStatus: Array<StockStatus>;
@@ -74,7 +77,8 @@ export class HealthCheckComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService,
-              private ideasService: IdeasService) {
+              private marketsSummary: MarketsSummaryService,
+              private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -95,16 +99,16 @@ export class HealthCheckComponent implements OnInit {
           this.healthCheck.getAnalystRevisions(listId, moment().day(-2).format('YYYY-MM-DD')),
           this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, listId, moment().isoWeekday(1).format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')),
           this.healthCheck.getPHCGridData(listId),
-          this.ideasService.getListSymbols(listId, this._uid)
         )
       })
       .take(1)
-      .subscribe(res => {
+      .map(res => {
         this.calculations = res[0][Object.keys(res[0])[0]];
         this.healthCheck.setPortfolioStatus(this.calculations);
         this.prognosisData = res[1];
+
         this.stocksStatus = res[2][Object.keys(res[2])[0]];
-        this.stocksStatus.push(Object.assign({}, {
+        this.stocksStatus.push(Object.assign({}, { // Push Weekly SPY into collection.
           "symbol": 'S&P 500',
           "corrected_pgr_rating": 0,
           "percentageChange": this.calculations.SPYPercentageChange,
@@ -113,13 +117,34 @@ export class HealthCheckComponent implements OnInit {
           "closePrice": 0,
           "arcColor": 2
         }));
+
         this.pgrChanges = res[3];
         this.earningsSurprise = res[4];
         this.analystRevisions = res[5];
         this.expectedEarnings = res[6];
         this.pgrGridData = res[7];
-        this.dailySymbolList = res[8]['symbols'];
-        console.log('this.dailySymbolList', this.dailySymbolList);
+      })
+      .flatMap(() => {
+        return Observable.timer(0, 5 * 1000).combineLatest(
+          this.healthCheck.getListSymbols(this._listId, this._uid),
+          this.marketsSummary.initialMarketSectorData({components: 'majorMarketIndices,sectors'})
+        )
+      })
+      .subscribe(res => {
+        this.dailySymbolList = res[1]['symbols'];
+        const indicies = res[2]['market_indices'];
+        this.dailySymbolList
+          .filter(x => x['symbol'] != 'S&P 500')
+          .push(Object.assign({}, { // Push Daily SPY into collection.
+            "symbol": 'S&P 500',
+            "corrected_pgr_rating": 0,
+            "percentageChange": indicies[0]['percent_change'],
+            "companyName": 'S&P500',
+            "raw_pgr_rating": 0,
+            "closePrice": 0,
+            "arcColor": 2
+          }));
+        this.dailySymbolList = this.dailySymbolList.slice(0); // hack to bypass dirty checking for non-primitives
       });
   }
 
