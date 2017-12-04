@@ -15,7 +15,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
         </div>
       </div>
 
-      <div *ngIf="!collapse" class="row">
+      <div *ngIf="!collapse" class="container">
         <div class="row">
           <div class="col-12">
             <div class="divider__long"></div>
@@ -27,7 +27,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <h3>Strong Industries</h3>
           </div>
 
-          <div class="col-12 powerGrid">
+          <div class="col-12 col-md-6 powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <p>STRONG STOCKS</p>
@@ -50,7 +50,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             </div>
           </div>
 
-          <div class="col-12 powerGrid">
+          <div class="col-12 col-md-6 powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <p>WEAK STOCKS</p>
@@ -81,7 +81,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <h3>Weak Industries</h3>
           </div>
 
-          <div class="col-12 powerGrid">
+          <div class="col-12 col-md-6 powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <p>STRONG GROUPS</p>
@@ -104,7 +104,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             </div>
           </div>
 
-          <div class="col-12 powerGrid">
+          <div class="col-12 col-md-6 powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <p>WEAK GROUPS</p>
