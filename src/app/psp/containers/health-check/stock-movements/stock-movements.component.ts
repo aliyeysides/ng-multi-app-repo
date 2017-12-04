@@ -74,7 +74,7 @@ interface FilterFunc {
         <div class="col-12">
           <div class="btn-group" dropdown [autoClose]="true">
             <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-              {{ currentToggleOptionText }} <span class="caret"></span>
+              {{ currentToggleOptionText }} <span class=""><i class="fa fa-caret-square-o-down" aria-hidden="true"></i></span>
             </button>
             <ul *dropdownMenu class="dropdown-menu" role="menu">
               <li (click)="selectToggleOption(toggleOptions.movers);" role="menuitem"><a
