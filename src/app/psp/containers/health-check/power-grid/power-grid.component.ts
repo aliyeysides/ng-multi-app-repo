@@ -18,8 +18,8 @@ import {HealthCheckService} from '../../../../services/health-check.service';
       <div *ngIf="!collapse" class="container">
 
         <div class="row">
-          <div class="col-12">
-            <h3>Strong Industries</h3>
+          <div class="col-12 hidden-md-up">
+            <h3><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M475.115 131.752L336 220.28V152c0-18.916-20.931-30.399-36.885-20.248L160 220.28V56c0-13.255-10.745-24-24-24H24C10.745 32 0 42.745 0 56v400c0 13.255 10.745 24 24 24h464c13.255 0 24-10.745 24-24V152c0-18.917-20.931-30.399-36.885-20.248zM464 432H48V80h64v184c0 18.916 20.931 30.399 36.885 20.248L288 195.72V264c0 18.915 20.931 30.399 36.885 20.248L464 195.72V432zm-60-48h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12zm-128 0h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12zm-128 0h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12z"/></svg></span>Strong Industries</h3>
             <div class="divider__long"></div>
           </div>
 
@@ -40,7 +40,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
                   </a>
                 </p>
               </div>
-              <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant">
+              <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6">
                 <p class="industry green">{{ industry.IndustryName }}</p>
               </div>
             </div>
@@ -63,30 +63,27 @@ import {HealthCheckService} from '../../../../services/health-check.service';
                   </a>
                 </p>
               </div>
-              <div *ngIf="isWeakStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant">
+              <div *ngIf="isWeakStock(industry.SymbolPGRMappings).length>0" class="col-6">
                 <p class="industry green">{{ industry.IndustryName }}</p>
               </div>
             </div>
           </div>
 
-          <div class="col-12">
+          <div class="col-12 hidden-md-up">
+            <h3><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M475.115 131.752L336 220.28V152c0-18.916-20.931-30.399-36.885-20.248L160 220.28V56c0-13.255-10.745-24-24-24H24C10.745 32 0 42.745 0 56v400c0 13.255 10.745 24 24 24h464c13.255 0 24-10.745 24-24V152c0-18.917-20.931-30.399-36.885-20.248zM464 432H48V80h64v184c0 18.916 20.931 30.399 36.885 20.248L288 195.72V264c0 18.915 20.931 30.399 36.885 20.248L464 195.72V432zm-60-48h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12zm-128 0h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12zm-128 0h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12z"/></svg></span>Weak Industries</h3>
             <div class="divider__long"></div>
-          </div>
-
-          <div class="col-12">
-            <h3>Weak Industries</h3>
           </div>
 
           <div class="col-12 col-md-6 powerGrid">
             <div class="row col-headers">
               <div class="col-6">
-                <p>STRONG GROUPS</p>
+                <h4>STRONG GROUPS</h4>
               </div>
               <div class="col-6">
               </div>
             </div>
             <div *ngFor="let industry of weakIndustries" class="row grid__row">
-              <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant red">
+              <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6 red">
                 <p class="ticker">
                   <a *ngFor="let stock of isStrongStock(industry.SymbolPGRMappings);let last = last">
                     {{ objectKeys(stock)[0] }}
@@ -94,7 +91,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
                   </a>
                 </p>
               </div>
-              <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant">
+              <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6">
                 <p class="industry red">{{ industry.IndustryName }}</p>
               </div>
             </div>
@@ -103,7 +100,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
           <div class="col-12 col-md-6 powerGrid">
             <div class="row col-headers">
               <div class="col-6">
-                <p>WEAK GROUPS</p>
+                <h4>WEAK GROUPS</h4>
               </div>
               <div class="col-6">
               </div>
@@ -117,7 +114,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
                   </a>
                 </p>
               </div>
-              <div *ngIf="isWeakStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant">
+              <div *ngIf="isWeakStock(industry.SymbolPGRMappings).length>0" class="col-6">
                 <p class="industry red">{{ industry.IndustryName }}</p>
               </div>
             </div>

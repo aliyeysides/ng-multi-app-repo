@@ -38,7 +38,7 @@
 			font-weight: 600;
 			text-transform: uppercase;
 			padding:6px 15px 4px;
-			margin: 7px 0;
+			margin: 6px 0 10px;
 		}
 
 		p {
@@ -237,11 +237,14 @@
 
 			span {
 				display: inline-block;
-				vertical-align: text-bottom;
+				width: 28px;
+				height: 28px;
+				position: relative;
+				vertical-align: sub;
 
 				svg {
-					width: 22px;
-					height: 22px;
+					width: 28px;
+					height: 28px;
 					margin-left: 20px;
 				}
 			}
@@ -281,7 +284,7 @@
   margin:15px 0;
 
   &:last-child {
-  	margin-bottom:0;
+  	margin-bottom:20px;
   }
 }
 
@@ -470,58 +473,66 @@
 
 
 #HC--PowerGrid {
+
 }
 
 .powerGrid {
-
 	.col-headers {
-	  	padding:0;
+	  	margin-bottom: 10px;
+	  	margin-top: 0px;
 
-		p {
-		  font-size: 16px;
-		  font-weight: 500;
-		  opacity: .8;
-		}
+	  	h4 {
+
+	  	}
 	}
 
 	.grid__row {
-		margin-bottom: 15px;
+		margin-bottom: 1px;
+
+		&:last-child {
+			margin-bottom:20px;
+
+			.grid__quadrant {
+				border-radius: 0 0 8px 8px;
+			}
+		}
 
 		.grid__quadrant {
 		  	padding: 2px 3px 0;
-		  	border-radius: 7px;
 
 			.ticker {
 			  	color:#ffffff;
 			  	font-weight: 600;
-			  	font-size: 20px;
-			  	line-height: 40px;
-			  	border-bottom: 1px dashed #ffffff;
-			  	padding: 5px 0;
+			  	font-size: 18px;
+			  	padding: 15px 0;
 			  	overflow: hidden;
 			  	text-overflow: ellipsis;
 			  	white-space: nowrap;
-
-				&:last-child {
-				  border-bottom: 0px dashed #ffffff;
-				}
 			}
 
-			.industry {
-			  	line-height: 40px;
-			  	padding: 5px 0;
-			  	font-size: 16px;
-			  	font-weight: 500;
-			  	overflow: hidden;
-			  	text-overflow: ellipsis;
-			  	white-space: nowrap;
+		}
+
+		&:nth-of-type(2) {
+			.grid__quadrant {
+				border-radius: 8px 8px 0 0;
 			}
 		}
+
 		.grid__quadrant.green {
 		  background: linear-gradient(to right, rgba(0,204,0,1) 0%,rgba(0,170,119,1) 100%);
 		}
 		.grid__quadrant.red {
 		  background: linear-gradient(to right, rgba(255,50,50,1) 2%,rgba(170,0,119,1) 100%);
+		}
+
+		.industry {
+		  	line-height: 45px;
+		  	padding: 5px 0;
+		  	font-size: 16px;
+		  	font-weight: 500;
+		  	overflow: hidden;
+		  	text-overflow: ellipsis;
+		  	white-space: nowrap;
 		}
 	}
 }

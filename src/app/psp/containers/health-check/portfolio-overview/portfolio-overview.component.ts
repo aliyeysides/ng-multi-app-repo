@@ -17,10 +17,10 @@ import {HealthCheckService} from '../../../../services/health-check.service';
       </div>
 
       <div class="row no-gutters overview__summary">
-        <div class="col-12">
+        <div class="col-12 col-md-4">
           <p class="timespan">LAST WEEK</p>
         </div>
-        <div class="col-12">
+        <div class="col-12 col-md-4">
           <p class="data">
             <span class="icon__arrow">
               <img *ngIf="isPortUp()" src="./assets/imgs/icon__thin-arrow--up.svg">
@@ -29,7 +29,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <sub><span class="plus-minus" *ngIf="isPortUp()">+</span></sub>{{ calculations?.avgPercentageChange | number:'.2-2' }}<sub>%</sub>
           </p>
         </div>
-        <div class="col-12" style="padding:0 10px;">
+        <div class="col-12 col-md-4" style="padding:0 10px;">
           <p>Compared to the <span class="market">S&amp;P 500</span> ---
             <span class="market market--change"> 
               <span *ngIf="isSPYUp()">Up +</span>
@@ -41,7 +41,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
       </div>
 
       <div class="row overview__powerbar">
-        <div class="col-12 powerbar clearfix">
+        <div class="col-12 col-md-9 powerbar clearfix">
           <div (click)="setToggleOptions('Bulls')"
             [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
             <p>{{ prognosisData?.BullishSymbolsCount }}</p>
@@ -54,7 +54,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <p>{{ prognosisData?.BearishSymbolsCount }}</p>
           </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 col-md-3">
           <p class="label">Chaikin Power Bar <a> <i tooltip="{{ toolTipText }}" class="fa fa-info-circle" aria-hidden="true"></i></a></p>
         </div>
       </div>
