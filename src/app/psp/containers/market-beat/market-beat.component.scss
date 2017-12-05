@@ -565,4 +565,148 @@
 
 
 
+.component--marketbeat {
+
+	.section--masthead {
+		padding:150px 0 0 0;
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 100% auto;
+
+		h2 {
+			color:#ffffff;
+			display:block;
+			background-color: rgba(0,0,0,0.7);
+			padding: 8px 0;
+			margin:0;
+			text-align: center;
+			width: 100%;
+			opacity: 1;
+		}
+	}
+
+	.masthead--featured {
+		background-image: url("/../../assets/imgs/image__MI--masthead.png");
+	}
+
+	.masthead--education {
+		background-image: url("/../../assets/imgs/image__EDU--masthead.png");
+		padding:100px 0 0 0;
+		margin-top: 40px;
+	}
+
+
+
+	.section--date-select {
+		h3 {
+			margin:30px 0 0px;
+			color: #484848;
+			opacity: 0.6;
+			font-weight: 600;
+		}
+	}
+	.section--article {
+		.article__headline {
+			font-weight: 400;
+			font-size: 20px;
+			line-height: 1.4;
+			margin-bottom: 5px;
+			font-family: 'Open Sans', sans-serif;
+			text-align: left;
+			opacity: 0.8;
+			white-space: normal;
+			color:#484848;
+
+			&::after {
+				content: " →";
+			}
+		}
+		.article__author {
+			text-align: center;
+			font-size: 18px;
+			font-weight: 600;
+			line-height: 1;
+			padding:10px 0 25px;
+		}
+		.article__preview {
+			margin-top: 25px;
+			font-family: 'Open Sans', sans-serif;
+			color: #484848;
+			position: relative;
+
+			.paragraph {
+				display: block;
+				height: 148px;
+				overflow: hidden;
+				font-family: 'Open Sans', sans-serif;
+				color: #484848;
+				font-size: 14px;
+				line-height: 1.5;
+				text-align: left;
+				margin:10px 0 15px;
+			}
+
+			&::after {
+				content: "…";
+				position: absolute;
+				bottom: -23px;
+				left:0;
+				right:0;
+				width: 100%;
+				text-align: center;
+				font-size: 32px;
+				opacity: 0.6;
+			}
+		}
+		.article__read-more {
+			display: block;
+			font-size: 13px;
+			color: #1199FF;
+			font-weight: 700;
+			margin: 25px 0 10px;
+			text-align: center;
+		}
+	}
+	.education--article {
+		padding-left:10px;
+
+		.article__read-more {
+			margin:0;
+			text-align: left;
+		}
+		.article__headline {
+			font-weight: 600;
+			font-size: 16px;
+			line-height: 1.4;
+			font-family: 'Open Sans', sans-serif;
+			text-align: left;
+			opacity: 0.8;
+			white-space: normal;
+			color:#484848;
+		}
+	}
+	.article__thumbnail {
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 100% auto;
+	}
+	.educational__entry {
+		margin: 15px 0 20px;
+	}
+}
+
+
+#education--article__1 {
+	background-image: url("/../../assets/imgs/image__EDU--article-1.png");
+}
+
+#education--article__2 {
+	background-image: url("/../../assets/imgs/image__EDU--article-2.png");
+}
+
+
+
+
+
+
 

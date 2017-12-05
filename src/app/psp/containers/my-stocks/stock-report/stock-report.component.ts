@@ -1113,7 +1113,6 @@ import { Component, OnInit } from '@angular/core';
         </div>
       </div>
 
-  `
   `,
   styleUrls: ['./stock-report.component.scss']
 })
