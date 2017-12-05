@@ -5,18 +5,21 @@ import {AuthService} from '../../../services/auth.service';
 import * as moment from 'moment';
 import {
   EarningsAnalystRevisions,
-  EarningsReportSurprises, PGRChanges, PHCGridData, PortfolioStatus, PrognosisData,
+  EarningsReportSurprises, ExpectedEarningsReports, ListSymbolObj, PGRChanges, PHCGridData, PortfolioStatus,
+  PrognosisData,
   StockStatus
 } from '../../../shared/models/health-check';
 import {Observable} from 'rxjs/Observable';
 import {MarketsSummaryService} from '../../../services/markets-summary.service';
 import {Subject} from 'rxjs/Subject';
+import {Subscription} from 'rxjs/Subscription';
+import {TimerObservable} from 'rxjs/observable/TimerObservable';
 
 @Component({
   selector: 'cpt-health-check',
   template: `
     <!-- PANEL CONTENTS -->
-    <div class="container-fluid component component--healthcheck">
+    <div [ngBusy]="loading" class="container-fluid component component--healthcheck">
       <div class="row contents">
 
         <!-- HEALTH-CHECK - Intro -->
@@ -71,14 +74,14 @@ export class HealthCheckComponent implements OnInit {
   public pgrChanges: PGRChanges;
   public earningsSurprise: EarningsReportSurprises;
   public analystRevisions: EarningsAnalystRevisions;
-  public expectedEarnings;
+  public expectedEarnings: ExpectedEarningsReports;
   public pgrGridData: PHCGridData;
-  public dailySymbolList;
+  public dailySymbolList: Array<StockStatus | ListSymbolObj>;
+  public loading: Subscription;
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService,
-              private marketsSummary: MarketsSummaryService,
-              private cd: ChangeDetectorRef) {
+              private marketsSummary: MarketsSummaryService) {
   }
 
   ngOnInit() {
@@ -125,7 +128,7 @@ export class HealthCheckComponent implements OnInit {
         this.pgrGridData = res[7];
       })
       .flatMap(() => {
-        return Observable.timer(0, 5 * 1000).combineLatest(
+        return TimerObservable.create(0, 10000).combineLatest(
           this.healthCheck.getListSymbols(this._listId, this._uid),
           this.marketsSummary.initialMarketSectorData({components: 'majorMarketIndices,sectors'})
         )
@@ -135,14 +138,14 @@ export class HealthCheckComponent implements OnInit {
         this.dailySymbolList = res[1]['symbols'].filter(x => x['symbol'] != 'S&P 500');
         const indicies = res[2]['market_indices'];
         this.dailySymbolList.push(Object.assign({}, { // Push Daily SPY into collection.
-            "symbol": 'S&P 500',
-            "corrected_pgr_rating": 0,
-            "percentageChange": indicies[0]['percent_change'],
-            "companyName": 'S&P500',
-            "raw_pgr_rating": 0,
-            "closePrice": 0,
-            "arcColor": 2
-          }));
+          "symbol": 'S&P 500',
+          "corrected_pgr_rating": 0,
+          "percentageChange": indicies[0]['percent_change'],
+          "companyName": 'S&P500',
+          "raw_pgr_rating": 0,
+          "closePrice": 0,
+          "arcColor": 2
+        }));
         this.dailySymbolList = this.dailySymbolList.slice(0); // hack to bypass dirty checking for non-primitives
       });
   }
