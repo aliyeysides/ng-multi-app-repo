@@ -1,11 +1,9 @@
-import {ChangeDetectorRef, Component, DoCheck, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {PortfolioStatus, StockStatus} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
-import {MarketsSummaryService} from '../../../../services/markets-summary.service';
-import {MarketData} from '../../../../bear/core/market-summary/market-summary.component';
 
 interface ListSymbolObj {
   "is_watching_stock": boolean,
@@ -182,7 +180,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   toggleOptions: ToggleOptions = {
     currentToggleOptionText: 'Top Movers',
     all(stock: StockStatus) {
-      // return stock['percentageChange'] != 0;
       this.currentToggleOptionText = 'All';
       return true;
     },
