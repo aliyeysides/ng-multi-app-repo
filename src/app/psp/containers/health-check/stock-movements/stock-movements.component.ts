@@ -80,7 +80,7 @@ interface FilterFunc {
             <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
               {{ currentToggleOptionText }} 
               <span>
-                <svg width="38px" height="38px" viewBox="0 0 38 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <svg class="align-absolute" width="38px" height="38px" viewBox="0 0 38 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <defs></defs>
                   <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g id="icon_section-h2__calendar-copy" fill-rule="nonzero" fill="#1199ff">

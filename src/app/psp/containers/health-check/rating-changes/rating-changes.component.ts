@@ -33,7 +33,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
 
       <div *ngIf="!collapse" class="row">
         <div class="col-12 col-md-6">
-          <h3>Turned Bullish</h3>
+          <h3><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M168.5 84.2l148 146.8c4.7 4.7 4.7 12.3 0 17l-19.8 19.8c-4.7 4.7-12.3 4.7-17 0L160 149.3 40.3 267.8c-4.7 4.7-12.3 4.7-17 0L3.5 248c-4.7-4.7-4.7-12.3 0-17l148-146.8c4.7-4.7 12.3-4.7 17 0zm-17 160L3.5 391c-4.7 4.7-4.7 12.3 0 17l19.8 19.8c4.7 4.7 12.3 4.7 17 0L160 309.3l119.7 118.5c4.7 4.7 12.3 4.7 17 0l19.8-19.8c4.7-4.7 4.7-12.3 0-17l-148-146.8c-4.7-4.7-12.3-4.7-17 0z"/></svg></span>Turned Bullish</h3>
           <div class="divider__long"></div>
           <ul class="stock__list">
             <li class="row col-headers">
@@ -52,11 +52,11 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             </li>
             <ng-container *ngIf="bullishAlerts.length">
               <li *ngFor="let stock of bullishAlerts" class="row list__entry">
-                <div class="col-2 list-entry__pgr">
+                <div class="col-3 list-entry__pgr">
                   <img class="align-absolute"
                        src="{{ appendPGRImage(stock['corrected_pgr_rating'], stock['raw_pgr_rating']) }}">
                 </div>
-                <div class="col-4 list-entry__info">
+                <div class="col-3 list-entry__info">
                   <p class="ticker">{{ stock['symbol'] }}</p>
                   <p class="company">{{ stock['company'] }}</p>
                 </div>
@@ -78,7 +78,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
         </div>
 
         <div class="col-12 col-md-6">
-          <h3>Turned Bearish</h3>
+          <h3><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M151.5 427.8L3.5 281c-4.7-4.7-4.7-12.3 0-17l19.8-19.8c4.7-4.7 12.3-4.7 17 0L160 362.7l119.7-118.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17l-148 146.8c-4.7 4.7-12.3 4.7-17 0zm17-160l148-146.8c4.7-4.7 4.7-12.3 0-17l-19.8-19.8c-4.7-4.7-12.3-4.7-17 0L160 202.7 40.3 84.2c-4.7-4.7-12.3-4.7-17 0L3.5 104c-4.7 4.7-4.7 12.3 0 17l148 146.8c4.7 4.7 12.3 4.7 17 0z"/></svg></span>Turned Bearish</h3>
           <div class="divider__long"></div>
           <ul class="stock__list">
             <li class="row col-headers">
@@ -97,11 +97,11 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             </li>
             <ng-container *ngIf="bearishAlerts.length">
               <li *ngFor="let stock of bearishAlerts" class="row list__entry">
-                <div class="col-2 list-entry__pgr">
+                <div class="col-3 list-entry__pgr">
                   <img class="align-absolute"
                        src="{{ appendPGRImage(stock['corrected_pgr_rating'], stock['raw_pgr_rating']) }}">
                 </div>
-                <div class="col-4 list-entry__info">
+                <div class="col-3 list-entry__info">
                   <p class="ticker">{{ stock['symbol'] }}</p>
                   <p class="company">{{ stock['company'] }}</p>
                 </div>
