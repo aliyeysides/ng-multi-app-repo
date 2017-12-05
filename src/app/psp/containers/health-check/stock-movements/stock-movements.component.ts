@@ -1,30 +1,9 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import {PortfolioStatus, StockStatus} from '../../../../shared/models/health-check';
+import {ListSymbolObj, PortfolioStatus, StockStatus} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
-
-interface ListSymbolObj {
-  "is_watching_stock": boolean,
-  "symbol": string,
-  "raw_PGR": number,
-  "industry_name": string,
-  "Change": number,
-  "filter": number,
-  "Last": number,
-  "signals": string,
-  "market_cap": number,
-  "div_yield": number,
-  "name": string,
-  "list_rating": number,
-  "PGR": number,
-  "TechnicalRating ": number,
-  "Percentage ": number,
-  "industry_ListID ": number,
-  "is_holding_stock": boolean,
-  "SummaryRating ": number
-}
 
 interface ToggleOptions {
   currentToggleOptionText: string,
@@ -255,7 +234,8 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.updateData();
+    // console.log('changes', changes);
+    if (changes['dailyStocks']) this._dailyStocks.next(changes['dailyStocks'].currentValue);
   }
 
   updateData() {

@@ -127,7 +127,6 @@ export class ReportingCalendarComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .filter(x => x != undefined)
       .subscribe(res => {
-        console.log('data in cal', res);
         this.parseExpectedEarningsReports(res);
       });
   }

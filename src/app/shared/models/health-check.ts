@@ -81,3 +81,24 @@ export interface EarningsReport {
 export interface ExpectedEarningsReports {
   [key: string]: Array<EarningsReport>
 }
+
+export interface ListSymbolObj {
+  "is_watching_stock": boolean,
+  "symbol": string,
+  "raw_PGR": number,
+  "industry_name": string,
+  "Change": number,
+  "filter": number,
+  "Last": number,
+  "signals": string,
+  "market_cap": number,
+  "div_yield": number,
+  "name": string,
+  "list_rating": number,
+  "PGR": number,
+  "TechnicalRating ": number,
+  "Percentage ": number,
+  "industry_ListID ": number,
+  "is_holding_stock": boolean,
+  "SummaryRating ": number
+}

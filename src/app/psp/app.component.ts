@@ -4,7 +4,6 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 import {HealthCheckService} from '../services/health-check.service';
 import {PortfolioStatus} from '../shared/models/health-check';
-import {Subscription} from 'rxjs/Subscription';
 
 declare let gtag: Function;
 
@@ -32,7 +31,7 @@ declare let gtag: Function;
       </div>
   
         <!-- App Container -->
-      <div [ngBusy]="loading" class="container--main" id="container--main" [ngClass]="{'blur-me': searchOpened || ( navOpened | async ) }">
+      <div class="container--main" id="container--main" [ngClass]="{'blur-me': searchOpened || ( navOpened | async ) }">
         <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->
         <div class="router__container">
           <router-outlet></router-outlet>
@@ -49,7 +48,6 @@ export class AppComponent {
   public navOpened: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public title: string;
   public status: PortfolioStatus;
-  public loading: Subscription;
   options = {
     position: ['top', 'right'],
     timeOut: 5000,
@@ -70,7 +68,7 @@ export class AppComponent {
         // });
       }
     });
-    this.loading = this.healthCheck.getPortfolioStatus()
+    this.healthCheck.getPortfolioStatus()
       .take(1)
       .subscribe(res => this.status = res);
   }
