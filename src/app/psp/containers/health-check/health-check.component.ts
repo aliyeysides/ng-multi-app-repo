@@ -139,7 +139,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
   }
 
   loadDailyData() {
-    Observable.timer(0, 60 * 1000)
+    Observable.timer(0, 30 * 1000)
       .switchMap(() => {
         return Observable.combineLatest(
           this.healthCheck.getListSymbols(this._listId, this._uid),

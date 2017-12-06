@@ -28,3 +28,12 @@ export const loadingMaskConfig2: BusyConfig = ({
 </div>`,
   wrapperClass: 'ng-busy'
 });
+
+export const loadingMaskConfig3: BusyConfig = ({
+  message: '',
+  backdrop: true,
+  delay: 0,
+  minDuration: 0,
+  template: `<div class="spinner"></div>`,
+  wrapperClass: 'ng-busy'
+});

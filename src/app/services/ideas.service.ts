@@ -70,10 +70,11 @@ export class IdeasService {
   }
 
   public addStockIntoList(listId: string, symbol: string) {
+    console.log('fired at least');
     const allowed = 30;
     const addStockIntoListUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/addStockIntoList?`;
-    this.addStockIntoListParams.set('listId', listId);
-    this.addStockIntoListParams.set('symbol', symbol);
+    this.addStockIntoListParams.set('listId', listId.toString());
+    this.addStockIntoListParams.set('symbol', symbol.toString());
 
     return this.authService
       .currentUser$
@@ -86,6 +87,7 @@ export class IdeasService {
       }))
       .map(res => res['symbols'].length < allowed)
       .flatMap(allowed => {
+        console.log('allowed', allowed);
         if (allowed) {
 
           return this.http.get(addStockIntoListUrl, {
