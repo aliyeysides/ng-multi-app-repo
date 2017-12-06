@@ -1,7 +1,8 @@
-import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {BaseSettingsMenuComponent} from '../../../shared/components/menus/settings-menu.component';
 import {AuthService} from '../../../services/auth.service';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Subject} from 'rxjs/Subject';
 
 declare let gtag: Function;
 
@@ -13,7 +14,7 @@ declare let gtag: Function;
         <img src="assets/imgs/logo_powerpulse.svg">
       </div>
       <div class="nav-list">
-        <cpt-psp-navigator></cpt-psp-navigator>
+        <cpt-psp-navigator (routeClicked)="navClicked()"></cpt-psp-navigator>
         <ul>
           <li>
             <a><i class="fa fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>
@@ -32,6 +33,7 @@ declare let gtag: Function;
 export class PspSettingsMenuComponent extends BaseSettingsMenuComponent implements OnInit {
   @Input('navOpened') navOpened: BehaviorSubject<boolean>;
   @Input('btn') btn: ElementRef;
+  @Output('navClosed') navClosed: EventEmitter<void> = new EventEmitter<void>();
   @ViewChild('nav') nav: ElementRef;
 
   @HostListener('click', ['$event']) onClick(e?: Event) {
@@ -45,6 +47,7 @@ export class PspSettingsMenuComponent extends BaseSettingsMenuComponent implemen
   }
 
   private opened: boolean = false;
+  private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(public el: ElementRef,
               public authService: AuthService) {
@@ -53,7 +56,13 @@ export class PspSettingsMenuComponent extends BaseSettingsMenuComponent implemen
 
   ngOnInit() {
     this.navOpened
+      .takeUntil(this._ngUnsubscribe)
       .subscribe(res => res === false ? this.closeNav() : this.openNav())
+  }
+
+  ngOnDestroy() {
+    this._ngUnsubscribe.next();
+    this._ngUnsubscribe.complete();
   }
 
   openNav() {
@@ -68,6 +77,10 @@ export class PspSettingsMenuComponent extends BaseSettingsMenuComponent implemen
     this.nav.nativeElement.style.width = "0";
     document.getElementById("header_button--right").style.right = "1em";
     document.getElementById("header_button--left").style.left = "1em";
+  }
+
+  navClicked() {
+    this.navClosed.emit();
   }
 
 }

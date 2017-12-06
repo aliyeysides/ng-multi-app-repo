@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {AuthService} from '../../../services/auth.service';
 
@@ -62,7 +62,7 @@ import {Subscription} from 'rxjs/Subscription';
     </div>`,
   styleUrls: ['./health-check.component.scss']
 })
-export class HealthCheckComponent implements OnInit {
+export class HealthCheckComponent implements OnInit, OnDestroy {
   private _uid: string;
   private _listId: string;
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -131,6 +131,11 @@ export class HealthCheckComponent implements OnInit {
       });
 
 
+  }
+
+  ngOnDestroy() {
+    this._ngUnsubscribe.next();
+    this._ngUnsubscribe.complete();
   }
 
   loadDailyData() {

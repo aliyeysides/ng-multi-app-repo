@@ -1,7 +1,8 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ListSymbolObj} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
+import {SignalService} from '../../../../services/signal.service';
 
 @Component({
   selector: 'cpt-my-stocks-list',
@@ -26,7 +27,7 @@ import {Subject} from 'rxjs/Subject';
         </li>
         <li *ngFor="let stock of myStocks" class="row list__entry">
           <div class="col-3 list-entry__pgr">
-            <img class="align-middle" src="./assets/imgs/arc_VeryBullish.svg">
+            <img class="align-middle" src="{{ appendPGRImage(stock.PGR, stock.raw_PGR) }}">
           </div>
           <div class="col-3 list-entry__info">
             <p class="ticker">{{ stock.symbol }}</p>
@@ -41,22 +42,23 @@ import {Subject} from 'rxjs/Subject';
           <div (click)="toggleSlider(stock.symbol)" class="button__slide">
             <img src="./assets/imgs/ui_slide.svg">
           </div>
-          <div class="col-12 list-entry__overlay green" [ngClass]="{'open': sliderObj[stock.symbol] }">
+          <div class="col-12 list-entry__overlay" [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.Change>0, 'red': stock.Change<0 }">
             <div class="row no-gutters overlay__contents">
-              <div class="button__slide">
+              <div (click)="toggleSlider(stock.symbol)" class="button__slide">
                 <img src="./assets/imgs/ui_slide.svg">
               </div>
               <div class="col-2">
-                <img class="align-middle" src="./assets/imgs/icon_minus.svg">
+                <img (click)="emitAddStock(stock.symbol)" class="align-middle" src="./assets/imgs/icon_plus--white.svg">
               </div>
               <div class="col-4">
-                <p class="ticker">SHOP</p>
+                <p class="ticker">{{ stock.symbol }}</p>
               </div>
               <div class="col-2">
-                <img class="align-middle" src="./assets/imgs/icon_arrow-up.svg">
+                <img *ngIf="stock.Change>0" class="align-middle" src="./assets/imgs/icon_arrow-up.svg">
+                <img *ngIf="stock.Change<0" class="align-middle" src="./assets/imgs/icon_arrow-down.svg">
               </div>
               <div class="col-4">
-                <p class="data">-2.34%</p>
+                <p class="data">{{ stock.Change }}%</p>
               </div>
             </div>
           </div>
@@ -70,6 +72,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _stocks: BehaviorSubject<ListSymbolObj[]> = new BehaviorSubject<ListSymbolObj[]>({} as ListSymbolObj[]);
 
+  @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @Input('stocks')
   set stocks(val: ListSymbolObj[]) {
     this._stocks.next(val);
@@ -82,7 +85,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   myStocks: ListSymbolObj[];
   sliderObj: object = {};
 
-  constructor() { }
+  constructor(private signalService: SignalService) { }
 
   ngOnInit() {
     this._stocks
@@ -100,8 +103,20 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   }
 
   toggleSlider(ticker: string) {
-    this.sliderObj[ticker] = true;
-    console.log('clicked', this.sliderObj[ticker]);
+    if (!this.sliderObj[ticker]) {
+      this.sliderObj = {};
+      this.sliderObj[ticker] = true;
+      return;
+    }
+    this.sliderObj[ticker] = !this.sliderObj[ticker];
+  }
+
+  emitAddStock(ticker: string) {
+    this.addStockClicked.emit(ticker);
+  }
+
+  appendPGRImage(pgr: number, rawPgr: number) {
+    return this.signalService.appendPGRImage(pgr, rawPgr);
   }
 
 }
