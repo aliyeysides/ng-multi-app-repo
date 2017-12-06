@@ -27,9 +27,15 @@
       height: 100vh;
       position: relative;
       overflow-x: hidden;
+      padding-top: 300px;
       background-color: rgba(255, 255, 255, 1);
     }
-
+.align-absolute {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
 </style>
 
 
@@ -53,11 +59,9 @@
 <!-- Enable bootstrap 4 theme -->
 <script>window.__theme = 'bs4';</script>
 <cpt-root>
-  <div class="loading loading-Pulse container-fluid">
-    <div class="row loading__contents">
-      <div class="col-12">
-        <img width="239" src="assets/imgs/loading_splash--Pulse__logo.png" style="margin:300px auto 0px;">
-      </div>
+  <div class="loading loading-Pulse">
+    <div style="width: 100%; position: relative;">
+        <img class="align-absolute" width="239" src="assets/imgs/loading_splash--Pulse__logo.png">
     </div>
   </div>
 </cpt-root>

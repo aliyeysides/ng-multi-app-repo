@@ -55,17 +55,7 @@ interface FilterFunc {
         <div class="col-12">
           <div class="btn-group" dropdown [autoClose]="true">
             <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-              {{ currentToggleOptionText }} 
-              <span>
-                <svg class="align-absolute" width="38px" height="38px" viewBox="0 0 38 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <defs></defs>
-                  <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <g id="icon_section-h2__calendar-copy" fill-rule="nonzero" fill="#1199ff">
-                      <path d="M10.6111607,14.9285714 L27.3888393,14.9285714 C28.2964286,14.9285714 28.7544643,16.03125 28.1098214,16.6674107 L19.7209821,25.0053571 C19.3223214,25.4040179 18.6861607,25.4040179 18.2875,25.0053571 L9.89866071,16.6674107 C9.24553571,16.03125 9.70357143,14.9285714 10.6111607,14.9285714 Z M38,4.07142857 L38,33.9285714 C38,36.1763393 36.1763393,38 33.9285714,38 L4.07142857,38 C1.82366071,38 0,36.1763393 0,33.9285714 L0,4.07142857 C0,1.82366071 1.82366071,0 4.07142857,0 L33.9285714,0 C36.1763393,0 38,1.82366071 38,4.07142857 Z M33.9285714,33.4196429 L33.9285714,4.58035714 C33.9285714,4.30044643 33.6995536,4.07142857 33.4196429,4.07142857 L4.58035714,4.07142857 C4.30044643,4.07142857 4.07142857,4.30044643 4.07142857,4.58035714 L4.07142857,33.4196429 C4.07142857,33.6995536 4.30044643,33.9285714 4.58035714,33.9285714 L33.4196429,33.9285714 C33.6995536,33.9285714 33.9285714,33.6995536 33.9285714,33.4196429 Z" id="Shape"></path>
-                      </g>
-                  </g>
-                </svg>
-              </span>
+              {{ currentToggleOptionText }}
             </button>
             <ul *dropdownMenu class="dropdown-menu" role="menu">
               <li (click)="selectToggleOption(toggleOptions.movers);" role="menuitem"><a
@@ -81,7 +71,6 @@ interface FilterFunc {
               </li>
             </ul>
           </div>
-          <div class="divider__long"></div>
           <ul class="section__chart">
             <li class="row no-gutters col-headers">
               <div class="col-4">
