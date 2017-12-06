@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {AuthService} from '../../../services/auth.service';
 
@@ -13,7 +13,6 @@ import {Observable} from 'rxjs/Observable';
 import {MarketsSummaryService} from '../../../services/markets-summary.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
-import {TimerObservable} from 'rxjs/observable/TimerObservable';
 
 @Component({
   selector: 'cpt-health-check',
@@ -85,7 +84,7 @@ export class HealthCheckComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.currentUser$
+    this.loading = this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
       .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
       .take(1)
@@ -105,12 +104,12 @@ export class HealthCheckComponent implements OnInit {
         )
       })
       .take(1)
-      .map(res => {
-        this.calculations = res[0][Object.keys(res[0])[0]];
+      .map(([calc, data, status, pgr, sups, revs, reports, grid]) => {
+        this.calculations = calc[Object.keys(calc)[0]];
         this.healthCheck.setPortfolioStatus(this.calculations);
-        this.prognosisData = res[1];
+        this.prognosisData = data;
 
-        this.stocksStatus = res[2][Object.keys(res[2])[0]];
+        this.stocksStatus = status[Object.keys(status)[0]];
         this.stocksStatus.push(Object.assign({}, { // Push Weekly SPY into collection.
           "symbol": 'S&P 500',
           "corrected_pgr_rating": 0,
@@ -121,22 +120,31 @@ export class HealthCheckComponent implements OnInit {
           "arcColor": 2
         }));
 
-        this.pgrChanges = res[3];
-        this.earningsSurprise = res[4];
-        this.analystRevisions = res[5];
-        this.expectedEarnings = res[6];
-        this.pgrGridData = res[7];
+        this.pgrChanges = pgr;
+        this.earningsSurprise = sups;
+        this.analystRevisions = revs;
+        this.expectedEarnings = reports;
+        this.pgrGridData = grid;
       })
-      .flatMap(() => {
-        return TimerObservable.create(0, 10000).combineLatest(
+      .subscribe(() => {
+        this.loadDailyData();
+      });
+
+
+  }
+
+  loadDailyData() {
+    Observable.timer(0, 60 * 1000)
+      .switchMap(() => {
+        return Observable.combineLatest(
           this.healthCheck.getListSymbols(this._listId, this._uid),
           this.marketsSummary.initialMarketSectorData({components: 'majorMarketIndices,sectors'})
         )
       })
-      .subscribe(res => {
-        this.dailySymbolList = [];
-        this.dailySymbolList = res[1]['symbols'].filter(x => x['symbol'] != 'S&P 500');
-        const indicies = res[2]['market_indices'];
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(([stocks, data]) => {
+        this.dailySymbolList = stocks['symbols'].filter(x => x['symbol'] != 'S&P 500');
+        const indicies = data['market_indices'];
         this.dailySymbolList.push(Object.assign({}, { // Push Daily SPY into collection.
           "symbol": 'S&P 500',
           "corrected_pgr_rating": 0,

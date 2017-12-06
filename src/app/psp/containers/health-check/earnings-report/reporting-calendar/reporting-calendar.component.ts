@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {ExpectedEarningsReports} from '../../../../../shared/models/health-check';
+import {EarningsReport, ExpectedEarningsReports} from '../../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 
 import * as moment from 'moment';
@@ -36,32 +36,32 @@ import * as moment from 'moment';
       <div class="col-12 calendar__week">
         <div (click)="toggleDay('monday')" class="cal-day">
           <p class="align-absolute">
-            <span *ngIf="selectedDay != 'monday'" class="earnings-count">{{ weeklyData['monday'].length }}</span>
+            <span *ngIf="selectedDay != 'monday'" class="earnings-count">{{ getAllReportsCount(weeklyData['monday']) }}</span>
             <i (click)="selectedDay = ''" *ngIf="selectedDay === 'monday'" class="fa fa-times" aria-hidden="true"></i>
           </p>
         </div>
         <div (click)="toggleDay('tuesday')" class="cal-day">
           <p class="align-absolute">
-            <span *ngIf="selectedDay != 'tuesday'" class="earnings-count">{{ weeklyData['tuesday'].length }}</span>
+            <span *ngIf="selectedDay != 'tuesday'" class="earnings-count">{{ getAllReportsCount(weeklyData['tuesday']) }}</span>
             <i (click)="selectedDay = ''" *ngIf="selectedDay === 'tuesday'" class="fa fa-times" aria-hidden="true"></i>
           </p>
         </div>
         <div (click)="toggleDay('wednesday')" class="cal-day">
           <p class="align-absolute">
-            <span *ngIf="selectedDay != 'wednesday'" class="earnings-count">{{ weeklyData['wednesday'].length }}</span>
+            <span *ngIf="selectedDay != 'wednesday'" class="earnings-count">{{ getAllReportsCount(weeklyData['wednesday']) }}</span>
             <i (click)="selectedDay = ''" *ngIf="selectedDay === 'wednesday'" class="fa fa-times"
                aria-hidden="true"></i>
           </p>
         </div>
         <div (click)="toggleDay('thursday')" class="cal-day">
           <p class="align-absolute">
-            <span *ngIf="selectedDay != 'thursday'" class="earnings-count">{{ weeklyData['thursday'].length }}</span>
+            <span *ngIf="selectedDay != 'thursday'" class="earnings-count">{{ getAllReportsCount(weeklyData['thursday']) }}</span>
             <i (click)="selectedDay = ''" *ngIf="selectedDay === 'thursday'" class="fa fa-times" aria-hidden="true"></i>
           </p>
         </div>
         <div (click)="toggleDay('friday')" class="cal-day">
           <p class="align-absolute">
-            <span *ngIf="selectedDay != 'friday'" class="earnings-count">{{ weeklyData['friday'].length }}</span>
+            <span *ngIf="selectedDay != 'friday'" class="earnings-count">{{ getAllReportsCount(weeklyData['friday']) }}</span>
             <i (click)="selectedDay = ''" *ngIf="selectedDay === 'friday'" class="fa fa-times" aria-hidden="true"></i>
           </p>
         </div>
@@ -165,6 +165,13 @@ export class ReportingCalendarComponent implements OnInit, OnDestroy {
         }
       });
     });
+  }
+
+  getAllReportsCount(arr): number {
+    if (arr.length) {
+      return arr[0]['bullishSymbolCount'] + arr[0]['neturalSymbolCount'] + arr[0]['bearishSymbolCount'];
+    }
+    return 0;
   }
 
   toggleDay(day: string) {

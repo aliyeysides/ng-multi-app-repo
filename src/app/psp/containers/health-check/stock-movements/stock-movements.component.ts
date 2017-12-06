@@ -208,16 +208,16 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
         if (res == 'Top Movers') {
-          this.selectedToggleOption = this.toggleOptions.movers;
+          this.selectToggleOption(this.toggleOptions.movers);
         }
         if (res == 'Bulls') {
-          this.selectedToggleOption = this.toggleOptions.bulls;
+          this.selectToggleOption(this.toggleOptions.bulls);
         }
         if (res == 'Neutral') {
-          this.selectedToggleOption = this.toggleOptions.neutral;
+          this.selectToggleOption(this.toggleOptions.neutral);
         }
         if (res == 'Bears') {
-          this.selectedToggleOption = this.toggleOptions.bears;
+          this.selectToggleOption(this.toggleOptions.bears);
         }
         this.updateData();
       });
@@ -234,7 +234,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // console.log('changes', changes);
     if (changes['dailyStocks']) this._dailyStocks.next(changes['dailyStocks'].currentValue);
   }
 
@@ -244,9 +243,9 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
       .take(1)
       .subscribe(res => {
         this.weeklyStockData = this.parseStockStatus(res);
+        this.calculateBarWidth(this.weeklyStockData);
         this.upStocksWeekly = this.weeklyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] > 0).length;
         this.downStocksWeekly = this.weeklyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] < 0).length;
-
       });
 
     this._dailyStocks
@@ -267,6 +266,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
           }
         });
         this.dailyStockData = this.parseStockStatus(res);
+        this.calculateBarWidth(this.dailyStockData);
         this.upStocksDaily = this.dailyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] > 0).length;
         this.downStocksDaily = this.dailyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] < 0).length;
       });
@@ -304,7 +304,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
           .sort((x, y) => y['percentageChange'] - x['percentageChange']);
       }
     }
-    this.calculateBarWidth(result);
     return result;
   }
 

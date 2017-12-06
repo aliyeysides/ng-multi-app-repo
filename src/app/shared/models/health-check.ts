@@ -67,7 +67,7 @@ export interface PrognosisData {
 
 export interface EarningsReport {
   [key: string]: {
-  "bearishSymbolCount": number,
+    "bearishSymbolCount": number,
     "neturalSymbol": Array<string>,
     "nonPgrSymbolCount": number,
     "bullishSymbolCount": number,
