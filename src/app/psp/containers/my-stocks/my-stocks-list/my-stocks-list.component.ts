@@ -41,22 +41,23 @@ import {Subject} from 'rxjs/Subject';
           <div (click)="toggleSlider(stock.symbol)" class="button__slide">
             <img src="./assets/imgs/ui_slide.svg">
           </div>
-          <div class="col-12 list-entry__overlay green" [ngClass]="{'open': sliderObj[stock.symbol] }">
+          <div class="col-12 list-entry__overlay" [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.Change>0, 'red': stock.Change<0 }">
             <div class="row no-gutters overlay__contents">
-              <div class="button__slide">
+              <div (click)="toggleSlider(stock.symbol)" class="button__slide">
                 <img src="./assets/imgs/ui_slide.svg">
               </div>
               <div class="col-2">
                 <img class="align-middle" src="./assets/imgs/icon_minus.svg">
               </div>
               <div class="col-4">
-                <p class="ticker">SHOP</p>
+                <p class="ticker">{{ stock.symbol }}</p>
               </div>
               <div class="col-2">
-                <img class="align-middle" src="./assets/imgs/icon_arrow-up.svg">
+                <img *ngIf="stock.Change>0" class="align-middle" src="./assets/imgs/icon_arrow-up.svg">
+                <img *ngIf="stock.Change<0" class="align-middle" src="./assets/imgs/icon_arrow-down.svg">
               </div>
               <div class="col-4">
-                <p class="data">-2.34%</p>
+                <p class="data">{{ stock.Change }}%</p>
               </div>
             </div>
           </div>
@@ -100,8 +101,12 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   }
 
   toggleSlider(ticker: string) {
-    this.sliderObj[ticker] = true;
-    console.log('clicked', this.sliderObj[ticker]);
+    if (!this.sliderObj[ticker]) {
+      this.sliderObj = {};
+      this.sliderObj[ticker] = true;
+      return;
+    }
+    this.sliderObj[ticker] = !this.sliderObj[ticker];
   }
 
 }

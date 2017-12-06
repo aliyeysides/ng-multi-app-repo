@@ -20,7 +20,7 @@ declare let gtag: Function;
         <div #navBtn (click)="toggleNav()" class="header__button header__button--left" id="header_button--left">
           <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
         </div>
-        <cpt-psp-settings-menu [btn]="navBtn" [navOpened]="navOpened" (navClosed)="blurMe=false;this.navOpened.next(false)"></cpt-psp-settings-menu>
+        <cpt-psp-settings-menu [btn]="navBtn" [navOpened]="navOpened" (navClosed)="this.navOpened.next(false)"></cpt-psp-settings-menu>
         <div class="header__title header__search">
           <h1 *ngIf="!searchOpened">{{ title }}</h1>
           <cpt-psp-symbol-search [placeholder]="'Search'" *ngIf="searchOpened"></cpt-psp-symbol-search>
@@ -31,7 +31,7 @@ declare let gtag: Function;
       </div>
   
         <!-- App Container -->
-      <div class="container--main" id="container--main" [ngClass]="{'blur-me': blurMe }">
+      <div class="container--main" id="container--main" [ngClass]="{'blur-me': this.searchOpened || this.navOpened.getValue()}">
         <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->
         <div class="router__container">
           <router-outlet></router-outlet>
@@ -74,7 +74,6 @@ export class AppComponent {
       .take(1)
       .subscribe(res => this.status = res);
 
-    this.blurMe = this.searchOpened || this.navOpened.getValue();
   }
 
   toggleSearch() {
