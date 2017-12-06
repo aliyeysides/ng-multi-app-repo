@@ -134,7 +134,7 @@ sub {
 }
 
 .tab--slide {
-  width: 50px;
+  width: 100px;
   height: 5px;
   background-color: #dddddd;
   border-radius: 10px;
@@ -151,18 +151,30 @@ sub {
 
 
 
+.paragraph {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  margin-bottom: 15px;
+  text-align: left;
+  font-weight: 400;
+  line-height: 1.65;
+
+  span {
+    font-weight: 700;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+  }
+}
+
+
 .disclaimer {
   font-family: 'Open Sans', sans-serif;
   font-size: 11px;
-  margin-bottom: 15px;
+  margin: 15px 0;
   text-align: left;
   font-weight: 300;
   line-height: 1.5;
 }
-
-
-
-
 
 
 
@@ -317,7 +329,8 @@ sub {
 
 
 .section__toggle {
-  margin-top:20px;
+  margin-top:25px;
+
   .toggle {
 
     p {

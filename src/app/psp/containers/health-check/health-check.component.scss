@@ -38,7 +38,7 @@
 			border-radius: 20px;
 			color:#ffffff;
 			font-weight: 600;
-			padding:7px 20px 4px;
+			padding:5px 20px 3px;
 			margin: 10px 0 10px;
 		}
 
@@ -216,20 +216,21 @@
 		    font-weight: 600;
 		    text-align: center;
 		    border: 3px solid #1199ff;
-		    padding: 5px 20px 2px;
+		    padding: 8px 15px 5px 20px;
 		    font-size: 26px;
 		    border-radius: 40px;
 		}
 		.btn-primary {
 	  		background-color: #ffffff;
 		    border-color: #1199ff;
-		    font-size: 26px;
+		    font-size: 25px;
+		    line-height: 1;
 			color: #1199ff;
 			box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
 		}
 		.dropdown-toggle {
 			&::after {
-				vertical-align:inherit;
+				vertical-align:middle;
 		    }
 		}
 	}
@@ -397,7 +398,7 @@
 	margin-bottom:20px;
 
 	.col-head {
-		margin:15px 0 0;
+		margin: 0;
 	  	float: left;
 	  	width: 20%;
 
@@ -468,7 +469,14 @@
 
 
 #HC--PowerGrid {
-
+	h2 {
+		margin-bottom: 20px;
+	}
+	.paragraph {
+		&:last-child {
+			margin-bottom: 20px;
+		}
+	}
 }
 
 .powerGrid {
@@ -489,6 +497,14 @@
 
 			.grid__quadrant {
 				border-radius: 0 0 8px 8px;
+			}
+		}
+
+		&:only-child {
+			margin-bottom:20px;
+
+			.grid__quadrant {
+				border-radius: 8px;
 			}
 		}
 
@@ -527,6 +543,7 @@
 		  	overflow: hidden;
 		  	text-overflow: ellipsis;
 		  	white-space: nowrap;
+		  	text-align: left;
 		}
 	}
 }
