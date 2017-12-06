@@ -61,6 +61,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   @Input('placeholder') placeholder: string;
   @ViewChild('search') search: ElementRef;
   @Output('focused') focused: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output('addToListClicked') addToListClicked: EventEmitter<boolean> =  new EventEmitter<boolean>();
 
   private _listId: string;
   private _uid: string;
@@ -81,7 +82,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   }
 
   ngOnInit() {
-    this.authService.currentUser$
+    this.loading = this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
       .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
       .take(1)
@@ -111,11 +112,13 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   }
 
   addToList(ticker: string) {
-    this.ideasService.addStockIntoList(this._listId, ticker)
+    this.loading = this.ideasService.addStockIntoList(this._listId, ticker)
       .filter(x => x != undefined)
       .take(1)
-      .subscribe(res => console.log('res', res));
-    this.toggleFocus();
+      .subscribe(res => {
+        console.log('need to update list in my stocks', res);
+        this.addToListClicked.emit();
+      });
   }
 
   onClick() {

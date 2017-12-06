@@ -97,7 +97,6 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(stocks => {
         this.myStocks = stocks;
-        console.log('myStocks', this.myStocks);
       })
   }
 
