@@ -3,13 +3,14 @@ import {AuthService} from '../../../services/auth.service';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {ListSymbolObj} from '../../../shared/models/health-check';
 import {Subscription} from 'rxjs/Subscription';
+import {IdeasService} from '../../../services/ideas.service';
 
 @Component({
   selector: 'cpt-my-stocks',
   template: `
       <div [ngBusy]="loading" class="container-fluid component component--mystocks">
         <div class="row contents">
-          <cpt-my-stocks-list [stocks]="userStocks"></cpt-my-stocks-list>
+          <cpt-my-stocks-list (addStockClicked)="addStock($event)" [stocks]="userStocks"></cpt-my-stocks-list>
           <div class="col-12" id="list--recent">
             <h3>Recently Viewed</h3>
             <div class="divider__long"></div>
@@ -44,7 +45,8 @@ export class MyStocksComponent implements OnInit {
   loading: Subscription;
 
   constructor(private authService: AuthService,
-              private healthCheck: HealthCheckService) { }
+              private healthCheck: HealthCheckService,
+              private ideasService: IdeasService) { }
 
   ngOnInit() {
     this.loading = this.authService.currentUser$
@@ -58,6 +60,10 @@ export class MyStocksComponent implements OnInit {
       .subscribe(res => {
         this.userStocks = res['symbols'];
       })
+  }
+
+  addStock(ticker: string) {
+    this.ideasService.addStockIntoList(this._listId, ticker);
   }
 
 }
