@@ -20,10 +20,10 @@ declare let gtag: Function;
         <div #navBtn (click)="toggleNav()" class="header__button header__button--left" id="header_button--left">
           <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
         </div>
-        <cpt-psp-settings-menu [btn]="navBtn" [navOpened]="navOpened" (navClosed)="this.navOpened.next(false)"></cpt-psp-settings-menu>
+        <cpt-psp-settings-menu [btn]="navBtn" [navOpened]="navOpened" (navClosed)="navOpened.next(false)"></cpt-psp-settings-menu>
         <div class="header__title header__search">
           <h1 *ngIf="!searchOpened">{{ title }}</h1>
-          <cpt-psp-symbol-search [placeholder]="'Search'" *ngIf="searchOpened"></cpt-psp-symbol-search>
+          <cpt-psp-symbol-search (addToListClicked)="toggleSearch()" [placeholder]="'Search'" *ngIf="searchOpened"></cpt-psp-symbol-search>
         </div>
         <div (click)="toggleSearch()" class="header__button header__button--right" id="header_button--right">
           <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
@@ -31,7 +31,7 @@ declare let gtag: Function;
       </div>
   
         <!-- App Container -->
-      <div class="container--main" id="container--main" [ngClass]="{'blur-me': this.searchOpened || this.navOpened.getValue()}">
+      <div class="container--main" id="container--main" [ngClass]="{'blur-me': searchOpened || navOpened.getValue()}">
         <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->
         <div class="router__container">
           <router-outlet></router-outlet>
@@ -48,11 +48,10 @@ export class AppComponent {
   navOpened: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   title: string;
   status: PortfolioStatus;
-  blurMe: boolean;
 
   options = {
     position: ['top', 'right'],
-    timeOut: 5000,
+    timeOut: 5000
   };
 
   constructor(private router: Router, private healthCheck: HealthCheckService) {
