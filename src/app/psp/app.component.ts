@@ -20,7 +20,7 @@ declare let gtag: Function;
         <div #navBtn (click)="toggleNav()" class="header__button header__button--left" id="header_button--left">
           <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
         </div>
-        <cpt-psp-settings-menu [btn]="navBtn" [navOpened]="navOpened"></cpt-psp-settings-menu>
+        <cpt-psp-settings-menu [btn]="navBtn" [navOpened]="navOpened" (navClosed)="blurMe=false;this.navOpened.next(false)"></cpt-psp-settings-menu>
         <div class="header__title header__search">
           <h1 *ngIf="!searchOpened">{{ title }}</h1>
           <cpt-psp-symbol-search [placeholder]="'Search'" *ngIf="searchOpened"></cpt-psp-symbol-search>
@@ -31,7 +31,7 @@ declare let gtag: Function;
       </div>
   
         <!-- App Container -->
-      <div class="container--main" id="container--main" [ngClass]="{'blur-me': searchOpened || ( navOpened | async ) }">
+      <div class="container--main" id="container--main" [ngClass]="{'blur-me': blurMe }">
         <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->
         <div class="router__container">
           <router-outlet></router-outlet>
@@ -44,10 +44,12 @@ declare let gtag: Function;
 export class AppComponent {
   @ViewChild('search') search: ElementRef;
 
-  public searchOpened: boolean = false;
-  public navOpened: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public title: string;
-  public status: PortfolioStatus;
+  searchOpened: boolean = false;
+  navOpened: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  title: string;
+  status: PortfolioStatus;
+  blurMe: boolean;
+
   options = {
     position: ['top', 'right'],
     timeOut: 5000,
@@ -71,6 +73,8 @@ export class AppComponent {
     this.healthCheck.getPortfolioStatus()
       .take(1)
       .subscribe(res => this.status = res);
+
+    this.blurMe = this.searchOpened || this.navOpened.getValue();
   }
 
   toggleSearch() {
