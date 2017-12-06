@@ -223,7 +223,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['dailyStocks']) this._dailyStocks.next(changes['dailyStocks'].currentValue);
+    this.updateData();
   }
 
   updateData() {
