@@ -95,6 +95,15 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       })
   }
 
+  updateList() {
+    this.healthCheck.getListSymbols(this._listId, this._uid)
+      .take(1)
+      .subscribe(res => {
+        this.userStocks = res['symbols'];
+        console.log('updateList', this.userStocks);
+      })
+  }
+
   ngAfterContentInit() {
     this.search.nativeElement.focus();
     this.searchResults = [];
@@ -115,6 +124,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
     this.loading = this.ideasService.addStockIntoList(this._listId, ticker)
       .filter(x => x != undefined)
       .take(1)
+      .do(() => this.updateList())
       .subscribe(res => {
         console.log('need to update list in my stocks', res);
         this.addToListClicked.emit();
