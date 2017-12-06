@@ -70,11 +70,13 @@ export class MyStocksComponent implements OnInit {
 
   addStock(ticker: string) {
     this.ideasService.addStockIntoList(this._listId.toString(), ticker)
+      .take(1)
       .subscribe(res => this.updateData());
   }
 
   removeStock(ticker: string) {
     this.ideasService.deleteSymbolFromList(this._listId, ticker)
+      .take(1)
       .subscribe(res => this.updateData());
   }
 
