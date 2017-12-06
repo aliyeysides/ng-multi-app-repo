@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {ListSymbolObj} from '../../../shared/models/health-check';
@@ -8,31 +8,32 @@ import {IdeasService} from '../../../services/ideas.service';
 @Component({
   selector: 'cpt-my-stocks',
   template: `
-      <div [ngBusy]="loading" class="container-fluid component component--mystocks">
-        <div class="row contents">
-          <cpt-my-stocks-list (addStockClicked)="addStock($event)" [stocks]="userStocks"></cpt-my-stocks-list>
-          <div class="col-12" id="list--recent">
-            <h3>Recently Viewed</h3>
-            <div class="divider__long"></div>
-            <ul class="stock__list">
-              <li class="row col-headers">
-                <div class="col-3">
-                  <p>RATING</p>
-                </div>
-                <div class="col-3" style="padding-left:0;">
-                  <p class="text-left">TICKER</p>
-                </div>
-                <div class="col-3">
-                  <p>PRICE</p>
-                </div>
-                <div class="col-3">
-                  <p>CHG</p>
-                </div>
-              </li>
-            </ul>
-          </div>
+    <div [ngBusy]="loading" class="container-fluid component component--mystocks">
+      <div class="row contents">
+        <cpt-my-stocks-list (addStockClicked)="addStock($event)" (removeStockClicked)="removeStock($event)"
+                            [stocks]="userStocks"></cpt-my-stocks-list>
+        <div class="col-12" id="list--recent">
+          <h3>Recently Viewed</h3>
+          <div class="divider__long"></div>
+          <ul class="stock__list">
+            <li class="row col-headers">
+              <div class="col-3">
+                <p>RATING</p>
+              </div>
+              <div class="col-3" style="padding-left:0;">
+                <p class="text-left">TICKER</p>
+              </div>
+              <div class="col-3">
+                <p>PRICE</p>
+              </div>
+              <div class="col-3">
+                <p>CHG</p>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
+    </div>
   `,
   styleUrls: ['./my-stocks.component.scss']
 })
@@ -46,9 +47,14 @@ export class MyStocksComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService,
-              private ideasService: IdeasService) { }
+              private ideasService: IdeasService) {
+  }
 
   ngOnInit() {
+    this.updateData();
+  }
+
+  updateData() {
     this.loading = this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
       .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
@@ -63,7 +69,13 @@ export class MyStocksComponent implements OnInit {
   }
 
   addStock(ticker: string) {
-    this.ideasService.addStockIntoList(this._listId, ticker);
+    this.ideasService.addStockIntoList(this._listId.toString(), ticker)
+      .subscribe(res => this.updateData());
+  }
+
+  removeStock(ticker: string) {
+    this.ideasService.deleteSymbolFromList(this._listId, ticker)
+      .subscribe(res => this.updateData());
   }
 
 }

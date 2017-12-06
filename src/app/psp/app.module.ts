@@ -17,7 +17,7 @@ import {AuthService} from '../services/auth.service';
 
 import {BusyModule} from 'angular2-busy';
 import {AuthGuard} from '../shared/auth.guard';
-import {loadingMaskConfig2} from '../../loading-mask-config';
+import {loadingMaskConfig2, loadingMaskConfig3} from '../../loading-mask-config';
 import {IdeasService} from '../services/ideas.service';
 import {SignalService} from '../services/signal.service';
 
@@ -35,7 +35,7 @@ import {SymbolSearchService} from '../services/symbol-search.service';
     SharedModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
-    BusyModule.forRoot(loadingMaskConfig2),
+    BusyModule.forRoot(loadingMaskConfig3),
     SimpleNotificationsModule.forRoot(),
     ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES,

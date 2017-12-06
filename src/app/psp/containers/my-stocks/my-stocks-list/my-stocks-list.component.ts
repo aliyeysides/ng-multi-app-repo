@@ -34,21 +34,22 @@ import {SignalService} from '../../../../services/signal.service';
             <p class="company">{{ stock.name }}</p>
           </div>
           <div class="col-3 list-entry__data">
-            <p class="data green">{{ stock.Last }}</p>
+            <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock.Last }}</p>
           </div>
           <div class="col-3 list-entry__data">
-            <p class="data green">{{ stock.Change }}%</p>
+            <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock.Change }}%</p>
           </div>
           <div (click)="toggleSlider(stock.symbol)" class="button__slide">
             <img src="./assets/imgs/ui_slide.svg">
           </div>
-          <div class="col-12 list-entry__overlay" [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.Change>0, 'red': stock.Change<0 }">
+          <div class="col-12 list-entry__overlay"
+               [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.Change>0, 'red': stock.Change<0 }">
             <div class="row no-gutters overlay__contents">
               <div (click)="toggleSlider(stock.symbol)" class="button__slide">
                 <img src="./assets/imgs/ui_slide.svg">
               </div>
-              <div class="col-2">
-                <img (click)="emitAddStock(stock.symbol)" class="align-middle" src="./assets/imgs/icon_plus--white.svg">
+              <div (click)="emitRemoveStock(stock.symbol)" class="col-2">
+                <img class="align-middle" src="./assets/imgs/icon_minus.svg">
               </div>
               <div class="col-4">
                 <p class="ticker">{{ stock.symbol }}</p>
@@ -73,6 +74,8 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   private _stocks: BehaviorSubject<ListSymbolObj[]> = new BehaviorSubject<ListSymbolObj[]>({} as ListSymbolObj[]);
 
   @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
+  @Output('removeStockClicked') removeStockClicked: EventEmitter<string> = new EventEmitter<string>();
+
   @Input('stocks')
   set stocks(val: ListSymbolObj[]) {
     this._stocks.next(val);
@@ -85,7 +88,8 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   myStocks: ListSymbolObj[];
   sliderObj: object = {};
 
-  constructor(private signalService: SignalService) { }
+  constructor(private signalService: SignalService) {
+  }
 
   ngOnInit() {
     this._stocks
@@ -113,6 +117,10 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
 
   emitAddStock(ticker: string) {
     this.addStockClicked.emit(ticker);
+  }
+
+  emitRemoveStock(ticker: string) {
+    this.removeStockClicked.emit(ticker);
   }
 
   appendPGRImage(pgr: number, rawPgr: number) {
