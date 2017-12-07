@@ -42,12 +42,12 @@ declare let gtag: Function;
               {{ result.CompanyName }}
             </p>
           </div>
-          <div *ngIf="!resultInUserList(result.Symbol)" (click)="addToList(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
+          <div (click)="addToList(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
             <img class="align-middle" src="./assets/imgs/icon_plus--white.svg">
           </div>
-          <div *ngIf="resultInUserList(result.Symbol)" (click)="addToList(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
-            <img class="align-middle" src="./assets/imgs/icon_plus_minus.svg">
-          </div>
+          <!--<div *ngIf="resultInUserList(result.Symbol)" (click)="addToList(result.Symbol);$event.stopPropagation()" class="col-1 search__action">-->
+            <!--<img class="align-middle" src="./assets/imgs/icon_plus_minus.svg">-->
+          <!--</div>-->
         </li>
       </ul>
       <ul *ngIf="searchResults && symbolSearchForm.value && searchResults.length == 0">
@@ -139,8 +139,8 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
     console.log('clicked');
   }
 
-  resultInUserList(result: string) {
-    return this.userStocks.filter(x => x['Symbol'] == result).length > 0;
-  }
+  // resultInUserList(result: string) {
+  //   return this.userStocks.filter(x => x['Symbol'] == result).length > 0;
+  // }
 
 }
