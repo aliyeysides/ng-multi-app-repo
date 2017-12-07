@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {ListSymbolObj} from '../../../shared/models/health-check';
 import {Subscription} from 'rxjs/Subscription';
 import {IdeasService} from '../../../services/ideas.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-my-stocks',
@@ -36,14 +38,16 @@ import {IdeasService} from '../../../services/ideas.service';
         </div>
       </div>
     </div>
-    <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock" [stock]="selectedStock"></cpt-psp-stock-report>
+    <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock"
+                          [stock]="selectedStock"></cpt-psp-stock-report>
   `,
   styleUrls: ['./my-stocks.component.scss']
 })
-export class MyStocksComponent implements OnInit {
+export class MyStocksComponent implements OnInit, OnDestroy {
 
   private _uid: string;
   private _listId: string;
+  private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
   selectedStock: string | boolean;
   userStocks: ListSymbolObj[];
@@ -51,7 +55,9 @@ export class MyStocksComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService,
-              private ideasService: IdeasService) {
+              private ideasService: IdeasService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -65,7 +71,25 @@ export class MyStocksComponent implements OnInit {
       })
       .subscribe(res => {
         this.userStocks = res['symbols'];
-      })
+      });
+
+    this.route.params
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(params => {
+        console.log('params', params);
+          if (params.symbol) {
+            console.log('params.symbol', params.symbol);
+            this.selectedStock = params.symbol;
+          } else {
+            console.log('default', 'AAPL');
+          }
+        }
+      );
+  }
+
+  ngOnDestroy() {
+    this._ngUnsubscribe.next();
+    this._ngUnsubscribe.complete();
   }
 
   updateData() {
@@ -91,9 +115,12 @@ export class MyStocksComponent implements OnInit {
   }
 
   selectStock(ticker: string) {
-    console.log('selectStock', ticker);
-    window.scrollTo(0,0);
-    this.selectedStock = ticker;
+    this.gotoReport(ticker);
+
+  }
+
+  gotoReport(ticker: string) {
+    this.router.navigate(['my-stocks', ticker])
   }
 
   closeReport() {
