@@ -18,7 +18,7 @@ declare let gtag: Function;
 @Component({
   selector: 'cpt-psp-symbol-search',
   template: `
-    <form class="form-inline" (submit)="onSubmit()">
+    <form class="form-inline" (submit)="onSubmit(symbolSearchForm.value)">
       <div class="form-group">
         <input #search (focusout)="toggleFocus()" (focus)="toggleFocus()" [formControl]="symbolSearchForm" type="search"
                class="form-control search-box"
@@ -64,7 +64,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   @Input('placeholder') placeholder: string;
   @ViewChild('search') search: ElementRef;
   @Output('focused') focused: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output('addToListClicked') addToListClicked: EventEmitter<boolean> =  new EventEmitter<boolean>();
+  @Output('toggleSearch') toggleSearch: EventEmitter<boolean> =  new EventEmitter<boolean>();
 
   private _listId: string;
   private _uid: string;
@@ -110,8 +110,9 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       });
   }
 
-  onSubmit() {
-    // TODO: on submit
+  onSubmit(ticker: string) {
+    this.router.navigate(['my-stocks', ticker.toUpperCase()]);
+    this.toggleSearch.emit();
   }
 
   addToList(ticker: string) {
@@ -119,7 +120,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       .take(1)
       .subscribe(res => {
         this.healthCheck.updateMyStocksList();
-        this.addToListClicked.emit();
+        this.toggleSearch.emit();
       });
   }
 
@@ -128,13 +129,14 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       .take(1)
       .subscribe(res => {
         this.healthCheck.updateMyStocksList();
-        this.addToListClicked.emit();
+        this.toggleSearch.emit();
       });
   }
 
 
-  onClick() {
-    console.log('clicked');
+  onClick(ticker: string) {
+    this.router.navigate(['my-stocks', ticker]);
+    this.toggleSearch.emit();
   }
 
   // resultInUserList(result: string) {

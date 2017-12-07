@@ -78,12 +78,10 @@ export class MyStocksComponent implements OnInit, OnDestroy {
     this.route.params
       .takeUntil(this._ngUnsubscribe)
       .subscribe(params => {
-        console.log('params', params);
           if (params.symbol) {
-            console.log('params.symbol', params.symbol);
             this.selectedStock = params.symbol;
           } else {
-            console.log('default', 'AAPL');
+            this.selectedStock = 'AAPL';
           }
         }
       );
@@ -100,6 +98,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       .take(1)
       .subscribe(res => {
         this.userStocks = res['symbols'];
+        this.healthCheck.setUserStocks(res['symbols']);
         this.powerBar = res['PowerBar'];
       })
   }

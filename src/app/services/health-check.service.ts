@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {UtilService} from './util.service';
 import {URLSearchParams} from '@angular/http';
-import {PGRChanges, PortfolioStatus, PrognosisData} from '../shared/models/health-check';
+import {ListSymbolObj, PGRChanges, PortfolioStatus, PrognosisData, StockStatus} from '../shared/models/health-check';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
@@ -24,6 +24,7 @@ export class HealthCheckService {
   private _portfolioStatus: Subject<PortfolioStatus> = new Subject<PortfolioStatus>();
   private _toggleOptions: BehaviorSubject<string> = new BehaviorSubject<string>('Top Movers');
   private _updateMyStocksList: Subject<void> = new Subject<void>();
+  private _userStocks: BehaviorSubject<Array<StockStatus|ListSymbolObj>> = new BehaviorSubject<Array<StockStatus|ListSymbolObj>>(undefined as Array<StockStatus|ListSymbolObj>);
 
   constructor(private utilService: UtilService) {
     this.prognosisParams = new URLSearchParams;
@@ -60,6 +61,14 @@ export class HealthCheckService {
 
   public getMyStocksSubject() {
     return this._updateMyStocksList;
+  }
+
+  public setUserStocks(val: Array<StockStatus|ListSymbolObj>) {
+    this._userStocks.next(val);
+  }
+
+  public getUserStocks() {
+    return this._userStocks;
   }
 
   public getPrognosisData(listId: string): Observable<PrognosisData> {

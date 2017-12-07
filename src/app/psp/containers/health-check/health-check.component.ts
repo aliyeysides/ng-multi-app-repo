@@ -49,11 +49,15 @@ import {Subscription} from 'rxjs/Subscription';
 
           <div class="row">
             <div class="col-12">
-              <h4>Disclaimer</h4>
-              <p class="disclaimer">Etiam vel nisi laoreet, semper felis sit amet, egestas libero. Ut quis pretium
-                tortor, eget semper lacus. Sed at leo lectus. Donec imperdiet erat eu enim vestibulum, ut interdum odio
-                laoreet. Nam vel tellus vel ligula posuere iaculis. Sed porta imperdiet leo sed posuere. Aenean maximus
-                lacus tortor, nec interdum diam posuere non.</p>
+              <h4>Disclaimer:</h4>
+              <p class="disclaimer">Chaikin Analytics (CA) is not registered as a securities Broker/Dealer
+                or Investment Advisor with either the U.S. Securities and Exchange Commission or with any state
+                securities regulatory authority. The information presented in our reports does not represent a
+                recommendation to buy or sell stocks or any financial instrument nor is it intended as an endorsement of
+                any security or investment. The information in this report does not take into account an individual's
+                specific financial situation. The user bears complete responsibility for their own investment research
+                and should consult with their financial advisor before making buy/sell decisions. For more information,
+                see <a target="_blank" href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a></p>
             </div>
           </div>
         </div>
@@ -198,6 +202,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(([stocks, data]) => {
         this.dailySymbolList = stocks['symbols'].filter(x => x['symbol'] != 'S&P 500');
+        this.healthCheck.setUserStocks(this.dailySymbolList);
         const indicies = data['market_indices'];
         this.dailySymbolList.push(Object.assign({}, { // Push Daily SPY into collection.
           "symbol": 'S&P 500',
