@@ -10,14 +10,10 @@ import {HealthCheckService} from '../../../../services/health-check.service';
     <div class="col-12 col-lg-12 col-xl-12 section--overview" [ngClass]="{
     'section--overview--green': calculations?.avgPercentageChange > 0,
     'section--overview--red': calculations?.avgPercentageChange < 0}">
-      <div class="row overview__header">
-        <div class="col-12">
-          <p class="timespan">LAST WEEK</p>
-        </div>
-      </div>
 
       <div class="row no-gutters overview__summary">
         <div class="col-12 col-md-4">
+          <p class="timespan">LAST WEEK</p>
           <p><span class="list-name">My Stocks</span></p>
           
         </div>

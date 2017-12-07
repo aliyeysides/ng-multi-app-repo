@@ -1,0 +1,41 @@
+@import 'variables';
+
+
+
+
+.section__list {
+	h3 {
+  		font-size: 28px;
+  		line-height: 1;
+		display: inline-block;
+  background: linear-gradient(to left, rgba(0,204,0,0.95) 0%,rgba(0,170,119,0.95) 80%);
+		border: 0px solid #333;
+		border-radius: 30px;
+		color:#ffffff;
+		font-weight: 600;
+		padding:8px 25px 5px;
+		margin: 20px 0 10px;
+		opacity: 1;
+	}
+	.col-headers {
+		margin-top:10px;
+		font-weight:600;
+		.sort {
+			p {
+				display:inline-block;
+			}
+		}
+		.sorted {
+			p {
+				//border-bottom: 2px solid #999999;
+				font-weight: 500;
+				color:#ffffff;
+				background-color: #666666;
+				border-radius: 30px;
+				display: inline-block;
+				padding:3px 8px 1px;
+			}
+		}
+	}
+}
+
