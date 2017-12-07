@@ -15,7 +15,7 @@ import {Subject} from 'rxjs/Subject';
         <cpt-my-stocks-list (addStockClicked)="addStock($event)" (removeStockClicked)="removeStock($event)"
                             (updateData)="updateData()"
                             (stockClicked)="selectStock($event)"
-                            [stocks]="userStocks"></cpt-my-stocks-list>
+                            [stocks]="userStocks" [powerBar]="powerBar"></cpt-my-stocks-list>
         <div class="col-12" id="list--recent">
           <h3>Recently Viewed</h3>
           <div class="divider__long"></div>
@@ -51,6 +51,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
 
   selectedStock: string | boolean;
   userStocks: ListSymbolObj[];
+  powerBar: string;
   loading: Subscription;
 
   constructor(private authService: AuthService,
@@ -71,6 +72,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       })
       .subscribe(res => {
         this.userStocks = res['symbols'];
+        this.powerBar = res['PowerBar'];
       });
 
     this.route.params
@@ -98,6 +100,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       .take(1)
       .subscribe(res => {
         this.userStocks = res['symbols'];
+        this.powerBar = res['PowerBar'];
       })
   }
 
