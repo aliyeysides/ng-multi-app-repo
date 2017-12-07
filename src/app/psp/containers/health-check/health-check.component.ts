@@ -57,7 +57,7 @@ import {Subscription} from 'rxjs/Subscription';
                 any security or investment. The information in this report does not take into account an individual's
                 specific financial situation. The user bears complete responsibility for their own investment research
                 and should consult with their financial advisor before making buy/sell decisions. For more information,
-                <a target="_blank" href="http://www.chaikinanalytics.com/disclaimer/">see disclaimer.</a></p>
+                see <a target="_blank" href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a></p>
             </div>
           </div>
         </div>
