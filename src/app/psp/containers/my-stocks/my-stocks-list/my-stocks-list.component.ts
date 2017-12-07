@@ -47,7 +47,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <p>CHG</p>
           </div>
         </li>
-        <li (click)="selectedStock(stock.symbol)" *ngFor="let stock of myStocks" class="row list__entry">
+        <li (click)="selectedStock(stock.symbol);$event.stopPropagation()" *ngFor="let stock of myStocks" class="row list__entry">
           <div class="col-3 list-entry__pgr">
             <img class="align-absolute" src="{{ appendPGRImage(stock.PGR, stock.raw_PGR) }}">
           </div>
@@ -61,16 +61,16 @@ import {HealthCheckService} from '../../../../services/health-check.service';
           <div class="col-3 list-entry__data">
             <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock.Change }}%</p>
           </div>
-          <div (click)="toggleSlider(stock.symbol)" class="button__slide">
+          <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide">
             <img src="./assets/imgs/ui_slide.svg">
           </div>
           <div class="col-12 list-entry__overlay"
                [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.Change>0, 'red': stock.Change<0 }">
             <div class="row no-gutters overlay__contents">
-              <div (click)="toggleSlider(stock.symbol)" class="button__slide">
+              <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide">
                 <img src="./assets/imgs/ui_slide.svg">
               </div>
-              <div (click)="emitRemoveStock(stock.symbol)" class="col-2">
+              <div (click)="emitRemoveStock(stock.symbol);$event.stopPropagation()" class="col-2">
                 <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
               </div>
               <div class="col-4">

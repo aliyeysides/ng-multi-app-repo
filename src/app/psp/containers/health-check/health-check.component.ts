@@ -84,7 +84,22 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loading = this.authService.currentUser$
+    this.loading = this.initData();
+
+    this.healthCheck.getMyStocksSubject()
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(res => {
+        this.updateData();
+      })
+  }
+
+  ngOnDestroy() {
+    this._ngUnsubscribe.next();
+    this._ngUnsubscribe.complete();
+  }
+
+  initData() {
+    return this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
       .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
       .take(1)
@@ -129,13 +144,47 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.loadDailyData();
       });
-
-
   }
 
-  ngOnDestroy() {
-    this._ngUnsubscribe.next();
-    this._ngUnsubscribe.complete();
+  updateData() {
+    const startDate = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
+      endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
+    return Observable.combineLatest(
+      this.healthCheck.getChaikinCalculations(this._listId, startDate, endDate),
+      this.healthCheck.getPrognosisData(this._listId),
+      this.healthCheck.getUserPortfolioStockStatus(this._listId, startDate, endDate),
+      this.healthCheck.getPGRWeeklyChangeDAta(this._listId, moment().subtract(1, 'weeks').day(-1).format('YYYY-MM-DD'), moment().day(-1).format('YYYY-MM-DD')),
+      this.healthCheck.getEarningsSurprise(this._listId, startDate, endDate),
+      this.healthCheck.getAnalystRevisions(this._listId, moment().day(-2).format('YYYY-MM-DD')),
+      this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, this._listId, moment().isoWeekday(1).format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')),
+      this.healthCheck.getPHCGridData(this._listId),
+    )
+      .take(1)
+      .map(([calc, data, status, pgr, sups, revs, reports, grid]) => {
+        this.calculations = calc[Object.keys(calc)[0]];
+        this.healthCheck.setPortfolioStatus(this.calculations);
+        this.prognosisData = data;
+
+        this.stocksStatus = status[Object.keys(status)[0]];
+        this.stocksStatus.push(Object.assign({}, { // Push Weekly SPY into collection.
+          "symbol": 'S&P 500',
+          "corrected_pgr_rating": 0,
+          "percentageChange": this.calculations.SPYPercentageChange,
+          "companyName": 'S&P500',
+          "raw_pgr_rating": 0,
+          "closePrice": 0,
+          "arcColor": 2
+        }));
+
+        this.pgrChanges = pgr;
+        this.earningsSurprise = sups;
+        this.analystRevisions = revs;
+        this.expectedEarnings = reports;
+        this.pgrGridData = grid;
+      })
+      .subscribe(() => {
+        this.loadDailyData();
+      });
   }
 
   loadDailyData() {

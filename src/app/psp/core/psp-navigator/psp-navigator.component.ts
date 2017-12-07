@@ -19,7 +19,7 @@ export class PspNavigatorComponent {
   @Output('routeClicked') routeClicked: EventEmitter<void> = new EventEmitter<void>();
   public routes = [
     {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-    {link: '/my-stocks', klass: 'fa fa-list', label: 'My Stocks'},
+    {link: '/my-stocks/AMAT', klass: 'fa fa-list', label: 'My Stocks'},
     {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Beat'},
   ];
 

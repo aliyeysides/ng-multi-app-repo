@@ -4,6 +4,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
+import {Router} from '@angular/router';
 
 interface ToggleOptions {
   currentToggleOptionText: string,
@@ -80,7 +81,7 @@ interface FilterFunc {
                 <p class="text-left">% CHANGE</p>
               </div>
             </li>
-            <li *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
+            <li (click)="gotoReport(stock.symbol)" *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
                 class="row no-gutters list-item__mover">
               <div class="col-4 mover__stock">
                 <img *ngIf="stock.arcColor != 2"
@@ -187,7 +188,8 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   collapse: boolean = false;
 
   constructor(private signalService: SignalService,
-              private healthCheck: HealthCheckService) {
+              private healthCheck: HealthCheckService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -324,6 +326,11 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
       const relWidth = Math.abs(x['percentageChange']) * 100 / max;
       return Object.assign(x, {barWidth: relWidth + '%', width: relWidth})
     })
+  }
+
+  gotoReport(ticker: string) {
+    if (ticker === 'S&P 500' ) return;
+    this.router.navigate(['my-stocks', ticker]);
   }
 
 }

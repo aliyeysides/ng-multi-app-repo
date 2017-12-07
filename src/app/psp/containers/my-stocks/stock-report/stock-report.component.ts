@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'cpt-psp-stock-report',
@@ -1116,7 +1116,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   `,
   styleUrls: ['./stock-report.component.scss']
 })
-export class StockReportComponent implements OnInit {
+export class StockReportComponent implements OnInit, OnChanges {
   @Input('stock') stock: string;
   @Input('show') show: boolean;
   @Output('closeClicked') closeClicked: EventEmitter<void> = new EventEmitter<void>();
@@ -1125,6 +1125,11 @@ export class StockReportComponent implements OnInit {
 
   ngOnInit() {
     console.log('stock', this.stock, 'show', this.show);
+    window.scrollTo(0, 0);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes) window.scrollTo(0, 0);
   }
 
   closeReport() {

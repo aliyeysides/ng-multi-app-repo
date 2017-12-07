@@ -7,6 +7,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
+import {Router} from '@angular/router';
 
 interface EarningsReportObj {
   symbol: string,
@@ -61,7 +62,7 @@ interface EarningsReportObj {
               </div>
             </li>
             <ng-container *ngIf="allSurprises.length">
-              <li *ngFor="let item of allSurprises" class="row no-gutters earnings__entry">
+              <li (click)="gotoReport(item.symbol)" *ngFor="let item of allSurprises" class="row no-gutters earnings__entry">
                 <div class="col-1 pgr">
                   <img class="align-absolute" src="{{ appendPGRImage(item.pgr, item.raw_pgr) }}">
                 </div>
@@ -109,7 +110,7 @@ interface EarningsReportObj {
               </div>
             </li>
             <ng-container *ngIf="allRevisions.length">
-              <li *ngFor="let item of allRevisions" class="row no-gutters earnings__entry">
+              <li (click)="gotoReport(item.symbol)" *ngFor="let item of allRevisions" class="row no-gutters earnings__entry">
                 <div class="col-1 pgr">
                   <img class="align-absolute" src="{{ appendPGRImage(item.pgr, item.raw_pgr) }}">
                 </div>
@@ -192,7 +193,8 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
   @Input('expected') expected: ExpectedEarningsReports;
 
   constructor(private signalSerivce: SignalService,
-              private healthCheck: HealthCheckService) {
+              private healthCheck: HealthCheckService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -230,6 +232,10 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
 
   toggleCollapse() {
     this.collapse = !this.collapse;
+  }
+
+  gotoReport(ticker: string) {
+    this.router.navigate(['my-stocks', ticker]);
   }
 
   earningsReportObjFactory(res: EarningsReportSurprises | EarningsAnalystRevisions): Array<EarningsReportObj> {
