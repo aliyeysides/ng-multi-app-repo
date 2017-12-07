@@ -23,6 +23,7 @@ export class HealthCheckService {
 
   private _portfolioStatus: Subject<PortfolioStatus> = new Subject<PortfolioStatus>();
   private _toggleOptions: BehaviorSubject<string> = new BehaviorSubject<string>('Top Movers');
+  private _updateMyStocksList: Subject<void> = new Subject<void>();
 
   constructor(private utilService: UtilService) {
     this.prognosisParams = new URLSearchParams;
@@ -51,6 +52,14 @@ export class HealthCheckService {
 
   public getToggleOptions() {
     return this._toggleOptions;
+  }
+
+  public updateMyStocksList() {
+    this._updateMyStocksList.next();
+  }
+
+  public getMyStocksSubject() {
+    return this._updateMyStocksList;
   }
 
   public getPrognosisData(listId: string): Observable<PrognosisData> {

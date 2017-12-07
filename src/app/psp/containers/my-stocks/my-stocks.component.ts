@@ -11,6 +11,7 @@ import {IdeasService} from '../../../services/ideas.service';
     <div [ngBusy]="loading" class="container-fluid component component--mystocks">
       <div class="row contents">
         <cpt-my-stocks-list (addStockClicked)="addStock($event)" (removeStockClicked)="removeStock($event)"
+                            (updateData)="updateData()"
                             [stocks]="userStocks"></cpt-my-stocks-list>
         <div class="col-12" id="list--recent">
           <h3>Recently Viewed</h3>
@@ -51,10 +52,6 @@ export class MyStocksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.updateData();
-  }
-
-  updateData() {
     this.loading = this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
       .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
@@ -68,7 +65,17 @@ export class MyStocksComponent implements OnInit {
       })
   }
 
+  updateData() {
+    this.loading = this.healthCheck.getListSymbols(this._listId, this._uid)
+      .filter(x => x != undefined)
+      .take(1)
+      .subscribe(res => {
+        this.userStocks = res['symbols'];
+      })
+  }
+
   addStock(ticker: string) {
+    console.log('addStock', ticker);
     this.ideasService.addStockIntoList(this._listId.toString(), ticker)
       .take(1)
       .subscribe(res => this.updateData());

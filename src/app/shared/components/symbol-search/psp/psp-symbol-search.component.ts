@@ -42,8 +42,11 @@ declare let gtag: Function;
               {{ result.CompanyName }}
             </p>
           </div>
-          <div (click)="addToList(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
+          <div *ngIf="!resultInUserList(result.Symbol)" (click)="addToList(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
             <img class="align-middle" src="./assets/imgs/icon_plus--white.svg">
+          </div>
+          <div *ngIf="resultInUserList(result.Symbol)" (click)="addToList(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
+            <img class="align-middle" src="./assets/imgs/icon_plus_minus.svg">
           </div>
         </li>
       </ul>
@@ -84,23 +87,14 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   ngOnInit() {
     this.loading = this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
-      .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
-      .take(1)
+      .switchMap(uid => this.healthCheck.getAuthorizedLists(uid))
       .map(res => this._listId = res[0]['User Lists'][0]['list_id'])
       .switchMap(listId => {
         return this.healthCheck.getListSymbols(listId, this._uid)
       })
-      .subscribe(res => {
-        this.userStocks = res['symbols'];
-      })
-  }
-
-  updateList() {
-    this.healthCheck.getListSymbols(this._listId, this._uid)
       .take(1)
       .subscribe(res => {
         this.userStocks = res['symbols'];
-        console.log('updateList', this.userStocks);
       })
   }
 
@@ -121,18 +115,32 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   }
 
   addToList(ticker: string) {
-    this.loading = this.ideasService.addStockIntoList(this._listId, ticker)
-      .filter(x => x != undefined)
+    this.ideasService.addStockIntoList(this._listId.toString(), ticker)
       .take(1)
-      .do(() => this.updateList())
       .subscribe(res => {
-        console.log('need to update list in my stocks', res);
+        this.healthCheck.updateMyStocksList();
         this.addToListClicked.emit();
+
       });
   }
 
+  removeStock(ticker: string) {
+    this.ideasService.deleteSymbolFromList(this._listId, ticker)
+      .take(1)
+      .subscribe(res => {
+        this.healthCheck.updateMyStocksList();
+        this.addToListClicked.emit();
+
+      });
+  }
+
+
   onClick() {
     console.log('clicked');
+  }
+
+  resultInUserList(result: string) {
+    return this.userStocks.filter(x => x['Symbol'] == result).length > 0;
   }
 
 }
