@@ -25,13 +25,14 @@ h2 {
   line-height: 1;
 }
 h3 {
-  font-size:27px;
+  font-size:24px;
   line-height: 1;
   font-weight: 700;
   margin: 5px 0 3px;
-  opacity: 0.5;
+  opacity: 0.8;
   color: #484848;
   position: relative;
+  text-transform: uppercase;
 
   span {
     width: 40px;
@@ -176,6 +177,16 @@ sub {
   font-weight: 300;
   line-height: 1.5;
 }
+
+
+
+.icon__separator {
+  opacity: 0.15;
+  max-width: 35px;
+  margin: 0 auto;
+}
+
+
 
 
 
@@ -734,6 +745,7 @@ sub {
   top:0;
   left:0;
   width: 100%;
+  background: rgba(60,60,60,0.9);
 }
 
 .list-entry__overlay.show {
