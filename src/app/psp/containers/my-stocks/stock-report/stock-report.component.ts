@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'cpt-stock-report',
+  selector: 'cpt-psp-stock-report',
   template: `
-    <div class="component--stockview bearish open">
+    <div class="component--stockview bearish" [ngClass]="{'open': show}">
 
     <!-- STOCK VIEW HEADER -->
       <div class="stockview__header">
-        <div class="header__button header__button--left">
+        <div (click)="closeReport()" class="header__button header__button--left">
           <img class="align-absolute" src="./assets/imgs/icon_back-arrow--white.svg">
         </div>
         <div class="header__stock">
-          <h1 class="ticker">AMZN</h1>
+          <h1 class="ticker">{{ stock }}</h1>
           <p class="company-name">Amazon.Com Inc</p>
         </div>
         <div class="header__button header__button--right">
@@ -1117,10 +1117,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stock-report.component.scss']
 })
 export class StockReportComponent implements OnInit {
+  @Input('stock') stock: string;
+  @Input('show') show: boolean;
+  @Output('closeClicked') closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() { }
 
   ngOnInit() {
+    console.log('stock', this.stock, 'show', this.show);
+  }
+
+  closeReport() {
+    this.show = false;
+    this.closeClicked.emit();
   }
 
 }

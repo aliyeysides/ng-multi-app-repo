@@ -12,6 +12,7 @@ import {IdeasService} from '../../../services/ideas.service';
       <div class="row contents">
         <cpt-my-stocks-list (addStockClicked)="addStock($event)" (removeStockClicked)="removeStock($event)"
                             (updateData)="updateData()"
+                            (stockClicked)="selectStock($event)"
                             [stocks]="userStocks"></cpt-my-stocks-list>
         <div class="col-12" id="list--recent">
           <h3>Recently Viewed</h3>
@@ -35,6 +36,7 @@ import {IdeasService} from '../../../services/ideas.service';
         </div>
       </div>
     </div>
+    <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock" [stock]="selectedStock"></cpt-psp-stock-report>
   `,
   styleUrls: ['./my-stocks.component.scss']
 })
@@ -43,6 +45,7 @@ export class MyStocksComponent implements OnInit {
   private _uid: string;
   private _listId: string;
 
+  selectedStock: string | boolean;
   userStocks: ListSymbolObj[];
   loading: Subscription;
 
@@ -85,6 +88,15 @@ export class MyStocksComponent implements OnInit {
     this.ideasService.deleteSymbolFromList(this._listId, ticker)
       .take(1)
       .subscribe(res => this.updateData());
+  }
+
+  selectStock(ticker: string) {
+    console.log('selectStock', ticker);
+    this.selectedStock = ticker;
+  }
+
+  closeReport() {
+    this.selectedStock = false;
   }
 
 }
