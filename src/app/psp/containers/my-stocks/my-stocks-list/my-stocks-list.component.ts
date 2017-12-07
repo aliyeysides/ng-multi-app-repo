@@ -7,9 +7,8 @@ import {SignalService} from '../../../../services/signal.service';
 @Component({
   selector: 'cpt-my-stocks-list',
   template: `
-    <div class="col-12" id="list--selected">
+    <div class="col-12 section__list" id="list--selected">
       <h3>My Stocks</h3>
-      <div class="divider__long"></div>
       <ul class="stock__list">
         <li class="row col-headers">
           <div class="col-3">
@@ -49,14 +48,14 @@ import {SignalService} from '../../../../services/signal.service';
                 <img src="./assets/imgs/ui_slide.svg">
               </div>
               <div (click)="emitRemoveStock(stock.symbol)" class="col-2">
-                <img class="align-middle" src="./assets/imgs/icon_minus.svg">
+                <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
               </div>
               <div class="col-4">
                 <p class="ticker">{{ stock.symbol }}</p>
               </div>
               <div class="col-2">
                 <img *ngIf="stock.Change>0" class="align-middle" src="./assets/imgs/icon_arrow-up.svg">
-                <img *ngIf="stock.Change<0" class="align-middle" src="./assets/imgs/icon_arrow-down.svg">
+                <img *ngIf="stock.Change<0" class="align-absolute" src="./assets/imgs/icon_arrow-down.svg">
               </div>
               <div class="col-4">
                 <p class="data">{{ stock.Change }}%</p>

@@ -9,36 +9,32 @@
 
 .section--overview {
   	color:#ffffff;
-	padding-top:57px;
-
-	.overview__header {
-      	.timespan {
-      		font-size: 16px;
-	      	line-height: 1.3;
-	      	font-weight: 600;
-			text-transform: uppercase;
-      		display: inline-block;
-      		//border-bottom: 4px dotted rgba(255,255,255,1);
-      		margin: 5px 0 0px;
-      		padding-bottom: 0px;
-      	}
-	}
+	padding-top:55px;
 
 	.overview__summary {
 		margin:0;
 		position: relative;
 		padding: 5px 0px 15px;
 
+      	.timespan {
+      		font-size: 16px;
+	      	line-height: 1.3;
+	      	font-weight: 600;
+			text-transform: uppercase;
+      		display: inline-block;
+      		letter-spacing: 0.05em;
+      	}
+
 		.list-name {
-      		font-size: 24px;
+      		font-size: 27px;
       		line-height: 1;
 			display: inline-block;
-			background-color: transparent;
+			background-color: rgba(255,255,255,0.95);
 			border: 2px solid #ffffff;
-			border-radius: 20px;
-			color:#ffffff;
+			border-radius: 30px;
+			  color:#00C04E;
 			font-weight: 600;
-			padding:5px 20px 3px;
+			padding:5px 25px 2px;
 			margin: 10px 0 10px;
 		}
 
@@ -262,7 +258,7 @@
 
 
 .list-item__mover {
-  margin:10px 0;
+  margin:12px 0;
 
   &:first-child {
   	margin-top:15px;
@@ -341,7 +337,10 @@
 
 
 
-
+.icon__separator {
+	opacity: 0.1;
+	padding-top: 20px;
+}
 
 
 #HC--Ratings-Changes {
@@ -397,14 +396,17 @@
 .reporting-calendar {
 	margin-bottom:20px;
 
-	.col-head {
-		margin: 0;
-	  	float: left;
-	  	width: 20%;
+	.col-headers {
+		margin-top:20px;
+		.col-head {
+			margin: 0;
+		  	float: left;
+		  	width: 20%;
 
-		p {
-		  	opacity: 1;
-		  	font-weight: 600;
+			p {
+			  	opacity: 1;
+			  	font-weight: 600;
+			}
 		}
 	}
 
