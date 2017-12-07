@@ -4,6 +4,7 @@ import {PGRChanges} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'cpt-psp-rating-changes',
@@ -54,7 +55,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
               </div>
             </li>
             <ng-container *ngIf="bullishAlerts.length">
-              <li *ngFor="let stock of bullishAlerts" class="row list__entry">
+              <li (click)="gotoReport(stock.symbol)" *ngFor="let stock of bullishAlerts" class="row list__entry">
                 <div class="col-3 list-entry__pgr">
                   <img class="align-absolute"
                        src="{{ appendPGRImage(stock['corrected_pgr_rating'], stock['raw_pgr_rating']) }}">
@@ -102,7 +103,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
               </div>
             </li>
             <ng-container *ngIf="bearishAlerts.length">
-              <li *ngFor="let stock of bearishAlerts" class="row list__entry">
+              <li (click)="gotoReport(stock.symbol)" *ngFor="let stock of bearishAlerts" class="row list__entry">
                 <div class="col-3 list-entry__pgr">
                   <img class="align-absolute"
                        src="{{ appendPGRImage(stock['corrected_pgr_rating'], stock['raw_pgr_rating']) }}">
@@ -168,7 +169,8 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
   portUp: boolean;
 
   constructor(private signalService: SignalService,
-              private healthCheck: HealthCheckService) {
+              private healthCheck: HealthCheckService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -195,6 +197,10 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
 
   toggleCollapse() {
     this.collapse = !this.collapse;
+  }
+
+  gotoReport(ticker: string) {
+    this.router.navigate(['my-stocks', ticker]);
   }
 
   private parseAlerts(alerts: PGRChanges) {

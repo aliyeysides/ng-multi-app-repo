@@ -3,6 +3,7 @@ import {PHCIndustryData, PHCGridData} from '../../../../shared/models/health-che
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {HealthCheckService} from '../../../../services/health-check.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'cpt-psp-power-grid',
@@ -36,7 +37,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <div *ngFor="let industry of strongIndustries" class="row grid__row">
               <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant green">
                 <p class="ticker">
-                  <a *ngFor="let stock of isStrongStock(industry.SymbolPGRMappings);let last = last">
+                  <a (click)="gotoReport(stock)" *ngFor="let stock of isStrongStock(industry.SymbolPGRMappings);let last = last">
                     {{ objectKeys(stock)[0] }}
                     <span *ngIf="industry.SymbolPGRMappings.length>1 && !last">, </span>
                   </a>
@@ -59,7 +60,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <div *ngFor="let industry of strongIndustries" class="row grid__row">
               <div *ngIf="isWeakStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant red">
                 <p class="ticker">
-                  <a *ngFor="let stock of isWeakStock(industry.SymbolPGRMappings);let last = last">
+                  <a (click)="gotoReport(stock)" *ngFor="let stock of isWeakStock(industry.SymbolPGRMappings);let last = last">
                     {{ objectKeys(stock)[0] }}
                     <span *ngIf="industry.SymbolPGRMappings.length>1 && !last">, </span>
                   </a>
@@ -87,7 +88,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <div *ngFor="let industry of weakIndustries" class="row grid__row">
               <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant red">
                 <p class="ticker">
-                  <a *ngFor="let stock of isStrongStock(industry.SymbolPGRMappings);let last = last">
+                  <a (click)="gotoReport(stock)" *ngFor="let stock of isStrongStock(industry.SymbolPGRMappings);let last = last">
                     {{ objectKeys(stock)[0] }}
                     <span *ngIf="industry.SymbolPGRMappings.length>1 && !last">, </span>
                   </a>
@@ -110,7 +111,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <div *ngFor="let industry of weakIndustries" class="row grid__row">
               <div *ngIf="isWeakStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant red">
                 <p class="ticker">
-                  <a *ngFor="let stock of isWeakStock(industry.SymbolPGRMappings);let last = last">
+                  <a (click)="gotoReport(stock)" *ngFor="let stock of isWeakStock(industry.SymbolPGRMappings);let last = last">
                     {{ objectKeys(stock)[0] }}
                     <span *ngIf="industry.SymbolPGRMappings.length>1 && !last">, </span>
                   </a>
@@ -157,7 +158,8 @@ export class PowerGridComponent implements OnInit, OnDestroy {
 
   objectKeys = Object.keys;
 
-  constructor(private healthCheck: HealthCheckService) {
+  constructor(private healthCheck: HealthCheckService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -190,6 +192,10 @@ export class PowerGridComponent implements OnInit, OnDestroy {
 
   toggleCollapse() {
     this.collapse = !this.collapse;
+  }
+
+  gotoReport(ticker: string) {
+    this.router.navigate(['my-stocks', Object.keys(ticker)[0]]);
   }
 
 }

@@ -4,6 +4,7 @@ import {EarningsReport, ExpectedEarningsReports} from '../../../../../shared/mod
 import {Subject} from 'rxjs/Subject';
 
 import * as moment from 'moment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'cpt-psp-reporting-calendar',
@@ -83,15 +84,15 @@ import * as moment from 'moment';
           </div>
           <div class="col-4">
             <p class="ticker">
-              <span *ngFor="let ticker of selectedDayData['bullishSymbol']" style="display: inline-block;">
+              <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['bullishSymbol']" style="display: inline-block;">
                 <img width="30px" class="" src="./assets/imgs/arc_Bullish.svg">
                 {{ ticker }}
               </span>
-              <span *ngFor="let ticker of selectedDayData['neutralSymbol']" style="display: inline-block;">
+              <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['neutralSymbol']" style="display: inline-block;">
                 <img width="30px" class="" src="./assets/imgs/arc_Neutral.svg">
                 {{ ticker }}
               </span>
-              <span *ngFor="let ticker of selectedDayData['bearishSymbol']" style="display: inline-block;">
+              <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['bearishSymbol']" style="display: inline-block;">
                 <img width="30px" class="" src="./assets/imgs/arc_Bearish.svg">
                 {{ ticker }}
               </span>
@@ -129,7 +130,7 @@ export class ReportingCalendarComponent implements OnInit, OnDestroy {
     friday: []
   };
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
@@ -200,6 +201,10 @@ export class ReportingCalendarComponent implements OnInit, OnDestroy {
     this.selectedDay = day;
     this.selectedDayData = [];
     this.selectedDate = '';
+  }
+
+  gotoReport(ticker: string) {
+    this.router.navigate(['my-stocks', ticker]);
   }
 
 }
