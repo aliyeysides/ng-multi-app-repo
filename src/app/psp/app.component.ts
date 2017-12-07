@@ -24,7 +24,7 @@ declare let gtag: Function;
         <cpt-psp-settings-menu [btn]="navBtn" [navOpened]="navOpened" (navClosed)="navOpened.next(false)"></cpt-psp-settings-menu>
         <div class="header__title header__search">
           <h1 *ngIf="!searchOpened">{{ title }}</h1>
-          <cpt-psp-symbol-search (addToListClicked)="toggleSearch()" [placeholder]="'Search'" *ngIf="searchOpened"></cpt-psp-symbol-search>
+          <cpt-psp-symbol-search (toggleSearch)="toggleSearch()" [placeholder]="'Search'" *ngIf="searchOpened"></cpt-psp-symbol-search>
         </div>
         <div (click)="toggleSearch()" class="header__button header__button--right" id="header_button--right">
           <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">

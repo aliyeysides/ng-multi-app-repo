@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {ListSymbolObj} from '../../../../shared/models/health-check';
+import {ListSymbolObj, PortfolioStatus} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
@@ -8,7 +8,8 @@ import {HealthCheckService} from '../../../../services/health-check.service';
 @Component({
   selector: 'cpt-my-stocks-list',
   template: `
-    <div class="col-12 stocklist__overview stocklist__overview--green">
+    <div class="col-12 stocklist__overview"
+         [ngClass]="{'stocklist__overview--green': status?.avgPercentageChange > 0,'stocklist__overview--red': status?.avgPercentageChange < 0 }">
       <p class="list-name">My Stocks</p>
     </div>
 
@@ -17,13 +18,15 @@ import {HealthCheckService} from '../../../../services/health-check.service';
         <p class="label">Power Bar</p>
       </div>
       <div class="col-8 powerbar clearfix">
-        <div [ngClass]="{'bullish--more':powerbar[2]>powerbar[0], 'bullish--less':powerbar[2]<powerbar[0],'bullish--same':powerbar[2]==powerbar[0]}">
+        <div
+          [ngClass]="{'bullish--more':powerbar[2]>powerbar[0], 'bullish--less':powerbar[2]<powerbar[0],'bullish--same':powerbar[2]==powerbar[0]}">
           <p>{{ powerbar[2] }}</p>
         </div>
         <div class="neutral">
           <p>{{ powerbar[1] }}</p>
         </div>
-        <div [ngClass]="{'bearish--more':powerbar[0]>powerbar[2], 'bearish--less':powerbar[0]<powerbar[2],'bearish--same':powerbar[0]==powerbar[2]}">
+        <div
+          [ngClass]="{'bearish--more':powerbar[0]>powerbar[2], 'bearish--less':powerbar[0]<powerbar[2],'bearish--same':powerbar[0]==powerbar[2]}">
           <p>{{ powerbar[0] }}</p>
         </div>
       </div>
@@ -119,7 +122,8 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   }
 
 
-  powerbar: string[] = ['0','0','0'];
+  powerbar: string[] = ['0', '0', '0'];
+  status: PortfolioStatus;
   myStocks: ListSymbolObj[];
   sliderObj: object = {};
 
@@ -147,6 +151,11 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.updateData.emit()
       })
+
+    this.healthCheck.getPortfolioStatus()
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(res => this.status = res);
+
   }
 
   ngOnDestroy() {
