@@ -57,7 +57,8 @@ export class AppComponent implements OnDestroy {
     timeOut: 5000
   };
 
-  constructor(private router: Router, private healthCheck: HealthCheckService) {
+  constructor(private router: Router,
+              private healthCheck: HealthCheckService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.title = event.urlAfterRedirects.replace(/\W/g, ' ').trim().split(' ')
