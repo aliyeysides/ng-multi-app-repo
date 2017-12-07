@@ -1,9 +1,10 @@
-import {Component, ElementRef, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, OnDestroy, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 import {HealthCheckService} from '../services/health-check.service';
 import {PortfolioStatus} from '../shared/models/health-check';
+import {Subject} from 'rxjs/Subject';
 
 declare let gtag: Function;
 
@@ -41,8 +42,10 @@ declare let gtag: Function;
     </span>
   `
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   @ViewChild('search') search: ElementRef;
+
+  private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
   searchOpened: boolean = false;
   navOpened: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -70,9 +73,14 @@ export class AppComponent {
       }
     });
     this.healthCheck.getPortfolioStatus()
-      .take(1)
+      .takeUntil(this._ngUnsubscribe)
       .subscribe(res => this.status = res);
 
+  }
+
+  ngOnDestroy() {
+    this._ngUnsubscribe.next();
+    this._ngUnsubscribe.complete();
   }
 
   toggleSearch() {

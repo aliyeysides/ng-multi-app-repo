@@ -92,6 +92,7 @@ export class MyStocksComponent implements OnInit {
 
   selectStock(ticker: string) {
     console.log('selectStock', ticker);
+    window.scrollTo(0,0);
     this.selectedStock = ticker;
   }
 

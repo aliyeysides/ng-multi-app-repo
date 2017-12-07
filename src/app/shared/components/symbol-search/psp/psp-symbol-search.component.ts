@@ -120,7 +120,6 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       .subscribe(res => {
         this.healthCheck.updateMyStocksList();
         this.addToListClicked.emit();
-
       });
   }
 
@@ -130,7 +129,6 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       .subscribe(res => {
         this.healthCheck.updateMyStocksList();
         this.addToListClicked.emit();
-
       });
   }
 
