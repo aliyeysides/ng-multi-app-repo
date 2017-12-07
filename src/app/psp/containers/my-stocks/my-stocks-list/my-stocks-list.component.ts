@@ -3,6 +3,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ListSymbolObj} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
+import {HealthCheckService} from '../../../../services/health-check.service';
 
 @Component({
   selector: 'cpt-my-stocks-list',
@@ -74,6 +75,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
 
   @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @Output('removeStockClicked') removeStockClicked: EventEmitter<string> = new EventEmitter<string>();
+  @Output('updateData') updateData: EventEmitter<void> = new EventEmitter<void>();
 
   @Input('stocks')
   set stocks(val: ListSymbolObj[]) {
@@ -87,7 +89,8 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   myStocks: ListSymbolObj[];
   sliderObj: object = {};
 
-  constructor(private signalService: SignalService) {
+  constructor(private signalService: SignalService,
+              private healthCheck: HealthCheckService) {
   }
 
   ngOnInit() {
@@ -96,6 +99,14 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(stocks => {
         this.myStocks = stocks;
+      });
+
+    this.healthCheck.getMyStocksSubject()
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(res => {
+        console.log('res in get my ', res);
+        // this.emitAddStock(res);
+        this.updateData.emit()
       })
   }
 
