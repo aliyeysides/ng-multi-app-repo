@@ -25,7 +25,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <p>CHG</p>
           </div>
         </li>
-        <li *ngFor="let stock of myStocks" class="row list__entry">
+        <li (click)="selectedStock(stock.symbol)" *ngFor="let stock of myStocks" class="row list__entry">
           <div class="col-3 list-entry__pgr">
             <img class="align-middle" src="{{ appendPGRImage(stock.PGR, stock.raw_PGR) }}">
           </div>
@@ -75,6 +75,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
 
   @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @Output('removeStockClicked') removeStockClicked: EventEmitter<string> = new EventEmitter<string>();
+  @Output('stockClicked') stockClicked: EventEmitter<string> = new EventEmitter<string>();
   @Output('updateData') updateData: EventEmitter<void> = new EventEmitter<void>();
 
   @Input('stocks')
@@ -104,8 +105,6 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
     this.healthCheck.getMyStocksSubject()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
-        console.log('res in get my ', res);
-        // this.emitAddStock(res);
         this.updateData.emit()
       })
   }
@@ -134,6 +133,10 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
 
   appendPGRImage(pgr: number, rawPgr: number) {
     return this.signalService.appendPGRImage(pgr, rawPgr);
+  }
+
+  selectedStock(ticker: string) {
+    this.stockClicked.emit(ticker);
   }
 
 }

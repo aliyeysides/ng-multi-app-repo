@@ -30,7 +30,7 @@ import {SymbolSearchService} from '../services/symbol-search.service';
     AppComponent,
   ],
   imports: [
-    // BrowserModule,
+    BrowserModule,
     HttpModule,
     SharedModule,
     BrowserAnimationsModule,
