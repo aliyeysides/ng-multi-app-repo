@@ -202,6 +202,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(([stocks, data]) => {
         this.dailySymbolList = stocks['symbols'].filter(x => x['symbol'] != 'S&P 500');
+        this.healthCheck.setUserStocks(this.dailySymbolList);
         const indicies = data['market_indices'];
         this.dailySymbolList.push(Object.assign({}, { // Push Daily SPY into collection.
           "symbol": 'S&P 500',
