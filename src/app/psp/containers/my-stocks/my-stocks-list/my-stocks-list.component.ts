@@ -17,17 +17,15 @@ import {HealthCheckService} from '../../../../services/health-check.service';
         <p class="label">Power Bar</p>
       </div>
       <div class="col-8 powerbar clearfix">
-        <!--<div (click)="setToggleOptions('Bulls')"
-          [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
-          <p>{{ prognosisData?.BullishSymbolsCount }}</p>
+        <div [ngClass]="{'bullish--more':powerbar[2]>powerbar[0], 'bullish--less':powerbar[2]<powerbar[0],'bullish--same':powerbar[2]==powerbar[0]}">
+          <p>{{ powerbar[2] }}</p>
         </div>
-        <div (click)="setToggleOptions('Neutral')" class="neutral">
-          <p>{{ prognosisData?.NeutralSymbolsCount }}</p>
+        <div class="neutral">
+          <p>{{ powerbar[1] }}</p>
         </div>
-        <div (click)="setToggleOptions('Bears')"
-          [ngClass]="{'bearish--more':prognosisData?.BearishSymbolsCount>prognosisData?.BullishSymbolsCount, 'bearish--less':prognosisData?.BearishSymbolsCount<prognosisData?.BullishSymbolsCount,'bearish--same':prognosisData?.BearishSymbolsCount==prognosisData?.BullishSymbolsCount}">
-          <p>{{ prognosisData?.BearishSymbolsCount }}</p>
-        </div>-->
+        <div [ngClass]="{'bearish--more':powerbar[0]>powerbar[2], 'bearish--less':powerbar[0]<powerbar[2],'bearish--same':powerbar[0]==powerbar[2]}">
+          <p>{{ powerbar[0] }}</p>
+        </div>
       </div>
     </div>
 
@@ -47,7 +45,8 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <p>CHG</p>
           </div>
         </li>
-        <li (click)="selectedStock(stock.symbol);$event.stopPropagation()" *ngFor="let stock of myStocks" class="row list__entry">
+        <li (click)="selectedStock(stock.symbol);$event.stopPropagation()" *ngFor="let stock of myStocks"
+            class="row list__entry">
           <div class="col-3 list-entry__pgr">
             <img class="align-absolute" src="{{ appendPGRImage(stock.PGR, stock.raw_PGR) }}">
           </div>
@@ -94,6 +93,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
 export class MyStocksListComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _stocks: BehaviorSubject<ListSymbolObj[]> = new BehaviorSubject<ListSymbolObj[]>({} as ListSymbolObj[]);
+  private _powerbar: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @Output('removeStockClicked') removeStockClicked: EventEmitter<string> = new EventEmitter<string>();
@@ -109,6 +109,17 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
     return this._stocks.getValue();
   }
 
+  @Input('powerBar')
+  set powerBar(val: string) {
+    this._powerbar.next(val);
+  }
+
+  get powerBar() {
+    return this._powerbar.getValue();
+  }
+
+
+  powerbar: string[] = ['0','0','0'];
   myStocks: ListSymbolObj[];
   sliderObj: object = {};
 
@@ -122,6 +133,13 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(stocks => {
         this.myStocks = stocks;
+      });
+
+    this._powerbar
+      .filter(x => x != undefined)
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(powerbar => {
+        this.powerbar = powerbar.split(',');
       });
 
     this.healthCheck.getMyStocksSubject()
