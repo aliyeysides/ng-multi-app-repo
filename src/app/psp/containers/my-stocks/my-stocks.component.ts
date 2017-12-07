@@ -42,8 +42,8 @@ export class MyStocksComponent implements OnInit {
 
   private _uid: string;
   private _listId: string;
-  private userStocks: ListSymbolObj[];
 
+  userStocks: ListSymbolObj[];
   loading: Subscription;
 
   constructor(private authService: AuthService,

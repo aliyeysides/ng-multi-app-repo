@@ -8,7 +8,7 @@ import {PortfolioStatus} from '../shared/models/health-check';
 declare let gtag: Function;
 
 @Component({
-  selector: 'cpt-root',
+  selector: 'cpt-psp-root',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./app.component.scss'],
   template: `

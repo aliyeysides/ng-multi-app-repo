@@ -6,19 +6,22 @@
   <base href="/">
 
   <meta name="description" content="Chaikin Stock Summary Sheet">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name=viewport content="width=device-width, initial-scale=1">
 
-<!-- JS STARTS HERE -->
+  <!-- JS STARTS HERE -->
   <script src="https://use.fontawesome.com/aa9c7466cb.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
   <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
   <script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"> 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-<style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+          integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+          crossorigin="anonymous"></script>
+  <style>
 
     .loading-Pulse {
       background-image: url("assets/imgs/loading_splash--Pulse.png");
@@ -30,13 +33,14 @@
       padding-top: 300px;
       background-color: rgba(255, 255, 255, 1);
     }
-.align-absolute {
-    position: absolute;
-    top: 50%;
-    left:50%;
-    transform: translate(-50%, -50%);
-}
-</style>
+
+    .align-absolute {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
 
 
   <!-- User defined js -->
@@ -56,17 +60,18 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-<!-- Enable bootstrap 4 theme -->
-<script>window.__theme = 'bs4';</script>
-<cpt-root>
-  <div class="loading loading-Pulse">
-    <div style="width: 100%; position: relative;">
-        <img class="align-absolute" width="239" src="assets/imgs/loading_splash--Pulse__logo.png">
-    </div>
-  </div>
-</cpt-root>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Enable bootstrap 4 theme -->
+<script>window.__theme = 'bs4';</script>
+<cpt-psp-root>
+  <div class="loading loading-Pulse">
+    <div style="width: 100%; position: relative;">
+      <img class="align-absolute" width="239" src="assets/imgs/loading_splash--Pulse__logo.png">
+    </div>
+  </div>
+</cpt-psp-root>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109099815-2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -75,5 +80,8 @@
   }
   gtag('js', new Date());
 </script>
+
+
+
 </body>
 </html>
