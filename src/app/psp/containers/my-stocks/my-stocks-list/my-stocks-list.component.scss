@@ -1,22 +1,143 @@
 @import 'variables';
 
 
+.stocklist__overview {
+	padding-top:48px;
 
-
-.section__list {
-	h3 {
-  		font-size: 28px;
+	.list-name {
+  		font-size: 26px;
   		line-height: 1;
 		display: inline-block;
-  background: linear-gradient(to left, rgba(0,204,0,0.95) 0%,rgba(0,170,119,0.95) 80%);
-		border: 0px solid #333;
+		background-color: rgba(255,255,255,0.95);
+		border: 2px solid #ffffff;
 		border-radius: 30px;
-		color:#ffffff;
+		//color:#00C04E;
 		font-weight: 600;
-		padding:8px 25px 5px;
-		margin: 20px 0 10px;
-		opacity: 1;
+		padding:4px 25px 2px;
+		margin: 5px 0 10px;
 	}
+}
+
+.stocklist__powerbar {
+	background-color: #f8f8f8;
+	border-top:2px solid #ffffff;
+	border-bottom:2px solid #efefef;
+  	text-align: center;
+  	padding: 5px 0;
+
+    .label {
+      	font-size: 13px;
+      	font-weight: 600;
+      	line-height: 1;
+      	padding:5px 0;
+      	text-transform: uppercase;
+      	color:#484848;
+
+	    a {
+	    	color:#1199ff;
+	       	cursor: pointer;
+
+	      	i {
+	        	color:#1199ff;
+	       		cursor: pointer;
+	        	margin-left:5px;
+	      	}
+    	}
+  	}
+
+  	.powerbar {
+      	display: block;
+      	width: 100%;
+      	//height: 40px;
+     	margin: 5px 0;
+     	//padding: 0 5%;
+
+	    p {
+	      	color:#ffffff;
+	      	font-weight: 600;
+	      	font-size: 22px;
+	      	line-height: 18px;
+	      	white-space: nowrap;
+	    }
+
+	    .bullish--more {
+	      	height: 20px;
+	      	background-color: #009900;
+	      	float: left;
+	      	width: 56%;
+	      	border-radius: 25px 0px 0px 25px;
+	      	border: 2px solid #ffffff;
+	    }
+        .bullish--less {
+          height: 20px;
+          background-color: #009900;
+          float: left;
+          width: 28%;
+          border-radius: 25px 0px 0px 25px;
+          border: 2px solid #ffffff;
+        }
+        .bullish--same {
+          height: 20px;
+          background-color: #009900;
+          float: left;
+          width: 42%;
+          border-radius: 25px 0px 0px 25px;
+          border: 2px solid #ffffff;
+        }
+	    .neutral {
+	      	width: 16%;
+	      	height: 20px;
+	      	background-color: #FF9900;
+	      	float: left;
+	      	border-radius: 1px;
+	      	border-top: 2px solid #ffffff;
+	      	border-bottom: 2px solid #ffffff;
+	    }
+	    .bearish--more {
+	      	height: 20px;
+	      	background-color: #CC0000;
+	      	float: left;
+	      	width: 56%;
+	      	border-radius:0px 25px 25px 0px;
+	      	border: 2px solid #ffffff;
+	    }
+        .bearish--less {
+          height: 20px;
+          background-color: #CC0000;
+          float: left;
+          width: 28%;
+          border-radius:0px 25px 25px 0px;
+          border: 2px solid #ffffff;
+        }
+        .bearish--same {
+          height: 20px;
+          background-color: #CC0000;
+          float: left;
+          width: 42%;
+          border-radius:0px 25px 25px 0px;
+          border: 2px solid #ffffff;
+        }
+  	}
+}
+
+.stocklist__overview--green {
+  background: linear-gradient(to left, rgba(0,204,0,.93) 20%,rgba(0,170,119,.93) 100%);
+
+	.list-name {
+	  	color:#00C04E;
+	}
+}
+.stocklist__overview--red {
+  background: linear-gradient(to left, rgba(255,50,50,0.9) 20%,rgba(170,0,119,0.9) 100%);
+
+  	.list-name {
+  		color:#FD001F;
+	}
+}
+
+.section__list {
+	margin-bottom: 30px;
+
 	.col-headers {
 		margin-top:10px;
 		font-weight:600;

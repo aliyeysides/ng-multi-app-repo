@@ -8,8 +8,30 @@ import {HealthCheckService} from '../../../../services/health-check.service';
 @Component({
   selector: 'cpt-my-stocks-list',
   template: `
+    <div class="col-12 stocklist__overview stocklist__overview--green">
+      <p class="list-name">My Stocks</p>
+    </div>
+
+    <div class="stocklist__powerbar row no-gutters">
+      <div class="col-4">
+        <p class="label">Power Bar</p>
+      </div>
+      <div class="col-8 powerbar clearfix">
+        <!--<div (click)="setToggleOptions('Bulls')"
+          [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
+          <p>{{ prognosisData?.BullishSymbolsCount }}</p>
+        </div>
+        <div (click)="setToggleOptions('Neutral')" class="neutral">
+          <p>{{ prognosisData?.NeutralSymbolsCount }}</p>
+        </div>
+        <div (click)="setToggleOptions('Bears')"
+          [ngClass]="{'bearish--more':prognosisData?.BearishSymbolsCount>prognosisData?.BullishSymbolsCount, 'bearish--less':prognosisData?.BearishSymbolsCount<prognosisData?.BullishSymbolsCount,'bearish--same':prognosisData?.BearishSymbolsCount==prognosisData?.BullishSymbolsCount}">
+          <p>{{ prognosisData?.BearishSymbolsCount }}</p>
+        </div>-->
+      </div>
+    </div>
+
     <div class="col-12 section__list" id="list--selected">
-      <h3>My Stocks</h3>
       <ul class="stock__list">
         <li class="row col-headers">
           <div class="col-3">
@@ -27,7 +49,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
         </li>
         <li (click)="selectedStock(stock.symbol)" *ngFor="let stock of myStocks" class="row list__entry">
           <div class="col-3 list-entry__pgr">
-            <img class="align-middle" src="{{ appendPGRImage(stock.PGR, stock.raw_PGR) }}">
+            <img class="align-absolute" src="{{ appendPGRImage(stock.PGR, stock.raw_PGR) }}">
           </div>
           <div class="col-3 list-entry__info">
             <p class="ticker">{{ stock.symbol }}</p>
@@ -55,7 +77,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
                 <p class="ticker">{{ stock.symbol }}</p>
               </div>
               <div class="col-2">
-                <img *ngIf="stock.Change>0" class="align-middle" src="./assets/imgs/icon_arrow-up.svg">
+                <img *ngIf="stock.Change>0" class="align-absolute" src="./assets/imgs/icon_arrow-up.svg">
                 <img *ngIf="stock.Change<0" class="align-absolute" src="./assets/imgs/icon_arrow-down.svg">
               </div>
               <div class="col-4">
