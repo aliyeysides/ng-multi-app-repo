@@ -91,7 +91,7 @@ sub {
   color:#6ACC00;
 }
 
-.neutral, .hold, .yellow {
+.neutral, .hold {
   color:#FF9900;
 }
 
@@ -122,6 +122,10 @@ sub {
 
 .red {
   color:#FD001F;
+}
+
+.yellow {
+  color:#FFB411;
 }
 
 .greyed-out {
@@ -182,8 +186,13 @@ sub {
 
 .icon__separator {
   opacity: 0.15;
-  max-width: 35px;
   margin: 0 auto;
+  max-width: 40px;
+
+  img, svg {
+    width: 100%;
+    max-width: 40px;
+  }
 }
 
 
@@ -227,6 +236,13 @@ sub {
 
 .divider__long--red {
   background: linear-gradient(to right, rgba(255,50,50,1) 2%,rgba(170,0,119,1) 100%);
+  width: 100%;
+  margin: 15px 0;
+  height: 3px;
+}
+
+.divider__long--yellow {
+  background-image: linear-gradient(123deg, #FDD310 0%, #FFB100 100%);
   width: 100%;
   margin: 15px 0;
   height: 3px;
@@ -302,7 +318,7 @@ sub {
 
 
 .section__chart {
-  margin:20px 0;
+  margin:20px 0 35px;
 }
 
 
@@ -312,7 +328,7 @@ sub {
 
 
 .section__summary {
-  margin: 20px 0 25px;
+  margin: 20px 0 35px;
 
   p {
     font-size: 64px;
