@@ -17,7 +17,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
       <div class="col-4">
         <p class="label">Power Bar</p>
       </div>
-      <div class="col-8 powerbar clearfix">
+      <div class="col-8 powerbar">
         <div
           [ngClass]="{'bullish--more':powerbar[2]>powerbar[0], 'bullish--less':powerbar[2]<powerbar[0],'bullish--same':powerbar[2]==powerbar[0]}">
           <p>{{ powerbar[2] }}</p>

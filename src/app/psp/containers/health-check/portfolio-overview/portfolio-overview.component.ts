@@ -7,12 +7,12 @@ import {HealthCheckService} from '../../../../services/health-check.service';
 @Component({
   selector: 'cpt-psp-portfolio-overview',
   template: `
-    <div class="col-12 col-lg-12 col-xl-12 section--overview" [ngClass]="{
+    <div class="col-12 section--overview" [ngClass]="{
     'section--overview--green': calculations?.avgPercentageChange > 0,
     'section--overview--red': calculations?.avgPercentageChange < 0}">
 
       <div class="row no-gutters overview__summary">
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-4 align-self-center">
           <p class="timespan">LAST WEEK</p>
           <p><span class="list-name">My Stocks</span></p>
           
@@ -26,7 +26,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <sub><span class="plus-minus" *ngIf="isPortUp()">+</span></sub>{{ calculations?.avgPercentageChange | number:'.2-2' }}<sub>%</sub>
           </p>
         </div>
-        <div class="col-12 col-md-4" style="padding:0 10px;">
+        <div class="col-12 col-md-4 align-self-center text-md-left" style="padding:0 10px;">
           <p>Compared to the <span class="market">S&amp;P 500</span> ---
             <span class="market market--change"> 
               <span *ngIf="isSPYUp()">Up +</span>
@@ -38,7 +38,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
       </div>
 
       <div class="row overview__powerbar">
-        <div class="col-12 col-md-9 powerbar clearfix">
+        <div class="col-12 col-md-9 powerbar flex-md-last">
           <div (click)="setToggleOptions('Bulls')"
             [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
             <p>{{ prognosisData?.BullishSymbolsCount }}</p>
@@ -51,7 +51,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <p>{{ prognosisData?.BearishSymbolsCount }}</p>
           </div>
         </div>
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-3 align-self-center">
           <p class="label">Chaikin Power Bar <a> <i tooltip="{{ toolTipText }}" class="fa fa-info-circle" aria-hidden="true"></i></a></p>
         </div>
       </div>
