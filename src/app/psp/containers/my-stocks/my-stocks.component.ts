@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {IdeasService} from '../../../services/ideas.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'cpt-my-stocks',
@@ -74,6 +75,10 @@ export class MyStocksComponent implements OnInit, OnDestroy {
         this.userStocks = res['symbols'];
         this.powerBar = res['PowerBar'];
       });
+
+    Observable.interval(30 * 1000)
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(res => this.updateData());
 
     this.route.params
       .takeUntil(this._ngUnsubscribe)
