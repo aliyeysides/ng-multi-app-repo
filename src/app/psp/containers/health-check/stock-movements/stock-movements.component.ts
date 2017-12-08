@@ -39,7 +39,7 @@ interface FilterFunc {
         </div>
       </div>
 
-      <div class="row section__summary">
+      <div class="row no-gutters section__summary">
         <div class="col-6 summary--left">
           <p><img
             src="./assets/imgs/icon_circle-movement--green.svg">{{ selectedTimespan == 'WEEK' ? upStocksWeekly : upStocksDaily

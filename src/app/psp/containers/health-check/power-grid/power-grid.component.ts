@@ -21,15 +21,19 @@ import {Router} from '@angular/router';
       <div *ngIf="!collapse" class="container">
 
         <div class="row">
-          <div class="col-5 col-md-4"></div>
-          <div class="col-2 col-md-4" style="padding:0 10px;">
-            <span class="icon__separator"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M404 384h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12zm-116-12v-40c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v40c0 6.627 5.373 12 12 12h40c6.627 0 12-5.373 12-12zm-128 0v-40c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v40c0 6.627 5.373 12 12 12h40c6.627 0 12-5.373 12-12zm352-188v272c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24h80c13.255 0 24 10.745 24 24v185.167l157.267-78.633C301.052 154.641 320 165.993 320 184v57.167l157.267-78.633C493.052 154.641 512 165.993 512 184zM96 280V64H32v384h448V196.944l-180.422 90.211C294.268 289.81 288 285.949 288 280v-83.056l-180.422 90.211C102.269 289.811 96 285.947 96 280z"/></svg></span>
-          </div>
-          <div class="col-5 col-md-4"></div>
-          <div class="col-12 hidden-md-up">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-5"></div>
+              <div class="col-2" style="padding:0 10px;">
+                <span class="icon__separator"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M404 384h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12zm-116-12v-40c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v40c0 6.627 5.373 12 12 12h40c6.627 0 12-5.373 12-12zm-128 0v-40c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v40c0 6.627 5.373 12 12 12h40c6.627 0 12-5.373 12-12zm352-188v272c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24h80c13.255 0 24 10.745 24 24v185.167l157.267-78.633C301.052 154.641 320 165.993 320 184v57.167l157.267-78.633C493.052 154.641 512 165.993 512 184zM96 280V64H32v384h448V196.944l-180.422 90.211C294.268 289.81 288 285.949 288 280v-83.056l-180.422 90.211C102.269 289.811 96 285.947 96 280z"/></svg></span>
+              </div>
+              <div class="col-5"></div>
+            </div>
             <h3>Strong Industries</h3>
           </div>
-
+        </div>
+        
+        <div class="row">
           <div class="col-12 col-md-6 powerGrid">
             <div class="row col-headers">
               <div class="col-6">
@@ -53,7 +57,7 @@ import {Router} from '@angular/router';
             </div>
           </div>
 
-          <div class="col-12 col-md-6 powerGrid">
+          <div class="col-12 col-md-6 order-md-first powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <h4>WEAK STOCKS</h4>
@@ -76,17 +80,18 @@ import {Router} from '@angular/router';
             </div>
           </div>
 
-          <div class="col-5 col-md-4"></div>
-          <div class="col-2 col-md-4" style="padding:0 10px;">
-            <span class="icon__separator"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M477.267 162.534L320 241.167V184c0-18.007-18.948-29.359-34.733-21.466L128 241.167V56c0-13.255-10.745-24-24-24H24C10.745 32 0 42.745 0 56v400c0 13.255 10.745 24 24 24h464c13.255 0 24-10.745 24-24V184c0-18.007-18.948-29.359-34.733-21.466zM107.578 287.155L288 196.944V280c0 5.949 6.268 9.81 11.578 7.155L480 196.944V448H32V64h64v216c0 5.947 6.269 9.811 11.578 7.155z"/></svg></span>
-          </div>
-          <div class="col-5 col-md-4"></div>
-
-          <div class="col-12 hidden-md-up">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-5"></div>
+              <div class="col-2" style="padding:0 10px;">
+                <span class="icon__separator"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M477.267 162.534L320 241.167V184c0-18.007-18.948-29.359-34.733-21.466L128 241.167V56c0-13.255-10.745-24-24-24H24C10.745 32 0 42.745 0 56v400c0 13.255 10.745 24 24 24h464c13.255 0 24-10.745 24-24V184c0-18.007-18.948-29.359-34.733-21.466zM107.578 287.155L288 196.944V280c0 5.949 6.268 9.81 11.578 7.155L480 196.944V448H32V64h64v216c0 5.947 6.269 9.811 11.578 7.155z"/></svg></span>
+              </div>
+              <div class="col-5"></div>
+            </div>
             <h3>Weak Industries</h3>
           </div>
 
-          <div class="col-12 col-md-6 powerGrid">
+          <div class="col-12 col-md-6 flex-md-last powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <h4>STRONG STOCKS</h4>
@@ -95,7 +100,7 @@ import {Router} from '@angular/router';
               </div>
             </div>
             <div *ngFor="let industry of weakIndustries" class="row grid__row">
-              <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant red">
+              <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant green">
                 <p class="ticker">
                   <a (click)="gotoReport(stock)" *ngFor="let stock of isStrongStock(industry.SymbolPGRMappings);let last = last">
                     {{ objectKeys(stock)[0] }}
@@ -131,6 +136,7 @@ import {Router} from '@angular/router';
               </div>
             </div>
           </div>
+
         </div>
       </div>
       <div class="row">

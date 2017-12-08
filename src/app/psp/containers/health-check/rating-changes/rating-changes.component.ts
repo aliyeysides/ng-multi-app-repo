@@ -23,14 +23,14 @@ import {Router} from '@angular/router';
         </div>
       </div>
 
-      <div class="row section__summary">
-        <div class="col-6 summary--left">
+      <div class="row section__summary justify-content-center">
+        <div class="col-6 col-md-5 summary--left">
           <p><img src="./assets/imgs/icon_circle-change--green.svg">{{ bullishAlerts?.length }}</p>
         </div>
-        <div class="col-6 summary--right">
+        <div class="col-6 col-md-5 summary--right">
           <p><img src="./assets/imgs/icon_circle-change--red.svg">{{ bearishAlerts?.length }}</p>
         </div>
-      </div>
+      </div> 
 
       <div *ngIf="!collapse" class="row">
 

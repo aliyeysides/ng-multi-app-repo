@@ -28,11 +28,11 @@ interface EarningsReportObj {
         </div>
       </div>
 
-      <div class="row section__summary">
-        <div class="col-6 summary--left">
+      <div class="row section__summary justify-content-center">
+        <div class="col-6 col-md-5 summary--left">
           <p><img src="./assets/imgs/icon_circle-earnings--green.svg">{{ upCount }}</p>
         </div>
-        <div class="col-6 summary--right">
+        <div class="col-6 col-md-5 summary--right">
           <p><img src="./assets/imgs/icon_circle-earnings--red.svg">{{ downCount }}</p>
         </div>
       </div>
@@ -50,7 +50,7 @@ interface EarningsReportObj {
           <ul class="section__chart">
             <li class="row no-gutters col-headers">
               <div class="col-3">
-                <p class="text-left">RATING / TICKER</p>
+                <p class="text-left" style="white-space:nowrap;">RATING / TICKER</p>
               </div>
               <div class="col-3">
                 <p>ACT</p>
@@ -99,7 +99,7 @@ interface EarningsReportObj {
           <ul class="section__chart">
             <li class="row no-gutters col-headers">
               <div class="col-3">
-                <p class="text-left">RATING / TICKER</p>
+                <p class="text-left" style="white-space:nowrap;">RATING / TICKER</p>
               </div>
               <div class="col-3">
                 <p>CURR</p>

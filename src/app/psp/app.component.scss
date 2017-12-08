@@ -83,7 +83,7 @@ sub {
 /*                                      */
 
 
-.veryBullish, .strong {
+.veryBullish {
   color:#24A300;
 }
 
@@ -99,14 +99,13 @@ sub {
   color:#FD4500;
 }
 
-.veryBearish, .weak {
+.veryBearish {
   color:#EB001C;
 }
 
 .up-change, .up-change span, .green {
   color:#00C04E;
 }
-
 
 .blue {
   color:#4718E1;
@@ -120,7 +119,7 @@ sub {
   color:#1199ff;
 }
 
-.red {
+.red, .down-change, .down-change span {
   color:#FD001F;
 }
 
@@ -187,11 +186,11 @@ sub {
 .icon__separator {
   opacity: 0.15;
   margin: 0 auto;
-  max-width: 40px;
+  max-width: 32px;
 
   img, svg {
     width: 100%;
-    max-width: 40px;
+    max-width: 32px;
   }
 }
 
@@ -282,18 +281,12 @@ sub {
   width: 100%;
   text-align: center;
 }
-
-
-
 .container__contents {
   position: relative;
-
 }
 .contents {
   display: block;
 }
-
-
 
 
 
@@ -352,6 +345,8 @@ sub {
     border-left: 4px dotted #efefef;
   }
 }
+
+
 
 
 
