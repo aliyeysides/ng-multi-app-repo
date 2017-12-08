@@ -32,12 +32,51 @@
 .component--stockview.bullish {
 	background: linear-gradient(to right, rgba(0,204,0,1) 0%,rgba(0,170,119,1) 100%);
 
+	.stock-info {
+		h2 {
+			color:#00C04E;;
+		}
+	}
+	.stock-info--stats {
+		.label {
+			color:#00C04E;;
+		}
+	}
 	.stock-info--chart-toggle {
 		.date-select.selected {
-			background-color: #FD001F;
+			background-color: #00C04E;;
+		}
+	}
+	.stock-info--news {
+
+		.news__pagination {
+			p {
+				color:#00C04E;;
+
+				span {
+					color:#00C04E;
+				}
+			}
+		}
+		.news__slider {
+			.source {
+				color:#00C04E;
+			}
+		}
+	}
+	.data-table {
+		table {
+			.label {
+				color:#00C04E;
+			}
 		}
 	}
 }
+
+
+
+
+
 
 .component--stockview.bearish {
 	background: linear-gradient(to right, rgba(255,50,50,1) 2%,rgba(170,0,119,1) 100%);
@@ -82,6 +121,51 @@
 		}
 	}
 }
+
+.component--stockview.neutral {
+	background-image: linear-gradient(123deg, #FDD310 0%, #FFB100 100%);
+
+	.stock-info {
+		h2 {
+			color:#FFB411;
+		}
+	}
+	.stock-info--stats {
+		.label {
+		  	color:#FFB411;
+		}
+	}
+	.stock-info--chart-toggle {
+		.date-select.selected {
+			background-color:#FFB411;
+		}
+	}
+	.stock-info--news {
+
+		.news__pagination {
+			p {
+				color:#FFB411;
+
+				span {
+					color:#FFB411;
+				}
+			}
+		}
+		.news__slider {
+			.source {
+				color:#FFB411;
+			}
+		}
+	}
+	.data-table {
+		table {
+			.label {
+				color:#FFB411;
+			}
+		}
+	}
+}
+
 
 
 
@@ -349,13 +433,13 @@
 		line-height: 1;
 		display: inline-block;
 		text-align: center;
+		padding:3px 5px 1px 6px;
 	}
 
 	.date-select.selected {
 		opacity: 1;
 		border-radius: 30px;
 		color:#ffffff;
-		padding:3px 5px 1px 6px;
 	}
 }
 

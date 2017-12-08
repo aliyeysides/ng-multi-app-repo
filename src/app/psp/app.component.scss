@@ -124,6 +124,10 @@ sub {
   color:#FD001F;
 }
 
+.yellow {
+  color:#FFB411;
+}
+
 .greyed-out {
   color:#dddddd;
 }
@@ -182,8 +186,11 @@ sub {
 
 .icon__separator {
   opacity: 0.15;
-  max-width: 35px;
   margin: 0 auto;
+
+  img, svg {
+    width: 100%;
+  }
 }
 
 
@@ -302,7 +309,7 @@ sub {
 
 
 .section__chart {
-  margin:20px 0;
+  margin:20px 0 35px;
 }
 
 
@@ -312,7 +319,7 @@ sub {
 
 
 .section__summary {
-  margin: 20px 0 25px;
+  margin: 20px 0 35px;
 
   p {
     font-size: 64px;
