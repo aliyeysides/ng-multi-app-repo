@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {ListSymbolObj} from '../../../shared/models/health-check';
@@ -7,6 +7,7 @@ import {IdeasService} from '../../../services/ideas.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'cpt-my-stocks',
@@ -39,18 +40,26 @@ import {Observable} from 'rxjs/Observable';
         </div>
       </div>
     </div>
-    <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock"
+    <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock || reportOpen"
                           [stock]="selectedStock"></cpt-psp-stock-report>
   `,
   styleUrls: ['./my-stocks.component.scss']
 })
 export class MyStocksComponent implements OnInit, OnDestroy {
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    const width = event.target.innerWidth;
+    if (+width <= 1024) this.reportOpen = false;
+    if (+width > 1024) this.reportOpen = true;
+    this.router.navigate(['/my-stocks', this.userStocks[0].symbol])
+  }
 
   private _uid: string;
   private _listId: string;
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
   selectedStock: string | boolean;
+  reportOpen: boolean;
   userStocks: ListSymbolObj[];
   powerBar: string;
   loading: Subscription;
@@ -59,7 +68,11 @@ export class MyStocksComponent implements OnInit, OnDestroy {
               private healthCheck: HealthCheckService,
               private ideasService: IdeasService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private location: Location) {
+    const mobWidth = (window.screen.width);
+    if (+mobWidth <= 1024) this.reportOpen = false;
+    if (+mobWidth > 1024) this.reportOpen = true;
   }
 
   ngOnInit() {
@@ -86,7 +99,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
           if (params.symbol) {
             this.selectedStock = params.symbol;
           } else {
-            this.selectedStock = 'AAPL';
+            // this.selectedStock = 'AAPL';
           }
         }
       );
@@ -123,7 +136,6 @@ export class MyStocksComponent implements OnInit, OnDestroy {
 
   selectStock(ticker: string) {
     this.gotoReport(ticker);
-
   }
 
   gotoReport(ticker: string) {
@@ -131,7 +143,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   closeReport() {
-    this.selectedStock = false;
+    this.location.back();
   }
 
 }

@@ -150,7 +150,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
         this.updateData.emit()
-      })
+      });
 
     this.healthCheck.getPortfolioStatus()
       .takeUntil(this._ngUnsubscribe)

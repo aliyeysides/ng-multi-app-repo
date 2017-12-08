@@ -1124,7 +1124,6 @@ export class StockReportComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
-    console.log('stock', this.stock, 'show', this.show);
     window.scrollTo(0, 0);
   }
 
