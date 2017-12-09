@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, OnDestroy, OnInit, Output} from '@angular/core';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {Subject} from 'rxjs/Subject';
 
@@ -21,16 +21,27 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
   @Output('routeClicked') routeClicked: EventEmitter<void> = new EventEmitter<void>();
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    const width = event.target.innerWidth;
+    if (+width <= 1024) this.reportOpen = false;
+    if (+width > 1024) this.reportOpen = true;
+    this.updateRoutes();
+  }
 
   firstUserStock: string;
-  public routes = [
+  reportOpen: boolean;
+  public routes: object[] = [
     {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-    {link: '/my-stocks/' + 'AAPL', klass: 'fa fa-list', label: 'My Stocks'},
+    {link: '/my-stocks', klass: 'fa fa-list', label: 'My Stocks'},
     {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Beat'},
   ];
 
 
   constructor(private healthCheck: HealthCheckService) {
+    const mobWidth = (window.screen.width);
+    if (+mobWidth <= 1024) this.reportOpen = false;
+    if (+mobWidth > 1024) this.reportOpen = true;
   }
 
   ngOnInit() {
@@ -39,17 +50,29 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
       .filter(x => x != undefined)
       .subscribe(res => {
         this.firstUserStock = res[0].symbol;
-        this.routes = [
-          {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-          {link: '/my-stocks/' + this.firstUserStock, klass: 'fa fa-list', label: 'My Stocks'},
-          {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Beat'},
-        ];
+        this.updateRoutes();
       });
   }
 
   ngOnDestroy() {
     this._ngUnsubscribe.next();
     this._ngUnsubscribe.complete();
+  }
+
+  updateRoutes() {
+    if (this.reportOpen) {
+      this.routes = [
+        {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
+        {link: '/my-stocks/' + this.firstUserStock, klass: 'fa fa-list', label: 'My Stocks'},
+        {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Beat'},
+      ];
+      return;
+    }
+    this.routes = [
+      {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
+      {link: '/my-stocks', klass: 'fa fa-list', label: 'My Stocks'},
+      {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Beat'},
+    ];
   }
 
   closeNav(e: Event) {

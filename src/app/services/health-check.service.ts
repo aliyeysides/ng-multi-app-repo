@@ -22,6 +22,7 @@ export class HealthCheckService {
   private listSymbolsParams: URLSearchParams;
 
   private _portfolioStatus: Subject<PortfolioStatus> = new Subject<PortfolioStatus>();
+  private _currentUserList: BehaviorSubject<string> = new BehaviorSubject<string>('My Stocks');
   private _toggleOptions: BehaviorSubject<string> = new BehaviorSubject<string>('Top Movers');
   private _updateMyStocksList: Subject<void> = new Subject<void>();
   private _userStocks: BehaviorSubject<Array<StockStatus|ListSymbolObj>> = new BehaviorSubject<Array<StockStatus|ListSymbolObj>>(undefined as Array<StockStatus|ListSymbolObj>);
@@ -45,6 +46,14 @@ export class HealthCheckService {
 
   public getPortfolioStatus() {
     return this._portfolioStatus;
+  }
+
+  public set currentList(val: string) {
+    this._currentUserList.next(val);
+  }
+
+  public get currentList(): string {
+    return this._currentUserList.getValue();
   }
 
   public setToggleOptions(val) {

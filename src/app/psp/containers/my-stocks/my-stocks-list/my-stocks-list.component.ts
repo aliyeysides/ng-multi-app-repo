@@ -10,7 +10,16 @@ import {HealthCheckService} from '../../../../services/health-check.service';
   template: `
     <div class="col-12 stocklist__overview"
          [ngClass]="{'stocklist__overview--green': status?.avgPercentageChange > 0,'stocklist__overview--red': status?.avgPercentageChange < 0 }">
-      <p class="list-name">My Stocks</p>
+      <p class="list-name">{{ selectedListName }}</p>
+      <div class="btn-group" dropdown [autoClose]="true">
+        <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+          {{ currentToggleOptionText }}
+        </button>
+        <ul *dropdownMenu class="dropdown-menu" role="menu">
+          <li (click)="selectList(list)" *ngFor="let list of userlists" role="menuitem"><a
+            class="dropdown-item">{{ list['name'] }}</a></li>
+        </ul>
+      </div>
     </div>
 
     <div class="stocklist__powerbar row no-gutters">
@@ -97,11 +106,13 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _stocks: BehaviorSubject<ListSymbolObj[]> = new BehaviorSubject<ListSymbolObj[]>({} as ListSymbolObj[]);
   private _powerbar: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private _userlists: BehaviorSubject<object[]> = new BehaviorSubject<object[]>({} as object[]);
 
   @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @Output('removeStockClicked') removeStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @Output('stockClicked') stockClicked: EventEmitter<string> = new EventEmitter<string>();
   @Output('updateData') updateData: EventEmitter<void> = new EventEmitter<void>();
+  @Output('listChanged') listChanged: EventEmitter<void> = new EventEmitter<void>();
 
   @Input('stocks')
   set stocks(val: ListSymbolObj[]) {
@@ -121,11 +132,21 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
     return this._powerbar.getValue();
   }
 
+  @Input('userLists')
+    set userlists(val: object[]) {
+      this._userlists.next(val);
+    }
+
+    get userlists() {
+      return this._userlists.getValue();
+    }
+
 
   powerbar: string[] = ['0', '0', '0'];
   status: PortfolioStatus;
   myStocks: ListSymbolObj[];
   sliderObj: object = {};
+  selectedListName: string;
 
   constructor(private signalService: SignalService,
               private healthCheck: HealthCheckService) {
@@ -150,12 +171,13 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
         this.updateData.emit()
-      })
+      });
 
     this.healthCheck.getPortfolioStatus()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => this.status = res);
 
+    this.selectedListName = this.healthCheck.currentList;
   }
 
   ngOnDestroy() {
@@ -186,6 +208,12 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
 
   selectedStock(ticker: string) {
     this.stockClicked.emit(ticker);
+  }
+
+  selectList(list: object) {
+    this.selectedListName = list['name'];
+    this.healthCheck.currentList = this.selectedListName;
+    this.listChanged.emit();
   }
 
 }

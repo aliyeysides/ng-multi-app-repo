@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {ListSymbolObj} from '../../../shared/models/health-check';
@@ -6,16 +6,18 @@ import {Subscription} from 'rxjs/Subscription';
 import {IdeasService} from '../../../services/ideas.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'cpt-my-stocks',
   template: `
     <div [ngBusy]="loading" class="container-fluid component component--mystocks">
       <div class="row contents">
-        <cpt-my-stocks-list (addStockClicked)="addStock($event)" (removeStockClicked)="removeStock($event)"
+        <cpt-my-stocks-list (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)" (removeStockClicked)="removeStock($event)"
                             (updateData)="updateData()"
                             (stockClicked)="selectStock($event)"
-                            [stocks]="userStocks" [powerBar]="powerBar"></cpt-my-stocks-list>
+                            [stocks]="userStocks" [powerBar]="powerBar" [userLists]="allUserLists"></cpt-my-stocks-list>
         <div class="col-12" id="list--recent">
           <h3>Recently Viewed</h3>
           <div class="divider__long"></div>
@@ -38,35 +40,57 @@ import {Subject} from 'rxjs/Subject';
         </div>
       </div>
     </div>
-    <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock"
+    <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock || reportOpen"
                           [stock]="selectedStock"></cpt-psp-stock-report>
   `,
   styleUrls: ['./my-stocks.component.scss']
 })
 export class MyStocksComponent implements OnInit, OnDestroy {
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    const width = event.target.innerWidth;
+    if (+width <= 1024) this.reportOpen = false;
+    if (+width > 1024) this.reportOpen = true;
+    this.router.navigate(['/my-stocks', this.userStocks[0].symbol])
+  }
 
   private _uid: string;
   private _listId: string;
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
   selectedStock: string | boolean;
+  reportOpen: boolean;
   userStocks: ListSymbolObj[];
   powerBar: string;
   loading: Subscription;
+  allUserLists: object[];
+  currentList: string;
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService,
               private ideasService: IdeasService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private location: Location) {
+    const mobWidth = (window.screen.width);
+    if (+mobWidth <= 1024) this.reportOpen = false;
+    if (+mobWidth > 1024) this.reportOpen = true;
   }
 
   ngOnInit() {
     this.loading = this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
+      .do(() => this.currentList = this.healthCheck.currentList)
       .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
       .take(1)
-      .map(res => this._listId = res[0]['User Lists'][0]['list_id'])
+      .map(res => {
+        this.allUserLists = res[0]['User Lists'];
+        const myStocksUserList = this.allUserLists.filter(x => x['name'] === 'My Stocks')[0];
+        if (this.currentList == 'My Stocks') {
+          return this._listId = myStocksUserList['list_id'];
+        }
+        return this._listId = this.allUserLists.filter(x => x['name'] == this.currentList)[0]['list_id'];
+      })
       .switchMap(listId => {
         return this.healthCheck.getListSymbols(listId, this._uid)
       })
@@ -75,13 +99,17 @@ export class MyStocksComponent implements OnInit, OnDestroy {
         this.powerBar = res['PowerBar'];
       });
 
+    Observable.interval(30 * 1000)
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(res => this.updateData());
+
     this.route.params
       .takeUntil(this._ngUnsubscribe)
       .subscribe(params => {
           if (params.symbol) {
             this.selectedStock = params.symbol;
           } else {
-            this.selectedStock = 'AAPL';
+            // this.selectedStock = 'AAPL';
           }
         }
       );
@@ -118,7 +146,6 @@ export class MyStocksComponent implements OnInit, OnDestroy {
 
   selectStock(ticker: string) {
     this.gotoReport(ticker);
-
   }
 
   gotoReport(ticker: string) {
@@ -126,7 +153,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   closeReport() {
-    this.selectedStock = false;
+    this.location.back();
   }
 
 }

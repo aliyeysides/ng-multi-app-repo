@@ -4,12 +4,15 @@ import {routing} from './my-stocks.routing';
 import {MyStocksListComponent} from './my-stocks-list/my-stocks-list.component';
 import {StockReportComponent} from './stock-report/stock-report.component';
 import {SharedModule} from '../../../shared/index';
-import {IdeasService} from '../../../services/ideas.service';
+
+import {TooltipModule, BsDropdownModule} from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     routing,
-    SharedModule
+    SharedModule,
+    TooltipModule,
+    BsDropdownModule
   ],
   exports: [MyStocksComponent],
   declarations: [

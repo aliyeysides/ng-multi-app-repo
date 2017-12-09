@@ -14,8 +14,16 @@ import {HealthCheckService} from '../../../../services/health-check.service';
       <div class="row no-gutters overview__summary">
         <div class="col-12 col-md-4 align-self-center">
           <p class="timespan">LAST WEEK</p>
-          <p><span class="list-name">My Stocks</span></p>
-          
+          <p><span class="list-name">{{ selectedListName }}</span></p>
+          <div class="btn-group" dropdown [autoClose]="true">
+            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+              {{ currentToggleOptionText }}
+            </button>
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+              <li (click)="selectList(list)" *ngFor="let list of allUserLists" role="menuitem"><a
+                class="dropdown-item">{{ list['name'] }}</a></li>
+            </ul>
+          </div>
         </div>
         <div class="col-12 col-md-4">
           <p class="data">
@@ -23,7 +31,9 @@ import {HealthCheckService} from '../../../../services/health-check.service';
               <img *ngIf="isPortUp()" src="./assets/imgs/icon__thin-arrow--up.svg">
               <img *ngIf="!isPortUp()" src="./assets/imgs/icon__thin-arrow--down.svg">
             </span>
-            <sub><span class="plus-minus" *ngIf="isPortUp()">+</span></sub>{{ calculations?.avgPercentageChange | number:'.2-2' }}<sub>%</sub>
+            <sub><span class="plus-minus"
+                       *ngIf="isPortUp()">+</span></sub>{{ calculations?.avgPercentageChange | number:'.2-2'
+            }}<sub>%</sub>
           </p>
         </div>
         <div class="col-12 col-md-4 align-self-center text-md-left" style="padding:0 10px;">
@@ -40,14 +50,14 @@ import {HealthCheckService} from '../../../../services/health-check.service';
       <div class="row overview__powerbar">
         <div class="col-12 col-md-9 powerbar flex-md-last">
           <div (click)="setToggleOptions('Bulls')"
-            [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
+               [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
             <p>{{ prognosisData?.BullishSymbolsCount }}</p>
           </div>
           <div (click)="setToggleOptions('Neutral')" class="neutral">
             <p>{{ prognosisData?.NeutralSymbolsCount }}</p>
           </div>
           <div (click)="setToggleOptions('Bears')"
-            [ngClass]="{'bearish--more':prognosisData?.BearishSymbolsCount>prognosisData?.BullishSymbolsCount, 'bearish--less':prognosisData?.BearishSymbolsCount<prognosisData?.BullishSymbolsCount,'bearish--same':prognosisData?.BearishSymbolsCount==prognosisData?.BullishSymbolsCount}">
+               [ngClass]="{'bearish--more':prognosisData?.BearishSymbolsCount>prognosisData?.BullishSymbolsCount, 'bearish--less':prognosisData?.BearishSymbolsCount<prognosisData?.BullishSymbolsCount,'bearish--same':prognosisData?.BearishSymbolsCount==prognosisData?.BullishSymbolsCount}">
             <p>{{ prognosisData?.BearishSymbolsCount }}</p>
           </div>
         </div>
@@ -60,12 +70,16 @@ import {HealthCheckService} from '../../../../services/health-check.service';
   styleUrls: ['../health-check.component.scss']
 })
 export class PortfolioOverviewComponent implements OnInit, OnDestroy {
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
+  private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _data: BehaviorSubject<PrognosisData> = new BehaviorSubject<PrognosisData>({} as PrognosisData);
   private _calc: BehaviorSubject<PortfolioStatus> = new BehaviorSubject<PortfolioStatus>({} as PortfolioStatus);
+  private _lists: BehaviorSubject<object[]> = new BehaviorSubject<object[]>([] as object[]);
 
   toolTipText: string = "The Chaikin Power Bar is your list's report card. It gives the ratio of Bullish stocks (likely to outperform the market) to Bearish stocks (unlikely to perform in the short to medium term) as rated by the Chaikin Power Gauge Rating."
+  allUserLists: object[];
+  selectedListName: string;
 
+  @Output('listChanged') listChanged: EventEmitter<void> = new EventEmitter<void>();
   @Input('data')
   set data(val: PrognosisData) {
     this._data.next(val);
@@ -84,6 +98,16 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
     return this._calc.getValue();
   }
 
+
+  @Input('lists')
+  set lists(val: object[]) {
+    this._lists.next(val);
+  }
+
+  get lists() {
+    return this._lists.getValue();
+  }
+
   prognosisData: PrognosisData;
   calculations: PortfolioStatus;
 
@@ -92,17 +116,23 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._data
-      .takeUntil(this.ngUnsubscribe)
+      .takeUntil(this._ngUnsubscribe)
       .subscribe(res => this.prognosisData = res);
 
     this._calc
-      .takeUntil(this.ngUnsubscribe)
+      .takeUntil(this._ngUnsubscribe)
       .subscribe(res => this.calculations = res);
+
+    this._lists
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(res => this.allUserLists = res);
+
+    this.selectedListName = this.healthCheck.currentList;
   }
 
   ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    this._ngUnsubscribe.next();
+    this._ngUnsubscribe.complete();
   }
 
   isPortUp(): boolean {
@@ -115,6 +145,12 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
 
   setToggleOptions(option: string) {
     this.healthCheck.setToggleOptions(option);
+  }
+
+  selectList(list: object) {
+    this.selectedListName = list['name'];
+    this.healthCheck.currentList = this.selectedListName;
+    this.listChanged.emit();
   }
 
 }
