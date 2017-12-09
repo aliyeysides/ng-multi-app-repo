@@ -95,7 +95,6 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       .take(1)
       .subscribe(res => {
         this.userStocks = res['symbols'];
-        console.log('userStocks', this.userStocks);
       })
   }
 

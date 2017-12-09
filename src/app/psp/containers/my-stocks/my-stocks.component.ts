@@ -14,10 +14,10 @@ import {Location} from '@angular/common';
   template: `
     <div [ngBusy]="loading" class="container-fluid component component--mystocks">
       <div class="row contents">
-        <cpt-my-stocks-list (addStockClicked)="addStock($event)" (removeStockClicked)="removeStock($event)"
+        <cpt-my-stocks-list (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)" (removeStockClicked)="removeStock($event)"
                             (updateData)="updateData()"
                             (stockClicked)="selectStock($event)"
-                            [stocks]="userStocks" [powerBar]="powerBar"></cpt-my-stocks-list>
+                            [stocks]="userStocks" [powerBar]="powerBar" [userLists]="allUserLists"></cpt-my-stocks-list>
         <div class="col-12" id="list--recent">
           <h3>Recently Viewed</h3>
           <div class="divider__long"></div>
@@ -63,6 +63,8 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   userStocks: ListSymbolObj[];
   powerBar: string;
   loading: Subscription;
+  allUserLists: object[];
+  currentList: string;
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService,
@@ -78,9 +80,17 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loading = this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
+      .do(() => this.currentList = this.healthCheck.currentList)
       .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
       .take(1)
-      .map(res => this._listId = res[0]['User Lists'][0]['list_id'])
+      .map(res => {
+        this.allUserLists = res[0]['User Lists'];
+        const myStocksUserList = this.allUserLists.filter(x => x['name'] === 'My Stocks')[0];
+        if (this.currentList == 'My Stocks') {
+          return this._listId = myStocksUserList['list_id'];
+        }
+        return this._listId = this.allUserLists.filter(x => x['name'] == this.currentList)[0]['list_id'];
+      })
       .switchMap(listId => {
         return this.healthCheck.getListSymbols(listId, this._uid)
       })

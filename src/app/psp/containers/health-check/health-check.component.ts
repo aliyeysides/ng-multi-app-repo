@@ -22,7 +22,7 @@ import {Subscription} from 'rxjs/Subscription';
       <div class="row contents">
 
         <!-- HEALTH-CHECK - Intro -->
-        <cpt-psp-portfolio-overview [calc]="calculations" [data]="prognosisData"></cpt-psp-portfolio-overview>
+        <cpt-psp-portfolio-overview (listChanged)="listChanged()" [lists]="allUserLists" [calc]="calculations" [data]="prognosisData"></cpt-psp-portfolio-overview>
         <!-- HEALTH-CHECK - Stock Movements -->
         <cpt-psp-stock-movements [calc]="calculations" [weeklyStocks]="stocksStatus"
                                  [dailyStocks]="dailySymbolList"></cpt-psp-stock-movements>
@@ -76,6 +76,9 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
   public dailySymbolList: Array<StockStatus | ListSymbolObj>;
   public loading: Subscription;
 
+  public allUserLists: object[];
+  public currentList: string;
+
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService,
               private marketsSummary: MarketsSummaryService) {
@@ -99,9 +102,17 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
   initData() {
     return this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
+      .do(() => this.currentList = this.healthCheck.currentList)
       .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
       .take(1)
-      .map(res => this._listId = res[0]['User Lists'][0]['list_id'])
+      .map(res => {
+        this.allUserLists = res[0]['User Lists'];
+        const myStocksUserList = this.allUserLists.filter(x => x['name'] === 'My Stocks')[0];
+        if (this.currentList == 'My Stocks') {
+          return this._listId = myStocksUserList['list_id'];
+        }
+        return this._listId = this.allUserLists.filter(x => x['name'] == this.currentList)[0]['list_id'];
+      })
       .switchMap(listId => {
         const startDate = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
           endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
@@ -142,6 +153,10 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.loadDailyData();
       });
+  }
+
+  listChanged() {
+    this.loading = this.initData();
   }
 
   updateData() {
