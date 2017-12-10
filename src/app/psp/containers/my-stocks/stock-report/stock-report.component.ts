@@ -1134,6 +1134,7 @@ export class StockReportComponent implements OnInit, OnChanges {
   closeReport() {
     this.show = false;
     this.closeClicked.emit();
+    console.log('clicked');
   }
 
 }
