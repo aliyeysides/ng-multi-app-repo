@@ -38,7 +38,7 @@ import {SignalService} from '../../../services/signal.service';
                 <p>CHG</p>
               </div>
             </li>
-            <li *ngFor="let recent of recentlyViewed" class="row list__entry">
+            <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed" class="row list__entry">
               <div class="col-3 list-entry__pgr">
                 <img class="align-absolute" src="{{ appendPGRImage(recent['pgr']['PGR Value'], recent['pgr']['Corrected PGR Value']) }}">
               </div>
@@ -154,6 +154,14 @@ export class MyStocksComponent implements OnInit, OnDestroy {
         this.userStocks = res['symbols'];
         this.healthCheck.setUserStocks(res['symbols']);
         this.powerBar = res['PowerBar'];
+        this.recentlyViewed = [];
+        const recentlyViewedString = localStorage.getItem('recentlyViewed');
+        if (recentlyViewedString) {
+          const viewed = JSON.parse(recentlyViewedString).symbols;
+          Observable.from(viewed)
+            .flatMap(ticker => this.ideasService.getStockCardData(ticker as string))
+            .subscribe(res => this.recentlyViewed.push(res));
+        }
       })
   }
 

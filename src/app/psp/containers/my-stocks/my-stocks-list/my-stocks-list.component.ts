@@ -69,7 +69,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock.Last }}</p>
           </div>
           <div class="col-3 list-entry__data">
-            <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock.Change }}%</p>
+            <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock['Percentage '] }}%</p>
           </div>
           <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide">
             <img src="./assets/imgs/ui_slide.svg">
