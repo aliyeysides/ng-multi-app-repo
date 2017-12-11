@@ -5,6 +5,7 @@
 
 .component--mystocks {
 	.contents {
+	
 	}
 
 	.col-headers {
@@ -25,5 +26,19 @@
 				padding:3px 8px 1px;
 			}
 		}
+	}
+}
+.stocklist__overview--green {
+  background: linear-gradient(to left, rgba(0,204,0,.93) 20%,rgba(0,170,119,.93) 100%);
+
+	.list-name {
+	  	color:#00C04E;
+	}
+}
+.stocklist__overview--red {
+  background: linear-gradient(to left, rgba(255,50,50,0.9) 20%,rgba(170,0,119,0.9) 100%);
+
+  	.list-name {
+  		color:#FD001F;
 	}
 }
