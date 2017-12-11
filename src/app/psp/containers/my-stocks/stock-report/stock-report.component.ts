@@ -5,7 +5,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
   template: `
     <div class="component--stockview bearish" [ngClass]="{'open': show}">
 
-    <!-- STOCK VIEW HEADER -->
+      <!-- STOCK VIEW HEADER -->
       <div class="stockview__header">
         <div (click)="closeReport()" class="header__button header__button--left">
           <img class="align-absolute" src="./assets/imgs/icon_back-arrow--white.svg">
@@ -19,10 +19,10 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
         </div>
       </div>
 
-    <!-- STOCK VIEW CONTENTS -->
+      <!-- STOCK VIEW CONTENTS -->
       <div class="container-fluid stockview__contents">
 
-      <!-- STOCK VIEW TOP --> 
+        <!-- STOCK VIEW TOP -->
         <div class="row stock-info">
           <div class="col-12">
             <div class="tab--slide"></div>
@@ -115,7 +115,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
         </div>
 
-      <!-- STOCK VIEW PRICE -->
+        <!-- STOCK VIEW PRICE -->
         <div class="row stock-info stock-info--price">
           <div class="col-12">
             <p class="current-price red"><sub>$</sub>1108<sub>.22</sub></p>
@@ -139,10 +139,11 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
         </div>
 
-      <!-- STOCK VIEW CHART HEADER -->
+        <!-- STOCK VIEW CHART HEADER -->
         <div class="row stock-info stock-info--chart-toggle">
           <div class="col-12">
-            <p class="chart-header__breakdown">Down <span class="red">-12.02 &nbsp;(-3.23%)</span> over the last&hellip;</p>
+            <p class="chart-header__breakdown">Down <span class="red">-12.02 &nbsp;(-3.23%)</span> over the last&hellip;
+            </p>
           </div>
           <div class="col-2">
             <p class="date-select">1D</p>
@@ -164,18 +165,18 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
         </div>
 
-      <!-- STOCK VIEW MAIN CHART -->
+        <!-- STOCK VIEW MAIN CHART -->
         <div class="row stock-info stock-info--chart">
           <div class="col-12 main-chart bearish">
           </div>
         </div>
 
-      <!-- STOCK VIEW MONEYFLOW -->
+        <!-- STOCK VIEW MONEYFLOW -->
         <div class="row stock-info stock-info--chart">
           <div class="col-12 "></div>
         </div>
 
-      <!-- STOCK VIEW REL STRENGTH -->
+        <!-- STOCK VIEW REL STRENGTH -->
         <div class="row stock-info stock-info--chart">
           <div class="col-12 "></div>
         </div>
@@ -186,14 +187,14 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
         </div>
 
-      <!-- STOCK VIEW STATS -->
+        <!-- STOCK VIEW STATS -->
         <div class="row stock-info stock-info--stats">
           <div class="col-12">
             <h2>Today's Stats</h2>
           </div>
           <div class="col-4">
             <p class="data data--large">10.47<sub>M</sub></p>
-            <p class="label">REVENUE</p>            
+            <p class="label">REVENUE</p>
           </div>
           <div class="col-4">
             <p class="data data--large">178.6<sub>B</sub></p>
@@ -201,7 +202,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
           <div class="col-4">
             <p class="data data--large">0<sub>%</sub></p>
-            <p class="label">YIELD</p>            
+            <p class="label">YIELD</p>
           </div>
         </div>
         <div class="row">
@@ -210,11 +211,11 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
         </div>
 
-      <!-- STOCK VIEW STATS -->       
+        <!-- STOCK VIEW STATS -->
         <div class="row stock-info stock-info--stats">
           <div class="col-3">
             <p class="data">1108<sub>.65</sub></p>
-            <p class="label">OPEN</p>           
+            <p class="label">OPEN</p>
           </div>
           <div class="col-3">
             <p class="data">1111<sub>.65</sub></p>
@@ -222,11 +223,11 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
           <div class="col-3">
             <p class="data">1107<sub>.65</sub></p>
-            <p class="label">LOW</p>            
+            <p class="label">LOW</p>
           </div>
           <div class="col-3">
             <p class="data">-- --</p>
-            <p class="label">CLOSE</p>            
+            <p class="label">CLOSE</p>
           </div>
         </div>
         <div class="row">
@@ -235,15 +236,15 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
         </div>
 
-      <!-- STOCK VIEW STATS -->
+        <!-- STOCK VIEW STATS -->
         <div class="row stock-info stock-info--stats">
           <div class="col-12 stock-industry">
             <p class="data">Consumer Discretionary</p>
-            <p class="label">INDUSTRY</p>           
+            <p class="label">INDUSTRY</p>
           </div>
           <div class="col-12 stock-industry">
             <p class="data">Non-Food Retail/Wholesale</p>
-            <p class="label">SECTOR</p>           
+            <p class="label">SECTOR</p>
           </div>
         </div>
         <div class="row">
@@ -252,7 +253,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
         </div>
 
-      <!-- STOCK VIEW NEWS -->
+        <!-- STOCK VIEW NEWS -->
         <div class="row stock-info stock-info--news">
           <div class="col-12">
             <h2>Recent News</h2>
@@ -262,7 +263,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
             <div class="divider__long"></div>
           </div>
           <div class="col-1 chevron-slider chevron-slider--left">
-            <img class="align-absolute"  src="./assets/imgs/ui_chevron--left.svg">
+            <img class="align-absolute" src="./assets/imgs/ui_chevron--left.svg">
           </div>
           <ul class="col-10 news__slider">
             <li class="container">
@@ -271,11 +272,11 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
                   <p class="headline">Google broadens takedown of extremist YouTube videos&nbsp;→</p>
                 </div>
                 <div class="col-6">
-                  <p class="source">News Source</p>               
+                  <p class="source">News Source</p>
                 </div>
                 <div class="col-6">
-                  <p class="date">Date published</p>    
-                </div>              
+                  <p class="date">Date published</p>
+                </div>
               </div>
             </li>
             <li class="container">
@@ -284,11 +285,11 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
                   <p class="headline">Google broadens takedown of extremist YouTube videos&nbsp;→</p>
                 </div>
                 <div class="col-6">
-                  <p class="source">News Source</p>               
+                  <p class="source">News Source</p>
                 </div>
                 <div class="col-6">
-                  <p class="date">Date published</p>    
-                </div>              
+                  <p class="date">Date published</p>
+                </div>
               </div>
             </li>
             <li class="container">
@@ -297,11 +298,11 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
                   <p class="headline">Google broadens takedown of extremist YouTube videos&nbsp;→</p>
                 </div>
                 <div class="col-6">
-                  <p class="source">News Source</p>               
+                  <p class="source">News Source</p>
                 </div>
                 <div class="col-6">
-                  <p class="date">Date published</p>    
-                </div>              
+                  <p class="date">Date published</p>
+                </div>
               </div>
             </li>
           </ul>
@@ -321,23 +322,26 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
         </div>
 
-      <!-- STOCK VIEW BREAKDOWN -->
+        <!-- STOCK VIEW BREAKDOWN -->
         <div class="row stock-info stock-info--overall-breakdown">
           <div class="col-12">
             <h2>Rating <span>Breakdown</span></h2>
-          </div>    
+          </div>
 
           <div class="col-12 copy-block">
             <p class="rating"><span>AMZN</span> is <span class="red">Bearish</span></p>
-            <p class="paragraph"><span>Amazon.Com Inc:</span> Wodio ut vitae sagittis felis. Pellentesque quis vehicula enim, vitae suscipit nisl. Duis elit felis, pharetra sed lectus eu, pretium pretium lorem. Donec eu plac onec eu plact purus.</p>
-            <p class="paragraph"> Duis elit felis, pharetra sed lectus eu, pretium pretium lorem. Donec eu plac onec eu urus.</p>
+            <p class="paragraph"><span>Amazon.Com Inc:</span> Wodio ut vitae sagittis felis. Pellentesque quis vehicula
+              enim, vitae suscipit nisl. Duis elit felis, pharetra sed lectus eu, pretium pretium lorem. Donec eu plac
+              onec eu plact purus.</p>
+            <p class="paragraph"> Duis elit felis, pharetra sed lectus eu, pretium pretium lorem. Donec eu plac onec eu
+              urus.</p>
           </div>
           <div class="col-12">
             <div class="divider__long divider__long--red"></div>
-          </div>  
+          </div>
         </div>
 
-      <!-- BREAKDOWN - FINANCIALS --> 
+        <!-- BREAKDOWN - FINANCIALS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
             <h1>Financials: <span class="red">Very Bearish</span></h1>
@@ -422,8 +426,11 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
 
           <div class="col-12 copy-block">
-            <p class="paragraph"><span>AMZN's</span> financial metrics are very poor. The company is carrying too much long term debt and may be overvalued.</p>
-            <p class="paragraph">The factor rank is based on the stock having high long term debt to equity ratio, high price to book value, high price to sales ratio, and relatively low cash flow, but high return on equity.</p>
+            <p class="paragraph"><span>AMZN's</span> financial metrics are very poor. The company is carrying too much
+              long term debt and may be overvalued.</p>
+            <p class="paragraph">The factor rank is based on the stock having high long term debt to equity ratio, high
+              price to book value, high price to sales ratio, and relatively low cash flow, but high return on
+              equity.</p>
           </div>
 
           <div class="col-12 data-table">
@@ -525,7 +532,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
         </div>
 
-      <!-- BREAKDOWN - EARNINGS --> 
+        <!-- BREAKDOWN - EARNINGS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
             <h1>Earnings: <span class="yellow">Neutral</span></h1>
@@ -611,8 +618,11 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
 
           <div class="col-12 copy-block">
-            <p class="paragraph"><span>AMZN's</span> earnings performance has been strong. The company has a history of strong earnings growth and has outperformed analysts' earnings estimates.</p>
-            <p class="paragraph">The factor rank is based on the stock having high earnings growth over the past 3-5 years, better than expected earnings in recent quarters, and consistent earnings over the past 5 years, but a relatively poor yearly earnings trend, and a relatively high projected P/E ratio.</p>
+            <p class="paragraph"><span>AMZN's</span> earnings performance has been strong. The company has a history of
+              strong earnings growth and has outperformed analysts' earnings estimates.</p>
+            <p class="paragraph">The factor rank is based on the stock having high earnings growth over the past 3-5
+              years, better than expected earnings in recent quarters, and consistent earnings over the past 5 years,
+              but a relatively poor yearly earnings trend, and a relatively high projected P/E ratio.</p>
           </div>
 
           <div class="col-12">
@@ -651,10 +661,10 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 
           <div class="col-12">
             <div class="divider__long divider__long--red"></div>
-          </div> 
+          </div>
         </div>
 
-      <!-- BREAKDOWN - TECHNICALS --> 
+        <!-- BREAKDOWN - TECHNICALS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
             <h1>Technicals: <span class="red">Very Bearish</span></h1>
@@ -738,8 +748,11 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
 
           <div class="col-12 copy-block">
-            <p class="paragraph">Price/volume activity for <span>AMZN</span> is Very Bullish. AMZN is currently strong relative to its long-term trend and has outperformed the S&P 500 over the past 6 months.</p>
-            <p class="paragraph">The factor rank is based on the stock having price strength versus the market, strong Chaikin Money Flow persistency, strength vs. its long-term price trend, positive trend momentum, and an increasing volume trend.</p>
+            <p class="paragraph">Price/volume activity for <span>AMZN</span> is Very Bullish. AMZN is currently strong
+              relative to its long-term trend and has outperformed the S&P 500 over the past 6 months.</p>
+            <p class="paragraph">The factor rank is based on the stock having price strength versus the market, strong
+              Chaikin Money Flow persistency, strength vs. its long-term price trend, positive trend momentum, and an
+              increasing volume trend.</p>
           </div>
 
           <div class="col-12 stock-info">
@@ -804,10 +817,10 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
           <div class="col-12">
             <div class="divider__long divider__long--red"></div>
-          </div>  
+          </div>
         </div>
 
-      <!-- BREAKDOWN - EXPERTS -->  
+        <!-- BREAKDOWN - EXPERTS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
             <h1>Experts: <span class="red">Bearish</span></h1>
@@ -892,8 +905,11 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
 
           <div class="col-12 copy-block">
-            <p class="paragraph">Expert activity about <span>AMZN</span> is very negative. Analysts have been lowering their earnings estimates for AMZN and insiders are not net buyers of AMZN's stock.</p>
-            <p class="paragraph">The factor rank is based on the stock having analysts revising earnings estimates downward, insiders not purchasing significant amounts of stock, and weak performance of the industry group, but a low short interest ratio, and optimistic analyst opinions.</p>
+            <p class="paragraph">Expert activity about <span>AMZN</span> is very negative. Analysts have been lowering
+              their earnings estimates for AMZN and insiders are not net buyers of AMZN's stock.</p>
+            <p class="paragraph">The factor rank is based on the stock having analysts revising earnings estimates
+              downward, insiders not purchasing significant amounts of stock, and weak performance of the industry
+              group, but a low short interest ratio, and optimistic analyst opinions.</p>
           </div>
 
           <div class="col-12">
@@ -962,7 +978,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 
           <div class="col-12">
             <div class="divider__long divider__long--red"></div>
-          </div> 
+          </div>
         </div>
 
         <div class="row stock-info stock-info--competition">
@@ -1097,18 +1113,21 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
           <div class="col-12">
             <div class="divider__long divider__long--red"></div>
-          </div> 
+          </div>
         </div>
 
-      <!-- COMPANY PROFILE -->
+        <!-- COMPANY PROFILE -->
         <div class="row stock-info stock-info--profile">
           <div class="col-12">
             <h2>Company Profile</h2>
           </div>
 
           <div class="col-12 copy-block">
-            <p class="paragraph"><span>AMZN's</span> earnings performance has been strong. The company has a history of strong earnings growth and has outperformed analysts' earnings estimates.</p>
-            <p class="paragraph">The factor rank is based on the stock having high earnings growth over the past 3-5 years, better than expected earnings in recent quarters, and consistent earnings over the past 5 years, but a relatively poor yearly earnings trend, and a relatively high projected P/E ratio.</p>
+            <p class="paragraph"><span>AMZN's</span> earnings performance has been strong. The company has a history of
+              strong earnings growth and has outperformed analysts' earnings estimates.</p>
+            <p class="paragraph">The factor rank is based on the stock having high earnings growth over the past 3-5
+              years, better than expected earnings in recent quarters, and consistent earnings over the past 5 years,
+              but a relatively poor yearly earnings trend, and a relatively high projected P/E ratio.</p>
           </div>
         </div>
       </div>
@@ -1121,7 +1140,8 @@ export class StockReportComponent implements OnInit, OnChanges {
   @Input('show') show: boolean;
   @Output('closeClicked') closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -1134,6 +1154,22 @@ export class StockReportComponent implements OnInit, OnChanges {
   closeReport() {
     this.show = false;
     this.closeClicked.emit();
+
+    const recentlyViewedString = localStorage.getItem('recentlyViewed');
+    if (!recentlyViewedString) {
+      let data = {
+        symbols: []
+      };
+      data.symbols.push(this.stock);
+      localStorage.setItem('recentlyViewed', JSON.stringify(data));
+      return;
+    }
+    const recentlyViewed = JSON.parse(recentlyViewedString);
+    recentlyViewed.symbols.push(this.stock);
+    recentlyViewed.symbols = recentlyViewed.symbols
+      .filter((val, idx) => recentlyViewed.symbols.indexOf(val) == idx);
+    if (recentlyViewed.symbols.length > 3) recentlyViewed.symbols.shift();
+    localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed))
   }
 
 }

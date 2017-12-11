@@ -8,13 +8,15 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import {Location} from '@angular/common';
+import {SignalService} from '../../../services/signal.service';
 
 @Component({
   selector: 'cpt-my-stocks',
   template: `
     <div [ngBusy]="loading" class="container-fluid component component--mystocks">
       <div class="row contents">
-        <cpt-my-stocks-list (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)" (removeStockClicked)="removeStock($event)"
+        <cpt-my-stocks-list (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
+                            (removeStockClicked)="removeStock($event)"
                             (updateData)="updateData()"
                             (stockClicked)="selectStock($event)"
                             [stocks]="userStocks" [powerBar]="powerBar" [userLists]="allUserLists"></cpt-my-stocks-list>
@@ -34,6 +36,20 @@ import {Location} from '@angular/common';
               </div>
               <div class="col-3">
                 <p>CHG</p>
+              </div>
+            </li>
+            <li *ngFor="let recent of recentlyViewed" class="row col-headers">
+              <div class="col-3 list-entry__pgr">
+                <img class="align-absolute" src="{{ appendPGRImage(recent['pgr']['PGR Value'], recent['pgr']['Corrected PGR Value']) }}">
+              </div>
+              <div class="col-3" style="padding-left:0;">
+                <p class="text-left">{{ recent['meta-info']['symbol'] }}</p>
+              </div>
+              <div class="col-3">
+                <p>{{ recent['meta-info']['Last'] }}</p>
+              </div>
+              <div class="col-3">
+                <p>{{ recent['meta-info']['Percentage '] }}%</p>
               </div>
             </li>
           </ul>
@@ -65,13 +81,15 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   loading: Subscription;
   allUserLists: object[];
   currentList: string;
+  recentlyViewed: object[] = [];
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService,
               private ideasService: IdeasService,
               private route: ActivatedRoute,
               private router: Router,
-              private location: Location) {
+              private location: Location,
+              private signalService: SignalService) {
     const mobWidth = (window.screen.width);
     if (+mobWidth <= 1024) this.reportOpen = false;
     if (+mobWidth > 1024) this.reportOpen = true;
@@ -113,6 +131,14 @@ export class MyStocksComponent implements OnInit, OnDestroy {
           }
         }
       );
+
+    const recentlyViewedString = localStorage.getItem('recentlyViewed');
+    if (recentlyViewedString) {
+      const viewed = JSON.parse(recentlyViewedString).symbols;
+      Observable.from(viewed)
+        .flatMap(ticker => this.ideasService.getStockCardData(ticker as string))
+        .subscribe(res => this.recentlyViewed.push(res));
+    }
   }
 
   ngOnDestroy() {
@@ -154,6 +180,10 @@ export class MyStocksComponent implements OnInit, OnDestroy {
 
   closeReport() {
     this.location.back();
+  }
+
+  appendPGRImage(pgr, rawPgr) {
+    return this.signalService.appendPGRImage(pgr, rawPgr);
   }
 
 }
