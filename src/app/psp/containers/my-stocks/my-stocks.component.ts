@@ -40,7 +40,7 @@ import {SignalService} from '../../../services/signal.service';
             </li>
             <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed" class="row list__entry">
               <div class="col-3 list-entry__pgr">
-                <img class="align-absolute" src="{{ appendPGRImage(recent['pgr']['PGR Value'], recent['pgr']['Corrected PGR Value']) }}">
+                <img class="align-absolute" src="{{ appendPGRImage(recent['pgr']['Corrected PGR Value'], recent['pgr']['PGR Value']) }}">
               </div>
               <div class="col-3" style="padding-left:0;">
                 <p class="text-left">{{ recent['meta-info']['symbol'] }}</p>
