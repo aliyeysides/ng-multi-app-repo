@@ -10,10 +10,9 @@ import {HealthCheckService} from '../../../../services/health-check.service';
   template: `
     <div class="col-12 stocklist__overview"
          [ngClass]="{'stocklist__overview--green': status?.avgPercentageChange > 0,'stocklist__overview--red': status?.avgPercentageChange < 0 }">
-      <p class="list-name">{{ selectedListName }}</p>
       <div class="btn-group" dropdown [autoClose]="true">
         <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-          {{ currentToggleOptionText }}
+          {{ selectedListName }}
         </button>
         <ul *dropdownMenu class="dropdown-menu" role="menu">
           <li (click)="selectList(list)" *ngFor="let list of userlists" role="menuitem"><a

@@ -38,7 +38,7 @@ import {SignalService} from '../../../services/signal.service';
                 <p>CHG</p>
               </div>
             </li>
-            <li *ngFor="let recent of recentlyViewed" class="row col-headers">
+            <li *ngFor="let recent of recentlyViewed" class="row list__entry">
               <div class="col-3 list-entry__pgr">
                 <img class="align-absolute" src="{{ appendPGRImage(recent['pgr']['PGR Value'], recent['pgr']['Corrected PGR Value']) }}">
               </div>

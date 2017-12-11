@@ -14,10 +14,9 @@ import {HealthCheckService} from '../../../../services/health-check.service';
       <div class="row no-gutters overview__summary">
         <div class="col-12 col-md-4 align-self-center">
           <p class="timespan">LAST WEEK</p>
-          <p><span class="list-name">{{ selectedListName }}</span></p>
           <div class="btn-group" dropdown [autoClose]="true">
             <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-              {{ currentToggleOptionText }}
+              {{ selectedListName }}
             </button>
             <ul *dropdownMenu class="dropdown-menu" role="menu">
               <li (click)="selectList(list)" *ngFor="let list of allUserLists" role="menuitem"><a
