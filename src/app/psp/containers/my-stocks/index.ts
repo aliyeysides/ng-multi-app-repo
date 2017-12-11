@@ -6,6 +6,7 @@ import {StockReportComponent} from './stock-report/stock-report.component';
 import {SharedModule} from '../../../shared/index';
 
 import {TooltipModule, BsDropdownModule} from 'ngx-bootstrap';
+import {ReportService} from '../../../services/report.service';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import {TooltipModule, BsDropdownModule} from 'ngx-bootstrap';
     MyStocksListComponent,
     StockReportComponent
   ],
-  providers: []
+  providers: [ReportService]
 })
 export class MyStocksModule {
 }

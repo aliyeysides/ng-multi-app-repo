@@ -42,12 +42,10 @@ declare let gtag: Function;
               {{ result.CompanyName }}
             </p>
           </div>
-          <div *ngIf="!resultInUserList((userStocks | async), result.Symbol)"
-               (click)="addToList(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
+          <div *ngIf="!resultInUserList(userStocks, result.Symbol)" (click)="addToList(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
             <img class="align-middle" src="./assets/imgs/icon_plus--white.svg">
           </div>
-          <div *ngIf="resultInUserList((userStocks | async), result.Symbol)"
-               (click)="removeStock(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
+          <div *ngIf="resultInUserList(userStocks, result.Symbol)" (click)="removeStock(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
             <img class="align-middle" src="./assets/imgs/icon_minus.svg">
           </div>
         </li>
@@ -66,7 +64,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   @Input('placeholder') placeholder: string;
   @ViewChild('search') search: ElementRef;
   @Output('focused') focused: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output('toggleSearch') toggleSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output('toggleSearch') toggleSearch: EventEmitter<boolean> =  new EventEmitter<boolean>();
 
   private _listId: string;
   private _uid: string;
@@ -141,8 +139,10 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
     this.toggleSearch.emit();
   }
 
-  resultInUserList(arr: ListSymbolObj[], ticker: string) {
-    return arr.filter(x => x['symbol'] == ticker).length > 0;
+  resultInUserList(arr: ListSymbolObj[], ticker: string): boolean {
+    if (arr) {
+      return arr.filter(x => x['symbol'] == ticker).length > 0;
+    }
   }
 
 }
