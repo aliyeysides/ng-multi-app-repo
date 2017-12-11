@@ -1145,6 +1145,7 @@ export class StockReportComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
