@@ -10,6 +10,7 @@
 .section--overview {
   	color:#ffffff;
 	padding-top:50px;
+	background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 
 	.overview__summary {
 		margin:0;
@@ -32,7 +33,7 @@
 			background-color: rgba(255,255,255,0.95);
 			border: 2px solid #ffffff;
 			border-radius: 30px;
-			color:#00C04E;
+			color:#666;
 			font-weight: 600;
 			padding:4px 25px 2px;
 			margin: 3px 0 10px;
@@ -182,18 +183,18 @@
 	}
 }
 
-.section__overview--green {
-  background: linear-gradient(to left, rgba(0,204,0,.93) 20%,rgba(0,170,119,.93) 100%);
+.section--overview--green {
+  	background: linear-gradient(to left, rgba(0,204,0,.93) 20%,rgba(0,170,119,.93) 100%);
 
 	.list-name {
-	  	color:#00C04E;
+	  	color:#00C04E !important;
 	}
 }
-.section__overview--red {
-  background: linear-gradient(to left, rgba(255,50,50,0.9) 20%,rgba(170,0,119,0.9) 100%);
+.section--overview--red {
+  	background: linear-gradient(to left, rgba(255,50,50,0.9) 20%,rgba(170,0,119,0.9) 100%);
 
   	.list-name {
-  		color:#FD001F;
+  		color:#FD001F !important;
 	}
 }
 
@@ -488,11 +489,11 @@
 }
 
 .powerGrid {
-	margin-top:10px;
+	margin-top:0px;
 	
 	.col-headers {
-	  	margin-bottom: 10px;
-	  	margin-top: 0px;
+	  	margin-bottom: 5px;
+	  	margin-top: -5px;
 
 	  	h4 {
 
@@ -503,7 +504,7 @@
 		margin-bottom: 1px;
 
 		&:last-child {
-			margin-bottom:20px;
+			margin-bottom:0px;
 
 			.grid__quadrant {
 				border-radius: 0 0 8px 8px;
@@ -511,7 +512,7 @@
 		}
 
 		&:only-child {
-			margin-bottom:20px;
+			margin-bottom:0px;
 
 			.grid__quadrant {
 				border-radius: 8px;
