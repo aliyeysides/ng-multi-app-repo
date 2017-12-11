@@ -139,8 +139,10 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
     this.toggleSearch.emit();
   }
 
-  resultInUserList(arr: ListSymbolObj[], ticker: string) {
-    return arr.filter(x => x['symbol'] == ticker).length > 0;
+  resultInUserList(arr: ListSymbolObj[], ticker: string): boolean {
+    if (arr) {
+      return arr.filter(x => x['symbol'] == ticker).length > 0;
+    }
   }
 
 }

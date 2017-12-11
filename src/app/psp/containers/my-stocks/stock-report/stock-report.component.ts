@@ -1,9 +1,17 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
+import {ReportService} from '../../../../services/report.service';
+import {Subject} from 'rxjs/Subject';
+import {SignalService} from '../../../../services/signal.service';
 
 @Component({
   selector: 'cpt-psp-stock-report',
   template: `
-    <div class="component--stockview bearish" [ngClass]="{'open': show}">
+    <div class="component--stockview"
+         [ngClass]="{
+          'open': show, 
+         'bearish': symbolData ? symbolData['metaInfo'][0]['PGR'] < 3 : null, 
+         'neutral': symbolData ? symbolData['metaInfo'][0]['PGR'] == 3 : null, 
+         'bullish': symbolData ? symbolData['metaInfo'][0]['PGR'] > 3 : null}">
 
       <!-- STOCK VIEW HEADER -->
       <div class="stockview__header">
@@ -12,7 +20,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
         </div>
         <div class="header__stock">
           <h1 class="ticker">{{ stock }}</h1>
-          <p class="company-name">Amazon.Com Inc</p>
+          <p class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
         </div>
         <div class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_plus--white.svg">
@@ -30,83 +38,73 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           <div class="col-12 stockview__main-rating">
             <p class="label">Power Gauge Rating &nbsp;<a><i class="fa fa-info-circle" aria-hidden="true"></i></a>
             <p class="rating">
-              <img src="./assets/imgs/arc_Bearish.svg">
-              <span class="red">Bearish</span>
+              <img src="{{ appendPGRImage(symbolData) }}">
+              <span>{{ appendPGRText(symbolData) }}</span>
             </p>
           </div>
           <div class="col-12 stockview__PGR">
-            <!--    <ul *ngIf="stock" class="pgr__sliders">
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>LT Debt to Equity</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['financial'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['financial'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Price to Book</p>
-                        </div>                    
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['earning'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['earning'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                      <div class="col-6 pgr__label">
-                          <p>Return on Equity</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['technical'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['technical'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Price to Sales</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['expert'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['expert'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Free Cash Flow</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['expert'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['expert'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                </ul> -->
+            <ul *ngIf="stock" class="pgr__sliders">
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Financials</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][0]['Value'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][1]['Financials'][0]['Value'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Earnings</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][0]['Value'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][2]['Earnings'][0]['Value'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Technicals</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][0]['Value'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][3]['Technicals'][0]['Value'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Experts</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][0]['Value'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][4]['Experts'][0]['Value'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="row">
@@ -118,18 +116,18 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
         <!-- STOCK VIEW PRICE -->
         <div class="row stock-info stock-info--price">
           <div class="col-12">
-            <p class="current-price red"><sub>$</sub>1108<sub>.22</sub></p>
+            <p class="current-price">{{ symbolData ? symbolData['metaInfo'][0]['Last'] : null }}</p>
           </div>
+          <!--<div class="col-4">-->
+          <!--<p class="data red">1107.23</p>-->
+          <!--<p class="label">OPEN</p>-->
+          <!--</div>-->
           <div class="col-4">
-            <p class="data red">1107.23</p>
-            <p class="label">OPEN</p>
-          </div>
-          <div class="col-4">
-            <p class="data red">-1.25</p>
+            <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['Change'] : null }}</p>
             <p class="label">$ CHG</p>
           </div>
           <div class="col-4">
-            <p class="data red">(-3.22)</p>
+            <p class="data">({{ symbolData ? symbolData['metaInfo'][0]['Percentage '] : null }})</p>
             <p class="label">% CHG</p>
           </div>
         </div>
@@ -142,7 +140,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
         <!-- STOCK VIEW CHART HEADER -->
         <div class="row stock-info stock-info--chart-toggle">
           <div class="col-12">
-            <p class="chart-header__breakdown">Down <span class="red">-12.02 &nbsp;(-3.23%)</span> over the last&hellip;
+            <p class="chart-header__breakdown">Down <span>-12.02 &nbsp;(-3.23%)</span> over the last&hellip;
             </p>
           </div>
           <div class="col-2">
@@ -329,7 +327,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
           </div>
 
           <div class="col-12 copy-block">
-            <p class="rating"><span>AMZN</span> is <span class="red">Bearish</span></p>
+            <p class="rating"><span>AMZN</span> is <span>Bearish</span></p>
             <p class="paragraph"><span>Amazon.Com Inc:</span> Wodio ut vitae sagittis felis. Pellentesque quis vehicula
               enim, vitae suscipit nisl. Duis elit felis, pharetra sed lectus eu, pretium pretium lorem. Donec eu plac
               onec eu plact purus.</p>
@@ -344,7 +342,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
         <!-- BREAKDOWN - FINANCIALS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
-            <h1>Financials: <span class="red">Very Bearish</span></h1>
+            <h1>Financials: <span>Very Bearish</span></h1>
           </div>
 
           <div class="col-12 stockview__PGR">
@@ -667,7 +665,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
         <!-- BREAKDOWN - TECHNICALS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
-            <h1>Technicals: <span class="red">Very Bearish</span></h1>
+            <h1>Technicals: <span>Very Bearish</span></h1>
           </div>
           <div class="col-12 stockview__PGR">
             <!--    <ul *ngIf="stock" class="pgr__sliders">
@@ -823,7 +821,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
         <!-- BREAKDOWN - EXPERTS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
-            <h1>Experts: <span class="red">Bearish</span></h1>
+            <h1>Experts: <span>Bearish</span></h1>
           </div>
 
           <div class="col-12 stockview__PGR">
@@ -947,7 +945,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
                     <td class="greyed-out">MED</td>
                   </tr>
                   <tr>
-                    <td class="red">LOW</td>
+                    <td>LOW</td>
                   </tr>
                 </table>
               </div>
@@ -1135,20 +1133,38 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
   `,
   styleUrls: ['./stock-report.component.scss']
 })
-export class StockReportComponent implements OnInit, OnChanges {
+export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
+  private _ngUnsubscribe: Subject<void> = new Subject<void>();
   @Input('stock') stock: string;
   @Input('show') show: boolean;
   @Output('closeClicked') closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor() {
+  symbolData;
+
+  constructor(private reportService: ReportService,
+              private signalService: SignalService) {
   }
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    if (this.stock) {
+      this.reportService.getSymbolData(this.stock)
+        .takeUntil(this._ngUnsubscribe)
+        .filter(x => x != undefined)
+        .subscribe(res => {
+          this.symbolData = res;
+          console.log('data', this.symbolData);
+        });
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes) window.scrollTo(0, 0);
+  }
+
+  ngOnDestroy() {
+    this._ngUnsubscribe.next();
+    this._ngUnsubscribe.complete();
   }
 
   closeReport() {
@@ -1170,6 +1186,30 @@ export class StockReportComponent implements OnInit, OnChanges {
       .filter((val, idx) => recentlyViewed.symbols.indexOf(val) == idx);
     if (recentlyViewed.symbols.length > 3) recentlyViewed.symbols.shift();
     localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed))
+  }
+
+  appendPGRImage(symbolData) {
+    if (symbolData) {
+      return this.signalService.appendPGRImage(symbolData['metaInfo'][0]['PGR'], symbolData['metaInfo'][0]['raw_PGR']);
+    }
+  }
+
+  appendPGRText(symbolData) {
+    if (symbolData) {
+      return this.signalService.appendPGRText(symbolData['metaInfo'][0]['PGR'], symbolData['metaInfo'][0]['raw_PGR']);
+    }
+  }
+
+  appendSliderClass(pgr) {
+    if (pgr) {
+      return this.signalService.appendSliderBarClass(pgr);
+    }
+  }
+
+  appendSliderBarClass(pgr) {
+    if (pgr) {
+      return this.signalService.appendSliderBarClass(pgr);
+    }
   }
 
 }
