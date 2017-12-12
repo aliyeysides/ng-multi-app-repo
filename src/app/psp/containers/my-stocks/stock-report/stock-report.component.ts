@@ -224,7 +224,7 @@ import {Observable} from 'rxjs/Observable';
             <p class="label">INDUSTRY</p>
           </div>
           <div class="col-12 stock-industry">
-            <p class="data">blah</p>
+            <p class="data">{{ research ? research['Details']['Sector'] : null }}</p>
             <p class="label">SECTOR</p>
           </div>
         </div>
@@ -400,11 +400,11 @@ import {Observable} from 'rxjs/Observable';
                   <th colspan="2">Assets &amp; Liabilities</th>
                   <tr>
                     <td class="label">Current Ratio</td>
-                    <td class="data">1.39</td>
+                    <td class="data">{{ research ? research['Assets and Liabilities']['Current Ratio'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">LT Debt/ Equity</td>
-                    <td class="data">0.68</td>
+                    <td class="data">{{ research ? research['Assets and Liabilities']['LT Debt/Equity'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">% Earn on Eqty</td>
@@ -429,11 +429,11 @@ import {Observable} from 'rxjs/Observable';
                   </tr>
                   <tr>
                     <td class="label">Price to Book</td>
-                    <td class="data">$6.37</td>
+                    <td class="data">{{ research ? research['Valuation']['Price/Book'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">Price to Sales</td>
-                    <td class="data">3.88</td>
+                    <td class="data">{{ research ? research['Valuation']['Price/Sales'] : null }}</td>
                   </tr>
                 </table>
               </div>
@@ -463,11 +463,11 @@ import {Observable} from 'rxjs/Observable';
                   <th colspan="2">Returns</th>
                   <tr>
                     <td class="label">On Investment</td>
-                    <td class="data">21.94%</td>
+                    <td class="data">{{ research ? research['Returns']['Return on Invest'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">On Equity</td>
-                    <td class="data">35.40%</td>
+                    <td class="data">{{ research ? research['Returns']['Return on Equity'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">1 Month Return</td>
@@ -653,7 +653,7 @@ import {Observable} from 'rxjs/Observable';
               <li>
                 <div class="row sliderBar-container">
                   <div class="col-6 pgr__label">
-                    <p>Chaikin Money Flow"</p>
+                    <p>Chaikin Money Flow</p>
                   </div>
                   <div class="col-5 sliderProgress">
                     <div
@@ -968,46 +968,18 @@ import {Observable} from 'rxjs/Observable';
                   <p>PROFIT MRG</p>
                 </div>
               </li>
-              <li class="row no-gutters">
+              <li *ngFor="let stock of competitors" class="row no-gutters">
                 <div class="col-3 ticker">
-                  <p><span><img src="./assets/imgs/arc_Bullish.svg"></span> PGR</p>
+                  <p><span><img src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>{{ stock['symbol'] }}</p>
                 </div>
                 <div class="col-3 data">
-                  <p>7.60%</p>
+                  <p>{{ stock['Historic EPS growth'] }}</p>
                 </div>
                 <div class="col-3 data">
-                  <p>3.12%</p>
+                  <p>{{ stock['Projected EPS growth'] }}</p>
                 </div>
                 <div class="col-3 data">
-                  <p>3.12%</p>
-                </div>
-              </li>
-              <li class="row no-gutters">
-                <div class="col-3 ticker">
-                  <p><span><img src="./assets/imgs/arc_VeryBearish.svg"></span> KPMG</p>
-                </div>
-                <div class="col-3 data">
-                  <p>7.60%</p>
-                </div>
-                <div class="col-3 data">
-                  <p>3.12%</p>
-                </div>
-                <div class="col-3 data">
-                  <p>3.12%</p>
-                </div>
-              </li>
-              <li class="row no-gutters">
-                <div class="col-3 ticker">
-                  <p><span><img src="./assets/imgs/arc_Bearish.svg"></span> URBN</p>
-                </div>
-                <div class="col-3 data">
-                  <p>7.60%</p>
-                </div>
-                <div class="col-3 data">
-                  <p>3.12%</p>
-                </div>
-                <div class="col-3 data">
-                  <p>3.12%</p>
+                  <p>{{ stock['Profit Margin'] }}</p>
                 </div>
               </li>
             </ul>
@@ -1031,46 +1003,18 @@ import {Observable} from 'rxjs/Observable';
                   <p>REVENUE</p>
                 </div>
               </li>
-              <li class="row no-gutters">
+              <li *ngFor="let stock of competitors" class="row no-gutters">
                 <div class="col-3 ticker">
-                  <p><span><img src="./assets/imgs/arc_VeryBearish.svg"></span> KPMG</p>
+                  <p><span><img src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>{{ stock['symbol'] }}</p>
                 </div>
                 <div class="col-3 data">
-                  <p>2.02</p>
+                  <p>{{ stock['PEG']  }}</p>
                 </div>
                 <div class="col-3 data">
-                  <p>20.20</p>
+                  <p>{{ stock['PE'] }}</p>
                 </div>
                 <div class="col-3 data">
-                  <p class="">80.430</p>
-                </div>
-              </li>
-              <li class="row no-gutters">
-                <div class="col-3 ticker">
-                  <p><span><img src="./assets/imgs/arc_VeryBearish.svg"></span> KPMG</p>
-                </div>
-                <div class="col-3 data">
-                  <p>2.02</p>
-                </div>
-                <div class="col-3 data">
-                  <p>20.20</p>
-                </div>
-                <div class="col-3 data">
-                  <p class="">80.430</p>
-                </div>
-              </li>
-              <li class="row no-gutters">
-                <div class="col-3 ticker">
-                  <p><span><img src="./assets/imgs/arc_VeryBearish.svg"></span> KPMG</p>
-                </div>
-                <div class="col-3 data">
-                  <p>2.02</p>
-                </div>
-                <div class="col-3 data">
-                  <p>20.20</p>
-                </div>
-                <div class="col-3 data">
-                  <p>80.430</p>
+                  <p class="">{{ stock['Revenue(M)'] }}</p>
                 </div>
               </li>
             </ul>
@@ -1087,11 +1031,7 @@ import {Observable} from 'rxjs/Observable';
           </div>
 
           <div class="col-12 copy-block">
-            <p class="paragraph"><span>AMZN's</span> earnings performance has been strong. The company has a history of
-              strong earnings growth and has outperformed analysts' earnings estimates.</p>
-            <p class="paragraph">The factor rank is based on the stock having high earnings growth over the past 3-5
-              years, better than expected earnings in recent quarters, and consistent earnings over the past 5 years,
-              but a relatively poor yearly earnings trend, and a relatively high projected P/E ratio.</p>
+            <p class="paragraph">{{ symbolData ? symbolData['fundamentalData']['Company Text Blurb'] : null }}</p>
           </div>
         </div>
       </div>
@@ -1109,6 +1049,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   symbolData;
   headlines;
   summary;
+  competitors;
+  research;
   scrollLeftHeadlines: number;
   headlinePageNumber: number = 1;
 
@@ -1127,20 +1069,20 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         .map(res => this.symbolData = res)
         .switchMap(() => {
           return Observable.combineLatest(
+            this.reportService.getPgrDataAndContextSummary(this.stock, this.symbolData['metaInfo'][0]['industry_name']),
+            this.reportService.getTickerCompetitors(this.stock),
+            this.reportService.getResearchReportData(this.stock),
             // this.ideasService.getHeadlines(this.stock),
-            this.reportService.getPgrDataAndContextSummary(this.stock, this.symbolData['metaInfo'][0]['industry_name'])
           )
         })
-        .subscribe(summary => {
+        .subscribe(([summary, competitors, research]) => {
+          this.summary = summary;
+          this.competitors = competitors['compititors'];
+          this.research = research;
           // this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
-          this.summary = summary[0];
-          console.log('summary', this.summary);
+          console.log('research', this.research);
         });
-      // .subscribe(([headlines, summary]) => {
-      //   this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
-      //   this.summary = summary;
-      //   console.log('summary', this.summary);
-      // });
+
     }
   }
 
@@ -1184,6 +1126,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     if (symbolData) {
       return this.signalService.appendPGRText(symbolData['metaInfo'][0]['PGR'], symbolData['metaInfo'][0]['raw_PGR']);
     }
+  }
+
+  appendPGRImageComp(pgr, rawPgr) {
+    return this.signalService.appendPGRImage(pgr, rawPgr);
   }
 
   appendSliderClass(pgr) {
