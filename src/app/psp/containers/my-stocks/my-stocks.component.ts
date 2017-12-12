@@ -66,8 +66,10 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   onResize(event) {
     const width = event.target.innerWidth;
     if (+width <= 1024) this.reportOpen = false;
-    if (+width > 1024) this.reportOpen = true;
-    this.router.navigate(['/my-stocks', this.userStocks[0].symbol])
+    if (+width > 1024) {
+      this.router.navigate(['/my-stocks', this.userStocks[0].symbol]);
+      this.reportOpen = true;
+    }
   }
 
   private _uid: string;

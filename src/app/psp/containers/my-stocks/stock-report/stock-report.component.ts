@@ -7,11 +7,12 @@ import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {IdeasService} from '../../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'cpt-psp-stock-report',
   template: `
-    <div class="component--stockview"
+    <div [ngBusy]="loading" class="component--stockview"
          [ngClass]="{
           'open': show, 
          'bearish': symbolData ? symbolData['metaInfo'][0]['PGR'] < 3 : null, 
@@ -287,7 +288,7 @@ import {Observable} from 'rxjs/Observable';
           </div>
 
           <div class="col-12 copy-block">
-            <p class="rating"><span>{{ stock.toUpperCase() }}</span> is
+            <p class="rating"><span>{{ stock?.toUpperCase() }}</span> is
               <span>{{ summary ? summary['pgrContextSummary'][0]['status'] : null }}</span></p>
             <p class="paragraph"><span>{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}:</span>
               {{ summary ? summary['pgrContextSummary'][0]['mainSentence'] : null }}</p>
@@ -388,7 +389,7 @@ import {Observable} from 'rxjs/Observable';
           </div>
 
           <div class="col-12 copy-block">
-            <p class="paragraph"><span>{{ stock.toUpperCase() }}'s</span>
+            <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s</span>
               {{ summary ? summary['financialContextSummary'][0]['generalSentence'] : null }}</p>
             <p class="paragraph">{{ summary ? summary['financialContextSummary'][0]['explanatorySentence'] : null }}</p>
           </div>
@@ -584,7 +585,7 @@ import {Observable} from 'rxjs/Observable';
           </div>
 
           <div class="col-12 copy-block">
-            <p class="paragraph"><span>{{ stock.toUpperCase() }}'s:</span>
+            <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s:</span>
               {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
             <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null }}</p>
           </div>
@@ -1051,8 +1052,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   summary;
   competitors;
   research;
+  data;
   scrollLeftHeadlines: number;
   headlinePageNumber: number = 1;
+  loading: Subscription;
 
   constructor(private reportService: ReportService,
               private signalService: SignalService,
@@ -1062,8 +1065,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     window.scrollTo(0, 0);
     if (this.stock) {
-      Observable.timer(0, 30 * 1000)
-        .switchMap(() => this.reportService.getSymbolData(this.stock))
+        this.loading = this.reportService.getSymbolData(this.stock)
         .takeUntil(this._ngUnsubscribe)
         .filter(x => x != undefined)
         .map(res => this.symbolData = res)
@@ -1072,15 +1074,17 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             this.reportService.getPgrDataAndContextSummary(this.stock, this.symbolData['metaInfo'][0]['industry_name']),
             this.reportService.getTickerCompetitors(this.stock),
             this.reportService.getResearchReportData(this.stock),
+            this.reportService.getStockSummaryData(this.stock),
             // this.ideasService.getHeadlines(this.stock),
           )
         })
-        .subscribe(([summary, competitors, research]) => {
+        .subscribe(([summary, competitors, research, data]) => {
           this.summary = summary;
           this.competitors = competitors['compititors'];
           this.research = research;
+          this.data = data;
           // this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
-          console.log('research', this.research);
+          console.log('data', this.data);
         });
 
     }

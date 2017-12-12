@@ -10,6 +10,7 @@ export class ReportService {
   private _contextParams: URLSearchParams;
   private _competitorsParams: URLSearchParams;
   private _researchDataParams: URLSearchParams;
+  private _summaryDataParams: URLSearchParams;
 
   constructor(private utilService: UtilService) { }
 
@@ -36,11 +37,18 @@ export class ReportService {
     return this.utilService.getJson(url, this._competitorsParams);
   }
 
-  // https://dev.chaikinanalytics.com/CPTRestSecure/app/researchReportServices/getResearchReportData?symbol=FB
   public getResearchReportData(symbol: string) {
     const url = `${this._apiHost}/CPTRestSecure/app/researchReportServices/getResearchReportData?`;
     this._researchDataParams = new URLSearchParams();
     this._researchDataParams.set('symbol', symbol);
     return this.utilService.getJson(url, this._researchDataParams);
+  }
+
+  public getStockSummaryData(symbol: string) {
+    const url = `${this._apiHost}/CPTRestSecure/app/stockSummary/getStockSummaryData?`;
+    this._summaryDataParams = new URLSearchParams();
+    this._summaryDataParams.set('symbol', symbol);
+    this._summaryDataParams.set('components', 'stockSummaryData,oneYearChartData,fiveYearChartData,oneYearPgrData,fiveYearPgrData');
+    return this.utilService.getJson(url, this._summaryDataParams);
   }
 }
