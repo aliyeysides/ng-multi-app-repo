@@ -263,19 +263,6 @@ import {Observable} from 'rxjs/Observable';
                 </div>
               </div>
             </li>
-            <li class="container">
-              <div class="row">
-                <div class="col-12">
-                  <p class="headline">Google broadens takedown of extremist YouTube videos&nbsp;→</p>
-                </div>
-                <div class="col-6">
-                  <p class="source">News Source</p>
-                </div>
-                <div class="col-6">
-                  <p class="date">Date published</p>
-                </div>
-              </div>
-            </li>
           </ul>
           <div (click)="scrollRight()" *ngIf="headlines?.length" class="col-1 chevron-slider chevron-slider--right">
             <img class="align-absolute" src="./assets/imgs/ui_chevron--right.svg">
@@ -300,12 +287,11 @@ import {Observable} from 'rxjs/Observable';
           </div>
 
           <div class="col-12 copy-block">
-            <p class="rating"><span>AMZN</span> is <span>Bearish</span></p>
-            <p class="paragraph"><span>Amazon.Com Inc:</span> Wodio ut vitae sagittis felis. Pellentesque quis vehicula
-              enim, vitae suscipit nisl. Duis elit felis, pharetra sed lectus eu, pretium pretium lorem. Donec eu plac
-              onec eu plact purus.</p>
-            <p class="paragraph"> Duis elit felis, pharetra sed lectus eu, pretium pretium lorem. Donec eu plac onec eu
-              urus.</p>
+            <p class="rating"><span>{{ stock.toUpperCase() }}</span> is
+              <span>{{ summary ? summary['pgrContextSummary'][0]['status'] : null }}</span></p>
+            <p class="paragraph"><span>{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}:</span>
+              {{ summary ? summary['pgrContextSummary'][0]['mainSentence'] : null }}</p>
+            <p class="paragraph"> {{ summary ? summary['pgrContextSummary'][0]['additionalSentence'] : null }}</p>
           </div>
           <div class="col-12">
             <div class="divider__long divider__long--red"></div>
@@ -315,93 +301,96 @@ import {Observable} from 'rxjs/Observable';
         <!-- BREAKDOWN - FINANCIALS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
-            <h1>Financials: <span>Very Bearish</span></h1>
+            <h1>Financials: <span>{{ summary ? summary['financialContextSummary'][0]['status'] : null }}</span></h1>
           </div>
 
           <div class="col-12 stockview__PGR">
-            <!--    <ul *ngIf="stock" class="pgr__sliders">
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>LT Debt to Equity</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['financial'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['financial'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Price to Book</p>
-                        </div>                    
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['earning'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['earning'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                      <div class="col-6 pgr__label">
-                          <p>Return on Equity</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['technical'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['technical'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Price to Sales</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['expert'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['expert'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Free Cash Flow</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['expert'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['expert'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                </ul> -->
+            <ul *ngIf="stock" class="pgr__sliders">
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>LT Debt to Equity</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][1]['LT Debt to Equity'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][1]['Financials'][1]['LT Debt to Equity'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Price to Book</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][2]['Price to Book'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][1]['Financials'][2]['Price to Book'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Return on Equity</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][3]['Return on Equity'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][1]['Financials'][3]['Return on Equity'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Price to Sales</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][4]['Price to Sales'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][1]['Financials'][4]['Price to Sales'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Free Cash Flow</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][5]['Free Cash Flow'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][1]['Financials'][5]['Free Cash Flow'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
           <div class="col-12">
             <div class="divider__long"></div>
           </div>
 
           <div class="col-12 copy-block">
-            <p class="paragraph"><span>AMZN's</span> financial metrics are very poor. The company is carrying too much
-              long term debt and may be overvalued.</p>
-            <p class="paragraph">The factor rank is based on the stock having high long term debt to equity ratio, high
-              price to book value, high price to sales ratio, and relatively low cash flow, but high return on
-              equity.</p>
+            <p class="paragraph"><span>{{ stock.toUpperCase() }}'s</span>
+              {{ summary ? summary['financialContextSummary'][0]['generalSentence'] : null }}</p>
+            <p class="paragraph">{{ summary ? summary['financialContextSummary'][0]['explanatorySentence'] : null }}</p>
           </div>
 
           <div class="col-12 data-table">
@@ -506,82 +495,88 @@ import {Observable} from 'rxjs/Observable';
         <!-- BREAKDOWN - EARNINGS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
-            <h1>Earnings: <span class="yellow">Neutral</span></h1>
+            <h1>Earnings: <span class="yellow">{{ summary ? summary['earningsContextSummary'][0]['status'] : null
+              }}</span></h1>
           </div>
 
           <div class="col-12 stockview__PGR">
-            <!--    <ul *ngIf="stock" class="pgr__sliders">
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>LT Debt to Equity</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['financial'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['financial'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Price to Book</p>
-                        </div>                    
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['earning'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['earning'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                      <div class="col-6 pgr__label">
-                          <p>Return on Equity</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['technical'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['technical'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Price to Sales</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['expert'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['expert'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Free Cash Flow</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['expert'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['expert'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                </ul> -->
+            <ul *ngIf="stock" class="pgr__sliders">
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Earnings Growth</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][1]['Earnings Growth'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][2]['Earnings'][1]['Earnings Growth'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Earnings Surprise</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][2]['Earnings Surprise'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][2]['Earnings'][2]['Earnings Surprise'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Earnings Trend</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][3]['Earnings Trend'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][2]['Earnings'][3]['Earnings Trend'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Projected P/E</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][4]['Projected P/E'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][2]['Earnings'][4]['Projected P/E'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Earnings Consistency</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][5]['Earnings Consistency'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][2]['Earnings'][5]['Earnings Consistency'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
 
           <div class="col-12">
@@ -589,11 +584,9 @@ import {Observable} from 'rxjs/Observable';
           </div>
 
           <div class="col-12 copy-block">
-            <p class="paragraph"><span>AMZN's</span> earnings performance has been strong. The company has a history of
-              strong earnings growth and has outperformed analysts' earnings estimates.</p>
-            <p class="paragraph">The factor rank is based on the stock having high earnings growth over the past 3-5
-              years, better than expected earnings in recent quarters, and consistent earnings over the past 5 years,
-              but a relatively poor yearly earnings trend, and a relatively high projected P/E ratio.</p>
+            <p class="paragraph"><span>{{ stock.toUpperCase() }}'s:</span>
+              {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
+            <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null }}</p>
           </div>
 
           <div class="col-12">
@@ -638,92 +631,95 @@ import {Observable} from 'rxjs/Observable';
         <!-- BREAKDOWN - TECHNICALS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
-            <h1>Technicals: <span>Very Bearish</span></h1>
+            <h1>Technicals: <span>{{ summary ? summary['priceVolumeContextSummary'][0]['status'] : null }}</span></h1>
           </div>
           <div class="col-12 stockview__PGR">
-            <!--    <ul *ngIf="stock" class="pgr__sliders">
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>LT Debt to Equity</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['financial'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['financial'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Price to Book</p>
-                        </div>                    
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['earning'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['earning'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                      <div class="col-6 pgr__label">
-                          <p>Return on Equity</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['technical'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['technical'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Price to Sales</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['expert'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['expert'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Free Cash Flow</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['expert'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['expert'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                </ul> -->
+            <ul *ngIf="stock" class="pgr__sliders">
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Rel Strength vs Market</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][1]['Rel Strength vs Market'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][3]['Technicals'][1]['Rel Strength vs Market'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Chaikin Money Flow"</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][2]['Chaikin Money Flow'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][3]['Technicals'][2]['Chaikin Money Flow'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Price Strength</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][3]['Price Strength'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][3]['Technicals'][3]['Price Strength'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Price Trend ROC</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][4]['Price Trend ROC'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][3]['Technicals'][4]['Price Trend ROC'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Volume Trend</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][5]['Volume Trend'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][3]['Technicals'][5]['Volume Trend'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
           <div class="col-12">
             <div class="divider__long"></div>
           </div>
 
           <div class="col-12 copy-block">
-            <p class="paragraph">Price/volume activity for <span>AMZN</span> is Very Bullish. AMZN is currently strong
-              relative to its long-term trend and has outperformed the S&P 500 over the past 6 months.</p>
-            <p class="paragraph">The factor rank is based on the stock having price strength versus the market, strong
-              Chaikin Money Flow persistency, strength vs. its long-term price trend, positive trend momentum, and an
-              increasing volume trend.</p>
+            <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['generalSentence'] : null }}</p>
+            <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['explanatorySentence'] : null
+              }}</p>
           </div>
 
           <div class="col-12 stock-info">
@@ -794,93 +790,90 @@ import {Observable} from 'rxjs/Observable';
         <!-- BREAKDOWN - EXPERTS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
-            <h1>Experts: <span>Bearish</span></h1>
+            <h1>Experts: <span>{{ summary ? summary['expertOpnionsContextSummary'][0]['status'] : null }}</span></h1>
           </div>
 
           <div class="col-12 stockview__PGR">
-            <!--    <ul *ngIf="stock" class="pgr__sliders">
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>LT Debt to Equity</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['financial'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['financial'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Price to Book</p>
-                        </div>                    
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['earning'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['earning'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                      <div class="col-6 pgr__label">
-                          <p>Return on Equity</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['technical'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['technical'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Price to Sales</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['expert'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['expert'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="row sliderBar-container">
-                        <div class="col-6 pgr__label">
-                          <p>Free Cash Flow</p>
-                        </div>
-                        <div class="col-5 sliderProgress">
-                          <div [ngClass]="appendSliderClass(stock['pgr_factors_rating']['expert'])"></div>
-                          <div class="sliderBar"
-                               [ngClass]="appendSliderBarClass(stock['pgr_factors_rating']['expert'])"
-                               role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                </ul> -->
+            <ul *ngIf="stock" class="pgr__sliders">
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Estimate Trend</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][1]['Estimate Trend'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][4]['Experts'][1]['Estimate Trend'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Short Interest</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Insider Activity</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][3]['Insider Activity'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][4]['Experts'][3]['Insider Activity'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Analyst Rating Trend</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][4]['Analyst Rating Trend'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][4]['Experts'][4]['Analyst Rating Trend'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row sliderBar-container">
+                  <div class="col-6 pgr__label">
+                    <p>Industry Rel Strength</p>
+                  </div>
+                  <div class="col-5 sliderProgress">
+                    <div [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][5]['Industry Rel Strength'] : null)"></div>
+                    <div class="sliderBar"
+                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][4]['Experts'][5]['Industry Rel Strength'] : null)"
+                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
           <div class="col-12">
             <div class="divider__long"></div>
           </div>
 
           <div class="col-12 copy-block">
-            <p class="paragraph">Expert activity about <span>AMZN</span> is very negative. Analysts have been lowering
-              their earnings estimates for AMZN and insiders are not net buyers of AMZN's stock.</p>
-            <p class="paragraph">The factor rank is based on the stock having analysts revising earnings estimates
-              downward, insiders not purchasing significant amounts of stock, and weak performance of the industry
-              group, but a low short interest ratio, and optimistic analyst opinions.</p>
+            <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['generalSentence'] : null }}</p>
+            <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['explanatorySentence'] : null  }}</p>
           </div>
 
           <div class="col-12">
@@ -1115,6 +1108,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   symbolData;
   headlines;
+  summary;
   scrollLeftHeadlines: number;
   headlinePageNumber: number = 1;
 
@@ -1126,25 +1120,27 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     window.scrollTo(0, 0);
     if (this.stock) {
-      // Observable.timer(0, 30 * 1000).switchMap(() => {
-      //   // Observable.c
-      // })
-      this.reportService.getSymbolData(this.stock)
+      Observable.timer(0, 30 * 1000)
+        .switchMap(() => this.reportService.getSymbolData(this.stock))
         .takeUntil(this._ngUnsubscribe)
         .filter(x => x != undefined)
-        .subscribe(res => this.symbolData = res)
-
-      this.ideasService.getHeadlines(this.stock)
-        .takeUntil(this._ngUnsubscribe)
-        .filter(x => x != undefined)
-        .subscribe(res => {
-          this.headlines = res['headlines'].filter((item, index) => index < 7);
+        .map(res => this.symbolData = res)
+        .switchMap(() => {
+          return Observable.combineLatest(
+            // this.ideasService.getHeadlines(this.stock),
+            this.reportService.getPgrDataAndContextSummary(this.stock, this.symbolData['metaInfo'][0]['industry_name'])
+          )
+        })
+        .subscribe(summary => {
+          // this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
+          this.summary = summary[0];
+          console.log('summary', this.summary);
         });
-
-      this.reportService.getPgrDataAndContextSummary(this.stock)
-        .takeUntil(this._ngUnsubscribe)
-        .filter(x => x != undefined)
-        .subscribe(res => console.log('res', res));
+      // .subscribe(([headlines, summary]) => {
+      //   this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
+      //   this.summary = summary;
+      //   console.log('summary', this.summary);
+      // });
     }
   }
 

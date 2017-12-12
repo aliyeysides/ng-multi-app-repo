@@ -19,12 +19,12 @@ export class ReportService {
     return this.utilService.getJson(url, this._symbolDataParams);
   }
 
-  public getPgrDataAndContextSummary(symbol: string) {
-    const url = `${this._apiHost}CPTRestSecure/app/researchReportServices/getPgrDataAndContextSummary?`;
+  public getPgrDataAndContextSummary(symbol: string, industry: string) {
+    const url = `${this._apiHost}/CPTRestSecure/app/researchReportServices/getPgrDataAndContextSummary?`;
     this._contextParams = new URLSearchParams();
     this._contextParams.set('symbol', symbol);
+    this._contextParams.set('industry', industry);
     return this.utilService.getJson(url, this._contextParams);
   }
-// /CPTRestSecure/app/researchReportServices/getPgrDataAndContextSummary?symbol=AAPL&industry=Computer-Office%20Equipment
 
 }
