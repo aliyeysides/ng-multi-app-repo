@@ -1,7 +1,12 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
+import {
+  Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output,
+  SimpleChanges, ViewChild
+} from '@angular/core';
 import {ReportService} from '../../../../services/report.service';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
+import {IdeasService} from '../../../../services/ideas.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'cpt-psp-stock-report',
@@ -191,43 +196,21 @@ import {SignalService} from '../../../../services/signal.service';
             <h2>Today's Stats</h2>
           </div>
           <div class="col-4">
-            <p class="data data--large">10.47<sub>M</sub></p>
+            <p class="data data--large">{{ (symbolData ? symbolData['fundamentalData']['Revenue'] : null) / 1000 }}B</p>
             <p class="label">REVENUE</p>
           </div>
           <div class="col-4">
-            <p class="data data--large">178.6<sub>B</sub></p>
+            <p class="data data--large">
+              {{ (symbolData ? symbolData['fundamentalData']['Mkt Capitalization'] : null) | marketCap | number:'.2-2'
+              }}B</p>
             <p class="label">MKT CAP</p>
           </div>
           <div class="col-4">
-            <p class="data data--large">0<sub>%</sub></p>
+            <p class="data data--large">{{ (symbolData ? symbolData['fundamentalData']['Yield'] : null) }}%</p>
             <p class="label">YIELD</p>
           </div>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="divider__long"></div>
-          </div>
-        </div>
 
-        <!-- STOCK VIEW STATS -->
-        <div class="row stock-info stock-info--stats">
-          <div class="col-3">
-            <p class="data">1108<sub>.65</sub></p>
-            <p class="label">OPEN</p>
-          </div>
-          <div class="col-3">
-            <p class="data">1111<sub>.65</sub></p>
-            <p class="label">HIGH</p>
-          </div>
-          <div class="col-3">
-            <p class="data">1107<sub>.65</sub></p>
-            <p class="label">LOW</p>
-          </div>
-          <div class="col-3">
-            <p class="data">-- --</p>
-            <p class="label">CLOSE</p>
-          </div>
-        </div>
         <div class="row">
           <div class="col-12">
             <div class="divider__long"></div>
@@ -237,11 +220,11 @@ import {SignalService} from '../../../../services/signal.service';
         <!-- STOCK VIEW STATS -->
         <div class="row stock-info stock-info--stats">
           <div class="col-12 stock-industry">
-            <p class="data">Consumer Discretionary</p>
+            <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['industry_name'] : null }}</p>
             <p class="label">INDUSTRY</p>
           </div>
           <div class="col-12 stock-industry">
-            <p class="data">Non-Food Retail/Wholesale</p>
+            <p class="data">blah</p>
             <p class="label">SECTOR</p>
           </div>
         </div>
@@ -260,33 +243,23 @@ import {SignalService} from '../../../../services/signal.service';
           <div class="col-12">
             <div class="divider__long"></div>
           </div>
-          <div class="col-1 chevron-slider chevron-slider--left">
+          <div (click)="scrollLeft()" *ngIf="headlines?.length" class="col-1 chevron-slider chevron-slider--left">
             <img class="align-absolute" src="./assets/imgs/ui_chevron--left.svg">
           </div>
-          <ul class="col-10 news__slider">
-            <li class="container">
+          <ul *ngIf="!headlines?.length" class="news-panel__container">
+            <p class="news__none">There are currently no headlines for this symbol</p>
+          </ul>
+          <ul #newsList *ngIf="headlines?.length" class="col-10 news__slider">
+            <li *ngFor="let headline of headlines" class="container">
               <div class="row">
-                <div class="col-12">
-                  <p class="headline">Google broadens takedown of extremist YouTube videos&nbsp;→</p>
+                <div (click)="goToHeadline(headline)" class="col-12">
+                  <p class="headline">{{ headline.title }}&nbsp;→</p>
                 </div>
                 <div class="col-6">
-                  <p class="source">News Source</p>
+                  <p class="source">{{ headline.source }}</p>
                 </div>
                 <div class="col-6">
-                  <p class="date">Date published</p>
-                </div>
-              </div>
-            </li>
-            <li class="container">
-              <div class="row">
-                <div class="col-12">
-                  <p class="headline">Google broadens takedown of extremist YouTube videos&nbsp;→</p>
-                </div>
-                <div class="col-6">
-                  <p class="source">News Source</p>
-                </div>
-                <div class="col-6">
-                  <p class="date">Date published</p>
+                  <p class="date">{{ headline.headline_last_updated }}</p>
                 </div>
               </div>
             </li>
@@ -304,14 +277,14 @@ import {SignalService} from '../../../../services/signal.service';
               </div>
             </li>
           </ul>
-          <div class="col-1 chevron-slider chevron-slider--right">
+          <div (click)="scrollRight()" *ngIf="headlines?.length" class="col-1 chevron-slider chevron-slider--right">
             <img class="align-absolute" src="./assets/imgs/ui_chevron--right.svg">
           </div>
           <div class="col-12">
             <div class="divider__long"></div>
           </div>
           <div class="col-12 news__pagination">
-            <p>[ <span>2</span> of <span>8</span> ]</p>
+            <p>[ <span>{{ headlinePageNumber }}</span> of <span>{{ headlines?.length }}</span> ]</p>
           </div>
         </div>
         <div class="row">
@@ -1138,23 +1111,40 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   @Input('stock') stock: string;
   @Input('show') show: boolean;
   @Output('closeClicked') closeClicked: EventEmitter<void> = new EventEmitter<void>();
+  @ViewChild('newsList') newsList: ElementRef;
 
   symbolData;
+  headlines;
+  scrollLeftHeadlines: number;
+  headlinePageNumber: number = 1;
 
   constructor(private reportService: ReportService,
-              private signalService: SignalService) {
+              private signalService: SignalService,
+              private ideasService: IdeasService) {
   }
 
   ngOnInit() {
     window.scrollTo(0, 0);
     if (this.stock) {
+      // Observable.timer(0, 30 * 1000).switchMap(() => {
+      //   // Observable.c
+      // })
       this.reportService.getSymbolData(this.stock)
         .takeUntil(this._ngUnsubscribe)
         .filter(x => x != undefined)
+        .subscribe(res => this.symbolData = res)
+
+      this.ideasService.getHeadlines(this.stock)
+        .takeUntil(this._ngUnsubscribe)
+        .filter(x => x != undefined)
         .subscribe(res => {
-          this.symbolData = res;
-          console.log('data', this.symbolData);
+          this.headlines = res['headlines'].filter((item, index) => index < 7);
         });
+
+      this.reportService.getPgrDataAndContextSummary(this.stock)
+        .takeUntil(this._ngUnsubscribe)
+        .filter(x => x != undefined)
+        .subscribe(res => console.log('res', res));
     }
   }
 
@@ -1211,5 +1201,22 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       return this.signalService.appendSliderBarClass(pgr);
     }
   }
+
+  goToHeadline(headline) {
+    window.open(headline.url, '_blank');
+  }
+
+  scrollRight() {
+    this.headlinePageNumber < 7 ? this.headlinePageNumber++ : null;
+    this.scrollLeftHeadlines = this.newsList.nativeElement.scrollLeft;
+    this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines += 312.5, top: 0, behavior: 'smooth'});
+  }
+
+  scrollLeft() {
+    this.headlinePageNumber != 0 ? this.headlinePageNumber-- : null;
+    this.scrollLeftHeadlines = this.newsList.nativeElement.scrollLeft;
+    this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines -= 312.5, top: 0, behavior: 'smooth'});
+  }
+
 
 }

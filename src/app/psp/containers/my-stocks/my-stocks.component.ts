@@ -147,7 +147,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   updateData() {
-    this.loading = this.healthCheck.getListSymbols(this._listId, this._uid)
+    this.healthCheck.getListSymbols(this._listId, this._uid)
       .filter(x => x != undefined)
       .take(1)
       .subscribe(res => {
