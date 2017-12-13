@@ -21,7 +21,7 @@ import {ReportService} from '../../../services/report.service';
     MyStocksListComponent,
     StockReportComponent
   ],
-  providers: [ReportService]
+  providers: [ReportService],
 })
 export class MyStocksModule {
 }
