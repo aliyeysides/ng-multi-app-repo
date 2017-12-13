@@ -168,7 +168,6 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   addStock(ticker: string) {
-    console.log('addStock', ticker);
     this.ideasService.addStockIntoList(this._listId.toString(), ticker)
       .take(1)
       .subscribe(res => this.updateData());

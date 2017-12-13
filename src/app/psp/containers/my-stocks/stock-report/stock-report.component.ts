@@ -1075,15 +1075,15 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             this.reportService.getTickerCompetitors(this.stock),
             this.reportService.getResearchReportData(this.stock),
             this.reportService.getStockSummaryData(this.stock),
-            // this.ideasService.getHeadlines(this.stock),
+            this.ideasService.getHeadlines(this.stock),
           )
         })
-        .subscribe(([summary, competitors, research, data]) => {
+        .subscribe(([summary, competitors, research, data, headlines]) => {
           this.summary = summary;
           this.competitors = competitors['compititors'];
           this.research = research;
           this.data = data;
-          // this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
+          this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
           console.log('data', this.data);
         });
 

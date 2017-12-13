@@ -169,7 +169,7 @@ export class PowerGridComponent implements OnInit, OnDestroy {
   strongIndustries: Array<PHCIndustryData>;
   weakIndustries: Array<PHCIndustryData>;
   portUp: boolean;
-  collapse: boolean = false;
+  collapse: boolean = true;
 
   objectKeys = Object.keys;
 

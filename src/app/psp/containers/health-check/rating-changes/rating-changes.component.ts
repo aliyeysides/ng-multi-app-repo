@@ -170,7 +170,7 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
 
   bearishAlerts: Array<object> = [];
   bullishAlerts: Array<object> = [];
-  collapse: boolean = false;
+  collapse: boolean = true;
   portUp: boolean;
 
   constructor(private signalService: SignalService,
