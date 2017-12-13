@@ -1,4 +1,8 @@
-import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {
+  AfterViewInit,
+  Component, ComponentFactoryResolver, HostListener, OnDestroy, OnInit, ViewChild,
+  ViewChildren, ViewContainerRef
+} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {ListSymbolObj} from '../../../shared/models/health-check';
@@ -9,6 +13,9 @@ import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import {Location} from '@angular/common';
 import {SignalService} from '../../../services/signal.service';
+
+import * as moment from 'moment';
+import {StockReportComponent} from './stock-report/stock-report.component';
 
 @Component({
   selector: 'cpt-my-stocks',
@@ -58,8 +65,8 @@ import {SignalService} from '../../../services/signal.service';
           </div>
         </div>
 
-        <div class="col-12 col-md-8" [style.position]="{'absolute': reportOpen}">
-          <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock || reportOpen"
+        <div class="col-12 col-md-8" [style.position]="{'absolute': desktopView}">
+          <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock || desktopView"
                           [stock]="selectedStock"></cpt-psp-stock-report>
         </div>
 
@@ -73,10 +80,10 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     const width = event.target.innerWidth;
-    if (+width <= 1024) this.reportOpen = false;
+    if (+width <= 1024) this.desktopView = false;
     if (+width > 1024) {
       this.router.navigate(['/my-stocks', this.userStocks[0].symbol]);
-      this.reportOpen = true;
+      this.desktopView = true;
     }
   }
 
@@ -85,7 +92,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
   selectedStock: string | boolean;
-  reportOpen: boolean;
+  desktopView: boolean;
   userStocks: ListSymbolObj[];
   powerBar: string;
   loading: Subscription;
@@ -101,8 +108,8 @@ export class MyStocksComponent implements OnInit, OnDestroy {
               private location: Location,
               private signalService: SignalService) {
     const mobWidth = (window.screen.width);
-    if (+mobWidth <= 1024) this.reportOpen = false;
-    if (+mobWidth > 1024) this.reportOpen = true;
+    if (+mobWidth <= 1024) this.desktopView = false;
+    if (+mobWidth > 1024) this.desktopView = true;
   }
 
   ngOnInit() {
@@ -120,11 +127,17 @@ export class MyStocksComponent implements OnInit, OnDestroy {
         return this._listId = this.allUserLists.filter(x => x['name'] == this.currentList)[0]['list_id'];
       })
       .switchMap(listId => {
-        return this.healthCheck.getListSymbols(listId, this._uid)
+        const startDate = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
+          endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
+        return Observable.combineLatest(
+          this.healthCheck.getListSymbols(listId, this._uid),
+          this.healthCheck.getChaikinCalculations(listId, startDate, endDate)
+        )
       })
-      .subscribe(res => {
-        this.userStocks = res['symbols'];
-        this.powerBar = res['PowerBar'];
+      .subscribe(([symbols, calc]) => {
+        this.userStocks = symbols['symbols'];
+        this.powerBar = symbols['PowerBar'];
+        this.healthCheck.setPortfolioStatus(calc[Object.keys(calc)[0]]);
       });
 
     Observable.interval(30 * 1000)
@@ -192,7 +205,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   gotoReport(ticker: string) {
-    this.router.navigate(['my-stocks', ticker])
+    this.router.navigate(['my-stocks', ticker]);
   }
 
   closeReport() {

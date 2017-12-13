@@ -1092,14 +1092,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.research = research;
           this.data = data;
           this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
-          console.log('data', this.data);
         });
 
     }
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes) window.scrollTo(0, 0);
+    if (changes) this.ngOnInit()
   }
 
   ngOnDestroy() {
