@@ -30,11 +30,14 @@
 }
 
 .component--stockview.bullish {
-	background: linear-gradient(to right, rgba(0,204,0,1) 0%,rgba(0,170,119,1) 100%);
+	background: linear-gradient(to right, rgba(0,204,0,1) 0%, rgba(0,170,119,1) 100%);
 
+	.divider__full {
+	 	background: linear-gradient(to right, rgba(0,204,0,1) 0%, rgba(0,170,119,1) 100%);
+	}
 	.stock-info {
 		h2 {
-			color:#00C04E;;
+			color:#00C04E;
 		}
 	}
 	.stock-info--stats {
@@ -44,7 +47,7 @@
 	}
 	.stock-info--chart-toggle {
 		.date-select.selected {
-			background-color: #00C04E;;
+			background-color: #00C04E;
 		}
 	}
 	.stock-info--news {
@@ -81,6 +84,9 @@
 .component--stockview.bearish {
 	background: linear-gradient(to right, rgba(255,50,50,1) 2%,rgba(170,0,119,1) 100%);
 
+	.divider__full {
+	  background: linear-gradient(to right, rgba(255,50,50,1) 2%,rgba(170,0,119,1) 100%);
+	}
 	.stock-info {
 		h2 {
 			color:#FD001F;
@@ -125,6 +131,9 @@
 .component--stockview.neutral {
 	background-image: linear-gradient(123deg, #FDD310 0%, #FFB100 100%);
 
+	.divider__full {
+	  	background-image: linear-gradient(123deg, #FDD310 0%, #FFB100 100%);
+	}
 	.stock-info {
 		h2 {
 			color:#FFB411;
