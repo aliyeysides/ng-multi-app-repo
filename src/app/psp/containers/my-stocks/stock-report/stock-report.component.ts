@@ -52,7 +52,8 @@ import {Subscription} from 'rxjs/Subscription';
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-1"></div>
+                  <div class="col-4 pgr__label">
                     <p>Financials</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -63,11 +64,13 @@ import {Subscription} from 'rxjs/Subscription';
                          role="progressbar" aria-valuemin="0" aria-valuemax="100">
                     </div>
                   </div>
+                  <div class="col-2"></div>
                 </div>
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-1"></div>
+                  <div class="col-4 pgr__label">
                     <p>Earnings</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -78,11 +81,13 @@ import {Subscription} from 'rxjs/Subscription';
                          role="progressbar" aria-valuemin="0" aria-valuemax="100">
                     </div>
                   </div>
+                  <div class="col-2"></div>
                 </div>
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-1"></div>
+                  <div class="col-4 pgr__label">
                     <p>Technicals</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -93,11 +98,13 @@ import {Subscription} from 'rxjs/Subscription';
                          role="progressbar" aria-valuemin="0" aria-valuemax="100">
                     </div>
                   </div>
+                  <div class="col-2"></div>
                 </div>
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-1"></div>
+                  <div class="col-4 pgr__label">
                     <p>Experts</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -108,6 +115,7 @@ import {Subscription} from 'rxjs/Subscription';
                          role="progressbar" aria-valuemin="0" aria-valuemax="100">
                     </div>
                   </div>
+                  <div class="col-2"></div>
                 </div>
               </li>
             </ul>
@@ -187,7 +195,7 @@ import {Subscription} from 'rxjs/Subscription';
 
         <div class="row">
           <div class="col-12">
-            <div class="divider__long  divider__long--red"></div>
+            <div class="divider__full"></div>
           </div>
         </div>
 
@@ -231,7 +239,7 @@ import {Subscription} from 'rxjs/Subscription';
         </div>
         <div class="row">
           <div class="col-12">
-            <div class="divider__long divider__long--red"></div>
+            <div class="divider__full"></div>
           </div>
         </div>
 
@@ -277,7 +285,7 @@ import {Subscription} from 'rxjs/Subscription';
         </div>
         <div class="row">
           <div class="col-12">
-            <div class="divider__long divider__long--red"></div>
+            <div class="divider__full"></div>
           </div>
         </div>
 
@@ -295,7 +303,7 @@ import {Subscription} from 'rxjs/Subscription';
             <p class="paragraph"> {{ summary ? summary['pgrContextSummary'][0]['additionalSentence'] : null }}</p>
           </div>
           <div class="col-12">
-            <div class="divider__long divider__long--red"></div>
+            <div class="divider__full"></div>
           </div>
         </div>
 
@@ -489,7 +497,7 @@ import {Subscription} from 'rxjs/Subscription';
           </div>
 
           <div class="col-12">
-            <div class="divider__long divider__long--red"></div>
+            <div class="divider__full"></div>
           </div>
         </div>
 
@@ -625,7 +633,7 @@ import {Subscription} from 'rxjs/Subscription';
           </div>
 
           <div class="col-12">
-            <div class="divider__long divider__long--red"></div>
+            <div class="divider__full"></div>
           </div>
         </div>
 
@@ -784,7 +792,7 @@ import {Subscription} from 'rxjs/Subscription';
             <p>COLLAPSE</p>
           </div>
           <div class="col-12">
-            <div class="divider__long divider__long--red"></div>
+            <div class="divider__full"></div>
           </div>
         </div>
 
@@ -942,7 +950,7 @@ import {Subscription} from 'rxjs/Subscription';
           </div>
 
           <div class="col-12">
-            <div class="divider__long divider__long--red"></div>
+            <div class="divider__full"></div>
           </div>
         </div>
 
@@ -1021,7 +1029,7 @@ import {Subscription} from 'rxjs/Subscription';
             </ul>
           </div>
           <div class="col-12">
-            <div class="divider__long divider__long--red"></div>
+            <div class="divider__full"></div>
           </div>
         </div>
 
@@ -1138,7 +1146,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   appendSliderClass(pgr) {
     if (pgr) {
-      return this.signalService.appendSliderBarClass(pgr);
+      return this.signalService.appendSliderClass(pgr);
     }
   }
 

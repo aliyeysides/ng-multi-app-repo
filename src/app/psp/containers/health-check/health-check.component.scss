@@ -10,7 +10,7 @@
 .section--overview {
   	color:#ffffff;
 	padding-top:50px;
-	background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+	background: linear-gradient(13deg, rgba(157,158,163,0.95) 20%, rgba(189,187,190,0.95) 100%);
 
 	.overview__summary {
 		margin:0;
@@ -28,7 +28,7 @@
 
 		.btn-group {
 			margin-top: 8px;
-			margin-bottom: 5px;
+			margin-bottom: 10px;
 
 			.btn {
 			    font-weight: 600;
@@ -251,7 +251,7 @@
 		margin-top:25px;
 	}
 	.btn-group {
-		margin-top: 15px;
+		margin-top: 0px;
 		margin-bottom: 3px;
 
 		.btn {
@@ -563,7 +563,7 @@
 			  	color:#ffffff;
 			  	font-weight: 600;
 			  	font-size: 18px;
-			  	padding: 15px 0;
+			  	padding: 10px 0;
 			  	overflow: hidden;
 			  	text-overflow: ellipsis;
 			  	white-space: nowrap;
@@ -584,8 +584,8 @@
 		}
 
 		.industry {
-		  	line-height: 45px;
-		  	padding: 5px 0;
+		  	line-height: 35px;
+		  	padding: 7px 0;
 		  	font-size: 16px;
 		  	font-weight: 500;
 		  	overflow: hidden;
