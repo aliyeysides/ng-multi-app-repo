@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate, OnDestroy {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    // if (this.authService.isLoggedIn() === false) {
+    if (!this.authService.isLoggedIn()) {
       this.authService.login()
         .takeUntil(this.ngUnsubscribe)
         .subscribe(user => {
@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate, OnDestroy {
             this.utilService.handleError(err);
             window.location.href = this.utilService.getApiHostName();
           });
-    // }
+    }
     return this.authService.isLoggedIn();
   }
 
