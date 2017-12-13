@@ -914,13 +914,13 @@ import {Subscription} from 'rxjs/Subscription';
                 <table class="table--short-interest">
                   <th colspan="1">Short Interest</th>
                   <tr>
-                    <td class="greyed-out">HIGH</td>
+                    <td class="greyed-out" [ngClass]="{'red': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] < 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] >= 3 : null }">HIGH</td>
                   </tr>
                   <tr>
-                    <td class="greyed-out">MED</td>
+                    <td class="greyed-out" [ngClass]="{'neutral': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] === 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] != 3 : null  }">MED</td>
                   </tr>
                   <tr>
-                    <td>LOW</td>
+                    <td [ngClass]="{'green': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] > 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] <= 3 : null  }">LOW</td>
                   </tr>
                 </table>
               </div>
