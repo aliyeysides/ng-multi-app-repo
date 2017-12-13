@@ -171,7 +171,7 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
 
   public upCount: number = 0;
   public downCount: number = 0;
-  public collapse: boolean = false;
+  public collapse: boolean = true;
   public portUp: boolean;
 
   @Input('surprises')
