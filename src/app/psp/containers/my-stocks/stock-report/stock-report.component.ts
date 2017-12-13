@@ -462,8 +462,8 @@ import {Subscription} from 'rxjs/Subscription';
                     <td class="data">{{ symbolData ? symbolData['fundamentalData']['Yield'] : null }}</td>
                   </tr>
                   <tr>
-                    <td class="label">Ex-Dividend Date</td>
-                    <td class="data">???</td>
+                    <td class="label">Dividend Growth Rate</td>
+                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['growth_rate'] : null }}</td>
                   </tr>
                 </table>
               </div>
