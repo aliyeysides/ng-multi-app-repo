@@ -39,7 +39,7 @@ import {Subscription} from 'rxjs/Subscription';
         <cpt-psp-power-grid [data]="pgrGridData"></cpt-psp-power-grid>
 
         <!-- HEALTH-CHECK - DISCLAIMER -->
-        <div class="col-12 col-lg-8 col-xl-8 float-lg-right">
+        <div class="col-12 col-lg-8 col-xl-8 float-lg-right" id="HC--Disclaimer">
           <div class="row">
             <div class="col-12">
               <div class="divider__long"
