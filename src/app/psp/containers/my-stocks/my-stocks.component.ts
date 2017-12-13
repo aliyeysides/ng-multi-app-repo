@@ -15,8 +15,8 @@ import {SignalService} from '../../../services/signal.service';
   template: `
     <div [ngBusy]="loading" class="container-fluid">
 
-      <div class="row contents">
-        <div class="col-12 col-md-4 component component--mystocks">
+      <div class="row">
+        <div class="col-12 col-md-4 component--mystocks">
           <cpt-my-stocks-list (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
                             (removeStockClicked)="removeStock($event)"
                             (updateData)="updateData()"
@@ -58,7 +58,7 @@ import {SignalService} from '../../../services/signal.service';
           </div>
         </div>
 
-        <div class="col-12 col-md-8">
+        <div class="col-12 col-md-8" [style.position]="{'absolute': reportOpen}">
           <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock || reportOpen"
                           [stock]="selectedStock"></cpt-psp-stock-report>
         </div>
