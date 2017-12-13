@@ -13,51 +13,59 @@ import {SignalService} from '../../../services/signal.service';
 @Component({
   selector: 'cpt-my-stocks',
   template: `
-    <div [ngBusy]="loading" class="container-fluid component component--mystocks">
+    <div [ngBusy]="loading" class="container-fluid">
+
       <div class="row contents">
-        <cpt-my-stocks-list (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
+        <div class="col-12 col-md-4 component component--mystocks">
+          <cpt-my-stocks-list (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
                             (removeStockClicked)="removeStock($event)"
                             (updateData)="updateData()"
                             (stockClicked)="selectStock($event)"
                             [stocks]="userStocks" [powerBar]="powerBar" [userLists]="allUserLists"></cpt-my-stocks-list>
-        <div class="col-12" id="list--recent">
-          <h3>Recently Viewed</h3>
-          <div class="divider__long"></div>
-          <ul class="stock__list">
-            <li class="row col-headers">
-              <div class="col-3">
-                <p>RATING</p>
-              </div>
-              <div class="col-3" style="padding-left:0;">
-                <p class="text-left">TICKER</p>
-              </div>
-              <div class="col-3">
-                <p>PRICE</p>
-              </div>
-              <div class="col-3">
-                <p>CHG</p>
-              </div>
-            </li>
-            <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed" class="row list__entry">
-              <div class="col-3 list-entry__pgr">
-                <img class="align-absolute" src="{{ appendPGRImage(recent['pgr']['Corrected PGR Value'], recent['pgr']['PGR Value']) }}">
-              </div>
-              <div class="col-3" style="padding-left:0;">
-                <p class="text-left">{{ recent['meta-info']['symbol'] }}</p>
-              </div>
-              <div class="col-3">
-                <p>{{ recent['meta-info']['Last'] }}</p>
-              </div>
-              <div class="col-3">
-                <p>{{ recent['meta-info']['Percentage '] }}%</p>
-              </div>
-            </li>
-          </ul>
+          <div class="col-12" id="list--recent">
+            <h3>Recently Viewed</h3>
+            <div class="divider__long"></div>
+            <ul class="stock__list">
+              <li class="row col-headers">
+                <div class="col-3">
+                  <p>RATING</p>
+                </div>
+                <div class="col-3" style="padding-left:0;">
+                  <p class="text-left">TICKER</p>
+                </div>
+                <div class="col-3">
+                  <p>PRICE</p>
+                </div>
+                <div class="col-3">
+                  <p>CHG</p>
+                </div>
+              </li>
+              <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed" class="row list__entry">
+                <div class="col-3 list-entry__pgr">
+                  <img class="align-absolute" src="{{ appendPGRImage(recent['pgr']['Corrected PGR Value'], recent['pgr']['PGR Value']) }}">
+                </div>
+                <div class="col-3" style="padding-left:0;">
+                  <p class="text-left">{{ recent['meta-info']['symbol'] }}</p>
+                </div>
+                <div class="col-3">
+                  <p>{{ recent['meta-info']['Last'] }}</p>
+                </div>
+                <div class="col-3">
+                  <p>{{ recent['meta-info']['Percentage '] }}%</p>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </div>
-    <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock || reportOpen"
+
+        <div class="col-12 col-md-8">
+          <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock || reportOpen"
                           [stock]="selectedStock"></cpt-psp-stock-report>
+        </div>
+
+      </div>
+
+    </div>
   `,
   styleUrls: ['./my-stocks.component.scss']
 })
