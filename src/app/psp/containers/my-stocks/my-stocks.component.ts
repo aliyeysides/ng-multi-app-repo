@@ -58,7 +58,7 @@ import {SignalService} from '../../../services/signal.service';
           </div>
         </div>
 
-        <div class="col-12 col-md-8" [style.position]="{'absolute': reportOpen}">
+        <div class="col-12 col-md-8">
           <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock || reportOpen"
                           [stock]="selectedStock"></cpt-psp-stock-report>
         </div>
