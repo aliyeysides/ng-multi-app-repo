@@ -386,6 +386,11 @@ sub {
       padding:8px 15px 5px 10px;
     }
 
+    .toggle__only {
+      border-radius: 20px;
+      padding:8px 15px 5px 15px;
+    }
+
     .selected {
       background-color: #484848;
       color:#ffffff;

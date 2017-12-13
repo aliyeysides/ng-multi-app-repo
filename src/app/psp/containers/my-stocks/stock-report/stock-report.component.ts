@@ -38,7 +38,7 @@ import {Subscription} from 'rxjs/Subscription';
 
         <!-- STOCK VIEW TOP -->
         <div class="row stock-info">
-          <div class="col-12">
+          <div class="col-12 hidden-md-up">
             <div class="tab--slide"></div>
           </div>
           <div class="col-12 stockview__main-rating">

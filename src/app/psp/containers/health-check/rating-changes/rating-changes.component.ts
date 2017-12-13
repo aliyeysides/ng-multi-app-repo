@@ -17,6 +17,12 @@ import {Router} from '@angular/router';
         </div>
       </div>
 
+      <div class="row section__toggle">
+        <div class="col-12 toggle toggle--timespan">
+          <p class="toggle__only selected">LAST WEEK</p>
+        </div>
+      </div>
+      
       <div class="row">
         <div class="col-12">
           <h2>Ratings Changes</h2>
