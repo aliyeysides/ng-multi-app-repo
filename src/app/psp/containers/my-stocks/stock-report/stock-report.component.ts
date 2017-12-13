@@ -272,7 +272,7 @@ import {Subscription} from 'rxjs/Subscription';
             <div class="divider__long"></div>
           </div>
           <div class="col-12 news__pagination">
-            <p>[ <span>{{ headlinePageNumber }}</span> of <span>{{ headlines?.length }}</span> ]</p>
+            <!--<p>[ <span>{{ headlinePageNumber }}</span> of <span>{{ headlines?.length }}</span> ]</p>-->
           </div>
         </div>
         <div class="row">
@@ -409,11 +409,11 @@ import {Subscription} from 'rxjs/Subscription';
                   </tr>
                   <tr>
                     <td class="label">% Earn on Eqty</td>
-                    <td class="data">35.40%</td>
+                    <td class="data">{{ research ? research['Returns']['Return on Equity'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">Book Value</td>
-                    <td class="data">$6.37</td>
+                    <td class="data">{{ research ? research['Valuation']['Price/Book'] : null }}</td>
                   </tr>
                 </table>
               </div>
@@ -422,11 +422,11 @@ import {Subscription} from 'rxjs/Subscription';
                   <th colspan="2">Valuation</th>
                   <tr>
                     <td class="label">Price/Earnings</td>
-                    <td class="data">18.40</td>
+                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['P/E'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">PEG</td>
-                    <td class="data">1.69</td>
+                    <td class="data">{{ competitors ? competitors[0]['PEG'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">Price to Book</td>
@@ -443,19 +443,19 @@ import {Subscription} from 'rxjs/Subscription';
                   <th colspan="2">Dividends</th>
                   <tr>
                     <td class="label">Div per Share</td>
-                    <td class="data">0.68</td>
+                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['dividend_per_share'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">Payout</td>
-                    <td class="data">$0.29</td>
+                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['payout'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">Yield</td>
-                    <td class="data">1.65%</td>
+                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['Yield'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">Ex-Dividend Date</td>
-                    <td class="data">8/9/17</td>
+                    <td class="data">???</td>
                   </tr>
                 </table>
               </div>
@@ -472,11 +472,11 @@ import {Subscription} from 'rxjs/Subscription';
                   </tr>
                   <tr>
                     <td class="label">1 Month Return</td>
-                    <td class="data">0.00%</td>
+                    <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 4 Weeks'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">3 Month Return</td>
-                    <td class="data">0.00%</td>
+                    <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 24 Weeks'] : null }}</td>
                   </tr>
                 </table>
               </div>
@@ -730,11 +730,11 @@ import {Subscription} from 'rxjs/Subscription';
                   <th colspan="2">Price Hi/Lo</th>
                   <tr>
                     <td class="label">52 wk high</td>
-                    <td class="data">289.54</td>
+                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['52 Wk Hi'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">52 wk low</td>
-                    <td class="data">180.36</td>
+                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['52 Wk Lo'] : null }}</td>
                   </tr>
                 </table>
               </div>
@@ -743,10 +743,10 @@ import {Subscription} from 'rxjs/Subscription';
                   <th colspan="2">Price % Chg</th>
                   <tr>
                     <td class="label">% chg 4 wk rel S&amp;P</td>
-                    <td class="data">11.58%</td>
+                    <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 4 Wks Rel to S&P'] : null }}</td>
                   <tr>
                     <td class="label">% chg 24 wk rel S&amp;P</td>
-                    <td class="data">27.45%</td>
+                    <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 24 Wks Rel to S&P'] : null }}</td>
                   </tr>
                 </table>
               </div>
@@ -754,12 +754,12 @@ import {Subscription} from 'rxjs/Subscription';
                 <table>
                   <th colspan="2">Volume Activity</th>
                   <tr>
-                    <td class="label">Price/Earnings</td>
-                    <td class="data">18.40</td>
+                    <td class="label">avg. vol 20 days</td>
+                    <td class="data">{{ research ? research['VolumeActivity']['Average Volume 20 Days'] : null }}</td>
                   </tr>
                   <tr>
-                    <td class="label">PEG</td>
-                    <td class="data">1.69</td>
+                    <td class="label">avg. vol 90 days</td>
+                    <td class="data">{{ research ? research['VolumeActivity']['Average Volume 90 Days'] : null }}</td>
                   </tr>
                 </table>
               </div>
@@ -767,12 +767,12 @@ import {Subscription} from 'rxjs/Subscription';
                 <table>
                   <th colspan="2">Volatility Rel to Mkt</th>
                   <tr>
-                    <td class="label">Dividends per Share</td>
-                    <td class="data">0.68</td>
+                    <td class="label">% Change YTD Rel S&P 500</td>
+                    <td class="data">{{ research ? research['PriceActivity1']['% Change YTD Rel S&P 500'] : null }}</td>
                   </tr>
                   <tr>
-                    <td class="label">Payout</td>
-                    <td class="data">$0.29</td>
+                    <td class="label">Chaikin Money Flow Persistency</td>
+                    <td class="data">{{ research ? research['VolumeActivity']['Chaikin Money Flow Persistency'] : null }}</td>
                   </tr>
                 </table>
               </div>
@@ -890,15 +890,15 @@ import {Subscription} from 'rxjs/Subscription';
                   </tr>
                   <tr>
                     <td class="label text-left">Current Quarter</td>
-                    <td class="data text-center">0.69</td>
-                    <td class="data text-center">0.69</td>
-                    <td class="data text-center">0.00%</td>
+                    <td class="data text-center">{{ research ? research['Earning Estimate Revisions']['Current Qtr'][0] : null }}</td>
+                    <td class="data text-center">{{ research ? research['Earning Estimate Revisions']['Current Qtr'][1] : null }}</td>
+                    <td class="data text-center">{{ research ? research['Earning Estimate Revisions']['Current Qtr'][2] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label text-left">Next Quarter</td>
-                    <td class="data text-center">0.68</td>
-                    <td class="data text-center">0.68</td>
-                    <td class="data text-center">0.00%</td>
+                    <td class="data text-center">{{ research ? research['Earning Estimate Revisions']['Next Qtr'][0] : null }}</td>
+                    <td class="data text-center">{{ research ? research['Earning Estimate Revisions']['Next Qtr'][1] : null }}</td>
+                    <td class="data text-center">{{ research ? research['Earning Estimate Revisions']['Next Qtr'][2] : null }}</td>
                   </tr>
                 </table>
               </div>
@@ -921,15 +921,15 @@ import {Subscription} from 'rxjs/Subscription';
                   <th colspan="2">Recommendations</th>
                   <tr>
                     <td class="label">This week</td>
-                    <td class="data">BUY</td>
+                    <td class="data">{{ research ? research['Analyst Recommendations']['Mean this Week'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">Last Week</td>
-                    <td class="data">BUY</td>
+                    <td class="data">{{ research ? research['Analyst Recommendations']['Mean Last Week'] : null }}</td>
                   </tr>
                   <tr>
                     <td class="label">5 Weeks Ago</td>
-                    <td class="data">HOLD</td>
+                    <td class="data">{{ research ? research['Analyst Recommendations']['Mean 5 Weeks Ago'] : null }}</td>
                   </tr>
                 </table>
               </div>
