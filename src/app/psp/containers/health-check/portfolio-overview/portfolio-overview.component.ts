@@ -24,7 +24,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             </ul>
           </div>
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-4 align-self-center ">
           <p class="data">
             <span class="icon__arrow">
               <img *ngIf="isPortUp()" src="./assets/imgs/icon__thin-arrow--up.svg">
@@ -46,8 +46,8 @@ import {HealthCheckService} from '../../../../services/health-check.service';
         </div>
       </div>
 
-      <div class="row overview__powerbar">
-        <div class="col-12 col-md-8 powerbar flex-md-last">
+      <div class="row justify-content-center overview__powerbar">
+        <div class="col-12 col-md-8 col-lg-7 powerbar flex-md-last">
           <div (click)="setToggleOptions('Bulls')"
                [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
             <p>{{ prognosisData?.BullishSymbolsCount }}</p>
@@ -60,7 +60,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <p>{{ prognosisData?.BearishSymbolsCount }}</p>
           </div>
         </div>
-        <div class="col-12 col-md-4 align-self-center">
+        <div class="col-12 col-md-4 col-lg-3 align-self-center">
           <p class="label">Chaikin Power Bar <a> <i tooltip="{{ toolTipText }}" class="fa fa-info-circle" aria-hidden="true"></i></a></p>
         </div>
       </div>

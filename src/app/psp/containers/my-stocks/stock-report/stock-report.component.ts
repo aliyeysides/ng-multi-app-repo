@@ -37,7 +37,7 @@ import {Subscription} from 'rxjs/Subscription';
       <div class="container-fluid stockview__contents">
 
         <!-- STOCK VIEW TOP -->
-        <div class="row stock-info">
+        <div class="row no-gutters stock-info">
           <div class="col-12 hidden-md-up">
             <div class="tab--slide"></div>
           </div>
