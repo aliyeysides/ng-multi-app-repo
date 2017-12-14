@@ -8,6 +8,9 @@ import {SignalService} from '../../../../services/signal.service';
 import {IdeasService} from '../../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
+import {Chart} from '../../../../shared/models/chart';
+
+declare var zingchart: any;
 
 @Component({
   selector: 'cpt-psp-stock-report',
@@ -180,6 +183,8 @@ import {Subscription} from 'rxjs/Subscription';
         <!-- STOCK VIEW MAIN CHART -->
         <div class="row stock-info stock-info--chart">
           <div class="col-12 main-chart bearish">
+            <!-- TODO: implement main chart -->
+            <cpt-chaikin-chart [chart]="mainChart"></cpt-chaikin-chart>
           </div>
         </div>
 
@@ -484,7 +489,8 @@ import {Subscription} from 'rxjs/Subscription';
                   </tr>
                   <tr>
                     <td class="label">3 Month Return</td>
-                    <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 24 Weeks'] : null }}</td>
+                    <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 24 Weeks'] : null }}
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -751,10 +757,14 @@ import {Subscription} from 'rxjs/Subscription';
                   <th colspan="2">Price % Chg</th>
                   <tr>
                     <td class="label">% chg 4 wk rel S&amp;P</td>
-                    <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 4 Wks Rel to S&P'] : null }}</td>
+                    <td class="data">
+                      {{ research ? research['PriceActivity2']['% Change Price - 4 Wks Rel to S&P'] : null }}
+                    </td>
                   <tr>
                     <td class="label">% chg 24 wk rel S&amp;P</td>
-                    <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 24 Wks Rel to S&P'] : null }}</td>
+                    <td class="data">
+                      {{ research ? research['PriceActivity2']['% Change Price - 24 Wks Rel to S&P'] : null }}
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -780,7 +790,9 @@ import {Subscription} from 'rxjs/Subscription';
                   </tr>
                   <tr>
                     <td class="label">Chaikin Money Flow Persistency</td>
-                    <td class="data">{{ research ? research['VolumeActivity']['Chaikin Money Flow Persistency'] : null }}</td>
+                    <td class="data">{{ research ? research['VolumeActivity']['Chaikin Money Flow Persistency'] : null
+                      }}
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -810,7 +822,8 @@ import {Subscription} from 'rxjs/Subscription';
                     <p>Estimate Trend</p>
                   </div>
                   <div class="col-5 sliderProgress">
-                    <div [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][1]['Estimate Trend'] : null)"></div>
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][1]['Estimate Trend'] : null)"></div>
                     <div class="sliderBar"
                          [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][4]['Experts'][1]['Estimate Trend'] : null)"
                          role="progressbar" aria-valuemin="0" aria-valuemax="100">
@@ -824,7 +837,8 @@ import {Subscription} from 'rxjs/Subscription';
                     <p>Short Interest</p>
                   </div>
                   <div class="col-5 sliderProgress">
-                    <div [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] : null)"></div>
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] : null)"></div>
                     <div class="sliderBar"
                          [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] : null)"
                          role="progressbar" aria-valuemin="0" aria-valuemax="100">
@@ -838,7 +852,8 @@ import {Subscription} from 'rxjs/Subscription';
                     <p>Insider Activity</p>
                   </div>
                   <div class="col-5 sliderProgress">
-                    <div [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][3]['Insider Activity'] : null)"></div>
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][3]['Insider Activity'] : null)"></div>
                     <div class="sliderBar"
                          [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][4]['Experts'][3]['Insider Activity'] : null)"
                          role="progressbar" aria-valuemin="0" aria-valuemax="100">
@@ -852,7 +867,8 @@ import {Subscription} from 'rxjs/Subscription';
                     <p>Analyst Rating Trend</p>
                   </div>
                   <div class="col-5 sliderProgress">
-                    <div [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][4]['Analyst Rating Trend'] : null)"></div>
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][4]['Analyst Rating Trend'] : null)"></div>
                     <div class="sliderBar"
                          [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][4]['Experts'][4]['Analyst Rating Trend'] : null)"
                          role="progressbar" aria-valuemin="0" aria-valuemax="100">
@@ -866,7 +882,8 @@ import {Subscription} from 'rxjs/Subscription';
                     <p>Industry Rel Strength</p>
                   </div>
                   <div class="col-5 sliderProgress">
-                    <div [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][5]['Industry Rel Strength'] : null)"></div>
+                    <div
+                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][5]['Industry Rel Strength'] : null)"></div>
                     <div class="sliderBar"
                          [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][4]['Experts'][5]['Industry Rel Strength'] : null)"
                          role="progressbar" aria-valuemin="0" aria-valuemax="100">
@@ -882,7 +899,8 @@ import {Subscription} from 'rxjs/Subscription';
 
           <div class="col-12 copy-block">
             <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['generalSentence'] : null }}</p>
-            <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['explanatorySentence'] : null  }}</p>
+            <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['explanatorySentence'] : null
+              }}</p>
           </div>
 
           <div class="col-12">
@@ -898,15 +916,27 @@ import {Subscription} from 'rxjs/Subscription';
                   </tr>
                   <tr>
                     <td class="label text-left">Current Quarter</td>
-                    <td class="data text-center">{{ research ? research['Earning Estimate Revisions']['Current Qtr'][0] : null }}</td>
-                    <td class="data text-center">{{ research ? research['Earning Estimate Revisions']['Current Qtr'][1] : null }}</td>
-                    <td class="data text-center">{{ research ? research['Earning Estimate Revisions']['Current Qtr'][2] : null }}</td>
+                    <td class="data text-center">
+                      {{ research ? research['Earning Estimate Revisions']['Current Qtr'][0] : null }}
+                    </td>
+                    <td class="data text-center">
+                      {{ research ? research['Earning Estimate Revisions']['Current Qtr'][1] : null }}
+                    </td>
+                    <td class="data text-center">
+                      {{ research ? research['Earning Estimate Revisions']['Current Qtr'][2] : null }}
+                    </td>
                   </tr>
                   <tr>
                     <td class="label text-left">Next Quarter</td>
-                    <td class="data text-center">{{ research ? research['Earning Estimate Revisions']['Next Qtr'][0] : null }}</td>
-                    <td class="data text-center">{{ research ? research['Earning Estimate Revisions']['Next Qtr'][1] : null }}</td>
-                    <td class="data text-center">{{ research ? research['Earning Estimate Revisions']['Next Qtr'][2] : null }}</td>
+                    <td class="data text-center">
+                      {{ research ? research['Earning Estimate Revisions']['Next Qtr'][0] : null }}
+                    </td>
+                    <td class="data text-center">
+                      {{ research ? research['Earning Estimate Revisions']['Next Qtr'][1] : null }}
+                    </td>
+                    <td class="data text-center">
+                      {{ research ? research['Earning Estimate Revisions']['Next Qtr'][2] : null }}
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -914,13 +944,22 @@ import {Subscription} from 'rxjs/Subscription';
                 <table class="table--short-interest">
                   <th colspan="1">Short Interest</th>
                   <tr>
-                    <td class="greyed-out" [ngClass]="{'red': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] < 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] >= 3 : null }">HIGH</td>
+                    <td class="greyed-out"
+                        [ngClass]="{'red': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] < 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] >= 3 : null }">
+                      HIGH
+                    </td>
                   </tr>
                   <tr>
-                    <td class="greyed-out" [ngClass]="{'neutral': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] === 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] != 3 : null  }">MED</td>
+                    <td class="greyed-out"
+                        [ngClass]="{'neutral': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] === 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] != 3 : null  }">
+                      MED
+                    </td>
                   </tr>
                   <tr>
-                    <td [ngClass]="{'green': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] > 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] <= 3 : null  }">LOW</td>
+                    <td
+                      [ngClass]="{'green': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] > 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] <= 3 : null  }">
+                      LOW
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -937,7 +976,8 @@ import {Subscription} from 'rxjs/Subscription';
                   </tr>
                   <tr>
                     <td class="label">5 Weeks Ago</td>
-                    <td class="data">{{ research ? research['Analyst Recommendations']['Mean 5 Weeks Ago'] : null }}</td>
+                    <td class="data">{{ research ? research['Analyst Recommendations']['Mean 5 Weeks Ago'] : null }}
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -979,7 +1019,9 @@ import {Subscription} from 'rxjs/Subscription';
               </li>
               <li *ngFor="let stock of competitors" class="row no-gutters">
                 <div class="col-3 ticker">
-                  <p><span><img src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>{{ stock['symbol'] }}</p>
+                  <p><span><img
+                    src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>{{ stock['symbol']
+                    }}</p>
                 </div>
                 <div class="col-3 data">
                   <p>{{ stock['Historic EPS growth'] }}</p>
@@ -1014,10 +1056,12 @@ import {Subscription} from 'rxjs/Subscription';
               </li>
               <li *ngFor="let stock of competitors" class="row no-gutters">
                 <div class="col-3 ticker">
-                  <p><span><img src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>{{ stock['symbol'] }}</p>
+                  <p><span><img
+                    src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>{{ stock['symbol']
+                    }}</p>
                 </div>
                 <div class="col-3 data">
-                  <p>{{ stock['PEG']  }}</p>
+                  <p>{{ stock['PEG'] }}</p>
                 </div>
                 <div class="col-3 data">
                   <p>{{ stock['PE'] }}</p>
@@ -1061,6 +1105,16 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   competitors;
   research;
   data;
+
+  mainChart: Chart = {
+    id: 'mainChart',
+    data: {
+      graphset: []
+    },
+    height: undefined,
+    width: undefined
+  };
+
   scrollLeftHeadlines: number;
   headlinePageNumber: number = 1;
   loading: Subscription;
@@ -1073,7 +1127,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     window.scrollTo(0, 0);
     if (this.stock) {
-        this.loading = this.reportService.getSymbolData(this.stock)
+      this.loading = this.reportService.getSymbolData(this.stock)
         .takeUntil(this._ngUnsubscribe)
         .filter(x => x != undefined)
         .map(res => this.symbolData = res)
@@ -1084,6 +1138,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             this.reportService.getResearchReportData(this.stock),
             this.reportService.getStockSummaryData(this.stock),
             this.ideasService.getHeadlines(this.stock),
+            // this.reportService.getStockDataPoints({
+            //   symbol: this.stock,
+            //   interval: '1D',
+            //   dataComponents: 'HLC,dema,cmf,chaikinOscillations',
+            //   numBars: '250'
+            // })
           )
         })
         .subscribe(([summary, competitors, research, data, headlines]) => {
@@ -1092,8 +1152,26 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.research = research;
           this.data = data;
           this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
-        });
 
+          const closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse();
+          const dates = data['five_year_chart_data']['formatted_dates'].reverse();
+          const pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
+          const relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
+          console.log('relStr', data['five_year_chart_data']['relative_strength']);
+          this.mainChart = {
+            id: 'mainChart',
+            data: {
+              layout: "vertical",
+              graphset: [
+                this.getCloseConfig(dates, closePrices, '5Y'),
+                // this.getRSIConfig(dates, relStr),
+                this.getPGRConfig(dates, pgrData),
+              ]
+            },
+            height: undefined,
+            width: undefined
+          };
+        });
     }
   }
 
@@ -1169,6 +1247,262 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     this.headlinePageNumber != 0 ? this.headlinePageNumber-- : null;
     this.scrollLeftHeadlines = this.newsList.nativeElement.scrollLeft;
     this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines -= 312.5, top: 0, behavior: 'smooth'});
+  }
+
+  getCloseConfig(dates, values, current) {
+    return {
+      type: 'area',
+      backgroundColor: "#333",
+      height: 420,
+      x: 0,
+      y: 0,
+      crosshairX: {
+        shared: true,
+        plotLabel: {
+          backgroundColor: "#bbb",
+          fontColor: "#222",
+          text: "Close: %v",
+          fontFamily: "Open Sans",
+          y: 0,
+        },
+        scaleLabel: {
+          fontColor: "#222",
+          fontFamily: "Open Sans",
+          backgroundColor: "#bbb",
+        }
+      },
+      title: {
+        text: this.stock,
+        fontColor: "#fff",
+        fontFamily: 'Open Sans',
+        fontSize: 30,
+        align: 'left',
+        offsetX: 10
+      },
+      zoom: {
+        shared: true
+      },
+      plotarea: {
+        margin: "60 50 40 50"
+      },
+      plot: {
+        marker: {
+          visible: false
+        }
+      },
+      tooltip: {
+        text: "Close: %v",
+        backgroundColor: "#BBB",
+        borderColor: "transparent"
+      },
+      scaleY: {
+        guide: {
+          visible: true,
+          lineStyle: 'solid',
+          lineColor: "#444"
+        },
+        // values: values,
+        item: {
+          fontColor: "#ddd",
+          fontFamily: "Open Sans"
+        }
+      },
+      scaleX: {
+        guide: {
+          visible: true,
+          lineStyle: 'solid',
+          lineColor: "#444"
+        },
+        values: dates,
+        transform: {
+          type: 'date',
+          all: '%m/%d/%y'
+        },
+        zooming: {
+          shared: true
+        },
+        item: {
+          fontColor: "#ddd",
+          fontFamily: "Open Sans"
+        }
+      },
+      series: [
+        {
+          values: values,
+          lineColor: "#fff",
+          lineWidth: 1,
+          backgroundColor: "#909090 #313131"
+        }
+      ],
+      labels: [
+        {
+          x: 490,
+          y: 10,
+          id: '1W',
+          fontColor: (current === '1W') ? "#FFF" : "#777",
+          fontSize: "16",
+          fontFamily: "Open Sans",
+          cursor: "hand",
+          text: "1W"
+        },
+        {
+          x: 530,
+          y: 10,
+          id: '1M',
+          fontColor: (current === '1M') ? "#FFF" : "#777",
+          fontSize: "16",
+          fontFamily: "Open Sans",
+          cursor: "hand",
+          text: "1M"
+        },
+        {
+          x: 570,
+          y: 10,
+          id: '6M',
+          fontColor: (current === '6M') ? "#FFF" : "#777",
+          fontSize: "16",
+          fontFamily: "Open Sans",
+          cursor: "hand",
+          text: "6M"
+        },
+        {
+          x: 610,
+          y: 10,
+          id: '1Y',
+          fontColor: (current === '1Y') ? "#FFF" : "#777",
+          fontSize: "16",
+          fontFamily: "Open Sans",
+          cursor: "hand",
+          text: "1Y"
+        },
+        {
+          x: 650,
+          y: 10,
+          id: '5Y',
+          fontColor: (current === '2Y') ? "#FFF" : "#777",
+          fontSize: "16",
+          fontFamily: "Open Sans",
+          cursor: "hand",
+          text: "5Y"
+        }
+      ]
+    };
+  }
+
+  getRSIConfig(dates, values) {
+    return {
+      type: 'area',
+      height: 80,
+      x: 0,
+      y: 400,
+      backgroundColor: "#333",
+      plotarea: {
+        margin: "20 50 20 50"
+      },
+      plot: {
+        marker: {
+          visible: false
+        }
+      },
+      source: {
+        text: "chaikinanalytics.com",
+        fontColor: "#ddd",
+        fontFamily: "Open Sans"
+      },
+      tooltip: {
+        visible: false,
+        text: "RSI: %v",
+        fontFamily: "Open Sans",
+        borderColor: "transparent"
+      },
+      zoom: {
+        shared: true
+      },
+      crosshairX: {
+        shared: true,
+        scaleLabel: {
+          visible: false
+        },
+        plotLabel: {
+          fontFamily: "Open Sans",
+          backgroundColor: "#BBB",
+          text: "RSI: %v",
+          y: 0
+        }
+      },
+      scaleX: {
+        visible: false,
+        zooming: true
+      },
+      scaleY: {
+        visible: false
+      },
+      series: [
+        {
+          values: values,
+          text: "RSI",
+          backgroundColor: "#bbb"
+        }
+      ]
+    };
+  }
+
+  getPGRConfig(dates, values) {
+    return {
+      type: 'bar',
+      height: 80,
+      x: 0,
+      y: 400,
+      backgroundColor: "#333",
+      plotarea: {
+        margin: "20 50 20 50"
+      },
+      plot: {
+        marker: {
+          visible: false
+        }
+      },
+      source: {
+        text: "chaikinanalytics.com",
+        fontColor: "#ddd",
+        fontFamily: "Open Sans"
+      },
+      tooltip: {
+        visible: false,
+        text: "PGR: %v",
+        fontFamily: "Open Sans",
+        borderColor: "transparent"
+      },
+      zoom: {
+        shared: true
+      },
+      crosshairX: {
+        shared: true,
+        scaleLabel: {
+          visible: false
+        },
+        plotLabel: {
+          fontFamily: "Open Sans",
+          backgroundColor: "#BBB",
+          text: "PGR: %v",
+          y: 0
+        }
+      },
+      scaleX: {
+        visible: false,
+        zooming: true
+      },
+      scaleY: {
+        visible: false
+      },
+      series: [
+        {
+          values: values,
+          text: "PGR",
+          backgroundColor: "#bbb"
+        }
+      ]
+    };
   }
 
 
