@@ -67,7 +67,8 @@ import {StockReportComponent} from './stock-report/stock-report.component';
 
         <div class="col-12 col-md-8" [style.position]="{'absolute': desktopView}">
           <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock || desktopView"
-                          [stock]="selectedStock"></cpt-psp-stock-report>
+                          [stock]="selectedStock">
+          </cpt-psp-stock-report>
         </div>
 
       </div>

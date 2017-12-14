@@ -5,6 +5,7 @@
 
 .component--mystocks {
 	background-color: #ffffff;
+	padding:0;
 	
 	.contents {
 	
@@ -43,4 +44,8 @@
   	.list-name {
   		color:#FD001F;
 	}
+}
+
+.component--stockview-open {
+	position: absolute;
 }

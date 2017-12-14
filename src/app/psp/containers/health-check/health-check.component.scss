@@ -248,7 +248,7 @@
 
 #HC--Stock-Movements {
 	background-color:#ffffff;
-	border-right:2px solid #eee;
+	border-right:3px solid #eee;
 
 	h2 {
 		margin-top:25px;
@@ -392,6 +392,20 @@
 
 #HC--Ratings-Changes {
 	background-color:#ffffff;
+
+	.section__toggle {
+
+		.toggle {
+
+		    p {
+
+		    }
+		}
+	}
+
+	h2 {
+		margin-top:25px;
+	}
 
 	.button__slide {
 		display: none;
@@ -603,7 +617,9 @@
 		}
 	}
 }
-
+.flex-md-last.powerGrid {
+	margin-bottom: 20px;
+}
 
 
 #HC--Disclaimer {
