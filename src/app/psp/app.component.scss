@@ -707,10 +707,13 @@ sub {
 
 
 .stock__list {
-  height:100vh;
-  overflow-y:scroll;
+  height: 100vh;
+  overflow-y: scroll;
   padding-bottom: 143px;
   overflow-x: hidden;
+  padding-left: 10px;
+  padding-right: 10px;
+
 
   .col-headers {
     margin-bottom: 5px;
@@ -763,7 +766,7 @@ sub {
 
 .button__slide {
   position: absolute;
-  right:2%;
+  right:3%;
   top:20px;
   cursor: pointer;
 }
@@ -818,7 +821,7 @@ sub {
 
   .button__slide {
     position: absolute;
-    right:2%;
+    right:3%;
     top:15px;
     cursor: pointer;
   }
