@@ -11,6 +11,7 @@ export class ReportService {
   private _competitorsParams: URLSearchParams;
   private _researchDataParams: URLSearchParams;
   private _summaryDataParams: URLSearchParams;
+  private _stockDataPointsParams: URLSearchParams;
 
   constructor(private utilService: UtilService) { }
 
@@ -50,5 +51,16 @@ export class ReportService {
     this._summaryDataParams.set('symbol', symbol);
     this._summaryDataParams.set('components', 'stockSummaryData,oneYearChartData,fiveYearChartData,oneYearPgrData,fiveYearPgrData');
     return this.utilService.getJson(url, this._summaryDataParams);
+  }
+
+  public getStockDataPoints(query: object) {
+    const url = `${this._apiHost}/CPTRestSecure/app/chart/getStockDataPoints`;
+    this._stockDataPointsParams = new URLSearchParams();
+    this._stockDataPointsParams.set('symbol', query['symbol']);
+    this._stockDataPointsParams.set('interval', query['interval']);
+    this._stockDataPointsParams.set('dataComponents', query['dataComponents']);
+    this._stockDataPointsParams.set('numBars', query['numBars']);
+    this._stockDataPointsParams.set('version', '1.1');
+    return this.utilService.getJson(url, this._stockDataPointsParams);
   }
 }

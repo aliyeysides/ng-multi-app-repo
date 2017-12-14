@@ -180,6 +180,7 @@ import {Subscription} from 'rxjs/Subscription';
         <!-- STOCK VIEW MAIN CHART -->
         <div class="row stock-info stock-info--chart">
           <div class="col-12 main-chart bearish">
+            <!-- TODO: implement main chart -->
           </div>
         </div>
 
@@ -1084,14 +1085,21 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             this.reportService.getResearchReportData(this.stock),
             this.reportService.getStockSummaryData(this.stock),
             this.ideasService.getHeadlines(this.stock),
+            this.reportService.getStockDataPoints({
+              symbol: this.stock,
+              interval: '1D',
+              dataComponents: 'HLC,dema,cmf,chaikinOscillations',
+              numBars: '250'
+            })
           )
         })
-        .subscribe(([summary, competitors, research, data, headlines]) => {
+        .subscribe(([summary, competitors, research, data, headlines, chartData]) => {
           this.summary = summary;
           this.competitors = competitors['compititors'];
           this.research = research;
           this.data = data;
           this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
+          console.log('chartData', chartData);
         });
 
     }
