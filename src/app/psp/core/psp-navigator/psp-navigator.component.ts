@@ -63,14 +63,14 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
     if (this.reportOpen) {
       this.routes = [
         {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-        {link: '/my-stocks/' + this.firstUserStock, klass: 'fa fa-list', label: 'My Stocks'},
+        {link: '/my-stocks/' + this.firstUserStock, klass: 'fa fa-list', label: 'Stock Summary'},
         {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Beat'},
       ];
       return;
     }
     this.routes = [
       {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-      {link: '/my-stocks', klass: 'fa fa-list', label: 'My Stocks'},
+      {link: '/my-stocks', klass: 'fa fa-pie-chart', label: 'My Stocks'},
       {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Beat'},
     ];
   }
