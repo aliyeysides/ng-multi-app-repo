@@ -10,6 +10,9 @@
 	position:fixed;
 	left:0;
 	
+	@media screen AND (min-width:768px) {
+		z-index: 8;
+	}
 
 	.col-headers {
 		margin-top:10px;
@@ -46,13 +49,12 @@
 	}
 }
 
-.component--stockview-open {
-	position: absolute;
-}
-
 .component--stockview__container {
 	position:fixed;
 	right:0;
 	z-index: 9;
+}
 
+.component--stockview__container.visible {
+	z-index: 10;
 }
