@@ -6,10 +6,10 @@
 .component--mystocks {
 	background-color: #ffffff;
 	padding:0;
+	z-index: 10;
+	position:fixed;
+	left:0;
 	
-	.contents {
-	
-	}
 
 	.col-headers {
 		margin-top:10px;
@@ -48,4 +48,11 @@
 
 .component--stockview-open {
 	position: absolute;
+}
+
+.component--stockview__container {
+	position:fixed;
+	right:0;
+	z-index: 9;
+
 }

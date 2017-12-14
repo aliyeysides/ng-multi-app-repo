@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
     <div id="HC--Ratings-Changes" class="col-12 col-lg-8 col-xl-8 float-lg-right">
 
       <div class="row">
-        <div class="col-12 hidden-md-up">
+        <div class="col-12 hidden-lg-up">
           <div class="divider__long" [ngClass]="{'divider__long--green': portUp, 'divider__long--red': !portUp}"></div>
         </div>
       </div>

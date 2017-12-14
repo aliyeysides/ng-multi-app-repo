@@ -285,7 +285,7 @@ sub {
   transition: margin-left .5s;
 }
 .router__container {
-  position: relative;
+  //position: relative;
   background-color: #ffffff;
   width: 100%;
   text-align: center;
@@ -320,7 +320,7 @@ sub {
 
 
 .section__chart {
-  margin:20px 0 35px;
+  margin:25px 0 40px;
 }
 
 
@@ -331,6 +331,10 @@ sub {
 
 .section__summary {
   margin: 20px 0 35px;
+
+  @media screen AND (min-width: 768px) {
+    margin: 20px 0 25px;
+  }
 
   p {
     font-size: 64px;
@@ -362,6 +366,10 @@ sub {
 
 .section__toggle {
   margin-top:25px;
+
+  @media screen AND (min-width: 768px) {
+    margin-top: 10px;
+  }
 
   .toggle {
 
@@ -699,6 +707,10 @@ sub {
 
 
 .stock__list {
+  height:100vh;
+  overflow-y:scroll;
+  padding-bottom: 143px;
+  overflow-x: hidden;
 
   .col-headers {
     margin-bottom: 5px;
@@ -824,6 +836,10 @@ sub {
 .expand-collapse {
   margin:10px 0 0;
   cursor: pointer;
+
+  @media screen AND (min-width: 768px) {
+      margin:0px;
+  }
 
   p {
     font-size: 12px;
