@@ -1106,26 +1106,15 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   research;
   data;
 
-  dates: Array<string> = [];
-  closes: Array<number> = [];
-  volumes: Array<any> = [];
-  stockState = {
-    current: '5Y',
-    dates: this.dates,
-    closes: this.closes,
-    volumes: this.volumes
-  };
   mainChart: Chart = {
     id: 'mainChart',
     data: {
-      graphset: [
-        this.getCloseConfig(this.stockState.dates, this.stockState.closes, '5Y'),
-        this.getVolumeConfig(this.stockState.dates, this.stockState.volumes)
-      ]
+      graphset: []
     },
     height: undefined,
     width: undefined
   };
+
   scrollLeftHeadlines: number;
   headlinePageNumber: number = 1;
   loading: Subscription;
@@ -1149,30 +1138,34 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             this.reportService.getResearchReportData(this.stock),
             this.reportService.getStockSummaryData(this.stock),
             this.ideasService.getHeadlines(this.stock),
-            this.reportService.getStockDataPoints({
-              symbol: this.stock,
-              interval: '1D',
-              dataComponents: 'HLC,dema,cmf,chaikinOscillations',
-              numBars: '250'
-            })
+            // this.reportService.getStockDataPoints({
+            //   symbol: this.stock,
+            //   interval: '1D',
+            //   dataComponents: 'HLC,dema,cmf,chaikinOscillations',
+            //   numBars: '250'
+            // })
           )
         })
-        .subscribe(([summary, competitors, research, data, headlines, chartData]) => {
+        .subscribe(([summary, competitors, research, data, headlines]) => {
           this.summary = summary;
           this.competitors = competitors['compititors'];
           this.research = research;
           this.data = data;
           this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
 
-          // const closePrices = chartData['HLC'].map(x => +x.split(',')[2]).reverse();
           const closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse();
           const dates = data['five_year_chart_data']['formatted_dates'].reverse();
+          const pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
+          const relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
+          console.log('relStr', data['five_year_chart_data']['relative_strength']);
           this.mainChart = {
             id: 'mainChart',
             data: {
+              layout: "vertical",
               graphset: [
                 this.getCloseConfig(dates, closePrices, '5Y'),
-                this.getVolumeConfig(dates, chartData['cmf'])
+                // this.getRSIConfig(dates, relStr),
+                this.getPGRConfig(dates, pgrData),
               ]
             },
             height: undefined,
@@ -1385,20 +1378,20 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         {
           x: 650,
           y: 10,
-          id: '2Y',
+          id: '5Y',
           fontColor: (current === '2Y') ? "#FFF" : "#777",
           fontSize: "16",
           fontFamily: "Open Sans",
           cursor: "hand",
-          text: "2Y"
+          text: "5Y"
         }
       ]
     };
   }
 
-  getVolumeConfig(dates, values) {
+  getRSIConfig(dates, values) {
     return {
-      type: 'bar',
+      type: 'area',
       height: 80,
       x: 0,
       y: 400,
@@ -1406,14 +1399,19 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       plotarea: {
         margin: "20 50 20 50"
       },
+      plot: {
+        marker: {
+          visible: false
+        }
+      },
       source: {
-        text: "nasdaq.com",
+        text: "chaikinanalytics.com",
         fontColor: "#ddd",
         fontFamily: "Open Sans"
       },
       tooltip: {
         visible: false,
-        text: "Volume: %v",
+        text: "RSI: %v",
         fontFamily: "Open Sans",
         borderColor: "transparent"
       },
@@ -1428,7 +1426,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         plotLabel: {
           fontFamily: "Open Sans",
           backgroundColor: "#BBB",
-          text: "Volume: %v",
+          text: "RSI: %v",
           y: 0
         }
       },
@@ -1442,7 +1440,65 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       series: [
         {
           values: values,
-          text: "Volume",
+          text: "RSI",
+          backgroundColor: "#bbb"
+        }
+      ]
+    };
+  }
+
+  getPGRConfig(dates, values) {
+    return {
+      type: 'bar',
+      height: 80,
+      x: 0,
+      y: 400,
+      backgroundColor: "#333",
+      plotarea: {
+        margin: "20 50 20 50"
+      },
+      plot: {
+        marker: {
+          visible: false
+        }
+      },
+      source: {
+        text: "chaikinanalytics.com",
+        fontColor: "#ddd",
+        fontFamily: "Open Sans"
+      },
+      tooltip: {
+        visible: false,
+        text: "PGR: %v",
+        fontFamily: "Open Sans",
+        borderColor: "transparent"
+      },
+      zoom: {
+        shared: true
+      },
+      crosshairX: {
+        shared: true,
+        scaleLabel: {
+          visible: false
+        },
+        plotLabel: {
+          fontFamily: "Open Sans",
+          backgroundColor: "#BBB",
+          text: "PGR: %v",
+          y: 0
+        }
+      },
+      scaleX: {
+        visible: false,
+        zooming: true
+      },
+      scaleY: {
+        visible: false
+      },
+      series: [
+        {
+          values: values,
+          text: "PGR",
           backgroundColor: "#bbb"
         }
       ]
