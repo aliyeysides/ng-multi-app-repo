@@ -65,7 +65,7 @@ import {StockReportComponent} from './stock-report/stock-report.component';
           </div>
         </div>
 
-        <div class="col-12 col-md-8 component--stockview__container" [style.position]="{'absolute': desktopView}">
+        <div class="col-12 col-md-8 component--stockview__container" [ngClass]="{'visible': !desktopView}">
           <cpt-psp-stock-report (closeClicked)="closeReport()" [show]="!!selectedStock || desktopView"
                           [stock]="selectedStock">
           </cpt-psp-stock-report>
