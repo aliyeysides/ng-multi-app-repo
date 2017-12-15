@@ -196,7 +196,7 @@ declare var zingchart: any;
 
         <!-- STOCK VIEW MAIN CHART -->
         <div class="row stock-info stock-info--chart">
-          <div class="col-12 main-chart bearish">
+          <div class="col-12 bearish">
             <!-- TODO: implement main chart -->
             <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
           </div>
@@ -1178,7 +1178,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               layout: "vertical",
               graphset: [
                 this.getCloseConfig(dates, closePrices, '5Y'),
-                // this.getPGRConfig(dates, pgrData),
+                this.getPGRConfig(dates, pgrData),
                 this.getRSIConfig(dates, relStr),
               ]
             },
