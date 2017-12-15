@@ -1,4 +1,4 @@
-export class Chart {
+export class ZingChart {
   id: string;
   data: object;
   height: any;

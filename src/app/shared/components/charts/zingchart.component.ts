@@ -1,18 +1,18 @@
 // https://blog.zingchart.com/2016/08/18/angular-2-charts-with-rc5-2/
 
 import {Component, NgZone, AfterViewInit, OnDestroy, OnChanges, SimpleChanges} from '@angular/core';
-import {Chart} from '../../models/chart';
+import {ZingChart} from '../../models/zingchart';
 
 declare var zingchart: any;
 
 @Component({
-  selector: 'cpt-chaikin-chart',
+  selector: 'cpt-zingchart',
   inputs: ['chart'],
   template: `
     <div id="{{chart.id}}"></div>`
 })
 export class ChaikinChart implements AfterViewInit, OnDestroy, OnChanges {
-  chart: Chart;
+  chart: ZingChart;
 
   constructor(private zone: NgZone) {
   }
