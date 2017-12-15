@@ -38,124 +38,138 @@ declare var zingchart: any;
 
       <!-- STOCK VIEW CONTENTS -->
       <div class="container-fluid stockview__contents">
-
-        <!-- STOCK VIEW TOP -->
-        <div class="row no-gutters stock-info">
+        <div class="row">
           <div class="col-12 hidden-md-up">
             <div class="tab--slide"></div>
           </div>
-          <div class="col-12 stockview__main-rating">
-            <p class="label">Power Gauge Rating &nbsp;<a><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-            <p class="rating">
-              <img src="{{ appendPGRImage(symbolData) }}">
-              <span>{{ appendPGRText(symbolData) }}</span>
-            </p>
+
+          <div class="col-12 col-md-7 flex-md-last">
+            <!-- STOCK VIEW TOP -->
+            <div class="row no-gutters stock-info">
+
+              <div class="col-12 stockview__main-rating">
+                <p class="label">Power Gauge Rating &nbsp;<a><i class="fa fa-info-circle" aria-hidden="true"></i></a></p>
+                <p class="rating">
+                  <img src="{{ appendPGRImage(symbolData) }}">
+                  <span>{{ appendPGRText(symbolData) }}</span>
+                </p>
+              </div>
+              <div class="col-12 stockview__PGR">
+                <ul *ngIf="stock" class="pgr__sliders">
+                  <li>
+                    <div class="row sliderBar-container">
+                      <div class="col-1"></div>
+                      <div class="col-4 pgr__label">
+                        <p>Financials</p>
+                      </div>
+                      <div class="col-5 col-lg-6 sliderProgress">
+                        <div
+                          [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][0]['Value'] : null)"></div>
+                        <div class="sliderBar"
+                             [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][1]['Financials'][0]['Value'] : null)"
+                             role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                      </div>
+                      <div class="col-2 col-lg-1"></div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="row sliderBar-container">
+                      <div class="col-1"></div>
+                      <div class="col-4 pgr__label">
+                        <p>Earnings</p>
+                      </div>
+                      <div class="col-5 col-lg-6 sliderProgress">
+                        <div
+                          [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][0]['Value'] : null)"></div>
+                        <div class="sliderBar"
+                             [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][2]['Earnings'][0]['Value'] : null)"
+                             role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                      </div>
+                      <div class="col-2 col-lg-1"></div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="row sliderBar-container">
+                      <div class="col-1"></div>
+                      <div class="col-4 pgr__label">
+                        <p>Technicals</p>
+                      </div>
+                      <div class="col-5 col-lg-6 sliderProgress">
+                        <div
+                          [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][0]['Value'] : null)"></div>
+                        <div class="sliderBar"
+                             [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][3]['Technicals'][0]['Value'] : null)"
+                             role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                      </div>
+                      <div class="col-2 col-lg-1"></div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="row sliderBar-container">
+                      <div class="col-1"></div>
+                      <div class="col-4 pgr__label">
+                        <p>Experts</p>
+                      </div>
+                      <div class="col-5 col-lg-6 sliderProgress">
+                        <div
+                          [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][0]['Value'] : null)"></div>
+                        <div class="sliderBar"
+                             [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][4]['Experts'][0]['Value'] : null)"
+                             role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                      </div>
+                      <div class="col-2 col-lg-1"></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 hidden-md-up">
+                <div class="divider__long"></div>
+              </div>
+            </div>
           </div>
-          <div class="col-12 stockview__PGR">
-            <ul *ngIf="stock" class="pgr__sliders">
-              <li>
-                <div class="row sliderBar-container">
-                  <div class="col-1"></div>
-                  <div class="col-4 pgr__label">
-                    <p>Financials</p>
-                  </div>
-                  <div class="col-5 sliderProgress">
-                    <div
-                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][0]['Value'] : null)"></div>
-                    <div class="sliderBar"
-                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][1]['Financials'][0]['Value'] : null)"
-                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                    </div>
-                  </div>
-                  <div class="col-2"></div>
-                </div>
-              </li>
-              <li>
-                <div class="row sliderBar-container">
-                  <div class="col-1"></div>
-                  <div class="col-4 pgr__label">
-                    <p>Earnings</p>
-                  </div>
-                  <div class="col-5 sliderProgress">
-                    <div
-                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][0]['Value'] : null)"></div>
-                    <div class="sliderBar"
-                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][2]['Earnings'][0]['Value'] : null)"
-                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                    </div>
-                  </div>
-                  <div class="col-2"></div>
-                </div>
-              </li>
-              <li>
-                <div class="row sliderBar-container">
-                  <div class="col-1"></div>
-                  <div class="col-4 pgr__label">
-                    <p>Technicals</p>
-                  </div>
-                  <div class="col-5 sliderProgress">
-                    <div
-                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][0]['Value'] : null)"></div>
-                    <div class="sliderBar"
-                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][3]['Technicals'][0]['Value'] : null)"
-                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                    </div>
-                  </div>
-                  <div class="col-2"></div>
-                </div>
-              </li>
-              <li>
-                <div class="row sliderBar-container">
-                  <div class="col-1"></div>
-                  <div class="col-4 pgr__label">
-                    <p>Experts</p>
-                  </div>
-                  <div class="col-5 sliderProgress">
-                    <div
-                      [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][0]['Value'] : null)"></div>
-                    <div class="sliderBar"
-                         [ngClass]="appendSliderBarClass(symbolData ? symbolData['pgr'][4]['Experts'][0]['Value'] : null)"
-                         role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                    </div>
-                  </div>
-                  <div class="col-2"></div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="divider__long"></div>
+
+          <div class="col-12 col-md-5 align-self-center">
+            <!-- STOCK VIEW PRICE -->
+            <div class="row stock-info stock-info--price">
+              <div class="col-12">
+                <p class="current-price"><sub>$</sub>{{ symbolData ? symbolData['metaInfo'][0]['Last'] : null }}</p>
+                <p class="label">Current</p>
+              </div>
+              <!--<div class="col-4">-->
+              <!--<p class="data red">1107.23</p>-->
+              <!--<p class="label">OPEN</p>-->
+              <!--</div>-->
+              <div class="col-6">
+                <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['Change'] : null }}</p>
+                <p class="label">$ CHG</p>
+              </div>
+              <div class="col-6">
+                <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['Percentage '] : null }}<sub>%</sub></p>
+                <p class="label">% CHG</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 hidden-md-up">
+                <div class="divider__long"></div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- STOCK VIEW PRICE -->
-        <div class="row stock-info stock-info--price">
-          <div class="col-12">
-            <p class="current-price">{{ symbolData ? symbolData['metaInfo'][0]['Last'] : null }}</p>
-          </div>
-          <!--<div class="col-4">-->
-          <!--<p class="data red">1107.23</p>-->
-          <!--<p class="label">OPEN</p>-->
-          <!--</div>-->
-          <div class="col-4">
-            <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['Change'] : null }}</p>
-            <p class="label">$ CHG</p>
-          </div>
-          <div class="col-4">
-            <p class="data">({{ symbolData ? symbolData['metaInfo'][0]['Percentage '] : null }})</p>
-            <p class="label">% CHG</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="divider__long"></div>
-          </div>
-        </div>
+
 
         <!-- STOCK VIEW CHART HEADER -->
         <div class="row stock-info stock-info--chart-toggle">
+          <div class="col-12 hidden-md-down">
+            <div class="divider__long"></div>
+          </div>
           <div class="col-12">
             <p class="chart-header__breakdown">Down <span>-12.02 &nbsp;(-3.23%)</span> over the last&hellip;
             </p>
