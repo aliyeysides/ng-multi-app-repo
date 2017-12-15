@@ -174,7 +174,7 @@ declare var zingchart: any;
             <p class="chart-header__breakdown">Down <span>-12.02 &nbsp;(-3.23%)</span> over the last&hellip;
             </p>
           </div>
-          <div class="col-2">
+          <!--<div class="col-2">
             <p class="date-select">1D</p>
           </div>
           <div class="col-2">
@@ -191,7 +191,7 @@ declare var zingchart: any;
           </div>
           <div class="col-2">
             <p class="date-select">5Y</p>
-          </div>
+          </div>-->
         </div>
 
         <!-- STOCK VIEW MAIN CHART -->
@@ -200,16 +200,6 @@ declare var zingchart: any;
             <!-- TODO: implement main chart -->
             <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
           </div>
-        </div>
-
-        <!-- STOCK VIEW MONEYFLOW -->
-        <div class="row stock-info stock-info--chart">
-          <div class="col-12 "></div>
-        </div>
-
-        <!-- STOCK VIEW REL STRENGTH -->
-        <div class="row stock-info stock-info--chart">
-          <div class="col-12 "></div>
         </div>
 
         <div class="row">
@@ -1189,7 +1179,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
                 this.getRSIConfig(dates, relStr),
               ]
             },
-            height: undefined,
+            height: 520,
             width: undefined
           };
 
@@ -1315,35 +1305,40 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines -= 312.5, top: 0, behavior: 'smooth'});
   }
 
+
+
+
+
   getCloseConfig(dates, values, current) {
     return {
       type: 'area',
-      backgroundColor: "#333",
-      height: 420,
+      backgroundColor: "#fff",
+      height: 400,
       x: 0,
       y: 0,
       crosshairX: {
         shared: true,
         plotLabel: {
-          backgroundColor: "#bbb",
-          fontColor: "#222",
+          backgroundColor: "#b9e5fb",
+          fontColor: "#484848",
           text: "Close: %v",
           fontFamily: "Open Sans",
+          borderColor: "transparent",
           y: 0,
         },
         scaleLabel: {
-          fontColor: "#222",
+          fontColor: "#484848",
           fontFamily: "Open Sans",
-          backgroundColor: "#bbb",
+          backgroundColor: "#c8ebbb",
         }
       },
       title: {
         text: this.stock,
-        fontColor: "#fff",
+        fontColor: "#484848",
         fontFamily: 'Open Sans',
-        fontSize: 30,
+        fontSize: 24,
         align: 'left',
-        offsetX: 10
+        offsetX: 40
       },
       zoom: {
         shared: true
@@ -1357,27 +1352,37 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         }
       },
       tooltip: {
-        text: "Close: %v",
+        text: "CLOSE: %v",
         backgroundColor: "#BBB",
         borderColor: "transparent"
+      },
+      scaleYN: {
+        lineColor: "#fff"
       },
       scaleY: {
         guide: {
           visible: true,
           lineStyle: 'solid',
-          lineColor: "#444"
+          lineColor: "#eee"
         },
         // values: values,
         item: {
           fontColor: "#ddd",
           fontFamily: "Open Sans"
-        }
+        },
+        tick: {
+          lineColor: "transparent",
+          lineWidth: 0
+        },
+      },
+      scaleXN: {
+        lineColor: "#fff"
       },
       scaleX: {
         guide: {
-          visible: true,
+          visible: false,
           lineStyle: 'solid',
-          lineColor: "#444"
+          lineColor: "#eee"
         },
         values: dates,
         transform: {
@@ -1390,19 +1395,23 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         item: {
           fontColor: "#ddd",
           fontFamily: "Open Sans"
-        }
+        },
+        tick: {
+          lineColor: "transparent",
+          lineWidth: 0
+        },
       },
       series: [
         {
           values: values,
-          lineColor: "#feffef",
-          lineWidth: 3,
-          backgroundColor: "#909090 #313131"
+          lineColor: "#1199ff",
+          lineWidth: 2,
+          backgroundColor: "#1199ff #b9e5fb",
         }
       ],
       labels: [
         {
-          x: 490,
+          x: 120,
           y: 10,
           id: '1W',
           fontColor: (current === '1W') ? "#FFF" : "#777",
@@ -1412,7 +1421,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           text: "1W"
         },
         {
-          x: 530,
+          x: 180,
           y: 10,
           id: '1M',
           fontColor: (current === '1M') ? "#FFF" : "#777",
@@ -1422,7 +1431,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           text: "1M"
         },
         {
-          x: 570,
+          x: 240,
           y: 10,
           id: '6M',
           fontColor: (current === '6M') ? "#FFF" : "#777",
@@ -1432,7 +1441,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           text: "6M"
         },
         {
-          x: 610,
+          x: 300,
           y: 10,
           id: '1Y',
           fontColor: (current === '1Y') ? "#FFF" : "#777",
@@ -1442,7 +1451,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           text: "1Y"
         },
         {
-          x: 650,
+          x: 360,
           y: 10,
           id: '5Y',
           fontColor: (current === '2Y') ? "#FFF" : "#777",
@@ -1458,12 +1467,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   getRSIConfig(dates, values) {
     return {
       type: 'line',
-      height: 100,
+      height: 80,
       x: 0,
-      y: 400,
-      backgroundColor: "#333",
+      y: 430,
+      backgroundColor: "#fff",
       plotarea: {
-        margin: "20 50 20 50"
+        margin: "10 50 10 50"
       },
       plot: {
         marker: {
@@ -1471,13 +1480,14 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         }
       },
       source: {
-        text: "chaikinanalytics.com",
+        text: "ZingCharts.com",
         fontColor: "#ddd",
-        fontFamily: "Open Sans"
+        fontFamily: "Open Sans",
+        fontSize: "10",
       },
       tooltip: {
         visible: false,
-        text: "RSI: %v",
+        text: "Rel. Strength: %v",
         fontFamily: "Open Sans",
         borderColor: "transparent"
       },
@@ -1492,7 +1502,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         plotLabel: {
           fontFamily: "Open Sans",
           backgroundColor: "#BBB",
-          text: "RSI: %v",
+          text: "Rel. Strength: %v",
           y: 0
         }
       },
@@ -1506,7 +1516,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       series: [
         {
           values: values,
-          text: "RSI",
+          text: "Rel. Str",
           rules: [
             {
               rule: '%v < 0.5',
@@ -1515,7 +1525,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             }],
           backgroundColor: "#51bb2c",
           lineColor: "#51bb2c",
-          lineWidth: 3
+          lineWidth: 2
         }
       ]
     };
@@ -1524,12 +1534,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   getPGRConfig(dates, values) {
     return {
       type: 'bar',
-      height: 80,
+      height: 40,
       x: 0,
-      y: 380,
-      backgroundColor: "#333",
+      y: 390,
+      backgroundColor: "#fff",
       plotarea: {
-        margin: "20 50 20 50"
+        margin: "10 50 10 50"
       },
       plot: {
         marker: {
@@ -1537,6 +1547,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         }
       },
       source: {
+        visible: false,
         text: "chaikinanalytics.com",
         fontColor: "#ddd",
         fontFamily: "Open Sans"

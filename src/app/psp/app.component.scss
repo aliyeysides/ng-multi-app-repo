@@ -1037,3 +1037,56 @@ sub {
   margin-left:15px;
   height: 16px;
 }
+
+
+
+
+
+
+.component--stockview.bullish {
+
+  #mainChart-graph-id0-plotset-plot-0-area-path {
+    fill:#00C04E;
+  }
+  #mainChart-graph-id0-plotset-plot-0-path {
+    stroke:#00C04E;
+  }
+  #mainChart-graph-id0-scales-bl-0-c {
+    path {
+      stroke:#E0F9EA;
+    }
+  }
+}
+
+
+.component--stockview.bearish {
+
+  #mainChart-graph-id0-plotset-plot-0-path {
+    stroke:#FD001F;
+  }
+  #mainChart-graph-id0-plotset-plot-0-area-path {
+    fill:#FD001F;
+  }
+  #mainChart-graph-id0-scales-bl-0-c {
+    path {
+      stroke:#FFEFF1;
+    }
+  }
+}
+
+
+
+.component--stockview.neutral {
+
+  #mainChart-graph-id0-plotset-plot-0-path {
+    stroke:#febf01;
+  }
+  #mainChart-graph-id0-plotset-plot-0-area-path {
+    fill:#febf01;
+  }
+  #mainChart-graph-id0-scales-bl-0-c {
+    path {
+      stroke:#FFF6E9;
+    }
+  }
+}
