@@ -1329,8 +1329,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       series: [
         {
           values: values,
-          lineColor: "#fff",
-          lineWidth: 1,
+          lineColor: "#feffef",
+          lineWidth: 3,
           backgroundColor: "#909090 #313131"
         }
       ],
@@ -1392,7 +1392,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   getRSIConfig(dates, values) {
     return {
       type: 'line',
-      height: 80,
+      height: 100,
       x: 0,
       y: 400,
       backgroundColor: "#333",
@@ -1448,7 +1448,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               lineColor: "#bb2634"
             }],
           backgroundColor: "#51bb2c",
-          lineColor: "#51bb2c"
+          lineColor: "#51bb2c",
+          lineWidth: 3
         }
       ]
     };
