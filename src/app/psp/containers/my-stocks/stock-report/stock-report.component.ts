@@ -8,7 +8,7 @@ import {SignalService} from '../../../../services/signal.service';
 import {IdeasService} from '../../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
-import {Chart} from '../../../../shared/models/chart';
+import {ZingChart} from '../../../../shared/models/zingchart';
 
 declare var zingchart: any;
 
@@ -184,7 +184,7 @@ declare var zingchart: any;
         <div class="row stock-info stock-info--chart">
           <div class="col-12 main-chart bearish">
             <!-- TODO: implement main chart -->
-            <cpt-chaikin-chart [chart]="mainChart"></cpt-chaikin-chart>
+            <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
           </div>
         </div>
 
@@ -1106,7 +1106,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   research;
   data;
 
-  mainChart: Chart = {
+  mainChart: ZingChart = {
     id: 'mainChart',
     data: {
       graphset: []
@@ -1164,8 +1164,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               layout: "vertical",
               graphset: [
                 this.getCloseConfig(dates, closePrices, '5Y'),
-                // this.getRSIConfig(dates, relStr),
-                this.getPGRConfig(dates, pgrData),
+                // this.getPGRConfig(dates, pgrData),
+                this.getRSIConfig(dates, relStr),
               ]
             },
             height: undefined,
@@ -1329,8 +1329,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       series: [
         {
           values: values,
-          lineColor: "#fff",
-          lineWidth: 1,
+          lineColor: "#feffef",
+          lineWidth: 3,
           backgroundColor: "#909090 #313131"
         }
       ],
@@ -1391,8 +1391,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   getRSIConfig(dates, values) {
     return {
-      type: 'area',
-      height: 80,
+      type: 'line',
+      height: 100,
       x: 0,
       y: 400,
       backgroundColor: "#333",
@@ -1441,7 +1441,15 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         {
           values: values,
           text: "RSI",
-          backgroundColor: "#bbb"
+          rules: [
+            {
+              rule: '%v < 0.5',
+              backgroundColor: "#bb2634",
+              lineColor: "#bb2634"
+            }],
+          backgroundColor: "#51bb2c",
+          lineColor: "#51bb2c",
+          lineWidth: 3
         }
       ]
     };
@@ -1452,7 +1460,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       type: 'bar',
       height: 80,
       x: 0,
-      y: 400,
+      y: 380,
       backgroundColor: "#333",
       plotarea: {
         margin: "20 50 20 50"
@@ -1499,7 +1507,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         {
           values: values,
           text: "PGR",
-          backgroundColor: "#bbb"
+          backgroundColor: "#bbb",
         }
       ]
     };
