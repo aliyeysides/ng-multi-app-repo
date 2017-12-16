@@ -1182,6 +1182,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           const dates = data['five_year_chart_data']['formatted_dates'].reverse();
 
           const pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
+          const cmf = data['five_year_chart_data']['cmf'].map(x => +x).reverse();
           const relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
 
           this.mainChart = {
@@ -1191,7 +1192,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               graphset: [
                 this.getCloseConfig(dates, closePrices, '5Y'),
                 this.getPGRConfig(dates, pgrData),
-                this.getRSIConfig(dates, relStr),
+                // this.getRSIConfig(dates, relStr),
+                this.getCMFConfig(dates, cmf)
               ]
             },
             height: 520,
@@ -1561,6 +1563,73 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           rules: [
             {
               rule: '%v < 0.5',
+              backgroundColor: "#bb2634",
+              lineColor: "#bb2634"
+            }],
+          backgroundColor: "#51bb2c",
+          lineColor: "#51bb2c",
+          lineWidth: 2
+        }
+      ]
+    };
+  }
+
+  getCMFConfig(dates, values) {
+    return {
+      type: 'line',
+      height: 80,
+      x: 0,
+      y: 430,
+      backgroundColor: "#fff",
+      plotarea: {
+        margin: "10 50 10 50"
+      },
+      plot: {
+        marker: {
+          visible: false
+        }
+      },
+      source: {
+        text: "ZingCharts.com",
+        fontColor: "#ddd",
+        fontFamily: "Open Sans",
+        fontSize: "10",
+      },
+      tooltip: {
+        visible: false,
+        text: "Chaikin Money Flow: %v",
+        fontFamily: "Open Sans",
+        borderColor: "transparent"
+      },
+      zoom: {
+        shared: true
+      },
+      crosshairX: {
+        shared: true,
+        scaleLabel: {
+          visible: false
+        },
+        plotLabel: {
+          fontFamily: "Open Sans",
+          backgroundColor: "#BBB",
+          text: "Chaikin Money Flow: %v",
+          y: 0
+        }
+      },
+      scaleX: {
+        visible: false,
+        zooming: true
+      },
+      scaleY: {
+        visible: false
+      },
+      series: [
+        {
+          values: values,
+          text: "Chaikin Money Flow",
+          rules: [
+            {
+              rule: '%v < 0',
               backgroundColor: "#bb2634",
               lineColor: "#bb2634"
             }],
