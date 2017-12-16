@@ -1182,6 +1182,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           const dates = data['five_year_chart_data']['formatted_dates'].reverse();
 
           const pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
+          const cmf = data['five_year_chart_data']['cmf'].map(x => +x).reverse();
           const relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
 
           this.mainChart = {
@@ -1191,7 +1192,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               graphset: [
                 this.getCloseConfig(dates, closePrices, '5Y'),
                 this.getPGRConfig(dates, pgrData),
-                this.getRSIConfig(dates, relStr),
+                // this.getRSIConfig(dates, relStr),
+                this.getCMFConfig(dates, cmf)
               ]
             },
             height: 520,
@@ -1228,50 +1230,50 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             width: undefined
           };
 
-          zingchart.bind('mainChart', 'label_click', function(e){
-            console.log('test');
-            if(this.stockState.current === e.labelid){
-              return;
-            }
-
-            var windowClose = [];
-            var windowVolume = [];
-            var windowDates = [];
-            var cut = 0;
-            switch(e.labelid) {
-              case '1W':
-                cut = 5;
-                break;
-              case '1M':
-                cut = 20;
-                break;
-              case '6M':
-                cut = 130;
-                break;
-              case '1Y':
-                cut = 260;
-                break;
-              default:
-                cut = this.stockState.dates.length;
-                break;
-            }
-            windowClose = this.stockState.closes.slice(this.stockState.closes.length-cut);
-            windowDates = this.stockState.dates.slice(this.stockState.dates.length-cut);
-            windowVolume = this.stockState.volumes.slice(this.stockState.rsi.length-cut);
-
-            zingchart.exec('myChart', 'setdata', {
-
-              data: {
-                graphset:[
-                  this.getCloseConfig(windowDates, windowClose, e.labelid),
-                  this.getRSIConfig(windowDates, windowVolume)
-                ]
-              }
-            });
-
-            this.stockState.current = e.labelid;
-
-          });
+          // zingchart.bind('mainChart', 'label_click', function(e){
+          //   console.log('test');
+          //   if(this.stockState.current === e.labelid){
+          //     return;
+          //   }
+          //
+          //   var windowClose = [];
+          //   var windowVolume = [];
+          //   var windowDates = [];
+          //   var cut = 0;
+          //   switch(e.labelid) {
+          //     case '1W':
+          //       cut = 5;
+          //       break;
+          //     case '1M':
+          //       cut = 20;
+          //       break;
+          //     case '6M':
+          //       cut = 130;
+          //       break;
+          //     case '1Y':
+          //       cut = 260;
+          //       break;
+          //     default:
+          //       cut = this.stockState.dates.length;
+          //       break;
+          //   }
+          //   windowClose = this.stockState.closes.slice(this.stockState.closes.length-cut);
+          //   windowDates = this.stockState.dates.slice(this.stockState.dates.length-cut);
+          //   windowVolume = this.stockState.volumes.slice(this.stockState.rsi.length-cut);
+          //
+          //   zingchart.exec('myChart', 'setdata', {
+          //
+          //     data: {
+          //       graphset:[
+          //         this.getCloseConfig(windowDates, windowClose, e.labelid),
+          //         this.getRSIConfig(windowDates, windowVolume)
+          //       ]
+          //     }
+          //   });
+          //
+          //   this.stockState.current = e.labelid;
+          //
+          // });
         });
     }
   }
@@ -1561,6 +1563,73 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           rules: [
             {
               rule: '%v < 0.5',
+              backgroundColor: "#bb2634",
+              lineColor: "#bb2634"
+            }],
+          backgroundColor: "#51bb2c",
+          lineColor: "#51bb2c",
+          lineWidth: 2
+        }
+      ]
+    };
+  }
+
+  getCMFConfig(dates, values) {
+    return {
+      type: 'line',
+      height: 80,
+      x: 0,
+      y: 430,
+      backgroundColor: "#fff",
+      plotarea: {
+        margin: "10 50 10 50"
+      },
+      plot: {
+        marker: {
+          visible: false
+        }
+      },
+      source: {
+        text: "ZingCharts.com",
+        fontColor: "#ddd",
+        fontFamily: "Open Sans",
+        fontSize: "10",
+      },
+      tooltip: {
+        visible: false,
+        text: "Chaikin Money Flow: %v",
+        fontFamily: "Open Sans",
+        borderColor: "transparent"
+      },
+      zoom: {
+        shared: true
+      },
+      crosshairX: {
+        shared: true,
+        scaleLabel: {
+          visible: false
+        },
+        plotLabel: {
+          fontFamily: "Open Sans",
+          backgroundColor: "#BBB",
+          text: "Chaikin Money Flow: %v",
+          y: 0
+        }
+      },
+      scaleX: {
+        visible: false,
+        zooming: true
+      },
+      scaleY: {
+        visible: false
+      },
+      series: [
+        {
+          values: values,
+          text: "Chaikin Money Flow",
+          rules: [
+            {
+              rule: '%v < 0',
               backgroundColor: "#bb2634",
               lineColor: "#bb2634"
             }],
