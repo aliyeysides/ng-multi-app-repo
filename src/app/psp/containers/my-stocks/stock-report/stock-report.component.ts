@@ -613,6 +613,7 @@ declare var zingchart: any;
               <h3>Annual EPS</h3>
             </div>
             <div class="chart">
+              <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
             </div>
           </div>
           <div class="col-12">
@@ -620,6 +621,7 @@ declare var zingchart: any;
               <h3>Quarterly EPS</h3>
             </div>
             <div class="chart">
+              <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
             </div>
           </div>
           <div class="col-12">
@@ -627,6 +629,7 @@ declare var zingchart: any;
               <h3>Earnings Announcement</h3>
             </div>
             <div class="chart">
+              <!--<cpt-zingchart></cpt-zingchart>-->
             </div>
           </div>
           <div class="col-12">
@@ -634,6 +637,7 @@ declare var zingchart: any;
               <h3>Annual Revenue</h3>
             </div>
             <div class="chart">
+              <!--<cpt-zingchart></cpt-zingchart>-->
             </div>
           </div>
 
@@ -1125,6 +1129,22 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     height: undefined,
     width: undefined
   };
+  annualEPSChart: ZingChart = {
+    id: 'annualEPSChart',
+    data: {
+      graphset: []
+    },
+    height: undefined,
+    width: undefined
+  };
+  qrtEPSChart: ZingChart = {
+      id: 'qrtEPSChart',
+    data: {
+      graphset: []
+    },
+    height: undefined,
+    width: undefined
+  };
 
   scrollLeftHeadlines: number;
   headlinePageNumber: number = 1;
@@ -1148,13 +1168,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             this.reportService.getTickerCompetitors(this.stock),
             this.reportService.getResearchReportData(this.stock),
             this.reportService.getStockSummaryData(this.stock),
-            this.ideasService.getHeadlines(this.stock),
-            // this.reportService.getStockDataPoints({
-            //   symbol: this.stock,
-            //   interval: '1D',
-            //   dataComponents: 'HLC,dema,cmf,chaikinOscillations',
-            //   numBars: '250'
-            // })
+            this.ideasService.getHeadlines(this.stock)
           )
         })
         .subscribe(([summary, competitors, research, data, headlines]) => {
@@ -1168,7 +1182,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           const dates = data['five_year_chart_data']['formatted_dates'].reverse();
           const pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
           const relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
-          console.log('relStr', data['five_year_chart_data']['relative_strength']);
+
           this.mainChart = {
             id: 'mainChart',
             data: {
@@ -1180,6 +1194,36 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               ]
             },
             height: 520,
+            width: undefined
+          };
+
+          const annualEPSData = research['EPS Quarterly Results']['quaterlyData'].map(x => +x[5].slice(1));
+          const annualEPSDates = research['EPS Quarterly Results']['quaterlyData'].map(x => x[0]);
+
+          const qrtEPSData = research['EPS Quarterly Results']['quaterlyData'].map(x => x.splice(1));
+          console.log('data', qrtEPSData);
+
+          this.annualEPSChart = {
+            id: 'annualEPSChart',
+            data: {
+              layout: "vertical",
+              graphset: [
+                this.getAnnualEPSConfg(annualEPSDates, annualEPSData)
+              ]
+            },
+            height: undefined,
+            width: undefined
+          };
+
+          this.qrtEPSChart = {
+            id: 'qrtEPSChart',
+            data: {
+              layout: "vertical",
+              graphset: [
+                this.getQrtEPSConfig(annualEPSDates, qrtEPSData)
+              ]
+            },
+            height: undefined,
             width: undefined
           };
 
@@ -1304,10 +1348,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     this.scrollLeftHeadlines = this.newsList.nativeElement.scrollLeft;
     this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines -= 312.5, top: 0, behavior: 'smooth'});
   }
-
-
-
-
 
   getCloseConfig(dates, values, current) {
     return {
@@ -1588,6 +1628,132 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         }
       ]
     };
+  }
+
+  getAnnualEPSConfg(dates, values) {
+    return {
+      "type": "bar",
+      "background-color": "white",
+      "tooltip": {
+        "text": "$%v"
+      },
+      "plotarea": {
+        "margin": "80 60 100 60",
+        "y": "125px"
+      },
+      "plot": {
+        "animation": {
+          "effect": "ANIMATION_SLIDE_BOTTOM"
+        }
+      },
+      "scale-x": {
+        "line-color": "#7E7E7E",
+        "labels": dates,
+        "item": {
+          "font-color": "#7e7e7e"
+        },
+        "guide": {
+          "visible": false
+        }
+      },
+      "scale-y": {
+        "line-color": "#7E7E7E",
+        "item": {
+          "font-color": "#7e7e7e"
+        },
+        "guide": {
+          "visible": true
+        },
+        "label": {
+          "font-family": "arial",
+          "font-angle":0,
+          "bold": true,
+          "font-size": "14px",
+          "font-color": "#7E7E7E",
+          "offset-y":"-190px",
+          "offset-x":"20px"
+        },
+      },
+      "series": [
+        {
+          "values": values,
+          "alpha": 0.95,
+          "borderRadiusTopLeft": 7,
+          "background-color": "#8993c7",
+          "text": "Apple"
+        }
+      ]
+    }
+  }
+
+  getQrtEPSConfig(dates, values) {
+    return {
+      "type": "bar",
+      "background-color": "white",
+      "tooltip": {
+        "text": "$%v"
+      },
+      "plotarea": {
+        "margin": "80 60 100 60",
+        "y": "125px"
+      },
+      "plot": {
+        "animation": {
+          "effect": "ANIMATION_SLIDE_BOTTOM"
+        }
+      },
+      "scale-x": {
+        "line-color": "#7E7E7E",
+        "labels": dates,
+        "item": {
+          "font-color": "#7e7e7e"
+        },
+        "guide": {
+          "visible": false
+        }
+      },
+      "scale-y": {
+        "line-color": "#7E7E7E",
+        "item": {
+          "font-color": "#7e7e7e"
+        },
+        "guide": {
+          "visible": true
+        },
+        "label": {
+          "font-family": "arial",
+          "font-angle":0,
+          "bold": true,
+          "font-size": "14px",
+          "font-color": "#7E7E7E",
+          "offset-y":"-190px",
+          "offset-x":"20px"
+        },
+      },
+      "series": [
+        {
+          "values": values[0],
+          "alpha": 0.95,
+          "borderRadiusTopLeft": 7,
+          "background-color": "#8993c7",
+          "text": "Apple"
+        },
+        {
+          "values": values[1],
+          "alpha": 0.95,
+          "borderRadiusTopLeft": 7,
+          "background-color": "#8993c7",
+          "text": "Apple"
+        },
+        {
+          "values": values[2],
+          "alpha": 0.95,
+          "borderRadiusTopLeft": 7,
+          "background-color": "#8993c7",
+          "text": "Apple"
+        }
+      ]
+    }
   }
 
 
