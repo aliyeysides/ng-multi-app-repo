@@ -1180,6 +1180,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
           const closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse();
           const dates = data['five_year_chart_data']['formatted_dates'].reverse();
+
           const pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
           const relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
 
@@ -1572,59 +1573,132 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getPGRConfig(dates, values) {
-    return {
-      type: 'bar',
-      height: 40,
+    let veryBullish = [];
+    let bullish = [];
+    let neutral = [];
+    let bearish = [];
+    let veryBearish = [];
+    let pgrData = [veryBullish, bullish, neutral, bearish, veryBearish];
+    values.map(pgr => {
+      pgrData.forEach((arr, idx) => {
+        if (pgr === 5 && idx == 0) {
+          arr.push(100);
+          return;
+        }
+        if (pgr === 4 && idx == 1) {
+          arr.push(100);
+          return;
+        }
+        if (pgr === 3 && idx == 2) {
+          arr.push(100);
+          return;
+        }
+        if (pgr === 2 && idx == 3) {
+          arr.push(100);
+          return;
+        }
+        if (pgr === 1 && idx == 4) {
+          arr.push(100);
+          return;
+        }
+        arr.push(0);
+      })
+    });
+    return  {
+      "type": "bar",
+      height: 80,
       x: 0,
       y: 390,
-      backgroundColor: "#fff",
-      plotarea: {
-        margin: "10 50 10 50"
+      "plot": {
+        "stacked": true
       },
-      plot: {
-        marker: {
+      "backgroundColor": "#fff",
+      "scaleX": {
+        "values": dates,
+        "lineWidth": 0,
+        "lineColor":"none",
+        label: {
+          visible: false
+        },
+        "tick": {
+          "visible": false
+        },
+        "guide": {
+          "visible": false
+        },
+        "item": {
+          "font-color": "#999",
+          visible: false
+        },
+        zooming: true
+      },
+      "scaleY": {
+        "lineWidth":0,
+        "lineColor":"none",
+        "min-value": 0,
+        "max-value": 200,
+        "step": 0.75,
+        "tick": {
+          "visible": false
+        },
+        "guide": {
+          "lineStyle": "solid"
+        },
+        "item": {
+          "font-color": "#999",
           visible: false
         }
-      },
-      source: {
-        visible: false,
-        text: "chaikinanalytics.com",
-        fontColor: "#ddd",
-        fontFamily: "Open Sans"
-      },
-      tooltip: {
-        visible: false,
-        text: "PGR: %v",
-        fontFamily: "Open Sans",
-        borderColor: "transparent"
       },
       zoom: {
         shared: true
       },
-      crosshairX: {
-        shared: true,
-        scaleLabel: {
-          visible: false
-        },
-        plotLabel: {
-          fontFamily: "Open Sans",
-          backgroundColor: "#BBB",
-          text: "PGR: %v",
-          y: 0
-        }
+      "tooltip": {
+        "htmlMode": true,
+        "backgroundColor": "none",
+        "padding": 0,
+        "placement": "node:center",
+        "text": "<div class='zingchart-tooltip'><div class='scalex-value'>%kt<\/div><div class='scaley-value'>$%v<\/div><\/div>"
       },
-      scaleX: {
-        visible: false,
-        zooming: true
-      },
-      scaleY: {
-        visible: false
-      },
-      series: [
+      "series": [
         {
-          values: values,
-          text: "PGR",
-          backgroundColor: "#bbb",
+          "values": veryBullish,
+          "alpha": 1,
+          "background-color": "#30f300",
+          "hover-state" : {
+            backgroundColor: '#26a025'
+          }
+        },
+        {
+          "values": bullish,
+          "alpha": 1,
+          "background-color": "#db4437",
+          "hover-state" : {
+            backgroundColor: '#901E15'
+          }
+        },
+        {
+          "values": neutral,
+          "alpha": 1,
+          "background-color": "#dbb237",
+          "hover-state" : {
+            backgroundColor: '#90903a'
+          }
+        },
+        {
+          "values": bearish,
+          "alpha": 1,
+          "background-color": "#db513d",
+          "hover-state" : {
+            backgroundColor: '#904925'
+          }
+        },
+        {
+          "values": veryBearish,
+          "alpha": 1,
+          "background-color": "#db4437",
+          "hover-state" : {
+            backgroundColor: '#901E15'
+          }
         }
       ]
     };
