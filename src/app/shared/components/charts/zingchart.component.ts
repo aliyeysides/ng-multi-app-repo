@@ -18,7 +18,53 @@ export class ChaikinChart implements AfterViewInit, OnDestroy, OnChanges {
   }
 
   ngAfterViewInit() {
-    this.zone.runOutsideAngular(() => zingchart.render(this.chart));
+    this.zone.runOutsideAngular(() => {
+      zingchart.render(this.chart);
+      zingchart.bind('mainChart', 'label_click', function(e){
+        console.log('test');
+        if(this.stockState.current === e.labelid){
+          return;
+        }
+
+        var windowClose = [];
+        var windowVolume = [];
+        var windowDates = [];
+        var cut = 0;
+        switch(e.labelid) {
+          case '1W':
+            cut = 5;
+            break;
+          case '1M':
+            cut = 20;
+            break;
+          case '6M':
+            cut = 130;
+            break;
+          case '1Y':
+            cut = 260;
+            break;
+          default:
+            cut = this.stockState.dates.length;
+            break;
+        }
+        windowClose = this.stockState.closes.slice(this.stockState.closes.length-cut);
+        windowDates = this.stockState.dates.slice(this.stockState.dates.length-cut);
+        windowVolume = this.stockState.volumes.slice(this.stockState.rsi.length-cut);
+
+        zingchart.exec('myChart', 'setdata', {
+
+          data: {
+            graphset:[
+              this.getCloseConfig(windowDates, windowClose, e.labelid),
+              this.getRSIConfig(windowDates, windowVolume)
+            ]
+          }
+        });
+
+        this.stockState.current = e.labelid;
+
+      });
+    });
   }
 
   ngOnDestroy() {
