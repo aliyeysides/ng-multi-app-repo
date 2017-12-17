@@ -31,7 +31,7 @@ declare var zingchart: any;
           <h1 class="ticker">{{ stock }}</h1>
           <p class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
         </div>
-        <div class="header__button header__button--right">
+        <div (click)="addStock(stock)" class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_plus--white.svg">
         </div>
       </div>
@@ -1149,6 +1149,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   @Input('stock') stock: string;
   @Input('show') show: boolean;
   @Output('closeClicked') closeClicked: EventEmitter<void> = new EventEmitter<void>();
+  @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild('newsList') newsList: ElementRef;
 
   symbolData;
@@ -1408,6 +1409,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       return;
     }
     this.collapse[key] = !this.collapse[key];
+  }
+
+  addStock(ticker: string) {
+    this.addStockClicked.emit(ticker);
   }
 
   appendPGRImage(symbolData) {
