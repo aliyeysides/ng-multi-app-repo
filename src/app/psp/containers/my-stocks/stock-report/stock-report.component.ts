@@ -48,7 +48,8 @@ declare var zingchart: any;
             <div class="row no-gutters stock-info">
 
               <div class="col-12 stockview__main-rating">
-                <p class="label">Power Gauge Rating &nbsp;<a><i class="fa fa-info-circle" aria-hidden="true"></i></a></p>
+                <p class="label">Power Gauge Rating &nbsp;<a><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                </p>
                 <p class="rating">
                   <img src="{{ appendPGRImage(symbolData) }}">
                   <span>{{ appendPGRText(symbolData) }}</span>
@@ -162,7 +163,6 @@ declare var zingchart: any;
             </div>
           </div>
         </div>
-
 
 
         <!-- STOCK VIEW CHART HEADER -->
@@ -1138,7 +1138,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     width: undefined
   };
   qrtEPSChart: ZingChart = {
-      id: 'qrtEPSChart',
+    id: 'qrtEPSChart',
     data: {
       graphset: []
     },
@@ -1192,7 +1192,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               graphset: [
                 this.getCloseConfig(dates, closePrices, '5Y'),
                 this.getPGRConfig(dates, pgrData),
-                // this.getRSIConfig(dates, relStr),
+                this.getRSIConfig(dates, relStr),
                 this.getCMFConfig(dates, cmf)
               ]
             },
@@ -1203,8 +1203,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           const annualEPSData = research['EPS Quarterly Results']['quaterlyData'].map(x => +x[5].slice(1));
           const annualEPSDates = research['EPS Quarterly Results']['quaterlyData'].map(x => x[0]);
 
-          const qrtEPSData = research['EPS Quarterly Results']['quaterlyData'].map(x => x.splice(1));
-          console.log('data', qrtEPSData);
+          const qrtEPSData = research['EPS Quarterly Results']['quaterlyData']
+            .map(x => x.splice(1).map(x => +x.slice(1)));
 
           this.annualEPSChart = {
             id: 'annualEPSChart',
@@ -1673,7 +1673,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         arr.push(0);
       })
     });
-    return  {
+    return {
       "type": "bar",
       height: 80,
       x: 0,
@@ -1685,7 +1685,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       "scaleX": {
         "values": dates,
         "lineWidth": 0,
-        "lineColor":"none",
+        "lineColor": "none",
         label: {
           visible: false
         },
@@ -1702,8 +1702,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         zooming: true
       },
       "scaleY": {
-        "lineWidth":0,
-        "lineColor":"none",
+        "lineWidth": 0,
+        "lineColor": "none",
         "min-value": 0,
         "max-value": 200,
         "step": 0.75,
@@ -1733,7 +1733,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "values": veryBullish,
           "alpha": 1,
           "background-color": "#30f300",
-          "hover-state" : {
+          "hover-state": {
             backgroundColor: '#26a025'
           }
         },
@@ -1741,7 +1741,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "values": bullish,
           "alpha": 1,
           "background-color": "#db4437",
-          "hover-state" : {
+          "hover-state": {
             backgroundColor: '#901E15'
           }
         },
@@ -1749,7 +1749,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "values": neutral,
           "alpha": 1,
           "background-color": "#dbb237",
-          "hover-state" : {
+          "hover-state": {
             backgroundColor: '#90903a'
           }
         },
@@ -1757,7 +1757,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "values": bearish,
           "alpha": 1,
           "background-color": "#db513d",
-          "hover-state" : {
+          "hover-state": {
             backgroundColor: '#904925'
           }
         },
@@ -1765,7 +1765,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "values": veryBearish,
           "alpha": 1,
           "background-color": "#db4437",
-          "hover-state" : {
+          "hover-state": {
             backgroundColor: '#901E15'
           }
         }
@@ -1809,12 +1809,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         "label": {
           "font-family": "arial",
-          "font-angle":0,
+          "font-angle": 0,
           "bold": true,
           "font-size": "14px",
           "font-color": "#7E7E7E",
-          "offset-y":"-190px",
-          "offset-x":"20px"
+          "offset-y": "-190px",
+          "offset-x": "20px"
         },
       },
       "series": [
@@ -1830,6 +1830,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getQrtEPSConfig(dates, values) {
+    const seriesA = [values[0][0], values[1][0], values[2][0]];
+    const seriesB = [values[0][1], values[1][1], values[2][1]];
+    const seriesC = [values[0][2], values[1][2], values[2][2]];
     return {
       "type": "bar",
       "background-color": "white",
@@ -1865,31 +1868,31 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         "label": {
           "font-family": "arial",
-          "font-angle":0,
+          "font-angle": 0,
           "bold": true,
           "font-size": "14px",
           "font-color": "#7E7E7E",
-          "offset-y":"-190px",
-          "offset-x":"20px"
+          "offset-y": "-190px",
+          "offset-x": "20px"
         },
       },
       "series": [
         {
-          "values": values[0],
+          "values": seriesA,
           "alpha": 0.95,
           "borderRadiusTopLeft": 7,
           "background-color": "#8993c7",
           "text": "Apple"
         },
         {
-          "values": values[1],
+          "values": seriesB,
           "alpha": 0.95,
           "borderRadiusTopLeft": 7,
           "background-color": "#8993c7",
           "text": "Apple"
         },
         {
-          "values": values[2],
+          "values": seriesC,
           "alpha": 0.95,
           "borderRadiusTopLeft": 7,
           "background-color": "#8993c7",
