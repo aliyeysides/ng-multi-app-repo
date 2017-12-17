@@ -637,7 +637,7 @@ declare var zingchart: any;
               <h3>Annual Revenue</h3>
             </div>
             <div class="chart">
-              <!--<cpt-zingchart></cpt-zingchart>-->
+              <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
             </div>
           </div>
 
@@ -1153,6 +1153,14 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     height: undefined,
     width: undefined
   };
+  annualRevenueChart: ZingChart = {
+    id: 'annualRevenueChart',
+    data: {
+      graphset: []
+    },
+    height: undefined,
+    width: undefined
+  };
 
   scrollLeftHeadlines: number;
   headlinePageNumber: number = 1;
@@ -1239,12 +1247,27 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
           const epsSurprises = research['EPS Surprises'];
 
+          const revDates = research['Revenue&EarningsGrowth']['labels'];
+          const annualRev = research['Revenue&EarningsGrowth']['Revenue(M)']
+            .map(x => parseFloat(x.replace(/,/g, '')));
+
           this.epsSurprisesChart = {
             id: 'epsSurprisesChart',
             data: {
               layout: "vertical",
               graphset: [
                 this.getEPSSurprisesConfig(epsSurprises)
+              ]
+            },
+            height: undefined,
+            width: undefined
+          };
+          this.annualRevenueChart = {
+            id: 'annualRevenueChart',
+            data: {
+              layout: "vertical",
+              graphset: [
+                this.getAnnualRevenueConfig(revDates, annualRev)
               ]
             },
             height: undefined,
@@ -2012,12 +2035,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "text": 'Estimate',
           "alpha": 0.95,
           "borderRadiusTopLeft": 7,
-          "marker":{
-            "type":"circle",
-            "border-width":0,
-            "size":10,
-            "background-color":"#328ad9",
-            "shadow":false
+          "marker": {
+            "type": "circle",
+            "border-width": 0,
+            "size": 10,
+            "background-color": "#328ad9",
+            "shadow": false
           },
         },
         {
@@ -2025,12 +2048,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "text": 'Actual',
           "alpha": 0.95,
           "borderRadiusTopLeft": 7,
-          "marker":{
-            "type":"circle",
-            "border-width":0,
-            "size":10,
-            "background-color":"#d95039",
-            "shadow":false
+          "marker": {
+            "type": "circle",
+            "border-width": 0,
+            "size": 10,
+            "background-color": "#d95039",
+            "shadow": false
           },
         },
         // {
@@ -2045,6 +2068,67 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         //     "shadow":false
         //   },
         // }
+      ]
+    }
+  }
+
+  getAnnualRevenueConfig(dates, values) {
+    return {
+      "type": "bar",
+      "background-color": "white",
+      "tooltip": {
+        "text": "$%v (M)"
+      },
+      "plotarea": {
+        "margin": "80 60 100 60",
+        "y": "125px"
+      },
+      "plot": {
+        "animation": {
+          "effect": "ANIMATION_SLIDE_BOTTOM"
+        }
+      },
+      "scale-x": {
+        "line-color": "#7E7E7E",
+        "labels": dates,
+        "item": {
+          "font-color": "#7e7e7e"
+        },
+        "guide": {
+          "visible": false
+        }
+      },
+      "scale-y": {
+        "line-color": "#7E7E7E",
+        "item": {
+          "font-color": "#7e7e7e"
+        },
+        "guide": {
+          "visible": true
+        },
+        "label": {
+          "font-family": "arial",
+          "font-angle": 0,
+          "bold": true,
+          "font-size": "14px",
+          "font-color": "#7E7E7E",
+          "offset-y": "-190px",
+          "offset-x": "20px"
+        },
+      },
+      "series": [
+        {
+          "values": values,
+          "alpha": 0.95,
+          "borderRadiusTopLeft": 7,
+          "background-color": "#19c736",
+          "rules": [
+            {
+              rule: '%v < 0',
+              "background-color": "#c7133e",
+            }
+          ]
+        }
       ]
     }
   }
