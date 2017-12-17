@@ -321,7 +321,6 @@ declare var zingchart: any;
           <div class="col-12">
             <h1>Financials: <span>{{ summary ? summary['financialContextSummary'][0]['status'] : null }}</span></h1>
           </div>
-
           <div class="col-12 stockview__PGR">
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
@@ -401,109 +400,123 @@ declare var zingchart: any;
               </li>
             </ul>
           </div>
+
+          <ng-container *ngIf="collapse['financials'] == true">
+            <div class="col-12">
+              <div class="divider__long"></div>
+            </div>
+            <div class="col-12 copy-block">
+              <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s</span>
+                {{ summary ? summary['financialContextSummary'][0]['generalSentence'] : null }}</p>
+              <p class="paragraph">{{ summary ? summary['financialContextSummary'][0]['explanatorySentence'] : null
+                }}</p>
+            </div>
+            <div class="col-12 data-table">
+              <div class="row">
+                <div class="col-6 col-md-3">
+                  <table>
+                    <th colspan="2">Assets &amp; Liabilities</th>
+                    <tr>
+                      <td class="label">Current Ratio</td>
+                      <td class="data">{{ research ? research['Assets and Liabilities']['Current Ratio'] : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">LT Debt/ Equity</td>
+                      <td class="data">{{ research ? research['Assets and Liabilities']['LT Debt/Equity'] : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">% Earn on Eqty</td>
+                      <td class="data">{{ research ? research['Returns']['Return on Equity'] : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">Book Value</td>
+                      <td class="data">{{ research ? research['Valuation']['Price/Book'] : null }}</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-6 col-md-3">
+                  <table>
+                    <th colspan="2">Valuation</th>
+                    <tr>
+                      <td class="label">Price/Earnings</td>
+                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['P/E'] : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">PEG</td>
+                      <td class="data">{{ competitors ? competitors[0]['PEG'] : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">Price to Book</td>
+                      <td class="data">{{ research ? research['Valuation']['Price/Book'] : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">Price to Sales</td>
+                      <td class="data">{{ research ? research['Valuation']['Price/Sales'] : null }}</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-6 col-md-3">
+                  <table>
+                    <th colspan="2">Dividends</th>
+                    <tr>
+                      <td class="label">Div per Share</td>
+                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['dividend_per_share'] : null }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">Payout</td>
+                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['payout'] : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">Yield</td>
+                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['Yield'] : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">Dividend Growth Rate</td>
+                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['growth_rate'] : null }}</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-6 col-md-3">
+                  <table>
+                    <th colspan="2">Returns</th>
+                    <tr>
+                      <td class="label">On Investment</td>
+                      <td class="data">{{ research ? research['Returns']['Return on Invest'] : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">On Equity</td>
+                      <td class="data">{{ research ? research['Returns']['Return on Equity'] : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">1 Month Return</td>
+                      <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 4 Weeks'] : null }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">3 Month Return</td>
+                      <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 24 Weeks'] : null }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
           <div class="col-12">
             <div class="divider__long"></div>
           </div>
 
-          <div class="col-12 copy-block">
-            <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s</span>
-              {{ summary ? summary['financialContextSummary'][0]['generalSentence'] : null }}</p>
-            <p class="paragraph">{{ summary ? summary['financialContextSummary'][0]['explanatorySentence'] : null }}</p>
-          </div>
-
-          <div class="col-12 data-table">
-            <div class="row">
-              <div class="col-6 col-md-3">
-                <table>
-                  <th colspan="2">Assets &amp; Liabilities</th>
-                  <tr>
-                    <td class="label">Current Ratio</td>
-                    <td class="data">{{ research ? research['Assets and Liabilities']['Current Ratio'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">LT Debt/ Equity</td>
-                    <td class="data">{{ research ? research['Assets and Liabilities']['LT Debt/Equity'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">% Earn on Eqty</td>
-                    <td class="data">{{ research ? research['Returns']['Return on Equity'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">Book Value</td>
-                    <td class="data">{{ research ? research['Valuation']['Price/Book'] : null }}</td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-6 col-md-3">
-                <table>
-                  <th colspan="2">Valuation</th>
-                  <tr>
-                    <td class="label">Price/Earnings</td>
-                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['P/E'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">PEG</td>
-                    <td class="data">{{ competitors ? competitors[0]['PEG'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">Price to Book</td>
-                    <td class="data">{{ research ? research['Valuation']['Price/Book'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">Price to Sales</td>
-                    <td class="data">{{ research ? research['Valuation']['Price/Sales'] : null }}</td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-6 col-md-3">
-                <table>
-                  <th colspan="2">Dividends</th>
-                  <tr>
-                    <td class="label">Div per Share</td>
-                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['dividend_per_share'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">Payout</td>
-                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['payout'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">Yield</td>
-                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['Yield'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">Dividend Growth Rate</td>
-                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['growth_rate'] : null }}</td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-6 col-md-3">
-                <table>
-                  <th colspan="2">Returns</th>
-                  <tr>
-                    <td class="label">On Investment</td>
-                    <td class="data">{{ research ? research['Returns']['Return on Invest'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">On Equity</td>
-                    <td class="data">{{ research ? research['Returns']['Return on Equity'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">1 Month Return</td>
-                    <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 4 Weeks'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">3 Month Return</td>
-                    <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 24 Weeks'] : null }}
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 expand-collapse">
+          <div *ngIf="collapse['financials'] == true" (click)="toggleCollapse('financials')"
+               class="col-12 expand-collapse">
             <img src="./assets/imgs/icon_chevron--up.svg">
             <p>COLLAPSE</p>
+          </div>
+          <div *ngIf="collapse['financials'] == false" (click)="toggleCollapse('financials')"
+               class="col-12 expand-collapse">
+            <img src="./assets/imgs/icon_chevron--down.svg">
+            <p>EXPAND</p>
           </div>
 
           <div class="col-12">
@@ -602,46 +615,53 @@ declare var zingchart: any;
             <div class="divider__long"></div>
           </div>
 
-          <div class="col-12 copy-block">
-            <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s:</span>
-              {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
-            <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null }}</p>
-          </div>
+          <ng-container *ngIf="collapse['earnings']">
+            <div class="col-12 copy-block">
+              <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s:</span>
+                {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
+              <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null
+                }}</p>
+            </div>
+            <div class="col-12">
+              <div class="chart__header">
+                <h3>Annual EPS</h3>
+              </div>
+              <div class="chart">
+                <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="chart__header">
+                <h3>Quarterly EPS</h3>
+              </div>
+              <div class="chart">
+                <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="chart__header">
+                <h3>Earnings Announcement</h3>
+              </div>
+              <div class="chart">
+                <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="chart__header">
+                <h3>Annual Revenue</h3>
+              </div>
+              <div class="chart">
+                <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
+              </div>
+            </div>
+          </ng-container>
 
-          <div class="col-12">
-            <div class="chart__header">
-              <h3>Annual EPS</h3>
-            </div>
-            <div class="chart">
-              <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
-            </div>
+          <div *ngIf="collapse['earnings'] == true" (click)="toggleCollapse('earnings')" class="col-12 expand-collapse">
+            <img src="./assets/imgs/icon_chevron--up.svg">
+            <p>COLLAPSE</p>
           </div>
-          <div class="col-12">
-            <div class="chart__header">
-              <h3>Quarterly EPS</h3>
-            </div>
-            <div class="chart">
-              <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="chart__header">
-              <h3>Earnings Announcement</h3>
-            </div>
-            <div class="chart">
-              <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="chart__header">
-              <h3>Annual Revenue</h3>
-            </div>
-            <div class="chart">
-              <!--<cpt-zingchart></cpt-zingchart>-->
-            </div>
-          </div>
-
-          <div class="col-12 expand-collapse">
+          <div *ngIf="collapse['earnings'] == false" (click)="toggleCollapse('earnings')"
+               class="col-12 expand-collapse">
             <img src="./assets/imgs/icon_chevron--down.svg">
             <p>EXPAND</p>
           </div>
@@ -739,81 +759,91 @@ declare var zingchart: any;
             <div class="divider__long"></div>
           </div>
 
-          <div class="col-12 copy-block">
-            <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['generalSentence'] : null }}</p>
-            <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['explanatorySentence'] : null
-              }}</p>
-          </div>
-
-          <div class="col-12 stock-info">
-            <div class="row data-table">
-              <div class="col-6 col-sm-3">
-                <table>
-                  <th colspan="2">Price Hi/Lo</th>
-                  <tr>
-                    <td class="label">52 wk high</td>
-                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['52 Wk Hi'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">52 wk low</td>
-                    <td class="data">{{ symbolData ? symbolData['fundamentalData']['52 Wk Lo'] : null }}</td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-6 col-sm-3">
-                <table>
-                  <th colspan="2">Price % Chg</th>
-                  <tr>
-                    <td class="label">% chg 4 wk rel S&amp;P</td>
-                    <td class="data">
-                      {{ research ? research['PriceActivity2']['% Change Price - 4 Wks Rel to S&P'] : null }}
-                    </td>
-                  <tr>
-                    <td class="label">% chg 24 wk rel S&amp;P</td>
-                    <td class="data">
-                      {{ research ? research['PriceActivity2']['% Change Price - 24 Wks Rel to S&P'] : null }}
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-6 col-sm-3">
-                <table>
-                  <th colspan="2">Volume Activity</th>
-                  <tr>
-                    <td class="label">avg. vol 20 days</td>
-                    <td class="data">{{ research ? research['VolumeActivity']['Average Volume 20 Days'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">avg. vol 90 days</td>
-                    <td class="data">{{ research ? research['VolumeActivity']['Average Volume 90 Days'] : null }}</td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-6 col-sm-3">
-                <table>
-                  <th colspan="2">Volatility Rel to Mkt</th>
-                  <tr>
-                    <td class="label">% Change YTD Rel S&P 500</td>
-                    <td class="data">{{ research ? research['PriceActivity1']['% Change YTD Rel S&P 500'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">Chaikin Money Flow Persistency</td>
-                    <td class="data">{{ research ? research['VolumeActivity']['Chaikin Money Flow Persistency'] : null
-                      }}
-                    </td>
-                  </tr>
-                </table>
+          <ng-container *ngIf="collapse['technicals']">
+            <div class="col-12 copy-block">
+              <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['generalSentence'] : null }}</p>
+              <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['explanatorySentence'] : null
+                }}</p>
+            </div>
+            <div class="col-12 stock-info">
+              <div class="row data-table">
+                <div class="col-6 col-sm-3">
+                  <table>
+                    <th colspan="2">Price Hi/Lo</th>
+                    <tr>
+                      <td class="label">52 wk high</td>
+                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['52 Wk Hi'] : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">52 wk low</td>
+                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['52 Wk Lo'] : null }}</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-6 col-sm-3">
+                  <table>
+                    <th colspan="2">Price % Chg</th>
+                    <tr>
+                      <td class="label">% chg 4 wk rel S&amp;P</td>
+                      <td class="data">
+                        {{ research ? research['PriceActivity2']['% Change Price - 4 Wks Rel to S&P'] : null }}
+                      </td>
+                    <tr>
+                      <td class="label">% chg 24 wk rel S&amp;P</td>
+                      <td class="data">
+                        {{ research ? research['PriceActivity2']['% Change Price - 24 Wks Rel to S&P'] : null }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-6 col-sm-3">
+                  <table>
+                    <th colspan="2">Volume Activity</th>
+                    <tr>
+                      <td class="label">avg. vol 20 days</td>
+                      <td class="data">{{ research ? research['VolumeActivity']['Average Volume 20 Days'] : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">avg. vol 90 days</td>
+                      <td class="data">{{ research ? research['VolumeActivity']['Average Volume 90 Days'] : null }}</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-6 col-sm-3">
+                  <table>
+                    <th colspan="2">Volatility Rel to Mkt</th>
+                    <tr>
+                      <td class="label">% Change YTD Rel S&P 500</td>
+                      <td class="data">{{ research ? research['PriceActivity1']['% Change YTD Rel S&P 500'] : null }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">Chaikin Money Flow Persistency</td>
+                      <td class="data">{{ research ? research['VolumeActivity']['Chaikin Money Flow Persistency'] : null
+                        }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
               </div>
             </div>
-          </div>
+          </ng-container>
 
-          <div class="col-12 expand-collapse">
+          <div *ngIf="collapse['technicals'] == true" (click)="toggleCollapse('technicals')"
+               class="col-12 expand-collapse">
             <img src="./assets/imgs/icon_chevron--up.svg">
             <p>COLLAPSE</p>
           </div>
+          <div *ngIf="collapse['technicals'] == false" (click)="toggleCollapse('technicals')"
+               class="col-12 expand-collapse">
+            <img src="./assets/imgs/icon_chevron--down.svg">
+            <p>EXPAND</p>
+          </div>
+
           <div class="col-12">
             <div class="divider__full"></div>
           </div>
+
         </div>
 
         <!-- BREAKDOWN - EXPERTS -->
@@ -901,98 +931,112 @@ declare var zingchart: any;
               </li>
             </ul>
           </div>
+
+          <ng-container *ngIf="collapse['experts']">
+            <div class="col-12">
+              <div class="divider__long"></div>
+            </div>
+            <div class="col-12 copy-block">
+              <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['generalSentence'] : null
+                }}</p>
+              <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['explanatorySentence'] : null
+                }}</p>
+            </div>
+            <div class="col-12">
+              <div class="row data-table">
+                <div class="col-12 col-sm-6">
+                  <table>
+                    <th colspan="4">Earnings Estimate Revisions</th>
+                    <tr>
+                      <td class="label"></td>
+                      <td class="label text-center">Current</td>
+                      <td class="label text-center">7d Ago</td>
+                      <td class="label text-center">% change</td>
+                    </tr>
+                    <tr>
+                      <td class="label text-left">Current Quarter</td>
+                      <td class="data text-center">
+                        {{ research ? research['Earning Estimate Revisions']['Current Qtr'][0] : null }}
+                      </td>
+                      <td class="data text-center">
+                        {{ research ? research['Earning Estimate Revisions']['Current Qtr'][1] : null }}
+                      </td>
+                      <td class="data text-center">
+                        {{ research ? research['Earning Estimate Revisions']['Current Qtr'][2] : null }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label text-left">Next Quarter</td>
+                      <td class="data text-center">
+                        {{ research ? research['Earning Estimate Revisions']['Next Qtr'][0] : null }}
+                      </td>
+                      <td class="data text-center">
+                        {{ research ? research['Earning Estimate Revisions']['Next Qtr'][1] : null }}
+                      </td>
+                      <td class="data text-center">
+                        {{ research ? research['Earning Estimate Revisions']['Next Qtr'][2] : null }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-5 col-sm-3">
+                  <table class="table--short-interest">
+                    <th colspan="1">Short Interest</th>
+                    <tr>
+                      <td class="greyed-out"
+                          [ngClass]="{'red': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] < 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] >= 3 : null }">
+                        HIGH
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="greyed-out"
+                          [ngClass]="{'neutral': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] === 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] != 3 : null  }">
+                        MED
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        [ngClass]="{'green': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] > 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] <= 3 : null  }">
+                        LOW
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-7 col-sm-3">
+                  <table>
+                    <th colspan="2">Recommendations</th>
+                    <tr>
+                      <td class="label">This week</td>
+                      <td class="data">{{ research ? research['Analyst Recommendations']['Mean this Week'] : null }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">Last Week</td>
+                      <td class="data">{{ research ? research['Analyst Recommendations']['Mean Last Week'] : null }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">5 Weeks Ago</td>
+                      <td class="data">{{ research ? research['Analyst Recommendations']['Mean 5 Weeks Ago'] : null }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
           <div class="col-12">
             <div class="divider__long"></div>
           </div>
 
-          <div class="col-12 copy-block">
-            <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['generalSentence'] : null }}</p>
-            <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['explanatorySentence'] : null
-              }}</p>
+          <div *ngIf="collapse['experts'] == true" (click)="toggleCollapse('experts')"
+               class="col-12 expand-collapse">
+            <img src="./assets/imgs/icon_chevron--up.svg">
+            <p>COLLAPSE</p>
           </div>
-
-          <div class="col-12">
-            <div class="row data-table">
-              <div class="col-12 col-sm-6">
-                <table>
-                  <th colspan="4">Earnings Estimate Revisions</th>
-                  <tr>
-                    <td class="label"></td>
-                    <td class="label text-center">Current</td>
-                    <td class="label text-center">7d Ago</td>
-                    <td class="label text-center">% change</td>
-                  </tr>
-                  <tr>
-                    <td class="label text-left">Current Quarter</td>
-                    <td class="data text-center">
-                      {{ research ? research['Earning Estimate Revisions']['Current Qtr'][0] : null }}
-                    </td>
-                    <td class="data text-center">
-                      {{ research ? research['Earning Estimate Revisions']['Current Qtr'][1] : null }}
-                    </td>
-                    <td class="data text-center">
-                      {{ research ? research['Earning Estimate Revisions']['Current Qtr'][2] : null }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="label text-left">Next Quarter</td>
-                    <td class="data text-center">
-                      {{ research ? research['Earning Estimate Revisions']['Next Qtr'][0] : null }}
-                    </td>
-                    <td class="data text-center">
-                      {{ research ? research['Earning Estimate Revisions']['Next Qtr'][1] : null }}
-                    </td>
-                    <td class="data text-center">
-                      {{ research ? research['Earning Estimate Revisions']['Next Qtr'][2] : null }}
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-5 col-sm-3">
-                <table class="table--short-interest">
-                  <th colspan="1">Short Interest</th>
-                  <tr>
-                    <td class="greyed-out"
-                        [ngClass]="{'red': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] < 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] >= 3 : null }">
-                      HIGH
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="greyed-out"
-                        [ngClass]="{'neutral': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] === 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] != 3 : null  }">
-                      MED
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      [ngClass]="{'green': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] > 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] <= 3 : null  }">
-                      LOW
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-7 col-sm-3">
-                <table>
-                  <th colspan="2">Recommendations</th>
-                  <tr>
-                    <td class="label">This week</td>
-                    <td class="data">{{ research ? research['Analyst Recommendations']['Mean this Week'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">Last Week</td>
-                    <td class="data">{{ research ? research['Analyst Recommendations']['Mean Last Week'] : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">5 Weeks Ago</td>
-                    <td class="data">{{ research ? research['Analyst Recommendations']['Mean 5 Weeks Ago'] : null }}
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 expand-collapse">
+          <div *ngIf="collapse['experts'] == false" (click)="toggleCollapse('experts')"
+               class="col-12 expand-collapse">
             <img src="./assets/imgs/icon_chevron--down.svg">
             <p>EXPAND</p>
           </div>
@@ -1153,9 +1197,23 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     height: undefined,
     width: undefined
   };
+  annualRevenueChart: ZingChart = {
+    id: 'annualRevenueChart',
+    data: {
+      graphset: []
+    },
+    height: undefined,
+    width: undefined
+  };
 
   scrollLeftHeadlines: number;
   headlinePageNumber: number = 1;
+  collapse: object = {
+    'financials': true,
+    'earnings': true,
+    'technicals': true,
+    'experts': true
+  };
   loading: Subscription;
 
   constructor(private reportService: ReportService,
@@ -1239,12 +1297,27 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
           const epsSurprises = research['EPS Surprises'];
 
+          const revDates = research['Revenue&EarningsGrowth']['labels'];
+          const annualRev = research['Revenue&EarningsGrowth']['Revenue(M)']
+            .map(x => parseFloat(x.replace(/,/g, '')));
+
           this.epsSurprisesChart = {
             id: 'epsSurprisesChart',
             data: {
               layout: "vertical",
               graphset: [
                 this.getEPSSurprisesConfig(epsSurprises)
+              ]
+            },
+            height: undefined,
+            width: undefined
+          };
+          this.annualRevenueChart = {
+            id: 'annualRevenueChart',
+            data: {
+              layout: "vertical",
+              graphset: [
+                this.getAnnualRevenueConfig(revDates, annualRev)
               ]
             },
             height: undefined,
@@ -1327,6 +1400,14 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       .filter((val, idx) => recentlyViewed.symbols.indexOf(val) == idx);
     if (recentlyViewed.symbols.length > 3) recentlyViewed.symbols.shift();
     localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed))
+  }
+
+  toggleCollapse(key: string) {
+    if (!this.collapse[key]) {
+      this.collapse[key] = true;
+      return;
+    }
+    this.collapse[key] = !this.collapse[key];
   }
 
   appendPGRImage(symbolData) {
@@ -2012,12 +2093,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "text": 'Estimate',
           "alpha": 0.95,
           "borderRadiusTopLeft": 7,
-          "marker":{
-            "type":"circle",
-            "border-width":0,
-            "size":10,
-            "background-color":"#328ad9",
-            "shadow":false
+          "marker": {
+            "type": "circle",
+            "border-width": 0,
+            "size": 10,
+            "background-color": "#328ad9",
+            "shadow": false
           },
         },
         {
@@ -2025,12 +2106,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "text": 'Actual',
           "alpha": 0.95,
           "borderRadiusTopLeft": 7,
-          "marker":{
-            "type":"circle",
-            "border-width":0,
-            "size":10,
-            "background-color":"#d95039",
-            "shadow":false
+          "marker": {
+            "type": "circle",
+            "border-width": 0,
+            "size": 10,
+            "background-color": "#d95039",
+            "shadow": false
           },
         },
         // {
@@ -2045,6 +2126,67 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         //     "shadow":false
         //   },
         // }
+      ]
+    }
+  }
+
+  getAnnualRevenueConfig(dates, values) {
+    return {
+      "type": "bar",
+      "background-color": "white",
+      "tooltip": {
+        "text": "$%v (M)"
+      },
+      "plotarea": {
+        "margin": "80 60 100 60",
+        "y": "125px"
+      },
+      "plot": {
+        "animation": {
+          "effect": "ANIMATION_SLIDE_BOTTOM"
+        }
+      },
+      "scale-x": {
+        "line-color": "#7E7E7E",
+        "labels": dates,
+        "item": {
+          "font-color": "#7e7e7e"
+        },
+        "guide": {
+          "visible": false
+        }
+      },
+      "scale-y": {
+        "line-color": "#7E7E7E",
+        "item": {
+          "font-color": "#7e7e7e"
+        },
+        "guide": {
+          "visible": true
+        },
+        "label": {
+          "font-family": "arial",
+          "font-angle": 0,
+          "bold": true,
+          "font-size": "14px",
+          "font-color": "#7E7E7E",
+          "offset-y": "-190px",
+          "offset-x": "20px"
+        },
+      },
+      "series": [
+        {
+          "values": values,
+          "alpha": 0.95,
+          "borderRadiusTopLeft": 7,
+          "background-color": "#19c736",
+          "rules": [
+            {
+              rule: '%v < 0',
+              "background-color": "#c7133e",
+            }
+          ]
+        }
       ]
     }
   }
