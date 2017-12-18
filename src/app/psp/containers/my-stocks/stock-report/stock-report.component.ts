@@ -1515,7 +1515,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineStyle: 'solid',
           lineColor: "#eee"
         },
-        // values: values,
         item: {
           fontColor: "#ddd",
           fontFamily: "Open Sans"
@@ -1791,6 +1790,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       "backgroundColor": "#fff",
       "scaleX": {
         "values": dates,
+        "auto-fit": true,
         "lineWidth": 0,
         "lineColor": "none",
         label: {
@@ -1828,6 +1828,23 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       zoom: {
         shared: true
       },
+      crosshairX: {
+        shared: true,
+        plotLabel: {
+          multiple: false,
+          visible: false,
+          fontFamily: "Open Sans",
+          backgroundColor: "#BBB",
+          rules: [
+            {
+              rule: '%v == 100',
+              text: '%t',
+              visible: true,
+            }
+          ],
+          y: 0
+        }
+      },
       "tooltip": {
         "htmlMode": true,
         "backgroundColor": "none",
@@ -1839,21 +1856,25 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         {
           "values": veryBullish,
           "alpha": 1,
+          "text": 'Very Bullish',
           "background-color": "#30f300",
           "hover-state": {
-            backgroundColor: '#26a025'
+            backgroundColor: '#26a025',
+            text: 'Very Bullish'
           }
         },
         {
           "values": bullish,
+          "text": 'Bullish',
           "alpha": 1,
-          "background-color": "#db4437",
+          "background-color": "#77db3f",
           "hover-state": {
-            backgroundColor: '#901E15'
+            backgroundColor: '#1a901d'
           }
         },
         {
           "values": neutral,
+          "text": 'Neutral',
           "alpha": 1,
           "background-color": "#dbb237",
           "hover-state": {
@@ -1862,6 +1883,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         {
           "values": bearish,
+          "text": 'Bearish',
           "alpha": 1,
           "background-color": "#db513d",
           "hover-state": {
@@ -1870,6 +1892,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         {
           "values": veryBearish,
+          "text": 'Very Bearish',
           "alpha": 1,
           "background-color": "#db4437",
           "hover-state": {
