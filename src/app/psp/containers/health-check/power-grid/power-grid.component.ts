@@ -57,7 +57,7 @@ import {Router} from '@angular/router';
             </div>
           </div>
 
-          <div class="col-12 col-md-6 order-md-first powerGrid">
+          <div class="col-12 col-md-6 flex-md-first powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <h4>WEAK STOCKS</h4>
@@ -141,11 +141,11 @@ import {Router} from '@angular/router';
       </div>
       <div class="row">
         <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-          <img src="./assets/imgs/icon_chevron--up.svg">
+          <img src="./assets/imgs/ux__collapse--circle.svg">
           <p>COLLAPSE</p>
         </div>
         <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-          <img src="./assets/imgs/icon_chevron--down.svg">
+          <img src="./assets/imgs/ux__expand--circle.svg">
           <p>EXPAND</p>
         </div>
       </div>

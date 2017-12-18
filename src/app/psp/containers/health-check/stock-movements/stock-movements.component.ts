@@ -104,12 +104,12 @@ interface FilterFunc {
         </div>
       </div>
       <div class="row">
-        <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-          <img src="./assets/imgs/icon_chevron--up.svg">
+        <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse hidden-md-up">
+          <img src="./assets/imgs/ux__collapse--circle.svg">
           <p>COLLAPSE</p>
         </div>
-        <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-          <img src="./assets/imgs/icon_chevron--down.svg">
+        <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse hidden-md-up">
+          <img src="./assets/imgs/ux__expand--circle.svg">
           <p>EXPAND</p>
         </div>
       </div>

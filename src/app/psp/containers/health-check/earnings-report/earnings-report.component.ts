@@ -82,7 +82,7 @@ interface EarningsReportObj {
               </li>
             </ng-container>
             <ng-container *ngIf="!allSurprises.length">
-              <p>No Surprises.</p>
+              <p class="empty-chart">No Surprises.</p>
             </ng-container>
           </ul>
         </div>
@@ -131,7 +131,7 @@ interface EarningsReportObj {
               </li>
             </ng-container>
             <ng-container *ngIf="!allRevisions.length">
-              <p>No Revisions.</p>
+              <p class="empty-chart">No Revisions.</p>
             </ng-container>
           </ul>
         </div>
@@ -143,11 +143,11 @@ interface EarningsReportObj {
 
       <div class="row">
         <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-          <img src="./assets/imgs/icon_chevron--up.svg">
+          <img src="./assets/imgs/ux__collapse--circle.svg">
           <p>COLLAPSE</p>
         </div>
         <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-          <img src="./assets/imgs/icon_chevron--down.svg">
+          <img src="./assets/imgs/ux__expand--circle.svg">
           <p>EXPAND</p>
         </div>
       </div>
