@@ -21,6 +21,189 @@ import {Router} from '@angular/router';
       <div *ngIf="!collapse" class="container">
 
         <div class="row">
+          <div class="col-12 powergrid__container">
+            <table class="powergrid__table">
+              <tr class="powergrid__row" id="industry-1">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--strong">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-2">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--strong">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-3">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--strong">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-4">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--strong">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-5">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--strong">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-6">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--strong">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-7">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--neutral">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-8">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--neutral">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-9">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--weak">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-10">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--weak">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-11">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--weak">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-12">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--weak">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-13">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--weak">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-14">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--weak">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-15">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--weak">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+              <tr class="powergrid__row" id="industry-16">
+                <td class="bear">
+                  <p class="ticker"></p>
+                </td>
+                <td class="bull">
+                  <p class="ticker"></p>
+                </td>
+                <td class="industry industry--weak">
+                  <p class="industry"></p>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="row">
           <div class="col-12">
             <div class="row">
               <div class="col-5"></div>
