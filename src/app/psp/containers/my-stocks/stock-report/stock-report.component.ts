@@ -1235,6 +1235,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
           const closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse();
           const dates = data['five_year_chart_data']['formatted_dates'].reverse();
+          this.data['one_year_chart_data']['formatted_dates'].reverse();
 
           const pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
           const cmf = data['five_year_chart_data']['cmf'].map(x => +x).reverse();
@@ -1359,7 +1360,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     this.current = '5Y';
 
     const closePrices = this.data['five_year_chart_data']['close_price'].map(x => +x).reverse();
-    const dates = this.data['five_year_chart_data']['formatted_dates'].reverse();
+    const dates = this.data['five_year_chart_data']['formatted_dates'];
 
     const pgrData = this.data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
     const cmf = this.data['five_year_chart_data']['cmf'].map(x => +x).reverse();
@@ -1400,8 +1401,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           break;
       }
 
-    const dates = this.data['one_year_chart_data']['formatted_dates'].reverse()
-      .slice(this.data['one_year_chart_data']['formatted_dates'].length-cut);
+    const dates = this.data['one_year_chart_data']['formatted_dates'].slice(this.data['one_year_chart_data']['formatted_dates'].length-cut);
     const closePrices = this.data['one_year_chart_data']['close_price'].map(x => +x).reverse()
       .slice(this.data['one_year_chart_data']['close_price'].length-cut);
     const pgrData = this.data['one_year_pgr_data']['pgr_data'].map(x => +x).reverse()
@@ -1464,13 +1464,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   scrollRight() {
-    this.headlinePageNumber < 7 ? this.headlinePageNumber++ : null;
     this.scrollLeftHeadlines = this.newsList.nativeElement.scrollLeft;
     this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines += 350, top: 0, behavior: 'smooth'});
   }
 
   scrollLeft() {
-    this.headlinePageNumber != 0 ? this.headlinePageNumber-- : null;
     this.scrollLeftHeadlines = this.newsList.nativeElement.scrollLeft;
     this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines -= 350, top: 0, behavior: 'smooth'});
   }
@@ -1658,8 +1656,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       type: 'line',
       height: 80,
       x: 0,
-      // y: 321,
-      // backgroundColor: "transparent",
       y: 430,
       backgroundColor: "#fff",
       plotarea: {
