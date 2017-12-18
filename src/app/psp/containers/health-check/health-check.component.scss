@@ -647,35 +647,40 @@
 
 			.powergrid__row#industry-1 {
 				.bear {
-					background-image: linear-gradient(60deg, #FD4500 5%, #00C04E 35%);
+					background-image: linear-gradient(60deg, #FD4500 3%, #00C04E 33%);
 				}
 			}
 			.powergrid__row#industry-2 {
 				.bear {
-					background-image: linear-gradient(60deg, #FD4500 17%, #00C04E 47%);
+					background-image: linear-gradient(60deg, #FD4500 13%, #00C04E 43%);
 				}
 			}
 			.powergrid__row#industry-3 {
 				.bear {
-					background-image: linear-gradient(60deg, #FD4500 29%, #00C04E 59%);
+					background-image: linear-gradient(60deg, #FD4500 23%, #00C04E 53%);
 				}
 			}
 			.powergrid__row#industry-4 {
 				.bear {
-					background-image: linear-gradient(60deg, #FD4500 41%, #00C04E 71%);
+					background-image: linear-gradient(60deg, #FD4500 33%, #00C04E 63%);
 				}
 			}
 			.powergrid__row#industry-5 {
 				.bear {
-					background-image: linear-gradient(60deg, #FD4500 53%, #00C04E 84%);
+					background-image: linear-gradient(60deg, #FD4500 43%, #00C04E 73%);
 				}
 			}
 			.powergrid__row#industry-6 {
 				.bear {
-					background-image: linear-gradient(60deg, #FD4500 65%, #00C04E 95%);
+					background-image: linear-gradient(60deg, #FD4500 53%, #00C04E 93%);
 				}
 			}
-			.powergrid__row#industry-7,  .powergrid__row#industry-8 {
+			.powergrid__row#industry-7 {
+				.bear {
+					background-image: linear-gradient(60deg, #FD4500 63%, #00C04E 93%);
+				}
+			}
+			.powergrid__row#industry-8,  .powergrid__row#industry-9 {
 				.bear, .bull {
 					background-image: linear-gradient(123deg, #FDD310 0%, #FFB100 100%);
 				}
