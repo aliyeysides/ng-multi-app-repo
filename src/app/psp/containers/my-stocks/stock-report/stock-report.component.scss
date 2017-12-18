@@ -228,7 +228,7 @@
 			margin: 0 5% 0 15%;
 
 			@media screen AND (min-width:768px) {
-				font-size: 48px;
+				font-size: 40px;
 				margin: 0 5% 0 9%;
 			}
 		}
@@ -241,7 +241,7 @@
 			font-size: 18px;
 
 			@media screen AND (min-width:768px) {
-				font-size: 36px;
+				font-size: 32px;
 			}
 		}
 	}
@@ -303,6 +303,10 @@
 		margin-top:10px;
 		margin-bottom:25px;
 		font-size: 32px;
+
+		@media screen AND (min-width: 768px) {
+			font-size: 42px;
+		}
 	}
 
 	.label {
@@ -384,12 +388,19 @@
 	text-align: center;
 	margin: 10px 0 5px;
 
+	@media screen AND (min-width:768px) {
+		margin:20px 0 5px;
+	}
+
 	.label {
-		@media screen AND (min-width:992px) {
+		line-height: 1;
+		font-weight: 600;
+
+		@media screen AND (min-width:1200px) {
 			display: inline-block;
 			margin-right:5%;
+			vertical-align: super;
 		}
-		line-height: 1;
 
 		i {
 			color: #1199ff;
@@ -398,7 +409,7 @@
 
 	.rating {
 
-		@media screen AND (min-width:768px) {
+		@media screen AND (min-width:1200px) {
 			display: inline-block;
 		}
 
@@ -428,11 +439,17 @@
 
 
 .stock-info--price {
+	padding-bottom: 10px;
+
+	@media screen AND (min-width: 768px) {
+		border-left:4px dotted #eee;
+		margin-top: 10px;
+	}
 	.current-price {
 		font-size: 64px;
 		line-height: 1;
 		font-weight: 400;
-		margin-top: 20px;
+		margin-top: 10px;
 
 		sub {
 			font-size: 36px;
@@ -459,7 +476,7 @@
 
 
 .stock-info--chart-toggle {
-	margin: 10px 0;
+	margin: 0px 0 10px;
 
 	.chart-header__breakdown {
 		font-size: 20px;
@@ -505,7 +522,10 @@
 
 
 .stock-info--stats {
+	padding:20px 0;
+
 	.label {
+		color:#666;
 	}
 
 	.data {
@@ -542,21 +562,24 @@
 
 
 .stock-info--news {
+	padding:20px 0 10px;
+
 	h2 {
 		margin-bottom: 0px;
 	}
 
 	.news__slider {
-		width: calc(100%-30px);
+		width: 100%;
 	    list-style-type: none;
 	    margin: 0 auto;
 	    white-space: nowrap;
-	    overflow: hidden;
-	    overflow-x: scroll;
+	    overflow-y: hidden;
+	    overflow-x: auto;
 
 		li {
 			display: inline-block;
-			margin-right:15px;
+			width: 300px;
+			margin-right:50px;
 
 			.headline {
 				font-weight: 400;
@@ -582,6 +605,8 @@
 				font-weight: 400;
 				font-style: italic;
 				line-height: 35px;
+				padding-right: 10px;
+				text-transform: uppercase;
 			}
 		}
 
@@ -631,6 +656,11 @@
 	h1 {
 		margin: 25px 0 20px;
 		color:#484848;
+	}
+	.pgr__sliders {
+		@media screen AND (min-width: 1200px) {
+			padding-top:5px;
+		}
 	}
 }
 

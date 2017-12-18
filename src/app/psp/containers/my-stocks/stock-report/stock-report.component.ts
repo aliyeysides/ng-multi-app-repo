@@ -43,7 +43,7 @@ declare var zingchart: any;
             <div class="tab--slide"></div>
           </div>
 
-          <div class="col-12 col-md-7 flex-md-last">
+          <div class="col-12 col-md-7">
             <!-- STOCK VIEW TOP -->
             <div class="row no-gutters stock-info">
 
@@ -165,6 +165,7 @@ declare var zingchart: any;
         </div>
 
 
+
         <!-- STOCK VIEW CHART HEADER -->
         <div class="row stock-info stock-info--chart-toggle">
           <div class="col-12 hidden-md-down">
@@ -193,7 +194,7 @@ declare var zingchart: any;
 
         <!-- STOCK VIEW MAIN CHART -->
         <div class="row stock-info stock-info--chart">
-          <div class="col-12 bearish">
+          <div class="col-12" style="padding:0;">
             <!-- TODO: implement main chart -->
             <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
           </div>
@@ -234,11 +235,11 @@ declare var zingchart: any;
 
         <!-- STOCK VIEW STATS -->
         <div class="row stock-info stock-info--stats">
-          <div class="col-12 stock-industry">
+          <div class="col-12 col-lg-6 stock-industry">
             <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['industry_name'] : null }}</p>
             <p class="label">INDUSTRY</p>
           </div>
-          <div class="col-12 stock-industry">
+          <div class="col-12 col-lg-6 stock-industry">
             <p class="data">{{ research ? research['Details']['Sector'] : null }}</p>
             <p class="label">SECTOR</p>
           </div>
@@ -261,11 +262,11 @@ declare var zingchart: any;
           <div (click)="scrollLeft()" *ngIf="headlines?.length" class="col-1 chevron-slider chevron-slider--left">
             <img class="align-absolute" src="./assets/imgs/ui_chevron--left.svg">
           </div>
-          <ul *ngIf="!headlines?.length" class="news-panel__container">
+          <ul *ngIf="!headlines?.length" class="col-10 news-panel__container">
             <p class="news__none">There are currently no headlines for this symbol</p>
           </ul>
           <ul #newsList *ngIf="headlines?.length" class="col-10 news__slider">
-            <li *ngFor="let headline of headlines" class="container">
+            <li *ngFor="let headline of headlines" class="headline__container">
               <div class="row">
                 <div (click)="goToHeadline(headline)" class="col-12">
                   <p class="headline">{{ headline.title }}&nbsp;→</p>
@@ -281,12 +282,6 @@ declare var zingchart: any;
           </ul>
           <div (click)="scrollRight()" *ngIf="headlines?.length" class="col-1 chevron-slider chevron-slider--right">
             <img class="align-absolute" src="./assets/imgs/ui_chevron--right.svg">
-          </div>
-          <div class="col-12">
-            <div class="divider__long"></div>
-          </div>
-          <div class="col-12 news__pagination">
-            <!--<p>[ <span>{{ headlinePageNumber }}</span> of <span>{{ headlines?.length }}</span> ]</p>-->
           </div>
         </div>
         <div class="row">
@@ -316,9 +311,12 @@ declare var zingchart: any;
         <!-- BREAKDOWN - FINANCIALS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
-            <h1>Financials: <span>{{ summary ? summary['financialContextSummary'][0]['status'] : null }}</span></h1>
+            <h1>Financials: 
+              <span>{{ summary ? summary['financialContextSummary'][0]['status'] : null }}</span>
+            </h1>
           </div>
-          <div class="col-12 stockview__PGR">
+
+          <div class="col-12 col-lg-6 stockview__PGR ">
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row sliderBar-container">
@@ -399,10 +397,10 @@ declare var zingchart: any;
           </div>
 
           <ng-container *ngIf="collapse['financials'] == true">
-            <div class="col-12">
+            <div class="col-12 hidden-lg-up">
               <div class="divider__long"></div>
             </div>
-            <div class="col-12 copy-block">
+            <div class="col-12 col-lg-6 copy-block">
               <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s</span>
                 {{ summary ? summary['financialContextSummary'][0]['generalSentence'] : null }}</p>
               <p class="paragraph">{{ summary ? summary['financialContextSummary'][0]['explanatorySentence'] : null
@@ -840,7 +838,6 @@ declare var zingchart: any;
           <div class="col-12">
             <div class="divider__full"></div>
           </div>
-
         </div>
 
         <!-- BREAKDOWN - EXPERTS -->
@@ -1469,13 +1466,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   scrollRight() {
     this.headlinePageNumber < 7 ? this.headlinePageNumber++ : null;
     this.scrollLeftHeadlines = this.newsList.nativeElement.scrollLeft;
-    this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines += 312.5, top: 0, behavior: 'smooth'});
+    this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines += 350, top: 0, behavior: 'smooth'});
   }
 
   scrollLeft() {
     this.headlinePageNumber != 0 ? this.headlinePageNumber-- : null;
     this.scrollLeftHeadlines = this.newsList.nativeElement.scrollLeft;
-    this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines -= 312.5, top: 0, behavior: 'smooth'});
+    this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines -= 350, top: 0, behavior: 'smooth'});
   }
 
   getCloseConfig(dates, values) {
@@ -1486,6 +1483,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       x: 0,
       y: 0,
       crosshairX: {
+        lineWidth: 2,
+        lineColor: "#999",
         shared: true,
         plotLabel: {
           backgroundColor: "#b9e5fb",
@@ -1499,21 +1498,23 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           fontColor: "#484848",
           fontFamily: "Open Sans",
           backgroundColor: "#c8ebbb",
+          borderColor: "transparent",
         }
       },
       title: {
+        visible: false,
         text: this.stock,
         fontColor: "#484848",
         fontFamily: 'Open Sans',
         fontSize: 24,
         align: 'left',
-        offsetX: 40
+        offsetX: 40,
       },
       zoom: {
         shared: true
       },
       plotarea: {
-        margin: "60 50 40 50"
+        margin: "60 20 40 50"
       },
       plot: {
         marker: {
@@ -1535,8 +1536,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineColor: "#eee"
         },
         item: {
-          fontColor: "#ddd",
-          fontFamily: "Open Sans"
+          fontColor: "#999",
+          fontSize: "14",
+          fontWeight: "500",
+          fontFamily: "Rajdhani"
         },
         tick: {
           lineColor: "transparent",
@@ -1561,8 +1564,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           shared: true
         },
         item: {
-          fontColor: "#ddd",
-          fontFamily: "Open Sans"
+          fontColor: "#999",
+          fontSize: "14",
+          fontWeight: "500",
+          fontFamily: "Rajdhani"
         },
         tick: {
           lineColor: "transparent",
@@ -1585,10 +1590,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       type: 'line',
       height: 80,
       x: 0,
-      y: 430,
+      y: 400,
       backgroundColor: "#fff",
       plotarea: {
-        margin: "10 50 10 50"
+        margin: "10 20 10 50"
       },
       plot: {
         marker: {
@@ -1600,6 +1605,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         fontColor: "#ddd",
         fontFamily: "Open Sans",
         fontSize: "10",
+        fontWeight: "400",
       },
       tooltip: {
         visible: false,
@@ -1652,6 +1658,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       type: 'line',
       height: 80,
       x: 0,
+      // y: 321,
+      // backgroundColor: "transparent",
       y: 430,
       backgroundColor: "#fff",
       plotarea: {
@@ -1678,6 +1686,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         shared: true
       },
       crosshairX: {
+        lineWidth: 0,
         shared: true,
         scaleLabel: {
           visible: false

@@ -56,8 +56,8 @@
 		    position: absolute;
 		    z-index: 1000;
 		    float: left;
-		    min-width: 150px;
-		    padding: 0.5rem 0;
+		    min-width: 160px;
+		    padding: 5px 0;
 		    margin: 0;
 		    font-size: 22px;
 		    color: #484848;
@@ -69,11 +69,15 @@
 		    background-clip: padding-box;
 		    border: 0px solid #f0f0f0;
 		    border-top:0px solid #1199ff;
-		    border-radius: 10px;
+		    border-radius: 8px;
 			box-shadow: 0 6px 20px rgba(50, 50, 50, 0.25);
 
 			.dropdown-item {
 				font-weight: 600;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+				padding: 0.25rem 10px;
 
 				&:hover {
 					background-color: rgba(17,153,255, 0.1);
