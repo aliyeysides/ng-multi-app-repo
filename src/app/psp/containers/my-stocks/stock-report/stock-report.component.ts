@@ -1658,8 +1658,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       type: 'line',
       height: 80,
       x: 0,
-      y: 321,
-      backgroundColor: "transparent",
+      // y: 321,
+      // backgroundColor: "transparent",
       y: 430,
       backgroundColor: "#fff",
       plotarea: {
