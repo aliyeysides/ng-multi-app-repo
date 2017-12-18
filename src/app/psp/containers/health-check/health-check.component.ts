@@ -13,6 +13,7 @@ import {Observable} from 'rxjs/Observable';
 import {MarketsSummaryService} from '../../../services/markets-summary.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
+import {ReportService} from '../../../services/report.service';
 
 @Component({
   selector: 'cpt-health-check',
@@ -20,7 +21,7 @@ import {Subscription} from 'rxjs/Subscription';
     <!-- PANEL CONTENTS -->
     <div [ngBusy]="loading" class="container-fluid component component--healthcheck">
       <div class="row contents">
-
+        <button (click)="getPHCReportforListId()">pdf</button>
         <!-- HEALTH-CHECK - Intro -->
         <cpt-psp-portfolio-overview (listChanged)="listChanged()" [lists]="allUserLists" [calc]="calculations" [data]="prognosisData"></cpt-psp-portfolio-overview>
         <!-- HEALTH-CHECK - Stock Movements -->
@@ -81,6 +82,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService,
+              private reportService: ReportService,
               private marketsSummary: MarketsSummaryService) {
   }
 
@@ -224,6 +226,10 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
         }));
         this.dailySymbolList = this.dailySymbolList.slice(0); // hack to bypass dirty checking for non-primitives
       });
+  }
+
+  getPHCReportforListId() {
+    this.reportService.getPHCReportforListId(this._listId).subscribe();
   }
 
 }

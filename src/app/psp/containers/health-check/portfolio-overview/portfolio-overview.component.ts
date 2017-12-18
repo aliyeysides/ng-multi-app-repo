@@ -3,6 +3,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {PortfolioStatus, PrognosisData} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 import {HealthCheckService} from '../../../../services/health-check.service';
+import {ReportService} from '../../../../services/report.service';
 
 @Component({
   selector: 'cpt-psp-portfolio-overview',
@@ -110,7 +111,8 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   prognosisData: PrognosisData;
   calculations: PortfolioStatus;
 
-  constructor(private healthCheck: HealthCheckService) {
+  constructor(private healthCheck: HealthCheckService,
+              private reportService: ReportService) {
   }
 
   ngOnInit() {
@@ -151,5 +153,4 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
     this.healthCheck.currentList = this.selectedListName;
     this.listChanged.emit();
   }
-
 }

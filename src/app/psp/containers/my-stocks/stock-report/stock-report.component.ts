@@ -35,6 +35,7 @@ declare var zingchart: any;
         <div (click)="addStock(stock)" class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_plus--white.svg">
         </div>
+        <button (click)="getPDFStockReport(stock)">pdf</button>
       </div>
 
       <!-- STOCK VIEW CONTENTS -->
@@ -2195,5 +2196,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  getPDFStockReport(symbol: string) {
+    this.reportService.getPDFStockReport(symbol).subscribe();
+  }
 
 }
