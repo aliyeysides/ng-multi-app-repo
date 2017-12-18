@@ -91,7 +91,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
                 <img *ngIf="stock.Change<0" class="align-absolute" src="./assets/imgs/icon_arrow-down.svg">
               </div>
               <div class="col-4">
-                <p class="data">{{ stock.Change }}%</p>
+                <p class="data">{{ stock['Percentage '] }}%</p>
               </div>
             </div>
           </div>

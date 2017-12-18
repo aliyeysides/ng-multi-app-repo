@@ -20,11 +20,11 @@ import {StockReportComponent} from './stock-report/stock-report.component';
 @Component({
   selector: 'cpt-my-stocks',
   template: `
-    <div [ngBusy]="loading" class="container-fluid">
+    <div class="container-fluid">
 
       <div class="row">
         <div class="col-12 col-md-4 component--mystocks">
-          <cpt-my-stocks-list (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
+          <cpt-my-stocks-list [ngBusy]="loading" (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
                             (removeStockClicked)="removeStock($event)"
                             (updateData)="updateData()"
                             (stockClicked)="selectStock($event)"
@@ -210,7 +210,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   closeReport() {
-    this.location.back();
+    this.router.navigate(['my-stocks']);
   }
 
   appendPGRImage(pgr, rawPgr) {

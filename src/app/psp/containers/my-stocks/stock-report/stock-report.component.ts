@@ -9,6 +9,7 @@ import {IdeasService} from '../../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {ZingChart} from '../../../../shared/models/zingchart';
+import {Router} from '@angular/router';
 
 declare var zingchart: any;
 
@@ -46,6 +47,7 @@ declare var zingchart: any;
           <div class="col-12 col-md-7">
             <!-- STOCK VIEW TOP -->
             <div class="row no-gutters stock-info">
+              <button (click)="getPDFStockReport(stock)">pdf</button>
 
               <div class="col-12 stockview__main-rating">
                 <p class="label">Power Gauge Rating &nbsp;<a><i class="fa fa-info-circle" aria-hidden="true"></i></a>
@@ -140,7 +142,7 @@ declare var zingchart: any;
             <!-- STOCK VIEW PRICE -->
             <div class="row stock-info stock-info--price">
               <div class="col-12">
-                <p class="current-price"><sub>$</sub>{{ symbolData ? symbolData['metaInfo'][0]['Last'] : null }}</p>
+                <p class="current-price"><sub>$</sub>{{ symbolData ? (symbolData['metaInfo'][0]['Last'] | decimal ) : null }}</p>
                 <p class="label">Current</p>
               </div>
               <!--<div class="col-4">-->
@@ -148,11 +150,11 @@ declare var zingchart: any;
               <!--<p class="label">OPEN</p>-->
               <!--</div>-->
               <div class="col-6">
-                <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['Change'] : null }}</p>
+                <p class="data">{{ symbolData ? (symbolData['metaInfo'][0]['Change'] | decimal ) : null }}</p>
                 <p class="label">$ CHG</p>
               </div>
               <div class="col-6">
-                <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['Percentage '] : null }}<sub>%</sub></p>
+                <p class="data">{{ symbolData ? (symbolData['metaInfo'][0]['Percentage '] | decimal ) : null }}<sub>%</sub></p>
                 <p class="label">% CHG</p>
               </div>
             </div>
@@ -163,7 +165,6 @@ declare var zingchart: any;
             </div>
           </div>
         </div>
-
 
 
         <!-- STOCK VIEW CHART HEADER -->
@@ -212,7 +213,8 @@ declare var zingchart: any;
             <h2>Today's Stats</h2>
           </div>
           <div class="col-4">
-            <p class="data data--large">{{ (symbolData ? symbolData['fundamentalData']['Revenue'] : null) / 1000 }}B</p>
+            <p class="data data--large">
+              {{ (symbolData ? symbolData['fundamentalData']['Revenue'] : null) / 1000 | number:'.2-2' }}B</p>
             <p class="label">REVENUE</p>
           </div>
           <div class="col-4">
@@ -311,7 +313,7 @@ declare var zingchart: any;
         <!-- BREAKDOWN - FINANCIALS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
-            <h1>Financials: 
+            <h1>Financials:
               <span>{{ summary ? summary['financialContextSummary'][0]['status'] : null }}</span>
             </h1>
           </div>
@@ -413,19 +415,26 @@ declare var zingchart: any;
                     <th colspan="2">Assets &amp; Liabilities</th>
                     <tr>
                       <td class="label">Current Ratio</td>
-                      <td class="data">{{ research ? research['Assets and Liabilities']['Current Ratio'] : null }}</td>
+                      <td class="data">
+                        {{ research ? (research['Assets and Liabilities']['Current Ratio'] | number:'.2-2' ) : null }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">LT Debt/ Equity</td>
-                      <td class="data">{{ research ? research['Assets and Liabilities']['LT Debt/Equity'] : null }}</td>
+                      <td class="data">
+                        {{ research ? (research['Assets and Liabilities']['LT Debt/Equity'] | number:'.2-2' ) : null }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">% Earn on Eqty</td>
-                      <td class="data">{{ research ? research['Returns']['Return on Equity'] : null }}</td>
+                      <td class="data">{{ research ? (research['Returns']['Return on Equity'] | number:'.2-2' ) : null
+                        }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">Book Value</td>
-                      <td class="data">{{ research ? research['Valuation']['Price/Book'] : null }}</td>
+                      <td class="data">{{ research ? (research['Valuation']['Price/Book'] | number:'.2-2' ) : null }}
+                      </td>
                     </tr>
                   </table>
                 </div>
@@ -434,19 +443,19 @@ declare var zingchart: any;
                     <th colspan="2">Valuation</th>
                     <tr>
                       <td class="label">Price/Earnings</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['P/E'] : null }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['P/E'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">PEG</td>
-                      <td class="data">{{ competitors ? competitors[0]['PEG'] : null }}</td>
+                      <td class="data">{{ competitors ? (competitors[0]['PEG'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">Price to Book</td>
-                      <td class="data">{{ research ? research['Valuation']['Price/Book'] : null }}</td>
+                      <td class="data">{{ research ? (research['Valuation']['Price/Book'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">Price to Sales</td>
-                      <td class="data">{{ research ? research['Valuation']['Price/Sales'] : null }}</td>
+                      <td class="data">{{ research ? (research['Valuation']['Price/Sales'] | decimal ) : null }}</td>
                     </tr>
                   </table>
                 </div>
@@ -455,20 +464,25 @@ declare var zingchart: any;
                     <th colspan="2">Dividends</th>
                     <tr>
                       <td class="label">Div per Share</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['dividend_per_share'] : null }}
+                      <td class="data">
+                        {{ symbolData ? (symbolData['fundamentalData']['dividend_per_share'] | decimal ) : null }}
                       </td>
                     </tr>
                     <tr>
                       <td class="label">Payout</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['payout'] : null }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['payout'] | decimal ) : null }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">Yield</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['Yield'] : null }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['Yield'] | decimal ) : null }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">Dividend Growth Rate</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['growth_rate'] : null }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['growth_rate'] | decimal ) : null
+                        }}
+                      </td>
                     </tr>
                   </table>
                 </div>
@@ -477,20 +491,22 @@ declare var zingchart: any;
                     <th colspan="2">Returns</th>
                     <tr>
                       <td class="label">On Investment</td>
-                      <td class="data">{{ research ? research['Returns']['Return on Invest'] : null }}</td>
+                      <td class="data">{{ research ? (research['Returns']['Return on Invest'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">On Equity</td>
-                      <td class="data">{{ research ? research['Returns']['Return on Equity'] : null }}</td>
+                      <td class="data">{{ research ? (research['Returns']['Return on Equity'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">1 Month Return</td>
-                      <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 4 Weeks'] : null }}
+                      <td class="data">
+                        {{ research ? (research['PriceActivity2']['% Change Price - 4 Weeks'] | decimal ) : null }}
                       </td>
                     </tr>
                     <tr>
                       <td class="label">3 Month Return</td>
-                      <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 24 Weeks'] : null }}
+                      <td class="data">
+                        {{ research ? (research['PriceActivity2']['% Change Price - 24 Weeks'] | decimal ) : null }}
                       </td>
                     </tr>
                   </table>
@@ -767,11 +783,11 @@ declare var zingchart: any;
                     <th colspan="2">Price Hi/Lo</th>
                     <tr>
                       <td class="label">52 wk high</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['52 Wk Hi'] : null }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['52 Wk Hi'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">52 wk low</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['52 Wk Lo'] : null }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['52 Wk Lo'] | decimal ) : null }}</td>
                     </tr>
                   </table>
                 </div>
@@ -781,12 +797,12 @@ declare var zingchart: any;
                     <tr>
                       <td class="label">% chg 4 wk rel S&amp;P</td>
                       <td class="data">
-                        {{ research ? research['PriceActivity2']['% Change Price - 4 Wks Rel to S&P'] : null }}
+                        {{ research ? (research['PriceActivity2']['% Change Price - 4 Wks Rel to S&P'] | decimal ) : null }}
                       </td>
                     <tr>
                       <td class="label">% chg 24 wk rel S&amp;P</td>
                       <td class="data">
-                        {{ research ? research['PriceActivity2']['% Change Price - 24 Wks Rel to S&P'] : null }}
+                        {{ research ? (research['PriceActivity2']['% Change Price - 24 Wks Rel to S&P'] | decimal ) : null }}
                       </td>
                     </tr>
                   </table>
@@ -796,11 +812,11 @@ declare var zingchart: any;
                     <th colspan="2">Volume Activity</th>
                     <tr>
                       <td class="label">avg. vol 20 days</td>
-                      <td class="data">{{ research ? research['VolumeActivity']['Average Volume 20 Days'] : null }}</td>
+                      <td class="data">{{ research ? (research['VolumeActivity']['Average Volume 20 Days'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">avg. vol 90 days</td>
-                      <td class="data">{{ research ? research['VolumeActivity']['Average Volume 90 Days'] : null }}</td>
+                      <td class="data">{{ research ? (research['VolumeActivity']['Average Volume 90 Days'] | decimal ) : null }}</td>
                     </tr>
                   </table>
                 </div>
@@ -809,12 +825,12 @@ declare var zingchart: any;
                     <th colspan="2">Volatility Rel to Mkt</th>
                     <tr>
                       <td class="label">% Change YTD Rel S&P 500</td>
-                      <td class="data">{{ research ? research['PriceActivity1']['% Change YTD Rel S&P 500'] : null }}
+                      <td class="data">{{ research ? (research['PriceActivity1']['% Change YTD Rel S&P 500'] | decimal ) : null }}
                       </td>
                     </tr>
                     <tr>
                       <td class="label">Chaikin Money Flow Persistency</td>
-                      <td class="data">{{ research ? research['VolumeActivity']['Chaikin Money Flow Persistency'] : null
+                      <td class="data">{{ research ? (research['VolumeActivity']['Chaikin Money Flow Persistency'] | decimal ) : null
                         }}
                       </td>
                     </tr>
@@ -950,25 +966,25 @@ declare var zingchart: any;
                     <tr>
                       <td class="label text-left">Current Quarter</td>
                       <td class="data text-center">
-                        {{ research ? research['Earning Estimate Revisions']['Current Qtr'][0] : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Current Qtr'][0] | decimal ) : null }}
                       </td>
                       <td class="data text-center">
-                        {{ research ? research['Earning Estimate Revisions']['Current Qtr'][1] : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Current Qtr'][1] | decimal ) : null }}
                       </td>
                       <td class="data text-center">
-                        {{ research ? research['Earning Estimate Revisions']['Current Qtr'][2] : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Current Qtr'][2] | decimal ) : null }}
                       </td>
                     </tr>
                     <tr>
                       <td class="label text-left">Next Quarter</td>
                       <td class="data text-center">
-                        {{ research ? research['Earning Estimate Revisions']['Next Qtr'][0] : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Next Qtr'][0] | decimal ) : null }}
                       </td>
                       <td class="data text-center">
-                        {{ research ? research['Earning Estimate Revisions']['Next Qtr'][1] : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Next Qtr'][1] | decimal ) : null }}
                       </td>
                       <td class="data text-center">
-                        {{ research ? research['Earning Estimate Revisions']['Next Qtr'][2] : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Next Qtr'][2] | decimal ) : null }}
                       </td>
                     </tr>
                   </table>
@@ -1063,7 +1079,7 @@ declare var zingchart: any;
                   <p>PROFIT MRG</p>
                 </div>
               </li>
-              <li *ngFor="let stock of competitors" class="row no-gutters">
+              <li (click)="gotoReport(stock['symbol'])" *ngFor="let stock of competitors" class="row no-gutters">
                 <div class="col-3 ticker">
                   <p><span><img
                     src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>{{ stock['symbol']
@@ -1100,7 +1116,7 @@ declare var zingchart: any;
                   <p>REVENUE</p>
                 </div>
               </li>
-              <li *ngFor="let stock of competitors" class="row no-gutters">
+              <li (click)="gotoReport(stock['symbol'])" *ngFor="let stock of competitors" class="row no-gutters">
                 <div class="col-3 ticker">
                   <p><span><img
                     src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>{{ stock['symbol']
@@ -1196,7 +1212,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   };
 
   scrollLeftHeadlines: number;
-  headlinePageNumber: number = 1;
   collapse: object = {
     'financials': true,
     'earnings': true,
@@ -1207,7 +1222,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(private reportService: ReportService,
               private signalService: SignalService,
-              private ideasService: IdeasService) {
+              private ideasService: IdeasService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -1235,6 +1251,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
           const closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse();
           const dates = data['five_year_chart_data']['formatted_dates'].reverse();
+          this.data['one_year_chart_data']['formatted_dates'].reverse();
 
           const pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
           const cmf = data['five_year_chart_data']['cmf'].map(x => +x).reverse();
@@ -1359,7 +1376,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     this.current = '5Y';
 
     const closePrices = this.data['five_year_chart_data']['close_price'].map(x => +x).reverse();
-    const dates = this.data['five_year_chart_data']['formatted_dates'].reverse();
+    const dates = this.data['five_year_chart_data']['formatted_dates'];
 
     const pgrData = this.data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
     const cmf = this.data['five_year_chart_data']['cmf'].map(x => +x).reverse();
@@ -1384,32 +1401,31 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   toggleChartTime(span: string) {
     this.current = span;
 
-      var cut = 0;
-      switch(span) {
-        case '1W':
-          cut = 5;
-          break;
-        case '1M':
-          cut = 20;
-          break;
-        case '6M':
-          cut = 120;
-          break;
-        case '1Y':
-          cut = 250;
-          break;
-      }
+    var cut = 0;
+    switch (span) {
+      case '1W':
+        cut = 5;
+        break;
+      case '1M':
+        cut = 20;
+        break;
+      case '6M':
+        cut = 120;
+        break;
+      case '1Y':
+        cut = 250;
+        break;
+    }
 
-    const dates = this.data['one_year_chart_data']['formatted_dates'].reverse()
-      .slice(this.data['one_year_chart_data']['formatted_dates'].length-cut);
+    const dates = this.data['one_year_chart_data']['formatted_dates'].slice(this.data['one_year_chart_data']['formatted_dates'].length - cut);
     const closePrices = this.data['one_year_chart_data']['close_price'].map(x => +x).reverse()
-      .slice(this.data['one_year_chart_data']['close_price'].length-cut);
+      .slice(this.data['one_year_chart_data']['close_price'].length - cut);
     const pgrData = this.data['one_year_pgr_data']['pgr_data'].map(x => +x).reverse()
-      .slice(this.data['one_year_pgr_data']['pgr_data'].length-cut);
+      .slice(this.data['one_year_pgr_data']['pgr_data'].length - cut);
     const cmf = this.data['one_year_chart_data']['cmf'].map(x => +x).reverse()
-      .slice(this.data['one_year_chart_data']['cmf'].length-cut);
+      .slice(this.data['one_year_chart_data']['cmf'].length - cut);
     const relStr = this.data['one_year_chart_data']['relative_strength'].map(x => +x).reverse()
-      .slice(this.data['one_year_chart_data']['relative_strength'].length-cut);
+      .slice(this.data['one_year_chart_data']['relative_strength'].length - cut);
 
     this.mainChart = {
       id: 'mainChart',
@@ -1463,14 +1479,16 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     window.open(headline.url, '_blank');
   }
 
+  gotoReport(symbol: string) {
+    this.router.navigate(['my-stocks', symbol]);
+  }
+
   scrollRight() {
-    this.headlinePageNumber < 7 ? this.headlinePageNumber++ : null;
     this.scrollLeftHeadlines = this.newsList.nativeElement.scrollLeft;
     this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines += 350, top: 0, behavior: 'smooth'});
   }
 
   scrollLeft() {
-    this.headlinePageNumber != 0 ? this.headlinePageNumber-- : null;
     this.scrollLeftHeadlines = this.newsList.nativeElement.scrollLeft;
     this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines -= 350, top: 0, behavior: 'smooth'});
   }
@@ -1658,8 +1676,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       type: 'line',
       height: 80,
       x: 0,
-      // y: 321,
-      // backgroundColor: "transparent",
       y: 430,
       backgroundColor: "#fff",
       plotarea: {
@@ -2195,5 +2211,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  getPDFStockReport(symbol: string) {
+    this.reportService.getPDFStockReport(symbol).subscribe();
+  }
 
 }
