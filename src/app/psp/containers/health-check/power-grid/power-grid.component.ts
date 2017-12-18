@@ -25,13 +25,13 @@ import {Router} from '@angular/router';
             <table class="powergrid__table">
               <tr class="powergrid__row" id="industry-1">
                 <td class="bear">
-                  <p class="ticker"></p>
+                  <p class="ticker">TICK</p>
                 </td>
                 <td class="bull">
                   <p class="ticker"></p>
                 </td>
                 <td class="industry industry--strong">
-                  <p class="industry"></p>
+                  <p class="industry-text"><span>Industry 1</span></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-2">
@@ -39,21 +39,21 @@ import {Router} from '@angular/router';
                   <p class="ticker"></p>
                 </td>
                 <td class="bull">
-                  <p class="ticker"></p>
+                  <p class="ticker">TICK, TICK</p>
                 </td>
                 <td class="industry industry--strong">
-                  <p class="industry"></p>
+                  <p class="industry-text"><span>Industry 2</span></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-3">
                 <td class="bear">
-                  <p class="ticker"></p>
+                  <p class="ticker">TICK</p>
                 </td>
                 <td class="bull">
-                  <p class="ticker"></p>
+                  <p class="ticker">TICK</p>
                 </td>
                 <td class="industry industry--strong">
-                  <p class="industry"></p>
+                  <p class="industry-text"><span>Industry 3</span></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-4">
@@ -64,7 +64,7 @@ import {Router} from '@angular/router';
                   <p class="ticker"></p>
                 </td>
                 <td class="industry industry--strong">
-                  <p class="industry"></p>
+                  <p class="industry-text"><span>Industry 4</span></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-5">
@@ -75,7 +75,7 @@ import {Router} from '@angular/router';
                   <p class="ticker"></p>
                 </td>
                 <td class="industry industry--strong">
-                  <p class="industry"></p>
+                  <p class="industry-text"></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-6">
@@ -86,7 +86,7 @@ import {Router} from '@angular/router';
                   <p class="ticker"></p>
                 </td>
                 <td class="industry industry--strong">
-                  <p class="industry"></p>
+                  <p class="industry-text"></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-7">
@@ -97,7 +97,7 @@ import {Router} from '@angular/router';
                   <p class="ticker"></p>
                 </td>
                 <td class="industry industry--neutral">
-                  <p class="industry"></p>
+                  <p class="industry-text"></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-8">
@@ -108,7 +108,7 @@ import {Router} from '@angular/router';
                   <p class="ticker"></p>
                 </td>
                 <td class="industry industry--neutral">
-                  <p class="industry"></p>
+                  <p class="industry-text"></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-9">
@@ -119,7 +119,7 @@ import {Router} from '@angular/router';
                   <p class="ticker"></p>
                 </td>
                 <td class="industry industry--weak">
-                  <p class="industry"></p>
+                  <p class="industry-text"></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-10">
@@ -130,7 +130,7 @@ import {Router} from '@angular/router';
                   <p class="ticker"></p>
                 </td>
                 <td class="industry industry--weak">
-                  <p class="industry"></p>
+                  <p class="industry-text"></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-11">
@@ -141,7 +141,7 @@ import {Router} from '@angular/router';
                   <p class="ticker"></p>
                 </td>
                 <td class="industry industry--weak">
-                  <p class="industry"></p>
+                  <p class="industry-text"></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-12">
@@ -152,29 +152,29 @@ import {Router} from '@angular/router';
                   <p class="ticker"></p>
                 </td>
                 <td class="industry industry--weak">
-                  <p class="industry"></p>
+                  <p class="industry-text"><span>Industry n-5</span></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-13">
                 <td class="bear">
-                  <p class="ticker"></p>
+                  <p class="ticker">TICK, TICK</p>
                 </td>
                 <td class="bull">
                   <p class="ticker"></p>
                 </td>
                 <td class="industry industry--weak">
-                  <p class="industry"></p>
+                  <p class="industry-text"><span>Industry n-4</span></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-14">
                 <td class="bear">
-                  <p class="ticker"></p>
+                  <p class="ticker">TICK</p>
                 </td>
                 <td class="bull">
                   <p class="ticker"></p>
                 </td>
                 <td class="industry industry--weak">
-                  <p class="industry"></p>
+                  <p class="industry-text"><span>Industry n-3</span></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-15">
@@ -182,21 +182,21 @@ import {Router} from '@angular/router';
                   <p class="ticker"></p>
                 </td>
                 <td class="bull">
-                  <p class="ticker"></p>
+                  <p class="ticker">TICK</p>
                 </td>
                 <td class="industry industry--weak">
-                  <p class="industry"></p>
+                  <p class="industry-text"><span>Industry n-2</span></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-16">
                 <td class="bear">
-                  <p class="ticker"></p>
+                  <p class="ticker">TICK, TICK, TICK</p>
                 </td>
                 <td class="bull">
-                  <p class="ticker"></p>
+                  <p class="ticker">TICK</p>
                 </td>
                 <td class="industry industry--weak">
-                  <p class="industry"></p>
+                  <p class="industry-text"><span>Industry n-1</span></p>
                 </td>
               </tr>
             </table>
