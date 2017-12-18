@@ -166,7 +166,6 @@ declare var zingchart: any;
         </div>
 
 
-
         <!-- STOCK VIEW CHART HEADER -->
         <div class="row stock-info stock-info--chart-toggle">
           <div class="col-12 hidden-md-down">
@@ -312,7 +311,7 @@ declare var zingchart: any;
         <!-- BREAKDOWN - FINANCIALS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
-            <h1>Financials: 
+            <h1>Financials:
               <span>{{ summary ? summary['financialContextSummary'][0]['status'] : null }}</span>
             </h1>
           </div>
@@ -1386,31 +1385,31 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   toggleChartTime(span: string) {
     this.current = span;
 
-      var cut = 0;
-      switch(span) {
-        case '1W':
-          cut = 5;
-          break;
-        case '1M':
-          cut = 20;
-          break;
-        case '6M':
-          cut = 120;
-          break;
-        case '1Y':
-          cut = 250;
-          break;
-      }
+    var cut = 0;
+    switch (span) {
+      case '1W':
+        cut = 5;
+        break;
+      case '1M':
+        cut = 20;
+        break;
+      case '6M':
+        cut = 120;
+        break;
+      case '1Y':
+        cut = 250;
+        break;
+    }
 
-    const dates = this.data['one_year_chart_data']['formatted_dates'].slice(this.data['one_year_chart_data']['formatted_dates'].length-cut);
+    const dates = this.data['one_year_chart_data']['formatted_dates'].slice(this.data['one_year_chart_data']['formatted_dates'].length - cut);
     const closePrices = this.data['one_year_chart_data']['close_price'].map(x => +x).reverse()
-      .slice(this.data['one_year_chart_data']['close_price'].length-cut);
+      .slice(this.data['one_year_chart_data']['close_price'].length - cut);
     const pgrData = this.data['one_year_pgr_data']['pgr_data'].map(x => +x).reverse()
-      .slice(this.data['one_year_pgr_data']['pgr_data'].length-cut);
+      .slice(this.data['one_year_pgr_data']['pgr_data'].length - cut);
     const cmf = this.data['one_year_chart_data']['cmf'].map(x => +x).reverse()
-      .slice(this.data['one_year_chart_data']['cmf'].length-cut);
+      .slice(this.data['one_year_chart_data']['cmf'].length - cut);
     const relStr = this.data['one_year_chart_data']['relative_strength'].map(x => +x).reverse()
-      .slice(this.data['one_year_chart_data']['relative_strength'].length-cut);
+      .slice(this.data['one_year_chart_data']['relative_strength'].length - cut);
 
     this.mainChart = {
       id: 'mainChart',
@@ -1465,7 +1464,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   gotoReport(symbol: string) {
-    window.scrollTo(0, 0);
     this.router.navigate(['my-stocks', symbol]);
   }
 
