@@ -31,7 +31,7 @@ declare var zingchart: any;
           <h1 class="ticker">{{ stock }}</h1>
           <p class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
         </div>
-        <div class="header__button header__button--right">
+        <div (click)="addStock(stock)" class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_plus--white.svg">
         </div>
       </div>
@@ -174,24 +174,21 @@ declare var zingchart: any;
             <p class="chart-header__breakdown">Down <span>-12.02 &nbsp;(-3.23%)</span> over the last&hellip;
             </p>
           </div>
-          <!--<div class="col-2">
-            <p class="date-select">1D</p>
+          <div (click)="toggleChartTime('1W')" class="col-2">
+            <p class="date-select" [ngClass]="{'selected': current == '1W' }">1W</p>
           </div>
-          <div class="col-2">
-            <p class="date-select">1W</p>
+          <div (click)="toggleChartTime('1M')" class="col-2">
+            <p class="date-select" [ngClass]="{'selected': current == '1M' }">1M</p>
           </div>
-          <div class="col-2">
-            <p class="date-select">1M</p>
+          <div (click)="toggleChartTime('6M')" class="col-2">
+            <p class="date-select" [ngClass]="{'selected': current == '6M' }">6M</p>
           </div>
-          <div class="col-2">
-            <p class="date-select selected">6M</p>
+          <div (click)="toggleChartTime('1Y')" class="col-2">
+            <p class="date-select" [ngClass]="{'selected': current == '1Y' }">1Y</p>
           </div>
-          <div class="col-2">
-            <p class="date-select">1Y</p>
+          <div (click)="getFiveYearChart()" class="col-2">
+            <p class="date-select" [ngClass]="{'selected': current == '5Y' }">5Y</p>
           </div>
-          <div class="col-2">
-            <p class="date-select">5Y</p>
-          </div>-->
         </div>
 
         <!-- STOCK VIEW MAIN CHART -->
@@ -1149,6 +1146,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   @Input('stock') stock: string;
   @Input('show') show: boolean;
   @Output('closeClicked') closeClicked: EventEmitter<void> = new EventEmitter<void>();
+  @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild('newsList') newsList: ElementRef;
 
   symbolData;
@@ -1158,13 +1156,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   research;
   data;
 
-  stockState = {
-    current: '5Y',
-    dates: [],
-    closes: [],
-    pgr: [],
-    rsi: []
-  };
+  current: string = '5Y';
   mainChart: ZingChart = {
     id: 'mainChart',
     data: {
@@ -1251,12 +1243,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           const cmf = data['five_year_chart_data']['cmf'].map(x => +x).reverse();
           const relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
 
+          this.current = '5Y';
           this.mainChart = {
             id: 'mainChart',
             data: {
               layout: "vertical",
               graphset: [
-                this.getCloseConfig(dates, closePrices, '5Y'),
+                this.getCloseConfig(dates, closePrices),
                 this.getPGRConfig(dates, pgrData),
                 this.getRSIConfig(dates, relStr),
                 this.getCMFConfig(dates, cmf)
@@ -1323,51 +1316,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             height: undefined,
             width: undefined
           };
-
-          // zingchart.bind('mainChart', 'label_click', function(e){
-          //   console.log('test');
-          //   if(this.stockState.current === e.labelid){
-          //     return;
-          //   }
-          //
-          //   var windowClose = [];
-          //   var windowVolume = [];
-          //   var windowDates = [];
-          //   var cut = 0;
-          //   switch(e.labelid) {
-          //     case '1W':
-          //       cut = 5;
-          //       break;
-          //     case '1M':
-          //       cut = 20;
-          //       break;
-          //     case '6M':
-          //       cut = 130;
-          //       break;
-          //     case '1Y':
-          //       cut = 260;
-          //       break;
-          //     default:
-          //       cut = this.stockState.dates.length;
-          //       break;
-          //   }
-          //   windowClose = this.stockState.closes.slice(this.stockState.closes.length-cut);
-          //   windowDates = this.stockState.dates.slice(this.stockState.dates.length-cut);
-          //   windowVolume = this.stockState.volumes.slice(this.stockState.rsi.length-cut);
-          //
-          //   zingchart.exec('myChart', 'setdata', {
-          //
-          //     data: {
-          //       graphset:[
-          //         this.getCloseConfig(windowDates, windowClose, e.labelid),
-          //         this.getRSIConfig(windowDates, windowVolume)
-          //       ]
-          //     }
-          //   });
-          //
-          //   this.stockState.current = e.labelid;
-          //
-          // });
         });
     }
   }
@@ -1408,6 +1356,82 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       return;
     }
     this.collapse[key] = !this.collapse[key];
+  }
+
+  getFiveYearChart() {
+    this.current = '5Y';
+
+    const closePrices = this.data['five_year_chart_data']['close_price'].map(x => +x).reverse();
+    const dates = this.data['five_year_chart_data']['formatted_dates'].reverse();
+
+    const pgrData = this.data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
+    const cmf = this.data['five_year_chart_data']['cmf'].map(x => +x).reverse();
+    const relStr = this.data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
+
+    this.mainChart = {
+      id: 'mainChart',
+      data: {
+        layout: "vertical",
+        graphset: [
+          this.getCloseConfig(dates, closePrices),
+          this.getPGRConfig(dates, pgrData),
+          this.getRSIConfig(dates, relStr),
+          this.getCMFConfig(dates, cmf)
+        ]
+      },
+      height: 520,
+      width: undefined
+    };
+  }
+
+  toggleChartTime(span: string) {
+    this.current = span;
+
+      var cut = 0;
+      switch(span) {
+        case '1W':
+          cut = 5;
+          break;
+        case '1M':
+          cut = 20;
+          break;
+        case '6M':
+          cut = 120;
+          break;
+        case '1Y':
+          cut = 250;
+          break;
+      }
+
+    const dates = this.data['one_year_chart_data']['formatted_dates'].reverse()
+      .slice(this.data['one_year_chart_data']['formatted_dates'].length-cut);
+    const closePrices = this.data['one_year_chart_data']['close_price'].map(x => +x).reverse()
+      .slice(this.data['one_year_chart_data']['close_price'].length-cut);
+    const pgrData = this.data['one_year_pgr_data']['pgr_data'].map(x => +x).reverse()
+      .slice(this.data['one_year_pgr_data']['pgr_data'].length-cut);
+    const cmf = this.data['one_year_chart_data']['cmf'].map(x => +x).reverse()
+      .slice(this.data['one_year_chart_data']['cmf'].length-cut);
+    const relStr = this.data['one_year_chart_data']['relative_strength'].map(x => +x).reverse()
+      .slice(this.data['one_year_chart_data']['relative_strength'].length-cut);
+
+    this.mainChart = {
+      id: 'mainChart',
+      data: {
+        layout: "vertical",
+        graphset: [
+          this.getCloseConfig(dates, closePrices),
+          this.getPGRConfig(dates, pgrData),
+          this.getRSIConfig(dates, relStr),
+          this.getCMFConfig(dates, cmf)
+        ]
+      },
+      height: 520,
+      width: undefined
+    };
+  }
+
+  addStock(ticker: string) {
+    this.addStockClicked.emit(ticker);
   }
 
   appendPGRImage(symbolData) {
@@ -1454,7 +1478,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     this.newsList.nativeElement.scrollTo({left: this.scrollLeftHeadlines -= 312.5, top: 0, behavior: 'smooth'});
   }
 
-  getCloseConfig(dates, values, current) {
+  getCloseConfig(dates, values) {
     return {
       type: 'area',
       backgroundColor: "#fff",
@@ -1510,7 +1534,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineStyle: 'solid',
           lineColor: "#eee"
         },
-        // values: values,
         item: {
           fontColor: "#ddd",
           fontFamily: "Open Sans"
@@ -1552,58 +1575,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineColor: "#1199ff",
           lineWidth: 2,
           backgroundColor: "#1199ff #b9e5fb",
-        }
-      ],
-      labels: [
-        {
-          x: 120,
-          y: 10,
-          id: '1W',
-          fontColor: (current === '1W') ? "#FFF" : "#777",
-          fontSize: "16",
-          fontFamily: "Open Sans",
-          cursor: "hand",
-          text: "1W"
-        },
-        {
-          x: 180,
-          y: 10,
-          id: '1M',
-          fontColor: (current === '1M') ? "#FFF" : "#777",
-          fontSize: "16",
-          fontFamily: "Open Sans",
-          cursor: "hand",
-          text: "1M"
-        },
-        {
-          x: 240,
-          y: 10,
-          id: '6M',
-          fontColor: (current === '6M') ? "#FFF" : "#777",
-          fontSize: "16",
-          fontFamily: "Open Sans",
-          cursor: "hand",
-          text: "6M"
-        },
-        {
-          x: 300,
-          y: 10,
-          id: '1Y',
-          fontColor: (current === '1Y') ? "#FFF" : "#777",
-          fontSize: "16",
-          fontFamily: "Open Sans",
-          cursor: "hand",
-          text: "1Y"
-        },
-        {
-          x: 360,
-          y: 10,
-          id: '5Y',
-          fontColor: (current === '2Y') ? "#FFF" : "#777",
-          fontSize: "16",
-          fontFamily: "Open Sans",
-          cursor: "hand",
-          text: "5Y"
         }
       ]
     };
@@ -1786,6 +1757,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       "backgroundColor": "#fff",
       "scaleX": {
         "values": dates,
+        "auto-fit": true,
         "lineWidth": 0,
         "lineColor": "none",
         label: {
@@ -1823,6 +1795,23 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       zoom: {
         shared: true
       },
+      crosshairX: {
+        shared: true,
+        plotLabel: {
+          multiple: false,
+          visible: false,
+          fontFamily: "Open Sans",
+          backgroundColor: "#BBB",
+          rules: [
+            {
+              rule: '%v == 100',
+              text: '%t',
+              visible: true,
+            }
+          ],
+          y: 0
+        }
+      },
       "tooltip": {
         "htmlMode": true,
         "backgroundColor": "none",
@@ -1834,21 +1823,25 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         {
           "values": veryBullish,
           "alpha": 1,
+          "text": 'Very Bullish',
           "background-color": "#30f300",
           "hover-state": {
-            backgroundColor: '#26a025'
+            backgroundColor: '#26a025',
+            text: 'Very Bullish'
           }
         },
         {
           "values": bullish,
+          "text": 'Bullish',
           "alpha": 1,
-          "background-color": "#db4437",
+          "background-color": "#77db3f",
           "hover-state": {
-            backgroundColor: '#901E15'
+            backgroundColor: '#1a901d'
           }
         },
         {
           "values": neutral,
+          "text": 'Neutral',
           "alpha": 1,
           "background-color": "#dbb237",
           "hover-state": {
@@ -1857,6 +1850,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         {
           "values": bearish,
+          "text": 'Bearish',
           "alpha": 1,
           "background-color": "#db513d",
           "hover-state": {
@@ -1865,6 +1859,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         {
           "values": veryBearish,
+          "text": 'Very Bearish',
           "alpha": 1,
           "background-color": "#db4437",
           "hover-state": {
