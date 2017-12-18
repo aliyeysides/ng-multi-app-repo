@@ -9,6 +9,7 @@ import {IdeasService} from '../../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {ZingChart} from '../../../../shared/models/zingchart';
+import {Router} from '@angular/router';
 
 declare var zingchart: any;
 
@@ -1063,7 +1064,7 @@ declare var zingchart: any;
                   <p>PROFIT MRG</p>
                 </div>
               </li>
-              <li *ngFor="let stock of competitors" class="row no-gutters">
+              <li (click)="gotoReport(stock['symbol'])" *ngFor="let stock of competitors" class="row no-gutters">
                 <div class="col-3 ticker">
                   <p><span><img
                     src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>{{ stock['symbol']
@@ -1100,7 +1101,7 @@ declare var zingchart: any;
                   <p>REVENUE</p>
                 </div>
               </li>
-              <li *ngFor="let stock of competitors" class="row no-gutters">
+              <li (click)="gotoReport(stock['symbol'])" *ngFor="let stock of competitors" class="row no-gutters">
                 <div class="col-3 ticker">
                   <p><span><img
                     src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>{{ stock['symbol']
@@ -1196,7 +1197,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   };
 
   scrollLeftHeadlines: number;
-  headlinePageNumber: number = 1;
   collapse: object = {
     'financials': true,
     'earnings': true,
@@ -1207,7 +1207,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(private reportService: ReportService,
               private signalService: SignalService,
-              private ideasService: IdeasService) {
+              private ideasService: IdeasService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -1461,6 +1462,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   goToHeadline(headline) {
     window.open(headline.url, '_blank');
+  }
+
+  gotoReport(symbol: string) {
+    window.scrollTo(0, 0);
+    this.router.navigate(['my-stocks', symbol]);
   }
 
   scrollRight() {
