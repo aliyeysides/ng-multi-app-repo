@@ -142,7 +142,7 @@ declare var zingchart: any;
             <!-- STOCK VIEW PRICE -->
             <div class="row stock-info stock-info--price">
               <div class="col-12">
-                <p class="current-price"><sub>$</sub>{{ symbolData ? symbolData['metaInfo'][0]['Last'] : null }}</p>
+                <p class="current-price"><sub>$</sub>{{ symbolData ? (symbolData['metaInfo'][0]['Last'] | decimal ) : null }}</p>
                 <p class="label">Current</p>
               </div>
               <!--<div class="col-4">-->
@@ -150,11 +150,11 @@ declare var zingchart: any;
               <!--<p class="label">OPEN</p>-->
               <!--</div>-->
               <div class="col-6">
-                <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['Change'] : null }}</p>
+                <p class="data">{{ symbolData ? (symbolData['metaInfo'][0]['Change'] | decimal ) : null }}</p>
                 <p class="label">$ CHG</p>
               </div>
               <div class="col-6">
-                <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['Percentage '] : null }}<sub>%</sub></p>
+                <p class="data">{{ symbolData ? (symbolData['metaInfo'][0]['Percentage '] | decimal ) : null }}<sub>%</sub></p>
                 <p class="label">% CHG</p>
               </div>
             </div>
@@ -213,7 +213,8 @@ declare var zingchart: any;
             <h2>Today's Stats</h2>
           </div>
           <div class="col-4">
-            <p class="data data--large">{{ (symbolData ? symbolData['fundamentalData']['Revenue'] : null) / 1000 | number:'.2-2' }}B</p>
+            <p class="data data--large">
+              {{ (symbolData ? symbolData['fundamentalData']['Revenue'] : null) / 1000 | number:'.2-2' }}B</p>
             <p class="label">REVENUE</p>
           </div>
           <div class="col-4">
@@ -414,19 +415,26 @@ declare var zingchart: any;
                     <th colspan="2">Assets &amp; Liabilities</th>
                     <tr>
                       <td class="label">Current Ratio</td>
-                      <td class="data">{{ research ? research['Assets and Liabilities']['Current Ratio'] : null }}</td>
+                      <td class="data">
+                        {{ research ? (research['Assets and Liabilities']['Current Ratio'] | number:'.2-2' ) : null }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">LT Debt/ Equity</td>
-                      <td class="data">{{ research ? research['Assets and Liabilities']['LT Debt/Equity'] : null }}</td>
+                      <td class="data">
+                        {{ research ? (research['Assets and Liabilities']['LT Debt/Equity'] | number:'.2-2' ) : null }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">% Earn on Eqty</td>
-                      <td class="data">{{ research ? research['Returns']['Return on Equity'] : null }}</td>
+                      <td class="data">{{ research ? (research['Returns']['Return on Equity'] | number:'.2-2' ) : null
+                        }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">Book Value</td>
-                      <td class="data">{{ research ? research['Valuation']['Price/Book'] : null }}</td>
+                      <td class="data">{{ research ? (research['Valuation']['Price/Book'] | number:'.2-2' ) : null }}
+                      </td>
                     </tr>
                   </table>
                 </div>
@@ -435,19 +443,19 @@ declare var zingchart: any;
                     <th colspan="2">Valuation</th>
                     <tr>
                       <td class="label">Price/Earnings</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['P/E'] : null | decimal }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['P/E'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">PEG</td>
-                      <td class="data">{{ competitors ? competitors[0]['PEG'] : null | decimal }}</td>
+                      <td class="data">{{ competitors ? (competitors[0]['PEG'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">Price to Book</td>
-                      <td class="data">{{ research ? research['Valuation']['Price/Book'] : null | decimal }}</td>
+                      <td class="data">{{ research ? (research['Valuation']['Price/Book'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">Price to Sales</td>
-                      <td class="data">{{ research ? research['Valuation']['Price/Sales'] : null | decimal }}</td>
+                      <td class="data">{{ research ? (research['Valuation']['Price/Sales'] | decimal ) : null }}</td>
                     </tr>
                   </table>
                 </div>
@@ -456,20 +464,25 @@ declare var zingchart: any;
                     <th colspan="2">Dividends</th>
                     <tr>
                       <td class="label">Div per Share</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['dividend_per_share'] : null | decimal }}
+                      <td class="data">
+                        {{ symbolData ? (symbolData['fundamentalData']['dividend_per_share'] | decimal ) : null }}
                       </td>
                     </tr>
                     <tr>
                       <td class="label">Payout</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['payout'] : null | decimal }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['payout'] | decimal ) : null }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">Yield</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['Yield'] : null | decimal }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['Yield'] | decimal ) : null }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">Dividend Growth Rate</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['growth_rate'] : null | decimal }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['growth_rate'] | decimal ) : null
+                        }}
+                      </td>
                     </tr>
                   </table>
                 </div>
@@ -478,20 +491,22 @@ declare var zingchart: any;
                     <th colspan="2">Returns</th>
                     <tr>
                       <td class="label">On Investment</td>
-                      <td class="data">{{ research ? research['Returns']['Return on Invest'] : null | decimal }}</td>
+                      <td class="data">{{ research ? (research['Returns']['Return on Invest'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">On Equity</td>
-                      <td class="data">{{ research ? research['Returns']['Return on Equity'] : null | decimal }}</td>
+                      <td class="data">{{ research ? (research['Returns']['Return on Equity'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">1 Month Return</td>
-                      <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 4 Weeks'] : null | decimal }}
+                      <td class="data">
+                        {{ research ? (research['PriceActivity2']['% Change Price - 4 Weeks'] | decimal ) : null }}
                       </td>
                     </tr>
                     <tr>
                       <td class="label">3 Month Return</td>
-                      <td class="data">{{ research ? research['PriceActivity2']['% Change Price - 24 Weeks'] : null | decimal }}
+                      <td class="data">
+                        {{ research ? (research['PriceActivity2']['% Change Price - 24 Weeks'] | decimal ) : null }}
                       </td>
                     </tr>
                   </table>
@@ -768,11 +783,11 @@ declare var zingchart: any;
                     <th colspan="2">Price Hi/Lo</th>
                     <tr>
                       <td class="label">52 wk high</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['52 Wk Hi'] : null }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['52 Wk Hi'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">52 wk low</td>
-                      <td class="data">{{ symbolData ? symbolData['fundamentalData']['52 Wk Lo'] : null }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['52 Wk Lo'] | decimal ) : null }}</td>
                     </tr>
                   </table>
                 </div>
@@ -782,12 +797,12 @@ declare var zingchart: any;
                     <tr>
                       <td class="label">% chg 4 wk rel S&amp;P</td>
                       <td class="data">
-                        {{ research ? research['PriceActivity2']['% Change Price - 4 Wks Rel to S&P'] : null }}
+                        {{ research ? (research['PriceActivity2']['% Change Price - 4 Wks Rel to S&P'] | decimal ) : null }}
                       </td>
                     <tr>
                       <td class="label">% chg 24 wk rel S&amp;P</td>
                       <td class="data">
-                        {{ research ? research['PriceActivity2']['% Change Price - 24 Wks Rel to S&P'] : null }}
+                        {{ research ? (research['PriceActivity2']['% Change Price - 24 Wks Rel to S&P'] | decimal ) : null }}
                       </td>
                     </tr>
                   </table>
@@ -797,11 +812,11 @@ declare var zingchart: any;
                     <th colspan="2">Volume Activity</th>
                     <tr>
                       <td class="label">avg. vol 20 days</td>
-                      <td class="data">{{ research ? research['VolumeActivity']['Average Volume 20 Days'] : null }}</td>
+                      <td class="data">{{ research ? (research['VolumeActivity']['Average Volume 20 Days'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">avg. vol 90 days</td>
-                      <td class="data">{{ research ? research['VolumeActivity']['Average Volume 90 Days'] : null }}</td>
+                      <td class="data">{{ research ? (research['VolumeActivity']['Average Volume 90 Days'] | decimal ) : null }}</td>
                     </tr>
                   </table>
                 </div>
@@ -810,12 +825,12 @@ declare var zingchart: any;
                     <th colspan="2">Volatility Rel to Mkt</th>
                     <tr>
                       <td class="label">% Change YTD Rel S&P 500</td>
-                      <td class="data">{{ research ? research['PriceActivity1']['% Change YTD Rel S&P 500'] : null }}
+                      <td class="data">{{ research ? (research['PriceActivity1']['% Change YTD Rel S&P 500'] | decimal ) : null }}
                       </td>
                     </tr>
                     <tr>
                       <td class="label">Chaikin Money Flow Persistency</td>
-                      <td class="data">{{ research ? research['VolumeActivity']['Chaikin Money Flow Persistency'] : null
+                      <td class="data">{{ research ? (research['VolumeActivity']['Chaikin Money Flow Persistency'] | decimal ) : null
                         }}
                       </td>
                     </tr>
@@ -951,25 +966,25 @@ declare var zingchart: any;
                     <tr>
                       <td class="label text-left">Current Quarter</td>
                       <td class="data text-center">
-                        {{ research ? research['Earning Estimate Revisions']['Current Qtr'][0] : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Current Qtr'][0] | decimal ) : null }}
                       </td>
                       <td class="data text-center">
-                        {{ research ? research['Earning Estimate Revisions']['Current Qtr'][1] : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Current Qtr'][1] | decimal ) : null }}
                       </td>
                       <td class="data text-center">
-                        {{ research ? research['Earning Estimate Revisions']['Current Qtr'][2] : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Current Qtr'][2] | decimal ) : null }}
                       </td>
                     </tr>
                     <tr>
                       <td class="label text-left">Next Quarter</td>
                       <td class="data text-center">
-                        {{ research ? research['Earning Estimate Revisions']['Next Qtr'][0] : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Next Qtr'][0] | decimal ) : null }}
                       </td>
                       <td class="data text-center">
-                        {{ research ? research['Earning Estimate Revisions']['Next Qtr'][1] : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Next Qtr'][1] | decimal ) : null }}
                       </td>
                       <td class="data text-center">
-                        {{ research ? research['Earning Estimate Revisions']['Next Qtr'][2] : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Next Qtr'][2] | decimal ) : null }}
                       </td>
                     </tr>
                   </table>
