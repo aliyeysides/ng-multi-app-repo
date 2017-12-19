@@ -1,8 +1,4 @@
-import {
-  AfterViewInit,
-  Component, ComponentFactoryResolver, HostListener, OnDestroy, OnInit, ViewChild,
-  ViewChildren, ViewContainerRef
-} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {ListSymbolObj} from '../../../shared/models/health-check';
@@ -11,11 +7,9 @@ import {IdeasService} from '../../../services/ideas.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
-import {Location} from '@angular/common';
 import {SignalService} from '../../../services/signal.service';
 
 import * as moment from 'moment';
-import {StockReportComponent} from './stock-report/stock-report.component';
 
 @Component({
   selector: 'cpt-my-stocks',
@@ -25,10 +19,11 @@ import {StockReportComponent} from './stock-report/stock-report.component';
       <div class="row">
         <div class="col-12 col-md-4 component--mystocks">
           <cpt-my-stocks-list [ngBusy]="loading" (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
-                            (removeStockClicked)="removeStock($event)"
-                            (updateData)="updateData()"
-                            (stockClicked)="selectStock($event)"
-                            [stocks]="userStocks" [powerBar]="powerBar" [userLists]="allUserLists"></cpt-my-stocks-list>
+                              (removeStockClicked)="removeStock($event)"
+                              (updateData)="updateData()"
+                              (stockClicked)="selectStock($event)"
+                              [stocks]="userStocks" [powerBar]="powerBar"
+                              [userLists]="allUserLists"></cpt-my-stocks-list>
           <div class="col-12" id="list--recent">
             <h3>Recently Viewed</h3>
             <div class="divider__long"></div>
@@ -47,9 +42,11 @@ import {StockReportComponent} from './stock-report/stock-report.component';
                   <p>CHG</p>
                 </div>
               </li>
-              <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed" class="row list__entry">
+              <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed"
+                  class="row list__entry">
                 <div class="col-3 list-entry__pgr">
-                  <img class="align-absolute" src="{{ appendPGRImage(recent['pgr']['Corrected PGR Value'], recent['pgr']['PGR Value']) }}">
+                  <img class="align-absolute"
+                       src="{{ appendPGRImage(recent['pgr']['Corrected PGR Value'], recent['pgr']['PGR Value']) }}">
                 </div>
                 <div class="col-3" style="padding-left:0;">
                   <p class="text-left">{{ recent['meta-info']['symbol'] }}</p>
@@ -66,8 +63,11 @@ import {StockReportComponent} from './stock-report/stock-report.component';
         </div>
 
         <div class="col-12 col-md-8 component--stockview__container" [ngClass]="{'visible': !desktopView}">
-          <cpt-psp-stock-report [uid]="_uid" [listId]="_listId" (addStockClicked)="addStock($event)" (closeClicked)="closeReport()" [show]="!!selectedStock || desktopView"
-                          [stock]="selectedStock">
+          <cpt-psp-stock-report [uid]="_uid" [userStocks]="userStocks"
+                                [listId]="_listId" (addStockClicked)="addStock($event)"
+                                (removeStockClicked)="removeStock($event)" (closeClicked)="closeReport()"
+                                [show]="!!selectedStock || desktopView"
+                                [stock]="selectedStock">
           </cpt-psp-stock-report>
         </div>
 
@@ -83,7 +83,9 @@ export class MyStocksComponent implements OnInit, OnDestroy {
     const width = event.target.innerWidth;
     if (+width <= 1024) this.desktopView = false;
     if (+width > 1024) {
-      this.router.navigate(['/my-stocks', this.userStocks[0].symbol]);
+      if (this.userStocks) {
+        this.router.navigate(['/my-stocks', this.userStocks[0].symbol]);
+      }
       this.desktopView = true;
     }
   }
@@ -106,7 +108,6 @@ export class MyStocksComponent implements OnInit, OnDestroy {
               private ideasService: IdeasService,
               private route: ActivatedRoute,
               private router: Router,
-              private location: Location,
               private signalService: SignalService) {
     const mobWidth = (window.screen.width);
     if (+mobWidth <= 1024) this.desktopView = false;
