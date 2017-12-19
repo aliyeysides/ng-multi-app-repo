@@ -66,14 +66,15 @@ export class ReportService {
     return this.utilService.getJson(url, this._stockDataPointsParams);
   }
 
-  public getPHCReportforListId(listId: string) {
+  public getPHCReportforListId(listId: string, uid: string) {
     const url = `${this._apiHost}/CPTRestSecure/app/phc/getPHCReportForListID?`;
     this._phcPdfParams = new URLSearchParams();
     this._phcPdfParams.set('listID', listId);
-    this._phcPdfParams.set('response', 'file');
-    this._phcPdfParams.set('version', '1.3.2');
-    this._phcPdfParams.set('phcVersion', '1.2');
-    this._phcPdfParams.set('token', '4XC534118T00FR73S127L77QWU65GA1H');
+    this._phcPdfParams.set('uid', uid);
+    // this._phcPdfParams.set('response', 'file');
+    this._phcPdfParams.set('phcVersion', '1.3');
+    this._phcPdfParams.set('additionalSymbols', 'SPY');
+    this._phcPdfParams.set('_', '1513675654286');
     return this.utilService.getJson(url, this._phcPdfParams);
   }
 
@@ -81,7 +82,7 @@ export class ReportService {
     const url = `${this._apiHost}/CPTRestSecure/app/pdf/fetchReport?`;
     this._stockPdfParams = new URLSearchParams();
     this._stockPdfParams.set('symbol', symbol);
-    this._stockPdfParams.set('response', 'file');
+    // this._stockPdfParams.set('response', 'file');
     return this.utilService.getJson(url, this._stockPdfParams);
   }
 }

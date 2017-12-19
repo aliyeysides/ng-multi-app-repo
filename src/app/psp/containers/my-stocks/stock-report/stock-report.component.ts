@@ -10,6 +10,8 @@ import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {ZingChart} from '../../../../shared/models/zingchart';
 import {Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {UtilService} from '../../../../services/util.service';
 
 declare var zingchart: any;
 
@@ -1154,8 +1156,28 @@ declare var zingchart: any;
 })
 export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
+  private _uid: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private _listId: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private _apiHostName = this.utilService.getApiHostName();
   @Input('stock') stock: string;
   @Input('show') show: boolean;
+  @Input('uid')
+  set uid(val: string) {
+    this._uid.next(val);
+  }
+
+  get uid() {
+    return this._uid.getValue();
+  }
+
+  @Input('listId')
+  set listId(val: string) {
+    this._listId.next(val);
+  }
+
+  get listId() {
+    return this._listId.getValue();
+  }
   @Output('closeClicked') closeClicked: EventEmitter<void> = new EventEmitter<void>();
   @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild('newsList') newsList: ElementRef;
@@ -1221,6 +1243,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   constructor(private reportService: ReportService,
               private signalService: SignalService,
               private ideasService: IdeasService,
+              private utilService: UtilService,
               private router: Router) {
   }
 
@@ -2251,7 +2274,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getPDFStockReport(symbol: string) {
-    this.reportService.getPDFStockReport(symbol).subscribe();
+    window.open(`${this._apiHostName}/CPTRestSecure/app/pdf/fetchReport?symbol=${symbol}&listID=${this.listId}&uid=${this.uid}&response=file&token=4XC534118T00FR73S127L77QWU65GA1H`, "_blank");
   }
 
 }

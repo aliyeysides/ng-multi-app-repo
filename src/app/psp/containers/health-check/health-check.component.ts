@@ -14,6 +14,7 @@ import {MarketsSummaryService} from '../../../services/markets-summary.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
 import {ReportService} from '../../../services/report.service';
+import {UtilService} from '../../../services/util.service';
 
 @Component({
   selector: 'cpt-health-check',
@@ -21,9 +22,9 @@ import {ReportService} from '../../../services/report.service';
     <!-- PANEL CONTENTS -->
     <div [ngBusy]="loading" class="container-fluid component component--healthcheck">
       <div class="row contents">
-        <!--<button (click)="getPHCReportforListId()">pdf</button>-->
         <!-- HEALTH-CHECK - Intro -->
-        <cpt-psp-portfolio-overview (listChanged)="listChanged()" [lists]="allUserLists" [calc]="calculations" [data]="prognosisData"></cpt-psp-portfolio-overview>
+        <cpt-psp-portfolio-overview [uid]="_uid" [listId]="_listId" (listChanged)="listChanged()" [lists]="allUserLists"
+                                    [calc]="calculations" [data]="prognosisData"></cpt-psp-portfolio-overview>
         <!-- HEALTH-CHECK - Stock Movements -->
         <cpt-psp-stock-movements [calc]="calculations" [weeklyStocks]="stocksStatus"
                                  [dailyStocks]="dailySymbolList"></cpt-psp-stock-movements>
@@ -52,7 +53,13 @@ import {ReportService} from '../../../services/report.service';
             <div class="col-12">
               <h4>Disclaimer:</h4>
               <p class="disclaimer">Chaikin Analytics (CA) is not registered as a securities Broker/Dealer
-                or Investment Advisor with either the U.S. Securities and Exchange Commission or with any state securities regulatory authority. The information presented in our reports does not represent a recommendation to buy or sell stocks or any financial instrument nor is it intended as an endorsement of any security or investment. The information in this report does not take into account an individual's pecific financial situation. The user bears complete responsibility for their own investment research and should consult with their financial advisor before making buy/sell decisions. For more information, see <a target="_blank" href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a></p>
+                or Investment Advisor with either the U.S. Securities and Exchange Commission or with any state
+                securities regulatory authority. The information presented in our reports does not represent a
+                recommendation to buy or sell stocks or any financial instrument nor is it intended as an endorsement of
+                any security or investment. The information in this report does not take into account an individual's
+                pecific financial situation. The user bears complete responsibility for their own investment research
+                and should consult with their financial advisor before making buy/sell decisions. For more information,
+                see <a target="_blank" href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a></p>
             </div>
           </div>
         </div>
@@ -65,6 +72,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
   private _uid: string;
   private _listId: string;
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
+  private _apiHostName = this.utilService.getApiHostName();
 
   public calculations: PortfolioStatus;
   public stocksStatus: Array<StockStatus>;
@@ -83,6 +91,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService,
               private reportService: ReportService,
+              private utilService: UtilService,
               private marketsSummary: MarketsSummaryService) {
   }
 
@@ -226,10 +235,6 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
         }));
         this.dailySymbolList = this.dailySymbolList.slice(0); // hack to bypass dirty checking for non-primitives
       });
-  }
-
-  getPHCReportforListId() {
-    this.reportService.getPHCReportforListId(this._listId).subscribe();
   }
 
 }
