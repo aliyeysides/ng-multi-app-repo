@@ -74,6 +74,7 @@
 			box-shadow: 0 6px 20px rgba(50, 50, 50, 0.25);
 
 			.dropdown-item {
+				cursor: pointer;
 				font-weight: 600;
 				text-overflow: ellipsis;
 				overflow: hidden;

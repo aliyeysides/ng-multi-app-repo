@@ -498,6 +498,7 @@
 		display: inline-block;
 		text-align: center;
 		padding:6px 10px 3px 10px;
+		cursor: pointer;
 	}
 
 	.date-select.selected {
@@ -553,6 +554,10 @@
 	.stock-industry {
 		margin-bottom:15px;
 		margin-top: 5px;
+	}
+
+	.divider__full {
+		margin:10px auto 0;
 	}
 }
 

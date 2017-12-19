@@ -17,26 +17,40 @@ declare let gtag: Function;
         <cpt-psp-navigator (routeClicked)="navClicked()"></cpt-psp-navigator>
         <ul>
           <li>
-            <a><i class="fa fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>
+            <a class="nav--toplevel"><i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;Education</a>
           </li>
-          <li class="row">
-            <div class="col-6">
-              <p>account</p>
+        </ul>
+        <ul>
+          <li>
+            <a class="nav--toplevel"><i class="fa fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>
+          </li>
+          <li class="row no-gutters sub-nav">
+            <div class="col-12">
+              <a href="https://www.chaikinanalytics.com/stock-rating/" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> About the Power Gauge</a>
             </div>
             <div class="col-6">
-              <p>account</p>
+              <a href="" class="nav--sublevel"><i class="fa fa-cog" aria-hidden="true"></i> Walkthrough</a>
             </div>
             <div class="col-6">
-              <p>account</p>
+             <a href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/" class="nav--sublevel"><i class="fa fa-cog" aria-hidden="true"></i> User Guide</a>
             </div>
             <div class="col-6">
-              <p>account</p>
+              <a href="https://mh214.infusionsoft.com/app/orderForms/Chaikin-Analytics---Annual-Subscription" class="nav--sublevel"><i class="fa fa-cog" aria-hidden="true"></i> Upgrade!</a>
+            </div>
+            <div class="col-6">
+              <a href="" class="nav--sublevel"><i class="fa fa-cog" aria-hidden="true"></i> Manage Subscription</a>
+            </div>
+            <div class="col-6">
+             <a href="" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Edit User Name</a>
+            </div>
+            <div class="col-6">
+              <a href="" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Contact Us</a>
             </div>
           </li>
         </ul>
         <ul>
           <li (click)="logOutSession()">
-            <a><i class="fa fa-user-times" aria-hidden="true"></i> &nbsp;Sign Out</a>
+            <a class="nav--toplevel"><i class="fa fa-user-times" aria-hidden="true"></i> &nbsp;Sign Out</a>
           </li>
         </ul>
       </div>

@@ -184,7 +184,7 @@ declare var zingchart: any;
               <span *ngIf="timespanPerChange==0">Unch</span>
               <span *ngIf="timespanPerChange<0">Down</span>
               <span>{{ timespanPriceChange | decimal }} &nbsp;({{ timespanPerChange | decimal }}%)</span> over the
-              last&hellip;
+              last:
             </p>
           </div>
           <div class="col-1"></div>
@@ -223,12 +223,7 @@ declare var zingchart: any;
         <!-- STOCK VIEW STATS -->
         <div class="row stock-info stock-info--stats">
           <div class="col-12">
-            <h2>Today's Stats</h2>
-          </div>
-          <div class="col-4">
-            <p class="data data--large">
-              {{ (symbolData ? symbolData['fundamentalData']['Revenue'] : null) / 1000 | number:'.2-2' }}B</p>
-            <p class="label">REVENUE</p>
+            <h2>{{ stock }} Stats</h2>
           </div>
           <div class="col-4">
             <p class="data data--large">
@@ -240,16 +235,14 @@ declare var zingchart: any;
             <p class="data data--large">{{ (symbolData ? symbolData['fundamentalData']['Yield'] : null) }}%</p>
             <p class="label">YIELD</p>
           </div>
-        </div>
-
-        <div class="row">
+          <div class="col-4">
+            <p class="data data--large">
+              {{ (symbolData ? symbolData['fundamentalData']['Revenue'] : null) / 1000 | number:'.2-2' }}B</p>
+            <p class="label">REVENUE</p>
+          </div>
           <div class="col-12">
             <div class="divider__long"></div>
           </div>
-        </div>
-
-        <!-- STOCK VIEW STATS -->
-        <div class="row stock-info stock-info--stats">
           <div class="col-12 col-lg-6 stock-industry">
             <p class="data">{{ research ? research['Details']['Sector'] : null }}</p>
             <p class="label">SECTOR</p>
@@ -335,7 +328,7 @@ declare var zingchart: any;
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-5 pgr__label">
+                  <div class="col-6 col-md-5  pgr__label">
                     <p>LT Debt to Equity</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -350,7 +343,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-5 pgr__label">
+                  <div class="col-6 col-md-5 pgr__label">
                     <p>Price to Book</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -365,7 +358,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-5 pgr__label">
+                  <div class="col-6 col-md-5  pgr__label">
                     <p>Return on Equity</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -380,7 +373,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-5 pgr__label">
+                  <div class="col-6 col-md-5  pgr__label">
                     <p>Price to Sales</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -395,7 +388,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-5 pgr__label">
+                  <div class="col-6 col-md-5 pgr__label">
                     <p>Free Cash Flow</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -555,7 +548,7 @@ declare var zingchart: any;
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-5 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Earnings Growth</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -570,7 +563,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-5 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Earnings Surprise</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -585,7 +578,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-5 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Earnings Trend</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -600,7 +593,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-5 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Projected P/E</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -615,7 +608,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-5 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Earnings Consistency</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -705,7 +698,7 @@ declare var zingchart: any;
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Rel Strength vs Market</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -720,7 +713,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Chaikin Money Flow</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -735,7 +728,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Price Strength</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -750,7 +743,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Price Trend ROC</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -765,7 +758,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Volume Trend</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -831,6 +824,7 @@ declare var zingchart: any;
                   <table>
                     <th colspan="2">Volume Activity</th>
                     <tr>
+<<<<<<< HEAD
                       <td class="label">avg. vol 20 days</td>
                       <td class="data">
                         {{ research ? (research['VolumeActivity']['Average Volume 20 Days'] | decimal ) : null }}
@@ -841,6 +835,14 @@ declare var zingchart: any;
                       <td class="data">
                         {{ research ? (research['VolumeActivity']['Average Volume 90 Days'] | decimal ) : null }}
                       </td>
+=======
+                      <td class="label">Avg. vol 20 days</td>
+                      <td class="data">{{ research ? (research['VolumeActivity']['Average Volume 20 Days'] | decimal ) : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">Avg. vol 90 days</td>
+                      <td class="data">{{ research ? (research['VolumeActivity']['Average Volume 90 Days'] | decimal ) : null }}</td>
+>>>>>>> remotes/origin/cjb-dec19
                     </tr>
                   </table>
                 </div>
@@ -848,6 +850,7 @@ declare var zingchart: any;
                   <table>
                     <th colspan="2">Volatility Rel to Mkt</th>
                     <tr>
+<<<<<<< HEAD
                       <td class="label">Beta</td>
                       <td class="data">
                         {{ research ? (symbolData['fundamentalData']['beta'] | decimal ) : null }}
@@ -865,6 +868,16 @@ declare var zingchart: any;
                         <span *ngIf="symbolData ? symbolData['fundamentalData']['beta'] > 1 : null">
                           More Volatile
                         </span>
+=======
+                      <td class="label">% Chg YTD Rel S&P</td>
+                      <td class="data">{{ research ? (research['PriceActivity1']['% Change YTD Rel S&P 500'] | decimal ) : null }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">Money Flow Persist.</td>
+                      <td class="data">{{ research ? (research['VolumeActivity']['Chaikin Money Flow Persistency'] | decimal ) : null
+                        }}
+>>>>>>> remotes/origin/cjb-dec19
                       </td>
                     </tr>
                   </table>
@@ -875,12 +888,12 @@ declare var zingchart: any;
 
           <div *ngIf="collapse['technicals'] == true" (click)="toggleCollapse('technicals')"
                class="col-12 expand-collapse">
-            <img src="./assets/imgs/icon_chevron--up.svg">
+            <img src="./assets/imgs/ux__collapse--circle.svg">
             <p>COLLAPSE</p>
           </div>
           <div *ngIf="collapse['technicals'] == false" (click)="toggleCollapse('technicals')"
                class="col-12 expand-collapse">
-            <img src="./assets/imgs/icon_chevron--down.svg">
+            <img src="./assets/imgs/ux__expand--circle.svg">
             <p>EXPAND</p>
           </div>
 
@@ -899,7 +912,7 @@ declare var zingchart: any;
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Estimate Trend</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -914,7 +927,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Short Interest</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -929,7 +942,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Insider Activity</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -944,7 +957,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Analyst Rating Trend</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -959,7 +972,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-6 col-lg-5 pgr__label">
                     <p>Industry Rel Strength</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -1615,7 +1628,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         shared: true
       },
       plotarea: {
-        margin: "30 40 40 40"
+        margin: "30 40 40 30"
       },
       plot: {
         marker: {
@@ -1637,6 +1650,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineStyle: 'solid',
           lineColor: "#eee"
         },
+        placement: "opposite",
         item: {
           fontColor: "#999",
           fontSize: "14",
@@ -1644,6 +1658,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           fontFamily: "Rajdhani"
         },
         tick: {
+          visible: false,
           lineColor: "transparent",
           lineWidth: 0
         },
@@ -1692,7 +1707,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       type: 'line',
       height: 115,
       x: 0,
-      y: 400,
+      y: 530,
       backgroundColor: "transparent",
       plotarea: {
         margin: "25 40 20 40"
@@ -1703,7 +1718,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         }
       },
       source: {
-        visible: false,
+        visible: true,
         text: "ZingCharts.com",
         fontColor: "#ddd",
         fontFamily: "Open Sans",
@@ -1764,10 +1779,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       type: 'area',
       height: 130,
       x: 0,
-      y: 530,
+      y: 400,
       backgroundColor: "#fff",
       plotarea: {
-        margin: "10 40 20 40"
+        margin: "20 40 10 40"
       },
       plot: {
         marker: {
@@ -1775,6 +1790,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         }
       },
       source: {
+        visible: "false",
         text: "ZingCharts.com",
         fontColor: "#ddd",
         fontFamily: "Open Sans",
@@ -1868,7 +1884,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       x: 0,
       y: 321,
       "plot": {
-        "stacked": true
+        "stacked": true,
+        "bar-space":"0px",
       },
       plotarea: {
         margin: "0 40 0 40"
@@ -2001,7 +2018,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "text": "$%v"
       },
       "plotarea": {
-        "margin": "20 40 100 40",
+        "margin": "20 40 40 40",
         "y": "5"
       },
       "plot": {
@@ -2077,7 +2094,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "text": "$%v"
       },
       "plotarea": {
-        "margin": "20 40 100 40",
+        "margin": "20 40 40 40",
         "y": "5"
       },
       "plot": {
@@ -2103,6 +2120,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       },
       "scale-y": {
         "line-color": "transparent",
+
         item: {
           fontColor: "#999",
           fontSize: "14",
@@ -2140,7 +2158,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         {
           "values": seriesB,
-          "alpha": 0.95,
+          "alpha": 0.75,
           "borderRadiusTopLeft": 7,
           "background-color": "#19c736",
           "rules": [
@@ -2152,7 +2170,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         {
           "values": seriesC,
-          "alpha": 0.95,
+          "alpha": 0.9,
           "borderRadiusTopLeft": 7,
           "background-color": "#19c736",
           "rules": [
@@ -2193,7 +2211,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "text": "$%v"
       },
       "plotarea": {
-        "margin": "80 60 100 60",
+        "margin": "80 60 40 60",
         "y": "125px"
       },
       "plot": {

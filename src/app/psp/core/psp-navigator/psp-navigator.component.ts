@@ -5,15 +5,13 @@ import {Subject} from 'rxjs/Subject';
 @Component({
   selector: 'cpt-psp-navigator',
   template: `
-    <div class="nav-list">
       <ul>
         <li (click)="closeNav($event)" *ngFor="let route of routes"
             routerLinkActive="active"
             routerLink="{{ route.link }}">
-          <a><i class="{{ route.klass }}" aria-hidden="true"></i> &nbsp;{{ route.label }}</a>
+          <a class="nav--toplevel"><i class="{{ route.klass }}" aria-hidden="true"></i> &nbsp;{{ route.label }}</a>
         </li>
       </ul>
-    </div>
   `,
   styleUrls: ['./psp-navigator.component.scss']
 })
@@ -33,8 +31,8 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   reportOpen: boolean;
   public routes: object[] = [
     {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-    {link: '/my-stocks', klass: 'fa fa-list', label: 'My Stocks'},
-    {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Beat'},
+    {link: '/my-stocks', klass: 'fa fa-pie-chart', label: 'Stock Summary'},
+    {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Insights'},
   ];
 
 
@@ -63,15 +61,15 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
     if (this.reportOpen) {
       this.routes = [
         {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-        {link: '/my-stocks/' + this.firstUserStock, klass: 'fa fa-list', label: 'Stock Summary'},
-        {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Beat'},
+        {link: '/my-stocks/' + this.firstUserStock, klass: 'fa fa-pie-chart', label: 'Stock Summary'},
+        {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Insights'},
       ];
       return;
     }
     this.routes = [
       {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-      {link: '/my-stocks', klass: 'fa fa-pie-chart', label: 'My Stocks'},
-      {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Beat'},
+      {link: '/my-stocks', klass: 'fa fa-pie-chart', label: 'Stock Summary'},
+      {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Insights'},
     ];
   }
 

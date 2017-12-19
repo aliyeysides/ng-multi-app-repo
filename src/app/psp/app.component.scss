@@ -435,19 +435,19 @@ sub {
     padding:15px 0;
 
     ul {
-      padding:15px 20px;
+      padding:10px 20px;
       margin:0;
       border-top: 2px solid rgba(255,255,255,0.1);
 
       li {
-        height:60px;
-        font-size: 22px;
+        padding: 10px 0;
 
-        a {
+        .nav--toplevel {
           color:#ffffff !important;
-          line-height: 60px;
+          line-height: 1.5;
           text-decoration: none;
           white-space: nowrap;
+          font-size: 22px;
 
           i {
             color:#ffffff;
@@ -457,11 +457,36 @@ sub {
           }
         }
       }
+
+      .sub-nav {
+        padding: 0px;
+
+        .nav--sublevel {
+          font-size: 16px;
+          color:#ffffff !important;
+          line-height: 2;
+          text-decoration: none;
+          white-space: nowrap;
+          opacity: 0.75;
+          cursor: pointer;
+
+          i {
+            color:#ffffff;
+            font-size: 8px;
+            display: inline-block;
+            vertical-align: baseline;
+          }
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
     }
   }
 
   .logo {
-    padding:30px 20px 0 20px;
+    padding:20px 20px 0 20px;
   }
 }
 
@@ -1048,7 +1073,10 @@ sub {
 
 
 
-
+#annualEPSChart {
+  height: 440px;
+  overflow:hidden;
+}
 
 
 #mainChart-graph-id1-scale-y-guide-267-path {
