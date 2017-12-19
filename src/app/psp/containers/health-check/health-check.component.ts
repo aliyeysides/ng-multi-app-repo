@@ -21,7 +21,7 @@ import {ReportService} from '../../../services/report.service';
     <!-- PANEL CONTENTS -->
     <div [ngBusy]="loading" class="container-fluid component component--healthcheck">
       <div class="row contents">
-        <button (click)="getPHCReportforListId()">pdf</button>
+        <!--<button (click)="getPHCReportforListId()">pdf</button>-->
         <!-- HEALTH-CHECK - Intro -->
         <cpt-psp-portfolio-overview (listChanged)="listChanged()" [lists]="allUserLists" [calc]="calculations" [data]="prognosisData"></cpt-psp-portfolio-overview>
         <!-- HEALTH-CHECK - Stock Movements -->

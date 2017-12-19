@@ -47,7 +47,7 @@ declare var zingchart: any;
           <div class="col-12 col-md-7">
             <!-- STOCK VIEW TOP -->
             <div class="row no-gutters stock-info">
-              <button (click)="getPDFStockReport(stock)">pdf</button>
+              <!--<button (click)="getPDFStockReport(stock)">pdf</button>-->
 
               <div class="col-12 stockview__main-rating">
                 <p class="label">Power Gauge Rating &nbsp;<a><i class="fa fa-info-circle" aria-hidden="true"></i></a>
@@ -145,10 +145,6 @@ declare var zingchart: any;
                 <p class="current-price"><sub>$</sub>{{ symbolData ? (symbolData['metaInfo'][0]['Last'] | decimal ) : null }}</p>
                 <p class="label">Current</p>
               </div>
-              <!--<div class="col-4">-->
-              <!--<p class="data red">1107.23</p>-->
-              <!--<p class="label">OPEN</p>-->
-              <!--</div>-->
               <div class="col-6">
                 <p class="data">{{ symbolData ? (symbolData['metaInfo'][0]['Change'] | decimal ) : null }}</p>
                 <p class="label">$ CHG</p>
@@ -168,7 +164,7 @@ declare var zingchart: any;
 
 
         <!-- STOCK VIEW CHART HEADER -->
-        <div class="row stock-info stock-info--chart-toggle">
+        <div class="row no-gutters stock-info stock-info--chart-toggle">
           <div class="col-12 hidden-md-down">
             <div class="divider__long"></div>
           </div>
@@ -176,6 +172,7 @@ declare var zingchart: any;
             <p class="chart-header__breakdown">Down <span>-12.02 &nbsp;(-3.23%)</span> over the last&hellip;
             </p>
           </div>
+          <div class="col-1"></div>
           <div (click)="toggleChartTime('1W')" class="col-2">
             <p class="date-select" [ngClass]="{'selected': current == '1W' }">1W</p>
           </div>
@@ -191,6 +188,7 @@ declare var zingchart: any;
           <div (click)="getFiveYearChart()" class="col-2">
             <p class="date-select" [ngClass]="{'selected': current == '5Y' }">5Y</p>
           </div>
+          <div class="col-1"></div>
         </div>
 
         <!-- STOCK VIEW MAIN CHART -->
@@ -238,12 +236,12 @@ declare var zingchart: any;
         <!-- STOCK VIEW STATS -->
         <div class="row stock-info stock-info--stats">
           <div class="col-12 col-lg-6 stock-industry">
-            <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['industry_name'] : null }}</p>
-            <p class="label">INDUSTRY</p>
-          </div>
-          <div class="col-12 col-lg-6 stock-industry">
             <p class="data">{{ research ? research['Details']['Sector'] : null }}</p>
             <p class="label">SECTOR</p>
+          </div>
+          <div class="col-12 col-lg-6 stock-industry">
+            <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['industry_name'] : null }}</p>
+            <p class="label">INDUSTRY</p>
           </div>
         </div>
         <div class="row">
@@ -306,7 +304,7 @@ declare var zingchart: any;
             <p class="paragraph"> {{ summary ? summary['pgrContextSummary'][0]['additionalSentence'] : null }}</p>
           </div>
           <div class="col-12">
-            <div class="divider__full"></div>
+            <div class="divider__long"></div>
           </div>
         </div>
 
@@ -322,7 +320,7 @@ declare var zingchart: any;
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-5 pgr__label">
                     <p>LT Debt to Equity</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -337,7 +335,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-5 pgr__label">
                     <p>Price to Book</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -352,7 +350,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-5 pgr__label">
                     <p>Return on Equity</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -367,7 +365,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-5 pgr__label">
                     <p>Price to Sales</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -382,7 +380,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-5 pgr__label">
                     <p>Free Cash Flow</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -399,134 +397,130 @@ declare var zingchart: any;
           </div>
 
           <ng-container *ngIf="collapse['financials'] == true">
-            <div class="col-12 hidden-lg-up">
-              <div class="divider__long"></div>
-            </div>
-            <div class="col-12 col-lg-6 copy-block">
-              <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s</span>
-                {{ summary ? summary['financialContextSummary'][0]['generalSentence'] : null }}</p>
-              <p class="paragraph">{{ summary ? summary['financialContextSummary'][0]['explanatorySentence'] : null
-                }}</p>
-            </div>
-            <div class="col-12 data-table">
-              <div class="row">
-                <div class="col-6 col-md-3">
-                  <table>
-                    <th colspan="2">Assets &amp; Liabilities</th>
-                    <tr>
-                      <td class="label">Current Ratio</td>
-                      <td class="data">
-                        {{ research ? (research['Assets and Liabilities']['Current Ratio'] | number:'.2-2' ) : null }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="label">LT Debt/ Equity</td>
-                      <td class="data">
-                        {{ research ? (research['Assets and Liabilities']['LT Debt/Equity'] | number:'.2-2' ) : null }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="label">% Earn on Eqty</td>
-                      <td class="data">{{ research ? (research['Returns']['Return on Equity'] | number:'.2-2' ) : null
-                        }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="label">Book Value</td>
-                      <td class="data">{{ research ? (research['Valuation']['Price/Book'] | number:'.2-2' ) : null }}
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-                <div class="col-6 col-md-3">
-                  <table>
-                    <th colspan="2">Valuation</th>
-                    <tr>
-                      <td class="label">Price/Earnings</td>
-                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['P/E'] | decimal ) : null }}</td>
-                    </tr>
-                    <tr>
-                      <td class="label">PEG</td>
-                      <td class="data">{{ competitors ? (competitors[0]['PEG'] | decimal ) : null }}</td>
-                    </tr>
-                    <tr>
-                      <td class="label">Price to Book</td>
-                      <td class="data">{{ research ? (research['Valuation']['Price/Book'] | decimal ) : null }}</td>
-                    </tr>
-                    <tr>
-                      <td class="label">Price to Sales</td>
-                      <td class="data">{{ research ? (research['Valuation']['Price/Sales'] | decimal ) : null }}</td>
-                    </tr>
-                  </table>
-                </div>
-                <div class="col-6 col-md-3">
-                  <table>
-                    <th colspan="2">Dividends</th>
-                    <tr>
-                      <td class="label">Div per Share</td>
-                      <td class="data">
-                        {{ symbolData ? (symbolData['fundamentalData']['dividend_per_share'] | decimal ) : null }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="label">Payout</td>
-                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['payout'] | decimal ) : null }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="label">Yield</td>
-                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['Yield'] | decimal ) : null }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="label">Dividend Growth Rate</td>
-                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['growth_rate'] | decimal ) : null
-                        }}
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-                <div class="col-6 col-md-3">
-                  <table>
-                    <th colspan="2">Returns</th>
-                    <tr>
-                      <td class="label">On Investment</td>
-                      <td class="data">{{ research ? (research['Returns']['Return on Invest'] | decimal ) : null }}</td>
-                    </tr>
-                    <tr>
-                      <td class="label">On Equity</td>
-                      <td class="data">{{ research ? (research['Returns']['Return on Equity'] | decimal ) : null }}</td>
-                    </tr>
-                    <tr>
-                      <td class="label">1 Month Return</td>
-                      <td class="data">
-                        {{ research ? (research['PriceActivity2']['% Change Price - 4 Weeks'] | decimal ) : null }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="label">3 Month Return</td>
-                      <td class="data">
-                        {{ research ? (research['PriceActivity2']['% Change Price - 24 Weeks'] | decimal ) : null }}
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </ng-container>
-
-          <div class="col-12">
+          <div class="col-12 hidden-lg-up">
             <div class="divider__long"></div>
           </div>
+          <div class="col-12 col-lg-6 copy-block">
+            <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s</span>
+              {{ summary ? summary['financialContextSummary'][0]['generalSentence'] : null }}</p>
+            <p class="paragraph">{{ summary ? summary['financialContextSummary'][0]['explanatorySentence'] : null
+              }}</p>
+          </div>
+          <div class="col-12 data-table">
+            <div class="row">
+              <div class="col-6 col-md-3">
+                <table>
+                  <th colspan="2">Assets &amp; Liabilities</th>
+                  <tr>
+                    <td class="label">Current Ratio</td>
+                    <td class="data">
+                      {{ research ? (research['Assets and Liabilities']['Current Ratio'] | number:'.2-2' ) : null }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="label">LT Debt/ Equity</td>
+                    <td class="data">
+                      {{ research ? (research['Assets and Liabilities']['LT Debt/Equity'] | number:'.2-2' ) : null }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="label">% Earn on Eqty</td>
+                    <td class="data">{{ research ? (research['Returns']['Return on Equity'] | number:'.2-2' ) : null
+                      }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="label">Book Value</td>
+                    <td class="data">{{ research ? (research['Valuation']['Price/Book'] | number:'.2-2' ) : null }}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-6 col-md-3">
+                <table>
+                  <th colspan="2">Valuation</th>
+                  <tr>
+                    <td class="label">Price/Earnings</td>
+                    <td class="data">{{ symbolData ? (symbolData['fundamentalData']['P/E'] | decimal ) : null }}</td>
+                  </tr>
+                  <tr>
+                    <td class="label">PEG</td>
+                    <td class="data">{{ competitors ? (competitors[0]['PEG'] | decimal ) : null }}</td>
+                  </tr>
+                  <tr>
+                    <td class="label">Price to Book</td>
+                    <td class="data">{{ research ? (research['Valuation']['Price/Book'] | decimal ) : null }}</td>
+                  </tr>
+                  <tr>
+                    <td class="label">Price to Sales</td>
+                    <td class="data">{{ research ? (research['Valuation']['Price/Sales'] | decimal ) : null }}</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-6 col-md-3">
+                <table>
+                  <th colspan="2">Dividends</th>
+                  <tr>
+                    <td class="label">Div per Share</td>
+                    <td class="data">
+                      {{ symbolData ? (symbolData['fundamentalData']['dividend_per_share'] | decimal ) : null }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="label">Payout</td>
+                    <td class="data">{{ symbolData ? (symbolData['fundamentalData']['payout'] | decimal ) : null }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="label">Yield</td>
+                    <td class="data">{{ symbolData ? (symbolData['fundamentalData']['Yield'] | decimal ) : null }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="label">Dividend Growth Rate</td>
+                    <td class="data">{{ symbolData ? (symbolData['fundamentalData']['growth_rate'] | decimal ) : null
+                      }}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-6 col-md-3">
+                <table>
+                  <th colspan="2">Returns</th>
+                  <tr>
+                    <td class="label">On Investment</td>
+                    <td class="data">{{ research ? (research['Returns']['Return on Invest'] | decimal ) : null }}</td>
+                  </tr>
+                  <tr>
+                    <td class="label">On Equity</td>
+                    <td class="data">{{ research ? (research['Returns']['Return on Equity'] | decimal ) : null }}</td>
+                  </tr>
+                  <tr>
+                    <td class="label">1 Month Return</td>
+                    <td class="data">
+                      {{ research ? (research['PriceActivity2']['% Change Price - 4 Weeks'] | decimal ) : null }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="label">3 Month Return</td>
+                    <td class="data">
+                      {{ research ? (research['PriceActivity2']['% Change Price - 24 Weeks'] | decimal ) : null }}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          </ng-container>
 
           <div *ngIf="collapse['financials'] == true" (click)="toggleCollapse('financials')"
-               class="col-12 expand-collapse">
-            <img src="./assets/imgs/icon_chevron--up.svg">
+               class="col-12 hidden-lg-up expand-collapse">
+            <img src="./assets/imgs/ux__collapse--circle.svg">
             <p>COLLAPSE</p>
           </div>
           <div *ngIf="collapse['financials'] == false" (click)="toggleCollapse('financials')"
-               class="col-12 expand-collapse">
-            <img src="./assets/imgs/icon_chevron--down.svg">
+               class="col-12 hidden-lg-up expand-collapse">
+            <img src="./assets/imgs/ux__expand--circle.svg">
             <p>EXPAND</p>
           </div>
 
@@ -538,15 +532,15 @@ declare var zingchart: any;
         <!-- BREAKDOWN - EARNINGS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
-            <h1>Earnings: <span class="yellow">{{ summary ? summary['earningsContextSummary'][0]['status'] : null
+            <h1>Earnings: <span class="">{{ summary ? summary['earningsContextSummary'][0]['status'] : null
               }}</span></h1>
           </div>
 
-          <div class="col-12 stockview__PGR">
+          <div class="col-12 col-lg-6 stockview__PGR">
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-5 pgr__label">
                     <p>Earnings Growth</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -561,7 +555,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-5 pgr__label">
                     <p>Earnings Surprise</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -576,7 +570,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-5 pgr__label">
                     <p>Earnings Trend</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -591,7 +585,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-5 pgr__label">
                     <p>Projected P/E</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -606,7 +600,7 @@ declare var zingchart: any;
               </li>
               <li>
                 <div class="row sliderBar-container">
-                  <div class="col-6 pgr__label">
+                  <div class="col-5 pgr__label">
                     <p>Earnings Consistency</p>
                   </div>
                   <div class="col-5 sliderProgress">
@@ -622,58 +616,62 @@ declare var zingchart: any;
             </ul>
           </div>
 
-          <div class="col-12">
+          <ng-container *ngIf="collapse['earnings']">
+          <div class="col-12 hidden-lg-up">
             <div class="divider__long"></div>
           </div>
 
-          <ng-container *ngIf="collapse['earnings']">
-            <div class="col-12 copy-block">
-              <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s:</span>
-                {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
-              <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null
-                }}</p>
+          <div class="col-12 col-lg-6 copy-block">
+            <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s:</span>
+              {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
+            <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null
+              }}</p>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="chart__header">
+              <h3>Annual EPS</h3>
             </div>
-            <div class="col-12">
-              <div class="chart__header">
-                <h3>Annual EPS</h3>
-              </div>
-              <div class="chart">
-                <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
-              </div>
+            <div class="chart">
+              <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
             </div>
-            <div class="col-12">
-              <div class="chart__header">
-                <h3>Quarterly EPS</h3>
-              </div>
-              <div class="chart">
-                <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
-              </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="chart__header">
+              <h3>Quarterly EPS</h3>
             </div>
-            <div class="col-12">
-              <div class="chart__header">
-                <h3>Earnings Announcement</h3>
-              </div>
-              <div class="chart">
-                <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
-              </div>
+            <div class="chart">
+              <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
             </div>
-            <div class="col-12">
-              <div class="chart__header">
-                <h3>Annual Revenue</h3>
-              </div>
-              <div class="chart">
-                <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
-              </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="chart__header">
+              <h3>Earnings Announcement</h3>
             </div>
+            <div class="chart">
+              <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="chart__header">
+              <h3>Annual Revenue</h3>
+            </div>
+            <div class="chart">
+              <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
+            </div>
+          </div>
           </ng-container>
 
-          <div *ngIf="collapse['earnings'] == true" (click)="toggleCollapse('earnings')" class="col-12 expand-collapse">
-            <img src="./assets/imgs/icon_chevron--up.svg">
+          <div *ngIf="collapse['earnings'] == true" (click)="toggleCollapse('earnings')" class="col-12 hidden-lg-up expand-collapse">
+            <img src="./assets/imgs/ux__collapse--circle.svg">
             <p>COLLAPSE</p>
           </div>
           <div *ngIf="collapse['earnings'] == false" (click)="toggleCollapse('earnings')"
-               class="col-12 expand-collapse">
-            <img src="./assets/imgs/icon_chevron--down.svg">
+               class="col-12 hidden-lg-up expand-collapse">
+            <img src="./assets/imgs/ux__expand--circle.svg">
             <p>EXPAND</p>
           </div>
 
@@ -1269,7 +1267,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
                 this.getCMFConfig(dates, cmf)
               ]
             },
-            height: 520,
+            height: 660,
             width: undefined
           };
 
@@ -1393,7 +1391,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.getCMFConfig(dates, cmf)
         ]
       },
-      height: 520,
+      height: 660,
       width: undefined
     };
   }
@@ -1438,7 +1436,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.getCMFConfig(dates, cmf)
         ]
       },
-      height: 520,
+      height: 660,
       width: undefined
     };
   }
@@ -1496,7 +1494,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   getCloseConfig(dates, values) {
     return {
       type: 'area',
-      backgroundColor: "#fff",
+      backgroundColor: "transparent",
+      borderColor: "transparent",
       height: 400,
       x: 0,
       y: 0,
@@ -1513,6 +1512,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           y: 0,
         },
         scaleLabel: {
+          visible: false,
           fontColor: "#484848",
           fontFamily: "Open Sans",
           backgroundColor: "#c8ebbb",
@@ -1532,7 +1532,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         shared: true
       },
       plotarea: {
-        margin: "60 20 40 50"
+        margin: "30 40 40 40"
       },
       plot: {
         marker: {
@@ -1540,6 +1540,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         }
       },
       tooltip: {
+        visible: false,
         text: "CLOSE: %v",
         backgroundColor: "#BBB",
         borderColor: "transparent"
@@ -1606,12 +1607,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   getRSIConfig(dates, values) {
     return {
       type: 'line',
-      height: 80,
+      height: 115,
       x: 0,
       y: 400,
-      backgroundColor: "#fff",
+      backgroundColor: "transparent",
       plotarea: {
-        margin: "10 20 10 50"
+        margin: "25 40 20 40"
       },
       plot: {
         marker: {
@@ -1619,6 +1620,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         }
       },
       source: {
+        visible: false,
         text: "ZingCharts.com",
         fontColor: "#ddd",
         fontFamily: "Open Sans",
@@ -1635,14 +1637,17 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         shared: true
       },
       crosshairX: {
+        lineWidth: 2,
+        lineColor: "#999",
         shared: true,
         scaleLabel: {
           visible: false
         },
         plotLabel: {
           fontFamily: "Open Sans",
-          backgroundColor: "#BBB",
+          backgroundColor: "#b9e5fb",
           text: "Rel. Strength: %v",
+          borderColor: "transparent",
           y: 0
         }
       },
@@ -1673,13 +1678,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   getCMFConfig(dates, values) {
     return {
-      type: 'line',
-      height: 80,
+      type: 'area',
+      height: 130,
       x: 0,
-      y: 430,
+      y: 530,
       backgroundColor: "#fff",
       plotarea: {
-        margin: "10 50 10 50"
+        margin: "10 40 20 40"
       },
       plot: {
         marker: {
@@ -1702,15 +1707,17 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         shared: true
       },
       crosshairX: {
-        lineWidth: 0,
+        lineWidth: 2,
+        lineColor: "#999",
         shared: true,
         scaleLabel: {
           visible: false
         },
         plotLabel: {
           fontFamily: "Open Sans",
-          backgroundColor: "#BBB",
+          backgroundColor: "#b9e5fb",
           text: "Chaikin Money Flow: %v",
+          borderColor: "transparent",
           y: 0
         }
       },
@@ -1732,8 +1739,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               lineColor: "#bb2634"
             }],
           backgroundColor: "#51bb2c",
+          alphaArea: 0.9,
           lineColor: "#51bb2c",
-          lineWidth: 2
+          lineWidth: 0
         }
       ]
     };
@@ -1773,13 +1781,17 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     });
     return {
       "type": "bar",
-      height: 80,
+      height: 40,
       x: 0,
-      y: 390,
+      y: 321,
       "plot": {
         "stacked": true
       },
-      "backgroundColor": "#fff",
+      plotarea: {
+        margin: "0 40 0 40"
+      },
+      borderColor: "transparent",
+      backgroundColor: "transparent",
       "scaleX": {
         "values": dates,
         "auto-fit": true,
@@ -1822,11 +1834,14 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       },
       crosshairX: {
         shared: true,
+        lineColor: "transparent",
+        visible: false,
         plotLabel: {
           multiple: false,
           visible: false,
+          borderColor: "transparent",
           fontFamily: "Open Sans",
-          backgroundColor: "#BBB",
+          backgroundColor: "#b9e5fb",
           rules: [
             {
               rule: '%v == 100',
@@ -1849,7 +1864,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "values": veryBullish,
           "alpha": 1,
           "text": 'Very Bullish',
-          "background-color": "#30f300",
+          "backgroundColor": "#24A300",
           "hover-state": {
             backgroundColor: '#26a025',
             text: 'Very Bullish'
@@ -1859,7 +1874,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "values": bullish,
           "text": 'Bullish',
           "alpha": 1,
-          "background-color": "#77db3f",
+          "backgroundColor": "#6ACC00",
           "hover-state": {
             backgroundColor: '#1a901d'
           }
@@ -1868,7 +1883,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "values": neutral,
           "text": 'Neutral',
           "alpha": 1,
-          "background-color": "#dbb237",
+          "backgroundColor": "#FF9900",
           "hover-state": {
             backgroundColor: '#90903a'
           }
@@ -1877,7 +1892,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "values": bearish,
           "text": 'Bearish',
           "alpha": 1,
-          "background-color": "#db513d",
+          "backgroundColor": "#FD4500",
           "hover-state": {
             backgroundColor: '#904925'
           }
@@ -1886,7 +1901,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "values": veryBearish,
           "text": 'Very Bearish',
           "alpha": 1,
-          "background-color": "#db4437",
+          "backgroundColor": "#EB001C",
           "hover-state": {
             backgroundColor: '#901E15'
           }
@@ -1903,8 +1918,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "text": "$%v"
       },
       "plotarea": {
-        "margin": "80 60 100 60",
-        "y": "125px"
+        "margin": "20 40 100 40",
+        "y": "5"
       },
       "plot": {
         "animation": {
@@ -1912,29 +1927,41 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         }
       },
       "scale-x": {
-        "line-color": "#7E7E7E",
+        "line-color": "transparent",
         "labels": dates,
-        "item": {
-          "font-color": "#7e7e7e"
+        item: {
+          fontColor: "#999",
+          fontSize: "14",
+          fontWeight: "500",
+          fontFamily: "Rajdhani"
         },
         "guide": {
           "visible": false
-        }
+        },
+        "tick": {
+          "visible": false
+        },
       },
       "scale-y": {
-        "line-color": "#7E7E7E",
-        "item": {
-          "font-color": "#7e7e7e"
+        "line-color": "transparent",
+        item: {
+          fontColor: "#999",
+          fontSize: "14",
+          fontWeight: "500",
+          fontFamily: "Rajdhani"
+        },
+        "tick": {
+          "visible": false
         },
         "guide": {
           "visible": true
         },
         "label": {
-          "font-family": "arial",
+          "font-family": "Open Sans",
           "font-angle": 0,
           "bold": true,
           "font-size": "14px",
-          "font-color": "#7E7E7E",
+          "font-color": "#484848",
           "offset-y": "-190px",
           "offset-x": "20px"
         },
@@ -1942,9 +1969,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       "series": [
         {
           "values": values,
-          "alpha": 0.95,
+          "alpha": 0.9,
           "borderRadiusTopLeft": 7,
-          "background-color": "#19c736",
+          "background-color": "#19c736 #00C04E",
           "rules": [
             {
               rule: '%v < 0',
@@ -1967,8 +1994,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "text": "$%v"
       },
       "plotarea": {
-        "margin": "80 60 100 60",
-        "y": "125px"
+        "margin": "20 40 100 40",
+        "y": "5"
       },
       "plot": {
         "animation": {
@@ -1976,25 +2003,37 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         }
       },
       "scale-x": {
-        "line-color": "#7E7E7E",
+        "line-color": "transparent",
         "labels": dates,
-        "item": {
-          "font-color": "#7e7e7e"
+        item: {
+          fontColor: "#999",
+          fontSize: "14",
+          fontWeight: "500",
+          fontFamily: "Rajdhani"
         },
         "guide": {
           "visible": false
-        }
+        },
+        "tick": {
+          "visible": false
+        },
       },
       "scale-y": {
-        "line-color": "#7E7E7E",
-        "item": {
-          "font-color": "#7e7e7e"
+        "line-color": "transparent",
+        item: {
+          fontColor: "#999",
+          fontSize: "14",
+          fontWeight: "500",
+          fontFamily: "Rajdhani"
         },
         "guide": {
           "visible": true
         },
+        "tick": {
+          "visible": false
+        },
         "label": {
-          "font-family": "arial",
+          "font-family": "Open Sans",
           "font-angle": 0,
           "bold": true,
           "font-size": "14px",
@@ -2006,7 +2045,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       "series": [
         {
           "values": seriesA,
-          "alpha": 0.95,
+          "alpha": 0.9,
           "borderRadiusTopLeft": 7,
           "background-color": "#19c736",
           "rules": [

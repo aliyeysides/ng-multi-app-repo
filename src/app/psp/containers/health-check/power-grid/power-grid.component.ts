@@ -21,8 +21,16 @@ import {Router} from '@angular/router';
       <div *ngIf="!collapse" class="container">
 
         <div class="row">
-          <div class="col-12 powergrid__container">
+          <div class="col-12 powergrid__container hidden-sm-down">
+            <div class="vertical__label">
+              <p>Weak Industries <span> | </span> Strong Industries &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            </div>
             <table class="powergrid__table">
+              <tr>
+                <th>Weak Stocks</th>
+                <th>Strong Stocks</th>
+                <th></th>
+              </tr>
               <tr class="powergrid__row" id="industry-1">
                 <td class="bear">
                   <p class="ticker">TICK</p>
@@ -96,7 +104,7 @@ import {Router} from '@angular/router';
                 <td class="bull">
                   <p class="ticker"></p>
                 </td>
-                <td class="industry industry--neutral">
+                <td class="industry industry--strong">
                   <p class="industry-text"></p>
                 </td>
               </tr>
@@ -105,10 +113,10 @@ import {Router} from '@angular/router';
                   <p class="ticker"></p>
                 </td>
                 <td class="bull">
-                  <p class="ticker"></p>
+                  <p class="ticker">TICK</p>
                 </td>
                 <td class="industry industry--neutral">
-                  <p class="industry-text"></p>
+                  <p class="industry-text"><span>Industry Neutral</span></p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-9">
@@ -118,7 +126,7 @@ import {Router} from '@angular/router';
                 <td class="bull">
                   <p class="ticker"></p>
                 </td>
-                <td class="industry industry--weak">
+                <td class="industry industry--neutral">
                   <p class="industry-text"></p>
                 </td>
               </tr>
@@ -201,10 +209,8 @@ import {Router} from '@angular/router';
               </tr>
             </table>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col-12">
+          <div class="col-12 hidden-md-up">
             <div class="row">
               <div class="col-5"></div>
               <div class="col-2" style="padding:0 10px;">
@@ -214,10 +220,8 @@ import {Router} from '@angular/router';
             </div>
             <h3>Strong Industries</h3>
           </div>
-        </div>
-        
-        <div class="row">
-          <div class="col-12 col-md-6 powerGrid">
+
+          <div class="col-12 hidden-md-up powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <h4>STRONG STOCKS</h4>
@@ -240,7 +244,7 @@ import {Router} from '@angular/router';
             </div>
           </div>
 
-          <div class="col-12 col-md-6 flex-md-first powerGrid">
+          <div class="col-12 hidden-md-up powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <h4>WEAK STOCKS</h4>
@@ -263,7 +267,7 @@ import {Router} from '@angular/router';
             </div>
           </div>
 
-          <div class="col-12">
+          <div class="col-12 hidden-md-up">
             <div class="row" style="margin-top:40px;">
               <div class="col-5"></div>
               <div class="col-2" style="padding:0 10px;">
@@ -274,7 +278,7 @@ import {Router} from '@angular/router';
             <h3>Weak Industries</h3>
           </div>
 
-          <div class="col-12 col-md-6 flex-md-last powerGrid">
+          <div class="col-12 hidden-md-up powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <h4>STRONG STOCKS</h4>
@@ -297,7 +301,7 @@ import {Router} from '@angular/router';
             </div>
           </div>
 
-          <div class="col-12 col-md-6 powerGrid">
+          <div class="col-12 hidden-md-up powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <h4>WEAK STOCKS</h4>

@@ -19,6 +19,20 @@ declare let gtag: Function;
           <li>
             <a><i class="fa fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>
           </li>
+          <li class="row">
+            <div class="col-6">
+              <p>account</p>
+            </div>
+            <div class="col-6">
+              <p>account</p>
+            </div>
+            <div class="col-6">
+              <p>account</p>
+            </div>
+            <div class="col-6">
+              <p>account</p>
+            </div>
+          </li>
         </ul>
         <ul>
           <li (click)="logOutSession()">

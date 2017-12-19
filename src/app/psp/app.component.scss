@@ -387,16 +387,19 @@ sub {
     .toggle__left {
       border-radius: 20px 0px 0px 20px;
       padding:8px 10px 5px 15px;
+      cursor: pointer;
     }
 
     .toggle__right {
       border-radius: 0px 20px 20px 0;
       padding:8px 15px 5px 10px;
+      cursor: pointer;
     }
 
     .toggle__only {
       border-radius: 20px;
       padding:8px 15px 5px 15px;
+      cursor: default;
     }
 
     .selected {
@@ -1031,6 +1034,7 @@ sub {
   height: 16px;
   text-transform: uppercase;
   text-align: left;
+  white-space: nowrap;
 }
 
 .pgr__label p {
@@ -1041,6 +1045,15 @@ sub {
 
 
 
+
+
+
+
+
+
+#mainChart-graph-id1-scale-y-guide-267-path {
+  stroke: none;
+}
 
 
 .component--stockview.bullish {
@@ -1055,6 +1068,11 @@ sub {
     path {
       stroke:#E0F9EA;
     }
+  }
+  #annualEPSChart-graph-id0-scale-y-guide-3-path, #qrtEPSChart-graph-id0-scale-y-guide-10-path {
+   stroke:#00C04E;
+   stroke-dasharray: (0,0);
+   opacity: 0.33;
   }
 }
 
@@ -1072,6 +1090,11 @@ sub {
       stroke:#FFEFF1;
     }
   }
+  #annualEPSChart-graph-id0-scale-y-guide-3-path, #qrtEPSChart-graph-id0-scale-y-guide-10-path  {
+    stroke:#FD001F;
+   stroke-dasharray: (0,0);
+   opacity: 0.33;
+  }
 }
 
 
@@ -1088,5 +1111,10 @@ sub {
     path {
       stroke:#FFF6E9;
     }
+  }
+  #annualEPSChart-graph-id0-scale-y-guide-3-path, #qrtEPSChart-graph-id0-scale-y-guide-10-path  {
+    stroke:#febf01;
+   stroke-dasharray: (0,0);
+   opacity: 0.33;
   }
 }
