@@ -3,7 +3,6 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {PortfolioStatus, PrognosisData} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 import {HealthCheckService} from '../../../../services/health-check.service';
-import {ReportService} from '../../../../services/report.service';
 import {UtilService} from '../../../../services/util.service';
 
 @Component({
@@ -64,7 +63,8 @@ import {UtilService} from '../../../../services/util.service';
           </div>
         </div>
         <div class="col-12 col-md-4 col-lg-3 align-self-center">
-          <p class="label">Chaikin Power Bar <a> <i tooltip="{{ toolTipText }}" class="fa fa-info-circle" aria-hidden="true"></i></a></p>
+          <p class="label">Chaikin Power Bar <a> <i tooltip="{{ toolTipText }}" class="fa fa-info-circle"
+                                                    aria-hidden="true"></i></a></p>
         </div>
       </div>
     </div>
@@ -85,6 +85,7 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   selectedListName: string;
 
   @Output('listChanged') listChanged: EventEmitter<void> = new EventEmitter<void>();
+
   @Input('uid')
   set uid(val: string) {
     this._uid.next(val);
@@ -135,8 +136,7 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   calculations: PortfolioStatus;
 
   constructor(private healthCheck: HealthCheckService,
-              private utilService: UtilService,
-              private reportService: ReportService) {
+              private utilService: UtilService) {
   }
 
   ngOnInit() {
