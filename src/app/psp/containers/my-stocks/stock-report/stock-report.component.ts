@@ -788,7 +788,7 @@ declare var zingchart: any;
               <div class="row data-table">
                 <div class="col-6 col-sm-3">
                   <table>
-                    <th colspan="2">Price Hi/Lo</th>
+                    <th colspan="2">Price Activity</th>
                     <tr>
                       <td class="label">52 wk high</td>
                       <td class="data">{{ symbolData ? (symbolData['fundamentalData']['52 Wk Hi'] | decimal ) : null
@@ -842,16 +842,23 @@ declare var zingchart: any;
                   <table>
                     <th colspan="2">Volatility Rel to Mkt</th>
                     <tr>
-                      <td class="label">% Change YTD Rel S&P 500</td>
+                      <td class="label">Beta</td>
                       <td class="data">
-                        {{ research ? (research['PriceActivity1']['% Change YTD Rel S&P 500'] | decimal ) : null }}
+                        {{ research ? (symbolData['fundamentalData']['beta'] | decimal ) : null }}
                       </td>
                     </tr>
                     <tr>
-                      <td class="label">Chaikin Money Flow Persistency</td>
+                      <td class="label">Rel. Volatility</td>
                       <td class="data">
-                        {{ research ? (research['VolumeActivity']['Chaikin Money Flow Persistency'] | decimal ) : null
-                        }}
+                        <span *ngIf="symbolData ? symbolData['fundamentalData']['beta'] < 1 : null">
+                          Less Volatile
+                        </span>
+                        <span *ngIf="symbolData ? symbolData['fundamentalData']['beta'] == 1 : null">
+                          Equally Volatile
+                        </span>
+                        <span *ngIf="symbolData ? symbolData['fundamentalData']['beta'] > 1 : null">
+                          More Volatile
+                        </span>
                       </td>
                     </tr>
                   </table>

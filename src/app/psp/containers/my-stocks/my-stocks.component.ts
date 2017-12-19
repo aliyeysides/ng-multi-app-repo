@@ -88,7 +88,9 @@ export class MyStocksComponent implements OnInit, OnDestroy {
     const width = event.target.innerWidth;
     if (+width <= 1024) this.desktopView = false;
     if (+width > 1024) {
-      this.router.navigate(['/my-stocks', this.userStocks[0].symbol]);
+      if (this.userStocks) {
+        this.router.navigate(['/my-stocks', this.userStocks[0].symbol]);
+      }
       this.desktopView = true;
     }
   }
