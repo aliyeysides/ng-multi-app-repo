@@ -49,7 +49,7 @@ declare var zingchart: any;
           <div class="col-12 col-md-7">
             <!-- STOCK VIEW TOP -->
             <div class="row no-gutters stock-info">
-              <!--<button (click)="getPDFStockReport(stock)">pdf</button>-->
+              <button (click)="getPDFStockReport(stock)">pdf</button>
 
               <div class="col-12 stockview__main-rating">
                 <p class="label">Power Gauge Rating &nbsp;<a><i class="fa fa-info-circle" aria-hidden="true"></i></a>
