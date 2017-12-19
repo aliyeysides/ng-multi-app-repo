@@ -25,10 +25,11 @@ import {StockReportComponent} from './stock-report/stock-report.component';
       <div class="row">
         <div class="col-12 col-md-4 component--mystocks">
           <cpt-my-stocks-list [ngBusy]="loading" (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
-                            (removeStockClicked)="removeStock($event)"
-                            (updateData)="updateData()"
-                            (stockClicked)="selectStock($event)"
-                            [stocks]="userStocks" [powerBar]="powerBar" [userLists]="allUserLists"></cpt-my-stocks-list>
+                              (removeStockClicked)="removeStock($event)"
+                              (updateData)="updateData()"
+                              (stockClicked)="selectStock($event)"
+                              [stocks]="userStocks" [powerBar]="powerBar"
+                              [userLists]="allUserLists"></cpt-my-stocks-list>
           <div class="col-12" id="list--recent">
             <h3>Recently Viewed</h3>
             <div class="divider__long"></div>
@@ -47,9 +48,11 @@ import {StockReportComponent} from './stock-report/stock-report.component';
                   <p>CHG</p>
                 </div>
               </li>
-              <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed" class="row list__entry">
+              <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed"
+                  class="row list__entry">
                 <div class="col-3 list-entry__pgr">
-                  <img class="align-absolute" src="{{ appendPGRImage(recent['pgr']['Corrected PGR Value'], recent['pgr']['PGR Value']) }}">
+                  <img class="align-absolute"
+                       src="{{ appendPGRImage(recent['pgr']['Corrected PGR Value'], recent['pgr']['PGR Value']) }}">
                 </div>
                 <div class="col-3" style="padding-left:0;">
                   <p class="text-left">{{ recent['meta-info']['symbol'] }}</p>
@@ -66,8 +69,10 @@ import {StockReportComponent} from './stock-report/stock-report.component';
         </div>
 
         <div class="col-12 col-md-8 component--stockview__container" [ngClass]="{'visible': !desktopView}">
-          <cpt-psp-stock-report [uid]="_uid" [listId]="_listId" (addStockClicked)="addStock($event)" (closeClicked)="closeReport()" [show]="!!selectedStock || desktopView"
-                          [stock]="selectedStock">
+          <cpt-psp-stock-report [uid]="_uid"
+                                [listId]="_listId" (addStockClicked)="addStock($event)" (closeClicked)="closeReport()"
+                                [show]="!!selectedStock || desktopView"
+                                [stock]="selectedStock">
           </cpt-psp-stock-report>
         </div>
 

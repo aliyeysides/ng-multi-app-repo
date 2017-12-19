@@ -144,7 +144,8 @@ declare var zingchart: any;
             <!-- STOCK VIEW PRICE -->
             <div class="row stock-info stock-info--price">
               <div class="col-12">
-                <p class="current-price"><sub>$</sub>{{ symbolData ? (symbolData['metaInfo'][0]['Last'] | decimal ) : null }}</p>
+                <p class="current-price">
+                  <sub>$</sub>{{ symbolData ? (symbolData['metaInfo'][0]['Last'] | decimal ) : null }}</p>
                 <p class="label">Current</p>
               </div>
               <div class="col-6">
@@ -152,7 +153,8 @@ declare var zingchart: any;
                 <p class="label">$ CHG</p>
               </div>
               <div class="col-6">
-                <p class="data">{{ symbolData ? (symbolData['metaInfo'][0]['Percentage '] | decimal ) : null }}<sub>%</sub></p>
+                <p class="data">{{ symbolData ? (symbolData['metaInfo'][0]['Percentage '] | decimal ) : null
+                  }}<sub>%</sub></p>
                 <p class="label">% CHG</p>
               </div>
             </div>
@@ -171,7 +173,12 @@ declare var zingchart: any;
             <div class="divider__long"></div>
           </div>
           <div class="col-12">
-            <p class="chart-header__breakdown">Down <span>-12.02 &nbsp;(-3.23%)</span> over the last&hellip;
+            <p class="chart-header__breakdown">
+              <span *ngIf="timespanPerChange>0">Up</span>
+              <span *ngIf="timespanPerChange==0">Unch</span>
+              <span *ngIf="timespanPerChange<0">Down</span>
+              <span>{{ timespanPriceChange | decimal }} &nbsp;({{ timespanPerChange | decimal }}%)</span> over the
+              last&hellip;
             </p>
           </div>
           <div class="col-1"></div>
@@ -399,120 +406,120 @@ declare var zingchart: any;
           </div>
 
           <ng-container *ngIf="collapse['financials'] == true">
-          <div class="col-12 hidden-lg-up">
-            <div class="divider__long"></div>
-          </div>
-          <div class="col-12 col-lg-6 copy-block">
-            <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s</span>
-              {{ summary ? summary['financialContextSummary'][0]['generalSentence'] : null }}</p>
-            <p class="paragraph">{{ summary ? summary['financialContextSummary'][0]['explanatorySentence'] : null
-              }}</p>
-          </div>
-          <div class="col-12 data-table">
-            <div class="row">
-              <div class="col-6 col-md-3">
-                <table>
-                  <th colspan="2">Assets &amp; Liabilities</th>
-                  <tr>
-                    <td class="label">Current Ratio</td>
-                    <td class="data">
-                      {{ research ? (research['Assets and Liabilities']['Current Ratio'] | number:'.2-2' ) : null }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="label">LT Debt/ Equity</td>
-                    <td class="data">
-                      {{ research ? (research['Assets and Liabilities']['LT Debt/Equity'] | number:'.2-2' ) : null }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="label">% Earn on Eqty</td>
-                    <td class="data">{{ research ? (research['Returns']['Return on Equity'] | number:'.2-2' ) : null
-                      }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="label">Book Value</td>
-                    <td class="data">{{ research ? (research['Valuation']['Price/Book'] | number:'.2-2' ) : null }}
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-6 col-md-3">
-                <table>
-                  <th colspan="2">Valuation</th>
-                  <tr>
-                    <td class="label">Price/Earnings</td>
-                    <td class="data">{{ symbolData ? (symbolData['fundamentalData']['P/E'] | decimal ) : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">PEG</td>
-                    <td class="data">{{ competitors ? (competitors[0]['PEG'] | decimal ) : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">Price to Book</td>
-                    <td class="data">{{ research ? (research['Valuation']['Price/Book'] | decimal ) : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">Price to Sales</td>
-                    <td class="data">{{ research ? (research['Valuation']['Price/Sales'] | decimal ) : null }}</td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-6 col-md-3">
-                <table>
-                  <th colspan="2">Dividends</th>
-                  <tr>
-                    <td class="label">Div per Share</td>
-                    <td class="data">
-                      {{ symbolData ? (symbolData['fundamentalData']['dividend_per_share'] | decimal ) : null }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="label">Payout</td>
-                    <td class="data">{{ symbolData ? (symbolData['fundamentalData']['payout'] | decimal ) : null }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="label">Yield</td>
-                    <td class="data">{{ symbolData ? (symbolData['fundamentalData']['Yield'] | decimal ) : null }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="label">Dividend Growth Rate</td>
-                    <td class="data">{{ symbolData ? (symbolData['fundamentalData']['growth_rate'] | decimal ) : null
-                      }}
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-6 col-md-3">
-                <table>
-                  <th colspan="2">Returns</th>
-                  <tr>
-                    <td class="label">On Investment</td>
-                    <td class="data">{{ research ? (research['Returns']['Return on Invest'] | decimal ) : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">On Equity</td>
-                    <td class="data">{{ research ? (research['Returns']['Return on Equity'] | decimal ) : null }}</td>
-                  </tr>
-                  <tr>
-                    <td class="label">1 Month Return</td>
-                    <td class="data">
-                      {{ research ? (research['PriceActivity2']['% Change Price - 4 Weeks'] | decimal ) : null }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="label">3 Month Return</td>
-                    <td class="data">
-                      {{ research ? (research['PriceActivity2']['% Change Price - 24 Weeks'] | decimal ) : null }}
-                    </td>
-                  </tr>
-                </table>
+            <div class="col-12 hidden-lg-up">
+              <div class="divider__long"></div>
+            </div>
+            <div class="col-12 col-lg-6 copy-block">
+              <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s</span>
+                {{ summary ? summary['financialContextSummary'][0]['generalSentence'] : null }}</p>
+              <p class="paragraph">{{ summary ? summary['financialContextSummary'][0]['explanatorySentence'] : null
+                }}</p>
+            </div>
+            <div class="col-12 data-table">
+              <div class="row">
+                <div class="col-6 col-md-3">
+                  <table>
+                    <th colspan="2">Assets &amp; Liabilities</th>
+                    <tr>
+                      <td class="label">Current Ratio</td>
+                      <td class="data">
+                        {{ research ? (research['Assets and Liabilities']['Current Ratio'] | number:'.2-2' ) : null }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">LT Debt/ Equity</td>
+                      <td class="data">
+                        {{ research ? (research['Assets and Liabilities']['LT Debt/Equity'] | number:'.2-2' ) : null }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">% Earn on Eqty</td>
+                      <td class="data">{{ research ? (research['Returns']['Return on Equity'] | number:'.2-2' ) : null
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">Book Value</td>
+                      <td class="data">{{ research ? (research['Valuation']['Price/Book'] | number:'.2-2' ) : null }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-6 col-md-3">
+                  <table>
+                    <th colspan="2">Valuation</th>
+                    <tr>
+                      <td class="label">Price/Earnings</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['P/E'] | decimal ) : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">PEG</td>
+                      <td class="data">{{ competitors ? (competitors[0]['PEG'] | decimal ) : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">Price to Book</td>
+                      <td class="data">{{ research ? (research['Valuation']['Price/Book'] | decimal ) : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">Price to Sales</td>
+                      <td class="data">{{ research ? (research['Valuation']['Price/Sales'] | decimal ) : null }}</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-6 col-md-3">
+                  <table>
+                    <th colspan="2">Dividends</th>
+                    <tr>
+                      <td class="label">Div per Share</td>
+                      <td class="data">
+                        {{ symbolData ? (symbolData['fundamentalData']['dividend_per_share'] | decimal ) : null }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">Payout</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['payout'] | decimal ) : null }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">Yield</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['Yield'] | decimal ) : null }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">Dividend Growth Rate</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['growth_rate'] | decimal ) : null
+                        }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-6 col-md-3">
+                  <table>
+                    <th colspan="2">Returns</th>
+                    <tr>
+                      <td class="label">On Investment</td>
+                      <td class="data">{{ research ? (research['Returns']['Return on Invest'] | decimal ) : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">On Equity</td>
+                      <td class="data">{{ research ? (research['Returns']['Return on Equity'] | decimal ) : null }}</td>
+                    </tr>
+                    <tr>
+                      <td class="label">1 Month Return</td>
+                      <td class="data">
+                        {{ research ? (research['PriceActivity2']['% Change Price - 4 Weeks'] | decimal ) : null }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">3 Month Return</td>
+                      <td class="data">
+                        {{ research ? (research['PriceActivity2']['% Change Price - 24 Weeks'] | decimal ) : null }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
               </div>
             </div>
-          </div>
           </ng-container>
 
           <div *ngIf="collapse['financials'] == true" (click)="toggleCollapse('financials')"
@@ -619,55 +626,56 @@ declare var zingchart: any;
           </div>
 
           <ng-container *ngIf="collapse['earnings']">
-          <div class="col-12 hidden-lg-up">
-            <div class="divider__long"></div>
-          </div>
+            <div class="col-12 hidden-lg-up">
+              <div class="divider__long"></div>
+            </div>
 
-          <div class="col-12 col-lg-6 copy-block">
-            <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s:</span>
-              {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
-            <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null
-              }}</p>
-          </div>
+            <div class="col-12 col-lg-6 copy-block">
+              <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s:</span>
+                {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
+              <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null
+                }}</p>
+            </div>
 
-          <div class="col-12 col-lg-6">
-            <div class="chart__header">
-              <h3>Annual EPS</h3>
+            <div class="col-12 col-lg-6">
+              <div class="chart__header">
+                <h3>Annual EPS</h3>
+              </div>
+              <div class="chart">
+                <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
+              </div>
             </div>
-            <div class="chart">
-              <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
-            </div>
-          </div>
 
-          <div class="col-12 col-lg-6">
-            <div class="chart__header">
-              <h3>Quarterly EPS</h3>
+            <div class="col-12 col-lg-6">
+              <div class="chart__header">
+                <h3>Quarterly EPS</h3>
+              </div>
+              <div class="chart">
+                <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
+              </div>
             </div>
-            <div class="chart">
-              <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
-            </div>
-          </div>
 
-          <div class="col-12 col-lg-6">
-            <div class="chart__header">
-              <h3>Earnings Announcement</h3>
+            <div class="col-12 col-lg-6">
+              <div class="chart__header">
+                <h3>Earnings Announcement</h3>
+              </div>
+              <div class="chart">
+                <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
+              </div>
             </div>
-            <div class="chart">
-              <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
-            </div>
-          </div>
 
-          <div class="col-12 col-lg-6">
-            <div class="chart__header">
-              <h3>Annual Revenue</h3>
+            <div class="col-12 col-lg-6">
+              <div class="chart__header">
+                <h3>Annual Revenue</h3>
+              </div>
+              <div class="chart">
+                <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
+              </div>
             </div>
-            <div class="chart">
-              <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
-            </div>
-          </div>
           </ng-container>
 
-          <div *ngIf="collapse['earnings'] == true" (click)="toggleCollapse('earnings')" class="col-12 hidden-lg-up expand-collapse">
+          <div *ngIf="collapse['earnings'] == true" (click)="toggleCollapse('earnings')"
+               class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/ux__collapse--circle.svg">
             <p>COLLAPSE</p>
           </div>
@@ -783,11 +791,15 @@ declare var zingchart: any;
                     <th colspan="2">Price Hi/Lo</th>
                     <tr>
                       <td class="label">52 wk high</td>
-                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['52 Wk Hi'] | decimal ) : null }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['52 Wk Hi'] | decimal ) : null
+                        }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">52 wk low</td>
-                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['52 Wk Lo'] | decimal ) : null }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['52 Wk Lo'] | decimal ) : null
+                        }}
+                      </td>
                     </tr>
                   </table>
                 </div>
@@ -797,12 +809,14 @@ declare var zingchart: any;
                     <tr>
                       <td class="label">% chg 4 wk rel S&amp;P</td>
                       <td class="data">
-                        {{ research ? (research['PriceActivity2']['% Change Price - 4 Wks Rel to S&P'] | decimal ) : null }}
+                        {{ research ? (research['PriceActivity2']['% Change Price - 4 Wks Rel to S&P'] | decimal ) : null
+                        }}
                       </td>
                     <tr>
                       <td class="label">% chg 24 wk rel S&amp;P</td>
                       <td class="data">
-                        {{ research ? (research['PriceActivity2']['% Change Price - 24 Wks Rel to S&P'] | decimal ) : null }}
+                        {{ research ? (research['PriceActivity2']['% Change Price - 24 Wks Rel to S&P'] | decimal ) : null
+                        }}
                       </td>
                     </tr>
                   </table>
@@ -812,11 +826,15 @@ declare var zingchart: any;
                     <th colspan="2">Volume Activity</th>
                     <tr>
                       <td class="label">avg. vol 20 days</td>
-                      <td class="data">{{ research ? (research['VolumeActivity']['Average Volume 20 Days'] | decimal ) : null }}</td>
+                      <td class="data">
+                        {{ research ? (research['VolumeActivity']['Average Volume 20 Days'] | decimal ) : null }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">avg. vol 90 days</td>
-                      <td class="data">{{ research ? (research['VolumeActivity']['Average Volume 90 Days'] | decimal ) : null }}</td>
+                      <td class="data">
+                        {{ research ? (research['VolumeActivity']['Average Volume 90 Days'] | decimal ) : null }}
+                      </td>
                     </tr>
                   </table>
                 </div>
@@ -825,12 +843,14 @@ declare var zingchart: any;
                     <th colspan="2">Volatility Rel to Mkt</th>
                     <tr>
                       <td class="label">% Change YTD Rel S&P 500</td>
-                      <td class="data">{{ research ? (research['PriceActivity1']['% Change YTD Rel S&P 500'] | decimal ) : null }}
+                      <td class="data">
+                        {{ research ? (research['PriceActivity1']['% Change YTD Rel S&P 500'] | decimal ) : null }}
                       </td>
                     </tr>
                     <tr>
                       <td class="label">Chaikin Money Flow Persistency</td>
-                      <td class="data">{{ research ? (research['VolumeActivity']['Chaikin Money Flow Persistency'] | decimal ) : null
+                      <td class="data">
+                        {{ research ? (research['VolumeActivity']['Chaikin Money Flow Persistency'] | decimal ) : null
                         }}
                       </td>
                     </tr>
@@ -1161,6 +1181,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   private _apiHostName = this.utilService.getApiHostName();
   @Input('stock') stock: string;
   @Input('show') show: boolean;
+
   @Input('uid')
   set uid(val: string) {
     this._uid.next(val);
@@ -1178,6 +1199,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   get listId() {
     return this._listId.getValue();
   }
+
   @Output('closeClicked') closeClicked: EventEmitter<void> = new EventEmitter<void>();
   @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild('newsList') newsList: ElementRef;
@@ -1240,6 +1262,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   };
   loading: Subscription;
 
+  timespanPerChange: number;
+  timespanPriceChange: number;
+
   constructor(private reportService: ReportService,
               private signalService: SignalService,
               private ideasService: IdeasService,
@@ -1279,6 +1304,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           const relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
 
           this.current = '5Y';
+          this.timespanPerChange = this.calculatePricePerChange(closePrices[0], closePrices[closePrices.length - 1]);
+          this.timespanPriceChange = this.calculatePriceChange(closePrices[0], closePrices[closePrices.length - 1]);
           this.mainChart = {
             id: 'mainChart',
             data: {
@@ -1403,6 +1430,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     const cmf = this.data['five_year_chart_data']['cmf'].map(x => +x).reverse();
     const relStr = this.data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
 
+    this.timespanPerChange = this.calculatePricePerChange(closePrices[0], closePrices[closePrices.length - 1]);
+    this.timespanPriceChange = this.calculatePriceChange(closePrices[0], closePrices[closePrices.length - 1]);
     this.mainChart = {
       id: 'mainChart',
       data: {
@@ -1448,6 +1477,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     const relStr = this.data['one_year_chart_data']['relative_strength'].map(x => +x).reverse()
       .slice(this.data['one_year_chart_data']['relative_strength'].length - cut);
 
+    this.timespanPerChange = this.calculatePricePerChange(closePrices[0], closePrices[closePrices.length - 1]);
+    this.timespanPriceChange = this.calculatePriceChange(closePrices[0], closePrices[closePrices.length - 1]);
     this.mainChart = {
       id: 'mainChart',
       data: {
@@ -2275,6 +2306,14 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   getPDFStockReport(symbol: string) {
     window.open(`${this._apiHostName}/CPTRestSecure/app/pdf/fetchReport?symbol=${symbol}&listID=${this.listId}&uid=${this.uid}&response=file&token=4XC534118T00FR73S127L77QWU65GA1H`, "_blank");
+  }
+
+  calculatePricePerChange(firstClose: number, lastClose: number): number {
+    return (((lastClose - firstClose) / firstClose ) * 100);
+  }
+
+  calculatePriceChange(firstClose: number, lastClose: number): number {
+    return lastClose - firstClose;
   }
 
 }
