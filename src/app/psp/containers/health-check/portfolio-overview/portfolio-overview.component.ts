@@ -4,6 +4,7 @@ import {PortfolioStatus, PrognosisData} from '../../../../shared/models/health-c
 import {Subject} from 'rxjs/Subject';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {ReportService} from '../../../../services/report.service';
+import {UtilService} from '../../../../services/util.service';
 
 @Component({
   selector: 'cpt-psp-portfolio-overview',
@@ -48,6 +49,7 @@ import {ReportService} from '../../../../services/report.service';
       </div>
 
       <div class="row justify-content-center overview__powerbar">
+        <button (click)="getPHCReportforListId()"></button>
         <div class="col-12 col-md-8 col-lg-7 powerbar flex-md-last">
           <div (click)="setToggleOptions('Bulls')"
                [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
@@ -71,6 +73,9 @@ import {ReportService} from '../../../../services/report.service';
 })
 export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
+  private _apiHostName = this.utilService.getApiHostName();
+  private _uid: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private _listId: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _data: BehaviorSubject<PrognosisData> = new BehaviorSubject<PrognosisData>({} as PrognosisData);
   private _calc: BehaviorSubject<PortfolioStatus> = new BehaviorSubject<PortfolioStatus>({} as PortfolioStatus);
   private _lists: BehaviorSubject<object[]> = new BehaviorSubject<object[]>([] as object[]);
@@ -80,6 +85,24 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   selectedListName: string;
 
   @Output('listChanged') listChanged: EventEmitter<void> = new EventEmitter<void>();
+  @Input('uid')
+  set uid(val: string) {
+    this._uid.next(val);
+  }
+
+  get uid() {
+    return this._uid.getValue();
+  }
+
+  @Input('listId')
+  set listId(val: string) {
+    this._listId.next(val);
+  }
+
+  get listId() {
+    return this._listId.getValue();
+  }
+
   @Input('data')
   set data(val: PrognosisData) {
     this._data.next(val);
@@ -112,6 +135,7 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   calculations: PortfolioStatus;
 
   constructor(private healthCheck: HealthCheckService,
+              private utilService: UtilService,
               private reportService: ReportService) {
   }
 
@@ -152,5 +176,9 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
     this.selectedListName = list['name'];
     this.healthCheck.currentList = this.selectedListName;
     this.listChanged.emit();
+  }
+
+  getPHCReportforListId() {
+    window.open(`${this._apiHostName}/CPTRestSecure/app/phc/getPHCReportForListID?listID=${this.listId}&uid=${this.uid}&additionalSymbols=SPY&phcVersion=1.3&_=1513675654286`, "_blank");
   }
 }
