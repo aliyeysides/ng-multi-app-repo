@@ -1,8 +1,4 @@
-import {
-  AfterViewInit,
-  Component, ComponentFactoryResolver, HostListener, OnDestroy, OnInit, ViewChild,
-  ViewChildren, ViewContainerRef
-} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {ListSymbolObj} from '../../../shared/models/health-check';
@@ -11,11 +7,9 @@ import {IdeasService} from '../../../services/ideas.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
-import {Location} from '@angular/common';
 import {SignalService} from '../../../services/signal.service';
 
 import * as moment from 'moment';
-import {StockReportComponent} from './stock-report/stock-report.component';
 
 @Component({
   selector: 'cpt-my-stocks',
@@ -69,8 +63,9 @@ import {StockReportComponent} from './stock-report/stock-report.component';
         </div>
 
         <div class="col-12 col-md-8 component--stockview__container" [ngClass]="{'visible': !desktopView}">
-          <cpt-psp-stock-report [uid]="_uid"
-                                [listId]="_listId" (addStockClicked)="addStock($event)" (closeClicked)="closeReport()"
+          <cpt-psp-stock-report [uid]="_uid" [userStocks]="userStocks"
+                                [listId]="_listId" (addStockClicked)="addStock($event)"
+                                (removeStockClicked)="removeStock($event)" (closeClicked)="closeReport()"
                                 [show]="!!selectedStock || desktopView"
                                 [stock]="selectedStock">
           </cpt-psp-stock-report>
@@ -113,7 +108,6 @@ export class MyStocksComponent implements OnInit, OnDestroy {
               private ideasService: IdeasService,
               private route: ActivatedRoute,
               private router: Router,
-              private location: Location,
               private signalService: SignalService) {
     const mobWidth = (window.screen.width);
     if (+mobWidth <= 1024) this.desktopView = false;

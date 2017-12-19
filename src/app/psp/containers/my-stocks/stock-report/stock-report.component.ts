@@ -12,6 +12,7 @@ import {ZingChart} from '../../../../shared/models/zingchart';
 import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {UtilService} from '../../../../services/util.service';
+import {ListSymbolObj} from '../../../../shared/models/health-check';
 
 declare var zingchart: any;
 
@@ -34,8 +35,13 @@ declare var zingchart: any;
           <h1 class="ticker">{{ stock }}</h1>
           <p class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
         </div>
-        <div (click)="addStock(stock)" class="header__button header__button--right">
+        <div *ngIf="!resultInUserList((_userStocks | async), stock)" (click)="addStock(stock)"
+             class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_plus--white.svg">
+        </div>
+        <div *ngIf="resultInUserList((_userStocks | async), stock)" (click)="removeStock(stock)"
+             class="header__button header__button--right">
+          <img class="align-middle" src="./assets/imgs/icon_minus.svg">
         </div>
       </div>
 
@@ -1185,7 +1191,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _uid: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _listId: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private _userStocks: BehaviorSubject<ListSymbolObj[]> = new BehaviorSubject<ListSymbolObj[]>([] as ListSymbolObj[]);
   private _apiHostName = this.utilService.getApiHostName();
+
   @Input('stock') stock: string;
   @Input('show') show: boolean;
 
@@ -1207,8 +1215,18 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     return this._listId.getValue();
   }
 
+  @Input('userStocks')
+  set userStocks(val: ListSymbolObj[]) {
+    this._userStocks.next(val);
+  }
+
+  get userStocks() {
+    return this._userStocks.getValue();
+  }
+
   @Output('closeClicked') closeClicked: EventEmitter<void> = new EventEmitter<void>();
   @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
+  @Output('removeStockClicked') removeStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild('newsList') newsList: ElementRef;
 
   symbolData;
@@ -1504,6 +1522,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   addStock(ticker: string) {
     this.addStockClicked.emit(ticker);
+  }
+
+  removeStock(ticker: string) {
+    this.removeStockClicked.emit(ticker);
   }
 
   appendPGRImage(symbolData) {
@@ -2321,6 +2343,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   calculatePriceChange(firstClose: number, lastClose: number): number {
     return lastClose - firstClose;
+  }
+
+  resultInUserList(arr: ListSymbolObj[], ticker: string): boolean {
+    if (arr) {
+      return arr.filter(x => x['symbol'] == ticker).length > 0;
+    }
   }
 
 }
