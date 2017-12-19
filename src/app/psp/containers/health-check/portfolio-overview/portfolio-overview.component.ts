@@ -49,7 +49,7 @@ import {UtilService} from '../../../../services/util.service';
       </div>
 
       <div class="row justify-content-center overview__powerbar">
-        <button (click)="getPHCReportforListId()"></button>
+        <button (click)="getPHCReportforListId()">pdf</button>
         <div class="col-12 col-md-8 col-lg-7 powerbar flex-md-last">
           <div (click)="setToggleOptions('Bulls')"
                [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
@@ -179,6 +179,6 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   }
 
   getPHCReportforListId() {
-    window.open(`${this._apiHostName}/CPTRestSecure/app/phc/getPHCReportForListID?listID=${this.listId}&uid=${this.uid}&additionalSymbols=SPY&phcVersion=1.3&_=1513675654286`, "_blank");
+    window.open(`${this._apiHostName}/CPTRestSecure/app/phc/getPHCReportForListID?listID=${this.listId}&uid=${this.uid}&response=file&additionalSymbols=SPY&phcVersion=1.3&_=1513675654286`, "_blank");
   }
 }

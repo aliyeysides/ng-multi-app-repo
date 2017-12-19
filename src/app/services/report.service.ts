@@ -67,7 +67,6 @@ export class ReportService {
   }
 
   public getPHCReportforListId(listId: string, uid: string) {
-  // &additionalSymbols=SPY&phcVersion=1.3&_=1513675654286
     const url = `${this._apiHost}/CPTRestSecure/app/phc/getPHCReportForListID?`;
     this._phcPdfParams = new URLSearchParams();
     this._phcPdfParams.set('listID', listId);
@@ -83,7 +82,7 @@ export class ReportService {
     const url = `${this._apiHost}/CPTRestSecure/app/pdf/fetchReport?`;
     this._stockPdfParams = new URLSearchParams();
     this._stockPdfParams.set('symbol', symbol);
-    this._stockPdfParams.set('response', 'file');
+    // this._stockPdfParams.set('response', 'file');
     return this.utilService.getJson(url, this._stockPdfParams);
   }
 }
