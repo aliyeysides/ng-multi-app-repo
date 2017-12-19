@@ -75,11 +75,6 @@
 	}
 }
 
-
-
-
-
-
 .component--stockview.bearish {
 	background: linear-gradient(to right, rgba(255,50,50,1) 2%,rgba(170,0,119,1) 100%);
 
@@ -135,40 +130,40 @@
 	}
 	.stock-info {
 		h2 {
-			color:#febf01;
+			color:#f9c667;
 		}
 	}
 	.stock-info--stats {
 		.label {
-		  	color:#febf01;
+		  	color:#f9c667;
 		}
 	}
 	.stock-info--chart-toggle {
 		.date-select.selected {
-			background-color:#febf01;
+			background-color:#f9c667;
 		}
 	}
 	.stock-info--news {
 
 		.news__pagination {
 			p {
-				color:#febf01;
+				color:#f9c667;
 
 				span {
-					color:#febf01;
+					color:#f9c667;
 				}
 			}
 		}
 		.news__slider {
 			.source {
-				color:#febf01;
+				color:#f9c667;
 			}
 		}
 	}
 	.data-table {
 		table {
 			.label {
-				color:#febf01;
+				color:#f9c667;
 			}
 		}
 	}
@@ -305,7 +300,7 @@
 		font-size: 32px;
 
 		@media screen AND (min-width: 768px) {
-			font-size: 42px;
+			font-size: 38px;
 		}
 	}
 
@@ -371,6 +366,10 @@
 			font-weight: 700;
 			font-family: 'Open Sans', sans-serif;
 			font-size: 14px;
+		}
+
+		&:last-child {
+			margin-bottom: 0px;
 		}
 	}
 }
@@ -476,12 +475,14 @@
 
 
 .stock-info--chart-toggle {
-	margin: 0px 0 10px;
+	margin: 10px 0 0px;
+	padding: 0;
 
 	.chart-header__breakdown {
 		font-size: 20px;
 		font-weight: 500;
 		line-height: 1.5;
+		margin-bottom: 20px;
 
 		@media screen AND (min-width:768px) {
 			font-size: 28px;
@@ -489,14 +490,14 @@
 	}
 
 	.date-select {
-		font-size: 18px;
-		font-weight: 600;
+		font-size: 20px;
+		font-weight: 700;
 		opacity: 0.5;
 		color: #484848;
 		line-height: 1;
 		display: inline-block;
 		text-align: center;
-		padding:3px 5px 1px 6px;
+		padding:6px 10px 3px 10px;
 	}
 
 	.date-select.selected {
@@ -511,6 +512,7 @@
 
 
 .stock-info--chart {
+	//margin-top: -34px;
 }
 
 
@@ -562,7 +564,7 @@
 
 
 .stock-info--news {
-	padding:20px 0 10px;
+	padding:25px 0px;
 
 	h2 {
 		margin-bottom: 0px;
@@ -644,9 +646,14 @@
 		span {
 			font-weight: 700;
 		}
+
+		@media screen AND (min-width: 768px) {
+			font-size: 48px;
+		}
 	}
-	h1 {
-		margin-bottom: 25px;
+	h2 {
+		margin-top: 25px;
+		margin-bottom: 20px;
 	}
 }
 
@@ -654,13 +661,34 @@
 
 .stock-info--breakdown {
 	h1 {
-		margin: 25px 0 20px;
+		margin: 35px 0;
 		color:#484848;
+
+		@media screen AND (min-width: 768px) {
+			font-size: 48px;
+		}
+
+		span {
+			font-weight: 700;
+		}
 	}
 	.pgr__sliders {
 		@media screen AND (min-width: 1200px) {
 			padding-top:5px;
 		}
+	}
+	.data-table {
+		margin-top: 30px;
+		margin-bottom: 20px;
+	}
+	.stockview__PGR {
+		@media screen AND (min-width: 768px) {
+			border-right:4px dotted #eee;
+			margin-bottom: 20px;
+		}
+	}
+	.chart__header {
+		margin-top:50px;
 	}
 }
 
@@ -678,6 +706,8 @@
 
 
 .data-table {
+	margin-top: 0px;
+
 	table {
 		color: #484848;
 		width: 100%;
