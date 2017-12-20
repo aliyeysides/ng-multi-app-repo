@@ -62,6 +62,7 @@ ul {
 button {
   outline: none;
   border:0;
+  background: transparent;
 }
 :focus {
   outline: none;
@@ -145,6 +146,10 @@ sub {
   background-color: #dddddd;
   border-radius: 10px;
   margin: 5px auto 0;
+}
+
+.bold {
+  font-weight:600;
 }
 
 .blur-me {
@@ -448,6 +453,7 @@ sub {
           text-decoration: none;
           white-space: nowrap;
           font-size: 22px;
+          cursor: pointer;
 
           i {
             color:#ffffff;
@@ -509,7 +515,7 @@ sub {
   background: linear-gradient(13deg, rgba(157,158,163,0.95) 0%, rgba(189,187,190,0.95) 100%);
 
   @media screen AND (min-width: 993px) {
-    display: none;
+    display: block;
   }
 
   .header__title {
@@ -614,7 +620,9 @@ sub {
   background: linear-gradient(to left, rgba(255,50,50,0.95) 0%,rgba(170,0,119,0.95) 80%);
 }
 
-
+.page__header--grey {
+  background: linear-gradient(to left, rgba(60,60,60,0.95) 0%,rgba(100,100,100,0.95) 100%);
+}
 
 
 /*                                                   */
@@ -811,6 +819,7 @@ sub {
     position: relative;
     padding-top:12px;
     padding-bottom:12px;
+    cursor: pointer;
 
     .list-entry__pgr {
       position: relative;

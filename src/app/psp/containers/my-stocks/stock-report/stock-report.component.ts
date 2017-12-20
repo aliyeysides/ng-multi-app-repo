@@ -187,7 +187,7 @@ declare var zingchart: any;
               <span class="green" *ngIf="timespanPerChange>0">Up</span>
               <span class="greyed-out" *ngIf="timespanPerChange==0">Unch</span>
               <span class="red" *ngIf="timespanPerChange<0">Down</span>
-              <span [ngClass]="{
+              <span class="bold" [ngClass]="{
     'green': timespanPerChange>0,
     'red': timespanPerChange<0}">{{ timespanPriceChange | decimal }} &nbsp;({{ timespanPerChange | decimal
                 }}%)</span> over the
@@ -214,8 +214,8 @@ declare var zingchart: any;
         </div>
 
         <!-- STOCK VIEW MAIN CHART -->
-        <div class="row stock-info stock-info--chart">
-          <div class="col-12" style="padding:0;">
+        <div class="row no-gutters stock-info stock-info--chart">
+          <div class="col-12">
             <!-- TODO: implement main chart -->
             <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
           </div>
