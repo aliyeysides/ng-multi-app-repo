@@ -41,7 +41,10 @@ declare var zingchart: any;
         </div>
         <div *ngIf="resultInUserList((_userStocks | async), stock)" (click)="removeStock(stock)"
              class="header__button header__button--right">
-          <img class="align-middle" src="./assets/imgs/icon_minus.svg">
+          <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
+        </div>
+        <div class="header__button header__button--pdf">
+          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
       </div>
 
@@ -55,7 +58,6 @@ declare var zingchart: any;
           <div class="col-12 col-md-7">
             <!-- STOCK VIEW TOP -->
             <div class="row no-gutters stock-info">
-              <button (click)="getPDFStockReport(stock)">pdf</button>
 
               <div class="col-12 stockview__main-rating">
                 <p class="label">Power Gauge Rating &nbsp;<a><i class="fa fa-info-circle" aria-hidden="true"></i></a>
@@ -180,10 +182,12 @@ declare var zingchart: any;
           </div>
           <div class="col-12">
             <p class="chart-header__breakdown">
-              <span *ngIf="timespanPerChange>0">Up</span>
-              <span *ngIf="timespanPerChange==0">Unch</span>
-              <span *ngIf="timespanPerChange<0">Down</span>
-              <span>{{ timespanPriceChange | decimal }} &nbsp;({{ timespanPerChange | decimal }}%)</span> over the
+              <span class="green" *ngIf="timespanPerChange>0">Up</span>
+              <span class="greyed-out" *ngIf="timespanPerChange==0">Unch</span>
+              <span class="red" *ngIf="timespanPerChange<0">Down</span>
+              <span [ngClass]="{
+    'green': calculations?.timespanPerChange>0,
+    'red': calculations?.timespanPerChange<0}">{{ timespanPriceChange | decimal }} &nbsp;({{ timespanPerChange | decimal }}%)</span> over the
               last:
             </p>
           </div>
@@ -824,25 +828,16 @@ declare var zingchart: any;
                   <table>
                     <th colspan="2">Volume Activity</th>
                     <tr>
-<<<<<<< HEAD
-                      <td class="label">avg. vol 20 days</td>
+                      <td class="label">Avg. vol 20 days</td>
                       <td class="data">
                         {{ research ? (research['VolumeActivity']['Average Volume 20 Days'] | decimal ) : null }}
                       </td>
                     </tr>
                     <tr>
-                      <td class="label">avg. vol 90 days</td>
+                      <td class="label">Avg. vol 90 days</td>
                       <td class="data">
                         {{ research ? (research['VolumeActivity']['Average Volume 90 Days'] | decimal ) : null }}
                       </td>
-=======
-                      <td class="label">Avg. vol 20 days</td>
-                      <td class="data">{{ research ? (research['VolumeActivity']['Average Volume 20 Days'] | decimal ) : null }}</td>
-                    </tr>
-                    <tr>
-                      <td class="label">Avg. vol 90 days</td>
-                      <td class="data">{{ research ? (research['VolumeActivity']['Average Volume 90 Days'] | decimal ) : null }}</td>
->>>>>>> remotes/origin/cjb-dec19
                     </tr>
                   </table>
                 </div>
@@ -850,7 +845,6 @@ declare var zingchart: any;
                   <table>
                     <th colspan="2">Volatility Rel to Mkt</th>
                     <tr>
-<<<<<<< HEAD
                       <td class="label">Beta</td>
                       <td class="data">
                         {{ research ? (symbolData['fundamentalData']['beta'] | decimal ) : null }}
@@ -868,16 +862,6 @@ declare var zingchart: any;
                         <span *ngIf="symbolData ? symbolData['fundamentalData']['beta'] > 1 : null">
                           More Volatile
                         </span>
-=======
-                      <td class="label">% Chg YTD Rel S&P</td>
-                      <td class="data">{{ research ? (research['PriceActivity1']['% Change YTD Rel S&P 500'] | decimal ) : null }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="label">Money Flow Persist.</td>
-                      <td class="data">{{ research ? (research['VolumeActivity']['Chaikin Money Flow Persistency'] | decimal ) : null
-                        }}
->>>>>>> remotes/origin/cjb-dec19
                       </td>
                     </tr>
                   </table>
@@ -1604,7 +1588,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           fontColor: "#484848",
           text: "Close: %v",
           fontFamily: "Open Sans",
-          borderColor: "transparent",
+          borderColor: "#ffffff",
           y: 0,
         },
         scaleLabel: {
@@ -1612,7 +1596,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           fontColor: "#484848",
           fontFamily: "Open Sans",
           backgroundColor: "#c8ebbb",
-          borderColor: "transparent",
+          borderColor: "#ffffff",
         }
       },
       title: {
@@ -1710,7 +1694,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       y: 530,
       backgroundColor: "transparent",
       plotarea: {
-        margin: "25 40 20 40"
+        margin: "25 42 20 30"
       },
       plot: {
         marker: {
@@ -1724,6 +1708,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         fontFamily: "Open Sans",
         fontSize: "10",
         fontWeight: "400",
+
       },
       tooltip: {
         visible: false,
@@ -1745,7 +1730,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           fontFamily: "Open Sans",
           backgroundColor: "#b9e5fb",
           text: "Rel. Strength: %v",
-          borderColor: "transparent",
+          borderColor: "#ffffff",
+          strokeWidth: "4",
+          height: 20,
+          borderRadius: 7,
           y: 0
         }
       },
@@ -1782,7 +1770,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       y: 400,
       backgroundColor: "#fff",
       plotarea: {
-        margin: "20 40 10 40"
+        margin: "25 42 20 30"
       },
       plot: {
         marker: {
@@ -1838,9 +1826,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               lineColor: "#bb2634"
             }],
           backgroundColor: "#51bb2c",
-          alphaArea: 0.9,
+          alphaArea: 0.3,
           lineColor: "#51bb2c",
-          lineWidth: 0
+          lineWidth: 2
         }
       ]
     };
@@ -1888,7 +1876,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "bar-space":"0px",
       },
       plotarea: {
-        margin: "0 40 0 40"
+        margin: "0 42 0 30"
       },
       borderColor: "transparent",
       backgroundColor: "transparent",
@@ -1975,9 +1963,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "text": 'Bullish',
           "alpha": 1,
           "backgroundColor": "#6ACC00",
-          "hover-state": {
+          "hover-state": [{
             backgroundColor: '#1a901d'
-          }
+          }]
         },
         {
           "values": neutral,
@@ -2013,13 +2001,14 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   getAnnualEPSConfg(dates, values) {
     return {
       "type": "bar",
+      height: 400,
       "background-color": "white",
       "tooltip": {
         "text": "$%v"
       },
       "plotarea": {
-        "margin": "20 40 40 40",
-        "y": "5"
+        "margin": "30 30 0 30",
+        "y": "15"
       },
       "plot": {
         "animation": {
@@ -2069,13 +2058,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       "series": [
         {
           "values": values,
-          "alpha": 0.9,
-          "borderRadiusTopLeft": 7,
+          "alpha": 0.75,
+          "borderRadius": 7,
           "background-color": "#19c736 #00C04E",
           "rules": [
             {
               rule: '%v < 0',
-              "background-color": "#c7133e",
+              "background-color": "#F54225 #B6355C", 
             }
           ]
         }
@@ -2089,13 +2078,14 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     const seriesC = [values[0][2], values[1][2], values[2][2]];
     return {
       "type": "bar",
+      "height": "400",
       "background-color": "white",
       "tooltip": {
         "text": "$%v"
       },
       "plotarea": {
-        "margin": "20 40 40 40",
-        "y": "5"
+        "margin": "30 30 0 30",
+        "y": "15"
       },
       "plot": {
         "animation": {
@@ -2146,37 +2136,37 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       "series": [
         {
           "values": seriesA,
-          "alpha": 0.9,
-          "borderRadiusTopLeft": 7,
-          "background-color": "#19c736",
+          "alpha": 0.75,
+          "borderRadius": 7,
+          "background-color": "#19c736 #00C04E",
           "rules": [
             {
               rule: '%v < 0',
-              "background-color": "#c7133e",
+              "background-color": "#F54225 #B6355C",
             }
           ]
         },
         {
           "values": seriesB,
-          "alpha": 0.75,
-          "borderRadiusTopLeft": 7,
-          "background-color": "#19c736",
+          "alpha": 0.35,
+          "borderRadius": 7,
+          "background-color": "#19c736 #00C04E",
           "rules": [
             {
               rule: '%v < 0',
-              "background-color": "#c7133e",
+              "background-color": "#F54225 #B6355C",
             }
           ]
         },
         {
           "values": seriesC,
-          "alpha": 0.9,
-          "borderRadiusTopLeft": 7,
-          "background-color": "#19c736",
+          "alpha": 0.75,
+          "borderRadius": 7,
+          "background-color": "#19c736 #00C04E",
           "rules": [
             {
               rule: '%v < 0',
-              "background-color": "#c7133e",
+              "background-color": "#F54225 #B6355C",
             }
           ]
         }
