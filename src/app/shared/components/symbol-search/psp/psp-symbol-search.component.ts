@@ -1,5 +1,5 @@
 import {
-  AfterContentInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild,
+  AfterContentInit, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output, ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 
@@ -62,9 +62,17 @@ declare let gtag: Function;
 })
 export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
   @Input('placeholder') placeholder: string;
+  @Input('btn') btn: HTMLElement;
   @ViewChild('search') search: ElementRef;
   @Output('focused') focused: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output('toggleSearch') toggleSearch: EventEmitter<boolean> =  new EventEmitter<boolean>();
+  @Output('toggleSearch') toggleSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @HostListener('document:click', ['$event']) offClick(e: Event) {
+    e.stopPropagation();
+    if (!this.el.nativeElement.contains(e.target) && !this.btn.contains(e.target as Node)) {
+      this.toggleSearch.emit();
+    }
+  }
 
   private _listId: string;
   private _uid: string;
@@ -79,7 +87,8 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
               public authService: AuthService,
               public ideasService: IdeasService,
               public symbolSearchService: SymbolSearchService,
-              private healthCheck: HealthCheckService) {
+              private healthCheck: HealthCheckService,
+              private el: ElementRef) {
     super(router, authService, ideasService, symbolSearchService);
     this.symbolSearchForm = new FormControl();
   }

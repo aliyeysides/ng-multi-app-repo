@@ -45,8 +45,17 @@ declare let gtag: Function;
   styleUrls: ['./psp-settings-menu.component.scss']
 })
 export class PspSettingsMenuComponent extends BaseSettingsMenuComponent implements OnInit {
+  private _btn: HTMLElement;
   @Input('navOpened') navOpened: BehaviorSubject<boolean>;
-  @Input('btn') btn: ElementRef;
+  @Input('btn')
+  set btn(val: HTMLElement) {
+    this._btn = val;
+  }
+
+  get btn() {
+    return this._btn;
+  }
+
   @Output('navClosed') navClosed: EventEmitter<void> = new EventEmitter<void>();
   @ViewChild('nav') nav: ElementRef;
 
@@ -55,9 +64,11 @@ export class PspSettingsMenuComponent extends BaseSettingsMenuComponent implemen
   }
 
   @HostListener('document:click', ['$event']) offClick(e: Event) {
-    // e.stopPropagation();
-    // console.log('el', this.el.nativeElement, 'btn', this.btn.nativeElement);
-    //   if (!this.el.nativeElement.contains(e.target) && !this.btn.nativeElement.contains(e.target)) this.closeNav();
+    e.stopPropagation();
+    if (!this.el.nativeElement.contains(e.target) && !this.btn.contains(e.target as Node)) {
+      this.closeNav();
+      this.navClicked();
+    }
   }
 
   private opened: boolean = false;
