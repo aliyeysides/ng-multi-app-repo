@@ -56,7 +56,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <p>CHG</p>
           </div>
         </li>
-        <li (click)="selectedStock(stock.symbol);$event.stopPropagation()" *ngFor="let stock of myStocks"
+        <li (click)="selectedStock(stock.symbol);toggleSlider(stock.symbol);$event.stopPropagation()" *ngFor="let stock of myStocks"
             class="row list__entry">
           <div class="col-3 list-entry__pgr">
             <img class="align-absolute" src="{{ appendPGRImage(stock.PGR, stock.raw_PGR) }}">
