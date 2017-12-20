@@ -38,18 +38,20 @@ import {AuthService} from '../../../../services/auth.service';
           </p>
         </div>
         <div class="col-12 col-md-4 align-self-center text-md-left" style="padding:0 10px;">
-          <p>Compared to the <span class="market">S&amp;P 500</span> ---
+          <p>compared to the <span class="market">S&amp;P 500</span> ---
             <span class="market market--change"> 
               <span *ngIf="isSPYUp()">Up +</span>
               <span *ngIf="!isSPYUp()">Down</span>{{ calculations?.SPYPercentageChange | number:'.2-2' }}%
             </span>
-            over the same timespan
+            over the same timespan.
           </p>
         </div>
       </div>
 
       <div class="row justify-content-center overview__powerbar">
-        <button (click)="getPHCReportforListId()">pdf</button>
+        <div class="button--pdf">
+          <button class="align-absolute" (click)="getPHCReportforListId()"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+        </div>
         <div class="col-12 col-md-8 col-lg-7 powerbar flex-md-last">
           <div (click)="setToggleOptions('Bulls')"
                [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">

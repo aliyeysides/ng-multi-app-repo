@@ -24,11 +24,13 @@
 			text-transform: uppercase;
       		display: block;
       		letter-spacing: 0.05em;
+      		cursor: default;
       	}
 
 		.btn-group {
 			margin-top: 8px;
 			margin-bottom: 10px;
+			cursor: pointer;
 
 			.btn {
 			    font-weight: 600;
@@ -139,6 +141,28 @@
 		border-bottom:2px solid #efefef;
 	  	text-align: center;
 	  	padding: 0px;
+	  	position: relative;
+
+	  	.button--pdf {
+	  		position: absolute;
+	  		right:2%;
+	  		height: 60px;
+	  		bottom: 0;
+
+		  	button {
+				background: transparent;
+				cursor: pointer;
+
+				i {
+					font-size: 28px;
+					color: #484848;
+				}
+			}
+
+			@media screen AND (max-width:768px) {
+				display:none;
+			}
+	  	}
 
 	    .label {
 	      	font-size: 15px;

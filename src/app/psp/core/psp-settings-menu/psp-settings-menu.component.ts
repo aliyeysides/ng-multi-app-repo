@@ -29,22 +29,22 @@ declare let gtag: Function;
               <a href="https://www.chaikinanalytics.com/stock-rating/" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> About the Power Gauge</a>
             </div>
             <div class="col-6">
-              <a href="" class="nav--sublevel"><i class="fa fa-cog" aria-hidden="true"></i> Walkthrough</a>
+              <a href="" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Walkthrough</a>
             </div>
             <div class="col-6">
-             <a href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/" class="nav--sublevel"><i class="fa fa-cog" aria-hidden="true"></i> User Guide</a>
+             <a href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> User Guide</a>
             </div>
             <div class="col-6">
-              <a href="https://mh214.infusionsoft.com/app/orderForms/Chaikin-Analytics---Annual-Subscription" class="nav--sublevel"><i class="fa fa-cog" aria-hidden="true"></i> Upgrade!</a>
+              <a href="https://mh214.infusionsoft.com/app/orderForms/Chaikin-Analytics---Annual-Subscription" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Upgrade!</a>
             </div>
             <div class="col-6">
-              <a href="" class="nav--sublevel"><i class="fa fa-cog" aria-hidden="true"></i> Manage Subscription</a>
+              <a href="https://mh214.infusionsoft.com/app/form/pp_cancel" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Manage Subscription</a>
             </div>
             <div class="col-6">
-             <a href="" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Edit User Name</a>
+             <a href="https://mh214.infusionsoft.com/app/form/pp_changelogin" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Edit User Name</a>
             </div>
             <div class="col-6">
-              <a href="" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Contact Us</a>
+              <a href="mailto:info@chaikinanalytics.com?subject=Mastering the Bear support request" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Contact Us</a>
             </div>
           </li>
         </ul>
