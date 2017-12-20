@@ -186,7 +186,6 @@ export class ReportingCalendarComponent implements OnInit, OnDestroy {
     if (arr.length) {
       return arr[0]['bullishSymbolCount'] + arr[0]['neturalSymbolCount'] + arr[0]['bearishSymbolCount'];
     }
-    return 0;
   }
 
   toggleDay(day: string) {
