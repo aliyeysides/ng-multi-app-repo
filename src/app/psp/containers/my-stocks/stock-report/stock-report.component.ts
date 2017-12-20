@@ -154,16 +154,16 @@ declare var zingchart: any;
             <!-- STOCK VIEW PRICE -->
             <div class="row stock-info stock-info--price">
               <div class="col-12">
-                <p class="current-price">
+                <p class="current-price" [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">
                   <sub>$</sub>{{ symbolData ? (symbolData['metaInfo'][0]['Last'] | decimal ) : null }}</p>
                 <p class="label">Current</p>
               </div>
               <div class="col-6">
-                <p class="data">{{ symbolData ? (symbolData['metaInfo'][0]['Change'] | decimal ) : null }}</p>
+                <p class="data" [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">{{ symbolData ? (symbolData['metaInfo'][0]['Change'] | decimal ) : null }}</p>
                 <p class="label">$ CHG</p>
               </div>
               <div class="col-6">
-                <p class="data">{{ symbolData ? (symbolData['metaInfo'][0]['Percentage '] | decimal ) : null
+                <p class="data" [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">{{ symbolData ? (symbolData['metaInfo'][0]['Percentage '] | decimal ) : null
                   }}<sub>%</sub></p>
                 <p class="label">% CHG</p>
               </div>
