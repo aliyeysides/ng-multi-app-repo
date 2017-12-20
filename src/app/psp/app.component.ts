@@ -14,32 +14,37 @@ declare let gtag: Function;
   styleUrls: ['./app.component.scss'],
   template: `
     <!-- PANEL HEADER - Fixed to the top of each panel-->
-    <span>
-      <div class="page__header"
-           [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}"
-           id="page__header">
-        <div #navBtn (click)="toggleNav()" class="header__button header__button--left" id="header_button--left">
-          <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
-        </div>
-        <cpt-psp-settings-menu [btn]="navBtn" [navOpened]="navOpened" (navClosed)="navOpened.next(false)"></cpt-psp-settings-menu>
-        <div class="header__title header__search">
-          <h1 *ngIf="!searchOpened">{{ title }}</h1>
-          <cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'" *ngIf="searchOpened"></cpt-psp-symbol-search>
-        </div>
-        <div #searchBtn (click)="toggleSearch()" class="header__button header__button--right" id="header_button--right">
-          <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
-        </div>
+    <!--<span>-->
+    <div class="page__header"
+         [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}"
+         id="page__header">
+      <div #navBtn (click)="toggleNav()" class="header__button header__button--left" id="header_button--left">
+        <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
       </div>
-  
-        <!-- App Container -->
-      <div class="container--main" id="container--main" [ngClass]="{'blur-me': searchOpened || navOpened.getValue()}">
-        <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->
-        <div class="router__container">
-          <router-outlet></router-outlet>
-        </div>
-        <simple-notifications [options]="options"></simple-notifications>
+      <cpt-psp-settings-menu [btn]="navBtn" [navOpened]="navOpened"
+                             (navClosed)="navOpened.next(false)"></cpt-psp-settings-menu>
+      <div class="header__title header__search">
+        <h1 *ngIf="!searchOpened">{{ title }}</h1>
+        <cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
+                               *ngIf="searchOpened"></cpt-psp-symbol-search>
       </div>
-    </span>
+      <div #searchBtn (click)="toggleSearch()" class="header__button header__button--right" id="header_button--right">
+        <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
+      </div>
+    </div>
+    <div class="page__header--desktop">
+      <cpt-psp-navigator></cpt-psp-navigator>
+    </div>
+
+    <!-- App Container -->
+    <div class="container--main" id="container--main" [ngClass]="{'blur-me': searchOpened || navOpened.getValue()}">
+      <!-- PANEL ROUTER - Health Check, Insights, My Stocks -->
+      <div class="router__container">
+        <router-outlet></router-outlet>
+      </div>
+      <simple-notifications [options]="options"></simple-notifications>
+    </div>
+    <!--</span>-->
   `
 })
 export class AppComponent implements OnDestroy {

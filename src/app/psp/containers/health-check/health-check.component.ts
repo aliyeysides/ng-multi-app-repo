@@ -23,7 +23,7 @@ import {UtilService} from '../../../services/util.service';
     <div [ngBusy]="loading" class="container-fluid component component--healthcheck">
       <div class="row contents">
         <!-- HEALTH-CHECK - Intro -->
-        <cpt-psp-portfolio-overview [uid]="_uid" [listId]="_listId" (listChanged)="listChanged()" [lists]="allUserLists"
+        <cpt-psp-portfolio-overview [listId]="listId" (listChanged)="listChanged()" [lists]="allUserLists"
                                     [calc]="calculations" [data]="prognosisData"></cpt-psp-portfolio-overview>
         <!-- HEALTH-CHECK - Stock Movements -->
         <cpt-psp-stock-movements [calc]="calculations" [weeklyStocks]="stocksStatus"
@@ -70,10 +70,9 @@ import {UtilService} from '../../../services/util.service';
 })
 export class HealthCheckComponent implements OnInit, OnDestroy {
   private _uid: string;
-  private _listId: string;
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
-  private _apiHostName = this.utilService.getApiHostName();
 
+  public listId: string;
   public calculations: PortfolioStatus;
   public stocksStatus: Array<StockStatus>;
   public prognosisData: PrognosisData;
@@ -90,8 +89,6 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService,
-              private reportService: ReportService,
-              private utilService: UtilService,
               private marketsSummary: MarketsSummaryService) {
   }
 
@@ -100,7 +97,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
 
     this.healthCheck.getMyStocksSubject()
       .takeUntil(this._ngUnsubscribe)
-      .subscribe(res => {
+      .subscribe(() => {
         this.updateData();
       })
   }
@@ -114,15 +111,14 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
     return this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
       .do(() => this.currentList = this.healthCheck.currentList)
-      .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
       .take(1)
-      .map(res => {
-        this.allUserLists = res[0]['User Lists'];
+      .map(() => {
+        this.allUserLists = this.authService.userLists[0]['User Lists'];
         const myStocksUserList = this.allUserLists.filter(x => x['name'] === 'My Stocks')[0];
         if (this.currentList == 'My Stocks') {
-          return this._listId = myStocksUserList['list_id'];
+          return this.listId = myStocksUserList['list_id'];
         }
-        return this._listId = this.allUserLists.filter(x => x['name'] == this.currentList)[0]['list_id'];
+        return this.listId = this.allUserLists.filter(x => x['name'] == this.currentList)[0]['list_id'];
       })
       .switchMap(listId => {
         const startDate = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
@@ -174,14 +170,14 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
     const startDate = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
       endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
     return Observable.combineLatest(
-      this.healthCheck.getChaikinCalculations(this._listId, startDate, endDate),
-      this.healthCheck.getPrognosisData(this._listId),
-      this.healthCheck.getUserPortfolioStockStatus(this._listId, startDate, endDate),
-      this.healthCheck.getPGRWeeklyChangeDAta(this._listId, moment().subtract(1, 'weeks').day(-1).format('YYYY-MM-DD'), moment().day(-1).format('YYYY-MM-DD')),
-      this.healthCheck.getEarningsSurprise(this._listId, startDate, endDate),
-      this.healthCheck.getAnalystRevisions(this._listId, moment().day(-2).format('YYYY-MM-DD')),
-      this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, this._listId, moment().isoWeekday(1).format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')),
-      this.healthCheck.getPHCGridData(this._listId),
+      this.healthCheck.getChaikinCalculations(this.listId, startDate, endDate),
+      this.healthCheck.getPrognosisData(this.listId),
+      this.healthCheck.getUserPortfolioStockStatus(this.listId, startDate, endDate),
+      this.healthCheck.getPGRWeeklyChangeDAta(this.listId, moment().subtract(1, 'weeks').day(-1).format('YYYY-MM-DD'), moment().day(-1).format('YYYY-MM-DD')),
+      this.healthCheck.getEarningsSurprise(this.listId, startDate, endDate),
+      this.healthCheck.getAnalystRevisions(this.listId, moment().day(-2).format('YYYY-MM-DD')),
+      this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, this.listId, moment().isoWeekday(1).format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')),
+      this.healthCheck.getPHCGridData(this.listId),
     )
       .take(1)
       .map(([calc, data, status, pgr, sups, revs, reports, grid]) => {
@@ -215,7 +211,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
     Observable.timer(0, 30 * 1000)
       .switchMap(() => {
         return Observable.combineLatest(
-          this.healthCheck.getListSymbols(this._listId, this._uid),
+          this.healthCheck.getListSymbols(this.listId, this._uid),
           this.marketsSummary.initialMarketSectorData({components: 'majorMarketIndices,sectors'})
         )
       })

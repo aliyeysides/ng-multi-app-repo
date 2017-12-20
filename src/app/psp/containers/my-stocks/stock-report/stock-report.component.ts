@@ -13,6 +13,7 @@ import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {UtilService} from '../../../../services/util.service';
 import {ListSymbolObj} from '../../../../shared/models/health-check';
+import {AuthService} from '../../../../services/auth.service';
 
 declare var zingchart: any;
 
@@ -35,16 +36,17 @@ declare var zingchart: any;
           <h1 class="ticker">{{ stock }}</h1>
           <p class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
         </div>
-        <div *ngIf="!resultInUserList((_userStocks | async), stock)" (click)="addStock(stock)"
+        <div *ngIf="!resultInUserList(userStocks, stock)" (click)="addStock(stock)"
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_plus--white.svg">
         </div>
-        <div *ngIf="resultInUserList((_userStocks | async), stock)" (click)="removeStock(stock)"
+        <div *ngIf="resultInUserList(userStocks, stock)" (click)="removeStock(stock)"
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
         </div>
         <div class="header__button header__button--pdf">
-          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o"
+                                                                               aria-hidden="true"></i></button>
         </div>
       </div>
 
@@ -186,8 +188,9 @@ declare var zingchart: any;
               <span class="greyed-out" *ngIf="timespanPerChange==0">Unch</span>
               <span class="red" *ngIf="timespanPerChange<0">Down</span>
               <span [ngClass]="{
-    'green': calculations?.timespanPerChange>0,
-    'red': calculations?.timespanPerChange<0}">{{ timespanPriceChange | decimal }} &nbsp;({{ timespanPerChange | decimal }}%)</span> over the
+    'green': timespanPerChange>0,
+    'red': timespanPerChange<0}">{{ timespanPriceChange | decimal }} &nbsp;({{ timespanPerChange | decimal
+                }}%)</span> over the
               last:
             </p>
           </div>
@@ -1194,15 +1197,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   @Input('stock') stock: string;
   @Input('show') show: boolean;
 
-  @Input('uid')
-  set uid(val: string) {
-    this._uid.next(val);
-  }
-
-  get uid() {
-    return this._uid.getValue();
-  }
-
   @Input('listId')
   set listId(val: string) {
     this._listId.next(val);
@@ -1288,6 +1282,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   timespanPriceChange: number;
 
   constructor(private reportService: ReportService,
+              private authService: AuthService,
               private signalService: SignalService,
               private ideasService: IdeasService,
               private utilService: UtilService,
@@ -1405,7 +1400,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes) this.ngOnInit()
+    if (changes['stock']) this.ngOnInit()
   }
 
   ngOnDestroy() {
@@ -1873,7 +1868,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       y: 321,
       "plot": {
         "stacked": true,
-        "bar-space":"0px",
+        "bar-space": "0px",
       },
       plotarea: {
         margin: "0 42 0 30"
@@ -2064,7 +2059,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "rules": [
             {
               rule: '%v < 0',
-              "background-color": "#F54225 #B6355C", 
+              "background-color": "#F54225 #B6355C",
             }
           ]
         }
@@ -2342,7 +2337,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getPDFStockReport(symbol: string) {
-    window.open(`${this._apiHostName}/CPTRestSecure/app/pdf/fetchReport?symbol=${symbol}&listID=${this.listId}&uid=${this.uid}&response=file&token=4XC534118T00FR73S127L77QWU65GA1H`, "_blank");
+    this.authService.currentUser$
+      .filter(x => x != undefined)
+      .take(1)
+      .subscribe(usr => {
+        window.open(`${this._apiHostName}/CPTRestSecure/app/pdf/fetchReport?symbol=${symbol}&listID=${this.listId}&uid=${usr['UID']}&response=file&token=4XC534118T00FR73S127L77QWU65GA1H`, "_blank");
+      });
   }
 
   calculatePricePerChange(firstClose: number, lastClose: number): number {

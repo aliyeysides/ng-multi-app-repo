@@ -63,8 +63,8 @@ import * as moment from 'moment';
         </div>
 
         <div class="col-12 col-md-8 component--stockview__container" [ngClass]="{'visible': !desktopView}">
-          <cpt-psp-stock-report [uid]="_uid" [userStocks]="userStocks"
-                                [listId]="_listId" (addStockClicked)="addStock($event)"
+          <cpt-psp-stock-report [userStocks]="userStocks"
+                                [listId]="listId" (addStockClicked)="addStock($event)"
                                 (removeStockClicked)="removeStock($event)" (closeClicked)="closeReport()"
                                 [show]="!!selectedStock || desktopView"
                                 [stock]="selectedStock">
@@ -91,9 +91,9 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   private _uid: string;
-  private _listId: string;
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
+  listId: string;
   selectedStock: string | boolean;
   desktopView: boolean;
   userStocks: ListSymbolObj[];
@@ -118,15 +118,14 @@ export class MyStocksComponent implements OnInit, OnDestroy {
     this.loading = this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
       .do(() => this.currentList = this.healthCheck.currentList)
-      .flatMap(uid => this.healthCheck.getAuthorizedLists(uid))
       .take(1)
-      .map(res => {
-        this.allUserLists = res[0]['User Lists'];
+      .map(() => {
+        this.allUserLists = this.authService.userLists[0]['User Lists'];
         const myStocksUserList = this.allUserLists.filter(x => x['name'] === 'My Stocks')[0];
         if (this.currentList == 'My Stocks') {
-          return this._listId = myStocksUserList['list_id'];
+          return this.listId = myStocksUserList['list_id'];
         }
-        return this._listId = this.allUserLists.filter(x => x['name'] == this.currentList)[0]['list_id'];
+        return this.listId = this.allUserLists.filter(x => x['name'] == this.currentList)[0]['list_id'];
       })
       .switchMap(listId => {
         const startDate = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
@@ -172,7 +171,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   updateData() {
-    this.healthCheck.getListSymbols(this._listId, this._uid)
+    this.healthCheck.getListSymbols(this.listId, this._uid)
       .filter(x => x != undefined)
       .take(1)
       .subscribe(res => {
@@ -191,13 +190,13 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   addStock(ticker: string) {
-    this.ideasService.addStockIntoList(this._listId.toString(), ticker)
+    this.ideasService.addStockIntoList(this.listId.toString(), ticker)
       .take(1)
       .subscribe(res => this.updateData());
   }
 
   removeStock(ticker: string) {
-    this.ideasService.deleteSymbolFromList(this._listId, ticker)
+    this.ideasService.deleteSymbolFromList(this.listId, ticker)
       .take(1)
       .subscribe(res => this.updateData());
   }

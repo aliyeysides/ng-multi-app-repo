@@ -66,10 +66,10 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <p class="company">{{ stock.name }}</p>
           </div>
           <div class="col-3 list-entry__data">
-            <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock.Last }}</p>
+            <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock.Last | decimal }}</p>
           </div>
           <div class="col-3 list-entry__data">
-            <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock['Percentage '] }}%</p>
+            <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock['Percentage '] | decimal }}%</p>
           </div>
           <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide">
             <img src="./assets/imgs/ui_slide.svg">
@@ -91,7 +91,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
                 <img *ngIf="stock.Change<0" class="align-absolute" src="./assets/imgs/icon_arrow-down.svg">
               </div>
               <div class="col-4">
-                <p class="data">{{ stock['Percentage '] }}%</p>
+                <p class="data">{{ stock['Percentage '] | decimal }}%</p>
               </div>
             </div>
           </div>

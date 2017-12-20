@@ -16,14 +16,14 @@ import {UtilService} from '../services/util.service';
 import {AuthService} from '../services/auth.service';
 
 import {BusyModule} from 'angular2-busy';
-import {AuthGuard} from '../shared/auth.guard';
-import {loadingMaskConfig2, loadingMaskConfig3} from '../../loading-mask-config';
+import {loadingMaskConfig3} from '../../loading-mask-config';
 import {IdeasService} from '../services/ideas.service';
 import {SignalService} from '../services/signal.service';
 
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {NotificationsService} from 'angular2-notifications/dist';
 import {SymbolSearchService} from '../services/symbol-search.service';
+import {PspAuthGuard} from '../shared/guards/psp-auth.guard';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,7 @@ import {SymbolSearchService} from '../services/symbol-search.service';
   providers: [
     UtilService,
     AuthService,
-    AuthGuard,
+    PspAuthGuard,
     IdeasService,
     SignalService,
     NotificationsService,
