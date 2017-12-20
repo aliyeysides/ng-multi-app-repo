@@ -1297,6 +1297,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     window.scrollTo(0, 0);
     if (this.stock) {
+      console.log('I dun fired');
       this.loading = this.reportService.getSymbolData(this.stock)
         .takeUntil(this._ngUnsubscribe)
         .filter(x => x != undefined)
@@ -1405,7 +1406,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes) this.ngOnInit()
+    if (changes['stock']) this.ngOnInit()
   }
 
   ngOnDestroy() {
@@ -2064,7 +2065,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "rules": [
             {
               rule: '%v < 0',
-              "background-color": "#F54225 #B6355C", 
+              "background-color": "#F54225 #B6355C",
             }
           ]
         }
