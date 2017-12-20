@@ -4,6 +4,7 @@ import {PortfolioStatus, PrognosisData} from '../../../../shared/models/health-c
 import {Subject} from 'rxjs/Subject';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {UtilService} from '../../../../services/util.service';
+import {AuthService} from '../../../../services/auth.service';
 
 @Component({
   selector: 'cpt-psp-portfolio-overview',
@@ -74,7 +75,6 @@ import {UtilService} from '../../../../services/util.service';
 export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _apiHostName = this.utilService.getApiHostName();
-  private _uid: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _listId: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _data: BehaviorSubject<PrognosisData> = new BehaviorSubject<PrognosisData>({} as PrognosisData);
   private _calc: BehaviorSubject<PortfolioStatus> = new BehaviorSubject<PortfolioStatus>({} as PortfolioStatus);
@@ -85,15 +85,6 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   selectedListName: string;
 
   @Output('listChanged') listChanged: EventEmitter<void> = new EventEmitter<void>();
-
-  @Input('uid')
-  set uid(val: string) {
-    this._uid.next(val);
-  }
-
-  get uid() {
-    return this._uid.getValue();
-  }
 
   @Input('listId')
   set listId(val: string) {
@@ -136,6 +127,7 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   calculations: PortfolioStatus;
 
   constructor(private healthCheck: HealthCheckService,
+              private authService: AuthService,
               private utilService: UtilService) {
   }
 
@@ -179,6 +171,11 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   }
 
   getPHCReportforListId() {
-    window.open(`${this._apiHostName}/CPTRestSecure/app/phc/getPHCReportForListID?listID=${this.listId}&uid=${this.uid}&response=file&additionalSymbols=SPY&phcVersion=1.3&_=1513675654286`, "_blank");
+    this.authService.currentUser$
+      .filter(x => x != undefined)
+      .take(1)
+      .subscribe(usr => {
+        window.open(`${this._apiHostName}/CPTRestSecure/app/phc/getPHCReportForListID?listID=${this.listId}&uid=${usr['UID']}&response=file&additionalSymbols=SPY&phcVersion=1.3&_=1513675654286`, "_blank");
+      })
   }
 }
