@@ -1189,7 +1189,6 @@ declare var zingchart: any;
 })
 export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
-  private _uid: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _listId: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _userStocks: BehaviorSubject<ListSymbolObj[]> = new BehaviorSubject<ListSymbolObj[]>([] as ListSymbolObj[]);
   private _apiHostName = this.utilService.getApiHostName();
@@ -1227,7 +1226,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   research;
   data;
 
-  current: string = '5Y';
+  current: string = '1Y';
   mainChart: ZingChart = {
     id: 'mainChart',
     data: {
@@ -1312,15 +1311,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.data = data;
           this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
 
-          const closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse();
-          const dates = data['five_year_chart_data']['formatted_dates'].reverse();
-          this.data['one_year_chart_data']['formatted_dates'].reverse();
+          let dates, closePrices, pgrData, cmf, relStr;
+          this.current === '5Y' ? dates = data['five_year_chart_data']['formatted_dates'] : dates = data['one_year_chart_data']['formatted_dates'].reverse();
+          this.current === '5Y' ? closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse() : closePrices = data['one_year_chart_data']['close_price'].map(x => +x).reverse();
+          this.current === '5Y' ? pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse() : pgrData = data['one_year_pgr_data']['pgr_data'].map(x => +x).reverse();
+          this.current === '5Y' ? cmf = data['five_year_chart_data']['cmf'].map(x => +x).reverse() : cmf = data['one_year_chart_data']['cmf'].map(x => +x).reverse();
+          this.current === '5Y' ? relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse() : relStr = data['one_year_chart_data']['relative_strength'].map(x => +x).reverse();
 
-          const pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
-          const cmf = data['five_year_chart_data']['cmf'].map(x => +x).reverse();
-          const relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
-
-          this.current = '5Y';
           this.timespanPerChange = this.calculatePricePerChange(closePrices[0], closePrices[closePrices.length - 1]);
           this.timespanPriceChange = this.calculatePriceChange(closePrices[0], closePrices[closePrices.length - 1]);
           this.mainChart = {
@@ -1441,8 +1438,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     this.current = '5Y';
 
     const closePrices = this.data['five_year_chart_data']['close_price'].map(x => +x).reverse();
-    const dates = this.data['five_year_chart_data']['formatted_dates'];
-
+    const dates = this.data['five_year_chart_data']['formatted_dates'].slice().reverse();
     const pgrData = this.data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
     const cmf = this.data['five_year_chart_data']['cmf'].map(x => +x).reverse();
     const relStr = this.data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
