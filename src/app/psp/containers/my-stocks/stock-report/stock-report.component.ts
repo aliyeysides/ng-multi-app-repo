@@ -215,8 +215,8 @@ declare var zingchart: any;
         </div>
 
         <!-- STOCK VIEW MAIN CHART -->
-        <div class="row no-gutters stock-info stock-info--chart">
-          <div class="col-12">
+        <div class="row stock-info stock-info--chart">
+          <div class="col-12 main-chart">
             <!-- TODO: implement main chart -->
             <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
           </div>
@@ -1082,14 +1082,14 @@ declare var zingchart: any;
             </div>
           </ng-container>
 
-          <div *ngIf="collapse['experts'] == true" (click)="toggleCollapse('experts')"
+          <div *ngIf="collapse['financials'] == true" (click)="toggleCollapse('financials')"
                class="col-12 hidden-lg-up expand-collapse">
-            <img src="./assets/imgs/icon_chevron--up.svg">
+            <img src="./assets/imgs/ux__collapse--circle.svg">
             <p>COLLAPSE</p>
           </div>
-          <div *ngIf="collapse['experts'] == false" (click)="toggleCollapse('experts')"
+          <div *ngIf="collapse['financials'] == false" (click)="toggleCollapse('financials')"
                class="col-12 hidden-lg-up expand-collapse">
-            <img src="./assets/imgs/icon_chevron--down.svg">
+            <img src="./assets/imgs/ux__expand--circle.svg">
             <p>EXPAND</p>
           </div>
 
@@ -1182,13 +1182,23 @@ declare var zingchart: any;
         </div>
 
         <!-- COMPANY PROFILE -->
-        <div class="row stock-info stock-info--profile">
+        <div class="row justify-content-center stock-info stock-info--profile">
           <div class="col-12">
             <h2>Company Profile</h2>
           </div>
 
-          <div class="col-12 copy-block">
+          <div class="col-12 col-lg-10 copy-block">
             <p class="paragraph">{{ symbolData ? symbolData['fundamentalData']['Company Text Blurb'] : null }}</p>
+          </div>
+        </div>
+
+        <div class="row justify-content-center stock-info stock-info--disclaimer">
+          <div class="col-12">
+            <div class="divider__full"></div>
+          </div>
+          <div class="col-12 col-lg-10">
+            <h4>Disclaimer:</h4>
+            <p class="disclaimer">Chaikin Analytics (CA) is not registered as a securities Broker/Dealer or Investment Advisor with either the U.S. Securities and Exchange Commission or with any state securities regulatory authority. The information presented in our reports does not represent a recommendation to buy or sell stocks or any financial instrument nor is it intended as an endorsement of any security or investment. The information in this report does not take into account an individual's specific financial situation. The user bears complete responsibility for their own investment research and should consult with their financial advisor before making buy/sell decisions. For more information, see <a target="_blank" href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a> <a target="_blank" href="http://www.chaikinanalytics.com/attributions/">See Attributions &raquo;</a></p>
           </div>
         </div>
       </div>
