@@ -17,20 +17,19 @@ import {Subject} from 'rxjs/Subject';
 	      	</div>
         <div class="btn-group col-12 section--date-select" dropdown [autoClose]="true">
           <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-            <h3>Sun, Oct 3, 2017</h3>
+            <h3>{{ selectedInsight ? selectedInsight['post_title'] : null }}</h3>
             <div class="divider__long divider__long--blue"></div>
           </button>
           <ul *dropdownMenu class="dropdown-menu" role="menu">
-            <li (click)="selectList(list)" *ngFor="let post of posts" role="menuitem"><a
+            <li (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem"><a
               class="dropdown-item">{{ post['post_title'] }}</a></li>
           </ul>
         </div>
 	      	<div class="col-12 section--article featured--article">
-	      		<p class="article__headline">Tech Stocks Explode Again Based on Strong Earnings Reports as Nasdaq 100 Leads Market to New Highs</p>
 	      		<p class="article__author"><sub>BY</sub> Marc Chaikin</p>
 	      		<div class="divider__medium"></div>
 	      		<div class="article__preview">
-	      			<p class="paragraph">The S&P 500 Index closed on Friday at 2,581.07 up 0.23% on the week and made another new all-time high. The real excitement, however, was in the Nasdaq 100 Index where strong earnings reports from Amazon, Alphabet, Intel and Microsoft propelled the Nasdaq Index to a high volume advance to new all-highs. New highs in the major averages were confirmed by advance/decline data and Chaikin Money Flow, but the rally is once again</p>
+	      			<p class="paragraph" [innerHTML]="commentary"></p>
 	      		</div>
 	      		<a class="article__read-more">READ FULL ARTICLE</a>
 	      	</div>
@@ -111,6 +110,8 @@ export class MarketBeatComponent implements OnInit, OnDestroy {
 
   loadCount: number = 14;
   posts: object[];
+  selectedInsight: object;
+  commentary: string;
 
   constructor(private wp: WordpressService) { }
 
@@ -119,6 +120,7 @@ export class MarketBeatComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(posts => {
         this.posts = posts[0]['2'];
+        this.selectInsight(this.posts[0]);
         console.log('posts', this.posts);
       })
   }
@@ -126,6 +128,11 @@ export class MarketBeatComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this._ngUnsubscribe.next();
     this._ngUnsubscribe.complete();
+  }
+
+  selectInsight(post: object) {
+    this.selectedInsight = post;
+    this.commentary = this.wp.getInsightPostBody(post);
   }
 
 }
