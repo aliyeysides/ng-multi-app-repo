@@ -121,18 +121,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
         return this.listId = this.allUserLists.filter(x => x['name'] == this.currentList)[0]['list_id'];
       })
       .switchMap(listId => {
-        const startDate = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
-          endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
-        return Observable.combineLatest(
-          this.healthCheck.getChaikinCalculations(listId, startDate, endDate),
-          this.healthCheck.getPrognosisData(listId),
-          this.healthCheck.getUserPortfolioStockStatus(listId, startDate, endDate),
-          this.healthCheck.getPGRWeeklyChangeDAta(listId, moment().subtract(1, 'weeks').day(-1).format('YYYY-MM-DD'), moment().day(-1).format('YYYY-MM-DD')),
-          this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
-          this.healthCheck.getAnalystRevisions(listId, moment().day(-2).format('YYYY-MM-DD')),
-          this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, listId, moment().isoWeekday(1).format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')),
-          this.healthCheck.getPHCGridData(listId),
-        )
+        return this.getAllHCData(listId);
       })
       .take(1)
       .map(([calc, data, status, pgr, sups, revs, reports, grid]) => {
@@ -166,19 +155,25 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
     this.loading = this.initData();
   }
 
-  updateData() {
-    const startDate = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
-      endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
+  getAllHCData(listId): Observable<any> {
+    const lastWeekStart = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
+      lastWeekEnd = moment(lastWeekStart).add(7, 'days').format('YYYY-MM-DD');
+    const startDate = moment().isoWeekday(1).format('YYYY-MM-DD'),
+      endDate = moment().endOf('week').format('YYYY-MM-DD');
     return Observable.combineLatest(
-      this.healthCheck.getChaikinCalculations(this.listId, startDate, endDate),
-      this.healthCheck.getPrognosisData(this.listId),
-      this.healthCheck.getUserPortfolioStockStatus(this.listId, startDate, endDate),
-      this.healthCheck.getPGRWeeklyChangeDAta(this.listId, moment().subtract(1, 'weeks').day(-1).format('YYYY-MM-DD'), moment().day(-1).format('YYYY-MM-DD')),
-      this.healthCheck.getEarningsSurprise(this.listId, startDate, endDate),
-      this.healthCheck.getAnalystRevisions(this.listId, moment().day(-2).format('YYYY-MM-DD')),
-      this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, this.listId, moment().isoWeekday(1).format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')),
-      this.healthCheck.getPHCGridData(this.listId),
+      this.healthCheck.getChaikinCalculations(listId, lastWeekStart, lastWeekEnd),
+      this.healthCheck.getPrognosisData(listId),
+      this.healthCheck.getUserPortfolioStockStatus(listId, lastWeekStart, lastWeekEnd),
+      this.healthCheck.getPGRWeeklyChangeData(listId, lastWeekStart, lastWeekEnd),
+      this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
+      this.healthCheck.getAnalystRevisions(listId, moment().day(-2).format('YYYY-MM-DD')),
+      this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, listId, moment().isoWeekday(1).format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')),
+      this.healthCheck.getPHCGridData(listId),
     )
+  }
+
+  updateData() {
+    this.getAllHCData(this.listId)
       .take(1)
       .map(([calc, data, status, pgr, sups, revs, reports, grid]) => {
         this.calculations = calc[Object.keys(calc)[0]];

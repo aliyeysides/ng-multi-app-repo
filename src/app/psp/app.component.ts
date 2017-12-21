@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, ViewChild, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
@@ -38,10 +38,12 @@ declare let gtag: Function;
           <img class="" src="assets/imgs/logo_powerpulse--desktop.png">
         </div>
         <div class="col-8">
-          <cpt-psp-navigator></cpt-psp-navigator>
+          <cpt-psp-navigator *ngIf="!searchOpened"></cpt-psp-navigator>
+          <cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
+                                 *ngIf="searchOpened"></cpt-psp-symbol-search>
         </div>
         <div class="col-2">
-          <div class="header__button header__button--left">
+          <div #searchBtn (click)="toggleSearch()" class="header__button header__button--left" id="header_button--right">
             <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
           </div>
           <div class="header__button header__button--right">
@@ -78,6 +80,7 @@ export class AppComponent implements OnDestroy {
   };
 
   constructor(private router: Router,
+              private cd: ChangeDetectorRef,
               private healthCheck: HealthCheckService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -106,6 +109,7 @@ export class AppComponent implements OnDestroy {
 
   toggleSearch() {
     this.searchOpened = !this.searchOpened;
+    this.cd.detectChanges();
   }
 
   toggleNav() {

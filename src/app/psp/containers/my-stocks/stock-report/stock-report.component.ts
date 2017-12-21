@@ -1300,6 +1300,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     window.scrollTo(0, 0);
     if (this.stock) {
+      this.current = '1Y';
       this.loading = this.reportService.getSymbolData(this.stock)
         .takeUntil(this._ngUnsubscribe)
         .filter(x => x != undefined)

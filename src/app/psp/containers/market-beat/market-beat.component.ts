@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {WordpressService} from '../../../services/wordpress.service';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-market-beat',
@@ -12,15 +14,22 @@ import { Component, OnInit } from '@angular/core';
 	    </div>
 	    <div class="row">
 	      	<div class="col-12 section--date-select">
-	      		<h3>Sun, Oct 3, 2017</h3>
-	      		<div class="divider__long divider__long--blue"></div>
 	      	</div>
+        <div class="btn-group col-12 section--date-select" dropdown [autoClose]="true">
+          <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+            <h3>{{ selectedInsight ? selectedInsight['post_title'] : null }}</h3>
+            <div class="divider__long divider__long--blue"></div>
+          </button>
+          <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem"><a
+              class="dropdown-item">{{ post['post_title'] }}</a></li>
+          </ul>
+        </div>
 	      	<div class="col-12 section--article featured--article">
-	      		<p class="article__headline">Tech Stocks Explode Again Based on Strong Earnings Reports as Nasdaq 100 Leads Market to New Highs</p>
 	      		<p class="article__author"><sub>BY</sub> Marc Chaikin</p>
 	      		<div class="divider__medium"></div>
 	      		<div class="article__preview">
-	      			<p class="paragraph">The S&P 500 Index closed on Friday at 2,581.07 up 0.23% on the week and made another new all-time high. The real excitement, however, was in the Nasdaq 100 Index where strong earnings reports from Amazon, Alphabet, Intel and Microsoft propelled the Nasdaq Index to a high volume advance to new all-highs. New highs in the major averages were confirmed by advance/decline data and Chaikin Money Flow, but the rally is once again</p>
+	      			<p class="paragraph" [innerHTML]="commentary"></p>
 	      		</div>
 	      		<a class="article__read-more">READ FULL ARTICLE</a>
 	      	</div>
@@ -96,11 +105,33 @@ import { Component, OnInit } from '@angular/core';
   `,
   styleUrls: ['./market-beat.component.scss']
 })
-export class MarketBeatComponent implements OnInit {
+export class MarketBeatComponent implements OnInit, OnDestroy {
+  private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
-  constructor() { }
+  loadCount: number = 14;
+  posts: object[];
+  selectedInsight: object;
+  commentary: string;
+
+  constructor(private wp: WordpressService) { }
 
   ngOnInit() {
+    this.wp.getWordPressJson('2', this.loadCount)
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(posts => {
+        this.posts = posts[0]['2'];
+        this.selectInsight(this.posts[0]);
+      })
+  }
+
+  ngOnDestroy() {
+    this._ngUnsubscribe.next();
+    this._ngUnsubscribe.complete();
+  }
+
+  selectInsight(post: object) {
+    this.selectedInsight = post;
+    this.commentary = this.wp.getInsightPostBody(post);
   }
 
 }
