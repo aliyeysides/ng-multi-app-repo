@@ -31,6 +31,7 @@ declare let gtag: Function;
         <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
       </div>
     </div>
+    
     <div class="page__header--desktop">
       <div class="row no-gutters">
         <div class="col-2 logo--desktop">
@@ -40,7 +41,7 @@ declare let gtag: Function;
           <cpt-psp-navigator></cpt-psp-navigator>
         </div>
         <div class="col-2">
-          <div #searchBtn (click)="toggleSearch()" class="header__button header__button--left">
+          <div class="header__button header__button--left">
             <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
           </div>
           <div class="header__button header__button--right">
