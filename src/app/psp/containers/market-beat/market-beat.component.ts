@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {WordpressService} from '../../../services/wordpress.service';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'cpt-market-beat',
@@ -12,9 +14,17 @@ import { Component, OnInit } from '@angular/core';
 	    </div>
 	    <div class="row">
 	      	<div class="col-12 section--date-select">
-	      		<h3>Sun, Oct 3, 2017</h3>
-	      		<div class="divider__long divider__long--blue"></div>
 	      	</div>
+        <div class="btn-group col-12 section--date-select" dropdown [autoClose]="true">
+          <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+            <h3>Sun, Oct 3, 2017</h3>
+            <div class="divider__long divider__long--blue"></div>
+          </button>
+          <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li (click)="selectList(list)" *ngFor="let post of posts" role="menuitem"><a
+              class="dropdown-item">{{ post['post_title'] }}</a></li>
+          </ul>
+        </div>
 	      	<div class="col-12 section--article featured--article">
 	      		<p class="article__headline">Tech Stocks Explode Again Based on Strong Earnings Reports as Nasdaq 100 Leads Market to New Highs</p>
 	      		<p class="article__author"><sub>BY</sub> Marc Chaikin</p>
@@ -96,11 +106,26 @@ import { Component, OnInit } from '@angular/core';
   `,
   styleUrls: ['./market-beat.component.scss']
 })
-export class MarketBeatComponent implements OnInit {
+export class MarketBeatComponent implements OnInit, OnDestroy {
+  private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
-  constructor() { }
+  loadCount: number = 14;
+  posts: object[];
+
+  constructor(private wp: WordpressService) { }
 
   ngOnInit() {
+    this.wp.getWordPressJson('2', this.loadCount)
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(posts => {
+        this.posts = posts[0]['2'];
+        console.log('posts', this.posts);
+      })
+  }
+
+  ngOnDestroy() {
+    this._ngUnsubscribe.next();
+    this._ngUnsubscribe.complete();
   }
 
 }

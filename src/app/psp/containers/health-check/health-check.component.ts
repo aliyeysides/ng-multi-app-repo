@@ -155,7 +155,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
     this.loading = this.initData();
   }
 
-  getAllHCData(listId) {
+  getAllHCData(listId): Observable<any> {
     const lastWeekStart = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
       lastWeekEnd = moment(lastWeekStart).add(7, 'days').format('YYYY-MM-DD');
     const startDate = moment().isoWeekday(1).format('YYYY-MM-DD'),
