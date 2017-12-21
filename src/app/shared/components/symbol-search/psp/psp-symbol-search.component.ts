@@ -1,5 +1,6 @@
 import {
-  AfterContentInit, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output, ViewChild,
+  AfterContentInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output,
+  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 
@@ -60,7 +61,7 @@ declare let gtag: Function;
   styleUrls: ['./psp-symbol-search.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
+export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implements OnDestroy {
   @Input('placeholder') placeholder: string;
   @Input('btn') btn: HTMLElement;
   @ViewChild('search') search: ElementRef;
@@ -108,17 +109,17 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       })
   }
 
-  ngAfterContentInit() {
-    this.search.nativeElement.focus();
-    this.searchResults = [];
-    this.symbolSearchForm.valueChanges
-      .debounceTime(500)
-      .switchMap(val => this.symbolSearchService.symbolLookup(val))
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe(val => {
-        this.searchResults = val;
-      });
-  }
+  // ngAfterContentInit() {
+  //   this.search.nativeElement.focus();
+  //   this.searchResults = [];
+  //   this.symbolSearchForm.valueChanges
+  //     .debounceTime(500)
+  //     .switchMap(val => this.symbolSearchService.symbolLookup(val))
+  //     .takeUntil(this.ngUnsubscribe)
+  //     .subscribe(val => {
+  //       this.searchResults = val;
+  //     });
+  // }
 
   onSubmit(ticker: string) {
     this.router.navigate(['my-stocks', ticker.toUpperCase()]);
@@ -142,7 +143,6 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
         this.toggleSearch.emit();
       });
   }
-
 
   onClick(ticker: string) {
     this.router.navigate(['my-stocks', ticker]);

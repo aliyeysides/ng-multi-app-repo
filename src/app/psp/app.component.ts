@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, ViewChild, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
@@ -80,6 +80,7 @@ export class AppComponent implements OnDestroy {
   };
 
   constructor(private router: Router,
+              private cd: ChangeDetectorRef,
               private healthCheck: HealthCheckService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -108,6 +109,7 @@ export class AppComponent implements OnDestroy {
 
   toggleSearch() {
     this.searchOpened = !this.searchOpened;
+    this.cd.detectChanges();
   }
 
   toggleNav() {

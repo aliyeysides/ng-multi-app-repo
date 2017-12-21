@@ -1,5 +1,5 @@
 import {
-  AfterContentInit, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild,
+  AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild,
 } from '@angular/core';
 
 import {FormControl} from '@angular/forms';
