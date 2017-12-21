@@ -24,7 +24,7 @@ declare let gtag: Function;
           <li>
             <a class="nav--toplevel"><i class="fa fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>
           </li>
-          <li class="row no-gutters sub-nav">
+          <li class="row no-gutters sub-nav" style="">
             <div class="col-12">
               <a href="https://www.chaikinanalytics.com/stock-rating/" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> About the Power Gauge</a>
             </div>
@@ -53,6 +53,16 @@ declare let gtag: Function;
             <a class="nav--toplevel"><i class="fa fa-user-times" aria-hidden="true"></i> &nbsp;Sign Out</a>
           </li>
         </ul>
+      </div>
+      <div class="container-fluid toc__container">
+        <div class="row" style="">
+          <div class="col-6">
+            <p><a class="toc__link" href="https://www.chaikinanalytics.com/terms/" target="_blank">Terms &amp; Conditions</a></p>
+          </div>
+          <div class="col-6">
+            <p class="version">PowerPulse V1</p>
+          </div>
+        </div>
       </div>
     </nav>
   `,

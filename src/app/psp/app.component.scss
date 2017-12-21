@@ -472,6 +472,7 @@ sub {
 
       .sub-nav {
         padding: 0px;
+        min-width:320px;
 
         .nav--sublevel {
           font-size: 16px;
@@ -481,6 +482,7 @@ sub {
           white-space: nowrap;
           opacity: 0.75;
           cursor: pointer;
+          white-space: nowrap;
 
           i {
             color:#ffffff;
@@ -499,6 +501,29 @@ sub {
 
   .logo {
     padding:20px 20px 0 20px;
+  }
+
+  .toc__container {
+    position: absolute;
+    bottom: 0;
+    min-width:320px;
+
+    .version {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #999;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .toc__link {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #1199ff;
+      text-decoration: none;
+      text-align: left;
+      white-space: nowrap;
+    }
   }
 }
 
@@ -857,10 +882,11 @@ sub {
     position: relative;
     padding-top:12px;
     padding-bottom:12px;
-    cursor: pointer;
+    cursor: pointer !important;
 
     .list-entry__pgr {
       position: relative;
+      cursor: pointer;
 
       img {
         width: 60px;
@@ -869,6 +895,7 @@ sub {
 
     .list-entry__info {
       padding:0;
+      cursor: pointer;
 
       .ticker {
         font-size: 28px;
@@ -876,6 +903,7 @@ sub {
         line-height: 1;
         text-align: left;
         white-space: nowrap;
+        cursor: pointer;
       }
 
       .company {
@@ -884,15 +912,19 @@ sub {
         line-height: 1.4;
         text-align: left;
         white-space: nowrap;
+        cursor: pointer;
       }
     }
 
     .list-entry__data {
+      cursor: pointer;
+
       .data {
         font-size: 18px;
         font-weight: 500;
         text-align: center;
         line-height: 1;
+        cursor: pointer;
       }
     }
   }
@@ -904,6 +936,10 @@ sub {
   right:3%;
   top:20px;
   cursor: pointer;
+
+  @media screen AND (min-width:576px) {
+    display:none;
+  }
 }
 
 
@@ -928,6 +964,9 @@ sub {
 }
 .list-entry__overlay.green {
   background: rgba(0,192,78,0.95);
+}
+.list-entry__overlay.yellow {
+  background: goldenrod;
 }
 
 .overlay__contents {

@@ -284,7 +284,7 @@
 	height: 100vh;
 	overflow-y: auto;
 	overflow-x: hidden;
-	padding-bottom: 143px;
+	padding-bottom: 103px;
 
 
 	&::-webkit-scrollbar {
@@ -538,7 +538,13 @@
 
 
 .stock-info--chart {
-	//margin-top: -34px;
+	.main-chart {
+		padding:0;
+
+		@media screen AND (min-width: 992px) {
+			padding:20px;
+		}
+	}
 }
 
 
@@ -738,7 +744,9 @@
 }
 
 
-
+.stock-info--disclaimer {
+	padding-top:30px;
+}
 
 
 /*           DATA TABLE            */
