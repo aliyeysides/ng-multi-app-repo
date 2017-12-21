@@ -121,7 +121,6 @@ export class MarketBeatComponent implements OnInit, OnDestroy {
       .subscribe(posts => {
         this.posts = posts[0]['2'];
         this.selectInsight(this.posts[0]);
-        console.log('posts', this.posts);
       })
   }
 
