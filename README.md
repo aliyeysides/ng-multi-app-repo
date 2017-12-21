@@ -10,8 +10,6 @@ Run `npm run start` for a dev server. Navigate to `http://localhost:4202/`. The 
 
 Run `npm run build` to build the project in ahead-of-time compilation. Alternatively, run `npm run build-jit` to run a just-in-time build. You must specify the desired environment by appending an npm parameter `-- --env=staging` and also the app name that will be built using `-- --app mastering-the-bear`. This repository is currently housing two products: 'mastering-the-bear' and 'power-pulse'. The build artifacts will be stored in the `dist/` directory.
 
-**Please use jit compilation for now to avoid known issues!**
-
 ## Deploy
 
 After running a build, deploy the output `dist/` folder to the desired server using `npm run deploy-{{environmentName}}`. Here are some predefined deploy scripts (package.json):
