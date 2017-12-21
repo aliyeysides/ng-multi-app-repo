@@ -57,7 +57,7 @@ declare var zingchart: any;
             <div class="tab--slide"></div>
           </div>
 
-          <div class="col-12 col-md-7">
+          <div class="col-12 col-md-7 col-xl-6 align-self-center">
             <!-- STOCK VIEW TOP -->
             <div class="row no-gutters stock-info">
 
@@ -150,7 +150,7 @@ declare var zingchart: any;
             </div>
           </div>
 
-          <div class="col-12 col-md-5 align-self-center">
+          <div class="col-12 col-md-5 col-xl-6 align-self-center">
             <!-- STOCK VIEW PRICE -->
             <div class="row stock-info stock-info--price">
               <div class="col-12">
@@ -184,9 +184,10 @@ declare var zingchart: any;
           </div>
           <div class="col-12">
             <p class="chart-header__breakdown">
-              <span class="green" *ngIf="timespanPerChange>0">Up</span>
-              <span class="greyed-out" *ngIf="timespanPerChange==0">Unch</span>
-              <span class="red" *ngIf="timespanPerChange<0">Down</span>
+              {{ symbolData ? symbolData['metaInfo'][0]['name'] : null }} was
+              <span class="bold green" *ngIf="timespanPerChange>0">up</span>
+              <span class="bold greyed-out" *ngIf="timespanPerChange==0">unch</span>
+              <span class="bold red" *ngIf="timespanPerChange<0">down</span>
               <span class="bold" [ngClass]="{
     'green': timespanPerChange>0,
     'red': timespanPerChange<0}">{{ timespanPriceChange | decimal }} &nbsp;({{ timespanPerChange | decimal
@@ -540,9 +541,15 @@ declare var zingchart: any;
           </div>
 
           <div class="col-12">
-            <div class="divider__full"></div>
+            <div class="divider__long"></div>
           </div>
         </div>
+
+
+
+
+
+
 
         <!-- BREAKDOWN - EARNINGS -->
         <div class="row stock-info stock-info--breakdown">
@@ -632,52 +639,52 @@ declare var zingchart: any;
           </div>
 
           <ng-container *ngIf="collapse['earnings']">
-            <div class="col-12 hidden-lg-up">
-              <div class="divider__long"></div>
-            </div>
+          <div class="col-12 hidden-lg-up">
+            <div class="divider__long"></div>
+          </div>
 
-            <div class="col-12 col-lg-6 copy-block">
-              <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s:</span>
-                {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
-              <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null
-                }}</p>
-            </div>
+          <div class="col-12 col-lg-6 copy-block">
+            <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s:</span>
+              {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
+            <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null
+              }}</p>
+          </div>
 
-            <div class="col-12 col-lg-6">
-              <div class="chart__header">
-                <h3>Annual EPS</h3>
-              </div>
-              <div class="chart">
-                <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
-              </div>
+          <div class="col-12 col-lg-6">
+            <div class="chart__header">
+              <h3>Annual EPS</h3>
             </div>
+            <div class="chart">
+              <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
+            </div>
+          </div>
 
-            <div class="col-12 col-lg-6">
-              <div class="chart__header">
-                <h3>Quarterly EPS</h3>
-              </div>
-              <div class="chart">
-                <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
-              </div>
+          <div class="col-12 col-lg-6">
+            <div class="chart__header">
+              <h3>Quarterly EPS</h3>
             </div>
+            <div class="chart">
+              <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
+            </div>
+          </div>
 
-            <div class="col-12 col-lg-6">
-              <div class="chart__header">
-                <h3>Earnings Announcement</h3>
-              </div>
-              <div class="chart">
-                <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
-              </div>
+          <div class="col-12 col-lg-6">
+            <div class="chart__header">
+              <h3>Earnings Announcement</h3>
             </div>
+            <div class="chart">
+              <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
+            </div>
+          </div>
 
-            <div class="col-12 col-lg-6">
-              <div class="chart__header">
-                <h3>Annual Revenue</h3>
-              </div>
-              <div class="chart">
-                <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
-              </div>
+          <div class="col-12 col-lg-6">
+            <div class="chart__header">
+              <h3>Annual Revenue</h3>
             </div>
+            <div class="chart">
+              <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
+            </div>
+          </div>
           </ng-container>
 
           <div *ngIf="collapse['earnings'] == true" (click)="toggleCollapse('earnings')"
@@ -692,7 +699,7 @@ declare var zingchart: any;
           </div>
 
           <div class="col-12">
-            <div class="divider__full"></div>
+            <div class="divider__long"></div>
           </div>
         </div>
 
@@ -701,7 +708,7 @@ declare var zingchart: any;
           <div class="col-12">
             <h1>Technicals: <span>{{ summary ? summary['priceVolumeContextSummary'][0]['status'] : null }}</span></h1>
           </div>
-          <div class="col-12 stockview__PGR">
+          <div class="col-12 col-lg-6 stockview__PGR">
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row sliderBar-container">
@@ -780,12 +787,12 @@ declare var zingchart: any;
               </li>
             </ul>
           </div>
-          <div class="col-12">
+          <div class="col-12 hidden-lg-up ">
             <div class="divider__long"></div>
           </div>
 
           <ng-container *ngIf="collapse['technicals']">
-            <div class="col-12 copy-block">
+            <div class="col-12 col-lg-6 copy-block">
               <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['generalSentence'] : null }}</p>
               <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['explanatorySentence'] : null
                 }}</p>
@@ -874,20 +881,26 @@ declare var zingchart: any;
           </ng-container>
 
           <div *ngIf="collapse['technicals'] == true" (click)="toggleCollapse('technicals')"
-               class="col-12 expand-collapse">
+               class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/ux__collapse--circle.svg">
             <p>COLLAPSE</p>
           </div>
           <div *ngIf="collapse['technicals'] == false" (click)="toggleCollapse('technicals')"
-               class="col-12 expand-collapse">
+               class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/ux__expand--circle.svg">
             <p>EXPAND</p>
           </div>
 
           <div class="col-12">
-            <div class="divider__full"></div>
+            <div class="divider__long"></div>
           </div>
         </div>
+
+
+
+
+
+
 
         <!-- BREAKDOWN - EXPERTS -->
         <div class="row stock-info stock-info--breakdown">
@@ -895,7 +908,7 @@ declare var zingchart: any;
             <h1>Experts: <span>{{ summary ? summary['expertOpnionsContextSummary'][0]['status'] : null }}</span></h1>
           </div>
 
-          <div class="col-12 stockview__PGR">
+          <div class="col-12 col-lg-6 stockview__PGR">
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row sliderBar-container">
@@ -976,10 +989,10 @@ declare var zingchart: any;
           </div>
 
           <ng-container *ngIf="collapse['experts']">
-            <div class="col-12">
+            <div class="col-12 hidden-lg-up">
               <div class="divider__long"></div>
             </div>
-            <div class="col-12 copy-block">
+            <div class="col-12 col-lg-6 copy-block">
               <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['generalSentence'] : null
                 }}</p>
               <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['explanatorySentence'] : null
@@ -1069,17 +1082,13 @@ declare var zingchart: any;
             </div>
           </ng-container>
 
-          <div class="col-12">
-            <div class="divider__long"></div>
-          </div>
-
           <div *ngIf="collapse['experts'] == true" (click)="toggleCollapse('experts')"
-               class="col-12 expand-collapse">
+               class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/icon_chevron--up.svg">
             <p>COLLAPSE</p>
           </div>
           <div *ngIf="collapse['experts'] == false" (click)="toggleCollapse('experts')"
-               class="col-12 expand-collapse">
+               class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/icon_chevron--down.svg">
             <p>EXPAND</p>
           </div>
@@ -1094,7 +1103,7 @@ declare var zingchart: any;
             <h2>The Competition</h2>
           </div>
 
-          <div class="col-12 chart-list">
+          <div class="col-12 col-lg-6 chart-list">
             <h4>Growth Comparison</h4>
             <div class="divider"></div>
             <ul>
@@ -1115,7 +1124,7 @@ declare var zingchart: any;
               <li (click)="gotoReport(stock['symbol'])" *ngFor="let stock of competitors" class="row no-gutters">
                 <div class="col-3 ticker">
                   <p><span><img
-                    src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>{{ stock['symbol']
+                    src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span> {{ stock['symbol']
                     }}</p>
                 </div>
                 <div class="col-3 data">
@@ -1131,7 +1140,7 @@ declare var zingchart: any;
             </ul>
           </div>
 
-          <div class="col-12 chart-list">
+          <div class="col-12 col-lg-6 chart-list">
             <h4>Revenue Compairson</h4>
             <div class="divider"></div>
             <ul>
@@ -1152,7 +1161,7 @@ declare var zingchart: any;
               <li (click)="gotoReport(stock['symbol'])" *ngFor="let stock of competitors" class="row no-gutters">
                 <div class="col-3 ticker">
                   <p><span><img
-                    src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>{{ stock['symbol']
+                    src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span> {{ stock['symbol']
                     }}</p>
                 </div>
                 <div class="col-3 data">
@@ -2186,14 +2195,15 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     ];
     return {
       "type": "scatter",
+      "height": "400",
       "legend": {},
       "background-color": "white",
       "tooltip": {
         "text": "$%v"
       },
       "plotarea": {
-        "margin": "80 60 40 60",
-        "y": "125px"
+        "margin": "30 30 0 30",
+        "y": "15px"
       },
       "plot": {
         "animation": {
@@ -2201,29 +2211,41 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         }
       },
       "scale-x": {
-        "line-color": "#7E7E7E",
+        "line-color": "transparent",
         "values": ['3 Qtrs ago', '2 Qtrs ago', '1 Qtr ago', 'Latest Qtr'],
-        "item": {
-          "font-color": "#7e7e7e"
+        item: {
+          fontColor: "#999",
+          fontSize: "14",
+          fontWeight: "500",
+          fontFamily: "Rajdhani"
         },
         "guide": {
           "visible": false
-        }
+        },
+        "tick": {
+          "visible": false,
+        },
       },
       "scale-y": {
-        "line-color": "#7E7E7E",
-        "item": {
-          "font-color": "#7e7e7e"
+        "line-color": "#transparent",
+        item: {
+          fontColor: "#999",
+          fontSize: "14",
+          fontWeight: "500",
+          fontFamily: "Rajdhani"
         },
         "guide": {
-          "visible": true
+          "visible": true,
+        },
+        "tick": {
+          "visible": false,
         },
         "label": {
-          "font-family": "arial",
+          "font-family": "Open Sans",
           "font-angle": 0,
           "bold": true,
           "font-size": "14px",
-          "font-color": "#7E7E7E",
+          "font-color": "#484848",
           "offset-y": "-190px",
           "offset-x": "20px"
         },
@@ -2232,8 +2254,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         {
           "values": est,
           "text": 'Estimate',
-          "alpha": 0.95,
-          "borderRadiusTopLeft": 7,
+          "alpha": 0.75,
           "marker": {
             "type": "circle",
             "border-width": 0,
@@ -2245,13 +2266,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         {
           "values": act,
           "text": 'Actual',
-          "alpha": 0.95,
-          "borderRadiusTopLeft": 7,
+          "alpha": 0.75,
           "marker": {
             "type": "circle",
             "border-width": 0,
             "size": 10,
-            "background-color": "#d95039",
+            "background-color": "#F54225 #B6355C",
             "shadow": false
           },
         },
@@ -2274,13 +2294,14 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   getAnnualRevenueConfig(dates, values) {
     return {
       "type": "bar",
+      height: 400,
       "background-color": "white",
       "tooltip": {
         "text": "$%v (M)"
       },
       "plotarea": {
-        "margin": "80 60 100 60",
-        "y": "125px"
+        "margin": "30 30 0 30",
+        "y": "15px"
       },
       "plot": {
         "animation": {
@@ -2288,29 +2309,42 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         }
       },
       "scale-x": {
-        "line-color": "#7E7E7E",
+        "line-color": "transparent",
         "labels": dates,
-        "item": {
-          "font-color": "#7e7e7e"
+        item: {
+          fontColor: "#999",
+          fontSize: "14",
+          fontWeight: "500",
+          fontFamily: "Rajdhani"
         },
         "guide": {
           "visible": false
-        }
+        },
+        "tick": {
+          "visible": false
+        },
       },
       "scale-y": {
-        "line-color": "#7E7E7E",
-        "item": {
-          "font-color": "#7e7e7e"
+        "line-color": "transparent",
+        "line-style": "solid",
+        item: {
+          fontColor: "#999",
+          fontSize: "14",
+          fontWeight: "500",
+          fontFamily: "Rajdhani"
+        },
+        "tick": {
+          "visible": false
         },
         "guide": {
           "visible": true
         },
         "label": {
-          "font-family": "arial",
+          "font-family": "Open Sans",
           "font-angle": 0,
           "bold": true,
           "font-size": "14px",
-          "font-color": "#7E7E7E",
+          "font-color": "#484848",
           "offset-y": "-190px",
           "offset-x": "20px"
         },
@@ -2318,13 +2352,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       "series": [
         {
           "values": values,
-          "alpha": 0.95,
-          "borderRadiusTopLeft": 7,
-          "background-color": "#19c736",
+          "alpha": 0.75,
+          "borderRadius": 7,
+          "background-color": "#19c736 #00C04E",
           "rules": [
             {
               rule: '%v < 0',
-              "background-color": "#c7133e",
+              "background-color": "#F54225 #B6355C",
             }
           ]
         }

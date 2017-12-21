@@ -18,6 +18,9 @@
 		margin:25px auto;
 		width: 80%;
 	}
+	.divider__full {
+		margin:25px auto;
+	}
 	.divider__long--red, .divider__long--green, .divider__long--blue, .divider__long--yellow {
 		margin:25px auto;
 		width: 100%;
@@ -507,6 +510,7 @@
 
 		@media screen AND (min-width:768px) {
 			font-size: 28px;
+			margin-top: 20px;
 		}
 	}
 
@@ -727,6 +731,11 @@
 
 
 
+.stock-info--competition {
+	.chart-list {
+		padding: 0 5%;
+	}
+}
 
 
 
@@ -739,6 +748,10 @@
 
 .data-table {
 	margin-top: 0px;
+
+	@media screen AND (min-width: 992px) {
+		padding: 0 5%;
+	}
 
 	table {
 		color: #484848;

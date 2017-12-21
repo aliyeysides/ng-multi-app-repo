@@ -14,7 +14,6 @@ declare let gtag: Function;
   styleUrls: ['./app.component.scss'],
   template: `
     <!-- PANEL HEADER - Fixed to the top of each panel-->
-    <!--<span>-->
     <div class="page__header"
          [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}"
          id="page__header">
@@ -33,7 +32,22 @@ declare let gtag: Function;
       </div>
     </div>
     <div class="page__header--desktop">
-      <cpt-psp-navigator></cpt-psp-navigator>
+      <div class="row no-gutters">
+        <div class="col-2 logo--desktop">
+          <img class="" src="assets/imgs/logo_powerpulse--desktop.png">
+        </div>
+        <div class="col-8">
+          <cpt-psp-navigator></cpt-psp-navigator>
+        </div>
+        <div class="col-2">
+          <div #searchBtn (click)="toggleSearch()" class="header__button header__button--left">
+            <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
+          </div>
+          <div class="header__button header__button--right">
+        <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
+      </div>
+        </div>
+      </div>
     </div>
 
     <!-- App Container -->
@@ -44,7 +58,6 @@ declare let gtag: Function;
       </div>
       <simple-notifications [options]="options"></simple-notifications>
     </div>
-    <!--</span>-->
   `
 })
 export class AppComponent implements OnDestroy {
