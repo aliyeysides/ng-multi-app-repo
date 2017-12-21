@@ -17,7 +17,7 @@ import * as moment from 'moment';
     <div class="container-fluid">
 
       <div class="row">
-        <div class="col-12 col-md-4 component--mystocks">
+        <div class="col-12 col-md-4 col-xl-3 component--mystocks">
           <cpt-my-stocks-list [ngBusy]="loading" (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
                               (removeStockClicked)="removeStock($event)"
                               (updateData)="updateData()"
@@ -62,7 +62,7 @@ import * as moment from 'moment';
           </div>
         </div>
 
-        <div class="col-12 col-md-8 component--stockview__container" [ngClass]="{'visible': !desktopView}">
+        <div class="col-12 col-md-8 col-xl-9 component--stockview__container" [ngClass]="{'visible': !desktopView}">
           <cpt-psp-stock-report [userStocks]="userStocks"
                                 [listId]="listId" (addStockClicked)="addStock($event)"
                                 (removeStockClicked)="removeStock($event)" (closeClicked)="closeReport()"
