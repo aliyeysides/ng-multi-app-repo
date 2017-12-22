@@ -36,16 +36,71 @@
 		margin-top: 25px;
 	}
 
-
-
 	.section--date-select {
-		h3 {
-			margin:30px 0 -8px;
-			color: #484848;
-			opacity: 0.6;
-			font-weight: 600;
+
+		.btn-group {
+			margin-top: 8px;
+			margin-bottom: 10px;
+			cursor: pointer;
+
+			.btn {
+			    font-weight: 600;
+			    text-align: center;
+			    border: 3px solid #1199ff;
+			    padding: 4px 15px 1px 20px;
+			    border-radius: 40px;
+			}
+			.btn-primary {
+				cursor: pointer;
+		  		background-color: #ffffff;
+			    border-color: #1199ff;
+			    font-size: 27px;
+			    line-height: 1;
+				color: #1199ff;
+				box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
+			}
+			.dropdown-toggle {
+				min-width: 150px;
+				&::after {
+					vertical-align:middle;
+			    }
+			}
+		}
+		.dropdown-menu {
+		    position: absolute;
+		    z-index: 1000;
+		    float: left;
+		    min-width: 160px;
+		    padding: 5px 0;
+		    margin: 0;
+		    font-size: 22px;
+		    color: #484848;
+		    width: 100%;
+		    overflow: hidden;
+		    text-align: center;
+		    list-style: none;
+		    background-color: rgba(255,255,255, 0.96);
+		    background-clip: padding-box;
+		    border: 0px solid #f0f0f0;
+		    border-top:0px solid #1199ff;
+		    border-radius: 8px;
+			box-shadow: 0 6px 20px rgba(50, 50, 50, 0.25);
+
+			.dropdown-item {
+				cursor: pointer;
+				font-weight: 600;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+				padding: 0.25rem 10px;
+
+				&:hover {
+					background-color: rgba(17,153,255, 0.1);
+				}
+			}
 		}
 	}
+
 	.section--article {
 		.article__headline {
 			font-weight: 400;

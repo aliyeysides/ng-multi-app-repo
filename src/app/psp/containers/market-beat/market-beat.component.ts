@@ -13,18 +13,17 @@ import {Subject} from 'rxjs/Subject';
 	      	</div>
 	    </div>
 	    <div class="row">
-	      	<div class="col-12 section--date-select">
-	      	</div>
-        <div class="btn-group col-12 section--date-select" dropdown [autoClose]="true">
-          <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-            <h3>{{ selectedInsight ? selectedInsight['post_title'] : null }}</h3>
-            <div class="divider__long divider__long--blue"></div>
-          </button>
-          <ul *dropdownMenu class="dropdown-menu" role="menu">
-            <li (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem"><a
-              class="dropdown-item">{{ post['post_title'] }}</a></li>
-          </ul>
-        </div>
+	    	<div class="col-12 section--date-select">
+		        <div class="btn-group" dropdown [autoClose]="true">
+		          	<button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+		            	{{ selectedInsight ? selectedInsight['post_title'] : null }}
+		          	</button>
+			        <ul *dropdownMenu class="dropdown-menu" role="menu">
+			            <li (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem"><a
+			              class="dropdown-item">{{ post['post_title'] }}</a></li>
+			        </ul>
+		        </div>
+		    </div>
 	      	<div class="col-12 section--article featured--article">
 	      		<p class="article__author"><sub>BY</sub> Marc Chaikin</p>
 	      		<div class="divider__medium"></div>
@@ -33,73 +32,6 @@ import {Subject} from 'rxjs/Subject';
 	      		</div>
 	      		<a class="article__read-more">READ FULL ARTICLE</a>
 	      	</div>
-	    </div>
-	    <div class="row">
-	      	<div class="col-12 section--masthead masthead--education">
-	      		<h2>Education &amp; News</h2>
-	      	</div>
-	    </div>
-	    <div class="row">
-	      	<div class="col-12">
-	      		<h3>Market News</h3>
-	      		<div class="divider__long"></div>
-	      	</div>
-	    </div>
-	    <div class="row">
-	    	<ul class="col-12">
-	    		<li class="row no-gutters educational__entry">
-			      	<div class="col-4 article__thumbnail" id="education--article__1">
-			      	</div>
-			      	<div class="col-8 section--article education--article">
-			      		<p class="article__headline">Stocks Surge, Then Retreat, as Tech Sags</p>
-			      		<a class="article__read-more">READ FULL ARTICLE</a>
-			      	</div>
-			    </li>
-			    <li class="row no-gutters educational__entry">
-			      	<div class="col-4 article__thumbnail" id="education--article__2">
-			      	</div>
-			      	<div class="col-8 section--article education--article">
-			      		<p class="article__headline">Upside Target of SPX 2650 is Reached as Rally Broadens Out</p>
-			      		<a class="article__read-more">READ FULL ARTICLE</a>
-			      	</div>
-			    </li>
-			</ul>
-	    </div>
-	    <div class="row">
-	      	<div class="col-12 section--date-select">
-	      		<h3>Investing Tips</h3>
-	      		<div class="divider__long"></div>
-	      	</div>
-	    </div>
-	    <div class="row">
-	    	<ul class="col-12">
-	    		<li class="row no-gutters educational__entry">
-			      	<div class="col-4 article__thumbnail" id="education--article__1">
-			      	</div>
-			      	<div class="col-8 section--article education--article">
-			      		<p class="article__headline">Stocks Surge, Then Retreat, as Tech Sags</p>
-			      		<a class="article__read-more">READ FULL ARTICLE</a>
-			      	</div>
-			    </li>
-			</ul>
-	    </div>
-	    <div class="row">
-	      	<div class="col-12">
-	      		<h3>Using Chaikin</h3>
-	      		<div class="divider__long"></div>
-	      	</div>
-	    </div>
-	    <div class="row">
-	    	<ul class="col-12">
-	    		<li class="row no-gutters educational__entry">
-			      	<div class="col-4 article__thumbnail" id="education--article__1">
-			      	</div>
-			      	<div class="col-8 section--article education--article">
-			      		<p class="article__headline">Stocks Surge, Then Retreat, as Tech Sags</p>
-			      		<a class="article__read-more">READ FULL ARTICLE</a>
-			      	</div>
-			    </li>
-			</ul>
 	    </div>
     </div>
   `,
