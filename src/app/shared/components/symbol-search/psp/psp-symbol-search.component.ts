@@ -70,6 +70,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
 
   @HostListener('document:click', ['$event']) offClick(e: Event) {
     e.preventDefault();
+    console.log("this fired didn't it");
     if (!this.el.nativeElement.contains(e.target) && !this.btn.contains(e.target as Node)) {
       this.toggleSearch.emit();
       return;
@@ -108,18 +109,6 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
         this.userStocks = res['symbols'];
       })
   }
-
-  // ngAfterContentInit() {
-  //   this.search.nativeElement.focus();
-  //   this.searchResults = [];
-  //   this.symbolSearchForm.valueChanges
-  //     .debounceTime(500)
-  //     .switchMap(val => this.symbolSearchService.symbolLookup(val))
-  //     .takeUntil(this.ngUnsubscribe)
-  //     .subscribe(val => {
-  //       this.searchResults = val;
-  //     });
-  // }
 
   onSubmit(ticker: string) {
     this.router.navigate(['my-stocks', ticker.toUpperCase()]);

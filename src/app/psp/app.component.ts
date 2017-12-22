@@ -27,7 +27,7 @@ declare let gtag: Function;
         <cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
                                *ngIf="searchOpened"></cpt-psp-symbol-search>
       </div>
-      <div #searchBtn (click)="toggleSearch()" class="header__button header__button--right" id="header_button--right">
+      <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--right" id="header_button--right">
         <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
       </div>
     </div>
@@ -43,7 +43,7 @@ declare let gtag: Function;
                                  *ngIf="searchOpened"></cpt-psp-symbol-search>
         </div>
         <div class="col-2">
-          <div #searchBtn (click)="toggleSearch()" class="header__button header__button--left" id="header_button--right">
+          <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--left" id="header_button--right">
             <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
           </div>
           <div class="header__button header__button--right">
@@ -109,6 +109,7 @@ export class AppComponent implements OnDestroy {
 
   toggleSearch() {
     this.searchOpened = !this.searchOpened;
+    console.log('toggleSearch', this.searchOpened);
     this.cd.detectChanges();
   }
 
