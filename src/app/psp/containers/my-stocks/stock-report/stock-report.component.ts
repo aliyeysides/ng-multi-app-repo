@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output,
   SimpleChanges, ViewChild
 } from '@angular/core';
@@ -20,7 +21,7 @@ declare var zingchart: any;
 @Component({
   selector: 'cpt-psp-stock-report',
   template: `
-    <div [ngBusy]="loading" class="component--stockview"
+    <div class="component--stockview"
          [ngClass]="{
           'open': show, 
          'bearish': symbolData ? symbolData['metaInfo'][0]['PGR'] < 3 : null, 
@@ -154,16 +155,21 @@ declare var zingchart: any;
             <!-- STOCK VIEW PRICE -->
             <div class="row stock-info stock-info--price">
               <div class="col-12">
-                <p class="current-price" [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">
+                <p class="current-price"
+                   [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">
                   <sub>$</sub>{{ symbolData ? (symbolData['metaInfo'][0]['Last'] | decimal ) : null }}</p>
                 <p class="label">Current</p>
               </div>
               <div class="col-6">
-                <p class="data" [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">{{ symbolData ? (symbolData['metaInfo'][0]['Change'] | decimal ) : null }}</p>
+                <p class="data"
+                   [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">
+                  {{ symbolData ? (symbolData['metaInfo'][0]['Change'] | decimal ) : null }}</p>
                 <p class="label">$ CHG</p>
               </div>
               <div class="col-6">
-                <p class="data" [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">{{ symbolData ? (symbolData['metaInfo'][0]['Percentage '] | decimal ) : null
+                <p class="data"
+                   [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">
+                  {{ symbolData ? (symbolData['metaInfo'][0]['Percentage '] | decimal ) : null
                   }}<sub>%</sub></p>
                 <p class="label">% CHG</p>
               </div>
@@ -217,8 +223,7 @@ declare var zingchart: any;
         <!-- STOCK VIEW MAIN CHART -->
         <div class="row stock-info stock-info--chart">
           <div class="col-12 main-chart">
-            <!-- TODO: implement main chart -->
-            <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
+            <cpt-zingchart [ngBusy]="loading" [chart]="mainChart"></cpt-zingchart>
           </div>
         </div>
 
@@ -436,7 +441,8 @@ declare var zingchart: any;
                     <tr>
                       <td class="label">LT Debt/ Equity</td>
                       <td class="data">
-                        {{ research ? (research['Assets and Liabilities']['LT Debt/Equity'] | number:'.2-2' ) : null }}
+                        {{ research ? (research['Assets and Liabilities']['LT Debt/Equity'] | number:'.2-2' ) : null
+                        }}
                       </td>
                     </tr>
                     <tr>
@@ -457,7 +463,8 @@ declare var zingchart: any;
                     <th colspan="2">Valuation</th>
                     <tr>
                       <td class="label">Price/Earnings</td>
-                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['P/E'] | decimal ) : null }}</td>
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['P/E'] | decimal ) : null }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">PEG</td>
@@ -494,7 +501,8 @@ declare var zingchart: any;
                     </tr>
                     <tr>
                       <td class="label">Dividend Growth Rate</td>
-                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['growth_rate'] | decimal ) : null
+                      <td class="data">
+                        {{ symbolData ? (symbolData['fundamentalData']['growth_rate'] | decimal ) : null
                         }}
                       </td>
                     </tr>
@@ -505,11 +513,13 @@ declare var zingchart: any;
                     <th colspan="2">Returns</th>
                     <tr>
                       <td class="label">On Investment</td>
-                      <td class="data">{{ research ? (research['Returns']['Return on Invest'] | decimal ) : null }}</td>
+                      <td class="data">{{ research ? (research['Returns']['Return on Invest'] | decimal ) : null }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">On Equity</td>
-                      <td class="data">{{ research ? (research['Returns']['Return on Equity'] | decimal ) : null }}</td>
+                      <td class="data">{{ research ? (research['Returns']['Return on Equity'] | decimal ) : null }}
+                      </td>
                     </tr>
                     <tr>
                       <td class="label">1 Month Return</td>
@@ -544,11 +554,6 @@ declare var zingchart: any;
             <div class="divider__long"></div>
           </div>
         </div>
-
-
-
-
-
 
 
         <!-- BREAKDOWN - EARNINGS -->
@@ -639,52 +644,52 @@ declare var zingchart: any;
           </div>
 
           <ng-container *ngIf="collapse['earnings']">
-          <div class="col-12 hidden-lg-up">
-            <div class="divider__long"></div>
-          </div>
+            <div class="col-12 hidden-lg-up">
+              <div class="divider__long"></div>
+            </div>
 
-          <div class="col-12 col-lg-6 copy-block">
-            <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s:</span>
-              {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
-            <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null
-              }}</p>
-          </div>
+            <div class="col-12 col-lg-6 copy-block">
+              <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s:</span>
+                {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
+              <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null
+                }}</p>
+            </div>
 
-          <div class="col-12 col-lg-6">
-            <div class="chart__header">
-              <h3>Annual EPS</h3>
+            <div class="col-12 col-lg-6">
+              <div class="chart__header">
+                <h3>Annual EPS</h3>
+              </div>
+              <div class="chart">
+                <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
+              </div>
             </div>
-            <div class="chart">
-              <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
-            </div>
-          </div>
 
-          <div class="col-12 col-lg-6">
-            <div class="chart__header">
-              <h3>Quarterly EPS</h3>
+            <div class="col-12 col-lg-6">
+              <div class="chart__header">
+                <h3>Quarterly EPS</h3>
+              </div>
+              <div class="chart">
+                <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
+              </div>
             </div>
-            <div class="chart">
-              <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
-            </div>
-          </div>
 
-          <div class="col-12 col-lg-6">
-            <div class="chart__header">
-              <h3>Earnings Announcement</h3>
+            <div class="col-12 col-lg-6">
+              <div class="chart__header">
+                <h3>Earnings Announcement</h3>
+              </div>
+              <div class="chart">
+                <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
+              </div>
             </div>
-            <div class="chart">
-              <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
-            </div>
-          </div>
 
-          <div class="col-12 col-lg-6">
-            <div class="chart__header">
-              <h3>Annual Revenue</h3>
+            <div class="col-12 col-lg-6">
+              <div class="chart__header">
+                <h3>Annual Revenue</h3>
+              </div>
+              <div class="chart">
+                <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
+              </div>
             </div>
-            <div class="chart">
-              <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
-            </div>
-          </div>
           </ng-container>
 
           <div *ngIf="collapse['earnings'] == true" (click)="toggleCollapse('earnings')"
@@ -793,7 +798,8 @@ declare var zingchart: any;
 
           <ng-container *ngIf="collapse['technicals']">
             <div class="col-12 col-lg-6 copy-block">
-              <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['generalSentence'] : null }}</p>
+              <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['generalSentence'] : null
+                }}</p>
               <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['explanatorySentence'] : null
                 }}</p>
             </div>
@@ -897,11 +903,6 @@ declare var zingchart: any;
         </div>
 
 
-
-
-
-
-
         <!-- BREAKDOWN - EXPERTS -->
         <div class="row stock-info stock-info--breakdown">
           <div class="col-12">
@@ -995,7 +996,8 @@ declare var zingchart: any;
             <div class="col-12 col-lg-6 copy-block">
               <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['generalSentence'] : null
                 }}</p>
-              <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['explanatorySentence'] : null
+              <p class="paragraph">
+                {{ summary ? summary['expertOpnionsContextSummary'][0]['explanatorySentence'] : null
                 }}</p>
             </div>
             <div class="col-12">
@@ -1124,7 +1126,8 @@ declare var zingchart: any;
               <li (click)="gotoReport(stock['symbol'])" *ngFor="let stock of competitors" class="row no-gutters">
                 <div class="col-3 ticker">
                   <p><span><img
-                    src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span> {{ stock['symbol']
+                    src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>
+                    {{ stock['symbol']
                     }}</p>
                 </div>
                 <div class="col-3 data">
@@ -1161,7 +1164,8 @@ declare var zingchart: any;
               <li (click)="gotoReport(stock['symbol'])" *ngFor="let stock of competitors" class="row no-gutters">
                 <div class="col-3 ticker">
                   <p><span><img
-                    src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span> {{ stock['symbol']
+                    src="{{ appendPGRImageComp(stock['corrected_pgr_rate'], stock['raw_pgr_rate']) }}"></span>
+                    {{ stock['symbol']
                     }}</p>
                 </div>
                 <div class="col-3 data">
@@ -1198,13 +1202,22 @@ declare var zingchart: any;
           </div>
           <div class="col-12 col-lg-10">
             <h4>Disclaimer:</h4>
-            <p class="disclaimer">Chaikin Analytics (CA) is not registered as a securities Broker/Dealer or Investment Advisor with either the U.S. Securities and Exchange Commission or with any state securities regulatory authority. The information presented in our reports does not represent a recommendation to buy or sell stocks or any financial instrument nor is it intended as an endorsement of any security or investment. The information in this report does not take into account an individual's specific financial situation. The user bears complete responsibility for their own investment research and should consult with their financial advisor before making buy/sell decisions. For more information, see <a target="_blank" href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a> <a target="_blank" href="http://www.chaikinanalytics.com/attributions/">See Attributions &raquo;</a></p>
+            <p class="disclaimer">Chaikin Analytics (CA) is not registered as a securities Broker/Dealer or Investment
+              Advisor with either the U.S. Securities and Exchange Commission or with any state securities regulatory
+              authority. The information presented in our reports does not represent a recommendation to buy or sell
+              stocks or any financial instrument nor is it intended as an endorsement of any security or investment.
+              The information in this report does not take into account an individual's specific financial situation.
+              The user bears complete responsibility for their own investment research and should consult with their
+              financial advisor before making buy/sell decisions. For more information, see <a target="_blank"
+                                                                                               href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a>
+              <a target="_blank" href="http://www.chaikinanalytics.com/attributions/">See Attributions &raquo;</a></p>
           </div>
         </div>
       </div>
     </div>
   `,
-  styleUrls: ['./stock-report.component.scss']
+  styleUrls: ['./stock-report.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -1304,6 +1317,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               private signalService: SignalService,
               private ideasService: IdeasService,
               private utilService: UtilService,
+              private cd: ChangeDetectorRef,
               private router: Router) {
   }
 
@@ -1311,49 +1325,27 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     window.scrollTo(0, 0);
     if (this.stock) {
       this.current = '1Y';
-      this.loading = this.reportService.getSymbolData(this.stock)
-        .takeUntil(this._ngUnsubscribe)
+      this.reportService.getSymbolData(this.stock)
+        .take(1)
         .filter(x => x != undefined)
-        .map(res => this.symbolData = res)
+        .map(res => {
+          this.symbolData = res;
+          this.cd.markForCheck();
+        })
         .switchMap(() => {
           return Observable.combineLatest(
             this.reportService.getPgrDataAndContextSummary(this.stock, this.symbolData['metaInfo'][0]['industry_name']),
             this.reportService.getTickerCompetitors(this.stock),
             this.reportService.getResearchReportData(this.stock),
-            this.reportService.getStockSummaryData(this.stock),
             this.ideasService.getHeadlines(this.stock)
           )
         })
-        .subscribe(([summary, competitors, research, data, headlines]) => {
+        .take(1)
+        .subscribe(([summary, competitors, research, headlines]) => {
           this.summary = summary;
           this.competitors = competitors['compititors'];
           this.research = research;
-          this.data = data;
           this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
-
-          let dates, closePrices, pgrData, cmf, relStr;
-          this.current === '5Y' ? dates = data['five_year_chart_data']['formatted_dates'] : dates = data['one_year_chart_data']['formatted_dates'].reverse();
-          this.current === '5Y' ? closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse() : closePrices = data['one_year_chart_data']['close_price'].map(x => +x).reverse();
-          this.current === '5Y' ? pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse() : pgrData = data['one_year_pgr_data']['pgr_data'].map(x => +x).reverse();
-          this.current === '5Y' ? cmf = data['five_year_chart_data']['cmf'].map(x => +x).reverse() : cmf = data['one_year_chart_data']['cmf'].map(x => +x).reverse();
-          this.current === '5Y' ? relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse() : relStr = data['one_year_chart_data']['relative_strength'].map(x => +x).reverse();
-
-          this.timespanPerChange = this.calculatePricePerChange(closePrices[0], closePrices[closePrices.length - 1]);
-          this.timespanPriceChange = this.calculatePriceChange(closePrices[0], closePrices[closePrices.length - 1]);
-          this.mainChart = {
-            id: 'mainChart',
-            data: {
-              layout: "vertical",
-              graphset: [
-                this.getCloseConfig(dates, closePrices),
-                this.getPGRConfig(dates, pgrData),
-                this.getRSIConfig(dates, relStr),
-                this.getCMFConfig(dates, cmf)
-              ]
-            },
-            height: 660,
-            width: undefined
-          };
 
           const annualEPSData = research['EPS Quarterly Results']['quaterlyData'].map(x => +x[5].slice(1));
           const annualEPSDates = research['EPS Quarterly Results']['quaterlyData'].map(x => x[0]);
@@ -1412,12 +1404,48 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             height: undefined,
             width: undefined
           };
+          this.cd.markForCheck();
+        });
+
+      this.loading = this.reportService.getStockSummaryData(this.stock)
+        .take(1)
+        .subscribe(data => {
+          this.data = data;
+
+          let dates, closePrices, pgrData, cmf, relStr;
+          this.current === '5Y' ? dates = data['five_year_chart_data']['formatted_dates'] : dates = data['one_year_chart_data']['formatted_dates'].reverse();
+          this.current === '5Y' ? closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse() : closePrices = data['one_year_chart_data']['close_price'].map(x => +x).reverse();
+          this.current === '5Y' ? pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse() : pgrData = data['one_year_pgr_data']['pgr_data'].map(x => +x).reverse();
+          this.current === '5Y' ? cmf = data['five_year_chart_data']['cmf'].map(x => +x).reverse() : cmf = data['one_year_chart_data']['cmf'].map(x => +x).reverse();
+          this.current === '5Y' ? relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse() : relStr = data['one_year_chart_data']['relative_strength'].map(x => +x).reverse();
+
+          this.timespanPerChange = this.calculatePricePerChange(closePrices[0], closePrices[closePrices.length - 1]);
+          this.timespanPriceChange = this.calculatePriceChange(closePrices[0], closePrices[closePrices.length - 1]);
+          this.mainChart = {
+            id: 'mainChart',
+            data: {
+              layout: "vertical",
+              graphset: [
+                this.getCloseConfig(dates, closePrices),
+                this.getPGRConfig(dates, pgrData),
+                this.getRSIConfig(dates, relStr),
+                this.getCMFConfig(dates, cmf)
+              ]
+            },
+            height: 660,
+            width: undefined
+          };
+          this.loading ? this.loading.unsubscribe() : null;
+          this.cd.markForCheck();
         });
     }
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['stock']) this.ngOnInit()
+    if (changes['stock'] && this.loading) {
+      this.loading.unsubscribe();
+      this.ngOnInit();
+    }
   }
 
   ngOnDestroy() {
@@ -1456,6 +1484,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   getFiveYearChart() {
     this.current = '5Y';
+    this.loading = new Subscription();
 
     const closePrices = this.data['five_year_chart_data']['close_price'].map(x => +x).reverse();
     const dates = this.data['five_year_chart_data']['formatted_dates'].slice().reverse();
@@ -1479,10 +1508,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       height: 660,
       width: undefined
     };
+    this.loading ? this.loading.unsubscribe() : null;
+    this.cd.detectChanges();
   }
 
   toggleChartTime(span: string) {
     this.current = span;
+    this.loading = new Subscription();
 
     var cut = 0;
     switch (span) {
@@ -1526,6 +1558,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       height: 660,
       width: undefined
     };
+    this.loading ? this.loading.unsubscribe() : null;
+    this.cd.detectChanges();
   }
 
   addStock(ticker: string) {
