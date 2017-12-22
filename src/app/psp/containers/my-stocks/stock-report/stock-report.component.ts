@@ -1325,7 +1325,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     window.scrollTo(0, 0);
     if (this.stock) {
       this.current = '1Y';
-      this.loading = this.reportService.getSymbolData(this.stock)
+      this.reportService.getSymbolData(this.stock)
         .take(1)
         .filter(x => x != undefined)
         .map(res => {
@@ -1341,7 +1341,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           )
         })
         .take(1)
-        .do(([summary, competitors, research, headlines]) => {
+        .subscribe(([summary, competitors, research, headlines]) => {
           this.summary = summary;
           this.competitors = competitors['compititors'];
           this.research = research;
@@ -1405,8 +1405,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             width: undefined
           };
           this.cd.markForCheck();
-        })
-        .switchMap(() => this.reportService.getStockSummaryData(this.stock))
+        });
+
+      this.loading = this.reportService.getStockSummaryData(this.stock)
         .take(1)
         .subscribe(data => {
           this.data = data;
