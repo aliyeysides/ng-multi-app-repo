@@ -39,11 +39,11 @@ declare let gtag: Function;
         </div>
         <div class="col-8">
           <cpt-psp-navigator *ngIf="!searchOpened"></cpt-psp-navigator>
-          <cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
-                                 *ngIf="searchOpened"></cpt-psp-symbol-search>
+          <!-- <cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
+                                 *ngIf="searchOpened"></cpt-psp-symbol-search> -->
         </div>
         <div class="col-2">
-          <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--left" id="header_button--right">
+          <div class="header__button header__button--left" id="header_button--right">
             <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
           </div>
           <div class="header__button header__button--right">

@@ -160,7 +160,7 @@ sub {
 }
 
 .blur-me {
-  filter: blur(10px);
+  filter: blur(25px);
 }
 
 .show .btn-primary {
@@ -313,6 +313,119 @@ sub {
 
 
 
+
+
+/*                                                   */
+/*                    NAVIGATION                     */
+/*                                                   */
+
+
+
+.container--nav {
+  position: absolute;
+  background-color: #333;
+  height: 100vh;
+  color:#ffffff;
+  width: 0; /* 0 width - change this with JavaScript */
+  z-index: 1000;
+  top: 0;
+  overflow: hidden;
+  transition: 0.5s;
+  box-shadow: -7px 0 20px 0px rgba(0, 0, 0, 0.2);
+
+  .nav-list {
+    padding:15px 0;
+
+    ul {
+      padding:10px 20px;
+      margin:0;
+      border-top: 2px solid rgba(255,255,255,0.1);
+
+      li {
+        padding: 10px 0;
+
+        .nav--toplevel {
+          color:#ffffff !important;
+          line-height: 1.5;
+          text-decoration: none;
+          white-space: nowrap;
+          font-size: 22px;
+          cursor: pointer;
+
+          i {
+            color:#ffffff;
+            font-size: 28px;
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+      }
+
+      .sub-nav {
+        padding: 0px;
+        min-width:275px;
+
+        .nav--sublevel {
+          font-size: 16px;
+          color:#ffffff !important;
+          line-height: 2;
+          text-decoration: none;
+          white-space: nowrap;
+          opacity: 0.75;
+          cursor: pointer;
+          white-space: nowrap;
+
+          i {
+            color:#ffffff;
+            font-size: 8px;
+            display: inline-block;
+            vertical-align: baseline;
+          }
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  .logo {
+    padding:20px 20px 0 20px;
+  }
+
+  .toc__container {
+    position: absolute;
+    bottom: 5px;
+    min-width:295px;
+
+    .version {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #999;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .toc__link {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #1199ff;
+      text-decoration: none;
+      text-align: left;
+      white-space: nowrap;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
 .col-headers {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -421,111 +534,6 @@ sub {
 }
 
 
-
-
-
-/*                                                   */
-/*                    NAVIGATION                     */
-/*                                                   */
-
-
-
-.container--nav {
-  position: absolute;
-  background-color: #333;
-  height: 100vh;
-  color:#ffffff;
-  width: 0; /* 0 width - change this with JavaScript */
-  z-index: 1000;
-  top: 0;
-  overflow: hidden;
-  transition: 0.5s;
-  box-shadow: -7px 0 20px 0px rgba(0, 0, 0, 0.2);
-
-  .nav-list {
-    padding:15px 0;
-
-    ul {
-      padding:10px 20px;
-      margin:0;
-      border-top: 2px solid rgba(255,255,255,0.1);
-
-      li {
-        padding: 10px 0;
-
-        .nav--toplevel {
-          color:#ffffff !important;
-          line-height: 1.5;
-          text-decoration: none;
-          white-space: nowrap;
-          font-size: 22px;
-          cursor: pointer;
-
-          i {
-            color:#ffffff;
-            font-size: 28px;
-            display: inline-block;
-            vertical-align: middle;
-          }
-        }
-      }
-
-      .sub-nav {
-        padding: 0px;
-        min-width:320px;
-
-        .nav--sublevel {
-          font-size: 16px;
-          color:#ffffff !important;
-          line-height: 2;
-          text-decoration: none;
-          white-space: nowrap;
-          opacity: 0.75;
-          cursor: pointer;
-          white-space: nowrap;
-
-          i {
-            color:#ffffff;
-            font-size: 8px;
-            display: inline-block;
-            vertical-align: baseline;
-          }
-
-          &:hover {
-            opacity: 1;
-          }
-        }
-      }
-    }
-  }
-
-  .logo {
-    padding:20px 20px 0 20px;
-  }
-
-  .toc__container {
-    position: absolute;
-    bottom: 0;
-    min-width:320px;
-
-    .version {
-      font-size: 12px;
-      line-height: 1.5;
-      color: #999;
-      text-align: right;
-      white-space: nowrap;
-    }
-
-    .toc__link {
-      font-size: 12px;
-      line-height: 1.5;
-      color: #1199ff;
-      text-decoration: none;
-      text-align: left;
-      white-space: nowrap;
-    }
-  }
-}
 
 
 
