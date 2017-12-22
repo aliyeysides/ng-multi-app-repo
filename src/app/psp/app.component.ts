@@ -109,7 +109,6 @@ export class AppComponent implements OnDestroy {
 
   toggleSearch() {
     this.searchOpened = !this.searchOpened;
-    console.log('toggleSearch', this.searchOpened);
     this.cd.detectChanges();
   }
 
