@@ -17,16 +17,20 @@ declare let gtag: Function;
     <div class="page__header"
          [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}"
          id="page__header">
+
       <div #navBtn (click)="toggleNav()" class="header__button header__button--left" id="header_button--left">
         <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
       </div>
+
       <cpt-psp-settings-menu [btn]="navBtn" [navOpened]="navOpened"
                              (navClosed)="navOpened.next(false)"></cpt-psp-settings-menu>
+
       <div class="header__title header__search">
         <h1 *ngIf="!searchOpened">{{ title }}</h1>
         <cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
                                *ngIf="searchOpened"></cpt-psp-symbol-search>
       </div>
+
       <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--right" id="header_button--right">
         <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
       </div>
@@ -37,10 +41,10 @@ declare let gtag: Function;
         <div class="col-2 logo--desktop">
           <img class="" src="assets/imgs/logo_powerpulse--desktop.png">
         </div>
-        <div class="col-8">
+        <div class="col-8 header__search">
           <cpt-psp-navigator *ngIf="!searchOpened"></cpt-psp-navigator>
-          <!--<cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"-->
-                                 <!--*ngIf="searchOpened"></cpt-psp-symbol-search>-->
+         <cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
+                                 *ngIf="searchOpened"></cpt-psp-symbol-search>
         </div>
         <div class="col-2">
           <div #searchBtn (click)="toggleSearch();$event.stopPropagation()"  class="header__button header__button--left" id="header_button--right">

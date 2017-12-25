@@ -31,23 +31,23 @@ declare let gtag: Function;
     <div (mousedown)="$event.preventDefault();" *ngIf="searchResults && symbolSearchForm.value && focus == true"
          class="search__dropdown">
       <ul [ngBusy]="loading" *ngFor="let result of searchResults" class="container">
-        <li (click)="onClick(result.Symbol)" class="row search__entry"
+        <li (click)="onClick(result.Symbol)" class="row no-gutters search__entry"
             [ngClass]="{'search--match': result.Symbol == symbolSearchForm.value.toUpperCase() }">
           <div class="col-3 search__company">
             <p class="company-ticker">
               {{ result.Symbol }}
             </p>
           </div>
-          <div class="col-7">
+          <div class="col-8">
             <p class="company-name">
               {{ result.CompanyName }}
             </p>
           </div>
           <div *ngIf="!resultInUserList(userStocks, result.Symbol)" (click)="addToList(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
-            <img class="align-middle" src="./assets/imgs/icon_plus--white.svg">
+            <img class="align-absolute" src="./assets/imgs/icon_plus--white.svg">
           </div>
           <div *ngIf="resultInUserList(userStocks, result.Symbol)" (click)="removeStock(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
-            <img class="align-middle" src="./assets/imgs/icon_minus.svg">
+            <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
           </div>
         </li>
       </ul>
