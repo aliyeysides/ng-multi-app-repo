@@ -486,24 +486,25 @@ declare var zingchart: any;
                     <tr>
                       <td class="label">Div per Share</td>
                       <td class="data">
-                        {{ symbolData ? (symbolData['fundamentalData']['dividend_per_share'] | decimal ) : null }}
+                        $ {{ symbolData ? (symbolData['fundamentalData']['dividend_per_share'] | decimal ) : null }}
                       </td>
                     </tr>
                     <tr>
                       <td class="label">Payout</td>
-                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['payout'] | decimal ) : null }}
+                      <td class="data">
+                        {{ symbolData ? ((symbolData['fundamentalData']['payout']) * 100 | decimal ) : null }}%
                       </td>
                     </tr>
                     <tr>
                       <td class="label">Yield</td>
-                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['Yield'] | decimal ) : null }}
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['Yield'] | decimal ) : null }}%
                       </td>
                     </tr>
                     <tr>
-                      <td class="label">Dividend Growth Rate</td>
+                      <td class="label">5Y Growth Rate</td>
                       <td class="data">
-                        {{ symbolData ? (symbolData['fundamentalData']['growth_rate'] | decimal ) : null
-                        }}
+                        {{ symbolData ? ((symbolData['fundamentalData']['growth_rate']) * 100 | decimal ) : null
+                        }}%
                       </td>
                     </tr>
                   </table>
@@ -1349,7 +1350,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.competitors = competitors['compititors'];
           this.research = research;
           this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
-          console.log('research', this.research);
 
           const annualEPSData = research['EPS Quarterly Results']['quaterlyData'].map(x => +x[5].slice(1));
           const annualEPSDates = research['EPS Quarterly Results']['quaterlyData'].map(x => x[0]);

@@ -182,6 +182,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(params => {
           if (params.symbol) {
+            this.sliderObj = {};
             this.sliderObj[params.symbol] = true;
           } else {
             // this.selectedStock = 'AAPL';
