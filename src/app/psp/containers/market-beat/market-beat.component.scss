@@ -2,9 +2,6 @@
 @import 'variables';
 
 
- 
-
-
 
 .component--marketbeat {
 
@@ -18,16 +15,20 @@
 			color:#ffffff;
 			display:block;
 			background-color: rgba(0,0,0,0.7);
-			padding: 8px 0;
+			padding: 16px 0 10px;
 			margin:0;
 			text-align: center;
 			width: 100%;
 			opacity: 1;
+
+			@media screen AND (min-width: 992px) {
+				font-size: 42px;
+			}
 		}
 	}
 
 	.masthead--featured {
-		background-image: url("/../../assets/imgs/image__MI--masthead.png");
+		background-image: url("/assets/imgs/image__MI--masthead.png");
 	}
 
 	.masthead--education {
@@ -36,7 +37,21 @@
 		margin-top: 25px;
 	}
 
+	.section--author {
+		text-align: center;
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 1;
+		padding:15px 0 15px;
+
+		@media screen AND (min-width: 992px) {
+			padding:20px 0 15px;
+			font-size: 24px;
+		}
+	}
+
 	.section--date-select {
+		margin-top: 20px;
 
 		.btn-group {
 			margin-top: 8px;
@@ -117,29 +132,29 @@
 				content: " →";
 			}
 		}
-		.article__author {
-			text-align: center;
-			font-size: 18px;
-			font-weight: 600;
-			line-height: 1;
-			padding:10px 0 25px;
-		}
-		.article__preview {
+		.article__body {
 			margin-top: 25px;
 			font-family: 'Open Sans', sans-serif;
 			color: #484848;
 			position: relative;
+			padding-bottom: 30px;
 
-			.paragraph {
+			.article {
 				display: block;
-				height: 250px;
+				height: 100vh;
 				overflow: hidden;
 				font-family: 'Open Sans', sans-serif;
 				color: #484848;
-				font-size: 14px;
+				font-size: 16px;
 				line-height: 1.5;
 				text-align: left;
 				margin:10px 0 15px;
+
+				ul {
+					margin-left: 20px;
+					list-style: disc;
+					font-size: 18px;
+				}
 			}
 
 			&::after {
