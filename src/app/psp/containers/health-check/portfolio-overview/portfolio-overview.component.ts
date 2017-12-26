@@ -50,7 +50,8 @@ import {AuthService} from '../../../../services/auth.service';
 
       <div class="row justify-content-center overview__powerbar">
         <div class="button--pdf">
-          <button class="align-absolute" (click)="getPHCReportforListId()"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+          <button class="align-absolute" (click)="getPHCReportforListId()"><i class="fa fa-file-pdf-o"
+                                                                              aria-hidden="true"></i></button>
         </div>
         <div class="col-12 col-md-8 col-lg-7 powerbar flex-md-last">
           <div (click)="setToggleOptions('Bulls')"
@@ -67,6 +68,7 @@ import {AuthService} from '../../../../services/auth.service';
         </div>
         <div class="col-12 col-md-4 col-lg-3 align-self-center">
           <p class="label">Chaikin Power Bar <a> <i tooltip="{{ toolTipText }}" class="fa fa-info-circle"
+                                                    placement="auto"
                                                     aria-hidden="true"></i></a></p>
         </div>
       </div>
