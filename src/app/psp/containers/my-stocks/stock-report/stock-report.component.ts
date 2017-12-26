@@ -661,6 +661,7 @@ declare var zingchart: any;
               </div>
               <div class="chart">
                 <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
+                <p>{{ research ? research['EPS Quarterly Results']['label'][0] : null }}</p>
               </div>
             </div>
 
@@ -670,6 +671,7 @@ declare var zingchart: any;
               </div>
               <div class="chart">
                 <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
+                <p>{{ research ? research['EPS Quarterly Results']['label'][0] : null }}</p>
               </div>
             </div>
 
@@ -679,6 +681,7 @@ declare var zingchart: any;
               </div>
               <div class="chart">
                 <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
+                <p>Next report: {{ symbolData ? symbolData['EPSData']['next_report_date'] : null }}</p>
               </div>
             </div>
 
@@ -1346,6 +1349,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.competitors = competitors['compititors'];
           this.research = research;
           this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
+          console.log('research', this.research);
 
           const annualEPSData = research['EPS Quarterly Results']['quaterlyData'].map(x => +x[5].slice(1));
           const annualEPSDates = research['EPS Quarterly Results']['quaterlyData'].map(x => x[0]);
