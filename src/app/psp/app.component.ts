@@ -18,7 +18,7 @@ declare let gtag: Function;
          [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}"
          id="page__header">
 
-      <div #navBtn (click)="toggleNav()" class="header__button header__button--left" id="header_button--left">
+      <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--left" id="header_button--left">
         <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
       </div>
 
@@ -52,7 +52,7 @@ declare let gtag: Function;
                id="header_button--right">
             <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
           </div>
-          <div #navBtn (click)="toggleNav()" class="header__button header__button--right">
+          <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--right">
             <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
           </div>
         </div>
