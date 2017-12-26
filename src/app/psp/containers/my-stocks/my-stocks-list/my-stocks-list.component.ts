@@ -4,6 +4,7 @@ import {ListSymbolObj, PortfolioStatus} from '../../../../shared/models/health-c
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'cpt-my-stocks-list',
@@ -75,7 +76,7 @@ import {HealthCheckService} from '../../../../services/health-check.service';
             <img src="./assets/imgs/ui_slide.svg">
           </div>
           <div class="col-12 list-entry__overlay"
-               [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.Change>0, 'red': stock.Change<0 }">
+               [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.PGR>=4, 'red': stock.PGR<=2, 'yellow': stock.PGR==3 }">
             <div class="row no-gutters overlay__contents">
               <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide">
                 <img src="./assets/imgs/ui_slide.svg">
@@ -148,6 +149,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   selectedListName: string;
 
   constructor(private signalService: SignalService,
+              private route: ActivatedRoute,
               private healthCheck: HealthCheckService) {
   }
 
@@ -175,6 +177,18 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
     this.healthCheck.getPortfolioStatus()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => this.status = res);
+
+    this.route.params
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(params => {
+          if (params.symbol) {
+            this.sliderObj = {};
+            this.sliderObj[params.symbol] = true;
+          } else {
+            // this.selectedStock = 'AAPL';
+          }
+        }
+      );
 
     this.selectedListName = this.healthCheck.currentList;
   }

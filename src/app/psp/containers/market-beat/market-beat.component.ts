@@ -16,11 +16,11 @@ import {Subject} from 'rxjs/Subject';
 	    	<div class="col-12 section--date-select">
 		        <div class="btn-group" dropdown [autoClose]="true">
 		          	<button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-		            	{{ selectedInsight ? selectedInsight['post_title'] : null }}
+		            	{{ selectedInsight ? selectedInsight['post_title'].slice(26) : null }}
 		          	</button>
 			        <ul *dropdownMenu class="dropdown-menu" role="menu">
 			            <li (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem"><a
-			              class="dropdown-item">{{ post['post_title'] }}</a></li>
+			              class="dropdown-item">{{ post['post_title'].slice(26) }}</a></li>
 			        </ul>
 		        </div>
 		    </div>

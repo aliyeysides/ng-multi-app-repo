@@ -486,24 +486,25 @@ declare var zingchart: any;
                     <tr>
                       <td class="label">Div per Share</td>
                       <td class="data">
-                        {{ symbolData ? (symbolData['fundamentalData']['dividend_per_share'] | decimal ) : null }}
+                        $ {{ symbolData ? (symbolData['fundamentalData']['dividend_per_share'] | decimal ) : null }}
                       </td>
                     </tr>
                     <tr>
                       <td class="label">Payout</td>
-                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['payout'] | decimal ) : null }}
+                      <td class="data">
+                        {{ symbolData ? ((symbolData['fundamentalData']['payout']) * 100 | decimal ) : null }}%
                       </td>
                     </tr>
                     <tr>
                       <td class="label">Yield</td>
-                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['Yield'] | decimal ) : null }}
+                      <td class="data">{{ symbolData ? (symbolData['fundamentalData']['Yield'] | decimal ) : null }}%
                       </td>
                     </tr>
                     <tr>
-                      <td class="label">Dividend Growth Rate</td>
+                      <td class="label">5Y Growth Rate</td>
                       <td class="data">
-                        {{ symbolData ? (symbolData['fundamentalData']['growth_rate'] | decimal ) : null
-                        }}
+                        {{ symbolData ? ((symbolData['fundamentalData']['growth_rate']) * 100 | decimal ) : null
+                        }}%
                       </td>
                     </tr>
                   </table>
@@ -659,36 +660,43 @@ declare var zingchart: any;
               <div class="chart__header">
                 <h3>Annual EPS</h3>
               </div>
-              <div class="chart">
+              <div *ngIf="(annualEPSChart['data']['graphset'][0] | json) != '{}'" class="chart">
                 <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
+                <p>{{ research && research['EPS Quarterly Results'].hasOwnProperty('label') ? research['EPS Quarterly Results']['label'][0] : '' }}</p>
               </div>
+              <p *ngIf="(annualEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
 
             <div class="col-12 col-lg-6">
               <div class="chart__header">
                 <h3>Quarterly EPS</h3>
               </div>
-              <div class="chart">
+              <div *ngIf="(qrtEPSChart['data']['graphset'][0] | json) != '{}'" class="chart">
                 <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
+                <p>{{ research && research['EPS Quarterly Results'].hasOwnProperty('label') ? research['EPS Quarterly Results']['label'][0] : '' }}</p>
               </div>
+              <p *ngIf="(qrtEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
 
             <div class="col-12 col-lg-6">
               <div class="chart__header">
                 <h3>Earnings Announcement</h3>
               </div>
-              <div class="chart">
+              <div *ngIf="(epsSurprisesChart['data']['graphset'][0] | json) != '{}'" class="chart">
                 <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
+                <p>Next report: {{ symbolData ? symbolData['EPSData']['next_report_date'] : '' }}</p>
               </div>
+              <p *ngIf="(epsSurprisesChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
 
             <div class="col-12 col-lg-6">
               <div class="chart__header">
                 <h3>Annual Revenue</h3>
               </div>
-              <div class="chart">
+              <div *ngIf="(annualRevenueChart['data']['graphset'][0] | json) != '{}'"  class="chart">
                 <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
               </div>
+              <p *ngIf="(annualRevenueChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
           </ng-container>
 
@@ -1347,11 +1355,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.research = research;
           this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
 
-          const annualEPSData = research['EPS Quarterly Results']['quaterlyData'].map(x => +x[5].slice(1));
-          const annualEPSDates = research['EPS Quarterly Results']['quaterlyData'].map(x => x[0]);
+          const annualEPSData = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData'].map(x => +x[5].slice(1)) : null;
+          const annualEPSDates = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData'].map(x => x[0]) : null;
 
-          const qrtEPSData = research['EPS Quarterly Results']['quaterlyData']
-            .map(x => x.splice(1).map(x => +x.slice(1)));
+          const qrtEPSData = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData']
+            .map(x => x.splice(1).map(x => +x.slice(1))) : null;
 
           this.annualEPSChart = {
             id: 'annualEPSChart',
@@ -1379,8 +1387,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           const epsSurprises = research['EPS Surprises'];
 
           const revDates = research['Revenue&EarningsGrowth']['labels'];
-          const annualRev = research['Revenue&EarningsGrowth']['Revenue(M)']
-            .map(x => parseFloat(x.replace(/,/g, '')));
+          const annualRev = research['Revenue&EarningsGrowth'].hasOwnProperty('Revenue(M)') ? research['Revenue&EarningsGrowth']['Revenue(M)']
+            .map(x => parseFloat(x.replace(/,/g, ''))) : null;
 
           this.epsSurprisesChart = {
             id: 'epsSurprisesChart',
@@ -1732,683 +1740,704 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getRSIConfig(dates, values) {
-    return {
-      type: 'line',
-      height: 115,
-      x: 0,
-      y: 530,
-      backgroundColor: "transparent",
-      plotarea: {
-        margin: "25 42 20 30"
-      },
-      plot: {
-        marker: {
-          visible: false
-        }
-      },
-      source: {
-        visible: true,
-        text: "ZingCharts.com",
-        fontColor: "#ddd",
-        fontFamily: "Open Sans",
-        fontSize: "10",
-        fontWeight: "400",
+    if (values) {
+      return {
+        type: 'line',
+        height: 115,
+        x: 0,
+        y: 530,
+        backgroundColor: "transparent",
+        plotarea: {
+          margin: "25 42 20 30"
+        },
+        plot: {
+          marker: {
+            visible: false
+          }
+        },
+        source: {
+          visible: true,
+          text: "ZingCharts.com",
+          fontColor: "#ddd",
+          fontFamily: "Open Sans",
+          fontSize: "10",
+          fontWeight: "400",
 
-      },
-      tooltip: {
-        visible: false,
-        text: "Rel. Strength: %v",
-        fontFamily: "Open Sans",
-        borderColor: "transparent"
-      },
-      zoom: {
-        shared: true
-      },
-      crosshairX: {
-        lineWidth: 2,
-        lineColor: "#999",
-        shared: true,
-        scaleLabel: {
+        },
+        tooltip: {
+          visible: false,
+          text: "Rel. Strength: %v",
+          fontFamily: "Open Sans",
+          borderColor: "transparent"
+        },
+        zoom: {
+          shared: true
+        },
+        crosshairX: {
+          lineWidth: 2,
+          lineColor: "#999",
+          shared: true,
+          scaleLabel: {
+            visible: false
+          },
+          plotLabel: {
+            fontFamily: "Open Sans",
+            backgroundColor: "#b9e5fb",
+            text: "Rel. Strength: %v",
+            borderColor: "#ffffff",
+            strokeWidth: "4",
+            height: 20,
+            borderRadius: 7,
+            y: 0
+          }
+        },
+        scaleX: {
+          visible: false,
+          zooming: true
+        },
+        scaleY: {
           visible: false
         },
-        plotLabel: {
-          fontFamily: "Open Sans",
-          backgroundColor: "#b9e5fb",
-          text: "Rel. Strength: %v",
-          borderColor: "#ffffff",
-          strokeWidth: "4",
-          height: 20,
-          borderRadius: 7,
-          y: 0
-        }
-      },
-      scaleX: {
-        visible: false,
-        zooming: true
-      },
-      scaleY: {
-        visible: false
-      },
-      series: [
-        {
-          values: values,
-          text: "Rel. Str",
-          rules: [
-            {
-              rule: '%v < 0.5',
-              backgroundColor: "#bb2634",
-              lineColor: "#bb2634"
-            }],
-          backgroundColor: "#51bb2c",
-          lineColor: "#51bb2c",
-          lineWidth: 2
-        }
-      ]
-    };
+        series: [
+          {
+            values: values,
+            text: "Rel. Str",
+            rules: [
+              {
+                rule: '%v < 0.5',
+                backgroundColor: "#bb2634",
+                lineColor: "#bb2634"
+              }],
+            backgroundColor: "#51bb2c",
+            lineColor: "#51bb2c",
+            lineWidth: 2
+          }
+        ]
+      };
+    }
+    return {};
   }
 
   getCMFConfig(dates, values) {
-    return {
-      type: 'area',
-      height: 130,
-      x: 0,
-      y: 400,
-      backgroundColor: "#fff",
-      plotarea: {
-        margin: "25 42 20 30"
-      },
-      plot: {
-        marker: {
-          visible: false
-        }
-      },
-      source: {
-        visible: "false",
-        text: "ZingCharts.com",
-        fontColor: "#ddd",
-        fontFamily: "Open Sans",
-        fontSize: "10",
-      },
-      tooltip: {
-        visible: false,
-        text: "Chaikin Money Flow: %v",
-        fontFamily: "Open Sans",
-        borderColor: "transparent"
-      },
-      zoom: {
-        shared: true
-      },
-      crosshairX: {
-        lineWidth: 2,
-        lineColor: "#999",
-        shared: true,
-        scaleLabel: {
+    if (values) {
+      return {
+        type: 'area',
+        height: 130,
+        x: 0,
+        y: 400,
+        backgroundColor: "#fff",
+        plotarea: {
+          margin: "25 42 20 30"
+        },
+        plot: {
+          marker: {
+            visible: false
+          }
+        },
+        source: {
+          visible: "false",
+          text: "ZingCharts.com",
+          fontColor: "#ddd",
+          fontFamily: "Open Sans",
+          fontSize: "10",
+        },
+        tooltip: {
+          visible: false,
+          text: "Chaikin Money Flow: %v",
+          fontFamily: "Open Sans",
+          borderColor: "transparent"
+        },
+        zoom: {
+          shared: true
+        },
+        crosshairX: {
+          lineWidth: 2,
+          lineColor: "#999",
+          shared: true,
+          scaleLabel: {
+            visible: false
+          },
+          plotLabel: {
+            fontFamily: "Open Sans",
+            backgroundColor: "#b9e5fb",
+            text: "Chaikin Money Flow: %v",
+            borderColor: "transparent",
+            y: 0
+          }
+        },
+        scaleX: {
+          visible: false,
+          zooming: true
+        },
+        scaleY: {
           visible: false
         },
-        plotLabel: {
-          fontFamily: "Open Sans",
-          backgroundColor: "#b9e5fb",
-          text: "Chaikin Money Flow: %v",
-          borderColor: "transparent",
-          y: 0
-        }
-      },
-      scaleX: {
-        visible: false,
-        zooming: true
-      },
-      scaleY: {
-        visible: false
-      },
-      series: [
-        {
-          values: values,
-          text: "Chaikin Money Flow",
-          rules: [
-            {
-              rule: '%v < 0',
-              backgroundColor: "#bb2634",
-              lineColor: "#bb2634"
-            }],
-          backgroundColor: "#51bb2c",
-          alphaArea: 0.3,
-          lineColor: "#51bb2c",
-          lineWidth: 2
-        }
-      ]
-    };
+        series: [
+          {
+            values: values,
+            text: "Chaikin Money Flow",
+            rules: [
+              {
+                rule: '%v < 0',
+                backgroundColor: "#bb2634",
+                lineColor: "#bb2634"
+              }],
+            backgroundColor: "#51bb2c",
+            alphaArea: 0.3,
+            lineColor: "#51bb2c",
+            lineWidth: 2
+          }
+        ]
+      };
+    }
+    return {};
   }
 
   getPGRConfig(dates, values) {
-    let veryBullish = [];
-    let bullish = [];
-    let neutral = [];
-    let bearish = [];
-    let veryBearish = [];
-    let pgrData = [veryBullish, bullish, neutral, bearish, veryBearish];
-    values.map(pgr => {
-      pgrData.forEach((arr, idx) => {
-        if (pgr === 5 && idx == 0) {
-          arr.push(100);
-          return;
-        }
-        if (pgr === 4 && idx == 1) {
-          arr.push(100);
-          return;
-        }
-        if (pgr === 3 && idx == 2) {
-          arr.push(100);
-          return;
-        }
-        if (pgr === 2 && idx == 3) {
-          arr.push(100);
-          return;
-        }
-        if (pgr === 1 && idx == 4) {
-          arr.push(100);
-          return;
-        }
-        arr.push(0);
-      })
-    });
-    return {
-      "type": "bar",
-      height: 40,
-      x: 0,
-      y: 321,
-      "plot": {
-        "stacked": true,
-        "bar-space": "0px",
-      },
-      plotarea: {
-        margin: "0 42 0 30"
-      },
-      borderColor: "transparent",
-      backgroundColor: "transparent",
-      "scaleX": {
-        "values": dates,
-        "auto-fit": true,
-        "lineWidth": 0,
-        "lineColor": "none",
-        label: {
-          visible: false
+    if (values) {
+      let veryBullish = [];
+      let bullish = [];
+      let neutral = [];
+      let bearish = [];
+      let veryBearish = [];
+      let pgrData = [veryBullish, bullish, neutral, bearish, veryBearish];
+      values.map(pgr => {
+        pgrData.forEach((arr, idx) => {
+          if (pgr === 5 && idx == 0) {
+            arr.push(100);
+            return;
+          }
+          if (pgr === 4 && idx == 1) {
+            arr.push(100);
+            return;
+          }
+          if (pgr === 3 && idx == 2) {
+            arr.push(100);
+            return;
+          }
+          if (pgr === 2 && idx == 3) {
+            arr.push(100);
+            return;
+          }
+          if (pgr === 1 && idx == 4) {
+            arr.push(100);
+            return;
+          }
+          arr.push(0);
+        })
+      });
+      return {
+        "type": "bar",
+        height: 40,
+        x: 0,
+        y: 321,
+        "plot": {
+          "stacked": true,
+          "bar-space": "0px",
         },
-        "tick": {
-          "visible": false
+        plotarea: {
+          margin: "0 42 0 30"
         },
-        "guide": {
-          "visible": false
+        borderColor: "transparent",
+        backgroundColor: "transparent",
+        "scaleX": {
+          "values": dates,
+          "auto-fit": true,
+          "lineWidth": 0,
+          "lineColor": "none",
+          label: {
+            visible: false
+          },
+          "tick": {
+            "visible": false
+          },
+          "guide": {
+            "visible": false
+          },
+          "item": {
+            "font-color": "#999",
+            visible: false
+          },
+          zooming: true
         },
-        "item": {
-          "font-color": "#999",
-          visible: false
+        "scaleY": {
+          "lineWidth": 0,
+          "lineColor": "none",
+          "min-value": 0,
+          "max-value": 200,
+          "step": 0.75,
+          "tick": {
+            "visible": false
+          },
+          "guide": {
+            "lineStyle": "solid"
+          },
+          "item": {
+            "font-color": "#999",
+            visible: false
+          }
         },
-        zooming: true
-      },
-      "scaleY": {
-        "lineWidth": 0,
-        "lineColor": "none",
-        "min-value": 0,
-        "max-value": 200,
-        "step": 0.75,
-        "tick": {
-          "visible": false
+        zoom: {
+          shared: true
         },
-        "guide": {
-          "lineStyle": "solid"
-        },
-        "item": {
-          "font-color": "#999",
-          visible: false
-        }
-      },
-      zoom: {
-        shared: true
-      },
-      crosshairX: {
-        shared: true,
-        lineColor: "transparent",
-        visible: false,
-        plotLabel: {
-          multiple: false,
+        crosshairX: {
+          shared: true,
+          lineColor: "transparent",
           visible: false,
-          borderColor: "transparent",
-          fontFamily: "Open Sans",
-          backgroundColor: "#b9e5fb",
-          rules: [
-            {
-              rule: '%v == 100',
-              text: '%t',
-              visible: true,
+          plotLabel: {
+            multiple: false,
+            visible: false,
+            borderColor: "transparent",
+            fontFamily: "Open Sans",
+            backgroundColor: "#b9e5fb",
+            rules: [
+              {
+                rule: '%v == 100',
+                text: '%t',
+                visible: true,
+              }
+            ],
+            y: 0
+          }
+        },
+        "tooltip": {
+          "htmlMode": true,
+          "backgroundColor": "none",
+          "padding": 0,
+          "placement": "node:center",
+          "text": "<div class='zingchart-tooltip'><div class='scalex-value'>%kt<\/div><div class='scaley-value'>$%v<\/div><\/div>"
+        },
+        "series": [
+          {
+            "values": veryBullish,
+            "alpha": 1,
+            "text": 'Very Bullish',
+            "backgroundColor": "#24A300",
+            "hover-state": {
+              backgroundColor: '#26a025',
+              text: 'Very Bullish'
             }
-          ],
-          y: 0
-        }
-      },
-      "tooltip": {
-        "htmlMode": true,
-        "backgroundColor": "none",
-        "padding": 0,
-        "placement": "node:center",
-        "text": "<div class='zingchart-tooltip'><div class='scalex-value'>%kt<\/div><div class='scaley-value'>$%v<\/div><\/div>"
-      },
-      "series": [
-        {
-          "values": veryBullish,
-          "alpha": 1,
-          "text": 'Very Bullish',
-          "backgroundColor": "#24A300",
-          "hover-state": {
-            backgroundColor: '#26a025',
-            text: 'Very Bullish'
+          },
+          {
+            "values": bullish,
+            "text": 'Bullish',
+            "alpha": 1,
+            "backgroundColor": "#6ACC00",
+            "hover-state": [{
+              backgroundColor: '#1a901d'
+            }]
+          },
+          {
+            "values": neutral,
+            "text": 'Neutral',
+            "alpha": 1,
+            "backgroundColor": "#FF9900",
+            "hover-state": {
+              backgroundColor: '#90903a'
+            }
+          },
+          {
+            "values": bearish,
+            "text": 'Bearish',
+            "alpha": 1,
+            "backgroundColor": "#FD4500",
+            "hover-state": {
+              backgroundColor: '#904925'
+            }
+          },
+          {
+            "values": veryBearish,
+            "text": 'Very Bearish',
+            "alpha": 1,
+            "backgroundColor": "#EB001C",
+            "hover-state": {
+              backgroundColor: '#901E15'
+            }
           }
-        },
-        {
-          "values": bullish,
-          "text": 'Bullish',
-          "alpha": 1,
-          "backgroundColor": "#6ACC00",
-          "hover-state": [{
-            backgroundColor: '#1a901d'
-          }]
-        },
-        {
-          "values": neutral,
-          "text": 'Neutral',
-          "alpha": 1,
-          "backgroundColor": "#FF9900",
-          "hover-state": {
-            backgroundColor: '#90903a'
-          }
-        },
-        {
-          "values": bearish,
-          "text": 'Bearish',
-          "alpha": 1,
-          "backgroundColor": "#FD4500",
-          "hover-state": {
-            backgroundColor: '#904925'
-          }
-        },
-        {
-          "values": veryBearish,
-          "text": 'Very Bearish',
-          "alpha": 1,
-          "backgroundColor": "#EB001C",
-          "hover-state": {
-            backgroundColor: '#901E15'
-          }
-        }
-      ]
-    };
+        ]
+      };
+    }
+    return {};
   }
 
   getAnnualEPSConfg(dates, values) {
-    return {
-      "type": "bar",
-      height: 400,
-      "background-color": "white",
-      "tooltip": {
-        "text": "$%v"
-      },
-      "plotarea": {
-        "margin": "30 30 0 30",
-        "y": "15"
-      },
-      "plot": {
-        "animation": {
-          "effect": "ANIMATION_SLIDE_BOTTOM"
-        }
-      },
-      "scale-x": {
-        "line-color": "transparent",
-        "labels": dates,
-        item: {
-          fontColor: "#999",
-          fontSize: "14",
-          fontWeight: "500",
-          fontFamily: "Rajdhani"
+    if (values) {
+      return {
+        "type": "bar",
+        height: 400,
+        "background-color": "white",
+        "tooltip": {
+          "text": "$%v"
         },
-        "guide": {
-          "visible": false
+        "plotarea": {
+          "margin": "30 30 0 30",
+          "y": "15"
         },
-        "tick": {
-          "visible": false
+        "plot": {
+          "animation": {
+            "effect": "ANIMATION_SLIDE_BOTTOM"
+          }
         },
-      },
-      "scale-y": {
-        "line-color": "transparent",
-        item: {
-          fontColor: "#999",
-          fontSize: "14",
-          fontWeight: "500",
-          fontFamily: "Rajdhani"
+        "scale-x": {
+          "line-color": "transparent",
+          "labels": dates,
+          item: {
+            fontColor: "#999",
+            fontSize: "14",
+            fontWeight: "500",
+            fontFamily: "Rajdhani"
+          },
+          "guide": {
+            "visible": false
+          },
+          "tick": {
+            "visible": false
+          },
         },
-        "tick": {
-          "visible": false
+        "scale-y": {
+          "line-color": "transparent",
+          item: {
+            fontColor: "#999",
+            fontSize: "14",
+            fontWeight: "500",
+            fontFamily: "Rajdhani"
+          },
+          "tick": {
+            "visible": false
+          },
+          "guide": {
+            "visible": true
+          },
+          "label": {
+            "font-family": "Open Sans",
+            "font-angle": 0,
+            "bold": true,
+            "font-size": "14px",
+            "font-color": "#484848",
+            "offset-y": "-190px",
+            "offset-x": "20px"
+          },
         },
-        "guide": {
-          "visible": true
-        },
-        "label": {
-          "font-family": "Open Sans",
-          "font-angle": 0,
-          "bold": true,
-          "font-size": "14px",
-          "font-color": "#484848",
-          "offset-y": "-190px",
-          "offset-x": "20px"
-        },
-      },
-      "series": [
-        {
-          "values": values,
-          "alpha": 0.75,
-          "borderRadius": 7,
-          "background-color": "#19c736 #00C04E",
-          "rules": [
-            {
-              rule: '%v < 0',
-              "background-color": "#F54225 #B6355C",
-            }
-          ]
-        }
-      ]
+        "series": [
+          {
+            "values": values,
+            "alpha": 0.75,
+            "borderRadius": 7,
+            "background-color": "#19c736 #00C04E",
+            "rules": [
+              {
+                rule: '%v < 0',
+                "background-color": "#F54225 #B6355C",
+              }
+            ]
+          }
+        ]
+      }
     }
+    return {};
   }
 
   getQrtEPSConfig(dates, values) {
-    const seriesA = [values[0][0], values[1][0], values[2][0]];
-    const seriesB = [values[0][1], values[1][1], values[2][1]];
-    const seriesC = [values[0][2], values[1][2], values[2][2]];
-    return {
-      "type": "bar",
-      "height": "400",
-      "background-color": "white",
-      "tooltip": {
-        "text": "$%v"
-      },
-      "plotarea": {
-        "margin": "30 30 0 30",
-        "y": "15"
-      },
-      "plot": {
-        "animation": {
-          "effect": "ANIMATION_SLIDE_BOTTOM"
-        }
-      },
-      "scale-x": {
-        "line-color": "transparent",
-        "labels": dates,
-        item: {
-          fontColor: "#999",
-          fontSize: "14",
-          fontWeight: "500",
-          fontFamily: "Rajdhani"
+    if (values) {
+      const seriesA = [values[0][0], values[1][0], values[2][0]];
+      const seriesB = [values[0][1], values[1][1], values[2][1]];
+      const seriesC = [values[0][2], values[1][2], values[2][2]];
+      return {
+        "type": "bar",
+        "height": "400",
+        "background-color": "white",
+        "tooltip": {
+          "text": "$%v"
         },
-        "guide": {
-          "visible": false
+        "plotarea": {
+          "margin": "30 30 0 30",
+          "y": "15"
         },
-        "tick": {
-          "visible": false
+        "plot": {
+          "animation": {
+            "effect": "ANIMATION_SLIDE_BOTTOM"
+          }
         },
-      },
-      "scale-y": {
-        "line-color": "transparent",
+        "scale-x": {
+          "line-color": "transparent",
+          "labels": dates,
+          item: {
+            fontColor: "#999",
+            fontSize: "14",
+            fontWeight: "500",
+            fontFamily: "Rajdhani"
+          },
+          "guide": {
+            "visible": false
+          },
+          "tick": {
+            "visible": false
+          },
+        },
+        "scale-y": {
+          "line-color": "transparent",
 
-        item: {
-          fontColor: "#999",
-          fontSize: "14",
-          fontWeight: "500",
-          fontFamily: "Rajdhani"
+          item: {
+            fontColor: "#999",
+            fontSize: "14",
+            fontWeight: "500",
+            fontFamily: "Rajdhani"
+          },
+          "guide": {
+            "visible": true
+          },
+          "tick": {
+            "visible": false
+          },
+          "label": {
+            "font-family": "Open Sans",
+            "font-angle": 0,
+            "bold": true,
+            "font-size": "14px",
+            "font-color": "#7E7E7E",
+            "offset-y": "-190px",
+            "offset-x": "20px"
+          },
         },
-        "guide": {
-          "visible": true
-        },
-        "tick": {
-          "visible": false
-        },
-        "label": {
-          "font-family": "Open Sans",
-          "font-angle": 0,
-          "bold": true,
-          "font-size": "14px",
-          "font-color": "#7E7E7E",
-          "offset-y": "-190px",
-          "offset-x": "20px"
-        },
-      },
-      "series": [
-        {
-          "values": seriesA,
-          "alpha": 0.75,
-          "borderRadius": 7,
-          "background-color": "#19c736 #00C04E",
-          "rules": [
-            {
-              rule: '%v < 0',
-              "background-color": "#F54225 #B6355C",
-            }
-          ]
-        },
-        {
-          "values": seriesB,
-          "alpha": 0.35,
-          "borderRadius": 7,
-          "background-color": "#19c736 #00C04E",
-          "rules": [
-            {
-              rule: '%v < 0',
-              "background-color": "#F54225 #B6355C",
-            }
-          ]
-        },
-        {
-          "values": seriesC,
-          "alpha": 0.75,
-          "borderRadius": 7,
-          "background-color": "#19c736 #00C04E",
-          "rules": [
-            {
-              rule: '%v < 0',
-              "background-color": "#F54225 #B6355C",
-            }
-          ]
-        }
-      ]
+        "series": [
+          {
+            "values": seriesA,
+            "alpha": 0.75,
+            "borderRadius": 7,
+            "background-color": "#19c736 #00C04E",
+            "rules": [
+              {
+                rule: '%v < 0',
+                "background-color": "#F54225 #B6355C",
+              }
+            ]
+          },
+          {
+            "values": seriesB,
+            "alpha": 0.35,
+            "borderRadius": 7,
+            "background-color": "#19c736 #00C04E",
+            "rules": [
+              {
+                rule: '%v < 0',
+                "background-color": "#F54225 #B6355C",
+              }
+            ]
+          },
+          {
+            "values": seriesC,
+            "alpha": 0.75,
+            "borderRadius": 7,
+            "background-color": "#19c736 #00C04E",
+            "rules": [
+              {
+                rule: '%v < 0',
+                "background-color": "#F54225 #B6355C",
+              }
+            ]
+          }
+        ]
+      }
     }
+    return {};
   }
 
   getEPSSurprisesConfig(values) {
-    const est = [
-      +values['3 Qtr Ago'][0].slice(1),
-      +values['2 Qtr Ago'][0].slice(1),
-      +values['1 Qtr Ago'][0].slice(1),
-      +values['Latest Qtr'][0].slice(1)
-    ];
-    const act = [
-      +values['3 Qtr Ago'][1].slice(1),
-      +values['2 Qtr Ago'][1].slice(1),
-      +values['1 Qtr Ago'][1].slice(1),
-      +values['Latest Qtr'][1].slice(1)
-    ];
-    const diff = [
-      +values['3 Qtr Ago'][2].slice(1),
-      +values['2 Qtr Ago'][2].slice(1),
-      +values['1 Qtr Ago'][2].slice(1),
-      +values['Latest Qtr'][2].slice(1)
-    ];
-    return {
-      "type": "scatter",
-      "height": "400",
-      "legend": {},
-      "background-color": "white",
-      "tooltip": {
-        "text": "$%v"
-      },
-      "plotarea": {
-        "margin": "30 30 0 30",
-        "y": "15px"
-      },
-      "plot": {
-        "animation": {
-          "effect": "ANIMATION_SLIDE_BOTTOM"
-        }
-      },
-      "scale-x": {
-        "line-color": "transparent",
-        "values": ['3 Qtrs ago', '2 Qtrs ago', '1 Qtr ago', 'Latest Qtr'],
-        item: {
-          fontColor: "#999",
-          fontSize: "14",
-          fontWeight: "500",
-          fontFamily: "Rajdhani"
+    if (values) {
+      const est = [
+        +values['3 Qtr Ago'][0].slice(1),
+        +values['2 Qtr Ago'][0].slice(1),
+        +values['1 Qtr Ago'][0].slice(1),
+        +values['Latest Qtr'][0].slice(1)
+      ];
+      const act = [
+        +values['3 Qtr Ago'][1].slice(1),
+        +values['2 Qtr Ago'][1].slice(1),
+        +values['1 Qtr Ago'][1].slice(1),
+        +values['Latest Qtr'][1].slice(1)
+      ];
+      const diff = [
+        +values['3 Qtr Ago'][2].slice(1),
+        +values['2 Qtr Ago'][2].slice(1),
+        +values['1 Qtr Ago'][2].slice(1),
+        +values['Latest Qtr'][2].slice(1)
+      ];
+      return {
+        "type": "scatter",
+        "height": "400",
+        "legend": {},
+        "background-color": "white",
+        "tooltip": {
+          "text": "$%v"
         },
-        "guide": {
-          "visible": false
+        "plotarea": {
+          "margin": "30 30 0 30",
+          "y": "15px"
         },
-        "tick": {
-          "visible": false,
+        "plot": {
+          "animation": {
+            "effect": "ANIMATION_SLIDE_BOTTOM"
+          }
         },
-      },
-      "scale-y": {
-        "line-color": "#transparent",
-        item: {
-          fontColor: "#999",
-          fontSize: "14",
-          fontWeight: "500",
-          fontFamily: "Rajdhani"
-        },
-        "guide": {
-          "visible": true,
-        },
-        "tick": {
-          "visible": false,
-        },
-        "label": {
-          "font-family": "Open Sans",
-          "font-angle": 0,
-          "bold": true,
-          "font-size": "14px",
-          "font-color": "#484848",
-          "offset-y": "-190px",
-          "offset-x": "20px"
-        },
-      },
-      "series": [
-        {
-          "values": est,
-          "text": 'Estimate',
-          "alpha": 0.75,
-          "marker": {
-            "type": "circle",
-            "border-width": 0,
-            "size": 10,
-            "background-color": "#328ad9",
-            "shadow": false
+        "scale-x": {
+          "line-color": "transparent",
+          "values": ['3 Qtrs ago', '2 Qtrs ago', '1 Qtr ago', 'Latest Qtr'],
+          item: {
+            fontColor: "#999",
+            fontSize: "14",
+            fontWeight: "500",
+            fontFamily: "Rajdhani"
+          },
+          "guide": {
+            "visible": false
+          },
+          "tick": {
+            "visible": false,
           },
         },
-        {
-          "values": act,
-          "text": 'Actual',
-          "alpha": 0.75,
-          "marker": {
-            "type": "circle",
-            "border-width": 0,
-            "size": 10,
-            "background-color": "#F54225 #B6355C",
-            "shadow": false
+        "scale-y": {
+          "line-color": "#transparent",
+          item: {
+            fontColor: "#999",
+            fontSize: "14",
+            fontWeight: "500",
+            fontFamily: "Rajdhani"
+          },
+          "guide": {
+            "visible": true,
+          },
+          "tick": {
+            "visible": false,
+          },
+          "label": {
+            "font-family": "Open Sans",
+            "font-angle": 0,
+            "bold": true,
+            "font-size": "14px",
+            "font-color": "#484848",
+            "offset-y": "-190px",
+            "offset-x": "20px"
           },
         },
-        // {
-        //   "values": diff,
-        //   "alpha": 0.95,
-        //   "borderRadiusTopLeft": 7,
-        //   "marker":{
-        //     "type":"circle",
-        //     "border-width":0,
-        //     "size":10,
-        //     "background-color":"#7FC9D9",
-        //     "shadow":false
-        //   },
-        // }
-      ]
+        "series": [
+          {
+            "values": est,
+            "text": 'Estimate',
+            "alpha": 0.75,
+            "marker": {
+              "type": "circle",
+              "border-width": 0,
+              "size": 10,
+              "background-color": "#328ad9",
+              "shadow": false
+            },
+          },
+          {
+            "values": act,
+            "text": 'Actual',
+            "alpha": 0.75,
+            "marker": {
+              "type": "circle",
+              "border-width": 0,
+              "size": 10,
+              "background-color": "#F54225 #B6355C",
+              "shadow": false
+            },
+          },
+          // {
+          //   "values": diff,
+          //   "alpha": 0.95,
+          //   "borderRadiusTopLeft": 7,
+          //   "marker":{
+          //     "type":"circle",
+          //     "border-width":0,
+          //     "size":10,
+          //     "background-color":"#7FC9D9",
+          //     "shadow":false
+          //   },
+          // }
+        ]
+      }
     }
+    return {};
   }
 
   getAnnualRevenueConfig(dates, values) {
-    return {
-      "type": "bar",
-      height: 400,
-      "background-color": "white",
-      "tooltip": {
-        "text": "$%v (M)"
-      },
-      "plotarea": {
-        "margin": "30 30 0 30",
-        "y": "15px"
-      },
-      "plot": {
-        "animation": {
-          "effect": "ANIMATION_SLIDE_BOTTOM"
-        }
-      },
-      "scale-x": {
-        "line-color": "transparent",
-        "labels": dates,
-        item: {
-          fontColor: "#999",
-          fontSize: "14",
-          fontWeight: "500",
-          fontFamily: "Rajdhani"
+    if (values) {
+      return {
+        "type": "bar",
+        height: 400,
+        "background-color": "white",
+        "tooltip": {
+          "text": "$%v (M)"
         },
-        "guide": {
-          "visible": false
+        "plotarea": {
+          "margin": "30 30 0 30",
+          "y": "15px"
         },
-        "tick": {
-          "visible": false
+        "plot": {
+          "animation": {
+            "effect": "ANIMATION_SLIDE_BOTTOM"
+          }
         },
-      },
-      "scale-y": {
-        "line-color": "transparent",
-        "line-style": "solid",
-        item: {
-          fontColor: "#999",
-          fontSize: "14",
-          fontWeight: "500",
-          fontFamily: "Rajdhani"
+        "scale-x": {
+          "line-color": "transparent",
+          "labels": dates,
+          item: {
+            fontColor: "#999",
+            fontSize: "14",
+            fontWeight: "500",
+            fontFamily: "Rajdhani"
+          },
+          "guide": {
+            "visible": false
+          },
+          "tick": {
+            "visible": false
+          },
         },
-        "tick": {
-          "visible": false
+        "scale-y": {
+          "line-color": "transparent",
+          "line-style": "solid",
+          item: {
+            fontColor: "#999",
+            fontSize: "14",
+            fontWeight: "500",
+            fontFamily: "Rajdhani"
+          },
+          "tick": {
+            "visible": false
+          },
+          "guide": {
+            "visible": true
+          },
+          "label": {
+            "font-family": "Open Sans",
+            "font-angle": 0,
+            "bold": true,
+            "font-size": "14px",
+            "font-color": "#484848",
+            "offset-y": "-190px",
+            "offset-x": "20px"
+          },
         },
-        "guide": {
-          "visible": true
-        },
-        "label": {
-          "font-family": "Open Sans",
-          "font-angle": 0,
-          "bold": true,
-          "font-size": "14px",
-          "font-color": "#484848",
-          "offset-y": "-190px",
-          "offset-x": "20px"
-        },
-      },
-      "series": [
-        {
-          "values": values,
-          "alpha": 0.75,
-          "borderRadius": 7,
-          "background-color": "#19c736 #00C04E",
-          "rules": [
-            {
-              rule: '%v < 0',
-              "background-color": "#F54225 #B6355C",
-            }
-          ]
-        }
-      ]
+        "series": [
+          {
+            "values": values,
+            "alpha": 0.75,
+            "borderRadius": 7,
+            "background-color": "#19c736 #00C04E",
+            "rules": [
+              {
+                rule: '%v < 0',
+                "background-color": "#F54225 #B6355C",
+              }
+            ]
+          }
+        ]
+      }
     }
+    return {};
   }
 
   getPDFStockReport(symbol: string) {
