@@ -312,12 +312,12 @@ declare var zingchart: any;
         </div>
 
         <!-- STOCK VIEW BREAKDOWN -->
-        <div class="row stock-info stock-info--overall-breakdown">
+        <div class="row justify-content-center stock-info stock-info--overall-breakdown">
           <div class="col-12">
             <h2>Rating <span>Breakdown</span></h2>
           </div>
 
-          <div class="col-12 copy-block">
+          <div class="col-12 col-lg-10 copy-block">
             <p class="rating"><span>{{ stock?.toUpperCase() }}</span> is
               <span>{{ summary ? summary['pgrContextSummary'][0]['status'] : null }}</span></p>
             <p class="paragraph"><span>{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}:</span>
