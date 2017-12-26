@@ -4,6 +4,7 @@ import {ListSymbolObj, PortfolioStatus} from '../../../../shared/models/health-c
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'cpt-my-stocks-list',
@@ -148,6 +149,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   selectedListName: string;
 
   constructor(private signalService: SignalService,
+              private route: ActivatedRoute,
               private healthCheck: HealthCheckService) {
   }
 
@@ -175,6 +177,17 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
     this.healthCheck.getPortfolioStatus()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => this.status = res);
+
+    this.route.params
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(params => {
+          if (params.symbol) {
+            this.toggleSlider(params.symbol);
+          } else {
+            // this.selectedStock = 'AAPL';
+          }
+        }
+      );
 
     this.selectedListName = this.healthCheck.currentList;
   }
