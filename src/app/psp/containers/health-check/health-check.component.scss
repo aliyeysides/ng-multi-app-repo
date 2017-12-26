@@ -305,7 +305,7 @@
 	background-color:#ffffff;
 
 	@media screen AND (min-width: 993px) {
-		border-right:4px solid #eee;
+		border-right:2px solid #eee;
 	}
 
 	h2 {
@@ -645,6 +645,7 @@
 			.powergrid__row {
 				height: 40px;
 				border-bottom:1px dotted #ffffff;
+				overflow: hidden;
 
 				td {
 					width: 33%;
@@ -667,10 +668,24 @@
 					color:#ffffff;
 				  	font-weight: 600;
 				  	font-size: 18px;
-				  	overflow: hidden;
-				  	text-overflow: ellipsis;
-				  	white-space: nowrap;
 				  	vertical-align: middle;
+				  	display: inline-block;
+
+				  	span {
+				  		margin: 0px 7px;
+
+				  		&::after {				
+				  			content: ",";
+						}
+					}
+
+					&:last-child {
+						span {
+					  		&::after {				
+					  			content: " ";
+							}
+						}
+					}
 				}
 
 				.industry {

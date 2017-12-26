@@ -13,25 +13,31 @@ import {Subject} from 'rxjs/Subject';
 	      	</div>
 	    </div>
 	    <div class="row">
-	    	<div class="col-12 section--date-select">
-		        <div class="btn-group" dropdown [autoClose]="true">
-		          	<button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-		            	{{ selectedInsight ? selectedInsight['post_title'].slice(26) : null }}
-		          	</button>
-			        <ul *dropdownMenu class="dropdown-menu" role="menu">
-			            <li (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem"><a
-			              class="dropdown-item">{{ post['post_title'].slice(26) }}</a></li>
-			        </ul>
-		        </div>
-		    </div>
-	      	<div class="col-12 section--article featured--article">
-	      		<p class="article__author"><sub>BY</sub> Marc Chaikin</p>
-	      		<div class="divider__medium"></div>
-	      		<div class="article__preview">
-	      			<p class="paragraph" [innerHTML]="commentary"></p>
-	      		</div>
-	      		<a class="article__read-more">READ FULL ARTICLE</a>
-	      	</div>
+        <div class="container">
+          <div class="row">
+            <div class="col-12 section--author">
+              <p class="article__author"><sub>BY</sub> Marc Chaikin</p>
+            </div>
+            <div class="divider__medium"></div>
+    	    	<div class="col-12 section--date-select">
+    	        <div class="btn-group" dropdown [autoClose]="true">
+    	          	<button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+    	            	{{ selectedInsight ? selectedInsight['post_title'].slice(26) : null }}
+    	          	</button>
+    		        <ul *dropdownMenu class="dropdown-menu" role="menu">
+    		            <li (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem"><a
+    		              class="dropdown-item">{{ post['post_title'].slice(26) }}</a></li>
+    		        </ul>
+    	        </div>
+    		    </div>
+  	      	<div class="col-12 section--article featured--article">
+  	      		<div class="article__body">
+  	      			<div class="article" [innerHTML]="commentary"></div>
+  	      		</div>
+  	      		<a class="article__read-more">READ FULL ARTICLE</a>
+  	      	</div>
+          </div>
+        </div>
 	    </div>
     </div>
   `,

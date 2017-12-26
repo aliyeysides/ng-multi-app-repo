@@ -2064,7 +2064,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     if (values) {
       return {
         "type": "bar",
-        height: 400,
+        height: 360,
         "background-color": "white",
         "tooltip": {
           "text": "$%v"
@@ -2144,7 +2144,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       const seriesC = [values[0][2], values[1][2], values[2][2]];
       return {
         "type": "bar",
-        "height": "400",
+        "height": "360",
         "background-color": "white",
         "tooltip": {
           "text": "$%v"
@@ -2264,7 +2264,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       ];
       return {
         "type": "scatter",
-        "height": "400",
+        "height": "360",
         "legend": {},
         "background-color": "white",
         "tooltip": {
@@ -2366,7 +2366,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     if (values) {
       return {
         "type": "bar",
-        height: 400,
+        height: 360,
         "background-color": "white",
         "tooltip": {
           "text": "$%v (M)"
@@ -2424,7 +2424,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "series": [
           {
             "values": values,
-            "alpha": 0.75,
+            "alpha": 0.5,
             "borderRadius": 7,
             "background-color": "#19c736 #00C04E",
             "rules": [

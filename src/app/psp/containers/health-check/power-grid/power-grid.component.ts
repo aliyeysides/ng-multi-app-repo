@@ -10,8 +10,8 @@ import {Router} from '@angular/router';
   template: `
     <div id="HC--PowerGrid" class="col-12 col-lg-8 col-xl-8 float-lg-right">
 
-      <div class="row">
-        <div class="col-12">
+      <div class="row justify-content-center">
+        <div class="col-12 col-xl-10">
           <h2>Power Grid</h2>
           <p class="paragraph">Holding strong stocks in strong Industry Groups can help improve your investment results.
             In the following display, Industry Groups containing your stocks are ordered to show the 8 strongest to 8
