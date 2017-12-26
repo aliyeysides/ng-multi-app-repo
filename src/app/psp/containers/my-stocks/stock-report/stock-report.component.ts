@@ -656,7 +656,7 @@ declare var zingchart: any;
                 }}</p>
             </div>
 
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-6 section__chart">
               <div class="chart__header">
                 <h3>Annual EPS</h3>
               </div>
@@ -667,7 +667,7 @@ declare var zingchart: any;
               <p *ngIf="(annualEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
 
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-6 section__chart">
               <div class="chart__header">
                 <h3>Quarterly EPS</h3>
               </div>
@@ -678,7 +678,7 @@ declare var zingchart: any;
               <p *ngIf="(qrtEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
 
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-6 section__chart">
               <div class="chart__header">
                 <h3>Earnings Announcement</h3>
               </div>
@@ -689,7 +689,7 @@ declare var zingchart: any;
               <p *ngIf="(epsSurprisesChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
 
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-6 section__chart">
               <div class="chart__header">
                 <h3>Annual Revenue</h3>
               </div>
@@ -1513,7 +1513,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.getCMFConfig(dates, cmf)
         ]
       },
-      height: 660,
+      height: 640,
       width: undefined
     };
     this.loading ? this.loading.unsubscribe() : null;
@@ -1563,7 +1563,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.getCMFConfig(dates, cmf)
         ]
       },
-      height: 660,
+      height: 640,
       width: undefined
     };
     this.loading ? this.loading.unsubscribe() : null;
@@ -1629,7 +1629,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       type: 'area',
       backgroundColor: "transparent",
       borderColor: "transparent",
-      height: 400,
+      height: 380,
       x: 0,
       y: 0,
       crosshairX: {
@@ -1637,29 +1637,22 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         lineColor: "#999",
         shared: true,
         plotLabel: {
-          backgroundColor: "#b9e5fb",
-          fontColor: "#484848",
-          text: "Close: %v",
           fontFamily: "Open Sans",
+          backgroundColor: "#b9e5fb",
+          text: "Close: %v",
           borderColor: "#ffffff",
-          y: 0,
+          strokeWidth: "4",
+          height: 25,
+          borderRadius: 12,
+          y: -5,
         },
         scaleLabel: {
           visible: false,
-          fontColor: "#484848",
-          fontFamily: "Open Sans",
-          backgroundColor: "#c8ebbb",
-          borderColor: "#ffffff",
         }
       },
       title: {
         visible: false,
         text: this.stock,
-        fontColor: "#484848",
-        fontFamily: 'Open Sans',
-        fontSize: 24,
-        align: 'left',
-        offsetX: 40,
       },
       zoom: {
         shared: true
@@ -1745,10 +1738,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         type: 'line',
         height: 115,
         x: 0,
-        y: 530,
+        y: 510,
         backgroundColor: "transparent",
         plotarea: {
-          margin: "25 42 20 30"
+          margin: "30 42 20 30"
         },
         plot: {
           marker: {
@@ -1770,6 +1763,15 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           fontFamily: "Open Sans",
           borderColor: "transparent"
         },
+        title: {
+          visible: true,
+          text: "RELATIVE STRENGTH",
+          fontColor: "#484848",
+          fontFamily: 'Rajdhani',
+          fontSize: 18,
+          align: 'center',
+          fontWeight: "600",
+        },
         zoom: {
           shared: true
         },
@@ -1786,9 +1788,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             text: "Rel. Strength: %v",
             borderColor: "#ffffff",
             strokeWidth: "4",
-            height: 20,
-            borderRadius: 7,
-            y: 0
+            height: 25,
+            borderRadius: 12,
+            y: -5,
           }
         },
         scaleX: {
@@ -1824,10 +1826,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         type: 'area',
         height: 130,
         x: 0,
-        y: 400,
+        y: 380,
         backgroundColor: "#fff",
         plotarea: {
-          margin: "25 42 20 30"
+          margin: "25 42 25 30"
         },
         plot: {
           marker: {
@@ -1847,6 +1849,15 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           fontFamily: "Open Sans",
           borderColor: "transparent"
         },
+        title: {
+          visible: true,
+          text: "CHAIKIN MONEY FLOW",
+          fontColor: "#484848",
+          fontFamily: 'Rajdhani',
+          fontSize: 18,
+          align: 'center',
+          fontWeight: "600",
+        },
         zoom: {
           shared: true
         },
@@ -1861,8 +1872,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             fontFamily: "Open Sans",
             backgroundColor: "#b9e5fb",
             text: "Chaikin Money Flow: %v",
-            borderColor: "transparent",
-            y: 0
+            borderColor: "#ffffff",
+            strokeWidth: "4",
+            height: 25,
+            borderRadius: 12,
+            y: -5,
           }
         },
         scaleX: {
@@ -1930,7 +1944,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "type": "bar",
         height: 40,
         x: 0,
-        y: 321,
+        y: 300,
         "plot": {
           "stacked": true,
           "bar-space": "0px",
@@ -1987,7 +2001,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           plotLabel: {
             multiple: false,
             visible: false,
-            borderColor: "transparent",
+            borderColor: "#ffffff",
+            strokeWidth: "4",
+            height: 25,
+            borderRadius: 12,
             fontFamily: "Open Sans",
             backgroundColor: "#b9e5fb",
             rules: [
@@ -1997,10 +2014,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
                 visible: true,
               }
             ],
-            y: 0
+            y: -10,
           }
         },
         "tooltip": {
+          visible:false,
           "htmlMode": true,
           "backgroundColor": "none",
           "padding": 0,
