@@ -76,7 +76,7 @@ import {ActivatedRoute} from '@angular/router';
             <img src="./assets/imgs/ui_slide.svg">
           </div>
           <div class="col-12 list-entry__overlay"
-               [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.Change>0, 'red': stock.Change<0 }">
+               [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.PGR>=4, 'red': stock.PGR<=2, 'yellow': stock.PGR==3 }">
             <div class="row no-gutters overlay__contents">
               <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide">
                 <img src="./assets/imgs/ui_slide.svg">
@@ -182,7 +182,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(params => {
           if (params.symbol) {
-            this.toggleSlider(params.symbol);
+            this.sliderObj[params.symbol] = true;
           } else {
             // this.selectedStock = 'AAPL';
           }
@@ -198,6 +198,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   }
 
   toggleSlider(ticker: string) {
+    console.log('sliderObj', this.sliderObj);
     if (!this.sliderObj[ticker]) {
       this.sliderObj = {};
       this.sliderObj[ticker] = true;
