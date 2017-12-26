@@ -12,6 +12,9 @@ p, a, h1, h2, h3, h4, h5, h6, span, label, ul, li, table, td, th, tr, button {
   font-family: 'Rajdhani', 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
   cursor: default;
 }
 
@@ -176,11 +179,12 @@ sub {
   text-align: left;
   font-weight: 400;
   line-height: 1.65;
+  cursor: default;
 
   span {
     font-weight: 700;
     font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 
@@ -192,6 +196,7 @@ sub {
   text-align: left;
   font-weight: 300;
   line-height: 1.5;
+  cursor: default;
 }
 
 
@@ -405,6 +410,7 @@ sub {
       color: #999;
       text-align: right;
       white-space: nowrap;
+      cursor: default;
     }
 
     .toc__link {
@@ -435,6 +441,7 @@ sub {
     font-weight: 600;
     opacity: .5;
     line-height: 1;
+    cursor: default;
   }
 }
 
@@ -1136,8 +1143,8 @@ sub {
 
 
 
-#annualEPSChart, #qrtEPSChart  {
-  height: 420px;
+#annualEPSChart, #qrtEPSChart, #epsSurprisesChart, #annualRevenueChart  {
+  height: 400px;
   overflow: hidden;
 }
 
