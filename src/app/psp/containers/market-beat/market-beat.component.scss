@@ -6,7 +6,7 @@
 .component--marketbeat {
 
 	.section--masthead {
-		padding:150px 0 0 0;
+		padding:100px 0 0 0;
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: 100% auto;
@@ -15,7 +15,7 @@
 			color:#ffffff;
 			display:block;
 			background-color: rgba(0,0,0,0.7);
-			padding: 16px 0 10px;
+			padding: 12px 0 6px;
 			margin:0;
 			text-align: center;
 			width: 100%;
@@ -32,7 +32,7 @@
 	}
 
 	.masthead--education {
-		background-image: url("/../../assets/imgs/image__EDU--masthead.png");
+		background-image: url("/assets/imgs/image__EDU--masthead.png");
 		padding:100px 0 0 0;
 		margin-top: 25px;
 	}
@@ -51,7 +51,7 @@
 	}
 
 	.section--date-select {
-		margin-top: 20px;
+		margin-top: 10px;
 
 		.btn-group {
 			margin-top: 8px;
@@ -117,39 +117,15 @@
 	}
 
 	.section--article {
-		.article__headline {
-			font-weight: 400;
-			font-size: 20px;
-			line-height: 1.4;
-			margin-bottom: 5px;
-			font-family: 'Open Sans', sans-serif;
-			text-align: left;
-			opacity: 0.8;
-			white-space: normal;
-			color:#484848;
-
-			&::after {
-				content: " →";
-			}
-		}
-		.article__author {
-			text-align: center;
-			font-size: 18px;
-			font-weight: 600;
-			line-height: 1;
-			padding:10px 0 25px;
-		}
 		.article__body {
-			margin-top: 25px;
-			font-family: 'Open Sans', sans-serif;
+			height: 80vh;
+			overflow: hidden;
+			margin-top: 15px;
 			color: #484848;
 			position: relative;
-			padding-bottom: 30px;
+			padding-bottom: 10px;
 
 			.article {
-				display: block;
-				height: 100vh;
-				overflow: hidden;
 				font-family: 'Open Sans', sans-serif;
 				color: #484848;
 				font-size: 16px;
@@ -158,9 +134,28 @@
 				margin:10px 0 15px;
 
 				ul {
-					margin-left: 20px;
-					list-style: disc;
-					font-size: 18px;
+				    list-style: disc;
+				    padding: 0 2em 2em;
+				}
+				h1 {
+					font-weight: 400;
+					font-size: 20px;
+					line-height: 1.4;
+					margin-bottom: 5px;
+					text-align: left;
+					opacity: 0.8;
+					white-space: normal;
+					color:#484848;
+				}
+				a {
+					text-align: center;
+					font-size: 14px;
+					line-height: 1.5;
+				}
+				img {
+					width: 100%;
+					height: auto;
+					margin: 0 auto;
 				}
 			}
 
@@ -181,7 +176,7 @@
 			font-size: 13px;
 			color: #1199FF;
 			font-weight: 700;
-			margin: 25px 0 10px;
+			margin: 25px 0 30px;
 			text-align: center;
 		}
 	}

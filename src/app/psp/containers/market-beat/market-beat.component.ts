@@ -16,7 +16,7 @@ import {Subject} from 'rxjs/Subject';
         <div class="container">
           <div class="row">
             <div class="col-12 section--author">
-              <p class="article__author"><sub>BY</sub> Marc Chaikin</p>
+              <p class=""><sub>BY</sub> Marc Chaikin</p>
             </div>
             <div class="divider__medium"></div>
     	    	<div class="col-12 section--date-select">

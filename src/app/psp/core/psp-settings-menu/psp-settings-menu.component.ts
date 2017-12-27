@@ -17,7 +17,7 @@ declare let gtag: Function;
         <cpt-psp-navigator (routeClicked)="navClicked()"></cpt-psp-navigator>
         <ul>
           <li>
-            <a class="nav--toplevel"><i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;Education</a>
+            <a href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;Education</a>
           </li>
         </ul>
         <ul>
@@ -44,7 +44,7 @@ declare let gtag: Function;
              <a href="https://mh214.infusionsoft.com/app/form/pp_changelogin" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Edit User Name</a>
             </div>
             <div class="col-6">
-              <a href="mailto:info@chaikinanalytics.com?subject=Mastering the Bear support request" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Contact Us</a>
+              <a href="mailto:info@chaikinanalytics.com?subject=PowerPulse support request" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Contact Us</a>
             </div>
           </li>
         </ul>

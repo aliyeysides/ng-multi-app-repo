@@ -39,15 +39,15 @@ declare let gtag: Function;
 
     <div class="page__header--desktop">
       <div class="row no-gutters">
-        <div class="col-2 logo--desktop">
+        <div class="col-2 col-lg-3 logo--desktop">
           <img class="" src="assets/imgs/logo_powerpulse--desktop.png">
         </div>
-        <div class="col-8 header__search">
-          <cpt-psp-navigator *ngIf="!searchOpened"></cpt-psp-navigator>
+        <div class="col-8 col-lg-6 header__search">
+          <cpt-psp-navigator *ngIf="!searchOpened" class="desktop-nav"></cpt-psp-navigator>
           <cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
                                  *ngIf="searchOpened"></cpt-psp-symbol-search>
         </div>
-        <div class="col-2">
+        <div class="col-2 col-lg-3">
           <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--left"
                id="header_button--right">
             <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
