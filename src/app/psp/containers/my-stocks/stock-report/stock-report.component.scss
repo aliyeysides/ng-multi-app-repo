@@ -333,6 +333,7 @@
 		font-weight: 500;
 		line-height: 1;
 		text-transform: uppercase;
+		cursor: default;
 	}
 
 	.ticker {
@@ -410,6 +411,7 @@
 .stockview__main-rating {
 	text-align: center;
 	margin: 10px 0 5px;
+	cursor: default;
 
 	@media screen AND (min-width:768px) {
 		margin:20px 0 5px;
@@ -418,6 +420,7 @@
 	.label {
 		line-height: 1;
 		font-weight: 600;
+		cursor: default;
 
 		@media screen AND (min-width:1200px) {
 			display: inline-block;
@@ -463,6 +466,7 @@
 
 .stock-info--price {
 	padding-bottom: 10px;
+	cursor: default;
 
 	@media screen AND (min-width: 768px) {
 		border-left:4px dotted #eee;
@@ -473,6 +477,7 @@
 		line-height: 1;
 		font-weight: 400;
 		margin-top: 10px;
+		cursor: default;
 
 		sub {
 			font-size: 36px;
@@ -484,9 +489,11 @@
 		font-weight: 500;
 		line-height: 1.4;
 		margin-top:15px;
+		cursor: default;
 	}
 	.label {
 		line-height: 1.1;
+		cursor: default;
 	}
 }
 
@@ -679,7 +686,7 @@
 
 .stock-info--overall-breakdown {
 	.rating {
-		font-size: 36px;
+		font-size: 32px;
 		font-weight: 500;
 		margin-bottom: 25px;
 		line-height: 1.3;
