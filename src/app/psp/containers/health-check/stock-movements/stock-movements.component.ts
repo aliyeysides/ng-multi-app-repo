@@ -103,16 +103,18 @@ interface FilterFunc {
           </ul>
         </div>
       </div>
+
       <div class="row">
         <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse hidden-md-up">
           <img src="./assets/imgs/ux__collapse--circle.svg">
-          <p>COLLAPSE</p>
+          <p>Collapse</p>
         </div>
         <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse hidden-md-up">
           <img src="./assets/imgs/ux__expand--circle.svg">
-          <p>EXPAND</p>
+          <p>Expand for Detail</p>
         </div>
       </div>
+
     </div>
   `,
   styleUrls: ['../health-check.component.scss'],

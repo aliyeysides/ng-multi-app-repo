@@ -543,12 +543,12 @@ declare var zingchart: any;
           <div *ngIf="collapse['financials'] == true" (click)="toggleCollapse('financials')"
                class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/ux__collapse--circle.svg">
-            <p>COLLAPSE</p>
+            <p>Collapse</p>
           </div>
           <div *ngIf="collapse['financials'] == false" (click)="toggleCollapse('financials')"
                class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/ux__expand--circle.svg">
-            <p>EXPAND</p>
+            <p>Expand for details</p>
           </div>
 
           <div class="col-12">
@@ -703,12 +703,12 @@ declare var zingchart: any;
           <div *ngIf="collapse['earnings'] == true" (click)="toggleCollapse('earnings')"
                class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/ux__collapse--circle.svg">
-            <p>COLLAPSE</p>
+            <p>Collapse</p>
           </div>
           <div *ngIf="collapse['earnings'] == false" (click)="toggleCollapse('earnings')"
                class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/ux__expand--circle.svg">
-            <p>EXPAND</p>
+            <p>Expand for details</p>
           </div>
 
           <div class="col-12">
@@ -897,12 +897,12 @@ declare var zingchart: any;
           <div *ngIf="collapse['technicals'] == true" (click)="toggleCollapse('technicals')"
                class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/ux__collapse--circle.svg">
-            <p>COLLAPSE</p>
+            <p>Collapse</p>
           </div>
           <div *ngIf="collapse['technicals'] == false" (click)="toggleCollapse('technicals')"
                class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/ux__expand--circle.svg">
-            <p>EXPAND</p>
+            <p>Expand for details</p>
           </div>
 
           <div class="col-12">
@@ -1095,12 +1095,12 @@ declare var zingchart: any;
           <div *ngIf="collapse['financials'] == true" (click)="toggleCollapse('financials')"
                class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/ux__collapse--circle.svg">
-            <p>COLLAPSE</p>
+            <p>Collapse</p>
           </div>
           <div *ngIf="collapse['financials'] == false" (click)="toggleCollapse('financials')"
                class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/ux__expand--circle.svg">
-            <p>EXPAND</p>
+            <p>Expand for details</p>
           </div>
 
           <div class="col-12">
@@ -2029,7 +2029,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           {
             "values": veryBullish,
             "alpha": 1,
-            "text": 'Very Bullish',
+            "text": 'Power Gauge: Very Bullish',
             "backgroundColor": "#24A300",
             "hover-state": {
               backgroundColor: '#26a025',
@@ -2038,7 +2038,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
           {
             "values": bullish,
-            "text": 'Bullish',
+            "text": 'Power Gauge: Bullish',
             "alpha": 1,
             "backgroundColor": "#6ACC00",
             "hover-state": [{
@@ -2047,7 +2047,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
           {
             "values": neutral,
-            "text": 'Neutral',
+            "text": 'Power Gauge: Neutral',
             "alpha": 1,
             "backgroundColor": "#FF9900",
             "hover-state": {
@@ -2056,7 +2056,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
           {
             "values": bearish,
-            "text": 'Bearish',
+            "text": 'Power Gauge: Bearish',
             "alpha": 1,
             "backgroundColor": "#FD4500",
             "hover-state": {
@@ -2065,7 +2065,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
           {
             "values": veryBearish,
-            "text": 'Very Bearish',
+            "text": 'Power Gauge: Very Bearish',
             "alpha": 1,
             "backgroundColor": "#EB001C",
             "hover-state": {

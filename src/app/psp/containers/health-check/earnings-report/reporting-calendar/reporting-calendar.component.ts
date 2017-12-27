@@ -12,9 +12,9 @@ import {Router} from '@angular/router';
     <div class="row reporting-calendar">
 
       <div class="col-12">
-        <div class="row">
+        <div class="row" style="min-height:10px;">
           <div class="col-5"></div>
-          <div class="col-2">
+          <div class="col-2 hidden-md-up">
             <span class="icon__separator"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 64h-48V12c0-6.6-5.4-12-12-12h-8c-6.6 0-12 5.4-12 12v52H128V12c0-6.6-5.4-12-12-12h-8c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM48 96h352c8.8 0 16 7.2 16 16v48H32v-48c0-8.8 7.2-16 16-16zm352 384H48c-8.8 0-16-7.2-16-16V192h384v272c0 8.8-7.2 16-16 16zM148 320h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm96 0h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm96 0h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm-96 96h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm-96 0h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm192 0h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12z"/></svg></span></div>
           <div class="col-5"></div>
         </div>
@@ -83,21 +83,21 @@ import {Router} from '@angular/router';
 
       <div class="col-12 calendar__day-expand">
         <div class="row">
-          <div class="col-8">
-            <p class="earn-date" *ngIf="selectedDate">{{ moment(selectedDate).format('MMMM Do YYYY') }}</p>
+          <div class="col-12">
+            <p class="earn-date blue" *ngIf="selectedDate">{{ moment(selectedDate).format('MMMM Do YYYY') }}</p>
           </div>
-          <div class="col-4">
+          <div class="col-12">
             <p class="ticker">
               <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['bullishSymbol']" style="display: inline-block;">
-                <img width="30px" class="" src="./assets/imgs/arc_Bullish.svg">
+                <img width="40px" class="" src="./assets/imgs/arc_Bullish.svg">
                 {{ ticker }}
               </span>
               <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['neutralSymbol']" style="display: inline-block;">
-                <img width="30px" class="" src="./assets/imgs/arc_Neutral.svg">
+                <img width="40px" class="" src="./assets/imgs/arc_Neutral.svg">
                 {{ ticker }}
               </span>
               <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['bearishSymbol']" style="display: inline-block;">
-                <img width="30px" class="" src="./assets/imgs/arc_Bearish.svg">
+                <img width="40px" class="" src="./assets/imgs/arc_Bearish.svg">
                 {{ ticker }}
               </span>
             </p>
