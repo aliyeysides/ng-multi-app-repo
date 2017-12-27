@@ -39,17 +39,19 @@ import {Router} from '@angular/router';
                 <ng-container *ngIf="strongIndustries">
                   <tr class="powergrid__row" id="industry-{{ index + 1 }}">
                     <td class="bear">
-                      <p *ngFor="let stock of strongIndustries[index]?.SymbolPGRMappings" class="ticker">
+                      <p (click)="gotoReport(stock)" *ngFor="let stock of strongIndustries[index]?.SymbolPGRMappings" class="ticker">
                         <span *ngIf="stock[objectKeys(stock)[0]] < 50">{{ objectKeys(stock)[0] }}</span>
                       </p>
                     </td>
                     <td class="bull">
-                      <p *ngFor="let stock of strongIndustries[index]?.SymbolPGRMappings" class="ticker">
+                      <p (click)="gotoReport(stock)" *ngFor="let stock of strongIndustries[index]?.SymbolPGRMappings" class="ticker">
                         <span *ngIf="stock[objectKeys(stock)[0]] > 50">{{ objectKeys(stock)[0] }}</span>
                       </p>
                     </td>
                     <td class="industry industry--strong">
-                      <p class="industry-text"><span>{{ strongIndustries[index]?.IndustryName }}</span></p>
+                      <p class="industry-text">
+                        <span *ngIf="strongIndustries[index]">{{ strongIndustries[index]?.IndustryName }}</span>
+                      </p>
                     </td>
                   </tr>
                 </ng-container>
@@ -58,24 +60,36 @@ import {Router} from '@angular/router';
 
               <tr class="powergrid__row" id="industry-8">
                 <td class="bear">
-                  <p class="ticker"></p>
+                  <p (click)="gotoReport(stock)" *ngFor="let stock of neutralIndustries?.slice(0,1)[0].SymbolPGRMappings" class="ticker">
+                    <span *ngIf="stock[objectKeys(stock)[0]] > 50">{{ objectKeys(stock)[0] }}</span>
+                  </p>
                 </td>
                 <td class="bull">
-                  <p class="ticker">TICK</p>
+                  <p (click)="gotoReport(stock)" *ngFor="let stock of neutralIndustries?.slice(0,1)[0].SymbolPGRMappings" class="ticker">
+                    <span *ngIf="stock[objectKeys(stock)[0]] < 50">{{ objectKeys(stock)[0] }}</span>
+                  </p>
                 </td>
                 <td class="industry industry--neutral">
-                  <p class="industry-text"><span>Industry Neutral</span></p>
+                  <p class="industry-text">
+                    <span>{{ neutralIndustries ? neutralIndustries[0].IndustryName : null }}</span>
+                  </p>
                 </td>
               </tr>
               <tr class="powergrid__row" id="industry-9">
                 <td class="bear">
-                  <p class="ticker"></p>
+                  <p (click)="gotoReport(stock)" *ngFor="let stock of neutralIndustries?.slice(-1)[0].SymbolPGRMappings" class="ticker">
+                    <span *ngIf="stock[objectKeys(stock)[0]] > 50">{{ objectKeys(stock)[0] }}</span>
+                  </p>
                 </td>
                 <td class="bull">
-                  <p class="ticker"></p>
+                  <p (click)="gotoReport(stock)" *ngFor="let stock of neutralIndustries?.slice(-1)[0].SymbolPGRMappings" class="ticker">
+                    <span *ngIf="stock[objectKeys(stock)[0]] < 50">{{ objectKeys(stock)[0] }}</span>
+                  </p>
                 </td>
                 <td class="industry industry--neutral">
-                  <p class="industry-text"></p>
+                  <p class="industry-text">
+                    <span>{{ neutralIndustries ? neutralIndustries[neutralIndustries.length - 1].IndustryName : null }}</span>
+                  </p>
                 </td>
               </tr>
 
@@ -83,17 +97,19 @@ import {Router} from '@angular/router';
                 <ng-container *ngIf="weakIndustries">
                   <tr class="powergrid__row" id="industry-{{ index + 10 }}">
                     <td class="bear">
-                      <p *ngFor="let stock of weakIndustries[index]?.SymbolPGRMappings" class="ticker">
+                      <p (click)="gotoReport(stock)" *ngFor="let stock of weakIndustries[index]?.SymbolPGRMappings" class="ticker">
                         <span *ngIf="stock[objectKeys(stock)[0]] < 50">{{ objectKeys(stock)[0] }}</span>
                       </p>
                     </td>
                     <td class="bull">
-                      <p *ngFor="let stock of weakIndustries[index]?.SymbolPGRMappings" class="ticker">
+                      <p (click)="gotoReport(stock)" *ngFor="let stock of weakIndustries[index]?.SymbolPGRMappings" class="ticker">
                         <span *ngIf="stock[objectKeys(stock)[0]] > 50">{{ objectKeys(stock)[0] }}</span>
                       </p>
                     </td>
                     <td class="industry industry--strong">
-                      <p class="industry-text"><span>{{ weakIndustries[index]?.IndustryName }}</span></p>
+                      <p class="industry-text">
+                        <span *ngIf="weakIndustries[index]">{{ weakIndustries[index]?.IndustryName }}</span>
+                      </p>
                     </td>
                   </tr>
                 </ng-container>
@@ -252,6 +268,7 @@ export class PowerGridComponent implements OnInit, OnDestroy {
 
   allIndustries: Array<PHCIndustryData>;
   strongIndustries: Array<PHCIndustryData>;
+  neutralIndustries: Array<PHCIndustryData>;
   weakIndustries: Array<PHCIndustryData>;
   portUp: boolean;
   collapse: boolean = false;
@@ -268,9 +285,10 @@ export class PowerGridComponent implements OnInit, OnDestroy {
       .filter(x => x != undefined)
       .subscribe(res => {
         this.allIndustries = res['Industries'];
-        this.strongIndustries = this.allIndustries.filter(x => x['IndustryScore'] > 0);
-        this.weakIndustries = this.allIndustries.filter(x => x['IndustryScore'] < 0);
-        console.log('industries', this.strongIndustries, this.weakIndustries, this.allIndustries);
+        this.strongIndustries = this.allIndustries.filter(x => x['IndustryScore'] > 0.4);
+        this.neutralIndustries = this.allIndustries.filter(x => x['IndustryScore'] <= 0.4 && x['IndustryScore'] >= -0.4 );
+        this.weakIndustries = this.allIndustries.filter(x => x['IndustryScore'] < -0.4);
+        console.log('industries', 'strong:', this.strongIndustries, 'neutral:', this.neutralIndustries, 'weak:', this.weakIndustries, 'all:', this.allIndustries);
       });
 
     this.healthCheck.getPortfolioStatus()
