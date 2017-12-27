@@ -30,11 +30,11 @@ import {Subject} from 'rxjs/Subject';
     		        </ul>
     	        </div>
     		    </div>
-  	      	<div class="col-12 section--article featured--article">
+  	      	<div class="col-12 section--article featured--article" [class.opened]="opened">
   	      		<div class="article__body">
   	      			<div class="article" [innerHTML]="commentary"></div>
   	      		</div>
-  	      		<a class="article__read-more">READ FULL ARTICLE</a>
+  	      		<a (click)="readMore()" class="article__read-more">READ FULL ARTICLE</a>
   	      	</div>
           </div>
         </div>
@@ -50,6 +50,7 @@ export class MarketBeatComponent implements OnInit, OnDestroy {
   posts: object[];
   selectedInsight: object;
   commentary: string;
+  opened: boolean = false;
 
   constructor(private wp: WordpressService) { }
 
@@ -70,6 +71,10 @@ export class MarketBeatComponent implements OnInit, OnDestroy {
   selectInsight(post: object) {
     this.selectedInsight = post;
     this.commentary = this.wp.getInsightPostBody(post);
+  }
+
+  readMore() {
+    this.opened = !this.opened;
   }
 
 }
