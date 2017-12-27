@@ -68,7 +68,6 @@ import {AuthService} from '../../../../services/auth.service';
         </div>
         <div class="col-12 col-md-4 col-lg-3 align-self-center">
           <ng-template #toolTipTemp>
-            {{ toolTipText }}
             <div [innerHtml]="link"></div>
           </ng-template>
           <p class="label">Chaikin Power Bar <a> <i [tooltip]="toolTipTemp" class="fa fa-info-circle"
@@ -90,7 +89,7 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   private _lists: BehaviorSubject<object[]> = new BehaviorSubject<object[]>([] as object[]);
 
   toolTipText: string = "The Chaikin Power Bar is your list's report card. It gives the ratio of Bullish stocks (likely to outperform the market) to Bearish stocks (unlikely to perform in the short to medium term) as rated by the ";
-  link: string = `<a target="_blank" href="https://www.chaikinanalytics.com/stock-rating/">Chaikin Power Rating.</a>`;
+  link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/stock-rating/">Chaikin Power Rating.</a>`;
   allUserLists: object[];
   selectedListName: string;
 

@@ -60,10 +60,14 @@ declare var zingchart: any;
           <div class="col-12 col-md-7 col-xl-6 align-self-center">
             <!-- STOCK VIEW TOP -->
             <div class="row no-gutters stock-info">
-
+              <ng-template #toolTipTemp>
+                <div [innerHtml]="link"></div>
+              </ng-template>
               <div class="col-12 stockview__main-rating">
-                <p class="label">Power Gauge Rating &nbsp;<a><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                </p>
+                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fa fa-info-circle"
+                                                                placement="auto"
+                                                                triggers="click"
+                                                                aria-hidden="true" aria-hidden="true"></i></a></p>
                 <p class="rating">
                   <img src="{{ appendPGRImage(symbolData) }}">
                   <span>{{ appendPGRText(symbolData) }}</span>
@@ -661,7 +665,9 @@ declare var zingchart: any;
               </div>
               <div *ngIf="(annualEPSChart['data']['graphset'][0] | json) != '{}'" class="chart">
                 <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
-                <p>{{ research && research['EPS Quarterly Results'].hasOwnProperty('label') ? research['EPS Quarterly Results']['label'][0] : '' }}</p>
+                <p>
+                  {{ research && research['EPS Quarterly Results'].hasOwnProperty('label') ? research['EPS Quarterly Results']['label'][0] : ''
+                  }}</p>
               </div>
               <p *ngIf="(annualEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
@@ -672,7 +678,9 @@ declare var zingchart: any;
               </div>
               <div *ngIf="(qrtEPSChart['data']['graphset'][0] | json) != '{}'" class="chart">
                 <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
-                <p>{{ research && research['EPS Quarterly Results'].hasOwnProperty('label') ? research['EPS Quarterly Results']['label'][0] : '' }}</p>
+                <p>
+                  {{ research && research['EPS Quarterly Results'].hasOwnProperty('label') ? research['EPS Quarterly Results']['label'][0] : ''
+                  }}</p>
               </div>
               <p *ngIf="(qrtEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
@@ -692,7 +700,7 @@ declare var zingchart: any;
               <div class="chart__header">
                 <h3>Annual Revenue</h3>
               </div>
-              <div *ngIf="(annualRevenueChart['data']['graphset'][0] | json) != '{}'"  class="chart">
+              <div *ngIf="(annualRevenueChart['data']['graphset'][0] | json) != '{}'" class="chart">
                 <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
               </div>
               <p *ngIf="(annualRevenueChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
@@ -1264,6 +1272,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   competitors;
   research;
   data;
+
+  toolTipText: string = "Stock rating based on a 20-factor model that produces a rating from Very Bullish (or likely to outperform the market) to Very Bearish (unlikely to perform in the short to medium term). Read more ";
+  link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/stock-rating/">here.</a>`;
 
   current: string = '1Y';
   mainChart: ZingChart = {
@@ -2017,7 +2028,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           }
         },
         "tooltip": {
-          visible:false,
+          visible: false,
           "htmlMode": true,
           "backgroundColor": "none",
           "padding": 0,
