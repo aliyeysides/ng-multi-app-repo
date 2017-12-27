@@ -39,7 +39,7 @@ import {Router} from '@angular/router';
       </div>
 
       <div class="col-12 calendar__week">
-        <div (click)="toggleDay('monday')" class="cal-day" [ngClass]="{'blue': calToggleObj['monday'] }">
+        <div (click)="toggleDay('monday')" class="cal-day" [ngClass]="{'blue': calToggleObj['monday'] || getAllReportsCount(weeklyData['monday']) }">
           <p class="align-absolute">
             <span *ngIf="calToggleObj['monday'] != true"
                   class="earnings-count">{{ getAllReportsCount(weeklyData['monday']) }}</span>
@@ -47,31 +47,37 @@ import {Router} from '@angular/router';
                aria-hidden="true"></i>
           </p>
         </div>
-        <div (click)="toggleDay('tuesday')" class="cal-day" [ngClass]="{'blue': calToggleObj['tuesday'] }">
+        <div (click)="toggleDay('tuesday')" class="cal-day" [ngClass]="{'blue': calToggleObj['tuesday'] || getAllReportsCount(weeklyData['tuesday'])}">
           <p class="align-absolute">
             <span *ngIf="calToggleObj['tuesday'] != true"
                   class="earnings-count">{{ getAllReportsCount(weeklyData['tuesday']) }}</span>
-            <i (click)="toggleDay('tuesday');$event.stopPropagation()" *ngIf="calToggleObj['tuesday']" class="fa fa-times"
+            <i (click)="toggleDay('tuesday');$event.stopPropagation()" *ngIf="calToggleObj['tuesday']"
+               class="fa fa-times"
                aria-hidden="true"></i>
           </p>
         </div>
-        <div (click)="toggleDay('wednesday')" class="cal-day" [ngClass]="{'blue': calToggleObj['wednesday'] }">
+        <div (click)="toggleDay('wednesday')" class="cal-day"
+             [ngClass]="{'blue': calToggleObj['wednesday'] || getAllReportsCount(weeklyData['wednesday'])}">
           <p class="align-absolute">
             <span *ngIf="calToggleObj['wednesday'] != true"
                   class="earnings-count">{{ getAllReportsCount(weeklyData['wednesday']) }}</span>
-            <i (click)="toggleDay('wednesday');$event.stopPropagation()" *ngIf="calToggleObj['wednesday']" class="fa fa-times"
+            <i (click)="toggleDay('wednesday');$event.stopPropagation()" *ngIf="calToggleObj['wednesday']"
+               class="fa fa-times"
                aria-hidden="true"></i>
           </p>
         </div>
-        <div (click)="toggleDay('thursday')" class="cal-day" [ngClass]="{'blue': calToggleObj['thursday'] }">
+        <div (click)="toggleDay('thursday')" class="cal-day"
+             [ngClass]="{'blue': calToggleObj['thursday'] || getAllReportsCount(weeklyData['thursday']) }">
           <p class="align-absolute">
             <span *ngIf="calToggleObj['thursday'] != true"
                   class="earnings-count">{{ getAllReportsCount(weeklyData['thursday']) }}</span>
-            <i (click)="toggleDay('thursday');$event.stopPropagation()" *ngIf="calToggleObj['thursday']" class="fa fa-times"
+            <i (click)="toggleDay('thursday');$event.stopPropagation()" *ngIf="calToggleObj['thursday']"
+               class="fa fa-times"
                aria-hidden="true"></i>
           </p>
         </div>
-        <div (click)="toggleDay('friday')" class="cal-day" [ngClass]="{'blue': calToggleObj['friday'] }">
+        <div (click)="toggleDay('friday')" class="cal-day"
+             [ngClass]="{'blue': calToggleObj['friday'] || getAllReportsCount(weeklyData['friday']) }">
           <p class="align-absolute">
             <span *ngIf="calToggleObj['friday'] != true"
                   class="earnings-count">{{ getAllReportsCount(weeklyData['friday']) }}</span>
