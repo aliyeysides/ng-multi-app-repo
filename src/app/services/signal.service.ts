@@ -194,7 +194,7 @@ export class SignalService {
 
   public appendPGRImage(pgr, rawPgr) {
     const imageUrl = 'assets/imgs/';
-    if (pgr === 1 || pgr === 0) {
+    if (pgr === 1) {
       return imageUrl + 'arc_VeryBearish.svg';
     } else if (pgr === 2) {
       return imageUrl + 'arc_Bearish.svg';
