@@ -113,8 +113,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   ngOnInit() {
     this.loading = this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
-      // .switchMap(uid => this.healthCheck.getAuthorizedLists(uid))
-      .map(res => this._listId = this.authService.userLists[0]['User Lists'][0]['list_id'])
+      .map(res => this._listId = this.authService.userLists[0]['User Lists'].filter(x => x['name'] == this.healthCheck.currentList)[0]['list_id'])
       .switchMap(listId => {
         return this.healthCheck.getListSymbols(listId, this._uid)
       })

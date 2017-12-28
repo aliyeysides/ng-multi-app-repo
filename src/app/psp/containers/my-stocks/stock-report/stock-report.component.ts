@@ -1591,6 +1591,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   appendPGRImage(symbolData) {
     if (symbolData) {
+      console.log('stock report', 'pgr:', symbolData['metaInfo'][0]['PGR'], 'rawPgr:', symbolData['metaInfo'][0]['raw_PGR']);
       return this.signalService.appendPGRImage(symbolData['metaInfo'][0]['PGR'], symbolData['metaInfo'][0]['raw_PGR']);
     }
   }
