@@ -50,7 +50,8 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
     this.router.events.filter(event => event instanceof NavigationEnd)
       .takeUntil(this._ngUnsubscribe)
       .subscribe(event => {
-        this.currentRoute = event['url'];
+        this.currentRoute = event['urlAfterRedirects'];
+        console.log('currentRoute', this.currentRoute);
       });
 
     this.healthCheck.getUserStocks()
