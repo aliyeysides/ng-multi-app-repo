@@ -1,12 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {WordpressService} from '../../../services/wordpress.service';
 import {Subject} from 'rxjs/Subject';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'cpt-market-beat',
   template: `
     <!-- PANEL CONTENTS -->
-    <div class="container-fluid component component--marketbeat">
+    <div [ngBusy]="loading" class="container-fluid component component--marketbeat">
 	    <div class="row">
 	      	<div class="col-12 section--masthead masthead--featured">
 	      		<h2>Market Insights</h2>
@@ -51,11 +52,12 @@ export class MarketBeatComponent implements OnInit, OnDestroy {
   selectedInsight: object;
   commentary: string;
   opened: boolean = false;
+  loading: Subscription;
 
   constructor(private wp: WordpressService) { }
 
   ngOnInit() {
-    this.wp.getWordPressJson('2', this.loadCount)
+    this.loading = this.wp.getWordPressJson('2', this.loadCount)
       .takeUntil(this._ngUnsubscribe)
       .subscribe(posts => {
         this.posts = posts[0]['2'];
