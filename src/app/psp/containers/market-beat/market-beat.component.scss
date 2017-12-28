@@ -32,12 +32,6 @@
 		background-image: url("/assets/imgs/image__MI--masthead.png");
 	}
 
-	.masthead--education {
-		background-image: url("/assets/imgs/image__EDU--masthead.png");
-		padding:100px 0 0 0;
-		margin-top: 25px;
-	}
-
 	.section--author {
 		text-align: center;
 		font-size: 18px;
@@ -124,62 +118,15 @@
 
 	.section--article {
 		.article__body {
-			height: 80vh;
-			overflow: hidden;
+			height: 48vh;
+			//overflow: hidden;
 			margin-top: 15px;
 			color: #484848;
 			position: relative;
 			padding-bottom: 10px;
 
 			.article {
-				font-family: 'Open Sans', sans-serif;
-				color: #484848;
-				font-size: 16px;
-				line-height: 1.5;
-				text-align: left;
-				margin:10px 0 15px;
-
-				ul {
-				    list-style: disc;
-				    padding: 0 2em 2em;
-
-				    li {
-				    	padding:5px 0;
-				    	font-size: 16px;
-				    }
-				}
-				h1 {
-				    font-weight: 300;
-				    font-size: 36px;
-				    line-height: 1.5;
-				    margin-top: 5px;
-				    margin-bottom: 0px;
-				    text-align: left;
-				    opacity: 1;
-				    color: #484848;
-				}
-				a {
-					text-align: center;
-					font-size: 14px;
-					line-height: 1.1;
-				}
-				img {
-					width: 100%;
-					height: auto;
-					margin: 20px auto 30px;
-
-					@media screen AND (min-width:768px) {
-						width: 75%;
-					}
-				}
-				span {
-					font-family: 'Open Sans', sans-serif;
-					color: #484848;
-					font-size: 16px;
-					line-height: 1.5;
-					margin-bottom:15px;
-					margin-top:5px;
-				}
+				/*  styling done on app.component.scss  */
 			}
 
 			&::after {
@@ -195,12 +142,11 @@
 			}
 		}
 		.article__body.opened {
-			overflow:visible;
+			//overflow:visible;
 			height: 100%;
 
 			&::after {
-				display:none;
-				content: "";
+				content: "•";
 			}
 		}
 		.article__read-more {
@@ -208,7 +154,7 @@
 			font-size: 13px;
 			color: #1199FF;
 			font-weight: 700;
-			margin: 25px 0 30px;
+			margin: 25px 0 5px;
 			text-align: center;
 		}
 	}

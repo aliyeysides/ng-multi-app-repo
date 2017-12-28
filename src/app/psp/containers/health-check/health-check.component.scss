@@ -1,4 +1,4 @@
-@import 'variables';
+@import 'variablesPulse';
 
 
 
@@ -63,7 +63,7 @@
 		    padding: 5px 0;
 		    margin: 0;
 		    font-size: 22px;
-		    color: #484848;
+		    color: $font-color;
 		    width: 100%;
 		    overflow: hidden;
 		    text-align: center;
