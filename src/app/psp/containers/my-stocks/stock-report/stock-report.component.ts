@@ -46,8 +46,7 @@ declare var zingchart: any;
           <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
         </div>
         <div class="header__button header__button--pdf">
-          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o"
-                                                                               aria-hidden="true"></i></button>
+          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
       </div>
 
@@ -1807,11 +1806,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             rules: [
               {
                 rule: '%v < 0.5',
-                backgroundColor: "#bb2634",
-                lineColor: "#bb2634"
+                backgroundColor: "#FD001F",
+                lineColor: "#FD001F"
               }],
-            backgroundColor: "#51bb2c",
-            lineColor: "#51bb2c",
+            backgroundColor: "#00C04E",
+            lineColor: "#00C04E",
             lineWidth: 2
           }
         ]
@@ -1893,12 +1892,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             rules: [
               {
                 rule: '%v < 0',
-                backgroundColor: "#bb2634",
-                lineColor: "#bb2634"
+                backgroundColor: "#FD001F",
+                lineColor: "#FD001F"
               }],
-            backgroundColor: "#51bb2c",
+            backgroundColor: "#00C04E",
             alphaArea: 0.3,
-            lineColor: "#51bb2c",
+            lineColor: "#00C04E",
             lineWidth: 2
           }
         ]
@@ -2232,7 +2231,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
           {
             "values": seriesB,
-            "alpha": 0.35,
+            "alpha": 0.65,
             "borderRadius": 7,
             "background-color": "#19c736 #00C04E",
             "rules": [
@@ -2442,7 +2441,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "series": [
           {
             "values": values,
-            "alpha": 0.5,
+            "alpha": 0.75,
             "borderRadius": 7,
             "background-color": "#19c736 #00C04E",
             "rules": [

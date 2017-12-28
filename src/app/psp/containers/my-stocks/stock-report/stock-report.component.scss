@@ -21,7 +21,10 @@
 	.divider__full {
 		margin:25px auto;
 	}
-	.divider__long--red, .divider__long--green, .divider__long--blue, .divider__long--yellow {
+	.divider__long--red, 
+	.divider__long--green, 
+	.divider__long--blue, 
+	.divider__long--yellow {
 		margin:25px auto;
 		width: 100%;
 	}
@@ -126,10 +129,10 @@
 }
 
 .component--stockview.neutral {
-	background-image: linear-gradient(to bottom, #f79621 0%,#f9c667 100%);
+	background-image: linear-gradient(to bottom, #FADA3D 0%,#F89939 100%);
 
 	.divider__full {
-	  	background-image: linear-gradient(to bottom, #f79621 0%,#f9c667 100%);
+	  	background-image: linear-gradient(to bottom, #FADA3D 0%,#F89939 100%);
 	}
 	.stock-info {
 		h2 {
