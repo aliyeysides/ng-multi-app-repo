@@ -14,6 +14,7 @@ declare let gtag: Function;
   styleUrls: ['./app.component.scss'],
   template: `
     <!-- PANEL HEADER - Fixed to the top of each panel-->
+
     <div class="page__header"
          [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}"
          id="page__header">
@@ -67,6 +68,7 @@ declare let gtag: Function;
       </div>
       <simple-notifications [options]="options"></simple-notifications>
     </div>
+
   `
 })
 export class AppComponent implements OnDestroy {

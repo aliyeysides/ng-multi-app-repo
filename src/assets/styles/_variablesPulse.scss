@@ -2,14 +2,43 @@
 
 
 $veryBullish-green: #24A300;
-$bullish-green: #7ED321;
-$neutral-yellow: #ffbe00;
+$bullish-green: #6ACC00;
+$neutral-yellow: #ff9900;
 $bearish-red: #FD4500;
 $veryBearish-red: #EB001C;
 
 
+$pulse-blue: #3150C6;
+$pulse-blue__shade1: #1199ff;
+$pulse-blue__shade2: #540086;
+
+$pulse-green: #00C04E;
+$pulse-green__shade1: #00C07B;
+$pulse-green__shade2: #00C1A9;
+
+$pulse-red: #FD001F;
+$pulse-red__shade1: #EA003D;
+$pulse-red__shade2: #D5005D;
+
+$pulse-yellow: #F9BA3B;
+$pulse-yellow__shade1: #FADA3D;
+$pulse-yellow__shade2: #F89939;
+
+$pulse-grey: #999999;
+$pulse-grey__shade1: #666666;
+$pulse-grey__shade2: #333333;
 
 
+
+
+/*  Fonts  */
+
+
+$font-stack: 'Rajdhani', 'Open Sans', sans-serif;
+
+$font-color: #54555A;
+$font-color--mid: #999;
+$font-color--light: #CCCDD1;
 
 $link-blue: #1199ff;
 $link-grey: #7C828F;
@@ -18,21 +47,13 @@ $link-grey: #7C828F;
 
 
 
-/*  Fonts  */
-
-
-
-
-
-$font-color: #484848;
-
-
-
-
-
-
 /*  Backgrounds  */
 
+
+$background--verylight: #f8f8f8;
+$background--light: #DDDDDD;
+$background--medium: #999999;
+$background--dark: #333333;
 
 
 
@@ -44,12 +65,11 @@ $font-color: #484848;
 
 
 
-
 /*  Lines & Borders  */
 
 
 
-
+$divider--dotted: 4px dotted #DDD;
 
 
 
