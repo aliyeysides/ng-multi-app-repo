@@ -78,12 +78,12 @@ import {Router} from '@angular/router';
               <tr class="powergrid__row" id="industry-9">
                 <td class="bear">
                   <p (click)="gotoReport(stock)" *ngFor="let stock of neutralIndustries?.slice(-1)[0].SymbolPGRMappings" class="ticker">
-                    <span *ngIf="stock[objectKeys(stock)[0]] > 50">{{ objectKeys(stock)[0] }}</span>
+                    <span *ngIf="stock[objectKeys(stock)[0]] < 50">{{ objectKeys(stock)[0] }}</span>
                   </p>
                 </td>
                 <td class="bull">
                   <p (click)="gotoReport(stock)" *ngFor="let stock of neutralIndustries?.slice(-1)[0].SymbolPGRMappings" class="ticker">
-                    <span *ngIf="stock[objectKeys(stock)[0]] < 50">{{ objectKeys(stock)[0] }}</span>
+                    <span *ngIf="stock[objectKeys(stock)[0]] > 50">{{ objectKeys(stock)[0] }}</span>
                   </p>
                 </td>
                 <td class="industry industry--neutral">
