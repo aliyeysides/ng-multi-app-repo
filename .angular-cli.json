@@ -46,7 +46,7 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon--pulse.ico"
       ],
       "index": "psp-index.html",
       "main": "app/psp/main.ts",
