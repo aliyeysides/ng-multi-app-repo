@@ -65,6 +65,11 @@
 			    border: 3px solid #1199ff;
 			    padding: 4px 15px 1px 20px;
 			    border-radius: 40px;
+			    text-transform: lowercase;
+
+			    &::first-letter {
+			    	text-transform: capitalize;
+			    }
 			}
 			.btn-primary {
 				cursor: pointer;
@@ -137,33 +142,43 @@
 				ul {
 				    list-style: disc;
 				    padding: 0 2em 2em;
+
+				    li {
+				    	padding:5px 0;
+				    	font-size: 16px;
+				    }
 				}
 				h1 {
-					font-weight: 600;
-					font-size: 20px;
-					line-height: 1.4;
-					margin-top:25px;
-					margin-bottom: 15px;
-					text-align: left;
-					opacity: 0.8;
-					white-space: normal;
-					color:#484848;
+				    font-weight: 300;
+				    font-size: 36px;
+				    line-height: 1.5;
+				    margin-top: 5px;
+				    margin-bottom: 0px;
+				    text-align: left;
+				    opacity: 1;
+				    color: #484848;
 				}
 				a {
 					text-align: center;
 					font-size: 14px;
-					line-height: 1.5;
+					line-height: 1.1;
 				}
 				img {
 					width: 100%;
 					height: auto;
-					margin: 20px auto;
+					margin: 20px auto 30px;
+
+					@media screen AND (min-width:768px) {
+						width: 75%;
+					}
 				}
 				span {
 					font-family: 'Open Sans', sans-serif;
 					color: #484848;
 					font-size: 16px;
 					line-height: 1.5;
+					margin-bottom:15px;
+					margin-top:5px;
 				}
 			}
 
@@ -181,6 +196,12 @@
 		}
 		.article__body.opened {
 			overflow:visible;
+			height: 100%;
+
+			&::after {
+				display:none;
+				content: "";
+			}
 		}
 		.article__read-more {
 			display: block;
@@ -190,32 +211,6 @@
 			margin: 25px 0 30px;
 			text-align: center;
 		}
-	}
-	.education--article {
-		padding-left:10px;
-
-		.article__read-more {
-			margin:0;
-			text-align: left;
-		}
-		.article__headline {
-			font-weight: 600;
-			font-size: 16px;
-			line-height: 1.4;
-			font-family: 'Open Sans', sans-serif;
-			text-align: left;
-			opacity: 0.8;
-			white-space: normal;
-			color:#484848;
-		}
-	}
-	.article__thumbnail {
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: 100% auto;
-	}
-	.educational__entry {
-		margin: 15px 0 20px;
 	}
 }
 
