@@ -1,4 +1,7 @@
-import {Component, EventEmitter, HostListener, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+  Component, EventEmitter, HostListener, OnDestroy, OnInit,
+  Output
+} from '@angular/core';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {Subject} from 'rxjs/Subject';
 import {NavigationEnd, Router} from '@angular/router';
@@ -8,8 +11,8 @@ import {NavigationEnd, Router} from '@angular/router';
   template: `
     <ul>
       <li (click)="closeNav($event)" *ngFor="let route of routes"
-          routerLinkActive="active"
-          routerLink="{{ route.link }}" [ngClass]="{'active': currentRoute?.slice(0,10)==='/my-stocks' && route.label === 'Stock Summary'}">
+          [ngClass]="{active: currentRoute?.slice(0,10) === route.link.slice(0,10) }"
+          routerLink="{{ route.link }}">
         <a class="nav--toplevel"><i class="{{ route.klass }}" aria-hidden="true"></i> &nbsp;{{ route.label }}</a>
       </li>
     </ul>
@@ -41,19 +44,19 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
 
   constructor(private healthCheck: HealthCheckService,
               private router: Router) {
+
     const mobWidth = (window.screen.width);
     if (+mobWidth <= 1024) this.reportOpen = false;
     if (+mobWidth > 1024) this.reportOpen = true;
-  }
 
-  ngOnInit() {
     this.router.events.filter(event => event instanceof NavigationEnd)
       .takeUntil(this._ngUnsubscribe)
       .subscribe(event => {
-        this.currentRoute = event['urlAfterRedirects'];
-        console.log('currentRoute', this.currentRoute);
+        this.currentRoute = event['url'];
       });
+  }
 
+  ngOnInit() {
     this.healthCheck.getUserStocks()
       .takeUntil(this._ngUnsubscribe)
       .filter(x => x != undefined)
