@@ -1748,7 +1748,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           }
         },
         source: {
-          visible: true,
+          visible: false,
           text: "ZingCharts.com",
           fontColor: "#ddd",
           fontFamily: "Open Sans",
@@ -2231,7 +2231,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
           {
             "values": seriesB,
-            "alpha": 0.65,
+            "alpha": 0.75,
             "borderRadius": 7,
             "background-color": "#19c736 #00C04E",
             "rules": [
@@ -2282,7 +2282,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       return {
         "type": "scatter",
         "height": "360",
-        "legend": {},
+        "legend": {
+          "offset-y": "275px",
+        },
         "background-color": "white",
         "tooltip": {
           "text": "$%v"

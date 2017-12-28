@@ -30,8 +30,8 @@ import {Subject} from 'rxjs/Subject';
     		        </ul>
     	        </div>
     		    </div>
-  	      	<div class="col-12 section--article featured--article" [class.opened]="opened">
-  	      		<div class="article__body">
+  	      	<div class="col-12 section--article featured--article">
+  	      		<div class="article__body" [class.opened]="opened">
   	      			<div class="article" [innerHTML]="commentary"></div>
   	      		</div>
   	      		<a (click)="readMore()" class="article__read-more">READ FULL ARTICLE</a>

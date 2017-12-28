@@ -627,6 +627,7 @@
 				font-size: 17px;		
 				font-weight: 600;
 				letter-spacing: 0.03em;
+				cursor: default;
 
 				span {
 					width: 150px;
@@ -675,6 +676,7 @@
 				  	overflow: hidden;
 				  	vertical-align: middle;
 				  	display: inline-block;
+				  	cursor: pointer;
 
 				  	span {
 				  		margin: 0px 7px;
@@ -703,6 +705,7 @@
 						color:#484848;
 						text-overflow: ellipsis;
 						white-space: nowrap;
+						cursor: default;
 
 						span {
 							font-size: 18px;
@@ -891,6 +894,7 @@
 		  	text-overflow: ellipsis;
 		  	white-space: nowrap;
 		  	text-align: left;
+		  	cursor: default;
 		}
 	}
 }

@@ -136,7 +136,7 @@ sub {
 }
 
 .yellow {
-  color:#FF9900;
+  color:#F89939;
 }
 
 .greyed-out {
@@ -223,14 +223,14 @@ sub {
 }
 
 .divider__medium {
-  width: 60%;
+  width: 55%;
   height: 2px;
   background: #eeeeee;
   margin:0 auto;
 }
 
 .divider__long {
-  width: 70%;
+  width: 60%;
   height: 3px;
   border-radius: 5px;
   margin: 10px auto 20px;
@@ -246,7 +246,7 @@ sub {
 }
 
 .divider__long--green {
-  background: linear-gradient(to left, rgba(0,204,0,0.95) 0%,rgba(0,170,119,0.95) 80%);
+  background: linear-gradient(to left, rgba(0,204,0,0.85) 0%,rgba(0,170,119,0.85) 80%);
   width: 90%;
   margin: 15px auto;
   height: 3px;
@@ -254,7 +254,7 @@ sub {
 }
 
 .divider__long--red {
-  background: linear-gradient(to right, rgba(255,50,50,1) 2%,rgba(170,0,119,1) 100%);
+  background: linear-gradient(to right, rgba(255,50,50,0.85) 2%,rgba(170,0,119,0.85) 100%);
   width: 90%;
   margin: 15px auto;
   height: 3px;
@@ -262,7 +262,7 @@ sub {
 }
 
 .divider__long--yellow {
-  background-image: linear-gradient(123deg, #FDD310 0%, #FFB100 100%);
+  background-image: linear-gradient(123deg, #FADA3D 0%, #F89939 100%);
   width: 90%;
   margin: 15px auto;
   height: 3px;
@@ -460,6 +460,10 @@ sub {
 
 .section__chart {
   margin:25px 0 40px;
+
+  @media screen AND (max-width: 575px) {
+    margin:25px 0 10px;
+  }
 }
 
 
@@ -862,7 +866,7 @@ sub {
   background: rgba(0,192,78,0.95);
 }
 .list-entry__overlay.yellow {
-  background: rgba(255, 153, 17, 0.95);
+  background: rgba(249, 186, 59, 0.95);
 }
 
 .overlay__contents {
@@ -919,6 +923,7 @@ sub {
     font-weight: 500;
     line-height: 1.5;
     color:#999;
+    text-transform: uppercase;
   }
 
   img {
@@ -1174,6 +1179,12 @@ sub {
 
 }
 
+#epsSurprisesChart-menu-trigger-gear-path,
+#qrtEPSChart-menu-trigger-gear-path,
+#annualEPSChart-menu-trigger-gear-path,
+#annualRevenueChart-menu-trigger-gear-path, {
+  fill: #999;
+}
 
 
 #annualEPSChart, 
@@ -1193,7 +1204,8 @@ sub {
 
 .component--stockview.bullish {
 
-  #mainChart-graph-id0-plotset-plot-0-path {
+  #mainChart-graph-id0-plotset-plot-0-path,
+  #epsSurprisesChart-graph-id0-legend-path {
     stroke:#00C04E;
   }
   #mainChart-graph-id0-scales-bl-0-c {
@@ -1214,9 +1226,10 @@ sub {
   #epsSurprisesChart-graph-id0-plot-1-bl-1-c {
     circle {
       fill:#00C04E;
-      opacity: 0.75;
+      opacity: 0.85;
     }
   }
+  #epsSurprisesChart-graph-id0-legend-marker_1-path,
   #mainChart-graph-id0-plotset-plot-0-area-path,
   #annualEPSChart-graph-id0-plotset-plot-0-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-0-path,
@@ -1246,7 +1259,8 @@ sub {
 
 .component--stockview.bearish {
 
-  #mainChart-graph-id0-plotset-plot-0-path {
+  #mainChart-graph-id0-plotset-plot-0-path,
+  #epsSurprisesChart-graph-id0-legend-path {
     stroke:#FD001F;
   }
   #mainChart-graph-id0-scales-bl-0-c {
@@ -1267,9 +1281,10 @@ sub {
   #epsSurprisesChart-graph-id0-plot-1-bl-1-c {
     circle {
       fill:#FD001F;
-      opacity: 0.75;
+      opacity: 0.85;
     }
   }
+  #epsSurprisesChart-graph-id0-legend-marker_1-path,
   #mainChart-graph-id0-plotset-plot-0-area-path,
   #annualEPSChart-graph-id0-plotset-plot-0-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-0-path,
@@ -1300,12 +1315,14 @@ sub {
 
 .component--stockview.neutral {
 
-  #mainChart-graph-id0-plotset-plot-0-path {
+  #mainChart-graph-id0-plotset-plot-0-path,
+  #epsSurprisesChart-graph-id0-legend-path {
     stroke:#FADA3D;
   }
   #mainChart-graph-id0-scales-bl-0-c {
     path {
       stroke:#FADA3D;
+      opacity: 0.25;
     }
   }
   #epsSurprisesChart-graph-id0-scales-bl-0-c,
@@ -1315,13 +1332,13 @@ sub {
     path {
       stroke:#FADA3D;
       stroke-dasharray: (0,0);
-      opacity: 0.15;
+      opacity: 0.25;
     }
   }
   #epsSurprisesChart-graph-id0-plot-1-bl-1-c {
     circle {
-      fill:#FADA3D;
-      opacity: 0.75;
+      fill:#F89939;
+      opacity: 0.95;
     }
   }
   #mainChart-graph-id0-plotset-plot-0-area-path,
@@ -1340,6 +1357,7 @@ sub {
   #annualRevenueChart-graph-id0-plotset-plot-0-node-2-path {
     fill:#F9BA3B;
   }
+  #epsSurprisesChart-graph-id0-legend-marker_1-path,
   #annualEPSChart-graph-id0-plotset-plot-0-node-2-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-2-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-2-path,
