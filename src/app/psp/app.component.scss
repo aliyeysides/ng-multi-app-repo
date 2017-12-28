@@ -336,6 +336,7 @@ sub {
   z-index: 1000;
   top: 0;
   left: 0;
+  right: 0;
   overflow: hidden;
   transition: 0.5s;
   box-shadow: -7px 0 20px 0px rgba(0, 0, 0, 0.2);
@@ -1208,9 +1209,9 @@ sub {
 }
 
 
-#annualEPSChart, 
-#qrtEPSChart, 
-#epsSurprisesChart, 
+#annualEPSChart,
+#qrtEPSChart,
+#epsSurprisesChart,
 #annualRevenueChart  {
   height: 400px;
   overflow: hidden;
@@ -1255,7 +1256,7 @@ sub {
   #annualEPSChart-graph-id0-plotset-plot-0-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-0-path,
-  #qrtEPSChart-graph-id0-plotset-plot-2-node-0-path, 
+  #qrtEPSChart-graph-id0-plotset-plot-2-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
     fill:#00C04E;
@@ -1366,7 +1367,7 @@ sub {
   #annualEPSChart-graph-id0-plotset-plot-0-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-0-path,
-  #qrtEPSChart-graph-id0-plotset-plot-2-node-0-path,  
+  #qrtEPSChart-graph-id0-plotset-plot-2-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
     fill:#FADA3D;

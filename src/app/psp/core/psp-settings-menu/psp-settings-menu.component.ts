@@ -9,12 +9,12 @@ declare let gtag: Function;
 @Component({
   selector: 'cpt-psp-settings-menu',
   template: `
-    <nav #nav class="container--nav">
+    <nav [ngStyle]="{'left': side == 'left' ? 0 : null}" #nav class="container--nav">
       <div class="logo">
         <img src="assets/imgs/logo_powerpulse.svg">
       </div>
       <div class="nav-list">
-        <cpt-psp-navigator (routeClicked)="navClicked()"></cpt-psp-navigator>
+        <cpt-psp-navigator *ngIf="side==='left'" (routeClicked)="navClicked()"></cpt-psp-navigator>
         <ul>
           <li>
             <a href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;Education</a>
@@ -70,6 +70,7 @@ declare let gtag: Function;
 })
 export class PspSettingsMenuComponent extends BaseSettingsMenuComponent implements OnInit {
   private _btn: HTMLElement;
+  @Input('side') side: string;
   @Input('navOpened') navOpened: BehaviorSubject<boolean>;
   @Input('btn')
   set btn(val: HTMLElement) {
