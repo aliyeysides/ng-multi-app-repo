@@ -15,6 +15,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {UtilService} from '../../../../services/util.service';
 import {ListSymbolObj} from '../../../../shared/models/health-check';
 import {AuthService} from '../../../../services/auth.service';
+import {HealthCheckService} from '../../../../services/health-check.service';
 
 declare var zingchart: any;
 

@@ -145,13 +145,11 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => this.updateData());
 
-    this.route.params
+      this.route.params
       .takeUntil(this._ngUnsubscribe)
       .subscribe(params => {
           if (params.symbol) {
             this.selectedStock = params.symbol.slice();
-          } else {
-            // this.selectedStock = 'AAPL';
           }
         }
       );

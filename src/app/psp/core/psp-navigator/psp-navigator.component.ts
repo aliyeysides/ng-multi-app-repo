@@ -1,17 +1,18 @@
 import {Component, EventEmitter, HostListener, OnDestroy, OnInit, Output} from '@angular/core';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {Subject} from 'rxjs/Subject';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'cpt-psp-navigator',
   template: `
-      <ul>
-        <li (click)="closeNav($event)" *ngFor="let route of routes"
-            routerLinkActive="active"
-            routerLink="{{ route.link }}">
-          <a class="nav--toplevel"><i class="{{ route.klass }}" aria-hidden="true"></i> &nbsp;{{ route.label }}</a>
-        </li>
-      </ul>
+    <ul>
+      <li (click)="closeNav($event)" *ngFor="let route of routes"
+          routerLinkActive="active"
+          routerLink="{{ route.link }}" [ngClass]="{'active': currentRoute?.slice(0,10)==='/my-stocks' && route.label === 'Stock Summary'}">
+        <a class="nav--toplevel"><i class="{{ route.klass }}" aria-hidden="true"></i> &nbsp;{{ route.label }}</a>
+      </li>
+    </ul>
   `,
   styleUrls: ['./psp-navigator.component.scss']
 })
@@ -19,6 +20,7 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
   @Output('routeClicked') routeClicked: EventEmitter<void> = new EventEmitter<void>();
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     const width = event.target.innerWidth;
@@ -29,6 +31,7 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
 
   firstUserStock: string;
   reportOpen: boolean;
+  currentRoute: string;
   public routes: object[] = [
     {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
     {link: '/my-stocks', klass: 'fa fa-pie-chart', label: 'Stock Summary'},
@@ -36,13 +39,20 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   ];
 
 
-  constructor(private healthCheck: HealthCheckService) {
+  constructor(private healthCheck: HealthCheckService,
+              private router: Router) {
     const mobWidth = (window.screen.width);
     if (+mobWidth <= 1024) this.reportOpen = false;
     if (+mobWidth > 1024) this.reportOpen = true;
   }
 
   ngOnInit() {
+    this.router.events.filter(event => event instanceof NavigationEnd)
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(event => {
+        this.currentRoute = event['url'];
+      });
+
     this.healthCheck.getUserStocks()
       .takeUntil(this._ngUnsubscribe)
       .filter(x => x != undefined)
