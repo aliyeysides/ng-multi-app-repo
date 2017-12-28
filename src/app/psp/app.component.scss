@@ -687,7 +687,7 @@ sub {
       .active {
 
         .nav--toplevel {
-          font-weight: 700;
+          font-weight: 600;
           color:#ffffff;
           box-shadow:inset 0px -5px 0px rgba(255,255,255,1);
         }
@@ -862,7 +862,7 @@ sub {
   background: rgba(0,192,78,0.95);
 }
 .list-entry__overlay.yellow {
-  background: goldenrod;
+  background: rgba(255, 153, 17, 0.95);
 }
 
 .overlay__contents {
@@ -922,7 +922,7 @@ sub {
   }
 
   img {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     width: 22px;
     height: 22px;
   }
@@ -1108,6 +1108,10 @@ sub {
 .pgr__label p {
   margin-left:15px;
   height: 16px;
+
+  @media screen AND (max-width: 350px) {
+    margin-left:0px;
+  }
 }
 
 
@@ -1166,9 +1170,16 @@ sub {
 
 
 
+#annualEPSChart-tools {
+
+}
 
 
-#annualEPSChart, #qrtEPSChart, #epsSurprisesChart, #annualRevenueChart  {
+
+#annualEPSChart, 
+#qrtEPSChart, 
+#epsSurprisesChart, 
+#annualRevenueChart  {
   height: 400px;
   overflow: hidden;
 }
@@ -1182,9 +1193,6 @@ sub {
 
 .component--stockview.bullish {
 
-  #mainChart-graph-id0-plotset-plot-0-area-path {
-    fill:#00C04E;
-  }
   #mainChart-graph-id0-plotset-plot-0-path {
     stroke:#00C04E;
   }
@@ -1193,10 +1201,45 @@ sub {
       stroke:#E0F9EA;
     }
   }
-  #annualEPSChart-graph-id0-scale-y-guide-3-path, #annualRevenueChart-graph-id0-scale-y-guide-3-path, #qrtEPSChart-graph-id0-scale-y-guide-5-path, #annualEPSChart-graph-id0-scale-y-guide-19-path, #epsSurprisesChart-graph-id0-scale-y-guide-6-path {
-    stroke:#00C04E;
-    stroke-dasharray: (6,3);
-    opacity: 0.3;
+  #epsSurprisesChart-graph-id0-scales-bl-0-c,
+  #annualEPSChart-graph-id0-scales-bl-0-c,
+  #qrtEPSChart-graph-id0-scales-bl-0-c,
+  #annualRevenueChart-graph-id0-scales-bl-0-c {
+    path {
+      stroke:#00C04E;
+      stroke-dasharray: (0,0);
+      opacity: 0.15;
+    }
+  }
+  #epsSurprisesChart-graph-id0-plot-1-bl-1-c {
+    circle {
+      fill:#00C04E;
+      opacity: 0.75;
+    }
+  }
+  #mainChart-graph-id0-plotset-plot-0-area-path,
+  #annualEPSChart-graph-id0-plotset-plot-0-node-0-path,
+  #qrtEPSChart-graph-id0-plotset-plot-0-node-0-path,
+  #qrtEPSChart-graph-id0-plotset-plot-1-node-0-path,
+  #qrtEPSChart-graph-id0-plotset-plot-2-node-0-path, 
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-0-path,
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
+    fill:#00C04E;
+  }
+  #annualEPSChart-graph-id0-plotset-plot-0-node-1-path,
+  #qrtEPSChart-graph-id0-plotset-plot-0-node-1-path,
+  #qrtEPSChart-graph-id0-plotset-plot-1-node-1-path,
+  #qrtEPSChart-graph-id0-plotset-plot-2-node-1-path,
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-2-path {
+    fill:#00C07B;
+  }
+  #annualEPSChart-graph-id0-plotset-plot-0-node-2-path,
+  #qrtEPSChart-graph-id0-plotset-plot-0-node-2-path,
+  #qrtEPSChart-graph-id0-plotset-plot-1-node-2-path,
+  #qrtEPSChart-graph-id0-plotset-plot-2-node-2-path,
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-3-path,
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-4-path {
+    fill:#00C1A9;
   }
 }
 
@@ -1206,18 +1249,50 @@ sub {
   #mainChart-graph-id0-plotset-plot-0-path {
     stroke:#FD001F;
   }
-  #mainChart-graph-id0-plotset-plot-0-area-path {
-    fill:#FD001F;
-  }
   #mainChart-graph-id0-scales-bl-0-c {
     path {
       stroke:#FFEFF1;
     }
   }
-  #annualEPSChart-graph-id0-scale-y-guide-3-path, #annualRevenueChart-graph-id0-scale-y-guide-3-path, #qrtEPSChart-graph-id0-scale-y-guide-5-path, #annualEPSChart-graph-id0-scale-y-guide-19-path, #epsSurprisesChart-graph-id0-scale-y-guide-6-path  {
-    stroke:#FD001F;
-    stroke-dasharray: (6,3);
-    opacity: 0.3;
+  #epsSurprisesChart-graph-id0-scales-bl-0-c,
+  #annualEPSChart-graph-id0-scales-bl-0-c,
+  #qrtEPSChart-graph-id0-scales-bl-0-c,
+  #annualRevenueChart-graph-id0-scales-bl-0-c  {
+    path {
+      stroke:#FD001F;
+      stroke-dasharray: (0,0);
+      opacity: 0.15;
+    }
+  }
+  #epsSurprisesChart-graph-id0-plot-1-bl-1-c {
+    circle {
+      fill:#FD001F;
+      opacity: 0.75;
+    }
+  }
+  #mainChart-graph-id0-plotset-plot-0-area-path,
+  #annualEPSChart-graph-id0-plotset-plot-0-node-0-path,
+  #qrtEPSChart-graph-id0-plotset-plot-0-node-0-path,
+  #qrtEPSChart-graph-id0-plotset-plot-1-node-0-path,
+  #qrtEPSChart-graph-id0-plotset-plot-2-node-0-path,
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-0-path,
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
+    fill:#FD001F;
+  }
+  #annualEPSChart-graph-id0-plotset-plot-0-node-1-path,
+  #qrtEPSChart-graph-id0-plotset-plot-0-node-1-path,
+  #qrtEPSChart-graph-id0-plotset-plot-1-node-1-path,
+  #qrtEPSChart-graph-id0-plotset-plot-2-node-1-path,
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-2-path {
+    fill:#D53B41;
+  }
+  #annualEPSChart-graph-id0-plotset-plot-0-node-2-path,
+  #qrtEPSChart-graph-id0-plotset-plot-0-node-2-path,
+  #qrtEPSChart-graph-id0-plotset-plot-1-node-2-path,
+  #qrtEPSChart-graph-id0-plotset-plot-2-node-2-path,
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-3-path,
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-4-path {
+    fill:#B6355C;
   }
 }
 
@@ -1226,19 +1301,51 @@ sub {
 .component--stockview.neutral {
 
   #mainChart-graph-id0-plotset-plot-0-path {
-    stroke:#febf01;
-  }
-  #mainChart-graph-id0-plotset-plot-0-area-path {
-    fill:#febf01;
+    stroke:#FADA3D;
   }
   #mainChart-graph-id0-scales-bl-0-c {
     path {
-      stroke:#FFF6E9;
+      stroke:#FADA3D;
     }
   }
-  #annualEPSChart-graph-id0-scale-y-guide-3-path, #annualRevenueChart-graph-id0-scale-y-guide-3-path, #qrtEPSChart-graph-id0-scale-y-guide-5-path, #annualEPSChart-graph-id0-scale-y-guide-19-path, #epsSurprisesChart-graph-id0-scale-y-guide-6-path  {
-    stroke:#febf01;
-    stroke-dasharray: (6,3);
-    opacity: 0.3;
+  #epsSurprisesChart-graph-id0-scales-bl-0-c,
+  #annualEPSChart-graph-id0-scales-bl-0-c,
+  #qrtEPSChart-graph-id0-scales-bl-0-c,
+  #annualRevenueChart-graph-id0-scales-bl-0-c {
+    path {
+      stroke:#FADA3D;
+      stroke-dasharray: (0,0);
+      opacity: 0.15;
+    }
+  }
+  #epsSurprisesChart-graph-id0-plot-1-bl-1-c {
+    circle {
+      fill:#FADA3D;
+      opacity: 0.75;
+    }
+  }
+  #mainChart-graph-id0-plotset-plot-0-area-path,
+  #annualEPSChart-graph-id0-plotset-plot-0-node-0-path,
+  #qrtEPSChart-graph-id0-plotset-plot-0-node-0-path,
+  #qrtEPSChart-graph-id0-plotset-plot-1-node-0-path,
+  #qrtEPSChart-graph-id0-plotset-plot-2-node-0-path,  
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-0-path,
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
+    fill:#FADA3D;
+  }
+  #annualEPSChart-graph-id0-plotset-plot-0-node-1-path,
+  #qrtEPSChart-graph-id0-plotset-plot-0-node-1-path,
+  #qrtEPSChart-graph-id0-plotset-plot-1-node-1-path,
+  #qrtEPSChart-graph-id0-plotset-plot-2-node-1-path,
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-2-path {
+    fill:#F9BA3B;
+  }
+  #annualEPSChart-graph-id0-plotset-plot-0-node-2-path,
+  #qrtEPSChart-graph-id0-plotset-plot-0-node-2-path,
+  #qrtEPSChart-graph-id0-plotset-plot-1-node-2-path,
+  #qrtEPSChart-graph-id0-plotset-plot-2-node-2-path,
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-3-path,
+  #annualRevenueChart-graph-id0-plotset-plot-0-node-4-path {
+    fill:#F89939;
   }
 }
