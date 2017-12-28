@@ -241,6 +241,8 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
   }
 
   earningsReportObjFactory(res: EarningsReportSurprises | EarningsAnalystRevisions): Array<EarningsReportObj> {
+    this.upCount = 0;
+    this.downCount = 0;
     let result = [];
     Object.keys(res).forEach(key1 => {
       Object.keys(res[key1]).forEach(key2 => {
