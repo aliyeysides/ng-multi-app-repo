@@ -1,4 +1,7 @@
-import {ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
@@ -23,7 +26,7 @@ declare let gtag: Function;
         <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
       </div>
 
-      <cpt-psp-settings-menu [btn]="navBtn" [navOpened]="navOpened"
+      <cpt-psp-settings-menu [side]="menuPosition" [btn]="navBtn" [navOpened]="navOpened"
                              (navClosed)="navOpened.next(false)"></cpt-psp-settings-menu>
 
       <div class="header__title header__search">
@@ -75,12 +78,20 @@ export class AppComponent implements OnDestroy {
   @ViewChild('navBtn') navBtn: ElementRef;
   @ViewChild('searchBtn') searchBtn: ElementRef;
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    const width = event.target.innerWidth;
+    if (+width <= 1024) this.menuPosition = 'left';
+    if (+width > 1024) this.menuPosition = 'right'
+  }
+
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
   searchOpened: boolean = false;
   navOpened: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   title: string;
   status: PortfolioStatus;
+  menuPosition: string;
 
   options = {
     position: ['top', 'right'],
@@ -90,6 +101,10 @@ export class AppComponent implements OnDestroy {
   constructor(private router: Router,
               private cd: ChangeDetectorRef,
               private healthCheck: HealthCheckService) {
+    const mobWidth = (window.screen.width);
+    if (+mobWidth <= 1024) this.menuPosition = 'left';
+    if (+mobWidth > 1024) this.menuPosition = 'right';
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.title = event.urlAfterRedirects.replace(/\W/g, ' ').trim().split(' ')
