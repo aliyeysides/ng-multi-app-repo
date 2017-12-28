@@ -59,58 +59,30 @@ import {Router} from '@angular/router';
                 </ng-container>
               </ng-container>
 
+              <ng-container *ngFor="let row of neutralRows;let index = index">
+                <ng-container *ngIf="neutralIndustries?.length">
+                  <tr class="powergrid__row" id="industry-8">
 
-              <tr class="powergrid__row" id="industry-8">
-                <td class="bear">
-                  <ng-container *ngIf="neutralIndustries?.length">
-                  <p (click)="gotoReport(stock)"
-                     *ngFor="let stock of neutralIndustries?.slice(0,1)[0].SymbolPGRMappings" class="ticker">
-                    <span *ngIf="stock[objectKeys(stock)[0]] > 50">{{ objectKeys(stock)[0] }}</span>
-                  </p>
-                  </ng-container>
-                </td>
-                <td class="bull">
-                  <ng-container *ngIf="neutralIndustries?.length">
-                  <p (click)="gotoReport(stock)"
-                     *ngFor="let stock of neutralIndustries?.slice(0,1)[0].SymbolPGRMappings" class="ticker">
-                    <span *ngIf="stock[objectKeys(stock)[0]] < 50">{{ objectKeys(stock)[0] }}</span>
-                  </p>
-                  </ng-container>
-                </td>
-                <td class="industry industry--neutral">
-                  <ng-container *ngIf="neutralIndustries?.length">
-                  <p class="industry-text">
-                    <span>{{ neutralIndustries ? neutralIndustries[0].IndustryName : null }}</span>
-                  </p>
-                  </ng-container>
-                </td>
-              </tr>
-              <tr class="powergrid__row" id="industry-9">
-                <td class="bear">
-                  <ng-container *ngIf="neutralIndustries?.length">
-                    <p (click)="gotoReport(stock)"
-                       *ngFor="let stock of neutralIndustries?.slice(-1)[0].SymbolPGRMappings" class="ticker">
-                      <span *ngIf="stock[objectKeys(stock)[0]] < 50">{{ objectKeys(stock)[0] }}</span>
-                    </p>
-                  </ng-container>
-                </td>
-                <td class="bull">
-                  <ng-container *ngIf="neutralIndustries?.length">
-                    <p (click)="gotoReport(stock)"
-                       *ngFor="let stock of neutralIndustries?.slice(-1)[0].SymbolPGRMappings" class="ticker">
-                      <span *ngIf="stock[objectKeys(stock)[0]] > 50">{{ objectKeys(stock)[0] }}</span>
-                    </p>
-                  </ng-container>
-                </td>
-                <td class="industry industry--neutral">
-                  <ng-container *ngIf="neutralIndustries?.length">
-                    <p class="industry-text">
-                      <span>{{ neutralIndustries ? neutralIndustries[neutralIndustries.length - 1].IndustryName : null
-                        }}</span>
-                    </p>
-                  </ng-container>
-                </td>
-              </tr>
+                    <td class="bear">
+                      <p (click)="gotoReport(stock)" *ngFor="let stock of neutralIndustries[index]?.SymbolPGRMappings"
+                         class="ticker">
+                        <span *ngIf="stock[objectKeys(stock)[0]] > 50">{{ objectKeys(stock)[0] }}</span>
+                      </p>
+                    </td>
+                    <td class="bull">
+                      <p (click)="gotoReport(stock)" *ngFor="let stock of neutralIndustries[index]?.SymbolPGRMappings"
+                         class="ticker">
+                        <span *ngIf="stock[objectKeys(stock)[0]] < 50">{{ objectKeys(stock)[0] }}</span>
+                      </p>
+                    </td>
+                    <td class="industry industry--neutral">
+                      <p class="industry-text">
+                        <span *ngIf="neutralIndustries[index]">{{ neutralIndustries[index]?.IndustryName }}</span>
+                      </p>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
 
               <ng-container *ngFor="let row of rows;let index = index">
                 <ng-container *ngIf="weakIndustries">
@@ -294,6 +266,7 @@ export class PowerGridComponent implements OnInit, OnDestroy {
   portUp: boolean;
   collapse: boolean = false;
   rows: Array<number> = new Array(7);
+  neutralRows: Array<number> = new Array(2);
   objectKeys = Object.keys;
 
   constructor(private healthCheck: HealthCheckService,
