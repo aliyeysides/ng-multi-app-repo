@@ -57,7 +57,8 @@ import {ActivatedRoute} from '@angular/router';
             <p>CHG</p>
           </div>
         </li>
-        <li (click)="selectedStock(stock.symbol);toggleSlider(stock.symbol);$event.stopPropagation()" *ngFor="let stock of myStocks"
+        <li (click)="selectedStock(stock.symbol);toggleSlider(stock.symbol);$event.stopPropagation()"
+            *ngFor="let stock of myStocks"
             class="row list__entry">
           <div class="col-3 list-entry__pgr">
             <img class="align-absolute" src="{{ appendPGRImage(stock.PGR, stock.raw_PGR) }}">
@@ -70,13 +71,14 @@ import {ActivatedRoute} from '@angular/router';
             <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock.Last | decimal }}</p>
           </div>
           <div class="col-3 list-entry__data">
-            <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock['Percentage '] | decimal }}%</p>
+            <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">
+              {{ stock['Percentage '] | decimal }}%</p>
           </div>
           <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide">
             <img src="./assets/imgs/ui_slide.svg">
           </div>
           <div class="col-12 list-entry__overlay"
-               [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.PGR>=4, 'red': stock.PGR<=2, 'yellow': stock.PGR==3 }">
+               [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.PGR>=4, 'red': stock.PGR<=2 && stock.PGR>0, 'yellow': stock.PGR==3, 'none': stock.PGR<=0 }">
             <div class="row no-gutters overlay__contents">
               <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide">
                 <img src="./assets/imgs/ui_slide.svg">
@@ -133,13 +135,13 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   }
 
   @Input('userLists')
-    set userlists(val: object[]) {
-      this._userlists.next(val);
-    }
+  set userlists(val: object[]) {
+    this._userlists.next(val);
+  }
 
-    get userlists() {
-      return this._userlists.getValue();
-    }
+  get userlists() {
+    return this._userlists.getValue();
+  }
 
 
   powerbar: string[] = ['0', '0', '0'];

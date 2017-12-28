@@ -21,9 +21,9 @@
 	.divider__full {
 		margin:25px auto;
 	}
-	.divider__long--red, 
-	.divider__long--green, 
-	.divider__long--blue, 
+	.divider__long--red,
+	.divider__long--green,
+	.divider__long--blue,
 	.divider__long--yellow {
 		margin:25px auto;
 		width: 100%;
@@ -175,8 +175,52 @@
 	}
 }
 
+.component--stockview.none {
+  background-image: linear-gradient(to bottom, #666 0%,#667 100%);
 
+  .divider__full {
+    background-image: linear-gradient(to bottom, #666 0%,#667 100%);
+  }
+  .stock-info {
+    h2 {
+      color:#666;
+    }
+  }
+  .stock-info--stats {
+    .label {
+      color:#666;
+    }
+  }
+  .stock-info--chart-toggle {
+    .date-select.selected {
+      background-color:#666;
+    }
+  }
+  .stock-info--news {
 
+    .news__pagination {
+      p {
+        color:#666;
+
+        span {
+          color:#666;
+        }
+      }
+    }
+    .news__slider {
+      .source {
+        color:#666;
+      }
+    }
+  }
+  .data-table {
+    table {
+      .label {
+        color:#666;
+      }
+    }
+  }
+}
 
 
 /*           HEADER            */

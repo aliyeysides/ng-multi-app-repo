@@ -25,9 +25,10 @@ declare var zingchart: any;
     <div class="component--stockview"
          [ngClass]="{
           'open': show, 
-         'bearish': symbolData ? symbolData['metaInfo'][0]['PGR'] < 3 : null, 
+         'bearish': symbolData ? symbolData['metaInfo'][0]['PGR'] < 3 && symbolData['metaInfo'][0]['PGR'] >= 1 : null,
          'neutral': symbolData ? symbolData['metaInfo'][0]['PGR'] == 3 : null, 
-         'bullish': symbolData ? symbolData['metaInfo'][0]['PGR'] > 3 : null}">
+         'bullish': symbolData ? symbolData['metaInfo'][0]['PGR'] > 3 : null,
+         'none': symbolData ? symbolData['metaInfo'][0]['PGR'] <= 0 : null }">
 
       <!-- STOCK VIEW HEADER -->
       <div class="stockview__header">
@@ -47,7 +48,8 @@ declare var zingchart: any;
           <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
         </div>
         <div class="header__button header__button--pdf">
-          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o"
+                                                                               aria-hidden="true"></i></button>
         </div>
       </div>
 
@@ -1591,7 +1593,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   appendPGRImage(symbolData) {
     if (symbolData) {
-      console.log('stock report', 'pgr:', symbolData['metaInfo'][0]['PGR'], 'rawPgr:', symbolData['metaInfo'][0]['raw_PGR']);
       return this.signalService.appendPGRImage(symbolData['metaInfo'][0]['PGR'], symbolData['metaInfo'][0]['raw_PGR']);
     }
   }
