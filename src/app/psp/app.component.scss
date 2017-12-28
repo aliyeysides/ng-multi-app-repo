@@ -1,17 +1,18 @@
-@import 'variables';
+@import 'variablesPulse';
 
 body {
   height: 100%;
   overflow-x: hidden;
-  color:#484848;
+  color:$font-color;
   font-size: 14px;
   background-color: #ffffff;
 }
 
 p, a, h1, h2, h3, h4, h5, h6, span, label, ul, li, table, td, th, tr, button {
-  font-family: 'Rajdhani', 'Open Sans', sans-serif;
+  font-family: $font-stack;
   margin: 0;
   padding: 0;
+  cursor: default;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -30,7 +31,7 @@ h2 {
   font-size: 35px;
   font-weight: 400;
   margin: 40px 0px 5px;
-  color: #484848;
+  color: $font-color;
   line-height: 1;
 }
 h3 {
@@ -39,7 +40,7 @@ h3 {
   font-weight: 700;
   margin: 5px 0 3px;
   opacity: 0.8;
-  color: #484848;
+  color: $font-color;
   position: relative;
   text-transform: uppercase;
 
@@ -79,7 +80,7 @@ button {
   border:0;
 }
 ::placeholder {
- color: #484848 !important;
+ color: $font-color !important;
  font-size:28px !important;
  line-height: 1.5 !important;
  text-align: center !important;
@@ -96,70 +97,64 @@ sub {
 
 
 .veryBullish {
-  color:#24A300;
+  color: $veryBullish-green;
 }
-
 .bullish {
-  color:#6ACC00;
+  color: $bullish-green;
 }
-
-.neutral, .hold {
-  color:#FF9900;
+.neutral {
+  color: $neutral-yellow;
 }
-
 .bearish {
-  color:#FD4500;
+  color: $bearish-red;
 }
-
 .veryBearish {
-  color:#EB001C;
+  color: $veryBearish-red;
 }
 
-.up-change, .up-change span, .green {
-  color:#00C04E;
+
+.green, .up-change, .up-change span {
+  color:$pulse-green;
+}
+.red, .down-change, .down-change span {
+  color:$pulse-red;
+}
+.yellow, .hold {
+  color:$pulse-yellow;
+}
+.blue, .ux-blue {
+  color:$pulse-blue;
 }
 
-.blue {
-  color:#4718E1;
-}
-
-.ux-blue {
-  color:#4718E1;
-}
 
 .link-blue {
-  color:#1199ff;
+  color:$link-blue;
 }
-
-.red, .down-change, .down-change span {
-  color:#FD001F;
-}
-
-.yellow {
-  color:#F89939;
-}
-
 .greyed-out {
-  color:#dddddd;
+  color:$font-color--light;
 }
 
-.align-absolute {
-    position: absolute;
-    top: 50%;
-    left:50%;
-    transform: translate(-50%, -50%);
+
+
+
+
+.bold {
+  font-weight:600;
 }
+
+
+
+
+
+
+
 
 .tab--slide {
   width: 100px;
   height: 5px;
-  background-color: #dddddd;
+  background-color: $background--light;
   border-radius: 10px;
   margin: 5px auto 0;
-}
-
-.bold {
-  font-weight:600;
 }
 
 .blur-me {
@@ -167,9 +162,6 @@ sub {
   overflow: hidden;
 }
 
-.show .btn-primary {
-  box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
-}
 
 .empty-chart {
   text-align: center;
@@ -183,7 +175,7 @@ sub {
 
 
 .paragraph {
-  font-family: 'Open Sans', sans-serif;
+  font-family: $font-stack;
   font-size: 16px;
   margin-bottom: 15px;
   text-align: left;
@@ -199,7 +191,7 @@ sub {
 
 
 .disclaimer {
-  font-family: 'Open Sans', sans-serif;
+  font-family: $font-stack;
   font-size: 12px;
   margin: 15px 0 25px;
   text-align: left;
@@ -220,13 +212,13 @@ sub {
   height: 2px;
   border-radius: 5px;
   margin: 10px auto;
-  background: #f0f0f0;
+  background: $background--verylight;
 }
 
 .divider__medium {
   width: 55%;
   height: 2px;
-  background: #eeeeee;
+  background: $background--light;
   margin:0 auto;
 }
 
@@ -235,7 +227,7 @@ sub {
   height: 3px;
   border-radius: 5px;
   margin: 10px auto 20px;
-  background: #f0f0f0;
+  background: $background--verylight;
 }
 
 .divider__full {
@@ -243,7 +235,7 @@ sub {
   height: 3px;
   border-radius: 5px;
   margin: 15px auto;
-  background: #f0f0f0;
+  background: $background--verylight;
 }
 
 .divider__long--green {
@@ -337,12 +329,13 @@ sub {
 
 .container--nav {
   position: absolute;
-  background-color: #333;
+  background-color: $background--dark;
   height: 100vh;
   color:#ffffff;
   width: 0; /* 0 width - change this with JavaScript */
   z-index: 1000;
   top: 0;
+  left: 0;
   overflow: hidden;
   transition: 0.5s;
   box-shadow: -7px 0 20px 0px rgba(0, 0, 0, 0.2);
@@ -416,7 +409,7 @@ sub {
     .version {
       font-size: 11px;
       line-height: 1.5;
-      color: #999;
+      color: $font-color--mid;
       text-align: right;
       white-space: nowrap;
       cursor: default;
@@ -425,7 +418,7 @@ sub {
     .toc__link {
       font-size: 13px;
       line-height: 1.5;
-      color: #1199ff;
+      color: $link-blue;
       text-decoration: none;
       text-align: left;
       white-space: nowrap;
@@ -448,7 +441,7 @@ sub {
   p {
     font-size: 12px;
     font-weight: 600;
-    opacity: .5;
+    color: $font-color--light;
     line-height: 1;
     cursor: default;
   }
@@ -480,6 +473,7 @@ sub {
     font-size: 64px;
     line-height: 1;
     font-weight: 400;
+    cursor: default;
   }
 
   img {
@@ -492,10 +486,10 @@ sub {
   }
 
   .summary--left {
-    //border-right: 4px dotted #DDD;
+    //border-right: $divider--dotted;
   }
   .summary--right {
-    border-left: 4px dotted #DDD;
+    border-left: $divider--dotted;
   }
 }
 
@@ -518,7 +512,7 @@ sub {
       line-height: 1;
       font-weight: 700;
       display: inline-block;
-      color:#cccccc;
+      color: $font-color--light;
       font-weight: 600;
       text-transform: uppercase;
       margin: 10px 0 10px;
@@ -543,7 +537,7 @@ sub {
     }
 
     .selected {
-      background-color: #484848;
+      background-color: $font-color;
       color:#ffffff;
     }
   }
@@ -677,7 +671,7 @@ sub {
 
         .nav--toplevel {
           display: block;
-          color:#eeeeee;
+          color: $font-color--light;
           line-height: 45px;
           height: 45px;
           text-decoration: none;
@@ -697,8 +691,8 @@ sub {
           box-shadow:inset 0px -5px 0px rgba(255,255,255,1);
         }
 
-        i{
-          color:#1199ff;
+        i {
+          color:$link-blue;
         }
       }
     }
@@ -716,6 +710,7 @@ sub {
 .page__header--grey {
   background: linear-gradient(to left, rgba(60,60,60,0.95) 0%,rgba(100,100,100,0.95) 100%);
 }
+
 
 
 
@@ -947,8 +942,8 @@ sub {
 
 
 .article {
-  font-family: 'Open Sans', sans-serif;
-  color: #484848;
+  font-family: $font-stack;
+  color: $font-color;
   font-size: 16px;
   line-height: 1.5;
   text-align: left;
@@ -972,7 +967,7 @@ sub {
       margin-bottom: 0px;
       text-align: left;
       opacity: 1;
-      color: #4718E1;
+      color: $pulse-blue;
 
       @media screen AND (min-width: 768px) {
         font-size: 36px;
@@ -986,17 +981,19 @@ sub {
     font-weight: 400;
   }
   img {
-    width: 100%;
+    width: auto;
     height: auto;
+    clear: both;
+    max-width: 992px;
     margin: 20px auto 30px;
 
-    @media screen AND (min-width:768px) {
-      width: 75%;
+    @media screen AND (max-width:575px) {
+      width: 100%;
     }
   }
   span {
-    font-family: 'Open Sans', sans-serif;
-    color: #484848;
+    font-family: $font-stack;
+    color: $font-color;
     font-size: 16px;
     line-height: 1.5;
   }
@@ -1009,8 +1006,9 @@ sub {
 
 
 
-
-
+.show .btn-primary {
+  box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
+}
 
 
 .darken {
