@@ -60,9 +60,8 @@ import {Router} from '@angular/router';
               </ng-container>
 
               <ng-container *ngFor="let row of neutralRows;let index = index">
-                <ng-container *ngIf="neutralIndustries?.length">
+                <ng-container *ngIf="neutralIndustries">
                   <tr class="powergrid__row" id="industry-8">
-
                     <td class="bear">
                       <p (click)="gotoReport(stock)" *ngFor="let stock of neutralIndustries[index]?.SymbolPGRMappings"
                          class="ticker">
@@ -261,7 +260,7 @@ export class PowerGridComponent implements OnInit, OnDestroy {
 
   allIndustries: Array<PHCIndustryData>;
   strongIndustries: Array<PHCIndustryData>;
-  neutralIndustries: Array<PHCIndustryData>;
+  neutralIndustries: Array<PHCIndustryData> = [];
   weakIndustries: Array<PHCIndustryData>;
   portUp: boolean;
   collapse: boolean = false;
@@ -281,6 +280,7 @@ export class PowerGridComponent implements OnInit, OnDestroy {
         this.allIndustries = res['Industries'];
         this.strongIndustries = this.allIndustries.filter(x => x['IndustryScore'] > 0.4);
         this.neutralIndustries = this.allIndustries.filter(x => x['IndustryScore'] <= 0.4 && x['IndustryScore'] >= -0.4);
+        this.neutralIndustries.splice(1, this.neutralIndustries.length - 2);
         this.weakIndustries = this.allIndustries.filter(x => x['IndustryScore'] < -0.4);
         console.log('industries', 'strong:', this.strongIndustries, 'neutral:', this.neutralIndustries, 'weak:', this.weakIndustries, 'all:', this.allIndustries);
       });
