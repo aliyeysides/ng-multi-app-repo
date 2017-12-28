@@ -2426,6 +2426,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
         },
         "scale-y": {
+          "multiplier": true,
           "line-color": "transparent",
           "line-style": "solid",
           item: {
