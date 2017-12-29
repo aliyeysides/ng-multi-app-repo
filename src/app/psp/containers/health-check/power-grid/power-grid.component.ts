@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'cpt-psp-power-grid',
   template: `
-    <div id="HC--PowerGrid" class="col-12 col-lg-8 col-xl-8 float-lg-right">
+    <div id="HC--PowerGrid" class="">
 
       <div class="row justify-content-center">
         <div class="col-12 col-xl-10">
