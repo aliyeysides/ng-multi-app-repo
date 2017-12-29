@@ -237,7 +237,7 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
   }
 
   gotoReport(ticker: string) {
-    this.router.navigate(['my-stocks', ticker]);
+    this.router.navigate(['stock-analysis', ticker]);
   }
 
   earningsReportObjFactory(res: EarningsReportSurprises | EarningsAnalystRevisions): Array<EarningsReportObj> {

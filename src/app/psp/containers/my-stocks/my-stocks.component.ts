@@ -84,7 +84,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
     if (+width <= 1024) this.desktopView = false;
     if (+width > 1024) {
       if (this.userStocks) {
-        this.router.navigate(['/my-stocks', this.userStocks[0].symbol]);
+        this.router.navigate(['/stock-analysis', this.userStocks[0].symbol]);
       }
       this.desktopView = true;
     }
@@ -204,7 +204,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   gotoReport(ticker: string) {
-    this.router.navigate(['my-stocks', ticker]);
+    this.router.navigate(['stock-analysis', ticker]);
   }
 
   closeReport() {

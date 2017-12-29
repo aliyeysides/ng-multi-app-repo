@@ -211,7 +211,7 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
   }
 
   gotoReport(ticker: string) {
-    this.router.navigate(['my-stocks', ticker]);
+    this.router.navigate(['stock-analysis', ticker]);
   }
 
   private parseAlerts(alerts: PGRChanges) {

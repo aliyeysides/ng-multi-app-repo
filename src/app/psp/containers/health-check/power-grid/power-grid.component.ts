@@ -308,7 +308,7 @@ export class PowerGridComponent implements OnInit, OnDestroy {
   }
 
   gotoReport(ticker: string) {
-    this.router.navigate(['my-stocks', Object.keys(ticker)[0]]);
+    this.router.navigate(['stock-analysis', Object.keys(ticker)[0]]);
   }
 
 }
