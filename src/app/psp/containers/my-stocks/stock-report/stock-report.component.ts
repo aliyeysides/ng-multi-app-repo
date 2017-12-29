@@ -1689,6 +1689,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       },
       scaleY: {
         values: values,
+        autoFit: true,
         guide: {
           visible: true,
           lineStyle: 'solid',
@@ -1738,7 +1739,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       series: [
         {
           values: values,
-          step: 100,
           lineColor: "#1199ff",
           lineWidth: 2,
           backgroundColor: "#1199ff #b9e5fb",
