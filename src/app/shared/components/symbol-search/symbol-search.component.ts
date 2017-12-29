@@ -44,7 +44,6 @@ export class BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
       .switchMap(val => this.symbolSearchService.symbolLookup(val))
       .takeUntil(this.ngUnsubscribe)
       .subscribe(val => {
-        console.log('val', val);
         this.searchResults = val;
       });
   }

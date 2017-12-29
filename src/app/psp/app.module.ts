@@ -20,7 +20,6 @@ import {loadingMaskConfig3} from '../../loading-mask-config';
 import {IdeasService} from '../services/ideas.service';
 import {SignalService} from '../services/signal.service';
 
-import {SimpleNotificationsModule} from 'angular2-notifications';
 import {NotificationsService} from 'angular2-notifications/dist';
 import {SymbolSearchService} from '../services/symbol-search.service';
 import {PspAuthGuard} from '../shared/guards/psp-auth.guard';
@@ -36,7 +35,6 @@ import {PspAuthGuard} from '../shared/guards/psp-auth.guard';
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
     BusyModule.forRoot(loadingMaskConfig3),
-    SimpleNotificationsModule.forRoot(),
     ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES,
   ],
