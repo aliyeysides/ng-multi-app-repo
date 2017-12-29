@@ -24,7 +24,7 @@ import * as moment from 'moment';
                               (stockClicked)="selectStock($event)"
                               [stocks]="userStocks" [powerBar]="powerBar"
                               [userLists]="allUserLists"></cpt-my-stocks-list>
-          <div class="col-12" id="list--recent">
+          <div class="col-12">
             <h3>Recently Viewed</h3>
             <div class="divider__long"></div>
             <ul class="stock__list">

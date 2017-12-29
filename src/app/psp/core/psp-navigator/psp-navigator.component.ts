@@ -38,7 +38,7 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   public routes: object[] = [
     {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
     {link: '/my-stocks', klass: 'fa fa-pie-chart', label: 'Stock Summary'},
-    {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Insights'},
+    {link: '/market-insights', klass: 'fa fa-heartbeat', label: 'Market Insights'},
   ];
 
 
@@ -76,14 +76,14 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
       this.routes = [
         {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
         {link: '/my-stocks/' + this.firstUserStock, klass: 'fa fa-pie-chart', label: 'Stock Summary'},
-        {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Insights'},
+        {link: '/market-insights', klass: 'fa fa-heartbeat', label: 'Market Insights'},
       ];
       return;
     }
     this.routes = [
       {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
       {link: '/my-stocks', klass: 'fa fa-pie-chart', label: 'Stock Summary'},
-      {link: '/market-beat', klass: 'fa fa-heartbeat', label: 'Market Insights'},
+      {link: '/market-insights', klass: 'fa fa-heartbeat', label: 'Market Insights'},
     ];
   }
 
