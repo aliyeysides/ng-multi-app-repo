@@ -157,10 +157,27 @@ sub {
   margin: 5px auto 0;
 }
 
+
 .blur-me {
   filter: blur(25px);
   overflow: hidden;
 }
+
+
+.icon__separator {
+  opacity: 0.15;
+  margin: 0 auto;
+  max-width: 32px;
+
+  img, svg {
+    width: 100%;
+    max-width: 32px;
+  }
+}
+
+
+
+
 
 
 .empty-chart {
@@ -199,6 +216,9 @@ sub {
   line-height: 1.5;
   cursor: default;
 }
+
+
+
 
 
 
@@ -247,11 +267,12 @@ sub {
 }
 
 .divider__long--red {
-  background: linear-gradient(to right, rgba(255,50,50,0.85) 2%,rgba(170,0,119,0.85) 100%);
+  background-image:  $gradient--pulse-red;
   width: 90%;
   margin: 15px auto;
   height: 3px;
   border-radius: 5px;
+  opacity: .9;
 }
 
 .divider__long--yellow {
@@ -270,17 +291,6 @@ sub {
   border-radius: 5px;
 }
 
-
-.icon__separator {
-  opacity: 0.15;
-  margin: 0 auto;
-  max-width: 32px;
-
-  img, svg {
-    width: 100%;
-    max-width: 32px;
-  }
-}
 
 
 
@@ -399,6 +409,11 @@ sub {
 
   .logo {
     padding:15px 20px 0 20px;
+    width: 300px;
+
+    img {
+      width: 100%;
+     }
   }
 
   .toc__container {
@@ -561,7 +576,7 @@ sub {
   height: 45px;
   color:#ffffff;
   z-index: 100;
-  background: linear-gradient(13deg, rgba(157,158,163,0.95) 0%, rgba(189,187,190,0.95) 100%);
+  background: $gradient--pulse-grey;
 
   @media screen AND (min-width:992px) {
     background: transparent;
@@ -700,15 +715,15 @@ sub {
 }
 
 .page__header--green {
-  background: linear-gradient(to left, rgba(0,204,0,0.95) 0%,rgba(0,170,119,0.95) 80%);
+  background: $gradient--pulse-green;
 }
 
 .page__header--red {
-  background: linear-gradient(to left, rgba(255,50,50,0.95) 0%,rgba(170,0,119,0.95) 80%);
+  background: $gradient--pulse-red;
 }
 
 .page__header--grey {
-  background: linear-gradient(to left, rgba(60,60,60,0.95) 0%,rgba(100,100,100,0.95) 100%);
+  background: $gradient--pulse-grey;
 }
 
 
@@ -849,20 +864,20 @@ sub {
   top:5px;
   left:0;
   width: 100%;
-  background: rgba(60,60,60,0.9);
+  background: $gradient--pulse-grey;
 }
 
 .list-entry__overlay.show {
   display:block;
 }
 .list-entry__overlay.red {
-  background: rgba(253,0,31,0.9);
+  background: $gradient--pulse-red;
 }
 .list-entry__overlay.green {
-  background: rgba(0,192,78,0.95);
+  background: $gradient--pulse-green;
 }
 .list-entry__overlay.yellow {
-  background: rgba(249, 186, 59, 0.95);
+  background: $gradient--pulse-yellow;
 }
 
 .overlay__contents {
@@ -901,6 +916,9 @@ sub {
 
 
 
+
+
+
 /*                                      */
 /*          EXPAND/COLLAPSE             */
 /*                                      */
@@ -916,7 +934,7 @@ sub {
 
   p {
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.5;
     color:#999;
     text-transform: uppercase;
@@ -947,7 +965,7 @@ sub {
   font-size: 16px;
   line-height: 1.5;
   text-align: left;
-  margin:-10px 0 15px;
+  margin:-20px 0 15px;
 
   ul {
       list-style: disc;
@@ -955,7 +973,7 @@ sub {
       margin-top: -16px;
 
       li {
-        padding:5px 0;
+        padding:5px 0 3px;
         font-size: 16px;
       }
   }
@@ -985,7 +1003,7 @@ sub {
     height: auto;
     clear: both;
     max-width: 992px;
-    margin: 20px auto 30px;
+    margin: 20px auto 20px;
 
     @media screen AND (max-width:575px) {
       width: 100%;
