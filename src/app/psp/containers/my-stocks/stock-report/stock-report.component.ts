@@ -1276,8 +1276,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   research;
   data;
 
-  toolTipText: string = "Stock rating based on a 20-factor model that produces a rating from Very Bullish (or likely to outperform the market) to Very Bearish (unlikely to perform in the short to medium term). Read more ";
-  link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/stock-rating/">here.</a>`;
+  toolTipText: string = "Stock rating based on a 20-factor model that produces a rating from Very Bullish (or likely to outperform the market) to Very Bearish (unlikely to perform in the short to medium term). ";
+  link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/stock-rating/">Read more here.</a>`;
 
   current: string = '1Y';
   mainChart: ZingChart = {
@@ -1624,7 +1624,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   gotoReport(symbol: string) {
-    this.router.navigate(['my-stocks', symbol]);
+    this.router.navigate(['stock-analysis', symbol]);
   }
 
   scrollRight() {
@@ -1689,6 +1689,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       },
       scaleY: {
         values: values,
+        autoFit: true,
         guide: {
           visible: true,
           lineStyle: 'solid',
@@ -1738,7 +1739,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       series: [
         {
           values: values,
-          step: 100,
           lineColor: "#1199ff",
           lineWidth: 2,
           backgroundColor: "#1199ff #b9e5fb",

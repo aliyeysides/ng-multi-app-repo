@@ -336,7 +336,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
 
   gotoReport(ticker: string) {
     if (ticker === 'S&P 500' ) return;
-    this.router.navigate(['my-stocks', ticker]);
+    this.router.navigate(['stock-analysis', ticker]);
   }
 
 }

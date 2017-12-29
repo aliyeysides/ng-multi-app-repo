@@ -124,7 +124,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   }
 
   onSubmit(ticker: string) {
-    this.router.navigate(['my-stocks', ticker.toUpperCase()]);
+    this.router.navigate(['stock-analysis', ticker.toUpperCase()]);
     this.toggleSearch.emit();
   }
 
@@ -147,7 +147,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   }
 
   onClick(ticker: string) {
-    this.router.navigate(['my-stocks', ticker]);
+    this.router.navigate(['stock-analysis', ticker]);
     this.toggleSearch.emit();
   }
 

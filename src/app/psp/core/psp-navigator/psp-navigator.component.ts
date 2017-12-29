@@ -37,7 +37,7 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   currentRoute: string;
   public routes: object[] = [
     {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-    {link: '/my-stocks', klass: 'fa fa-pie-chart', label: 'Stock Summary'},
+    {link: '/stock-analysis', klass: 'fa fa-pie-chart', label: 'Stock Analysis'},
     {link: '/market-insights', klass: 'fa fa-heartbeat', label: 'Market Insights'},
   ];
 
@@ -57,11 +57,13 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log('test');
     this.healthCheck.getUserStocks()
       .takeUntil(this._ngUnsubscribe)
       .filter(x => x != undefined)
       .subscribe(res => {
         this.firstUserStock = res[0].symbol;
+        console.log('firstUserStock', this.firstUserStock);
         this.updateRoutes();
       });
   }
@@ -75,14 +77,14 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
     if (this.reportOpen) {
       this.routes = [
         {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-        {link: '/my-stocks/' + this.firstUserStock, klass: 'fa fa-pie-chart', label: 'Stock Summary'},
+        {link: '/stock-analysis/' + this.firstUserStock, klass: 'fa fa-pie-chart', label: 'Stock Analysis'},
         {link: '/market-insights', klass: 'fa fa-heartbeat', label: 'Market Insights'},
       ];
       return;
     }
     this.routes = [
       {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-      {link: '/my-stocks', klass: 'fa fa-pie-chart', label: 'Stock Summary'},
+      {link: '/stock-analysis', klass: 'fa fa-pie-chart', label: 'Stock Analysis'},
       {link: '/market-insights', klass: 'fa fa-heartbeat', label: 'Market Insights'},
     ];
   }
