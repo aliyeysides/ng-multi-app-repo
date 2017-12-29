@@ -31,7 +31,7 @@ import {MarketsSummaryService} from '../../../services/markets-summary.service';
     PowerGridComponent,
     ReportingCalendarComponent
   ],
-  providers: [HealthCheckService, MarketsSummaryService]
+  providers: [MarketsSummaryService]
 })
 export class HealthCheckModule {
 }

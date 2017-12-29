@@ -57,11 +57,13 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log('test');
     this.healthCheck.getUserStocks()
       .takeUntil(this._ngUnsubscribe)
       .filter(x => x != undefined)
       .subscribe(res => {
         this.firstUserStock = res[0].symbol;
+        console.log('firstUserStock', this.firstUserStock);
         this.updateRoutes();
       });
   }
