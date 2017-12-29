@@ -3,9 +3,9 @@
 
 $veryBullish-green: #24A300;
 $bullish-green: #6ACC00;
-$neutral-yellow: #ff9900;
+$neutral-yellow: #F5A623;
 $bearish-red: #FD4500;
-$veryBearish-red: #EB001C;
+$veryBearish-red: #D0021B;
 
 
 $pulse-blue: #3150C6;
@@ -41,7 +41,7 @@ $font-color--mid: #999;
 $font-color--light: #CCCDD1;
 
 $link-blue: #1199ff;
-$link-grey: #7C828F;
+$link-grey: #999999;
 
 
 
@@ -62,6 +62,16 @@ $background--dark: #333333;
 /*  Gradients  */
 
 
+$gradient--pulse-red: linear-gradient(45deg, #FD001F 0%, #EA003D 49%, #B70056 100%);
+
+$gradient--pulse-grey: linear-gradient(13deg, rgba(157,158,163,0.95) 20%, rgba(189,187,190,0.95) 100%);
+
+$gradient--pulse-green: linear-gradient(135deg, rgba(0,192,78,0.95) 0%, rgba(0,193,169,0.95) 100%);
+
+$gradient--pulse-blue: linear-gradient(to left, rgba(84,0,134,0.95) 0%, rgba(17,153,255,0.95) 100%);
+
+$gradient--pulse-yellow: linear-gradient(-135deg, rgba(250,218,61,0.95) 0%, rgba(248,153,57,0.95) 100%);
+
 
 
 
@@ -71,7 +81,7 @@ $background--dark: #333333;
 
 $divider--dotted: 4px dotted #DDD;
 
-
+$line--light: 2px solid #efefef;
 
 
 

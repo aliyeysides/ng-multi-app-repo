@@ -1,4 +1,3 @@
-
 @import 'variablesPulse';
 
 
@@ -132,7 +131,7 @@
 			&::after {
 				content: "…";
 				position: absolute;
-				bottom: 0px;
+				bottom: -15px;
 				left:0;
 				right:0;
 				width: 100%;
