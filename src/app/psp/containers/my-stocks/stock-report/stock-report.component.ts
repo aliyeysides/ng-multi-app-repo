@@ -1688,6 +1688,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         lineColor: "#fff"
       },
       scaleY: {
+        values: values,
         guide: {
           visible: true,
           lineStyle: 'solid',
@@ -1737,6 +1738,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       series: [
         {
           values: values,
+          step: 100,
           lineColor: "#1199ff",
           lineWidth: 2,
           backgroundColor: "#1199ff #b9e5fb",
@@ -1748,7 +1750,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   getRSIConfig(dates, values) {
     if (values) {
       return {
-        type: 'line',
+        type: 'area',
         height: 115,
         x: 0,
         y: 510,
@@ -1808,10 +1810,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         scaleX: {
           visible: false,
-          zooming: true
+          zooming: true,
         },
         scaleY: {
-          visible: false
+          visible: false,
+          refValue: 0.5
         },
         series: [
           {

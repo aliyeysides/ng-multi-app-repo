@@ -69,9 +69,7 @@ declare let gtag: Function;
       <div class="router__container">
         <router-outlet></router-outlet>
       </div>
-      <simple-notifications [options]="options"></simple-notifications>
     </div>
-
   `
 })
 export class AppComponent implements OnDestroy {
@@ -92,11 +90,6 @@ export class AppComponent implements OnDestroy {
   title: string;
   status: PortfolioStatus;
   menuPosition: string;
-
-  options = {
-    position: ['top', 'right'],
-    timeOut: 5000
-  };
 
   constructor(private router: Router,
               private cd: ChangeDetectorRef,
