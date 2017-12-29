@@ -17,7 +17,7 @@ declare let gtag: Function;
         <cpt-psp-navigator *ngIf="side==='left'" (routeClicked)="navClicked()"></cpt-psp-navigator>
         <ul>
           <li>
-            <a href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;Education</a>
+            <a target="_blank" href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;Education</a>
           </li>
         </ul>
         <ul>
