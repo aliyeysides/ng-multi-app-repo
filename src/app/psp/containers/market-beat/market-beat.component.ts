@@ -48,7 +48,7 @@ import {Subscription} from 'rxjs/Subscription';
 export class MarketBeatComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
-  loadCount: number = 14;
+  loadCount: number = 4;
   posts: object[];
   selectedInsight: object;
   commentary: string;
