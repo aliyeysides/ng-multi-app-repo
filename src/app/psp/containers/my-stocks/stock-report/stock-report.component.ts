@@ -1624,7 +1624,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   gotoReport(symbol: string) {
-    this.router.navigate(['my-stocks', symbol]);
+    this.router.navigate(['stock-analysis', symbol]);
   }
 
   scrollRight() {

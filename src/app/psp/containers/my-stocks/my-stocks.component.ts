@@ -208,7 +208,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   closeReport() {
-    this.router.navigate(['my-stocks']);
+    this.router.navigate(['stock-analysis']);
   }
 
   appendPGRImage(pgr, rawPgr) {
