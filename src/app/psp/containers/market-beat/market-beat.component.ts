@@ -35,7 +35,8 @@ import {Subscription} from 'rxjs/Subscription';
   	      		<div class="article__body" [class.opened]="opened">
   	      			<div class="article" [innerHTML]="commentary"></div>
   	      		</div>
-  	      		<a (click)="readMore()" class="article__read-more">READ FULL ARTICLE</a>
+  	      		<a *ngIf="!opened" (click)="toggleReadMore()" class="article__read-more">READ FULL ARTICLE</a>
+              <a *ngIf="opened" (click)="toggleReadMore()" class="article__read-more">COLLAPSE ARTICLE</a>
   	      	</div>
           </div>
         </div>
@@ -72,10 +73,11 @@ export class MarketBeatComponent implements OnInit, OnDestroy {
 
   selectInsight(post: object) {
     this.selectedInsight = post;
+    this.opened = false;
     this.commentary = this.wp.getInsightPostBody(post);
   }
 
-  readMore() {
+  toggleReadMore() {
     this.opened = !this.opened;
   }
 
