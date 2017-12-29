@@ -21,27 +21,29 @@ import {UtilService} from '../../../services/util.service';
   template: `
     <!-- PANEL CONTENTS -->
     <div [ngBusy]="loading" class="container-fluid component component--healthcheck">
-      <div class="row contents">
+      <div class="row justify-content-center">
+
         <!-- HEALTH-CHECK - Intro -->
         <cpt-psp-portfolio-overview [listId]="listId" (listChanged)="listChanged()" [lists]="allUserLists"
-                                    [calc]="calculations" [data]="prognosisData"></cpt-psp-portfolio-overview>
+                                    [calc]="calculations" [data]="prognosisData" class="col-12 HC-overview"></cpt-psp-portfolio-overview>
+
         <!-- HEALTH-CHECK - Stock Movements -->
         <cpt-psp-stock-movements [calc]="calculations" [weeklyStocks]="stocksStatus"
-                                 [dailyStocks]="dailySymbolList"></cpt-psp-stock-movements>
+                                 [dailyStocks]="dailySymbolList" class="col-12 col-lg-10"></cpt-psp-stock-movements>
 
         <!-- HEALTH-CHECK - Ratings Changes -->
-        <cpt-psp-rating-changes [alerts]="pgrChanges"></cpt-psp-rating-changes>
+        <cpt-psp-rating-changes [alerts]="pgrChanges" class="col-12 col-lg-10"></cpt-psp-rating-changes>
 
         <!-- HEALTH-CHECK - Earnings Reports -->
         <cpt-psp-earnings-report [surprises]="earningsSurprise"
                                  [revisions]="analystRevisions"
-                                 [expected]="expectedEarnings"></cpt-psp-earnings-report>
+                                 [expected]="expectedEarnings" class="col-12 col-lg-10"></cpt-psp-earnings-report>
 
         <!-- HEALTH-CHECK - Power Grid -->
-        <cpt-psp-power-grid [data]="pgrGridData"></cpt-psp-power-grid>
+        <cpt-psp-power-grid [data]="pgrGridData" class="col-12 col-lg-10"></cpt-psp-power-grid>
 
         <!-- HEALTH-CHECK - DISCLAIMER -->
-        <div class="col-12 col-lg-8 col-xl-8 float-lg-right" id="HC--Disclaimer">
+        <div class="col-12 col-lg-10" id="HC--Disclaimer">
           <div class="row justify-content-center">
             <div class="col-12">
               <div class="divider__long"

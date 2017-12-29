@@ -22,7 +22,7 @@ interface FilterFunc {
 @Component({
   selector: 'cpt-psp-stock-movements',
   template: `
-    <div id="HC--Stock-Movements" class="col-12 col-lg-4 col-xl-4 float-lg-left">
+    <div id="HC--Stock-Movements" class="">
 
       <div class="row section__toggle">
         <div class="col-12 toggle toggle--timespan">
@@ -39,13 +39,13 @@ interface FilterFunc {
         </div>
       </div>
 
-      <div class="row no-gutters section__summary">
-        <div class="col-6 summary--left">
+      <div class="row no-gutters section__summary justify-content-center">
+        <div class="col-6 col-lg-4 summary--left">
           <p><img
             src="./assets/imgs/icon_circle-movement--green.svg">{{ selectedTimespan == 'WEEK' ? upStocksWeekly : upStocksDaily
             }}</p>
         </div>
-        <div class="col-6 summary--right">
+        <div class="col-6 col-lg-4 summary--right">
           <p><img
             src="./assets/imgs/icon_circle-movement--red.svg">{{ selectedTimespan == 'WEEK' ? downStocksWeekly : downStocksDaily
             }}</p>
@@ -73,43 +73,39 @@ interface FilterFunc {
             </ul>
           </div>
           <ul class="section__chart">
-            <li class="row no-gutters col-headers">
-              <div class="hidden-sm-down hidden-lg-up col-md-2"></div>
-              <div class="col-4 col-md-2 col-lg-4 col-xl-3">
+            <li class="row no-gutters col-headers justify-content-center">
+              <div class="col-4 col-lg-3 col-xl-2">
                 <p class="text-left">RATING / TICKER</p>
               </div>
-              <div class="col-8 col-md-6 col-lg-8 col-xl-9">
+              <div class="col-8 col-lg-7 col-xl-6">
                 <p class="text-left">% CHANGE</p>
               </div>
-              <div class="hidden-sm-down hidden-lg-up col-md-2"></div>
             </li>
             <li (click)="gotoReport(stock.symbol)" *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
-                class="row no-gutters list-item__mover">
-              <div class="hidden-sm-down hidden-lg-up col-md-2"></div>
-              <div class="col-4 col-md-2 col-lg-4 col-xl-3 mover__stock">
+                class="row no-gutters list-item__mover justify-content-center">
+              <div class="col-4 col-lg-3 col-xl-2 mover__stock">
                 <img *ngIf="stock.arcColor != 2"
                      src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
                 <p class="ticker">{{ stock.symbol }}</p>
               </div>
-              <div class="col-8 col-md-6 col-lg-8 col-xl-9 mover__data">
+              <div class="col-8 col-lg-7 col-xl-6 mover__data">
                 <div class="mover__bar" [style.width]="stock['barWidth']"
                      [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0,'indice':stock.arcColor==2}">
                   <p class="data" [ngClass]="{'data--right':stock['width']<25}">{{ stock.percentageChange | decimal
                     }}%</p>
                 </div>
               </div>
-              <div class="hidden-sm-down hidden-lg-up col-md-2"></div>
             </li>
           </ul>
         </div>
       </div>
 
       <div class="row">
-        <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse hidden-md-up">
+        <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
           <img src="./assets/imgs/ux__collapse--circle.svg">
           <p>Collapse</p>
         </div>
-        <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse hidden-md-up">
+        <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
           <img src="./assets/imgs/ux__expand--circle.svg">
           <p>Expand for Detail</p>
         </div>

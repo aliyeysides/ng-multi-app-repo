@@ -20,7 +20,7 @@ interface EarningsReportObj {
 @Component({
   selector: 'cpt-psp-earnings-report',
   template: `
-    <div id="HC--Earnings" class="col-12 col-lg-8 col-xl-8 float-lg-right">
+    <div id="HC--Earnings" class="">
 
       <div class="row">
         <div class="col-12">
@@ -28,11 +28,11 @@ interface EarningsReportObj {
         </div>
       </div>
 
-      <div class="row section__summary justify-content-center">
-        <div class="col-6 col-md-5 summary--left">
+      <div class="row no-gutters section__summary justify-content-center">
+        <div class="col-6 col-lg-4 summary--left">
           <p><img src="./assets/imgs/icon_circle-arrow--green.svg">{{ upCount }}</p>
         </div>
-        <div class="col-6 col-md-5 summary--right">
+        <div class="col-6 col-lg-4 summary--right">
           <p><img src="./assets/imgs/icon_circle-arrow--red.svg">{{ downCount }}</p>
         </div>
       </div>

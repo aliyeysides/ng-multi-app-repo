@@ -10,11 +10,17 @@ declare let gtag: Function;
   selector: 'cpt-psp-settings-menu',
   template: `
     <nav [ngStyle]="{'left': side == 'left' ? 0 : null}" #nav class="container--nav">
-      <div class="logo">
+      <div class="logo hidden-lg-up">
         <img src="assets/imgs/logo_powerpulse.svg">
       </div>
       <div class="nav-list">
-        <cpt-psp-navigator *ngIf="side==='left'" (routeClicked)="navClicked()"></cpt-psp-navigator>
+        <cpt-psp-navigator class="hidden-lg-up" *ngIf="side==='left'" (routeClicked)="navClicked()"></cpt-psp-navigator>
+        <div class="hidden-md-down" style="height:30px;"></div>
+        <ul class="hidden-md-down">
+          <li>
+            <a href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fa fa-star" aria-hidden="true"></i> &nbsp;Upgrade</a>
+          </li>
+        </ul>
         <ul>
           <li>
             <a href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;Education</a>
@@ -24,26 +30,23 @@ declare let gtag: Function;
           <li>
             <a class="nav--toplevel"><i class="fa fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>
           </li>
-          <li class="row no-gutters sub-nav" style="">
+          <li class="row no-gutters sub-nav">
             <div class="col-12">
               <a href="https://www.chaikinanalytics.com/stock-rating/" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> About the Power Gauge</a>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-lg-12">
               <a href="" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Walkthrough</a>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-lg-12">
              <a href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> User Guide</a>
             </div>
-            <div class="col-6">
-              <a href="https://mh214.infusionsoft.com/app/orderForms/Chaikin-Analytics---Annual-Subscription" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Upgrade!</a>
-            </div>
-            <div class="col-6">
+            <div class="col-6 col-lg-12">
               <a href="https://mh214.infusionsoft.com/app/form/pp_cancel" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Manage Subscription</a>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-lg-12">
              <a href="https://mh214.infusionsoft.com/app/form/pp_changelogin" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Edit User Name</a>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-lg-12">
               <a href="mailto:info@chaikinanalytics.com?subject=PowerPulse support request" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Contact Us</a>
             </div>
           </li>

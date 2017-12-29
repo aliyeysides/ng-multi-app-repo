@@ -9,10 +9,10 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'cpt-psp-rating-changes',
   template: `
-    <div id="HC--Ratings-Changes" class="col-12 col-lg-8 col-xl-8 float-lg-right">
+    <div id="HC--Ratings-Changes" class="">
 
       <div class="row">
-        <div class="col-12 hidden-lg-up">
+        <div class="col-12">
           <div class="divider__long" [ngClass]="{'divider__long--green': portUp, 'divider__long--red': !portUp}"></div>
         </div>
       </div>
@@ -29,11 +29,11 @@ import {Router} from '@angular/router';
         </div>
       </div>
 
-      <div class="row section__summary justify-content-center">
-        <div class="col-6 col-md-5 summary--left">
+      <div class="row no-gutters section__summary justify-content-center">
+        <div class="col-6 col-lg-4 summary--left">
           <p><img src="./assets/imgs/icon_circle-change--green.svg">{{ bullishAlerts?.length }}</p>
         </div>
-        <div class="col-6 col-md-5 summary--right">
+        <div class="col-6 col-lg-4 summary--right">
           <p><img src="./assets/imgs/icon_circle-change--red.svg">{{ bearishAlerts?.length }}</p>
         </div>
       </div> 

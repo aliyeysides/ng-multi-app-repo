@@ -18,7 +18,7 @@ $pulse-green__shade2: #00C1A9;
 
 $pulse-red: #FD001F;
 $pulse-red__shade1: #EA003D;
-$pulse-red__shade2: #D5005D;
+$pulse-red__shade2: #B70056;
 
 $pulse-yellow: #F9BA3B;
 $pulse-yellow__shade1: #FADA3D;
@@ -62,7 +62,7 @@ $background--dark: #333333;
 /*  Gradients  */
 
 
-$gradient--pulse-red: linear-gradient(45deg, #FD001F 0%, #EA003D 49%, #B70056 100%);
+$gradient--pulse-red: linear-gradient(45deg, rgba(253,0,31,0.95) 0%, rgba(234,0,61,0.95) 51%, rgba(183,0,86,0.95) 100%);
 
 $gradient--pulse-grey: linear-gradient(13deg, rgba(157,158,163,0.95) 20%, rgba(189,187,190,0.95) 100%);
 

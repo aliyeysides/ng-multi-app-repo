@@ -1,6 +1,10 @@
 @import 'variablesPulse';
 
-
+.HC-overview {
+	width: 100%;
+	margin:0;
+	padding:0;
+}
 
 
 /*                                                   */
@@ -298,10 +302,6 @@
 
 #HC--Stock-Movements {
 	background-color:#ffffff;
-
-	@media screen AND (min-width: 993px) {
-		//border-right:2px solid #eee;
-	}
 
 	h2 {
 		margin-top:25px;

@@ -9,11 +9,11 @@ import {AuthService} from '../../../../services/auth.service';
 @Component({
   selector: 'cpt-psp-portfolio-overview',
   template: `
-    <div class="col-12 section--overview" [ngClass]="{
+    <div class="container-fluid section--overview" [ngClass]="{
     'section--overview--green': calculations?.avgPercentageChange > 0,
     'section--overview--red': calculations?.avgPercentageChange < 0}">
 
-      <div class="row no-gutters overview__summary">
+      <div class="row overview__summary">
         <div class="col-12 col-md-4 align-self-center">
           <p class="timespan">LAST WEEK</p>
           <div class="btn-group" dropdown [autoClose]="true">
