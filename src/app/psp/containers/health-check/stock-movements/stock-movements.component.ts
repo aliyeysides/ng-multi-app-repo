@@ -74,21 +74,21 @@ interface FilterFunc {
           </div>
           <ul class="section__chart">
             <li class="row no-gutters col-headers justify-content-center">
-              <div class="col-4 col-lg-3 col-xl-2">
+              <div class="col-4 col-lg-2">
                 <p class="text-left">RATING / TICKER</p>
               </div>
-              <div class="col-8 col-lg-7 col-xl-6">
+              <div class="col-8 col-lg-8">
                 <p class="text-left">% CHANGE</p>
               </div>
             </li>
             <li (click)="gotoReport(stock.symbol)" *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
                 class="row no-gutters list-item__mover justify-content-center">
-              <div class="col-4 col-lg-3 col-xl-2 mover__stock">
+              <div class="col-4 col-lg-2 mover__stock">
                 <img *ngIf="stock.arcColor != 2"
                      src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
                 <p class="ticker">{{ stock.symbol }}</p>
               </div>
-              <div class="col-8 col-lg-7 col-xl-6 mover__data">
+              <div class="col-8 col-lg-8 mover__data">
                 <div class="mover__bar" [style.width]="stock['barWidth']"
                      [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0,'indice':stock.arcColor==2}">
                   <p class="data" [ngClass]="{'data--right':stock['width']<25}">{{ stock.percentageChange | decimal
@@ -106,7 +106,7 @@ interface FilterFunc {
           <p>Collapse</p>
         </div>
         <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-          <img src="./assets/imgs/ux__expand--circle.svg">
+          <img src="./assets/imgs/ux__expand--dots.svg">
           <p>Expand for Detail</p>
         </div>
       </div>

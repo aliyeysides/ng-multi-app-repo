@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <defs></defs>
-    <g id="Icon/Collapse" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-63.000000, -15.000000)">
-        <path d="M79,47 C70.163444,47 63,39.836556 63,31 C63,22.163444 70.163444,15 79,15 C87.836556,15 95,22.163444 95,31 C95,39.836556 87.836556,47 79,47 Z M70.9754659,27 C70.1074262,27 69.6693501,28.2752912 70.2940142,29.0110362 L78.3172971,38.6541999 C78.6985856,39.1152667 79.3070246,39.1152667 79.6883131,38.6541999 L87.711596,29.0110362 C88.3281476,28.2752912 87.8900715,27 87.0220318,27 L70.9754659,27 Z" id="Combined-Shape" fill="#DDD"></path>
-    </g>
-</svg>

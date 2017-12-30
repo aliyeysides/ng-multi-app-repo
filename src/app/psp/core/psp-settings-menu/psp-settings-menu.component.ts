@@ -16,14 +16,14 @@ declare let gtag: Function;
       <div class="nav-list">
         <cpt-psp-navigator class="hidden-lg-up" *ngIf="side==='left'" (routeClicked)="navClicked()"></cpt-psp-navigator>
         <div class="hidden-md-down" style="height:30px;"></div>
-        <ul class="hidden-md-down">
-          <li>
-            <a href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fa fa-star" aria-hidden="true"></i> &nbsp;Upgrade</a>
-          </li>
-        </ul>
         <ul>
           <li>
             <a target="_blank" href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;Education</a>
+          </li>
+        </ul>
+        <ul class="hidden-md-down">
+          <li>
+            <a href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fa fa-star" aria-hidden="true"></i> &nbsp;Upgrade</a>
           </li>
         </ul>
         <ul>

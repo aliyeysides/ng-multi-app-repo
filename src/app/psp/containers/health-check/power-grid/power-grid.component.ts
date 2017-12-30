@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 
       <div class="row justify-content-center">
         <div class="col-12 col-xl-10">
-          <h2>Power Grid</h2>
+          <h2><span class="hidden-sm-down">Chaikin</span> Power Grid</h2>
           <p class="paragraph">Holding strong stocks in strong Industry Groups can help improve your investment results.
             In the following display, Industry Groups containing your stocks are ordered to show the 8 strongest to 8
             weakest Industry Groups.</p>
@@ -238,7 +238,7 @@ import {Router} from '@angular/router';
           <p>Collapse</p>
         </div>
         <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-          <img src="./assets/imgs/ux__expand--circle.svg">
+          <img src="./assets/imgs/ux__expand--dots.svg">
           <p>Expand for detail</p>
         </div>
       </div>

@@ -1,10 +1,14 @@
 @import 'variablesPulse';
 
+
+
 .HC-overview {
 	width: 100%;
 	margin:0;
 	padding:0;
 }
+
+
 
 
 /*                                                   */
@@ -19,7 +23,7 @@
 	.overview__summary {
 		margin:0;
 		position: relative;
-		padding: 5px 0px 5px;
+		padding: 10px 0px;
 
       	.timespan {
       		font-size: 15px;
@@ -39,7 +43,7 @@
 			.btn {
 			    font-weight: 600;
 			    text-align: center;
-			    border: 2px solid #ffffff;
+			    border: $line--white;
 			    padding: 4px 15px 1px 20px;
 			    border-radius: 40px;
 			}
@@ -49,7 +53,7 @@
 			    border-color: #ffffff;
 			    font-size: 27px;
 			    line-height: 1;
-				color: #666;
+				color: $font-color;
 				box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
 			}
 			.dropdown-toggle {
@@ -141,7 +145,7 @@
 
 	.overview__powerbar {
 		background-color: $background--verylight;
-		border-top:2px solid #ffffff;
+		border-top:$line--white;
 		border-bottom:$line--light;
 	  	text-align: center;
 	  	padding: 0px;
@@ -208,7 +212,7 @@
 		      	color:#ffffff;
 		      	font-weight: 500;
 		      	font-size: 28px;
-		      	line-height: 38px;
+		      	line-height: 41px;
 		      	white-space: nowrap;
 		    	cursor: pointer;
 		    }
@@ -273,7 +277,6 @@
 	  	}
 	}
 }
-
 .section--overview--green {
   	background: $gradient--pulse-green;
 
@@ -301,6 +304,7 @@
 
 
 #HC--Stock-Movements {
+	padding-top: 10px;
 	background-color:#ffffff;
 
 	h2 {
@@ -314,7 +318,7 @@
 		.btn {
 		    font-weight: 600;
 		    text-align: center;
-		    border: 3px solid #1199ff;
+		    border: $line--button;
 		    padding: 8px 15px 5px 20px;
 		    font-size: 26px;
 		    border-radius: 40px;
@@ -322,10 +326,10 @@
 		}
 		.btn-primary {
 	  		background-color: #ffffff;
-		    border-color: #1199ff;
+		    border-color: $link-blue;
 		    font-size: 25px;
 		    line-height: 1;
-			color: #1199ff;
+			color: $link-blue;
 			box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
 		}
 		.dropdown-toggle {
@@ -344,14 +348,14 @@
 	    padding: 0.5rem 0;
 	    margin: 0;
 	    font-size: 22px;
-	    color: #484848;
+	    color: $font-color;
 	    width: 100%;
 	    text-align: center;
 	    list-style: none;
 	    background-color: rgba(255,255,255, 0.97);
 	    background-clip: padding-box;
-	    border: 0px solid #f0f0f0;
-	    border-top:0px solid #1199ff;
+	    border: 0px;
+	    border-top:0px;
 	    border-radius: 20px;
 		box-shadow: 0 6px 20px rgba(50, 50, 50, 0.25);
 
@@ -419,7 +423,7 @@
 		}
 	    .data--right {
 	      padding-left: 120%;
-	      color: black;
+	      color: $font-color;
 	    }
 	}
 	.mover__bar.positive {
@@ -441,6 +445,7 @@
 
 	  	.data--right {
 	      color:$pulse-blue__shade2;
+	      padding-left: 200% !important;
 	    }
 	}
 }
@@ -480,6 +485,10 @@
 
 #HC--Earnings {
 	background-color:#ffffff;
+
+	.section__chart {
+  		margin:25px 0 40px;
+  	}
 }
 
 .earnings__entry {
@@ -579,6 +588,8 @@
 
 		  	span {
 		  		margin-bottom:10px;
+		  		display: block;
+		  		clear:both;
 		  	}
 		}
 		.earn-date {

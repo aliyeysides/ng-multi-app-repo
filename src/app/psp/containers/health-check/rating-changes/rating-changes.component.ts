@@ -25,7 +25,7 @@ import {Router} from '@angular/router';
       
       <div class="row">
         <div class="col-12">
-          <h2>Ratings Changes</h2>
+          <h2><span class="hidden-sm-down">Power Gauge</span> Ratings Changes</h2>
         </div>
       </div>
 
@@ -147,7 +147,7 @@ import {Router} from '@angular/router';
           <p>Collapse</p>
         </div>
         <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-          <img src="./assets/imgs/ux__expand--circle.svg">
+          <img src="./assets/imgs/ux__expand--dots.svg">
           <p>Expand for detail</p>
         </div>
       </div>

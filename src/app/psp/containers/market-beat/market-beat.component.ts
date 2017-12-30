@@ -19,7 +19,7 @@ import {Subscription} from 'rxjs/Subscription';
             <div class="col-12 section--author">
               <p class=""><sub>BY</sub> Marc Chaikin</p>
             </div>
-            <div class="divider__medium"></div>
+            <div class="divider__long"></div>
     	    	<div class="col-12 section--date-select">
     	        <div class="btn-group" dropdown [autoClose]="true">
     	          	<button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
