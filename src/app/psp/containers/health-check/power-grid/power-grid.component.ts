@@ -12,19 +12,18 @@ import {Router} from '@angular/router';
 
       <div class="row justify-content-center">
         <div class="col-12 col-xl-10">
-          <h2><span class="hidden-sm-down">Chaikin</span> Power Grid</h2>
+          <h2><span class="hidden-xs-down">Chaikin</span> Power Grid</h2>
           <p class="paragraph">Holding strong stocks in strong Industry Groups can help improve your investment results.
-            In the following display, Industry Groups containing your stocks are ordered to show the 8 strongest to 8
-            weakest Industry Groups.</p>
-          <p class="paragraph"><span>Note: <i>This grid shows the top 5 bullish and bottom 5 bearish stocks in each industry. Neutral stocks are not displayed.</i></span>
+            In the following display, Industry Groups containing your stocks are ordered to show the 8 strongest to 8 weakest Industry Groups.</p>
+          <p class="caption"><b>Note:</b> This grid shows the top 5 bullish and bottom 5 bearish stocks in each industry. Neutral stocks are not displayed.
           </p>
         </div>
       </div>
 
-      <div *ngIf="!collapse" class="container">
+      <div *ngIf="!collapse" class="container-fluid">
 
         <div class="row">
-          <div class="col-12 powergrid__container hidden-sm-down">
+          <div class="col-12 powergrid__container hidden-xs-down">
             <div class="vertical__label">
               <p>Weak Industries <span> | </span> Strong Industries
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
@@ -110,7 +109,7 @@ import {Router} from '@angular/router';
             </table>
           </div>
 
-          <div class="col-12 hidden-md-up">
+          <div class="col-12 hidden-sm-up">
             <div class="row">
               <div class="col-5"></div>
               <div class="col-2" style="padding:0 10px;">
@@ -122,7 +121,7 @@ import {Router} from '@angular/router';
             <h3>Strong Industries</h3>
           </div>
 
-          <div class="col-12 hidden-md-up powerGrid">
+          <div class="col-12 hidden-sm-up powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <h4>STRONG STOCKS</h4>
@@ -146,7 +145,7 @@ import {Router} from '@angular/router';
             </div>
           </div>
 
-          <div class="col-12 hidden-md-up powerGrid">
+          <div class="col-12 hidden-sm-up powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <h4>WEAK STOCKS</h4>
@@ -170,7 +169,7 @@ import {Router} from '@angular/router';
             </div>
           </div>
 
-          <div class="col-12 hidden-md-up">
+          <div class="col-12 hidden-sm-up">
             <div class="row" style="margin-top:40px;">
               <div class="col-5"></div>
               <div class="col-2" style="padding:0 10px;">
@@ -182,7 +181,7 @@ import {Router} from '@angular/router';
             <h3>Weak Industries</h3>
           </div>
 
-          <div class="col-12 hidden-md-up powerGrid">
+          <div class="col-12 hidden-sm-up powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <h4>STRONG STOCKS</h4>
@@ -206,7 +205,7 @@ import {Router} from '@angular/router';
             </div>
           </div>
 
-          <div class="col-12 hidden-md-up powerGrid">
+          <div class="col-12 hidden-sm-up powerGrid">
             <div class="row col-headers">
               <div class="col-6">
                 <h4>WEAK STOCKS</h4>

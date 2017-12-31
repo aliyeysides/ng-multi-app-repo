@@ -40,12 +40,12 @@ interface FilterFunc {
       </div>
 
       <div class="row no-gutters section__summary justify-content-center">
-        <div class="col-6 col-lg-4 summary--left">
+        <div class="col-6 col-md-5 col-lg-4 summary--left">
           <p><img
             src="./assets/imgs/icon_circle-movement--green.svg">{{ selectedTimespan == 'WEEK' ? upStocksWeekly : upStocksDaily
             }}</p>
         </div>
-        <div class="col-6 col-lg-4 summary--right">
+        <div class="col-6 col-md-5 col-lg-4 summary--right">
           <p><img
             src="./assets/imgs/icon_circle-movement--red.svg">{{ selectedTimespan == 'WEEK' ? downStocksWeekly : downStocksDaily
             }}</p>
@@ -74,21 +74,21 @@ interface FilterFunc {
           </div>
           <ul class="section__chart">
             <li class="row no-gutters col-headers justify-content-center">
-              <div class="col-4 col-lg-2">
+              <div class="col-4 col-sm-2 col-xl-1">
                 <p class="text-left">RATING / TICKER</p>
               </div>
-              <div class="col-8 col-lg-8">
-                <p class="text-left">% CHANGE</p>
+              <div class="col-8 col-sm-8 col-xl-7">
+                <p class="text-left col-header--per-chg">% CHANGE</p>
               </div>
             </li>
             <li (click)="gotoReport(stock.symbol)" *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
                 class="row no-gutters list-item__mover justify-content-center">
-              <div class="col-4 col-lg-2 mover__stock">
+              <div class="col-4 col-sm-2 col-lg-2 col-xl-1 mover__stock">
                 <img *ngIf="stock.arcColor != 2"
                      src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
                 <p class="ticker">{{ stock.symbol }}</p>
               </div>
-              <div class="col-8 col-lg-8 mover__data">
+              <div class="col-8 col-sm-8 col-lg-8 col-xl-7 mover__data">
                 <div class="mover__bar" [style.width]="stock['barWidth']"
                      [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0,'indice':stock.arcColor==2}">
                   <p class="data" [ngClass]="{'data--right':stock['width']<25}">{{ stock.percentageChange | decimal

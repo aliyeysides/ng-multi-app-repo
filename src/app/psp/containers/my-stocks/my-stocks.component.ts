@@ -81,8 +81,8 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     const width = event.target.innerWidth;
-    if (+width <= 1024) this.desktopView = false;
-    if (+width > 1024) {
+    if (+width <= 992) this.desktopView = false;
+    if (+width > 992) {
       if (this.userStocks) {
         this.router.navigate(['/stock-analysis', this.userStocks[0].symbol]);
       }

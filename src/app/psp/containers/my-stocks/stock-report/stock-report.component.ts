@@ -343,11 +343,11 @@ declare var zingchart: any;
           <div class="col-12 col-lg-6 stockview__PGR ">
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-md-5  pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>LT Debt to Equity</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][1]['LT Debt to Equity'] : null)"></div>
                     <div class="sliderBar"
@@ -358,11 +358,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-md-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Price to Book</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][2]['Price to Book'] : null)"></div>
                     <div class="sliderBar"
@@ -373,11 +373,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-md-5  pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Return on Equity</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][3]['Return on Equity'] : null)"></div>
                     <div class="sliderBar"
@@ -388,11 +388,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-md-5  pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Price to Sales</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][4]['Price to Sales'] : null)"></div>
                     <div class="sliderBar"
@@ -403,11 +403,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-md-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Free Cash Flow</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][5]['Free Cash Flow'] : null)"></div>
                     <div class="sliderBar"
@@ -550,7 +550,7 @@ declare var zingchart: any;
           </div>
           <div *ngIf="collapse['financials'] == false" (click)="toggleCollapse('financials')"
                class="col-12 hidden-lg-up expand-collapse">
-            <img src="./assets/imgs/ux__expand--circle.svg">
+            <img src="./assets/imgs/ux__expand--dots.svg">
             <p>Expand for details</p>
           </div>
 
@@ -570,11 +570,11 @@ declare var zingchart: any;
           <div class="col-12 col-lg-6 stockview__PGR">
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4  pgr__label">
                     <p>Earnings Growth</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6  sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][1]['Earnings Growth'] : null)"></div>
                     <div class="sliderBar"
@@ -585,11 +585,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4  pgr__label">
                     <p>Earnings Surprise</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6  sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][2]['Earnings Surprise'] : null)"></div>
                     <div class="sliderBar"
@@ -600,11 +600,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Earnings Trend</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][3]['Earnings Trend'] : null)"></div>
                     <div class="sliderBar"
@@ -615,11 +615,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Projected P/E</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][4]['Projected P/E'] : null)"></div>
                     <div class="sliderBar"
@@ -630,11 +630,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Earnings Consistency</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][5]['Earnings Consistency'] : null)"></div>
                     <div class="sliderBar"
@@ -731,11 +731,11 @@ declare var zingchart: any;
           <div class="col-12 col-lg-6 stockview__PGR">
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Rel Strength vs Market</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][1]['Rel Strength vs Market'] : null)"></div>
                     <div class="sliderBar"
@@ -746,11 +746,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Chaikin Money Flow</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][2]['Chaikin Money Flow'] : null)"></div>
                     <div class="sliderBar"
@@ -761,11 +761,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Price Strength</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][3]['Price Strength'] : null)"></div>
                     <div class="sliderBar"
@@ -776,11 +776,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Price Trend ROC</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][4]['Price Trend ROC'] : null)"></div>
                     <div class="sliderBar"
@@ -791,11 +791,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Volume Trend</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][5]['Volume Trend'] : null)"></div>
                     <div class="sliderBar"
@@ -927,11 +927,11 @@ declare var zingchart: any;
           <div class="col-12 col-lg-6 stockview__PGR">
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Estimate Trend</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6  sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][1]['Estimate Trend'] : null)"></div>
                     <div class="sliderBar"
@@ -942,11 +942,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Short Interest</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] : null)"></div>
                     <div class="sliderBar"
@@ -957,11 +957,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Insider Activity</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][3]['Insider Activity'] : null)"></div>
                     <div class="sliderBar"
@@ -972,11 +972,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Analyst Rating Trend</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][4]['Analyst Rating Trend'] : null)"></div>
                     <div class="sliderBar"
@@ -987,11 +987,11 @@ declare var zingchart: any;
                 </div>
               </li>
               <li>
-                <div class="row sliderBar-container">
-                  <div class="col-6 col-lg-5 pgr__label">
+                <div class="row justify-content-center sliderBar-container">
+                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Industry Rel Strength</p>
                   </div>
-                  <div class="col-5 sliderProgress">
+                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][5]['Industry Rel Strength'] : null)"></div>
                     <div class="sliderBar"
@@ -1115,12 +1115,12 @@ declare var zingchart: any;
           </div>
         </div>
 
-        <div class="row stock-info stock-info--competition">
+        <div class="row justify-content-center stock-info stock-info--competition">
           <div class="col-12">
             <h2>The Competition</h2>
           </div>
 
-          <div class="col-12 col-lg-6 chart-list">
+          <div class="col-12 col-md-10 col-lg-6 chart-list">
             <h4>Growth Comparison</h4>
             <div class="divider"></div>
             <ul>
@@ -1158,7 +1158,7 @@ declare var zingchart: any;
             </ul>
           </div>
 
-          <div class="col-12 col-lg-6 chart-list">
+          <div class="col-12 col-md-10 col-lg-6 chart-list">
             <h4>Revenue Compairson</h4>
             <div class="divider"></div>
             <ul>

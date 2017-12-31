@@ -30,10 +30,10 @@ import {Router} from '@angular/router';
       </div>
 
       <div class="row no-gutters section__summary justify-content-center">
-        <div class="col-6 col-lg-4 summary--left">
+        <div class="col-6 col-md-5 col-lg-4 summary--left">
           <p><img src="./assets/imgs/icon_circle-change--green.svg">{{ bullishAlerts?.length }}</p>
         </div>
-        <div class="col-6 col-lg-4 summary--right">
+        <div class="col-6 col-md-5 col-lg-4 summary--right">
           <p><img src="./assets/imgs/icon_circle-change--red.svg">{{ bearishAlerts?.length }}</p>
         </div>
       </div> 
@@ -78,9 +78,6 @@ import {Router} from '@angular/router';
                 </div>
                 <div class="col-3 list-entry__data">
                   <p class="data green">{{ stock['percentChange'] | decimal }}%</p>
-                </div>
-                <div class="button__slide">
-                  <img src="./assets/imgs/ui_slide.svg">
                 </div>
               </li>
             </ng-container>
@@ -128,9 +125,6 @@ import {Router} from '@angular/router';
                 </div>
                 <div class="col-3 list-entry__data">
                   <p class="data green">{{ stock['percentChange'] | decimal }}%</p>
-                </div>
-                <div class="button__slide">
-                  <img src="./assets/imgs/ui_slide.svg">
                 </div>
               </li>
             </ng-container>

@@ -42,7 +42,7 @@
 	    padding: 0.5rem 0;
 	    margin: 0;
 	    font-size: 22px;
-	    color: #484848;
+	    color: $font-color;
 	    width: 100%;
 	    text-align: center;
 	    list-style: none;
@@ -65,7 +65,7 @@
 
 .stocklist__powerbar {
 	background-color: $background--verylight;
-	border-top:2px solid #ffffff;
+	border-top:$line--white;
 	border-bottom:$line--light;
   	text-align: center;
   	padding: 0;
@@ -194,7 +194,6 @@
 		}
 		.sorted {
 			p {
-				//border-bottom: 2px solid #999999;
 				font-weight: 500;
 				color:#ffffff;
 				background-color: $background--medium;
