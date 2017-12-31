@@ -105,11 +105,10 @@ export class AppComponent implements OnDestroy {
             let cap = str.charAt(0).toUpperCase();
             return cap + str.slice(1);
           }).join(' ');
-        // TODO: need new ga id for psp;
-        // gtag('config', 'UA-109099815-2', {
-        //   'page_location': 'https://app.chaikinanalytics.com/ideas/' + event.urlAfterRedirects,
-        //   'page_path': event.urlAfterRedirects
-        // });
+        gtag('config', 'UA-109763576-2', {
+          'page_location': 'https://app.chaikinanalytics.com/ideas/' + event.urlAfterRedirects,
+          'page_path': event.urlAfterRedirects
+        });
       }
     });
     this.healthCheck.getPortfolioStatus()

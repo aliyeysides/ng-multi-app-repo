@@ -6,6 +6,8 @@ import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {ActivatedRoute} from '@angular/router';
 
+declare var gtag: Function;
+
 @Component({
   selector: 'cpt-my-stocks-list',
   template: `
@@ -229,6 +231,9 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
     this.selectedListName = list['name'];
     this.healthCheck.currentList = this.selectedListName;
     this.listChanged.emit();
+    gtag('event', 'list_switched', {
+      'event_label': this.selectedListName
+    });
   }
 
 }

@@ -16,8 +16,10 @@ import {UtilService} from '../../../../services/util.service';
 import {ListSymbolObj} from '../../../../shared/models/health-check';
 import {AuthService} from '../../../../services/auth.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
+import {SymbolSearchService} from '../../../../services/symbol-search.service';
 
 declare var zingchart: any;
+declare var gtag: Function;
 
 @Component({
   selector: 'cpt-psp-stock-report',
@@ -37,9 +39,9 @@ declare var zingchart: any;
         </div>
         <div class="header__stock">
           <h1 class="ticker">{{ stock }}</h1>
-          <p class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
+          <p *ngIf="!this.is_etf" class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
         </div>
-        <div *ngIf="!resultInUserList(userStocks, stock)" (click)="addStock(stock)"
+        <div *ngIf="!resultInUserList(userStocks, stock) && !is_etf" (click)="addStock(stock)"
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_plus--white.svg">
         </div>
@@ -47,13 +49,13 @@ declare var zingchart: any;
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
         </div>
-        <div class="header__button header__button--pdf">
+        <div *ngIf="!this.is_etf" class="header__button header__button--pdf">
           <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
       </div>
 
       <!-- STOCK VIEW CONTENTS -->
-      <div class="container-fluid stockview__contents">
+      <div [class.blur-me]="is_etf || !stock" class="container-fluid stockview__contents">
         <div class="row">
           <div class="col-12 hidden-md-up">
             <div class="tab--slide"></div>
@@ -1330,131 +1332,32 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   timespanPerChange: number;
   timespanPriceChange: number;
 
+  is_etf: boolean;
+
   constructor(private reportService: ReportService,
               private authService: AuthService,
               private signalService: SignalService,
               private ideasService: IdeasService,
               private utilService: UtilService,
               private cd: ChangeDetectorRef,
+              private symbolSearchService: SymbolSearchService,
               private router: Router) {
   }
 
   ngOnInit() {
     window.scrollTo(0, 0);
     if (this.stock) {
-      this.current = '1Y';
-      this.reportService.getSymbolData(this.stock)
-        .take(1)
-        .filter(x => x != undefined)
-        .map(res => {
-          this.symbolData = res;
-          this.cd.markForCheck();
-        })
-        .switchMap(() => {
-          return Observable.combineLatest(
-            this.reportService.getPgrDataAndContextSummary(this.stock, this.symbolData['metaInfo'][0]['industry_name']),
-            this.reportService.getTickerCompetitors(this.stock),
-            this.reportService.getResearchReportData(this.stock),
-            this.ideasService.getHeadlines(this.stock)
-          )
-        })
-        .take(1)
-        .subscribe(([summary, competitors, research, headlines]) => {
-          this.summary = summary;
-          this.competitors = competitors['compititors'];
-          this.research = research;
-          this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
-
-          const annualEPSData = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData'].map(x => +x[5].slice(1)) : null;
-          const annualEPSDates = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData'].map(x => x[0]) : null;
-
-          const qrtEPSData = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData']
-            .map(x => x.splice(1).map(x => +x.slice(1))) : null;
-
-          this.annualEPSChart = {
-            id: 'annualEPSChart',
-            data: {
-              layout: "vertical",
-              graphset: [
-                this.getAnnualEPSConfg(annualEPSDates, annualEPSData)
-              ]
-            },
-            height: undefined,
-            width: undefined
-          };
-          this.qrtEPSChart = {
-            id: 'qrtEPSChart',
-            data: {
-              layout: "vertical",
-              graphset: [
-                this.getQrtEPSConfig(annualEPSDates, qrtEPSData)
-              ]
-            },
-            height: undefined,
-            width: undefined
-          };
-
-          const epsSurprises = research['EPS Surprises'];
-
-          const revDates = research['Revenue&EarningsGrowth']['labels'];
-          const annualRev = research['Revenue&EarningsGrowth'].hasOwnProperty('Revenue(M)') ? research['Revenue&EarningsGrowth']['Revenue(M)']
-            .map(x => parseFloat(x.replace(/,/g, ''))) : null;
-
-          this.epsSurprisesChart = {
-            id: 'epsSurprisesChart',
-            data: {
-              layout: "vertical",
-              graphset: [
-                this.getEPSSurprisesConfig(epsSurprises)
-              ]
-            },
-            height: undefined,
-            width: undefined
-          };
-          this.annualRevenueChart = {
-            id: 'annualRevenueChart',
-            data: {
-              layout: "vertical",
-              graphset: [
-                this.getAnnualRevenueConfig(revDates, annualRev)
-              ]
-            },
-            height: undefined,
-            width: undefined
-          };
-          this.cd.markForCheck();
-        });
-
-      this.loading = this.reportService.getStockSummaryData(this.stock)
-        .take(1)
-        .subscribe(data => {
-          this.data = data;
-
-          let dates, closePrices, pgrData, cmf, relStr;
-          this.current === '5Y' ? dates = data['five_year_chart_data']['formatted_dates'] : dates = data['one_year_chart_data']['formatted_dates'].reverse();
-          this.current === '5Y' ? closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse() : closePrices = data['one_year_chart_data']['close_price'].map(x => +x).reverse();
-          this.current === '5Y' ? pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse() : pgrData = data['one_year_pgr_data']['pgr_data'].map(x => +x).reverse();
-          this.current === '5Y' ? cmf = data['five_year_chart_data']['cmf'].map(x => +x).reverse() : cmf = data['one_year_chart_data']['cmf'].map(x => +x).reverse();
-          this.current === '5Y' ? relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse() : relStr = data['one_year_chart_data']['relative_strength'].map(x => +x).reverse();
-
-          this.timespanPerChange = this.calculatePricePerChange(closePrices[0], closePrices[closePrices.length - 1]);
-          this.timespanPriceChange = this.calculatePriceChange(closePrices[0], closePrices[closePrices.length - 1]);
-          this.mainChart = {
-            id: 'mainChart',
-            data: {
-              layout: "vertical",
-              graphset: [
-                this.getCloseConfig(dates, closePrices),
-                this.getPGRConfig(dates, pgrData),
-                this.getRSIConfig(dates, relStr),
-                this.getCMFConfig(dates, cmf)
-              ]
-            },
-            height: 660,
-            width: undefined
-          };
-          this.loading ? this.loading.unsubscribe() : null;
-          this.cd.markForCheck();
+      this.symbolSearchService.symbolLookup(this.stock)
+        .subscribe(val => {
+          console.log('val', val);
+          val[0] ? this.is_etf = val[0]['is_etf'] : this.is_etf = true;
+          if (!this.is_etf) {
+            console.log('is_etf', this.is_etf);
+            this.getReportData(this.stock);
+            this.getMainChart(this.stock);
+          }
+          this.cd.detectChanges();
+          console.log('is_etf', this.is_etf);
         });
     }
   }
@@ -1469,6 +1372,125 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   ngOnDestroy() {
     this._ngUnsubscribe.next();
     this._ngUnsubscribe.complete();
+  }
+
+  getReportData(stock: string) {
+    this.current = '1Y';
+    this.reportService.getSymbolData(stock)
+      .take(1)
+      .filter(x => x != undefined)
+      .map(res => {
+        this.symbolData = res;
+        this.cd.markForCheck();
+      })
+      .switchMap(() => {
+        return Observable.combineLatest(
+          this.reportService.getPgrDataAndContextSummary(stock, this.symbolData['metaInfo'][0]['industry_name']),
+          this.reportService.getTickerCompetitors(stock),
+          this.reportService.getResearchReportData(stock),
+          this.ideasService.getHeadlines(stock)
+        )
+      })
+      .take(1)
+      .subscribe(([summary, competitors, research, headlines]) => {
+        this.summary = summary;
+        this.competitors = competitors['compititors'];
+        this.research = research;
+        this.headlines = headlines['headlines'] ? headlines['headlines'].filter((item, idx) => idx < 7) : [];
+
+        const annualEPSData = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData'].map(x => +x[5].slice(1)) : null;
+        const annualEPSDates = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData'].map(x => x[0]) : null;
+
+        const qrtEPSData = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData']
+          .map(x => x.splice(1).map(x => +x.slice(1))) : null;
+
+        this.annualEPSChart = {
+          id: 'annualEPSChart',
+          data: {
+            layout: "vertical",
+            graphset: [
+              this.getAnnualEPSConfg(annualEPSDates, annualEPSData)
+            ]
+          },
+          height: undefined,
+          width: undefined
+        };
+        this.qrtEPSChart = {
+          id: 'qrtEPSChart',
+          data: {
+            layout: "vertical",
+            graphset: [
+              this.getQrtEPSConfig(annualEPSDates, qrtEPSData)
+            ]
+          },
+          height: undefined,
+          width: undefined
+        };
+
+        const epsSurprises = research['EPS Surprises'];
+
+        const revDates = research['Revenue&EarningsGrowth']['labels'];
+        const annualRev = research['Revenue&EarningsGrowth'].hasOwnProperty('Revenue(M)') ? research['Revenue&EarningsGrowth']['Revenue(M)']
+          .map(x => parseFloat(x.replace(/,/g, ''))) : null;
+
+        this.epsSurprisesChart = {
+          id: 'epsSurprisesChart',
+          data: {
+            layout: "vertical",
+            graphset: [
+              this.getEPSSurprisesConfig(epsSurprises)
+            ]
+          },
+          height: undefined,
+          width: undefined
+        };
+        this.annualRevenueChart = {
+          id: 'annualRevenueChart',
+          data: {
+            layout: "vertical",
+            graphset: [
+              this.getAnnualRevenueConfig(revDates, annualRev)
+            ]
+          },
+          height: undefined,
+          width: undefined
+        };
+        this.cd.markForCheck();
+      });
+  }
+
+  getMainChart(stock: string) {
+    this.loading = this.reportService.getStockSummaryData(stock)
+      .take(1)
+      .subscribe(data => {
+        this.data = data;
+
+        let dates, closePrices, pgrData, cmf, relStr;
+        this.current === '5Y' ? dates = data['five_year_chart_data']['formatted_dates'] : dates = data['one_year_chart_data']['formatted_dates'].reverse();
+        this.current === '5Y' ? closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse() : closePrices = data['one_year_chart_data']['close_price'].map(x => +x).reverse();
+        this.current === '5Y' ? pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse() : pgrData = data['one_year_pgr_data']['pgr_data'].map(x => +x).reverse();
+        this.current === '5Y' ? cmf = data['five_year_chart_data']['cmf'].map(x => +x).reverse() : cmf = data['one_year_chart_data']['cmf'].map(x => +x).reverse();
+        this.current === '5Y' ? relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse() : relStr = data['one_year_chart_data']['relative_strength'].map(x => +x).reverse();
+
+        this.timespanPerChange = this.calculatePricePerChange(closePrices[0], closePrices[closePrices.length - 1]);
+        this.timespanPriceChange = this.calculatePriceChange(closePrices[0], closePrices[closePrices.length - 1]);
+        this.mainChart = {
+          id: 'mainChart',
+          data: {
+            layout: "vertical",
+            graphset: [
+              this.getCloseConfig(dates, closePrices),
+              this.getPGRConfig(dates, pgrData),
+              this.getRSIConfig(dates, relStr),
+              this.getCMFConfig(dates, cmf)
+            ]
+          },
+          height: 660,
+          width: undefined
+        };
+        this.loading ? this.loading.unsubscribe() : null;
+        this.cd.markForCheck();
+      });
   }
 
   closeReport() {
@@ -1578,6 +1600,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     };
     this.loading ? this.loading.unsubscribe() : null;
     this.cd.detectChanges();
+    gtag('event', 'chart_timespan_toggle', {
+      'event_category': 'engagement',
+      'event_label': span
+    });
   }
 
   addStock(ticker: string) {
@@ -1685,7 +1711,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         lineColor: "#fff"
       },
       scaleY: {
-        values: values,
         autoFit: true,
         guide: {
           visible: true,
@@ -2468,6 +2493,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe(usr => {
         window.open(`${this._apiHostName}/CPTRestSecure/app/pdf/fetchReport?symbol=${symbol}&listID=${this.listId}&uid=${usr['UID']}&response=file&token=4XC534118T00FR73S127L77QWU65GA1H`, "_blank");
       });
+    gtag('event', 'stock_report_pdf_clicked', {
+      'event_category': 'engagement',
+      'event_label': symbol
+    });
   }
 
   calculatePricePerChange(firstClose: number, lastClose: number): number {

@@ -3,6 +3,8 @@ import {WordpressService} from '../../../services/wordpress.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
 
+declare var gtag: Function;
+
 @Component({
   selector: 'cpt-market-beat',
   template: `
@@ -75,10 +77,18 @@ export class MarketBeatComponent implements OnInit, OnDestroy {
     this.selectedInsight = post;
     this.opened = false;
     this.commentary = this.wp.getInsightPostBody(post);
+    gtag('event', 'insight_clicked', {
+      'event_category': 'engagement',
+      'event_label': post['post_title'].slice(26)
+    });
   }
 
   toggleReadMore() {
     this.opened = !this.opened;
+    gtag('event', 'read_more_toggle', {
+      'event_category': 'engagement',
+      'event_label': this.selectedInsight['post_title'].slice(26)
+    });
   }
 
 }

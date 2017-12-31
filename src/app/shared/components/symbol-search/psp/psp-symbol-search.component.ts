@@ -126,6 +126,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   onSubmit(ticker: string) {
     this.router.navigate(['stock-analysis', ticker.toUpperCase()]);
     this.toggleSearch.emit();
+    gtag('event', 'search', {'search_term': ticker});
   }
 
   addToList(ticker: string) {
@@ -135,6 +136,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
         this.healthCheck.updateMyStocksList();
         this.toggleSearch.emit();
       });
+    gtag('event', 'search', {'search_term': ticker});
   }
 
   removeStock(ticker: string) {
@@ -149,6 +151,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   onClick(ticker: string) {
     this.router.navigate(['stock-analysis', ticker]);
     this.toggleSearch.emit();
+    gtag('event', 'search', {'search_term': ticker});
   }
 
   resultInUserList(arr: ListSymbolObj[], ticker: string): boolean {

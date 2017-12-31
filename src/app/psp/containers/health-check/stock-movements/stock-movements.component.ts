@@ -6,6 +6,8 @@ import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {Router} from '@angular/router';
 
+declare var gtag: Function;
+
 interface ToggleOptions {
   currentToggleOptionText: string,
   all?: FilterFunc,
@@ -269,15 +271,27 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   selectToggleOption(fn: FilterFunc) {
     this.selectedToggleOption = fn;
     this.updateData();
+    gtag('event', 'stock_movements_filter_clicked', {
+      'event_category': 'engagement',
+      'event_label': this.toggleOptions.currentToggleOptionText
+    });
   }
 
   selectTimespan(mode: string) {
     this.selectedTimespan = mode;
     this.updateData();
+    gtag('event', 'stock_movements_timespan_clicked', {
+      'event_category': 'engagement',
+      'event_label': mode
+    });
   }
 
   toggleCollapse() {
     this.collapse = !this.collapse;
+    gtag('event', 'stock_movements_collapse_clicked', {
+      'event_category': 'engagement',
+      'event_label': this.collapse
+    });
   }
 
   public parseStockStatus(res) {
@@ -333,6 +347,10 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   gotoReport(ticker: string) {
     if (ticker === 'S&P 500' ) return;
     this.router.navigate(['stock-analysis', ticker]);
+    gtag('event', 'stock_clicked', {
+      'event_category': 'engagement',
+      'event_label': ticker
+    });
   }
 
 }

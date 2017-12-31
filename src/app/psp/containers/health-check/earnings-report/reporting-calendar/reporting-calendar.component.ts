@@ -6,6 +6,8 @@ import {Subject} from 'rxjs/Subject';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
 
+declare var gtag: Function;
+
 @Component({
   selector: 'cpt-psp-reporting-calendar',
   template: `
@@ -210,10 +212,19 @@ export class ReportingCalendarComponent implements OnInit, OnDestroy {
     this.selectedDay = day;
     this.selectedDayData = [];
     this.selectedDate = '';
+
+    gtag('event', 'calendar_day_toggled', {
+      'event_category': 'engagement',
+      'event_label': day
+    });
   }
 
   gotoReport(ticker: string) {
     this.router.navigate(['stock-analysis', ticker]);
+    gtag('event', 'stock_clicked', {
+      'event_category': 'engagement',
+      'event_label': ticker
+    });
   }
 
 }
