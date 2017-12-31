@@ -23,7 +23,7 @@ a {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 32px;
   font-weight: 400;
 }
 h2 {
@@ -42,8 +42,7 @@ h3 {
   line-height: 1;
   font-weight: 700;
   margin: 5px 0 3px;
-  opacity: 0.8;
-  color: $font-color;
+  color: $font-color--mid;
   position: relative;
   text-transform: uppercase;
 
@@ -141,13 +140,7 @@ sub {
 
 
 
-.bold {
-  font-weight:600;
-}
 
-.ticker {
-  cursor: pointer;
-}
 
 
 
@@ -155,11 +148,11 @@ sub {
 
 
 .tab--slide {
-  width: 100px;
+  width: 80px;
   height: 5px;
   background-color: $background--light;
   border-radius: 10px;
-  margin: 5px auto 0;
+  margin: 5px auto;
 }
 
 
@@ -183,6 +176,16 @@ sub {
 
 
 
+
+
+.bold {
+  font-weight:600;
+}
+
+.ticker {
+  cursor: pointer;
+}
+
 .chart-caption {
   font-family: $font-stack2;
   font-size: 14px;
@@ -193,6 +196,18 @@ sub {
   font-style: italic;
   margin-top: -10px;
   color: $font-color--mid;
+}
+
+.caption {
+  font-family: $font-stack2;
+  font-size: 16px;
+  text-align: left;
+  font-weight: 400;
+  line-height: 1.5;
+  cursor: default;
+  font-style: italic;
+  color: $font-color--mid;
+  margin-bottom: 10px;
 }
 
 .empty-chart {
@@ -213,7 +228,7 @@ sub {
   margin-bottom: 15px;
   text-align: left;
   font-weight: 500;
-  line-height: 1.75;
+  line-height: 1.66;
   cursor: default;
 }
 
@@ -631,7 +646,7 @@ sub {
     height: 100%;
     padding: 0 13%;
 
-    @media screen AND (min-width: 556px) {
+    @media screen AND (min-width: 992px) {
       padding:0;
     }
   }
@@ -1074,7 +1089,7 @@ sub {
 }
 
 .slider-veryBearish {
-  background-color: #e00000;
+  background-color: $veryBearish-red;
   left: 0%;
   position: absolute;
   margin-top: -4px;
@@ -1087,7 +1102,7 @@ sub {
 }
 
 .slider-bearish {
-  background-color: #ef5a00;
+  background-color: $bearish-red;
   left: 25%;
   position: absolute;
   margin-top: -4px;
@@ -1100,7 +1115,7 @@ sub {
 }
 
 .slider-neutral {
-  background-color: #ffbe00;
+  background-color: $neutral-yellow;
   left: 50%;
   position: absolute;
   margin-top: -4px;
@@ -1113,7 +1128,7 @@ sub {
 }
 
 .slider-bullish {
-  background-color: #61c600;
+  background-color: $bullish-green;
   left: 75%;
   position: absolute;
   margin-top: -4px;
@@ -1126,7 +1141,7 @@ sub {
 }
 
 .slider-veryBullish {
-  background-color: #24a300;
+  background-color: $veryBullish-green;
   left: 100%;
   position: absolute;
   margin-top: -4px;
@@ -1197,10 +1212,9 @@ sub {
 }
 
 .pgr__label p {
-  margin-left:15px;
   height: 16px;
 
-  @media screen AND (max-width: 350px) {
+  @media screen AND (max-width: 349px) {
     margin-left:0px;
   }
 }
