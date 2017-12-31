@@ -18,6 +18,7 @@ import {AuthService} from '../../../../services/auth.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 
 declare var zingchart: any;
+declare var gtag: Function;
 
 @Component({
   selector: 'cpt-psp-stock-report',
@@ -1585,6 +1586,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     };
     this.loading ? this.loading.unsubscribe() : null;
     this.cd.detectChanges();
+    gtag('event', 'chart_timespan_toggle', {
+      'event_category': 'engagement',
+      'event_label': span
+    });
   }
 
   addStock(ticker: string) {
@@ -2474,6 +2479,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe(usr => {
         window.open(`${this._apiHostName}/CPTRestSecure/app/pdf/fetchReport?symbol=${symbol}&listID=${this.listId}&uid=${usr['UID']}&response=file&token=4XC534118T00FR73S127L77QWU65GA1H`, "_blank");
       });
+    gtag('event', 'stock_report_pdf_clicked', {
+      'event_category': 'engagement',
+      'event_label': symbol
+    });
   }
 
   calculatePricePerChange(firstClose: number, lastClose: number): number {

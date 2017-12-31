@@ -11,6 +11,8 @@ import {SignalService} from '../../../services/signal.service';
 
 import * as moment from 'moment';
 
+declare var gtag: Function;
+
 @Component({
   selector: 'cpt-my-stocks',
   template: `
@@ -191,16 +193,28 @@ export class MyStocksComponent implements OnInit, OnDestroy {
     this.ideasService.addStockIntoList(this.listId.toString(), ticker)
       .take(1)
       .subscribe(res => this.updateData());
+    gtag('event', 'add_stock_clicked', {
+      'event_category': 'engagement',
+      'event_label': ticker
+    });
   }
 
   removeStock(ticker: string) {
     this.ideasService.deleteSymbolFromList(this.listId, ticker)
       .take(1)
       .subscribe(res => this.updateData());
+    gtag('event', 'remove_stock_clicked', {
+      'event_category': 'engagement',
+      'event_label': ticker
+    });
   }
 
   selectStock(ticker: string) {
     this.gotoReport(ticker);
+    gtag('event', 'stock_clicked', {
+      'event_category': 'engagement',
+      'event_label': ticker
+    });
   }
 
   gotoReport(ticker: string) {
