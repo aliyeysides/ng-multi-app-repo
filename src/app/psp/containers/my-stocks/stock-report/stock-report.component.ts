@@ -1685,7 +1685,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         lineColor: "#fff"
       },
       scaleY: {
-        values: values,
         autoFit: true,
         guide: {
           visible: true,
