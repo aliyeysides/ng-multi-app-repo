@@ -5,6 +5,8 @@ import {Subject} from 'rxjs/Subject';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {Router} from '@angular/router';
 
+declare var gtag: Function;
+
 @Component({
   selector: 'cpt-psp-power-grid',
   template: `
@@ -305,10 +307,18 @@ export class PowerGridComponent implements OnInit, OnDestroy {
 
   toggleCollapse() {
     this.collapse = !this.collapse;
+    gtag('event', 'powergrid_collapse_clicked', {
+      'event_category': 'engagement',
+      'event_label': this.collapse
+    });
   }
 
   gotoReport(ticker: string) {
     this.router.navigate(['stock-analysis', Object.keys(ticker)[0]]);
+    gtag('event', 'stock_clicked', {
+      'event_category': 'engagement',
+      'event_label': ticker
+    });
   }
 
 }

@@ -6,6 +6,8 @@ import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {Router} from '@angular/router';
 
+declare var gtag: Function;
+
 @Component({
   selector: 'cpt-psp-rating-changes',
   template: `
@@ -208,10 +210,18 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
 
   toggleCollapse() {
     this.collapse = !this.collapse;
+    gtag('event', 'rating_changes_collapse_clicked', {
+      'event_category': 'engagement',
+      'event_label': this.collapse
+    });
   }
 
   gotoReport(ticker: string) {
     this.router.navigate(['stock-analysis', ticker]);
+    gtag('event', 'stock_clicked', {
+      'event_category': 'engagement',
+      'event_label': ticker
+    });
   }
 
   private parseAlerts(alerts: PGRChanges) {

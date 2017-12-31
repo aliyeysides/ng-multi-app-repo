@@ -6,6 +6,8 @@ import {HealthCheckService} from '../../../../services/health-check.service';
 import {UtilService} from '../../../../services/util.service';
 import {AuthService} from '../../../../services/auth.service';
 
+declare var gtag: Function;
+
 @Component({
   selector: 'cpt-psp-portfolio-overview',
   template: `
@@ -171,12 +173,19 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
 
   setToggleOptions(option: string) {
     this.healthCheck.setToggleOptions(option);
+    gtag('event', 'stock_movements_filter_clicked', {
+      'event_category': 'engagement',
+      'event_label': option
+    });
   }
 
   selectList(list: object) {
     this.selectedListName = list['name'];
     this.healthCheck.currentList = this.selectedListName;
     this.listChanged.emit();
+    gtag('event', 'list_switched', {
+      'event_label': this.selectedListName
+    });
   }
 
   getPHCReportforListId() {
@@ -185,6 +194,9 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
       .take(1)
       .subscribe(usr => {
         window.open(`${this._apiHostName}/CPTRestSecure/app/phc/getPHCReportForListID?listID=${this.listId}&uid=${usr['UID']}&response=file&additionalSymbols=SPY&phcVersion=1.3&_=1513675654286`, "_blank");
-      })
+      });
+    gtag('event', 'phc_pdf_clicked', {
+      'event_category': 'engagement'
+    });
   }
 }
