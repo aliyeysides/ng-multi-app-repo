@@ -204,8 +204,7 @@ declare var gtag: Function;
               <span class="bold" [ngClass]="{
     'green': timespanPerChange>0,
     'red': timespanPerChange<0}">{{ timespanPriceChange | decimal }} &nbsp;({{ timespanPerChange | decimal
-                }}%)</span> over the
-              last:
+                }}%)</span> over the last:
             </p>
           </div>
           <div (click)="toggleChartTime('1W')" class="col-2">
@@ -1230,6 +1229,13 @@ declare var gtag: Function;
               <a target="_blank" href="http://www.chaikinanalytics.com/attributions/">See Attributions &raquo;</a></p>
           </div>
         </div>
+
+      </div>
+    </div>
+
+    <div class="etf--warning">
+      <div class="warning-box align-absolute">
+        <p class="warning__text align-absolute">Chaikin stock analysis not available for ETFs at this time. Please check back later</p>
       </div>
     </div>
   `,
