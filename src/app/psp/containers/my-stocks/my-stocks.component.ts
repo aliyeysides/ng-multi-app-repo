@@ -139,6 +139,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       })
       .subscribe(([symbols, calc]) => {
         this.userStocks = symbols['symbols'];
+        this.healthCheck.setUserStocks(this.userStocks);
         this.powerBar = symbols['PowerBar'];
         this.healthCheck.setPortfolioStatus(calc[Object.keys(calc)[0]]);
       });

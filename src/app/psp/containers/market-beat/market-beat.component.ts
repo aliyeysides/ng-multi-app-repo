@@ -85,7 +85,7 @@ export class MarketBeatComponent implements OnInit, OnDestroy {
 
   toggleReadMore() {
     this.opened = !this.opened;
-    gtag('event', 'read_more_clicked', {
+    gtag('event', 'read_more_toggle', {
       'event_category': 'engagement',
       'event_label': this.selectedInsight['post_title'].slice(26)
     });

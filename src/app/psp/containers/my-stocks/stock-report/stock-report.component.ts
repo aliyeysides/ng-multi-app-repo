@@ -16,6 +16,7 @@ import {UtilService} from '../../../../services/util.service';
 import {ListSymbolObj} from '../../../../shared/models/health-check';
 import {AuthService} from '../../../../services/auth.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
+import {SymbolSearchService} from '../../../../services/symbol-search.service';
 
 declare var zingchart: any;
 declare var gtag: Function;
@@ -38,9 +39,9 @@ declare var gtag: Function;
         </div>
         <div class="header__stock">
           <h1 class="ticker">{{ stock }}</h1>
-          <p class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
+          <p *ngIf="!this.is_etf" class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
         </div>
-        <div *ngIf="!resultInUserList(userStocks, stock)" (click)="addStock(stock)"
+        <div *ngIf="!resultInUserList(userStocks, stock) && !is_etf" (click)="addStock(stock)"
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_plus--white.svg">
         </div>
@@ -48,13 +49,13 @@ declare var gtag: Function;
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
         </div>
-        <div class="header__button header__button--pdf">
+        <div *ngIf="!this.is_etf" class="header__button header__button--pdf">
           <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
       </div>
 
       <!-- STOCK VIEW CONTENTS -->
-      <div class="container-fluid stockview__contents">
+      <div [class.blur-me]="is_etf || !stock" class="container-fluid stockview__contents">
         <div class="row">
           <div class="col-12 hidden-md-up">
             <div class="tab--slide"></div>
@@ -1331,20 +1332,33 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   timespanPerChange: number;
   timespanPriceChange: number;
 
+  is_etf: boolean;
+
   constructor(private reportService: ReportService,
               private authService: AuthService,
               private signalService: SignalService,
               private ideasService: IdeasService,
               private utilService: UtilService,
               private cd: ChangeDetectorRef,
+              private symbolSearchService: SymbolSearchService,
               private router: Router) {
   }
 
   ngOnInit() {
     window.scrollTo(0, 0);
     if (this.stock) {
-      this.getReportData(this.stock);
-      this.getAllCharts(this.stock);
+      this.symbolSearchService.symbolLookup(this.stock)
+        .subscribe(val => {
+          console.log('val', val);
+          val[0] ? this.is_etf = val[0]['is_etf'] : this.is_etf = true;
+          if (!this.is_etf) {
+            console.log('is_etf', this.is_etf);
+            this.getReportData(this.stock);
+            this.getMainChart(this.stock);
+          }
+          this.cd.detectChanges();
+          console.log('is_etf', this.is_etf);
+        });
     }
   }
 
@@ -1371,7 +1385,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       })
       .switchMap(() => {
         return Observable.combineLatest(
-          this.reportService.getPgrDataAndContextSummary(this.stock, this.symbolData['metaInfo'][0]['industry_name']),
+          this.reportService.getPgrDataAndContextSummary(stock, this.symbolData['metaInfo'][0]['industry_name']),
           this.reportService.getTickerCompetitors(stock),
           this.reportService.getResearchReportData(stock),
           this.ideasService.getHeadlines(stock)
@@ -1382,7 +1396,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         this.summary = summary;
         this.competitors = competitors['compititors'];
         this.research = research;
-        this.headlines = headlines['headlines'].filter((item, idx) => idx < 7);
+        this.headlines = headlines['headlines'] ? headlines['headlines'].filter((item, idx) => idx < 7) : [];
 
         const annualEPSData = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData'].map(x => +x[5].slice(1)) : null;
         const annualEPSDates = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData'].map(x => x[0]) : null;
@@ -1445,7 +1459,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       });
   }
 
-  getAllCharts(stock: string) {
+  getMainChart(stock: string) {
     this.loading = this.reportService.getStockSummaryData(stock)
       .take(1)
       .subscribe(data => {
