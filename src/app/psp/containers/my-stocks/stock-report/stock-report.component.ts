@@ -48,8 +48,7 @@ declare var zingchart: any;
           <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
         </div>
         <div class="header__button header__button--pdf">
-          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o"
-                                                                               aria-hidden="true"></i></button>
+          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
       </div>
 
@@ -190,7 +189,7 @@ declare var zingchart: any;
 
 
         <!-- STOCK VIEW CHART HEADER -->
-        <div class="row no-gutters stock-info stock-info--chart-toggle">
+        <div class="row no-gutters stock-info stock-info--chart-toggle justify-content-center">
           <div class="col-12 hidden-md-down">
             <div class="divider__long"></div>
           </div>
@@ -207,7 +206,6 @@ declare var zingchart: any;
               last:
             </p>
           </div>
-          <div class="col-1"></div>
           <div (click)="toggleChartTime('1W')" class="col-2">
             <p class="date-select" [ngClass]="{'selected': current == '1W' }">1W</p>
           </div>
@@ -223,7 +221,6 @@ declare var zingchart: any;
           <div (click)="getFiveYearChart()" class="col-2">
             <p class="date-select" [ngClass]="{'selected': current == '5Y' }">5Y</p>
           </div>
-          <div class="col-1"></div>
         </div>
 
         <!-- STOCK VIEW MAIN CHART -->
@@ -242,7 +239,7 @@ declare var zingchart: any;
         <!-- STOCK VIEW STATS -->
         <div class="row stock-info stock-info--stats">
           <div class="col-12">
-            <h2>{{ stock }} Stats</h2>
+            <h2><b>{{ stock }}</b> Stats</h2>
           </div>
           <div class="col-4">
             <p class="data data--large">
@@ -287,7 +284,7 @@ declare var zingchart: any;
             <div class="divider__long"></div>
           </div>
           <div (click)="scrollLeft()" *ngIf="headlines?.length" class="col-1 chevron-slider chevron-slider--left">
-            <img class="align-absolute" src="./assets/imgs/ui_chevron--left.svg">
+            <img class="align-absolute" src="./assets/imgs/ux__scroll--left.svg">
           </div>
           <ul *ngIf="!headlines?.length" class="col-10 news-panel__container">
             <p class="news__none">There are currently no headlines for this symbol</p>
@@ -308,7 +305,7 @@ declare var zingchart: any;
             </li>
           </ul>
           <div (click)="scrollRight()" *ngIf="headlines?.length" class="col-1 chevron-slider chevron-slider--right">
-            <img class="align-absolute" src="./assets/imgs/ui_chevron--right.svg">
+            <img class="align-absolute" src="./assets/imgs/ux__scroll--right.svg">
           </div>
         </div>
         <div class="row">
@@ -320,7 +317,7 @@ declare var zingchart: any;
         <!-- STOCK VIEW BREAKDOWN -->
         <div class="row justify-content-center stock-info stock-info--overall-breakdown">
           <div class="col-12">
-            <h2>Rating <span>Breakdown</span></h2>
+            <h2><span class="hidden-sm-down">Power Gauge</span> Rating Breakdown</h2>
           </div>
 
           <div class="col-12 col-lg-10 copy-block">
@@ -668,11 +665,11 @@ declare var zingchart: any;
               </div>
               <div *ngIf="(annualEPSChart['data']['graphset'][0] | json) != '{}'" class="chart">
                 <cpt-zingchart [chart]="annualEPSChart"></cpt-zingchart>
-                <p>
+                <p class="chart-caption">
                   {{ research && research['EPS Quarterly Results'].hasOwnProperty('label') ? research['EPS Quarterly Results']['label'][0] : ''
                   }}</p>
               </div>
-              <p *ngIf="(annualEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
+              <p class="empty-chart" *ngIf="(annualEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
 
             <div class="col-12 col-lg-6 section__chart">
@@ -681,11 +678,11 @@ declare var zingchart: any;
               </div>
               <div *ngIf="(qrtEPSChart['data']['graphset'][0] | json) != '{}'" class="chart">
                 <cpt-zingchart [chart]="qrtEPSChart"></cpt-zingchart>
-                <p>
+                <p class="chart-caption">
                   {{ research && research['EPS Quarterly Results'].hasOwnProperty('label') ? research['EPS Quarterly Results']['label'][0] : ''
                   }}</p>
               </div>
-              <p *ngIf="(qrtEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
+              <p class="empty-chart" *ngIf="(qrtEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
 
             <div class="col-12 col-lg-6 section__chart">
@@ -694,9 +691,9 @@ declare var zingchart: any;
               </div>
               <div *ngIf="(epsSurprisesChart['data']['graphset'][0] | json) != '{}'" class="chart">
                 <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
-                <p>Next report: {{ symbolData ? symbolData['EPSData']['next_report_date'] : '' }}</p>
+                <p class="chart-caption" >Next report: {{ symbolData ? symbolData['EPSData']['next_report_date'] : '' }}</p>
               </div>
-              <p *ngIf="(epsSurprisesChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
+              <p class="empty-chart" *ngIf="(epsSurprisesChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
 
             <div class="col-12 col-lg-6 section__chart">
@@ -706,7 +703,7 @@ declare var zingchart: any;
               <div *ngIf="(annualRevenueChart['data']['graphset'][0] | json) != '{}'" class="chart">
                 <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
               </div>
-              <p *ngIf="(annualRevenueChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
+              <p class="empty-chart" *ngIf="(annualRevenueChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
           </ng-container>
 
@@ -717,7 +714,7 @@ declare var zingchart: any;
           </div>
           <div *ngIf="collapse['earnings'] == false" (click)="toggleCollapse('earnings')"
                class="col-12 hidden-lg-up expand-collapse">
-            <img src="./assets/imgs/ux__expand--circle.svg">
+            <img src="./assets/imgs/ux__expand--dots.svg">
             <p>Expand for details</p>
           </div>
 
@@ -911,7 +908,7 @@ declare var zingchart: any;
           </div>
           <div *ngIf="collapse['technicals'] == false" (click)="toggleCollapse('technicals')"
                class="col-12 hidden-lg-up expand-collapse">
-            <img src="./assets/imgs/ux__expand--circle.svg">
+            <img src="./assets/imgs/ux__expand--dots.svg">
             <p>Expand for details</p>
           </div>
 
@@ -1671,7 +1668,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         shared: true
       },
       plotarea: {
-        margin: "30 40 40 30"
+        margin: "15 40 40 30",
       },
       plot: {
         marker: {
@@ -1704,8 +1701,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         tick: {
           visible: false,
-          lineColor: "transparent",
-          lineWidth: 0
         },
       },
       scaleXN: {
@@ -1732,8 +1727,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           fontFamily: "Rajdhani"
         },
         tick: {
-          lineColor: "transparent",
-          lineWidth: 0
+          visible: false,
         },
       },
       series: [
@@ -1765,12 +1759,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         source: {
           visible: false,
-          text: "ZingCharts.com",
-          fontColor: "#ddd",
-          fontFamily: "Open Sans",
-          fontSize: "10",
-          fontWeight: "400",
-
         },
         tooltip: {
           visible: false,
@@ -1823,10 +1811,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             rules: [
               {
                 rule: '%v < 0.5',
-                backgroundColor: "#FD001F",
+                backgroundColor: "#F5A623 #FD001F",
                 lineColor: "#FD001F"
               }],
-            backgroundColor: "#00C04E",
+            backgroundColor: "#00C04E #F5A623",
             lineColor: "#00C04E",
             lineWidth: 2
           }
@@ -1845,7 +1833,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         y: 380,
         backgroundColor: "#fff",
         plotarea: {
-          margin: "25 42 25 30"
+          margin: "30 42 25 30"
         },
         plot: {
           marker: {
@@ -1854,10 +1842,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         source: {
           visible: "false",
-          text: "ZingCharts.com",
-          fontColor: "#ddd",
-          fontFamily: "Open Sans",
-          fontSize: "10",
         },
         tooltip: {
           visible: false,
@@ -1958,9 +1942,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       });
       return {
         "type": "bar",
-        height: 40,
+        height: 30,
         x: 0,
-        y: 300,
+        y: 315,
         "plot": {
           "stacked": true,
           "bar-space": "0px",

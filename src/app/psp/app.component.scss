@@ -8,11 +8,10 @@ body {
   background-color: #ffffff;
 }
 
-p, a, h1, h2, h3, h4, h5, h6, span, label, ul, li, table, td, th, tr, button {
+p, a, h1, h2, h3, h4, h5, h6, label, ul, li, table, td, th, tr, button {
   font-family: $font-stack;
   margin: 0;
   padding: 0;
-  cursor: default;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -28,11 +27,15 @@ h1 {
   font-weight: 400;
 }
 h2 {
-  font-size: 35px;
+  font-size: 36px;
   font-weight: 400;
   margin: 40px 0px 5px;
   color: $font-color;
   line-height: 1;
+
+  @media screen AND (min-width: 767px) {
+      font-size: 44px;
+  }
 }
 h3 {
   font-size:24px;
@@ -113,10 +116,10 @@ sub {
 }
 
 
-.green, .up-change, .up-change span {
+.green, .up-change {
   color:$pulse-green;
 }
-.red, .down-change, .down-change span {
+.red, .down-change {
   color:$pulse-red;
 }
 .yellow, .hold {
@@ -142,7 +145,9 @@ sub {
   font-weight:600;
 }
 
-
+.ticker {
+  cursor: pointer;
+}
 
 
 
@@ -178,7 +183,17 @@ sub {
 
 
 
-
+.chart-caption {
+  font-family: $font-stack2;
+  font-size: 14px;
+  text-align: left;
+  font-weight: 400;
+  line-height: 1;
+  cursor: default;
+  font-style: italic;
+  margin-top: -10px;
+  color: $font-color--mid;
+}
 
 .empty-chart {
   text-align: center;
@@ -188,27 +203,23 @@ sub {
   margin: 20px 0;
   color: $font-color;
   opacity: 0.6;
+  cursor: default;
 }
 
 
 .paragraph {
-  font-family: $font-stack;
+  font-family: $font-stack2;
   font-size: 16px;
   margin-bottom: 15px;
   text-align: left;
   font-weight: 500;
   line-height: 1.75;
   cursor: default;
-
-  span {
-    font-weight: 700;
-    font-size: 15px;
-  }
 }
 
 
 .disclaimer {
-  font-family: $font-stack;
+  font-family: $font-stack2;
   font-size: 12px;
   margin: 15px 0 25px;
   text-align: left;
@@ -233,13 +244,6 @@ sub {
   border-radius: 5px;
   margin: 10px auto;
   background: $background--verylight;
-}
-
-.divider__medium {
-  width: 55%;
-  height: 2px;
-  background: $background--light;
-  margin:0 auto;
 }
 
 .divider__long {
@@ -327,10 +331,8 @@ sub {
 
 
 
-/*                                                   */
-/*                    NAVIGATION                     */
-/*                                                   */
 
+/*              NAVIGATION               */
 
 
 .container--nav {
@@ -376,7 +378,7 @@ sub {
 
       .sub-nav {
         padding: 0px;
-        min-width:275px;
+        width:330px;
 
         .nav--sublevel {
           font-size: 16px;
@@ -386,20 +388,21 @@ sub {
           white-space: nowrap;
           opacity: 1;
           cursor: pointer;
-          white-space: nowrap;
 
           @media screen AND (min-width:992px) {
-            font-size: 22px;
+            font-size: 19px;
+            margin-left:10px;
+            line-height: 2.25;
           }
 
           i {
             color:#ffffff;
             font-size: 8px;
             display: inline-block;
-            vertical-align: baseline;
+            vertical-align: middle;
 
             @media screen AND (min-width:992px) {
-              font-size: 12px;
+              font-size: 11px;
               vertical-align: middle;
             }
           }
@@ -413,8 +416,8 @@ sub {
   }
 
   .logo {
-    padding:15px 20px 0 20px;
-    width: 300px;
+    padding:20px 20px 0 18px;
+    width: 280px;
 
     img {
       width: 100%;
@@ -424,7 +427,7 @@ sub {
   .toc__container {
     position: absolute;
     bottom: 15px;
-    min-width:295px;
+    width:295px;
 
     .version {
       font-size: 11px;
@@ -618,9 +621,8 @@ sub {
 
 
 
-/*                                                   */
-/*                 SEARCH COMPONENT                  */
-/*                                                   */
+
+/*             SEARCH COMPONENT               */
 
 
 .header__search {
@@ -656,7 +658,6 @@ sub {
 /*          STANDARD COMPONENTS           */
 
 
-
 .col-headers {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -687,9 +688,10 @@ sub {
 
 
 
-
 .section__summary {
-  margin: 20px 0 35px;
+  margin: 35px 0;
+  height: 56px;
+  overflow: hidden;
 
   p {
     font-size: 64px;
@@ -719,12 +721,13 @@ sub {
 
 
 
-
 .section__toggle {
   margin-top:25px;
+  margin-bottom:-10px;
+
 
   @media screen AND (min-width: 768px) {
-    margin-top: 10px;
+    margin-top: 20px;
   }
 
   .toggle {
@@ -773,13 +776,7 @@ sub {
 
 
 
-
-
-
-
-/*                                                   */
-/*                 STOCK LIST ENTRY                  */
-/*                                                   */
+/*        STOCK LIST ENTRY           */
 
 
 .stock__list {
@@ -849,8 +846,6 @@ sub {
     }
   }
 }
-
-
 .button__slide {
   position: absolute;
   right:3%;
@@ -865,8 +860,6 @@ sub {
 
 
 
-
-
 .list-entry__overlay {
   display: none;
   position: absolute;
@@ -875,7 +868,6 @@ sub {
   width: 100%;
   background: $gradient--pulse-grey;
 }
-
 .list-entry__overlay.show {
   display:block;
 }
@@ -888,7 +880,6 @@ sub {
 .list-entry__overlay.yellow {
   background: $gradient--pulse-yellow;
 }
-
 .overlay__contents {
   height: 60px;
 
@@ -928,31 +919,25 @@ sub {
 
 
 
-/*                                      */
 /*          EXPAND/COLLAPSE             */
-/*                                      */
 
 
 .expand-collapse {
   margin:10px 0 0;
   cursor: pointer;
 
-  @media screen AND (min-width: 768px) {
-      margin:0px;
-  }
-
   p {
     font-size: 13px;
     font-weight: 600;
     line-height: 1.5;
-    color:#999;
+    color: $font-color--light;
     text-transform: uppercase;
+    cursor: pointer;
   }
 
   img {
-    margin-bottom: 8px;
-    width: 22px;
-    height: 22px;
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -962,10 +947,7 @@ sub {
 
 
 
-/*                                                 */
-/*          MARKET INSIGHTS WORD PRESS             */
-/*                                                 */
-
+/*         MARKET INSIGHTS WORD PRESS            */
 
 
 .article {
@@ -1013,19 +995,22 @@ sub {
     clear: both;
     display: block;
     max-width: 992px;
-    margin: 20px auto 20px;
+    margin: 20px auto 10px;
 
     @media screen AND (max-width:575px) {
       width: 100%;
     }
   }
   span {
-    font-family: $font-stack;
+    font-family: $font-stack2;
     color: $font-color;
     font-size: 16px;
     line-height: 1.5;
   }
 }
+
+
+
 
 
 
@@ -1232,7 +1217,7 @@ sub {
 #qrtEPSChart-menu-trigger-gear-path,
 #annualEPSChart-menu-trigger-gear-path,
 #annualRevenueChart-menu-trigger-gear-path, {
-  fill: #999;
+  fill: $line--chart;
 }
 
 
@@ -1255,7 +1240,7 @@ sub {
 
   #mainChart-graph-id0-plotset-plot-0-path,
   #epsSurprisesChart-graph-id0-legend-path {
-    stroke:#00C04E;
+    stroke:$pulse-green;
   }
   #mainChart-graph-id0-scales-bl-0-c {
     path {
@@ -1267,14 +1252,14 @@ sub {
   #qrtEPSChart-graph-id0-scales-bl-0-c,
   #annualRevenueChart-graph-id0-scales-bl-0-c {
     path {
-      stroke:#00C04E;
+      stroke:$pulse-green;
       stroke-dasharray: (0,0);
       opacity: 0.15;
     }
   }
   #epsSurprisesChart-graph-id0-plot-1-bl-1-c {
     circle {
-      fill:#00C04E;
+      fill:$pulse-green;
       opacity: 0.85;
     }
   }
@@ -1286,14 +1271,14 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-2-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
-    fill:#00C04E;
+    fill:$pulse-green;
   }
   #annualEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-2-node-1-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-2-path {
-    fill:#00C07B;
+    fill:$pulse-green__shade1;
   }
   #annualEPSChart-graph-id0-plotset-plot-0-node-2-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-2-path,
@@ -1301,7 +1286,7 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-2-node-2-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-3-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-4-path {
-    fill:#00C1A9;
+    fill:$pulse-green__shade2;
   }
 }
 
@@ -1310,7 +1295,7 @@ sub {
 
   #mainChart-graph-id0-plotset-plot-0-path,
   #epsSurprisesChart-graph-id0-legend-path {
-    stroke:#FD001F;
+    stroke:$pulse-red;
   }
   #mainChart-graph-id0-scales-bl-0-c {
     path {
@@ -1322,14 +1307,14 @@ sub {
   #qrtEPSChart-graph-id0-scales-bl-0-c,
   #annualRevenueChart-graph-id0-scales-bl-0-c  {
     path {
-      stroke:#FD001F;
+      stroke:$pulse-red;
       stroke-dasharray: (0,0);
       opacity: 0.15;
     }
   }
   #epsSurprisesChart-graph-id0-plot-1-bl-1-c {
     circle {
-      fill:#FD001F;
+      fill:$pulse-red;
       opacity: 0.85;
     }
   }
@@ -1341,14 +1326,14 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-2-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
-    fill:#FD001F;
+    fill:$pulse-red;
   }
   #annualEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-2-node-1-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-2-path {
-    fill:#D53B41;
+    fill:$pulse-red__shade1;
   }
   #annualEPSChart-graph-id0-plotset-plot-0-node-2-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-2-path,
@@ -1356,7 +1341,7 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-2-node-2-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-3-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-4-path {
-    fill:#B6355C;
+    fill:$pulse-red__shade2;
   }
 }
 
@@ -1366,11 +1351,11 @@ sub {
 
   #mainChart-graph-id0-plotset-plot-0-path,
   #epsSurprisesChart-graph-id0-legend-path {
-    stroke:#FADA3D;
+    stroke:$pulse-yellow__shade1;
   }
   #mainChart-graph-id0-scales-bl-0-c {
     path {
-      stroke:#FADA3D;
+      stroke:$pulse-yellow__shade1;
       opacity: 0.25;
     }
   }
@@ -1379,14 +1364,14 @@ sub {
   #qrtEPSChart-graph-id0-scales-bl-0-c,
   #annualRevenueChart-graph-id0-scales-bl-0-c {
     path {
-      stroke:#FADA3D;
+      stroke:$pulse-yellow__shade1;
       stroke-dasharray: (0,0);
       opacity: 0.25;
     }
   }
   #epsSurprisesChart-graph-id0-plot-1-bl-1-c {
     circle {
-      fill:#F89939;
+      fill:$pulse-yellow;
       opacity: 0.95;
     }
   }
@@ -1397,14 +1382,14 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-2-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
-    fill:#FADA3D;
+    fill:$pulse-yellow__shade1;
   }
   #annualEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-2-node-1-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-2-path {
-    fill:#F9BA3B;
+    fill:$pulse-yellow;
   }
   #epsSurprisesChart-graph-id0-legend-marker_1-path,
   #annualEPSChart-graph-id0-plotset-plot-0-node-2-path,
@@ -1413,6 +1398,6 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-2-node-2-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-3-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-4-path {
-    fill:#F89939;
+    fill:$pulse-yellow__shade2;
   }
 }

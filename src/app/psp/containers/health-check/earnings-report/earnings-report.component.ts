@@ -24,7 +24,7 @@ interface EarningsReportObj {
 
       <div class="row">
         <div class="col-12">
-          <h2>Earnings Info</h2>
+          <h2>Earnings <span class="hidden-sm-down">Surprises &amp; Revisions</span></h2>
         </div>
       </div>
 
@@ -147,7 +147,7 @@ interface EarningsReportObj {
           <p>Collapse</p>
         </div>
         <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-          <img src="./assets/imgs/ux__expand--circle.svg">
+          <img src="./assets/imgs/ux__expand--dots.svg">
           <p>Expand for detail</p>
         </div>
       </div>

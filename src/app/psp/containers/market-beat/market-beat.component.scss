@@ -27,6 +27,10 @@
 		}
 	}
 
+	.divider__long {
+		margin: 0px auto;
+	}
+
 	.masthead--featured {
 		background-image: url("../../../../assets/imgs/image__MI--masthead.png");
 	}
@@ -55,7 +59,7 @@
 			.btn {
 			    font-weight: 600;
 			    text-align: center;
-			    border: 3px solid #1199ff;
+			    border: $line--button;
 			    padding: 4px 15px 1px 20px;
 			    border-radius: 40px;
 			    text-transform: lowercase;
@@ -67,10 +71,10 @@
 			.btn-primary {
 				cursor: pointer;
 		  		background-color: #ffffff;
-			    border-color: #1199ff;
+			    border-color: $link-blue;
 			    font-size: 27px;
 			    line-height: 1;
-				color: #1199ff;
+				color: $link-blue;
 				box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
 			}
 			.dropdown-toggle {
@@ -88,7 +92,7 @@
 		    padding: 5px 0;
 		    margin: 0;
 		    font-size: 22px;
-		    color: #484848;
+		    color: $font-color;
 		    width: 100%;
 		    overflow: hidden;
 		    text-align: center;
@@ -117,10 +121,10 @@
 
 	.section--article {
 		.article__body {
-			height: 49vh;
+			height: 50vh;
 			overflow: hidden;
 			margin-top: 15px;
-			color: #484848;
+			color: $font-color;
 			position: relative;
 			padding-bottom: 20px;
 
@@ -131,7 +135,7 @@
 			&::after {
 				content: "…";
 				position: absolute;
-				bottom: -15px;
+				bottom: -5px;
 				left:0;
 				right:0;
 				width: 100%;
@@ -151,9 +155,9 @@
 		.article__read-more {
 			display: block;
 			font-size: 13px;
-			color: #1199FF;
+			color: $link-blue;
 			font-weight: 600;
-			margin: 15px 0 5px;
+			margin: 5px 0 0px;
 			text-align: center;
 		}
 	}
