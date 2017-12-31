@@ -50,7 +50,12 @@ declare var gtag: Function;
           <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
         </div>
         <div *ngIf="!this.is_etf" class="header__button header__button--pdf">
-          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+          <div (click)="jumpToFragment(financials)">Financials</div>
+          <div (click)="jumpToFragment(earnings)">Earnings</div>
+          <div (click)="jumpToFragment(technicals)">Technicals</div>
+          <div (click)="jumpToFragment(experts)">Experts</div>
+          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o"
+                                                                               aria-hidden="true"></i></button>
         </div>
       </div>
 
@@ -335,7 +340,7 @@ declare var gtag: Function;
         </div>
 
         <!-- BREAKDOWN - FINANCIALS -->
-        <div class="row stock-info stock-info--breakdown">
+        <div #financials class="row stock-info stock-info--breakdown">
           <div class="col-12">
             <h1>Financials:
               <span>{{ summary ? summary['financialContextSummary'][0]['status'] : null }}</span>
@@ -563,7 +568,7 @@ declare var gtag: Function;
 
 
         <!-- BREAKDOWN - EARNINGS -->
-        <div class="row stock-info stock-info--breakdown">
+        <div #earnings class="row stock-info stock-info--breakdown">
           <div class="col-12">
             <h1>Earnings: <span class="">{{ summary ? summary['earningsContextSummary'][0]['status'] : null
               }}</span></h1>
@@ -671,7 +676,8 @@ declare var gtag: Function;
                   {{ research && research['EPS Quarterly Results'].hasOwnProperty('label') ? research['EPS Quarterly Results']['label'][0] : ''
                   }}</p>
               </div>
-              <p class="empty-chart" *ngIf="(annualEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
+              <p class="empty-chart" *ngIf="(annualEPSChart['data']['graphset'][0] | json) === '{}'">No Data
+                Available.</p>
             </div>
 
             <div class="col-12 col-lg-6 section__chart">
@@ -693,9 +699,11 @@ declare var gtag: Function;
               </div>
               <div *ngIf="(epsSurprisesChart['data']['graphset'][0] | json) != '{}'" class="chart">
                 <cpt-zingchart [chart]="epsSurprisesChart"></cpt-zingchart>
-                <p class="chart-caption" >Next report: {{ symbolData ? symbolData['EPSData']['next_report_date'] : '' }}</p>
+                <p class="chart-caption">Next report: {{ symbolData ? symbolData['EPSData']['next_report_date'] : ''
+                  }}</p>
               </div>
-              <p class="empty-chart" *ngIf="(epsSurprisesChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
+              <p class="empty-chart" *ngIf="(epsSurprisesChart['data']['graphset'][0] | json) === '{}'">No Data
+                Available.</p>
             </div>
 
             <div class="col-12 col-lg-6 section__chart">
@@ -705,7 +713,8 @@ declare var gtag: Function;
               <div *ngIf="(annualRevenueChart['data']['graphset'][0] | json) != '{}'" class="chart">
                 <cpt-zingchart [chart]="annualRevenueChart"></cpt-zingchart>
               </div>
-              <p class="empty-chart" *ngIf="(annualRevenueChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
+              <p class="empty-chart" *ngIf="(annualRevenueChart['data']['graphset'][0] | json) === '{}'">No Data
+                Available.</p>
             </div>
           </ng-container>
 
@@ -726,7 +735,7 @@ declare var gtag: Function;
         </div>
 
         <!-- BREAKDOWN - TECHNICALS -->
-        <div class="row stock-info stock-info--breakdown">
+        <div #technicals class="row stock-info stock-info--breakdown">
           <div class="col-12">
             <h1>Technicals: <span>{{ summary ? summary['priceVolumeContextSummary'][0]['status'] : null }}</span></h1>
           </div>
@@ -921,7 +930,7 @@ declare var gtag: Function;
 
 
         <!-- BREAKDOWN - EXPERTS -->
-        <div class="row stock-info stock-info--breakdown">
+        <div #experts class="row stock-info stock-info--breakdown">
           <div class="col-12">
             <h1>Experts: <span>{{ summary ? summary['expertOpnionsContextSummary'][0]['status'] : null }}</span></h1>
           </div>
@@ -1237,6 +1246,12 @@ declare var gtag: Function;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
+  @ViewChild('newsList') newsList: ElementRef;
+  @ViewChild('financials') financials: ElementRef;
+  @ViewChild('earnings') earnings: ElementRef;
+  @ViewChild('technicals') technicals: ElementRef;
+  @ViewChild('experts') experts: ElementRef;
+
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _listId: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _userStocks: BehaviorSubject<ListSymbolObj[]> = new BehaviorSubject<ListSymbolObj[]>([] as ListSymbolObj[]);
@@ -1266,7 +1281,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   @Output('closeClicked') closeClicked: EventEmitter<void> = new EventEmitter<void>();
   @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @Output('removeStockClicked') removeStockClicked: EventEmitter<string> = new EventEmitter<string>();
-  @ViewChild('newsList') newsList: ElementRef;
 
   symbolData;
   headlines;
@@ -2511,6 +2525,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     if (arr) {
       return arr.filter(x => x['symbol'] == ticker).length > 0;
     }
+  }
+
+  jumpToFragment(viewChild) {
+    viewChild.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
   }
 
 }
