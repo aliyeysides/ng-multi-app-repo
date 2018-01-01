@@ -95,8 +95,8 @@ export class AppComponent implements OnDestroy {
               private cd: ChangeDetectorRef,
               private healthCheck: HealthCheckService) {
     const mobWidth = (window.screen.width);
-    if (+mobWidth <= 992) this.menuPosition = 'left';
-    if (+mobWidth > 992) this.menuPosition = 'right';
+    if (+mobWidth <= 991) this.menuPosition = 'left';
+    if (+mobWidth > 991) this.menuPosition = 'right';
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
