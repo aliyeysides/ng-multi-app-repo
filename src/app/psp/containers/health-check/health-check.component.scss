@@ -458,7 +458,7 @@
 
 		  	.data--right {
 		      color:$pulse-blue__shade2;
-		      padding-left: 200% !important;
+		      //padding-left: 200% !important;
 		    }
 		}
 	}
@@ -644,7 +644,7 @@
 
 			p {
 				text-align: center;
-				font-size: 17px;		
+				font-size: 17px;
 				font-weight: 600;
 				letter-spacing: 0.03em;
 				cursor: default;
@@ -701,14 +701,14 @@
 				  	span {
 				  		margin: 0px 7px;
 
-				  		&::after {				
+				  		&::after {
 				  			content: ",";
 						}
 					}
 
 					&:last-child {
 						span {
-					  		&::after {				
+					  		&::after {
 					  			content: " ";
 							}
 						}
@@ -849,7 +849,7 @@
 
 .powerGrid {
 	margin-top:0px;
-	
+
 	.col-headers {
 	  	margin-bottom: 5px;
 	  	margin-top: -5px;
