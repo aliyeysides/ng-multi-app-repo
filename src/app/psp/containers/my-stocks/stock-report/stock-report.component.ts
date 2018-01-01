@@ -1242,7 +1242,7 @@ declare var gtag: Function;
       </div>
     </div>
 
-    <div class="etf--warning">
+    <div *ngIf="is_etf" class="etf--warning">
       <div class="warning-box align-absolute">
         <p class="warning__text align-absolute">Chaikin stock analysis not available for ETFs at this time. Please check back later</p>
       </div>
