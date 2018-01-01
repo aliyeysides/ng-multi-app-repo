@@ -832,6 +832,12 @@
 	}
 }
 
+.unselected--warning {
+  @media screen AND (max-width:768px) {
+    display:none;
+  }
+}
+
 .etf--warning {
 	position: absolute;
 	top: 0;
@@ -842,9 +848,9 @@
  	overflow: hidden;
  	background-color: rgba(50,50,50,0.9);
 
-  @media screen AND (max-width:768px) {
-    display:none;
-  }
+  //@media screen AND (max-width:768px) {
+  //  display:none;
+  //}
 
  	.warning-box {
  		background-color: rgba(255,255,255,0.8);

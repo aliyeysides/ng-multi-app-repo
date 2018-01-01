@@ -1242,7 +1242,7 @@ declare var gtag: Function;
 
       </div>
     </div>
-    <div *ngIf="!stock" class="etf--warning">
+    <div *ngIf="!stock" class="etf--warning unselected--warning">
       <div class="warning-box align-absolute">
         <p class="warning__text align-absolute">Select a stock to get started.</p>
       </div>
