@@ -15,6 +15,7 @@ import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
 import {ReportService} from '../../../services/report.service';
 import {UtilService} from '../../../services/util.service';
+import {SignalService} from '../../../services/signal.service';
 
 @Component({
   selector: 'cpt-health-check',
@@ -82,6 +83,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
   public currentList: string;
 
   constructor(private authService: AuthService,
+              private signalService: SignalService,
               private healthCheck: HealthCheckService,
               private marketsSummary: MarketsSummaryService) {
   }
