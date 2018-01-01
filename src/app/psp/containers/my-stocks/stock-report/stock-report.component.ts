@@ -195,7 +195,6 @@ declare var gtag: Function;
           </div>
         </div>
 
-
         <!-- STOCK VIEW CHART HEADER -->
         <div class="row no-gutters stock-info stock-info--chart-toggle justify-content-center">
           <div class="col-12 hidden-md-down">
@@ -207,9 +206,7 @@ declare var gtag: Function;
               <span class="bold green" *ngIf="timespanPerChange>0">up</span>
               <span class="bold greyed-out" *ngIf="timespanPerChange==0">unch</span>
               <span class="bold red" *ngIf="timespanPerChange<0">down</span>
-              <span class="bold" [ngClass]="{
-    'green': timespanPerChange>0,
-    'red': timespanPerChange<0}">{{ timespanPriceChange | decimal }} &nbsp;({{ timespanPerChange | decimal
+              <span class="bold" [ngClass]="{ 'green': timespanPerChange>0, 'red': timespanPerChange<0}">{{ timespanPriceChange | decimal }} &nbsp;({{ timespanPerChange | decimal
                 }}%)</span> over the last:
             </p>
           </div>
@@ -235,9 +232,7 @@ declare var gtag: Function;
           <div class="col-12 main-chart">
             <cpt-zingchart [ngBusy]="loading" [chart]="mainChart"></cpt-zingchart>
           </div>
-        </div>
 
-        <div class="row">
           <div class="col-12">
             <div class="divider__full"></div>
           </div>
@@ -274,8 +269,7 @@ declare var gtag: Function;
             <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['industry_name'] : null }}</p>
             <p class="label">INDUSTRY</p>
           </div>
-        </div>
-        <div class="row">
+
           <div class="col-12">
             <div class="divider__full"></div>
           </div>
@@ -314,8 +308,7 @@ declare var gtag: Function;
           <div (click)="scrollRight()" *ngIf="headlines?.length" class="col-1 chevron-slider chevron-slider--right">
             <img class="align-absolute" src="./assets/imgs/ux__scroll--right.svg">
           </div>
-        </div>
-        <div class="row">
+
           <div class="col-12">
             <div class="divider__full"></div>
           </div>
@@ -351,7 +344,7 @@ declare var gtag: Function;
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>LT Debt to Equity</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -366,7 +359,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Price to Book</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -381,7 +374,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Return on Equity</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -396,7 +389,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Price to Sales</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -411,7 +404,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Free Cash Flow</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -566,7 +559,6 @@ declare var gtag: Function;
           </div>
         </div>
 
-
         <!-- BREAKDOWN - EARNINGS -->
         <div #earnings class="row stock-info stock-info--breakdown">
           <div class="col-12">
@@ -578,7 +570,7 @@ declare var gtag: Function;
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4  pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4  pgr__label">
                     <p>Earnings Growth</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6  sliderProgress">
@@ -593,7 +585,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4  pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4  pgr__label">
                     <p>Earnings Surprise</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6  sliderProgress">
@@ -608,7 +600,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Earnings Trend</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -623,7 +615,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Projected P/E</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -638,7 +630,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Earnings Consistency</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -743,7 +735,7 @@ declare var gtag: Function;
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Rel Strength vs Market</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -758,7 +750,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Chaikin Money Flow</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -773,7 +765,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Price Strength</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -788,7 +780,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Price Trend ROC</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -803,7 +795,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Volume Trend</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -818,11 +810,12 @@ declare var gtag: Function;
               </li>
             </ul>
           </div>
-          <div class="col-12 hidden-lg-up ">
-            <div class="divider__long"></div>
-          </div>
 
           <ng-container *ngIf="collapse['technicals']">
+            <div class="col-12 hidden-lg-up ">
+              <div class="divider__long"></div>
+            </div>
+
             <div class="col-12 col-lg-6 copy-block">
               <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['generalSentence'] : null
                 }}</p>
@@ -928,7 +921,6 @@ declare var gtag: Function;
           </div>
         </div>
 
-
         <!-- BREAKDOWN - EXPERTS -->
         <div #experts class="row stock-info stock-info--breakdown">
           <div class="col-12">
@@ -939,7 +931,7 @@ declare var gtag: Function;
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Estimate Trend</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6  sliderProgress">
@@ -954,7 +946,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Short Interest</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -969,7 +961,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Insider Activity</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -984,7 +976,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Analyst Rating Trend</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -999,7 +991,7 @@ declare var gtag: Function;
               </li>
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-5 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Industry Rel Strength</p>
                   </div>
                   <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
@@ -1110,14 +1102,14 @@ declare var gtag: Function;
             </div>
           </ng-container>
 
-          <div *ngIf="collapse['financials'] == true" (click)="toggleCollapse('financials')"
+          <div *ngIf="collapse['experts'] == true" (click)="toggleCollapse('experts')"
                class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/ux__collapse--circle.svg">
             <p>Collapse</p>
           </div>
-          <div *ngIf="collapse['financials'] == false" (click)="toggleCollapse('financials')"
+          <div *ngIf="collapse['experts'] == false" (click)="toggleCollapse('experts')"
                class="col-12 hidden-lg-up expand-collapse">
-            <img src="./assets/imgs/ux__expand--circle.svg">
+            <img src="./assets/imgs/ux__expand--dots.svg">
             <p>Expand for details</p>
           </div>
 
@@ -1126,6 +1118,7 @@ declare var gtag: Function;
           </div>
         </div>
 
+        <!-- COMPETITION -->
         <div class="row justify-content-center stock-info stock-info--competition">
           <div class="col-12">
             <h2>The Competition</h2>
@@ -1222,6 +1215,7 @@ declare var gtag: Function;
           </div>
         </div>
 
+        <!-- DISCLAIMER -->
         <div class="row justify-content-center stock-info stock-info--disclaimer">
           <div class="col-12">
             <div class="divider__full"></div>
