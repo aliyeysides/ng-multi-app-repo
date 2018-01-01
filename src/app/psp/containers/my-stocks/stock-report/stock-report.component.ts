@@ -17,6 +17,7 @@ import {ListSymbolObj} from '../../../../shared/models/health-check';
 import {AuthService} from '../../../../services/auth.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {SymbolSearchService} from '../../../../services/symbol-search.service';
+import {Location} from '@angular/common';
 
 declare var zingchart: any;
 declare var gtag: Function;
@@ -1241,10 +1242,15 @@ declare var gtag: Function;
 
       </div>
     </div>
-
+    <div *ngIf="!stock" class="etf--warning">
+      <div class="warning-box align-absolute">
+        <p class="warning__text align-absolute">Select a stock to get started.</p>
+      </div>
+    </div>
     <div *ngIf="is_etf" class="etf--warning">
       <div class="warning-box align-absolute">
         <p class="warning__text align-absolute">Chaikin stock analysis not available for ETFs at this time. Please check back later</p>
+        <div (click)="goBack()">go back.</div>
       </div>
     </div>
   `,
@@ -1360,6 +1366,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               private ideasService: IdeasService,
               private utilService: UtilService,
               private cd: ChangeDetectorRef,
+              private location: Location,
               private symbolSearchService: SymbolSearchService,
               private router: Router) {
   }
@@ -1368,16 +1375,14 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     window.scrollTo(0, 0);
     if (this.stock) {
       this.symbolSearchService.symbolLookup(this.stock)
+        .take(1)
         .subscribe(val => {
-          console.log('val', val);
           val[0] ? this.is_etf = val[0]['is_etf'] : this.is_etf = true;
           if (!this.is_etf) {
-            console.log('is_etf', this.is_etf);
             this.getReportData(this.stock);
             this.getMainChart(this.stock);
           }
           this.cd.detectChanges();
-          console.log('is_etf', this.is_etf);
         });
     }
   }
@@ -2536,6 +2541,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   jumpToFragment(viewChild) {
     viewChild.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }
