@@ -42,23 +42,23 @@ declare var gtag: Function;
           <h1 class="ticker">{{ stock }}</h1>
           <p *ngIf="!is_etf" class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
         </div>
-        <div *ngIf="!resultInUserList(userStocks, stock) && !is_etf" (click)="addStock(stock)"
+        <div tooltip="Add stock to list" placement="auto" *ngIf="!resultInUserList(userStocks, stock) && !is_etf" (click)="addStock(stock)"
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_plus--white.svg">
         </div>
-        <div *ngIf="resultInUserList(userStocks, stock)" (click)="removeStock(stock)"
+        <div tooltip="Remove stock from list" placement="auto" *ngIf="resultInUserList(userStocks, stock)" (click)="removeStock(stock)"
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
         </div>
         <div *ngIf="!is_etf" class="header__button header__button--pdf">
-          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+          <button tooltip="Download Report PDF" placement="bottom" class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <div class="anchor" (click)="jumpToFragment(top)">Top</div>
-          <div class="anchor" (click)="jumpToFragment(financials)">F</div>
-          <div class="anchor" (click)="jumpToFragment(earnings)">Ea</div>
-          <div class="anchor" (click)="jumpToFragment(technicals)">T</div>
-          <div class="anchor" (click)="jumpToFragment(experts)">Ex</div>
+          <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)">Top</div>
+          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials)">F</div>
+          <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings)">Ea</div>
+          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals)">T</div>
+          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts)">Ex</div>
         </div>
       </div>
 
