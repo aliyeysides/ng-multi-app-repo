@@ -42,16 +42,19 @@ declare var gtag: Function;
           <h1 class="ticker">{{ stock }}</h1>
           <p *ngIf="!is_etf" class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
         </div>
-        <div tooltip="Add stock to list" placement="auto" *ngIf="!resultInUserList(userStocks, stock) && !is_etf" (click)="addStock(stock)"
+        <div tooltip="Add stock to list" placement="auto" *ngIf="!resultInUserList(userStocks, stock) && !is_etf"
+             (click)="addStock(stock)"
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_plus--white.svg">
         </div>
-        <div tooltip="Remove stock from list" placement="auto" *ngIf="resultInUserList(userStocks, stock)" (click)="removeStock(stock)"
+        <div tooltip="Remove stock from list" placement="auto" *ngIf="resultInUserList(userStocks, stock)"
+             (click)="removeStock(stock)"
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
         </div>
         <div *ngIf="!is_etf" class="header__button header__button--pdf">
-          <button tooltip="Download Report PDF" placement="bottom" class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+          <button tooltip="Download Report PDF" placement="bottom" class="align-absolute"
+                  (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
           <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)">Top</div>
@@ -208,7 +211,9 @@ declare var gtag: Function;
               <span class="bold green" *ngIf="timespanPerChange>0">up</span>
               <span class="bold greyed-out" *ngIf="timespanPerChange==0">unch</span>
               <span class="bold red" *ngIf="timespanPerChange<0">down</span>
-              <span class="bold" [ngClass]="{ 'green': timespanPerChange>0, 'red': timespanPerChange<0}">{{ timespanPriceChange | decimal }} &nbsp;({{ timespanPerChange | decimal
+              <span class="bold"
+                    [ngClass]="{ 'green': timespanPerChange>0, 'red': timespanPerChange<0}">{{ timespanPriceChange | decimal
+                }} &nbsp;({{ timespanPerChange | decimal
                 }}%)</span> over the last:
             </p>
           </div>
@@ -1245,7 +1250,8 @@ declare var gtag: Function;
     </div>
     <div *ngIf="is_etf" class="etf--warning">
       <div class="warning-box align-absolute">
-        <p class="warning__text align-absolute">Chaikin stock analysis not available for ETFs at this time. Please check back later</p>
+        <p class="warning__text align-absolute">Chaikin stock analysis not available for ETFs at this time. Please check
+          back later</p>
         <div (click)="goBack()">go back.</div>
       </div>
     </div>
@@ -1424,8 +1430,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         const annualEPSData = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData'].map(x => +x[5].slice(1)) : null;
         const annualEPSDates = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData'].map(x => x[0]) : null;
 
-        const qrtEPSData = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData']
-          .map(x => x.splice(1).map(x => +x.slice(1))) : null;
+        const qrtEPSData = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ?
+          research['EPS Quarterly Results']['quaterlyData']
+            .map(x => x.splice(1).map(x => +x.slice(1))) : null;
 
         this.annualEPSChart = {
           id: 'annualEPSChart',
@@ -2210,6 +2217,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       const seriesA = [values[0][0], values[1][0], values[2][0]];
       const seriesB = [values[0][1], values[1][1], values[2][1]];
       const seriesC = [values[0][2], values[1][2], values[2][2]];
+      const seriesD = [values[0][3], values[1][3], values[2][3]];
       return {
         "type": "bar",
         "height": "360",
@@ -2294,6 +2302,18 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
           {
             "values": seriesC,
+            "alpha": 0.75,
+            "borderRadius": 7,
+            "background-color": "#19c736 #00C04E",
+            "rules": [
+              {
+                rule: '%v < 0',
+                "background-color": "#F54225 #B6355C",
+              }
+            ]
+          },
+          {
+            "values": seriesD,
             "alpha": 0.75,
             "borderRadius": 7,
             "background-color": "#19c736 #00C04E",

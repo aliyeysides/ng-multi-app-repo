@@ -170,10 +170,10 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
       this.healthCheck.getChaikinCalculations(listId, lastWeekStart, lastWeekEnd),
       this.healthCheck.getPrognosisData(listId),
       this.healthCheck.getUserPortfolioStockStatus(listId, lastWeekStart, lastWeekEnd),
-      this.healthCheck.getPGRWeeklyChangeData(listId, lastWeekStart, today),
+      this.healthCheck.getPGRWeeklyChangeData(listId, startDate, today),
       this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
-      this.healthCheck.getAnalystRevisions(listId, moment().day(-2).format('YYYY-MM-DD')),
-      this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, listId, moment().isoWeekday(1).format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')),
+      this.healthCheck.getAnalystRevisions(listId, startDate),
+      this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, listId, startDate, endDate),
       this.healthCheck.getPHCGridData(listId),
     )
   }
