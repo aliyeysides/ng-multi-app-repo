@@ -26,7 +26,8 @@ import {SignalService} from '../../../services/signal.service';
 
         <!-- HEALTH-CHECK - Intro -->
         <cpt-psp-portfolio-overview [listId]="listId" (listChanged)="listChanged()" [lists]="allUserLists"
-                                    [calc]="calculations" [data]="prognosisData" class="col-12 HC-overview"></cpt-psp-portfolio-overview>
+                                    [calc]="calculations" [data]="prognosisData"
+                                    class="col-12 HC-overview"></cpt-psp-portfolio-overview>
 
         <!-- HEALTH-CHECK - Stock Movements -->
         <cpt-psp-stock-movements [calc]="calculations" [weeklyStocks]="stocksStatus"
@@ -54,7 +55,15 @@ import {SignalService} from '../../../services/signal.service';
 
             <div class="col-12 col-lg-10">
               <h4>Disclaimer:</h4>
-              <p class="disclaimer">Chaikin Analytics (CA) is not registered as a securities Broker/Dealer or Investment Advisor with either the U.S. Securities and Exchange Commission or with any state securities regulatory authority. The information presented in our reports does not represent a recommendation to buy or sell stocks or any financial instrument nor is it intended as an endorsement of any security or investment. The information in this report does not take into account an individual's specific financial situation. The user bears complete responsibility for their own investment research and should consult with their financial advisor before making buy/sell decisions. For more information, see <a target="_blank" href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a> <a target="_blank" href="http://www.chaikinanalytics.com/attributions/">See Attributions &raquo;</a></p>
+              <p class="disclaimer">Chaikin Analytics (CA) is not registered as a securities Broker/Dealer or Investment
+                Advisor with either the U.S. Securities and Exchange Commission or with any state securities regulatory
+                authority. The information presented in our reports does not represent a recommendation to buy or sell
+                stocks or any financial instrument nor is it intended as an endorsement of any security or investment.
+                The information in this report does not take into account an individual's specific financial situation.
+                The user bears complete responsibility for their own investment research and should consult with their
+                financial advisor before making buy/sell decisions. For more information, see <a target="_blank"
+                                                                                                 href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a>
+                <a target="_blank" href="http://www.chaikinanalytics.com/attributions/">See Attributions &raquo;</a></p>
             </div>
           </div>
         </div>
@@ -153,14 +162,15 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
 
   getAllHCData(listId): Observable<any> {
     const lastWeekStart = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
-      lastWeekEnd = moment(lastWeekStart).add(7, 'days').format('YYYY-MM-DD');
-    const startDate = moment().isoWeekday(1).format('YYYY-MM-DD'),
-      endDate = moment().endOf('week').format('YYYY-MM-DD');
+      lastWeekEnd = moment(lastWeekStart).add(7, 'days').format('YYYY-MM-DD'),
+      startDate = moment().isoWeekday(1).format('YYYY-MM-DD'),
+      endDate = moment().endOf('week').format('YYYY-MM-DD'),
+      today = moment().format('YYYY-MM-DD');
     return Observable.combineLatest(
       this.healthCheck.getChaikinCalculations(listId, lastWeekStart, lastWeekEnd),
       this.healthCheck.getPrognosisData(listId),
       this.healthCheck.getUserPortfolioStockStatus(listId, lastWeekStart, lastWeekEnd),
-      this.healthCheck.getPGRWeeklyChangeData(listId, lastWeekStart, lastWeekEnd),
+      this.healthCheck.getPGRWeeklyChangeData(listId, lastWeekStart, today),
       this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
       this.healthCheck.getAnalystRevisions(listId, moment().day(-2).format('YYYY-MM-DD')),
       this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, listId, moment().isoWeekday(1).format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')),
