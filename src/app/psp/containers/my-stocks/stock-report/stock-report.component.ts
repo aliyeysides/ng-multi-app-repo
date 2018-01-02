@@ -2354,7 +2354,15 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "type": "scatter",
         "height": "360",
         "legend": {
+          adjustLayout: true,
           "offset-y": "275px",
+        },
+        crosshairX: {
+          plotLabel : {
+            text:'%t: %v',
+            borderWidth: 2,
+            bold: true
+          }
         },
         "background-color": "white",
         "tooltip": {
