@@ -59,7 +59,7 @@ declare var gtag: Function;
             <p>CHG</p>
           </div>
         </li>
-        <li (click)="selectedStock(stock.symbol);toggleSlider(stock.symbol);$event.stopPropagation()"
+        <li (click)="selectedStock(stock.symbol)"
             *ngFor="let stock of myStocks"
             class="row list__entry">
           <div class="col-3 list-entry__pgr">
@@ -80,7 +80,7 @@ declare var gtag: Function;
             <img src="./assets/imgs/ui_slide.svg">
           </div>
           <div class="col-12 hidden-sm-up list-entry__overlay"
-               [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.PGR>=4, 'red': stock.PGR<=2 && stock.PGR>0, 'yellow': stock.PGR==3, 'none': stock.PGR<=0 }">
+               [ngClass]="{'show': sliderObj[stock.symbol]==true, 'green': stock.PGR>=4, 'red': stock.PGR<=2 && stock.PGR>0, 'yellow': stock.PGR==3, 'none': stock.PGR<=0 }">
             <div class="row no-gutters overlay__contents">
               <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide">
                 <img src="./assets/imgs/ui_slide.svg">
@@ -203,6 +203,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   }
 
   toggleSlider(ticker: string) {
+    console.log(this.sliderObj);
     if (!this.sliderObj[ticker]) {
       this.sliderObj = {};
       this.sliderObj[ticker] = true;
@@ -225,6 +226,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
 
   selectedStock(ticker: string) {
     this.stockClicked.emit(ticker);
+    this.toggleSlider(ticker);
   }
 
   selectList(list: object) {
