@@ -76,11 +76,11 @@ declare var gtag: Function;
             <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">
               {{ stock['Percentage '] | decimal }}%</p>
           </div>
-          <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide">
+          <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide hidden-sm-up">
             <img src="./assets/imgs/ui_slide.svg">
           </div>
           <div class="col-12 hidden-sm-up list-entry__overlay"
-               [ngClass]="{'show': sliderObj[stock.symbol]==true, 'green': stock.PGR>=4, 'red': stock.PGR<=2 && stock.PGR>0, 'yellow': stock.PGR==3, 'none': stock.PGR<=0 }">
+               [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.PGR>=4, 'red': stock.PGR<=2 && stock.PGR>0, 'yellow': stock.PGR==3, 'none': stock.PGR<=0 }">
             <div class="row no-gutters overlay__contents">
               <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide">
                 <img src="./assets/imgs/ui_slide.svg">

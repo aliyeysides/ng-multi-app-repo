@@ -797,13 +797,17 @@ sub {
 .stock__list {
   height: 100vh;
   overflow-y: auto;
-  padding-bottom: 143px;
+  padding-bottom: 145px;
   overflow-x: hidden;
   padding-left: 10px;
   padding-right: 10px;
 
   &::-webkit-scrollbar {
     display:none;
+  }
+
+  @media screen AND (max-width: 375px) {
+    padding-bottom: 175px;
   }
 
   .col-headers {
@@ -821,7 +825,8 @@ sub {
       cursor: pointer;
 
       img {
-        width: 60px;
+        width: 70%;
+        max-width: 60px;
       }
     }
 
@@ -866,10 +871,6 @@ sub {
   right:3%;
   top:20px;
   cursor: pointer;
-
-  @media screen AND (min-width:576px) {
-    display:none;
-  }
 }
 
 
