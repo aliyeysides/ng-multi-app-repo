@@ -872,13 +872,13 @@ declare var gtag: Function;
                     <tr>
                       <td class="label">Avg. vol 20 days</td>
                       <td class="data">
-                        {{ research ? (research['VolumeActivity']['Average Volume 20 Days'] | decimal ) : null }}
+                        {{ research ? research['VolumeActivity']['Average Volume 20 Days'] : null }}
                       </td>
                     </tr>
                     <tr>
                       <td class="label">Avg. vol 90 days</td>
                       <td class="data">
-                        {{ research ? (research['VolumeActivity']['Average Volume 90 Days'] | decimal ) : null }}
+                        {{ research ? research['VolumeActivity']['Average Volume 90 Days'] : null }}
                       </td>
                     </tr>
                   </table>
