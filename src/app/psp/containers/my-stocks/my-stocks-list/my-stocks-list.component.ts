@@ -203,7 +203,6 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   }
 
   toggleSlider(ticker: string) {
-    console.log(this.sliderObj);
     if (!this.sliderObj[ticker]) {
       this.sliderObj = {};
       this.sliderObj[ticker] = true;

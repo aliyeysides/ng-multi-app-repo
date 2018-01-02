@@ -1730,7 +1730,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         lineColor: "#fff"
       },
       scaleY: {
-        values: values,
+        maxValue: Math.max(...values),
+        minValue: Math.min(...values),
         autoFit: true,
         guide: {
           visible: true,
