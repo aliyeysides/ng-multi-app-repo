@@ -120,44 +120,29 @@
 	}
 
 	.section--article {
+		position: relative;
+
 		.article__body {
 			height: 50vh;
 			overflow: hidden;
 			margin-top: 15px;
 			color: $font-color;
-			position: relative;
 			padding-bottom: 20px;
 
 			.article {
 				/*  styling done on app.component.scss  */
 			}
-
-			&::after {
-				content: "…";
-				position: absolute;
-				bottom: -5px;
-				left:0;
-				right:0;
-				width: 100%;
-				text-align: center;
-				font-size: 32px;
-				opacity: 0.6;
-			}
 		}
 		.article__body.opened {
 			overflow:visible;
 			height: 100%;
-
-			&::after {
-				content: "•";
-			}
 		}
 		.article__read-more {
 			display: block;
 			font-size: 13px;
 			color: $link-blue;
-			font-weight: 600;
-			margin: 5px 0 0px;
+			font-weight: 700;
+			margin: 5px 0 15px;
 			text-align: center;
 		}
 	}
