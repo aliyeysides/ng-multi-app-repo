@@ -2354,6 +2354,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "type": "scatter",
         "height": "360",
         "legend": {
+          adjustLayout: true,
           "offset-y": "275px",
         },
         "background-color": "white",
