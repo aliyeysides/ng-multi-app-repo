@@ -51,12 +51,13 @@ declare var gtag: Function;
           <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
         </div>
         <div *ngIf="!this.is_etf" class="header__button header__button--pdf">
-          <div (click)="jumpToFragment(financials)">Financials</div>
-          <div (click)="jumpToFragment(earnings)">Earnings</div>
-          <div (click)="jumpToFragment(technicals)">Technicals</div>
-          <div (click)="jumpToFragment(experts)">Experts</div>
-          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o"
-                                                                               aria-hidden="true"></i></button>
+          <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+        </div>
+        <div class="header__button header__button--anchors">
+          <div class="anchor" (click)="jumpToFragment(financials)">F</div>
+          <div class="anchor" (click)="jumpToFragment(earnings)">Ea</div>
+          <div class="anchor" (click)="jumpToFragment(technicals)">T</div>
+          <div class="anchor" (click)="jumpToFragment(experts)">Ex</div>
         </div>
       </div>
 
