@@ -54,7 +54,7 @@ declare var gtag: Function;
           <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <div class="anchor" (click)="jumpToTop()">Top</div>
+          <div class="anchor" (click)="jumpToFragment(top)">Top</div>
           <div class="anchor" (click)="jumpToFragment(financials)">F</div>
           <div class="anchor" (click)="jumpToFragment(earnings)">Ea</div>
           <div class="anchor" (click)="jumpToFragment(technicals)">T</div>
@@ -64,7 +64,7 @@ declare var gtag: Function;
 
       <!-- STOCK VIEW CONTENTS -->
       <div [class.blur-me]="is_etf || !stock" class="container-fluid stockview__contents">
-        <div class="row">
+        <div #top class="row">
           <div class="col-12 hidden-md-up">
             <div class="tab--slide"></div>
           </div>
@@ -1254,6 +1254,7 @@ declare var gtag: Function;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
+  @ViewChild('top') top: ElementRef;
   @ViewChild('newsList') newsList: ElementRef;
   @ViewChild('financials') financials: ElementRef;
   @ViewChild('earnings') earnings: ElementRef;
@@ -2538,13 +2539,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   jumpToFragment(viewChild) {
-    console.log('viewChild', viewChild);
     viewChild.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
-  }
-
-  jumpToTop() {
-    console.log('topped');
-    this.jumpToFragment(this.el.nativeElement);
   }
 
   goBack() {
