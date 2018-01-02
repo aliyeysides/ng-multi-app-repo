@@ -84,11 +84,14 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
 
   @HostListener('document:click', ['$event']) offClick(e: Event) {
     e.preventDefault();
-    console.log("this fired didn't it");
     if (!this.el.nativeElement.contains(e.target) && !this.btn.contains(e.target as Node)) {
       this.toggleSearch.emit();
       return;
     }
+  }
+
+  @HostListener('document:keydown.enter', ['$event']) onEnter(e: KeyboardEvent) {
+    this.searchResults.length ? this.onSubmit(this.searchResults[0].Symbol) : null;
   }
 
   private _listId: string;
