@@ -2538,10 +2538,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   jumpToFragment(viewChild) {
+    console.log('viewChild', viewChild);
     viewChild.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
   }
 
   jumpToTop() {
+    console.log('topped');
     this.jumpToFragment(this.el.nativeElement);
   }
 
