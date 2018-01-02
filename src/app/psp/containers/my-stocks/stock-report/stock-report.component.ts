@@ -54,11 +54,11 @@ declare var gtag: Function;
           <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <div class="anchor" (click)="jumpToFragment(top)">Top</div>
-          <div class="anchor" (click)="jumpToFragment(financials)">F</div>
-          <div class="anchor" (click)="jumpToFragment(earnings)">Ea</div>
-          <div class="anchor" (click)="jumpToFragment(technicals)">T</div>
-          <div class="anchor" (click)="jumpToFragment(experts)">Ex</div>
+          <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)">Top</div>
+          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials)">F</div>
+          <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings)">Ea</div>
+          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals)">T</div>
+          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts)">Ex</div>
         </div>
       </div>
 
