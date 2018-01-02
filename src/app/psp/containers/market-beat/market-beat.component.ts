@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
 import {WordpressService} from '../../../services/wordpress.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
@@ -43,6 +43,7 @@ declare var gtag: Function;
           </div>
         </div>
 	    </div>
+      <div *ngIf="opened" (click)="jumpToTop()">Top</div>
     </div>
   `,
   styleUrls: ['./market-beat.component.scss']
@@ -57,7 +58,8 @@ export class MarketBeatComponent implements OnInit, OnDestroy {
   opened: boolean = false;
   loading: Subscription;
 
-  constructor(private wp: WordpressService) { }
+  constructor(private wp: WordpressService,
+              private el: ElementRef) { }
 
   ngOnInit() {
     this.loading = this.wp.getWordPressJson('2', this.loadCount)
@@ -89,6 +91,10 @@ export class MarketBeatComponent implements OnInit, OnDestroy {
       'event_category': 'engagement',
       'event_label': this.selectedInsight['post_title'].slice(26)
     });
+  }
+
+  jumpToTop() {
+    this.el.nativeElement.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
   }
 
 }

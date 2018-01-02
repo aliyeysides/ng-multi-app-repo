@@ -40,7 +40,7 @@ declare var gtag: Function;
         </div>
         <div class="header__stock">
           <h1 class="ticker">{{ stock }}</h1>
-          <p *ngIf="!this.is_etf" class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
+          <p *ngIf="!is_etf" class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
         </div>
         <div *ngIf="!resultInUserList(userStocks, stock) && !is_etf" (click)="addStock(stock)"
              class="header__button header__button--right">
@@ -50,10 +50,11 @@ declare var gtag: Function;
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
         </div>
-        <div *ngIf="!this.is_etf" class="header__button header__button--pdf">
+        <div *ngIf="!is_etf" class="header__button header__button--pdf">
           <button class="align-absolute" (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
+          <div class="anchor" (click)="jumpToTop()">Top</div>
           <div class="anchor" (click)="jumpToFragment(financials)">F</div>
           <div class="anchor" (click)="jumpToFragment(earnings)">Ea</div>
           <div class="anchor" (click)="jumpToFragment(technicals)">T</div>
@@ -1361,6 +1362,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               private ideasService: IdeasService,
               private utilService: UtilService,
               private cd: ChangeDetectorRef,
+              private el: ElementRef,
               private location: Location,
               private symbolSearchService: SymbolSearchService,
               private router: Router) {
@@ -2537,6 +2539,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   jumpToFragment(viewChild) {
     viewChild.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+  }
+
+  jumpToTop() {
+    this.jumpToFragment(this.el.nativeElement);
   }
 
   goBack() {
