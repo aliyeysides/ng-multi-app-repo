@@ -157,7 +157,7 @@ sub {
 
 
 .blur-me {
-  filter: blur(25px);
+  filter: blur(20px);
   overflow: hidden;
 }
 
@@ -180,6 +180,10 @@ sub {
 
 .bold {
   font-weight:600;
+}
+
+.bolder {
+  font-weight:700;
 }
 
 .ticker {
@@ -591,7 +595,7 @@ sub {
         .nav--toplevel {
           display: block;
           color: #ffffff;
-          line-height: 45px;
+          line-height: 48px;
           height: 45px;
           text-decoration: none;
           white-space: nowrap;
@@ -1249,6 +1253,8 @@ sub {
 #mainChart-graph-id1-scale-y-guide-267-path {
   stroke: none;
 }
+
+
 
 
 .component--stockview.bullish {

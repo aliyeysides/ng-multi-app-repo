@@ -57,11 +57,11 @@ declare var gtag: Function;
                   (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)">Top</div>
-          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials)">F</div>
-          <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings)">Ea</div>
-          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals)">T</div>
-          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts)">Ex</div>
+          <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i class="fa fa-home" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials)"><i class="fa fa-university" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings)"><i class="fa fa-usd" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals)"><i class="fa fa-pie-chart" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></div>
         </div>
       </div>
 
@@ -79,10 +79,7 @@ declare var gtag: Function;
                 <div [innerHtml]="link"></div>
               </ng-template>
               <div class="col-12 stockview__main-rating">
-                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fa fa-info-circle"
-                                                                placement="auto"
-                                                                triggers="click"
-                                                                aria-hidden="true" aria-hidden="true"></i></a></p>
+                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fa fa-info-circle" placement="auto" triggers="click" aria-hidden="true" aria-hidden="true"></i></a></p>
                 <p class="rating">
                   <img src="{{ appendPGRImage(symbolData) }}">
                   <span>{{ appendPGRText(symbolData) }}</span>
@@ -1078,7 +1075,7 @@ declare var gtag: Function;
                       </td>
                     </tr>
                     <tr>
-                      <td
+                      <td class="greyed-out"
                         [ngClass]="{'green': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] > 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] <= 3 : null  }">
                         LOW
                       </td>
@@ -1102,7 +1099,7 @@ declare var gtag: Function;
                       <td class="label">5 Weeks Ago</td>
                       <td class="data">{{ research ? research['Analyst Recommendations']['Mean 5 Weeks Ago'] : null }}
                       </td>
-                    </tr>
+                    </tr>v
                   </table>
                 </div>
               </div>
@@ -2001,7 +1998,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "type": "bar",
         height: 30,
         x: 0,
-        y: 315,
+        y: 310,
         "plot": {
           "stacked": true,
           "bar-space": "0px",

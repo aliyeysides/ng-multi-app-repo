@@ -37,13 +37,24 @@ declare var gtag: Function;
   	      		<div class="article__body" [class.opened]="opened">
   	      			<div class="article" [innerHTML]="commentary"></div>
   	      		</div>
-  	      		<a *ngIf="!opened" (click)="toggleReadMore()" class="article__read-more">READ FULL ARTICLE</a>
-              <a *ngIf="opened" (click)="toggleReadMore()" class="article__read-more">COLLAPSE ARTICLE</a>
+              <div *ngIf="!opened" (click)="toggleReadMore()"
+               class="expand-collapse">
+                <img src="./assets/imgs/ux__expand--dots.svg">
+                <p class="article__read-more">READ FULL ARTICLE</p>
+              </div>
+              <div *ngIf="opened" (click)="toggleReadMore()"
+               class="expand-collapse">
+                <img src="./assets/imgs/ux__collapse--circle.svg">
+                <p class="article__read-more">COLLAPSE ARTICLE</p>
+              </div>
   	      	</div>
           </div>
         </div>
 	    </div>
-      <div *ngIf="opened" (click)="jumpToTop()">Top</div>
+
+      <div class="anchor__top" *ngIf="opened" (click)="jumpToTop()">
+        Top
+      </div>
     </div>
   `,
   styleUrls: ['./market-beat.component.scss']
