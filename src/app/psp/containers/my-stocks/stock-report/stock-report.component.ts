@@ -2441,6 +2441,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
           {
             "values": diff,
+            "text": 'Difference',
             "alpha": 0.95,
             "borderRadiusTopLeft": 7,
             "marker":{
