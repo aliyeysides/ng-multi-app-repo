@@ -62,6 +62,9 @@ declare let gtag: Function;
         </div>
       </div>
     </div>
+    
+    <!-- Onboarding Modal -->
+    <cpt-psp-onboarding></cpt-psp-onboarding>
 
     <!-- App Container -->
     <div class="container--main" id="container--main" [ngClass]="{'blur-me': searchOpened || navOpened.getValue()}">

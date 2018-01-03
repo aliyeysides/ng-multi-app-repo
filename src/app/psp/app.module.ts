@@ -24,6 +24,8 @@ import {NotificationsService} from 'angular2-notifications/dist';
 import {SymbolSearchService} from '../services/symbol-search.service';
 import {PspAuthGuard} from '../shared/guards/psp-auth.guard';
 import {HealthCheckService} from '../services/health-check.service';
+import {PspOnboardingComponent} from './core/psp-onboarding/psp-onboarding.component';
+import {PspOnboardingModule} from './core/psp-onboarding/index';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import {HealthCheckService} from '../services/health-check.service';
     HttpModule,
     SharedModule,
     BrowserAnimationsModule,
+    PspOnboardingModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
     BusyModule.forRoot(loadingMaskConfig3),
     ...APP_CORE_MODULES,
@@ -49,7 +52,8 @@ import {HealthCheckService} from '../services/health-check.service';
     NotificationsService,
     SymbolSearchService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [PspOnboardingComponent]
 })
 export class AppModule {
 }
