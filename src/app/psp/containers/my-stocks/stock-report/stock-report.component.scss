@@ -549,8 +549,12 @@
 
 
 .stock-info--chart-toggle {
-	margin: 10px 0 0px;
+	margin: 0;
 	padding: 0;
+
+	@media screen AND (max-width:575px) {
+		margin: 15px 0 0;
+	}
 
 	.chart-header__breakdown {
 		font-size: 20px;
@@ -561,7 +565,6 @@
 
 		@media screen AND (min-width:768px) {
 			font-size: 28px;
-			margin-top: 20px;
 		}
 	}
 

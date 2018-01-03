@@ -1095,7 +1095,7 @@ declare var gtag: Function;
                       <td class="label">5 Weeks Ago</td>
                       <td class="data">{{ research ? research['Analyst Recommendations']['Mean 5 Weeks Ago'] : null }}
                       </td>
-                    </tr>v
+                    </tr>
                   </table>
                 </div>
               </div>
