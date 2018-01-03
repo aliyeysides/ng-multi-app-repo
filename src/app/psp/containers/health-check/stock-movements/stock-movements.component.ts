@@ -56,6 +56,7 @@ interface FilterFunc {
 
       <div *ngIf="!collapse" class="row">
         <div class="col-12">
+          <p class="label">SHOWING:</p>
           <div class="btn-group" dropdown [autoClose]="true">
             <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
               {{ currentToggleOptionText }}

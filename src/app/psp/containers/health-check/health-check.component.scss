@@ -308,40 +308,55 @@
 	padding-top: 10px;
 	background-color:#ffffff;
 
-	@media screen AND (min-width: 575px) {
+	@media screen AND (min-width: 576px) {
 		padding-top:0px;
 	}
 
 	h2 {
 		margin-top:25px;
 	}
+
+	.label {
+  		font-size: 15px;
+      	line-height: 1.1;
+      	font-weight: 600;
+		text-transform: uppercase;
+  		display: block;
+  		letter-spacing: 0.05em;
+  		cursor: default;
+  		color:$font-color--light;
+  		margin-top: 15px;
+  	}
+
 	.btn-group {
-		margin-top: 0px;
-		margin-bottom: 3px;
+		margin-top: 5px;
+		margin-bottom: 0px;
 		cursor: pointer;
 
 		.btn {
 		    font-weight: 600;
 		    text-align: center;
 		    border: $line--button;
-		    padding: 8px 15px 5px 20px;
+		    padding: 10px 25px 7px 30px;
 		    font-size: 26px;
 		    border-radius: 40px;
 		    cursor: pointer;
 		}
 		.btn-primary {
-	  		background-color: #ffffff;
-		    border-color: $link-blue;
+	  		background-color: $font-color;
+		    border-color: #ffffff;
 		    font-size: 25px;
 		    line-height: 1;
-			color: $link-blue;
+			color: #FFFFFF;
+			text-transform: uppercase;
 			box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
 		}
 		.dropdown-toggle {
-			min-width: 150px;
+			min-width: 200px;
+
 			&::after {
 				vertical-align:middle;
-		    }
+			}
 		}
 	}
 	.dropdown-menu {
@@ -352,17 +367,17 @@
 	    min-width: 100%;
 	    padding: 0.5rem 0;
 	    margin: 0;
-	    font-size: 22px;
+	    font-size: 24px;
 	    color: $font-color;
 	    width: 100%;
 	    text-align: center;
 	    list-style: none;
-	    background-color: rgba(255,255,255, 0.97);
+	    background-color: rgba(255,255,255, 0.95);
 	    background-clip: padding-box;
 	    border: 0px;
 	    border-top:0px;
 	    border-radius: 20px;
-		box-shadow: 0 6px 20px rgba(50, 50, 50, 0.25);
+		box-shadow: 0 6px 40px rgba(50, 50, 50, 0.25);
 
 		.dropdown-item {
 			font-weight: 600;
@@ -388,7 +403,7 @@
 	  }
 
 	  &:last-child {
-	  	margin-bottom:20px;
+	  	margin-bottom:10px;
 	  }
 	}
 

@@ -157,7 +157,7 @@ sub {
 
 
 .blur-me {
-  filter: blur(20px);
+  filter: blur(10px);
   overflow: hidden;
 }
 
@@ -976,7 +976,7 @@ sub {
   font-size: 16px;
   line-height: 1.5;
   text-align: left;
-  margin:-20px 0 15px;
+  margin:-25px 0 25px;
 
   ul {
       list-style: disc;
@@ -986,6 +986,10 @@ sub {
       li {
         padding:5px 0 3px;
         font-size: 16px;
+
+        @media screen AND (min-width: 768px) {
+          font-size: 18px;
+        }
       }
   }
   h1 {
@@ -1290,6 +1294,7 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-0-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-2-node-0-path,
+  #qrtEPSChart-graph-id0-plotset-plot-3-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
     fill:$pulse-green;
@@ -1298,6 +1303,7 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-2-node-1-path,
+  #qrtEPSChart-graph-id0-plotset-plot-3-node-1-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-2-path {
     fill:$pulse-green__shade1;
   }
@@ -1305,6 +1311,7 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-0-node-2-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-2-path,
   #qrtEPSChart-graph-id0-plotset-plot-2-node-2-path,
+  #qrtEPSChart-graph-id0-plotset-plot-3-node-2-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-3-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-4-path {
     fill:$pulse-green__shade2;
