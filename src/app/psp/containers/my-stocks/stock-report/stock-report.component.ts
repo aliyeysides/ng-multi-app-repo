@@ -324,7 +324,7 @@ declare var gtag: Function;
               <span>{{ summary ? summary['pgrContextSummary'][0]['status'] : null }}</span></p>
             <p class="paragraph"><span>{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}:</span>
               {{ summary ? summary['pgrContextSummary'][0]['mainSentence'] : null }}</p>
-            <p class="paragraph"> {{ summary ? summary['pgrContextSummary'][0]['additionalSentence'] : null }}</p>
+            <p class="paragraph"> {{ summary ? summary['pgrContextSummary'][0]['additonalSentence'] : null }}</p>
           </div>
           <div class="col-12">
             <div class="divider__long"></div>
@@ -1995,10 +1995,17 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         y: 310,
         "plot": {
           "stacked": true,
-          "bar-space": "0px",
+          // "bar-space": "0",
+          // "bars-space-left": '0',
+          // "bars-space-right": '0',
+          // "bar-width": '25px',
+          // "bar-max-width": '20%',
+          "hover-state": {
+            "visible": false
+          },
         },
         plotarea: {
-          margin: "0 42 0 30"
+          margin: "0 30 0 30"
         },
         borderColor: "transparent",
         backgroundColor: "transparent",
@@ -2080,18 +2087,17 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "text": 'Power Gauge: Very Bullish',
             "backgroundColor": "#24A300",
             "hover-state": {
-              backgroundColor: '#26a025',
-              text: 'Very Bullish'
-            }
+              "visible": false
+            },
           },
           {
             "values": bullish,
             "text": 'Power Gauge: Bullish',
             "alpha": 1,
             "backgroundColor": "#6ACC00",
-            "hover-state": [{
-              backgroundColor: '#1a901d'
-            }]
+            "hover-state": {
+              "visible": false
+            },
           },
           {
             "values": neutral,
@@ -2099,8 +2105,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "alpha": 1,
             "backgroundColor": "#FF9900",
             "hover-state": {
-              backgroundColor: '#90903a'
-            }
+              "visible": false
+            },
           },
           {
             "values": bearish,
@@ -2108,8 +2114,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "alpha": 1,
             "backgroundColor": "#FD4500",
             "hover-state": {
-              backgroundColor: '#904925'
-            }
+              "visible": false
+            },
           },
           {
             "values": veryBearish,
@@ -2117,8 +2123,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "alpha": 1,
             "backgroundColor": "#EB001C",
             "hover-state": {
-              backgroundColor: '#901E15'
-            }
+              "visible": false
+            },
           }
         ]
       };
