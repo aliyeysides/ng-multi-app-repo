@@ -274,7 +274,7 @@ sub {
 }
 
 .divider__full {
-  width: 100%;
+  width: 90%;
   height: 3px;
   border-radius: 5px;
   margin: 15px auto;
@@ -820,8 +820,8 @@ sub {
 
   .list__entry {
     position: relative;
-    padding-top:12px;
-    padding-bottom:12px;
+    padding-top:7px;
+    padding-bottom:7px;
     cursor: pointer !important;
 
     .list-entry__pgr {
@@ -883,10 +883,11 @@ sub {
 .list-entry__overlay {
   display: none;
   position: absolute;
-  top:5px;
+  top:0px;
   left:0;
   width: 100%;
   background: $gradient--pulse-grey;
+  padding:0;
 }
 .list-entry__overlay.show {
   display:block;
@@ -901,20 +902,20 @@ sub {
   background: $gradient--pulse-yellow;
 }
 .overlay__contents {
-  height: 60px;
+  height: 68px;
 
   .ticker {
     font-weight: 600;
     font-size: 36px;
-    line-height: 62px;
+    line-height: 72px;
     color:#ffffff;
     text-align: left;
   }
 
   .data {
     font-weight: 400;
-    font-size: 30px;
-    line-height: 62px;
+    font-size: 34px;
+    line-height: 72px;
     color:#ffffff;
     text-align: left;
   }

@@ -128,7 +128,7 @@
 		position: relative;
 
 		.article__body {
-			height: 50vh;
+			height: 47vh;
 			overflow: hidden;
 			margin-top: 15px;
 			color: $font-color;
@@ -136,6 +136,10 @@
 
 			.article {
 				/*  styling done on app.component.scss  */
+			}
+
+			@media screen AND (min-width: 576px) {
+				height: 52vh;
 			}
 		}
 		.article__body.opened {
