@@ -284,10 +284,6 @@ declare var gtag: Function;
           <div class="col-12">
             <h2>Recent News</h2>
           </div>
-
-          <div class="col-12">
-            <div class="divider__long"></div>
-          </div>
           <div (click)="scrollLeft()" *ngIf="headlines?.length" class="col-1 chevron-slider chevron-slider--left">
             <img class="align-absolute" src="./assets/imgs/ux__scroll--left.svg">
           </div>
