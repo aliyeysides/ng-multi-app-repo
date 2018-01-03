@@ -1095,7 +1095,7 @@ declare var gtag: Function;
                       <td class="label">5 Weeks Ago</td>
                       <td class="data">{{ research ? research['Analyst Recommendations']['Mean 5 Weeks Ago'] : null }}
                       </td>
-                    </tr>v
+                    </tr>
                   </table>
                 </div>
               </div>
@@ -2435,20 +2435,20 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               "shadow": false
             },
           },
-          {
-            "values": diff,
-            "text": 'Difference',
-            "alpha": 0.95,
-            "borderRadiusTopLeft": 7,
-            "marker":{
-              "type":"circle",
-              "border-width":0,
-              "size":10,
-              "background-color":"#7FC9D9",
-              "shadow":false,
-              visible: false
-            },
-          }
+          // {
+          //   "values": diff,
+          //   "text": 'Difference',
+          //   "alpha": 0.95,
+          //   "borderRadiusTopLeft": 7,
+          //   "marker":{
+          //     "type":"circle",
+          //     "border-width":0,
+          //     "size":10,
+          //     "background-color":"#7FC9D9",
+          //     "shadow":false,
+          //     visible: false
+          //   },
+          // }
         ]
       }
     }
