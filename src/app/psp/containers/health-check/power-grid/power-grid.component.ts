@@ -279,10 +279,10 @@ export class PowerGridComponent implements OnInit, OnDestroy {
       .filter(x => x != undefined)
       .subscribe(res => {
         this.allIndustries = res['Industries'];
-        this.strongIndustries = this.allIndustries.filter(x => x['IndustryScore'] > 0.4);
-        this.neutralIndustries = this.allIndustries.filter(x => x['IndustryScore'] <= 0.4 && x['IndustryScore'] >= -0.4);
+        this.strongIndustries = this.allIndustries.filter(x => x['IndustryScore'] > 0.04);
+        this.neutralIndustries = this.allIndustries.filter(x => x['IndustryScore'] <= 0.04 && x['IndustryScore'] >= -0.04);
         this.neutralIndustries.splice(1, this.neutralIndustries.length - 2);
-        this.weakIndustries = this.allIndustries.filter(x => x['IndustryScore'] < -0.4);
+        this.weakIndustries = this.allIndustries.filter(x => x['IndustryScore'] < -0.04);
       });
 
     this.healthCheck.getPortfolioStatus()

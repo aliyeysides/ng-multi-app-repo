@@ -15,7 +15,6 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {UtilService} from '../../../../services/util.service';
 import {ListSymbolObj} from '../../../../shared/models/health-check';
 import {AuthService} from '../../../../services/auth.service';
-import {HealthCheckService} from '../../../../services/health-check.service';
 import {SymbolSearchService} from '../../../../services/symbol-search.service';
 import {Location} from '@angular/common';
 
@@ -1362,7 +1361,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               private ideasService: IdeasService,
               private utilService: UtilService,
               private cd: ChangeDetectorRef,
-              private el: ElementRef,
               private location: Location,
               private symbolSearchService: SymbolSearchService,
               private router: Router) {
