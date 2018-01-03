@@ -15,7 +15,6 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {UtilService} from '../../../../services/util.service';
 import {ListSymbolObj} from '../../../../shared/models/health-check';
 import {AuthService} from '../../../../services/auth.service';
-import {HealthCheckService} from '../../../../services/health-check.service';
 import {SymbolSearchService} from '../../../../services/symbol-search.service';
 import {Location} from '@angular/common';
 
@@ -57,11 +56,17 @@ declare var gtag: Function;
                   (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i class="fa fa-home" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials)"><i class="fa fa-university" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings)"><i class="fa fa-usd" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals)"><i class="fa fa-pie-chart" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i class="fa fa-home"
+                                                                                                      aria-hidden="true"></i>
+          </div>
+          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials)"><i
+            class="fa fa-university" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings)"><i
+            class="fa fa-usd" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals)"><i
+            class="fa fa-pie-chart" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts)"><i
+            class="fa fa-thumbs-up" aria-hidden="true"></i></div>
         </div>
       </div>
 
@@ -79,7 +84,9 @@ declare var gtag: Function;
                 <div [innerHtml]="link"></div>
               </ng-template>
               <div class="col-12 stockview__main-rating">
-                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fa fa-info-circle" placement="auto" triggers="click" aria-hidden="true" aria-hidden="true"></i></a></p>
+                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fa fa-info-circle"
+                                                                placement="auto" triggers="click" aria-hidden="true"
+                                                                aria-hidden="true"></i></a></p>
                 <p class="rating">
                   <img src="{{ appendPGRImage(symbolData) }}">
                   <span>{{ appendPGRText(symbolData) }}</span>
@@ -324,8 +331,8 @@ declare var gtag: Function;
             <p class="rating"><span>{{ stock?.toUpperCase() }}</span> is
               <span>{{ summary ? summary['pgrContextSummary'][0]['status'] : null }}</span></p>
             <p class="paragraph"><span>{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}:</span>
-              {{ summary ? summary['pgrContextSummary'][0]['mainSentence'] : null }}</p>
-            <p class="paragraph"> {{ summary ? summary['pgrContextSummary'][0]['additionalSentence'] : null }}</p>
+              {{ summary ? summary['pgrContextSummary'][0]['mainSentenceTM'] : null }}</p>
+            <p class="paragraph"> {{ summary ? summary['pgrContextSummary'][0]['additonalSentence'] : null }}</p>
           </div>
           <div class="col-12">
             <div class="divider__long"></div>
@@ -1072,7 +1079,7 @@ declare var gtag: Function;
                     </tr>
                     <tr>
                       <td class="greyed-out"
-                        [ngClass]="{'green': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] > 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] <= 3 : null  }">
+                          [ngClass]="{'green': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] > 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] <= 3 : null  }">
                         LOW
                       </td>
                     </tr>
@@ -1362,7 +1369,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               private ideasService: IdeasService,
               private utilService: UtilService,
               private cd: ChangeDetectorRef,
-              private el: ElementRef,
               private location: Location,
               private symbolSearchService: SymbolSearchService,
               private router: Router) {
@@ -1416,6 +1422,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       .take(1)
       .subscribe(([summary, competitors, research, headlines]) => {
         this.summary = summary;
+        const sen = this.summary['pgrContextSummary'][0]['mainSentence'];
+        Object.assign(this.summary['pgrContextSummary'][0], {mainSentenceTM: sen.replace(/<TRADEMARK>/, '')});
+
         this.competitors = competitors['compititors'];
         this.research = research;
         this.headlines = headlines['headlines'] ? headlines['headlines'].filter((item, idx) => idx < 7) : [];
@@ -1997,10 +2006,17 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         y: 310,
         "plot": {
           "stacked": true,
-          "bar-space": "0px",
+          // "bar-space": "0",
+          // "bars-space-left": '0',
+          // "bars-space-right": '0',
+          // "bar-width": '25px',
+          // "bar-max-width": '20%',
+          "hover-state": {
+            "visible": false
+          },
         },
         plotarea: {
-          margin: "0 42 0 30"
+          margin: "0 30 0 30"
         },
         borderColor: "transparent",
         backgroundColor: "transparent",
@@ -2082,18 +2098,17 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "text": 'Power Gauge: Very Bullish',
             "backgroundColor": "#24A300",
             "hover-state": {
-              backgroundColor: '#26a025',
-              text: 'Very Bullish'
-            }
+              "visible": false
+            },
           },
           {
             "values": bullish,
             "text": 'Power Gauge: Bullish',
             "alpha": 1,
             "backgroundColor": "#6ACC00",
-            "hover-state": [{
-              backgroundColor: '#1a901d'
-            }]
+            "hover-state": {
+              "visible": false
+            },
           },
           {
             "values": neutral,
@@ -2101,8 +2116,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "alpha": 1,
             "backgroundColor": "#FF9900",
             "hover-state": {
-              backgroundColor: '#90903a'
-            }
+              "visible": false
+            },
           },
           {
             "values": bearish,
@@ -2110,8 +2125,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "alpha": 1,
             "backgroundColor": "#FD4500",
             "hover-state": {
-              backgroundColor: '#904925'
-            }
+              "visible": false
+            },
           },
           {
             "values": veryBearish,
@@ -2119,8 +2134,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "alpha": 1,
             "backgroundColor": "#EB001C",
             "hover-state": {
-              backgroundColor: '#901E15'
-            }
+              "visible": false
+            },
           }
         ]
       };
@@ -2351,8 +2366,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "offset-y": "275px",
         },
         crosshairX: {
-          plotLabel : {
-            text:'%t: %v',
+          plotLabel: {
+            text: '%t: %v',
             borderWidth: 2,
             bold: true
           }

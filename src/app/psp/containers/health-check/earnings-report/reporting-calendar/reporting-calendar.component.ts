@@ -100,7 +100,7 @@ declare var gtag: Function;
                 <img width="40px" class="" src="./assets/imgs/arc_Bullish.svg">
                 {{ ticker }}
               </span>
-              <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['neutralSymbol']" style="display: inline-block;">
+              <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['neturalSymbol']" style="display: inline-block;">
                 <img width="40px" class="" src="./assets/imgs/arc_Neutral.svg">
                 {{ ticker }}
               </span>
