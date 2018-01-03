@@ -56,11 +56,17 @@ declare var gtag: Function;
                   (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i class="fa fa-home" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials)"><i class="fa fa-university" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings)"><i class="fa fa-usd" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals)"><i class="fa fa-pie-chart" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i class="fa fa-home"
+                                                                                                      aria-hidden="true"></i>
+          </div>
+          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials)"><i
+            class="fa fa-university" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings)"><i
+            class="fa fa-usd" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals)"><i
+            class="fa fa-pie-chart" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts)"><i
+            class="fa fa-thumbs-up" aria-hidden="true"></i></div>
         </div>
       </div>
 
@@ -78,7 +84,9 @@ declare var gtag: Function;
                 <div [innerHtml]="link"></div>
               </ng-template>
               <div class="col-12 stockview__main-rating">
-                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fa fa-info-circle" placement="auto" triggers="click" aria-hidden="true" aria-hidden="true"></i></a></p>
+                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fa fa-info-circle"
+                                                                placement="auto" triggers="click" aria-hidden="true"
+                                                                aria-hidden="true"></i></a></p>
                 <p class="rating">
                   <img src="{{ appendPGRImage(symbolData) }}">
                   <span>{{ appendPGRText(symbolData) }}</span>
@@ -323,7 +331,7 @@ declare var gtag: Function;
             <p class="rating"><span>{{ stock?.toUpperCase() }}</span> is
               <span>{{ summary ? summary['pgrContextSummary'][0]['status'] : null }}</span></p>
             <p class="paragraph"><span>{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}:</span>
-              {{ summary ? summary['pgrContextSummary'][0]['mainSentence'] : null }}</p>
+              {{ summary ? summary['pgrContextSummary'][0]['mainSentenceTM'] : null }}</p>
             <p class="paragraph"> {{ summary ? summary['pgrContextSummary'][0]['additonalSentence'] : null }}</p>
           </div>
           <div class="col-12">
@@ -1071,7 +1079,7 @@ declare var gtag: Function;
                     </tr>
                     <tr>
                       <td class="greyed-out"
-                        [ngClass]="{'green': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] > 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] <= 3 : null  }">
+                          [ngClass]="{'green': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] > 3 : null, 'greyed-out': symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] <= 3 : null  }">
                         LOW
                       </td>
                     </tr>
@@ -1414,6 +1422,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       .take(1)
       .subscribe(([summary, competitors, research, headlines]) => {
         this.summary = summary;
+        const sen = this.summary['pgrContextSummary'][0]['mainSentence'];
+        Object.assign(this.summary['pgrContextSummary'][0], {mainSentenceTM: sen.replace(/<TRADEMARK>/, '')});
+
         this.competitors = competitors['compititors'];
         this.research = research;
         this.headlines = headlines['headlines'] ? headlines['headlines'].filter((item, idx) => idx < 7) : [];
@@ -2355,8 +2366,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "offset-y": "275px",
         },
         crosshairX: {
-          plotLabel : {
-            text:'%t: %v',
+          plotLabel: {
+            text: '%t: %v',
             borderWidth: 2,
             bold: true
           }
