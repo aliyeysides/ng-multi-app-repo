@@ -2399,18 +2399,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         "series": [
           {
-            "values": est,
-            "text": 'Estimate',
-            "alpha": 0.75,
-            "marker": {
-              "type": "circle",
-              "border-width": 0,
-              "size": 10,
-              "background-color": "#328ad9",
-              "shadow": false
-            },
-          },
-          {
             "values": act,
             "text": 'Actual',
             "alpha": 0.75,
@@ -2419,6 +2407,18 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               "border-width": 0,
               "size": 10,
               "background-color": "#F54225 #B6355C",
+              "shadow": false
+            },
+          },
+          {
+            "values": est,
+            "text": 'Estimate',
+            "alpha": 0.75,
+            "marker": {
+              "type": "circle",
+              "border-width": 0,
+              "size": 10,
+              "background-color": "#328ad9",
               "shadow": false
             },
           },
