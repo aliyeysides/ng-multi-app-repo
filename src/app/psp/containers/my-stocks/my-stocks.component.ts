@@ -85,8 +85,8 @@ export class MyStocksComponent implements OnInit, OnDestroy {
     const width = event.target.innerWidth;
     if (+width <= 992) this.desktopView = false;
     if (+width > 992) {
-      if (this.userStocks) {
-        this.router.navigate(['/stock-analysis', this.userStocks[0].symbol]);
+      if (this.selectedStock) {
+        this.router.navigate(['/stock-analysis', this.selectedStock]);
       }
       this.desktopView = true;
     }
@@ -153,6 +153,8 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       .subscribe(params => {
           if (params.symbol) {
             this.selectedStock = params.symbol.slice();
+          } else {
+            this.selectedStock = 'AAPL';
           }
         }
       );
