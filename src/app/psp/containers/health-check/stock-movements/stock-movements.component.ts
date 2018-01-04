@@ -332,17 +332,19 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   calculateBarWidth(stocks: StockStatus[]) {
-    const per_arr = stocks.map(x => Math.abs(x['percentageChange']));
-    const max = per_arr.reduce((a, b) => {
-      return Math.max(a, b);
-    });
-    stocks.map(x => {
-      if (Math.abs(x['percentageChange']) == max) {
-        return Object.assign(x, {barWidth: 100 + '%', width: 100})
-      }
-      const relWidth = Math.abs(x['percentageChange']) * 100 / max;
-      return Object.assign(x, {barWidth: relWidth + '%', width: relWidth})
-    })
+    if (stocks.length) {
+      const per_arr = stocks.map(x => Math.abs(x['percentageChange']));
+      const max = per_arr.reduce((a, b) => {
+        return Math.max(a, b);
+      });
+      stocks.map(x => {
+        if (Math.abs(x['percentageChange']) == max) {
+          return Object.assign(x, {barWidth: 100 + '%', width: 100})
+        }
+        const relWidth = Math.abs(x['percentageChange']) * 100 / max;
+        return Object.assign(x, {barWidth: relWidth + '%', width: relWidth})
+      })
+    }
   }
 
   gotoReport(ticker: string) {

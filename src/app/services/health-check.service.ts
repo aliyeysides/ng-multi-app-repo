@@ -121,11 +121,9 @@ export class HealthCheckService {
     return this.utilService.getJson(url, this.stockStatusParams);
   }
 
-  public getPGRWeeklyChangeData(listId: string, startDate, endDate): Observable<PGRChanges> {
-    const url = `${this.apiHost}/CPTRestSecure/app/phcService/getPGRWeeklyChangeDataNew?`;
+  public getPGRWeeklyChangeData(listId: string): Observable<PGRChanges> {
+    const url = `${this.apiHost}/CPTRestSecure/app/phcService/getCurrentWeekPGRChangeData?`;
     this.pgrWeeklyChangeParams.set('listId', listId);
-    this.pgrWeeklyChangeParams.set('startDate', startDate);
-    this.pgrWeeklyChangeParams.set('endDate', endDate);
     return this.utilService.getJson(url, this.pgrWeeklyChangeParams);
   }
 

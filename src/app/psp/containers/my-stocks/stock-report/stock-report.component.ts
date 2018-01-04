@@ -323,6 +323,7 @@ declare var gtag: Function;
             <p class="paragraph"><span>{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}:</span>
               {{ summary ? summary['pgrContextSummary'][0]['mainSentenceTM'] : null }}</p>
             <p class="paragraph"> {{ summary ? summary['pgrContextSummary'][0]['additonalSentence'] : null }}</p>
+            <p class="paragraph"> {{ summary ? summary['pgrContextSummary'][0]['neutralSentence'] : null }}</p>
           </div>
           <div class="col-12">
             <div class="divider__long"></div>
@@ -1712,9 +1713,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         visible: false,
         text: this.stock,
       },
-      zoom: {
-        shared: true
-      },
       plotarea: {
         margin: "15 40 40 30",
       },
@@ -1765,9 +1763,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         transform: {
           type: 'date',
           all: '%m/%d/%y'
-        },
-        zooming: {
-          shared: true
         },
         item: {
           fontColor: "#999",
@@ -1824,9 +1819,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           align: 'center',
           fontWeight: "600",
         },
-        zoom: {
-          shared: true
-        },
         crosshairX: {
           lineWidth: 2,
           lineColor: "#999",
@@ -1847,7 +1839,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         scaleX: {
           visible: false,
-          zooming: true,
         },
         scaleY: {
           visible: false,
@@ -1907,9 +1898,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           align: 'center',
           fontWeight: "600",
         },
-        zoom: {
-          shared: true
-        },
         crosshairX: {
           lineWidth: 2,
           lineColor: "#999",
@@ -1930,7 +1918,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         scaleX: {
           visible: false,
-          zooming: true
         },
         scaleY: {
           visible: false
@@ -2028,7 +2015,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "font-color": "#999",
             visible: false
           },
-          zooming: true
         },
         "scaleY": {
           "lineWidth": 0,
@@ -2046,9 +2032,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "font-color": "#999",
             visible: false
           }
-        },
-        zoom: {
-          shared: true
         },
         crosshairX: {
           shared: true,
@@ -2417,18 +2400,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         "series": [
           {
-            "values": est,
-            "text": 'Estimate',
-            "alpha": 0.75,
-            "marker": {
-              "type": "circle",
-              "border-width": 0,
-              "size": 10,
-              "background-color": "#328ad9",
-              "shadow": false
-            },
-          },
-          {
             "values": act,
             "text": 'Actual',
             "alpha": 0.75,
@@ -2437,6 +2408,18 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               "border-width": 0,
               "size": 10,
               "background-color": "#F54225 #B6355C",
+              "shadow": false
+            },
+          },
+          {
+            "values": est,
+            "text": 'Estimate',
+            "alpha": 0.75,
+            "marker": {
+              "type": "circle",
+              "border-width": 0,
+              "size": 10,
+              "background-color": "#328ad9",
               "shadow": false
             },
           },
