@@ -79,14 +79,12 @@ declare var gtag: Function;
 
           <div class="col-12 col-md-7 col-xl-6 align-self-center">
             <!-- STOCK VIEW TOP -->
-            <div class="row no-gutters stock-info">
+            <div class="row no-gutters stock-info stock-info--main-rating">
               <ng-template #toolTipTemp>
                 <div [innerHtml]="link"></div>
               </ng-template>
               <div class="col-12 stockview__main-rating">
-                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fa fa-info-circle"
-                                                                placement="auto" triggers="click" aria-hidden="true"
-                                                                aria-hidden="true"></i></a></p>
+                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fa fa-info-circle" placement="auto" triggers="click" aria-hidden="true" aria-hidden="true"></i></a></p>
                 <p class="rating">
                   <img src="{{ appendPGRImage(symbolData) }}">
                   <span>{{ appendPGRText(symbolData) }}</span>
@@ -95,12 +93,11 @@ declare var gtag: Function;
               <div class="col-12 stockview__PGR">
                 <ul *ngIf="stock" class="pgr__sliders">
                   <li>
-                    <div class="row sliderBar-container">
-                      <div class="col-1"></div>
+                    <div class="row justify-content-center sliderBar-container">
                       <div class="col-4 pgr__label">
                         <p>Financials</p>
                       </div>
-                      <div class="col-5 col-lg-6 sliderProgress">
+                      <div class="col-5 col-xl-6 sliderProgress">
                         <div
                           [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][0]['Value'] : null)"></div>
                         <div class="sliderBar"
@@ -108,16 +105,14 @@ declare var gtag: Function;
                              role="progressbar" aria-valuemin="0" aria-valuemax="100">
                         </div>
                       </div>
-                      <div class="col-2 col-lg-1"></div>
                     </div>
                   </li>
                   <li>
-                    <div class="row sliderBar-container">
-                      <div class="col-1"></div>
+                    <div class="row justify-content-center  sliderBar-container">
                       <div class="col-4 pgr__label">
                         <p>Earnings</p>
                       </div>
-                      <div class="col-5 col-lg-6 sliderProgress">
+                      <div class="col-5 col-xl-6  sliderProgress">
                         <div
                           [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][0]['Value'] : null)"></div>
                         <div class="sliderBar"
@@ -125,16 +120,14 @@ declare var gtag: Function;
                              role="progressbar" aria-valuemin="0" aria-valuemax="100">
                         </div>
                       </div>
-                      <div class="col-2 col-lg-1"></div>
                     </div>
                   </li>
                   <li>
-                    <div class="row sliderBar-container">
-                      <div class="col-1"></div>
+                    <div class="row justify-content-center sliderBar-container">
                       <div class="col-4 pgr__label">
                         <p>Technicals</p>
                       </div>
-                      <div class="col-5 col-lg-6 sliderProgress">
+                      <div class="col-5 col-xl-6  sliderProgress">
                         <div
                           [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][0]['Value'] : null)"></div>
                         <div class="sliderBar"
@@ -142,16 +135,14 @@ declare var gtag: Function;
                              role="progressbar" aria-valuemin="0" aria-valuemax="100">
                         </div>
                       </div>
-                      <div class="col-2 col-lg-1"></div>
                     </div>
                   </li>
                   <li>
-                    <div class="row sliderBar-container">
-                      <div class="col-1"></div>
+                    <div class="row justify-content-center sliderBar-container">
                       <div class="col-4 pgr__label">
                         <p>Experts</p>
                       </div>
-                      <div class="col-5 col-lg-6 sliderProgress">
+                      <div class="col-5 col-xl-6  sliderProgress">
                         <div
                           [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][0]['Value'] : null)"></div>
                         <div class="sliderBar"
@@ -159,7 +150,6 @@ declare var gtag: Function;
                              role="progressbar" aria-valuemin="0" aria-valuemax="100">
                         </div>
                       </div>
-                      <div class="col-2 col-lg-1"></div>
                     </div>
                   </li>
                 </ul>
@@ -211,7 +201,7 @@ declare var gtag: Function;
           </div>
           <div class="col-12">
             <p class="chart-header__breakdown">
-              {{ symbolData ? symbolData['metaInfo'][0]['name'] : null }} was
+              <span class="bold">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</span> was
               <span class="bold green" *ngIf="timespanPerChange>0">up</span>
               <span class="bold greyed-out" *ngIf="timespanPerChange==0">unch</span>
               <span class="bold red" *ngIf="timespanPerChange<0">down</span>
@@ -1627,7 +1617,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.getCMFConfig(dates, cmf)
         ]
       },
-      height: 640,
+      height: 630,
       width: undefined
     };
     this.loading ? this.loading.unsubscribe() : null;
@@ -2016,7 +2006,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
         },
         plotarea: {
-          margin: "0 30 0 30"
+          margin: "0 42 0 30"
         },
         borderColor: "transparent",
         backgroundColor: "transparent",

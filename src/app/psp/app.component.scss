@@ -266,8 +266,8 @@ sub {
 }
 
 .divider__long {
-  width: 60%;
-  height: 3px;
+  width: 90%;
+  height: 2px;
   border-radius: 5px;
   margin: 10px auto 20px;
   background: $background--verylight;
@@ -275,7 +275,7 @@ sub {
 
 .divider__full {
   width: 90%;
-  height: 3px;
+  height: 2px;
   border-radius: 5px;
   margin: 15px auto;
   background: $background--verylight;
@@ -285,7 +285,7 @@ sub {
   background: $gradient--pulse-green;
   width: 90%;
   margin: 15px auto;
-  height: 3px;
+  height: 2px;
   border-radius: 5px;
   opacity: .8;
 }
@@ -294,7 +294,7 @@ sub {
   background-image:  $gradient--pulse-red;
   width: 90%;
   margin: 15px auto;
-  height: 3px;
+  height: 2px;
   border-radius: 5px;
   opacity: .8;
 }
@@ -303,7 +303,7 @@ sub {
   background-image: $gradient--pulse-yellow;
   width: 90%;
   margin: 15px auto;
-  height: 3px;
+  height: 2px;
   border-radius: 5px;
   opacity: .9;
 }
@@ -312,7 +312,7 @@ sub {
   background-image: $gradient--pulse-blue;
   width: 90%;
   margin: 15px auto;
-  height: 3px;
+  height: 2px;
   border-radius: 5px;
   opacity: .8;
 }
@@ -801,7 +801,7 @@ sub {
 .stock__list {
   height: 100vh;
   overflow-y: auto;
-  padding-bottom: 145px;
+  padding-bottom: 155px;
   overflow-x: hidden;
   padding-left: 10px;
   padding-right: 10px;
@@ -811,7 +811,7 @@ sub {
   }
 
   @media screen AND (max-width: 375px) {
-    padding-bottom: 175px;
+    padding-bottom: 178px;
   }
 
   .col-headers {
@@ -820,8 +820,8 @@ sub {
 
   .list__entry {
     position: relative;
-    padding-top:7px;
-    padding-bottom:7px;
+    padding-top:10px;
+    padding-bottom:4px;
     cursor: pointer !important;
 
     .list-entry__pgr {
@@ -1353,6 +1353,7 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-0-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-2-node-0-path,
+  #qrtEPSChart-graph-id0-plotset-plot-3-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
     fill:$pulse-red;
@@ -1361,6 +1362,7 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-2-node-1-path,
+  #qrtEPSChart-graph-id0-plotset-plot-3-node-1-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-2-path {
     fill:$pulse-red__shade1;
   }
@@ -1368,6 +1370,7 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-0-node-2-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-2-path,
   #qrtEPSChart-graph-id0-plotset-plot-2-node-2-path,
+  #qrtEPSChart-graph-id0-plotset-plot-3-node-2-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-3-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-4-path {
     fill:$pulse-red__shade2;
@@ -1409,6 +1412,7 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-0-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-2-node-0-path,
+  #qrtEPSChart-graph-id0-plotset-plot-3-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-0-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
     fill:$pulse-yellow__shade1;
@@ -1417,6 +1421,7 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-2-node-1-path,
+  #qrtEPSChart-graph-id0-plotset-plot-3-node-1-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-2-path {
     fill:$pulse-yellow;
   }
@@ -1425,6 +1430,7 @@ sub {
   #qrtEPSChart-graph-id0-plotset-plot-0-node-2-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-2-path,
   #qrtEPSChart-graph-id0-plotset-plot-2-node-2-path,
+  #qrtEPSChart-graph-id0-plotset-plot-3-node-2-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-3-path,
   #annualRevenueChart-graph-id0-plotset-plot-0-node-4-path {
     fill:$pulse-yellow__shade2;
