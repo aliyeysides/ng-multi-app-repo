@@ -323,6 +323,7 @@ declare var gtag: Function;
             <p class="paragraph"><span>{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}:</span>
               {{ summary ? summary['pgrContextSummary'][0]['mainSentenceTM'] : null }}</p>
             <p class="paragraph"> {{ summary ? summary['pgrContextSummary'][0]['additonalSentence'] : null }}</p>
+            <p class="paragraph"> {{ summary ? summary['pgrContextSummary'][0]['neutralSentence'] : null }}</p>
           </div>
           <div class="col-12">
             <div class="divider__long"></div>
