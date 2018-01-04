@@ -1712,9 +1712,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         visible: false,
         text: this.stock,
       },
-      zoom: {
-        shared: true
-      },
       plotarea: {
         margin: "15 40 40 30",
       },
@@ -1765,9 +1762,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         transform: {
           type: 'date',
           all: '%m/%d/%y'
-        },
-        zooming: {
-          shared: true
         },
         item: {
           fontColor: "#999",
@@ -1824,9 +1818,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           align: 'center',
           fontWeight: "600",
         },
-        zoom: {
-          shared: true
-        },
         crosshairX: {
           lineWidth: 2,
           lineColor: "#999",
@@ -1847,7 +1838,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         scaleX: {
           visible: false,
-          zooming: true,
         },
         scaleY: {
           visible: false,
@@ -1907,9 +1897,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           align: 'center',
           fontWeight: "600",
         },
-        zoom: {
-          shared: true
-        },
         crosshairX: {
           lineWidth: 2,
           lineColor: "#999",
@@ -1930,7 +1917,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         scaleX: {
           visible: false,
-          zooming: true
         },
         scaleY: {
           visible: false
@@ -2028,7 +2014,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "font-color": "#999",
             visible: false
           },
-          zooming: true
         },
         "scaleY": {
           "lineWidth": 0,
@@ -2046,9 +2031,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "font-color": "#999",
             visible: false
           }
-        },
-        zoom: {
-          shared: true
         },
         crosshairX: {
           shared: true,
