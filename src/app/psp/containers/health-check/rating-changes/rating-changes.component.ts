@@ -21,7 +21,6 @@ declare var gtag: Function;
 
       <div class="row section__toggle">
         <div class="col-12 toggle toggle--timespan">
-          <p class="toggle__only selected">LAST WEEK</p>
         </div>
       </div>
       
