@@ -198,6 +198,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
         }));
 
         this.pgrChanges = pgr;
+        console.log('pgr', pgr, this.pgrChanges);
         this.earningsSurprise = sups;
         this.analystRevisions = revs;
         this.expectedEarnings = reports;
