@@ -190,6 +190,14 @@ sub {
   cursor: pointer;
 }
 
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  cursor: default;
+  text-transform: uppercase;
+  color:$font-color--mid;
+}
+
 .chart-caption {
   font-family: $font-stack2;
   font-size: 14px;
@@ -249,6 +257,13 @@ sub {
 
 
 
+
+.page-item.active .page-link {
+    z-index: 0;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
 
 
 
@@ -696,7 +711,7 @@ sub {
 
 
 .section__chart {
-  margin:25px 0 40px;
+  margin:20px 0 30px;
 
   @media screen AND (max-width: 575px) {
     margin:25px 0 10px;
@@ -830,7 +845,7 @@ sub {
 
       img {
         width: 70%;
-        max-width: 60px;
+        max-width: 55px;
       }
     }
 

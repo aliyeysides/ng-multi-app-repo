@@ -26,18 +26,32 @@
 			opacity: 1;
 
 			@media screen AND (min-width: 992px) {
-				font-size: 42px;
-				font-weight: 300;
+				font-size: 44px;
+				font-weight: 400;
 			}
 		}
 	}
 
-	.divider__long {
-		margin: 0px auto;
-	}
-
 	.masthead--featured {
 		background-image: url("../../../../assets/imgs/image__MI--masthead.png");
+	}
+
+	.anchor__top {
+		position: fixed;
+		right: 5px;
+		bottom:20%;
+		background-color: rgba(0, 0, 0, 0.05);
+		border: 2px solid #ffffff;
+		border-radius: 30px;
+		text-align: center;
+		padding:10px;
+
+		p {
+			color:$font-color;
+			font-size: 18px;
+			font-weight: 700;
+			line-height: 28px;
+		}
 	}
 
 	.section--author {
@@ -45,81 +59,71 @@
 		font-size: 18px;
 		font-weight: 600;
 		line-height: 1;
-		padding:15px 0 15px;
+		padding:10px 0 20px;
+		color: $font-color--mid;
 
 		@media screen AND (min-width: 992px) {
-			padding:20px 0 15px;
+			padding:15px 0 20px;
 			font-size: 24px;
 		}
 	}
 
 	.section--date-select {
-		margin-top: 10px;
+		margin-top: 5px;
 
 		.btn-group {
-			margin-top: 8px;
+			margin-top: 5px;
 			margin-bottom: 0px;
 			cursor: pointer;
 
 			.btn {
 			    font-weight: 600;
 			    text-align: center;
-			    border: $line--button;
-			    padding: 7px 15px 4px 20px;
+			    border: #ffffff;
+			    padding: 10px 25px 7px 30px;
+			    font-size: 26px;
 			    border-radius: 40px;
-			    text-transform: lowercase;
-
-			    &::first-letter {
-			    	text-transform: capitalize;
-			    }
+			    cursor: pointer;
 			}
 			.btn-primary {
-				cursor: pointer;
-		  		background-color: #ffffff;
-			    border-color: $link-blue;
-			    font-size: 27px;
+		  		background-color: $font-color;
+			    border-color: #ffffff;
+			    font-size: 25px;
 			    line-height: 1;
-				color: $link-blue;
+				color: #FFFFFF;
+				text-transform: uppercase;
 				box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
+				z-index: 10;
 			}
 			.dropdown-toggle {
-				min-width: 150px;
+				min-width: 200px;
+
 				&::after {
 					vertical-align:middle;
-			    }
+				}
 			}
 		}
 		.dropdown-menu {
 		    position: absolute;
-		    z-index: 1000;
+		    cursor: pointer;
+		    z-index: 5;
 		    float: left;
-		    min-width: 160px;
-		    padding: 5px 0;
-		    margin: 0;
-		    font-size: 22px;
+		    min-width: 100%;
+		    padding: 40px 0 5px;
+		    margin: -40px 0 0;
+		    font-size: 24px;
 		    color: $font-color;
 		    width: 100%;
-		    overflow: hidden;
 		    text-align: center;
 		    list-style: none;
-		    background-color: rgba(255,255,255, 0.96);
+		    background-color: rgba(255,255,255, 0.92);
 		    background-clip: padding-box;
-		    border: 0px solid #f0f0f0;
-		    border-top:0px solid #1199ff;
-		    border-radius: 8px;
-			box-shadow: 0 6px 20px rgba(50, 50, 50, 0.25);
+		    border: 2px solid #ffffff;
+		    border-radius: 20px;
+			box-shadow: 0 6px 40px rgba(50, 50, 50, 0.25);
 
 			.dropdown-item {
-				cursor: pointer;
 				font-weight: 600;
-				text-overflow: ellipsis;
-				overflow: hidden;
-				white-space: nowrap;
-				padding: 0.25rem 10px;
-
-				&:hover {
-					background-color: rgba(17,153,255, 0.1);
-				}
 			}
 		}
 	}

@@ -375,14 +375,14 @@
 		@media screen AND (max-width: 575px) {
 			font-size: 32px;
 		}
+
+		@media screen AND (max-width: 991px) {
+			font-size: 34px;
+		}
 	}
 
 	.label {
-		font-size: 13px;
-		font-weight: 500;
 		line-height: 1;
-		text-transform: uppercase;
-		cursor: default;
 	}
 
 	.ticker {
@@ -482,9 +482,9 @@
 
 	.label {
 		line-height: 1.4;
-		font-weight: 500;
+		font-weight: 600;
 		cursor: default;
-		color: $font-color--light;
+		color: $font-color--mid;
 
 		@media screen AND (min-width:1200px) {
 			display: inline-block;
@@ -570,22 +570,21 @@
 
 
 .stock-info--chart-toggle {
-	margin: 0px 0 0;
-	padding: 0;
+	padding: 0 5px;
 
-	@media screen AND (max-width:575px) {
+	@media screen AND (max-width:991px) {
 		margin: 15px 0 0;
 	}
 
 	.chart-header__breakdown {
-		font-size: 20px;
+		font-size: 22px;
 		font-weight: 500;
 		line-height: 1.5;
 		margin-bottom: 20px;
 		cursor: default;
 		margin-top: 20px;
 
-		@media screen AND (min-width:768px) {
+		@media screen AND (min-width:992px) {
 			font-size: 28px;
 		}
 	}
@@ -660,8 +659,7 @@
 	}
 
 	.stock-industry {
-		margin-bottom:15px;
-		margin-top: 5px;
+		margin-bottom:25px;
 	}
 
 	.divider__full {
@@ -763,7 +761,11 @@
 			font-weight: 700;
 		}
 
-		@media screen AND (min-width: 768px) {
+		@media screen AND (min-width: 576px) {
+			font-size: 40px;
+		}
+
+		@media screen AND (min-width: 992px) {
 			font-size: 48px;
 		}
 	}
@@ -780,7 +782,11 @@
 		margin: 35px 0;
 		color:$font-color;
 
-		@media screen AND (min-width: 768px) {
+		@media screen AND (min-width: 576px) {
+			font-size: 40px;
+		}
+
+		@media screen AND (min-width: 992px) {
 			font-size: 48px;
 		}
 
