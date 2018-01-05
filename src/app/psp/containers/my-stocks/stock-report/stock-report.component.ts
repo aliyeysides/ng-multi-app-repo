@@ -1929,19 +1929,22 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           visible: false,
         },
         scaleY: {
-          visible: false
+          visible: false,
+          refValue: 0
         },
         series: [
           {
             type: "area",
             values: values,
             text: "Chaikin Money Flow",
+            // aspect: 'stepped',
             rules: [
               {
-                rule: '%v < 0',
+                rule: '%v <= 0',
                 backgroundColor: "#FD001F",
                 lineColor: "#FD001F"
-              }],
+              },
+            ],
             backgroundColor: "#00C04E",
             alphaArea: 0.3,
             lineColor: "#00C04E",
@@ -2006,6 +2009,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "scaleX": {
           offset: 0,
           "values": dates,
+          "visible": false,
           "auto-fit": true,
           "lineWidth": 0,
           "lineColor": "none",
