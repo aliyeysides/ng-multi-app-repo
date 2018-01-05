@@ -17,7 +17,7 @@ declare var gtag: Function;
 
       <div class="row no-gutters overview__summary">
         <div class="col-12 col-md-4 align-self-center">
-          <p class="timespan">LAST WEEK</p>
+          <p class="timespan">THIS WEEK</p>
           <div class="btn-group" dropdown [autoClose]="true">
             <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
               {{ selectedListName }}

@@ -39,22 +39,23 @@
 			margin-top: 8px;
 			margin-bottom: 10px;
 			cursor: pointer;
+			z-index: 20;
 
 			.btn {
 			    font-weight: 600;
 			    text-align: center;
 			    border: $line--white;
-			    padding: 4px 15px 1px 20px;
+			    padding: 4px 18px 1px 23px;
 			    border-radius: 40px;
 			}
 			.btn-primary {
 				cursor: pointer;
 		  		background-color: #ffffff;
-			    border-color: #ffffff;
 			    font-size: 27px;
 			    line-height: 1;
 				color: $font-color;
 				box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
+				z-index: 20;
 			}
 			.dropdown-toggle {
 				min-width: 150px;
@@ -65,22 +66,22 @@
 		}
 		.dropdown-menu {
 		    position: absolute;
-		    z-index: 1000;
+		    z-index: 10;
 		    float: left;
 		    min-width: 160px;
-		    padding: 5px 0;
-		    margin: 0;
+		    padding: 46px 0 5px;
+		    margin: -37px 0px 0px;
 		    font-size: 22px;
 		    color: $font-color;
 		    width: 100%;
 		    overflow: hidden;
 		    text-align: center;
 		    list-style: none;
-		    background-color: rgba(255,255,255, 0.96);
+		    background-color: rgba(255,255,255, 0.92);
 		    background-clip: padding-box;
-		    border: 0px solid #f0f0f0;
-		    border-top:0px solid #1199ff;
-		    border-radius: 8px;
+		    border: 2px solid #ffffff;
+		    //border-top:0px solid #1199ff;
+		    border-radius: 18px;
 			box-shadow: 0 6px 20px rgba(50, 50, 50, 0.25);
 
 			.dropdown-item {
@@ -350,6 +351,7 @@
 			color: #FFFFFF;
 			text-transform: uppercase;
 			box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
+			z-index: 10;
 		}
 		.dropdown-toggle {
 			min-width: 200px;
@@ -362,19 +364,19 @@
 	.dropdown-menu {
 	    position: absolute;
 	    cursor: pointer;
-	    z-index: 1000;
+	    z-index: 5;
 	    float: left;
 	    min-width: 100%;
-	    padding: 0.5rem 0;
-	    margin: 0;
+	    padding: 40px 0 5px;
+	    margin: -40px 0 0;
 	    font-size: 24px;
 	    color: $font-color;
 	    width: 100%;
 	    text-align: center;
 	    list-style: none;
-	    background-color: rgba(255,255,255, 0.95);
+	    background-color: rgba(255,255,255, 0.92);
 	    background-clip: padding-box;
-	    border: 0px;
+	    border: 2px solid #ffffff;
 	    border-top:0px;
 	    border-radius: 20px;
 		box-shadow: 0 6px 40px rgba(50, 50, 50, 0.25);
@@ -410,19 +412,21 @@
 	.mover__stock {
 		cursor: pointer;
 
-		img {
-		  display: flex;
-		  float:left;
-		  width: 28px;
-		  height: auto;
-		  margin-right:5px;
-		  margin-top: 8px;
-		}
+
 		.ticker {
-		  float:left;
 		  font-weight: 700;
 		  font-size: 22px;
 		  white-space: nowrap;
+		  text-align: left;
+
+		  	img {
+			  display: inline-block;
+			  float:left;
+			  width: 28px;
+			  height: auto;
+			  margin-right:5px;
+			  margin-top: 8px;
+			}
 		}
 		.ticker.indice {
 		  color: $pulse-blue;
@@ -450,7 +454,7 @@
 			  	cursor: default;
 			}
 		    .data--right {
-		      padding-left: 120%;
+		      padding-left: 110%;
 		      color: $font-color;
 		    }
 		}
