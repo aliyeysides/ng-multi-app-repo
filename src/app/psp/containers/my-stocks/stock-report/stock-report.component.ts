@@ -56,17 +56,13 @@ declare var gtag: Function;
                   (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i class="fa fa-home"
-                                                                                                      aria-hidden="true"></i>
-          </div>
+          <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i class="fa fa-arrow-up" aria-hidden="true"></i></div>
           <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials)"><i
             class="fa fa-university" aria-hidden="true"></i></div>
           <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings)"><i
             class="fa fa-usd" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals)"><i
-            class="fa fa-pie-chart" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts)"><i
-            class="fa fa-thumbs-up" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals)"><i class="fa fa-line-chart" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts)"><i class="fa fa-users" aria-hidden="true"></i></div>
         </div>
       </div>
 

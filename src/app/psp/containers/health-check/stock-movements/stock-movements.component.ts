@@ -87,9 +87,8 @@ interface FilterFunc {
             <li (click)="gotoReport(stock.symbol)" *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
                 class="row no-gutters list-item__mover justify-content-center">
               <div class="col-4 col-sm-2 col-lg-2 col-xl-1 mover__stock">
-                <img *ngIf="stock.arcColor != 2"
-                     src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
-                <p class="ticker">{{ stock.symbol }}</p>
+                <p class="ticker"><img *ngIf="stock.arcColor != 2"
+                     src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}"> {{ stock.symbol }}</p>
               </div>
               <div class="col-8 col-sm-8 col-lg-8 col-xl-7 mover__data">
                 <div class="mover__bar" [style.width]="stock['barWidth']"
