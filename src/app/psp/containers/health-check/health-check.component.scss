@@ -326,7 +326,7 @@
   		letter-spacing: 0.05em;
   		cursor: default;
   		color:$font-color--light;
-  		margin-top: 15px;
+  		margin-top: 0px;
   	}
 
 	.btn-group {
@@ -386,6 +386,8 @@
 		}
 	}
 	.section__chart {
+		margin: 10px 0 30px;
+
 		.col-header--per-chg {
 			@media screen AND (min-width: 1200px) {
 				padding-left: 20px;

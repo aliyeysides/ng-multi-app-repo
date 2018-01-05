@@ -166,7 +166,7 @@ declare var gtag: Function;
 
           <div class="col-12 col-md-5 col-xl-6 align-self-center">
             <!-- STOCK VIEW PRICE -->
-            <div class="row stock-info stock-info--price">
+            <div class="row no-gutters stock-info stock-info--price">
               <div class="col-12">
                 <p class="current-price"
                    [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">
@@ -343,10 +343,10 @@ declare var gtag: Function;
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
                 <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                  <div class="col-6 col-sm-4 col-md-4 col-lg-5 col-xl-4 pgr__label">
                     <p>LT Debt to Equity</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][1]['LT Debt to Equity'] : null)"></div>
                     <div class="sliderBar"
@@ -361,7 +361,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Price to Book</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][2]['Price to Book'] : null)"></div>
                     <div class="sliderBar"
@@ -376,7 +376,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Return on Equity</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][3]['Return on Equity'] : null)"></div>
                     <div class="sliderBar"
@@ -391,7 +391,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Price to Sales</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][4]['Price to Sales'] : null)"></div>
                     <div class="sliderBar"
@@ -406,7 +406,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Free Cash Flow</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][5]['Free Cash Flow'] : null)"></div>
                     <div class="sliderBar"
@@ -431,7 +431,7 @@ declare var gtag: Function;
             </div>
             <div class="col-12 data-table">
               <div class="row">
-                <div class="col-6 col-md-3">
+                <div class="col-6 col-sm-3 col-md-6 col-lg-3">
                   <table>
                     <th colspan="2">Assets &amp; Liabilities</th>
                     <tr>
@@ -460,7 +460,7 @@ declare var gtag: Function;
                     </tr>
                   </table>
                 </div>
-                <div class="col-6 col-md-3">
+                <div class="col-6 col-sm-3 col-md-6 col-lg-3">
                   <table>
                     <th colspan="2">Valuation</th>
                     <tr>
@@ -482,7 +482,7 @@ declare var gtag: Function;
                     </tr>
                   </table>
                 </div>
-                <div class="col-6 col-md-3">
+                <div class="col-6 col-sm-3 col-md-6 col-lg-3">
                   <table>
                     <th colspan="2">Dividends</th>
                     <tr>
@@ -511,7 +511,7 @@ declare var gtag: Function;
                     </tr>
                   </table>
                 </div>
-                <div class="col-6 col-md-3">
+                <div class="col-6 col-sm-3 col-md-6 col-lg-3">
                   <table>
                     <th colspan="2">Returns</th>
                     <tr>
@@ -572,7 +572,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4  pgr__label">
                     <p>Earnings Growth</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6  sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6  sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][1]['Earnings Growth'] : null)"></div>
                     <div class="sliderBar"
@@ -587,7 +587,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4  pgr__label">
                     <p>Earnings Surprise</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6  sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][2]['Earnings Surprise'] : null)"></div>
                     <div class="sliderBar"
@@ -602,7 +602,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Earnings Trend</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][3]['Earnings Trend'] : null)"></div>
                     <div class="sliderBar"
@@ -617,7 +617,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Projected P/E</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][4]['Projected P/E'] : null)"></div>
                     <div class="sliderBar"
@@ -632,7 +632,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Earnings Consistency</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][5]['Earnings Consistency'] : null)"></div>
                     <div class="sliderBar"
@@ -737,7 +737,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Rel Strength vs Market</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][1]['Rel Strength vs Market'] : null)"></div>
                     <div class="sliderBar"
@@ -752,7 +752,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Chaikin Money Flow</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][2]['Chaikin Money Flow'] : null)"></div>
                     <div class="sliderBar"
@@ -767,7 +767,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Price Strength</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][3]['Price Strength'] : null)"></div>
                     <div class="sliderBar"
@@ -782,7 +782,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Price Trend ROC</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][4]['Price Trend ROC'] : null)"></div>
                     <div class="sliderBar"
@@ -797,7 +797,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Volume Trend</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][5]['Volume Trend'] : null)"></div>
                     <div class="sliderBar"
@@ -823,7 +823,7 @@ declare var gtag: Function;
             </div>
             <div class="col-12 stock-info">
               <div class="row data-table">
-                <div class="col-6 col-sm-3">
+                <div class="col-6 col-sm-3 col-md-6 col-lg-3">
                   <table>
                     <th colspan="2">Price Activity</th>
                     <tr>
@@ -840,7 +840,7 @@ declare var gtag: Function;
                     </tr>
                   </table>
                 </div>
-                <div class="col-6 col-sm-3">
+                <div class="col-6 col-sm-3 col-md-6 col-lg-3">
                   <table>
                     <th colspan="2">Price % Chg</th>
                     <tr>
@@ -858,7 +858,7 @@ declare var gtag: Function;
                     </tr>
                   </table>
                 </div>
-                <div class="col-6 col-sm-3">
+                <div class="col-6 col-sm-3 col-md-6 col-lg-3">
                   <table>
                     <th colspan="2">Volume Activity</th>
                     <tr>
@@ -875,7 +875,7 @@ declare var gtag: Function;
                     </tr>
                   </table>
                 </div>
-                <div class="col-6 col-sm-3">
+                <div class="col-6 col-sm-3 col-md-6 col-lg-3">
                   <table>
                     <th colspan="2">Volatility Rel to Mkt</th>
                     <tr>
@@ -933,7 +933,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Estimate Trend</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6  sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][1]['Estimate Trend'] : null)"></div>
                     <div class="sliderBar"
@@ -948,7 +948,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Short Interest</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][2]['Short Interest'] : null)"></div>
                     <div class="sliderBar"
@@ -963,7 +963,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Insider Activity</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][3]['Insider Activity'] : null)"></div>
                     <div class="sliderBar"
@@ -978,7 +978,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Analyst Rating Trend</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][4]['Analyst Rating Trend'] : null)"></div>
                     <div class="sliderBar"
@@ -993,7 +993,7 @@ declare var gtag: Function;
                   <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
                     <p>Industry Rel Strength</p>
                   </div>
-                  <div class="col-5 col-sm-6 col-lg-5 col-xl-6 sliderProgress">
+                  <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
                       [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][5]['Industry Rel Strength'] : null)"></div>
                     <div class="sliderBar"
@@ -1793,9 +1793,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     if (values) {
       return {
         type: 'mixed',
-        height: 115,
+        height: 130,
         x: 0,
-        y: 510,
+        y: 520,
         backgroundColor: "transparent",
         plotarea: {
           margin: "25 75"
@@ -1817,10 +1817,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         title: {
           visible: true,
-          text: "RELATIVE STRENGTH",
-          fontColor: "#484848",
+          text: "CHAIKIN MONEY FLOW",
+          fontColor: "#999999",
           fontFamily: 'Rajdhani',
-          fontSize: 18,
+          fontSize: 16,
           align: 'center',
           fontWeight: "600",
         },
@@ -1877,7 +1877,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         type: 'mixed',
         height: 130,
         x: 0,
-        y: 380,
+        y: 395,
         backgroundColor: "#fff",
         plotarea: {
           margin: "25 75"
@@ -1900,9 +1900,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         title: {
           visible: true,
           text: "CHAIKIN MONEY FLOW",
-          fontColor: "#484848",
+          fontColor: "#999999",
           fontFamily: 'Rajdhani',
-          fontSize: 18,
+          fontSize: 16,
           align: 'center',
           fontWeight: "600",
         },
@@ -1993,7 +1993,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "type": "mixed",
         "height": 30,
         "x": 0,
-        "y": 330,
+        "y": 331,
         "plot": {
           midPoint: true,
           "stacked": true,
@@ -2002,7 +2002,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           }
         },
         "plotarea": {
-          "margin": "25 75"
+          "margin": "0 77"
         },
         "borderColor": "transparent",
         "backgroundColor": "transparent",
