@@ -218,6 +218,8 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
   }
 
   private parseAlerts(alerts: PGRChanges) {
+    this.bearishAlerts = [];
+    this.bullishAlerts = [];
     const keys = Object.keys(alerts);
     keys.forEach(key1 => {
       if (alerts['DataAvailable'] == true && key1 != 'DataAvailable') {
