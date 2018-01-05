@@ -56,13 +56,16 @@ declare var gtag: Function;
                   (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i class="fa fa-arrow-up" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i
+            class="fa fa-arrow-up" aria-hidden="true"></i></div>
           <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials)"><i
             class="fa fa-university" aria-hidden="true"></i></div>
           <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings)"><i
             class="fa fa-usd" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals)"><i class="fa fa-line-chart" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts)"><i class="fa fa-users" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals)"><i
+            class="fa fa-line-chart" aria-hidden="true"></i></div>
+          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts)"><i
+            class="fa fa-users" aria-hidden="true"></i></div>
         </div>
       </div>
 
@@ -80,7 +83,9 @@ declare var gtag: Function;
                 <div [innerHtml]="link"></div>
               </ng-template>
               <div class="col-12 stockview__main-rating">
-                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fa fa-info-circle" placement="auto" triggers="click" aria-hidden="true" aria-hidden="true"></i></a></p>
+                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fa fa-info-circle"
+                                                                placement="auto" triggers="click" aria-hidden="true"
+                                                                aria-hidden="true"></i></a></p>
                 <p class="rating">
                   <img src="{{ appendPGRImage(symbolData) }}">
                   <span>{{ appendPGRText(symbolData) }}</span>
@@ -1681,7 +1686,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   getCloseConfig(dates, values) {
     return {
-      type: 'area',
+      type: 'mixed',
       backgroundColor: "transparent",
       borderColor: "transparent",
       height: 380,
@@ -1710,11 +1715,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         text: this.stock,
       },
       plotarea: {
-        margin: "15 40 40 30",
+        margin: "25 75",
       },
-      plot: {
-        marker: {
-          visible: false
+      "plot": {
+        midPoint: true,
+        "marker": {
+          "visible": false
         }
       },
       tooltip: {
@@ -1750,6 +1756,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         lineColor: "#fff"
       },
       scaleX: {
+        offset: 0,
         guide: {
           visible: false,
           lineStyle: 'solid',
@@ -1772,6 +1779,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       },
       series: [
         {
+          type: "area",
           values: values,
           lineColor: "#1199ff",
           lineWidth: 2,
@@ -1784,17 +1792,18 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   getRSIConfig(dates, values) {
     if (values) {
       return {
-        type: 'area',
+        type: 'mixed',
         height: 115,
         x: 0,
         y: 510,
         backgroundColor: "transparent",
         plotarea: {
-          margin: "30 42 20 30"
+          margin: "25 75"
         },
-        plot: {
-          marker: {
-            visible: false
+        "plot": {
+          midPoint: true,
+          "marker": {
+            "visible": false
           }
         },
         source: {
@@ -1834,6 +1843,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           }
         },
         scaleX: {
+          offset: 0,
           visible: false,
         },
         scaleY: {
@@ -1842,6 +1852,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         series: [
           {
+            type: "area",
             values: values,
             text: "Rel. Str",
             rules: [
@@ -1863,17 +1874,18 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   getCMFConfig(dates, values) {
     if (values) {
       return {
-        type: 'area',
+        type: 'mixed',
         height: 130,
         x: 0,
         y: 380,
         backgroundColor: "#fff",
         plotarea: {
-          margin: "30 42 25 30"
+          margin: "25 75"
         },
-        plot: {
-          marker: {
-            visible: false
+        "plot": {
+          midPoint: true,
+          "marker": {
+            "visible": false
           }
         },
         source: {
@@ -1913,6 +1925,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           }
         },
         scaleX: {
+          offset: 0,
           visible: false,
         },
         scaleY: {
@@ -1920,6 +1933,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         series: [
           {
+            type: "area",
             values: values,
             text: "Chaikin Money Flow",
             rules: [
@@ -1973,33 +1987,30 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         })
       });
       return {
-        "type": "bar",
-        height: 30,
-        x: 0,
-        y: 310,
+        "type": "mixed",
+        "height": 30,
+        "x": 0,
+        "y": 330,
         "plot": {
+          midPoint: true,
           "stacked": true,
-          // "bar-space": "0",
-          // "bars-space-left": '0',
-          // "bars-space-right": '0',
-          // "bar-width": '25px',
-          // "bar-max-width": '20%',
           "hover-state": {
             "visible": false
-          },
+          }
         },
-        plotarea: {
-          margin: "0 42 0 30"
+        "plotarea": {
+          "margin": "25 75"
         },
-        borderColor: "transparent",
-        backgroundColor: "transparent",
+        "borderColor": "transparent",
+        "backgroundColor": "transparent",
         "scaleX": {
+          offset: 0,
           "values": dates,
           "auto-fit": true,
           "lineWidth": 0,
           "lineColor": "none",
-          label: {
-            visible: false
+          "label": {
+            "visible": false
           },
           "tick": {
             "visible": false
@@ -2009,8 +2020,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
           "item": {
             "font-color": "#999",
-            visible: false
+            "visible": false
           },
+          "zooming": true
         },
         "scaleY": {
           "lineWidth": 0,
@@ -2026,88 +2038,96 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
           "item": {
             "font-color": "#999",
-            visible: false
+            "visible": false
           }
         },
-        crosshairX: {
-          shared: true,
-          lineColor: "transparent",
-          visible: false,
-          plotLabel: {
-            multiple: false,
-            visible: false,
-            borderColor: "#ffffff",
-            strokeWidth: "4",
-            height: 25,
-            borderRadius: 12,
-            fontFamily: "Open Sans",
-            backgroundColor: "#b9e5fb",
-            rules: [
+        "zoom": {
+          "shared": true
+        },
+        "crosshairX": {
+          "shared": true,
+          "lineColor": "transparent",
+          "visible": false,
+          "plotLabel": {
+            "multiple": false,
+            "visible": false,
+            "borderColor": "#ffffff",
+            "strokeWidth": "4",
+            "height": 25,
+            "borderRadius": 12,
+            "fontFamily": "Open Sans",
+            "backgroundColor": "#b9e5fb",
+            "rules": [
               {
-                rule: '%v == 100',
-                text: '%t',
-                visible: true,
+                "rule": "%v == 100",
+                "text": "%t",
+                "visible": true
               }
             ],
-            y: -10,
+            "y": -10
           }
         },
         "tooltip": {
-          visible: false,
+          "visible": false,
           "htmlMode": true,
           "backgroundColor": "none",
           "padding": 0,
           "placement": "node:center",
-          "text": "<div class='zingchart-tooltip'><div class='scalex-value'>%kt<\/div><div class='scaley-value'>$%v<\/div><\/div>"
+          "text": "<div class='zingchart-tooltip'><div class='scalex-value'>%kt</div><div class='scaley-value'>$%v</div></div>"
         },
         "series": [
           {
+            type: "bar",
             "values": veryBullish,
             "alpha": 1,
-            "text": 'Power Gauge: Very Bullish',
+            "text": "Power Gauge: Very Bullish",
             "backgroundColor": "#24A300",
             "hover-state": {
               "visible": false
-            },
+            }
           },
           {
+            type: "bar",
             "values": bullish,
-            "text": 'Power Gauge: Bullish',
+            "text": "Power Gauge: Bullish",
             "alpha": 1,
             "backgroundColor": "#6ACC00",
             "hover-state": {
               "visible": false
-            },
+            }
           },
           {
+            type: "bar",
             "values": neutral,
-            "text": 'Power Gauge: Neutral',
+            "text": "Power Gauge: Neutral",
             "alpha": 1,
             "backgroundColor": "#FF9900",
             "hover-state": {
               "visible": false
-            },
+            }
           },
           {
+            type: "bar",
             "values": bearish,
-            "text": 'Power Gauge: Bearish',
+            "text": "Power Gauge: Bearish",
             "alpha": 1,
             "backgroundColor": "#FD4500",
             "hover-state": {
               "visible": false
-            },
+            }
           },
           {
+            type: "bar",
             "values": veryBearish,
-            "text": 'Power Gauge: Very Bearish',
+            "text": "Power Gauge: Very Bearish",
             "alpha": 1,
             "backgroundColor": "#EB001C",
             "hover-state": {
               "visible": false
-            },
+            }
           }
         ]
-      };
+      }
     }
     return {};
   }
