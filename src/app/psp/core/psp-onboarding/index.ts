@@ -1,15 +1,17 @@
 import {NgModule} from '@angular/core';
 import {SharedModule} from '../../../shared/index';
 import {PspOnboardingComponent} from './psp-onboarding.component';
-import {BsModalService, ModalModule} from 'ngx-bootstrap';
+import {BsModalRef, BsModalService, ModalModule, PaginationConfig, PaginationModule} from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     SharedModule,
-    ModalModule
+    ModalModule,
+    PaginationModule
   ],
   exports: [PspOnboardingComponent],
   declarations: [PspOnboardingComponent],
-  providers: [BsModalService]
+  providers: [BsModalService, BsModalRef, PaginationConfig]
 })
-export class PspOnboardingModule {}
+export class PspOnboardingModule {
+}

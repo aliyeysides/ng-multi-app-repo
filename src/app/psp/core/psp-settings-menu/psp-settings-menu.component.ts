@@ -37,7 +37,7 @@ declare let gtag: Function;
               <a (click)="gtagClicked('about_rating_clicked')" href="https://www.chaikinanalytics.com/stock-rating/" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> About the Power Gauge</a>
             </div>
             <div class="col-6 col-lg-12">
-              <a (click)="startOnboarding();gtagClicked('onboarding_clicked')" href="#" class="nav--sublevel"><i class="fa fa-cog" aria-hidden="true"></i> Walkthrough</a>
+              <a (click)="startOnboarding();gtagClicked('onboarding_clicked')" class="nav--sublevel"><i class="fa fa-cog" aria-hidden="true"></i> Walkthrough</a>
             </div>
             <div class="col-6 col-lg-12">
              <a (click)="gtagClicked('user_guide_clicked')" href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> User Guide</a>
@@ -143,6 +143,7 @@ export class PspSettingsMenuComponent extends BaseSettingsMenuComponent implemen
 
   startOnboarding() {
     this.bsModalRef = this.modalService.show(PspOnboardingComponent);
+    this.navClosed.emit();
   }
 
   gtagClicked(event: string) {

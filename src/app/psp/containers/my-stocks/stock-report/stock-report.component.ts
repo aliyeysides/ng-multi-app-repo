@@ -33,7 +33,7 @@ declare var gtag: Function;
          'none': symbolData ? symbolData['metaInfo'][0]['PGR'] <= 0 : null }">
 
       <!-- STOCK VIEW HEADER -->
-      <div class="stockview__header">
+      <div (click)="jumpToFragment(top);$event.stopPropagation()" class="stockview__header">
         <div (click)="closeReport()" class="header__button header__button--left">
           <img class="align-absolute" src="./assets/imgs/icon_back-arrow--white.svg">
         </div>
@@ -42,12 +42,12 @@ declare var gtag: Function;
           <p *ngIf="!is_etf" class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
         </div>
         <div tooltip="Add stock to list" placement="auto" *ngIf="!resultInUserList(userStocks, stock) && !is_etf"
-             (click)="addStock(stock)"
+             (click)="addStock(stock);$event.stopPropagation()"
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_plus--white.svg">
         </div>
         <div tooltip="Remove stock from list" placement="auto" *ngIf="resultInUserList(userStocks, stock)"
-             (click)="removeStock(stock)"
+             (click)="removeStock(stock);$event.stopPropagation()"
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
         </div>
@@ -58,13 +58,13 @@ declare var gtag: Function;
         <div class="header__button header__button--anchors">
           <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i
             class="fa fa-arrow-up" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials)"><i
+          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials);$event.stopPropagation()"><i
             class="fa fa-university" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings)"><i
+          <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings);$event.stopPropagation()"><i
             class="fa fa-usd" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals)"><i
+          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals);$event.stopPropagation()"><i
             class="fa fa-line-chart" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts)"><i
+          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts);$event.stopPropagation()"><i
             class="fa fa-users" aria-hidden="true"></i></div>
         </div>
       </div>
