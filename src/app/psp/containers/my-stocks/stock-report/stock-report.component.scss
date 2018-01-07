@@ -209,7 +209,6 @@
 		cursor: pointer;
 
 		img {
-
 			width: 36px;
 			height: 36px;
 		}
@@ -714,8 +713,7 @@
 	    list-style-type: none;
 	    margin: 0 auto;
 	    white-space: nowrap;
-	    overflow-y: hidden;
-	    overflow-x: auto;
+	    overflow:hidden;
 
 		li {
 			display: inline-block;
