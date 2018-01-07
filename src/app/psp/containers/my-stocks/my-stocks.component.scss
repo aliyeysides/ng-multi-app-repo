@@ -13,26 +13,6 @@
 	@media screen AND (min-width:768px) {
 		z-index: 8;
 	}
-
-	.col-headers {
-		margin-top:10px;
-
-		.sort {
-			p {
-				display:inline-block;
-			}
-		}
-		.sorted {
-			p {
-				font-weight: 500;
-				color:#ffffff;
-				background-color: $background--medium;
-				border-radius: 30px;
-				display: inline-block;
-				padding:3px 8px 1px;
-			}
-		}
-	}
 }
 .stocklist__overview--green {
   background: $gradient--pulse-green;

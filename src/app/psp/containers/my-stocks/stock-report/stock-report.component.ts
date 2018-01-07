@@ -44,20 +44,20 @@ declare var gtag: Function;
         <div tooltip="Add stock to list" placement="auto" *ngIf="!resultInUserList(userStocks, stock) && !is_etf"
              (click)="addStock(stock);$event.stopPropagation()"
              class="header__button header__button--right">
-          <img class="align-absolute" src="./assets/imgs/icon_plus--white.svg">
+          <img class="align-absolute" src="./assets/imgs/ux__plus--circle.svg">
         </div>
         <div tooltip="Remove stock from list" placement="auto" *ngIf="resultInUserList(userStocks, stock)"
              (click)="removeStock(stock);$event.stopPropagation()"
              class="header__button header__button--right">
-          <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
+          <img class="align-absolute" src="./assets/imgs/ux__minus--circle.svg">
         </div>
         <div *ngIf="!is_etf" class="header__button header__button--pdf">
           <button tooltip="Download Report PDF" placement="bottom" class="align-absolute"
                   (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i
-            class="fa fa-arrow-up" aria-hidden="true"></i></div>
+          <!-- <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i
+            class="fa fa-arrow-up" aria-hidden="true"></i></div> -->
           <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials);$event.stopPropagation()"><i
             class="fa fa-university" aria-hidden="true"></i></div>
           <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings);$event.stopPropagation()"><i
@@ -71,12 +71,12 @@ declare var gtag: Function;
 
       <!-- STOCK VIEW CONTENTS -->
       <div [class.blur-me]="is_etf || !stock" class="container-fluid stockview__contents">
-        <div #top class="row">
+        <div #top class="row justify-content-center">
           <div class="col-12 hidden-md-up">
             <div class="tab--slide"></div>
           </div>
 
-          <div class="col-12 col-md-7 col-xl-6 align-self-center">
+          <div class="col-12 col-md-7 col-xl-5 align-self-center">
             <!-- STOCK VIEW TOP -->
             <div class="row no-gutters stock-info stock-info--main-rating">
               <ng-template #toolTipTemp>
@@ -98,7 +98,7 @@ declare var gtag: Function;
                       <div class="col-4 pgr__label">
                         <p>Financials</p>
                       </div>
-                      <div class="col-5 col-xl-6 sliderProgress">
+                      <div class="col-5 col-md-6 col-lg-5 col-xl-6 sliderProgress">
                         <div
                           [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][1]['Financials'][0]['Value'] : null)"></div>
                         <div class="sliderBar"
@@ -113,7 +113,7 @@ declare var gtag: Function;
                       <div class="col-4 pgr__label">
                         <p>Earnings</p>
                       </div>
-                      <div class="col-5 col-xl-6  sliderProgress">
+                      <div class="col-5 col-md-6 col-lg-5 col-xl-6 sliderProgress">
                         <div
                           [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][2]['Earnings'][0]['Value'] : null)"></div>
                         <div class="sliderBar"
@@ -128,7 +128,7 @@ declare var gtag: Function;
                       <div class="col-4 pgr__label">
                         <p>Technicals</p>
                       </div>
-                      <div class="col-5 col-xl-6  sliderProgress">
+                      <div class="col-5 col-md-6 col-lg-5 col-xl-6 sliderProgress">
                         <div
                           [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][3]['Technicals'][0]['Value'] : null)"></div>
                         <div class="sliderBar"
@@ -143,7 +143,7 @@ declare var gtag: Function;
                       <div class="col-4 pgr__label">
                         <p>Experts</p>
                       </div>
-                      <div class="col-5 col-xl-6  sliderProgress">
+                      <div class="col-5 col-md-6 col-lg-5 col-xl-6 sliderProgress">
                         <div
                           [ngClass]="appendSliderClass(symbolData ? symbolData['pgr'][4]['Experts'][0]['Value'] : null)"></div>
                         <div class="sliderBar"
@@ -164,7 +164,7 @@ declare var gtag: Function;
             </div>
           </div>
 
-          <div class="col-12 col-md-5 col-xl-6 align-self-center">
+          <div class="col-12 col-md-5 col-xl-5 align-self-center">
             <!-- STOCK VIEW PRICE -->
             <div class="row no-gutters stock-info stock-info--price">
               <div class="col-12">
@@ -332,18 +332,21 @@ declare var gtag: Function;
         </div>
 
         <!-- BREAKDOWN - FINANCIALS -->
-        <div #financials class="row stock-info stock-info--breakdown">
+        <div #financials class="row justify-content-center stock-info stock-info--breakdown">
+          <div class="pgr-section__icon col-12">
+            <img class="align-absolute" src="./assets/imgs/icon__H1-Financials.svg">
+          </div>
           <div class="col-12">
             <h1>Financials:
               <span>{{ summary ? summary['financialContextSummary'][0]['status'] : null }}</span>
             </h1>
           </div>
 
-          <div class="col-12 col-lg-6 stockview__PGR ">
+          <div class="col-12 col-lg-6 col-xl-5 stockview__PGR ">
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-md-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-md-4 col-lg-5 col-xl-5 pgr__label">
                     <p>LT Debt to Equity</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -357,8 +360,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Price to Book</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -372,8 +375,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Return on Equity</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -387,8 +390,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Price to Sales</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -402,8 +405,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Free Cash Flow</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -423,13 +426,13 @@ declare var gtag: Function;
             <div class="col-12 hidden-lg-up">
               <div class="divider__long"></div>
             </div>
-            <div class="col-12 col-lg-6 copy-block">
+            <div class="col-12 col-lg-6 col-xl-5 copy-block">
               <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s</span>
                 {{ summary ? summary['financialContextSummary'][0]['generalSentence'] : null }}</p>
               <p class="paragraph">{{ summary ? summary['financialContextSummary'][0]['explanatorySentence'] : null
                 }}</p>
             </div>
-            <div class="col-12 data-table">
+            <div class="col-12 col-xl-10 data-table">
               <div class="row">
                 <div class="col-6 col-sm-3 col-md-6 col-lg-3">
                   <table>
@@ -559,17 +562,20 @@ declare var gtag: Function;
         </div>
 
         <!-- BREAKDOWN - EARNINGS -->
-        <div #earnings class="row stock-info stock-info--breakdown">
+        <div #earnings class="row justify-content-center stock-info stock-info--breakdown">
+          <div class="pgr-section__icon col-12">
+            <img class="align-absolute" src="./assets/imgs/icon__H1-Earnings.svg">
+          </div>
           <div class="col-12">
             <h1>Earnings: <span class="">{{ summary ? summary['earningsContextSummary'][0]['status'] : null
               }}</span></h1>
           </div>
 
-          <div class="col-12 col-lg-6 stockview__PGR">
+          <div class="col-12 col-lg-6 col-xl-5 stockview__PGR">
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4  pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Earnings Growth</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6  sliderProgress">
@@ -583,8 +589,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4  pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5  pgr__label">
                     <p>Earnings Surprise</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -598,8 +604,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Earnings Trend</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -613,8 +619,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Projected P/E</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -628,8 +634,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Earnings Consistency</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -650,14 +656,14 @@ declare var gtag: Function;
               <div class="divider__long"></div>
             </div>
 
-            <div class="col-12 col-lg-6 copy-block">
+            <div class="col-12 col-lg-6 col-xl-5 copy-block">
               <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s:</span>
                 {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
               <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null
                 }}</p>
             </div>
 
-            <div class="col-12 col-lg-6 section__chart">
+            <div class="col-12 col-lg-6 col-xl-5 section__chart">
               <div class="chart__header">
                 <h3>Annual EPS</h3>
               </div>
@@ -667,11 +673,10 @@ declare var gtag: Function;
                   {{ research && research['EPS Quarterly Results'].hasOwnProperty('label') ? research['EPS Quarterly Results']['label'][0] : ''
                   }}</p>
               </div>
-              <p class="empty-chart" *ngIf="(annualEPSChart['data']['graphset'][0] | json) === '{}'">No Data
-                Available.</p>
+              <p class="empty-chart" *ngIf="(annualEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
 
-            <div class="col-12 col-lg-6 section__chart">
+            <div class="col-12 col-lg-6 col-xl-5 section__chart">
               <div class="chart__header">
                 <h3>Quarterly EPS</h3>
               </div>
@@ -684,7 +689,7 @@ declare var gtag: Function;
               <p class="empty-chart" *ngIf="(qrtEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
             </div>
 
-            <div class="col-12 col-lg-6 section__chart">
+            <div class="col-12 col-lg-6 col-xl-5 section__chart">
               <div class="chart__header">
                 <h3>Earnings Announcement</h3>
               </div>
@@ -697,7 +702,7 @@ declare var gtag: Function;
                 Available.</p>
             </div>
 
-            <div class="col-12 col-lg-6 section__chart">
+            <div class="col-12 col-lg-6 col-xl-5 section__chart">
               <div class="chart__header">
                 <h3>Annual Revenue</h3>
               </div>
@@ -726,16 +731,19 @@ declare var gtag: Function;
         </div>
 
         <!-- BREAKDOWN - TECHNICALS -->
-        <div #technicals class="row stock-info stock-info--breakdown">
+        <div #technicals class="row justify-content-center stock-info stock-info--breakdown">
+          <div class="pgr-section__icon col-12">
+            <img class="align-absolute" src="./assets/imgs/icon__H1-Technicals.svg">
+          </div>
           <div class="col-12">
             <h1>Technicals: <span>{{ summary ? summary['priceVolumeContextSummary'][0]['status'] : null }}</span></h1>
           </div>
-          <div class="col-12 col-lg-6 stockview__PGR">
+          <div class="col-12 col-lg-6 col-xl-5 stockview__PGR">
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
-                    <p>Rel Strength vs Market</p>
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
+                    <p>Rel Strength vs Mrkt</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
                     <div
@@ -748,8 +756,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Chaikin Money Flow</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -763,8 +771,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Price Strength</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -778,8 +786,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Price Trend ROC</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -793,8 +801,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Volume Trend</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -811,17 +819,18 @@ declare var gtag: Function;
           </div>
 
           <ng-container *ngIf="collapse['technicals']">
-            <div class="col-12 hidden-lg-up ">
+            <div class="col-12 hidden-lg-up">
               <div class="divider__long"></div>
             </div>
 
-            <div class="col-12 col-lg-6 copy-block">
+            <div class="col-12 col-lg-6 col-xl-5 copy-block">
               <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['generalSentence'] : null
                 }}</p>
               <p class="paragraph">{{ summary ? summary['priceVolumeContextSummary'][0]['explanatorySentence'] : null
                 }}</p>
             </div>
-            <div class="col-12 stock-info">
+
+            <div class="col-12 col-xl-10 stock-info">
               <div class="row data-table">
                 <div class="col-6 col-sm-3 col-md-6 col-lg-3">
                   <table>
@@ -921,16 +930,19 @@ declare var gtag: Function;
         </div>
 
         <!-- BREAKDOWN - EXPERTS -->
-        <div #experts class="row stock-info stock-info--breakdown">
+        <div #experts class="row justify-content-center stock-info stock-info--breakdown">
+          <div class="pgr-section__icon col-12">
+            <img class="align-absolute" src="./assets/imgs/icon__H1-Experts.svg">
+          </div>
           <div class="col-12">
             <h1>Experts: <span>{{ summary ? summary['expertOpnionsContextSummary'][0]['status'] : null }}</span></h1>
           </div>
 
-          <div class="col-12 col-lg-6 stockview__PGR">
+          <div class="col-12 col-lg-6 col-xl-5 stockview__PGR">
             <ul *ngIf="stock" class="pgr__sliders">
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Estimate Trend</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -944,8 +956,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Short Interest</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -959,8 +971,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Insider Activity</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -974,8 +986,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Analyst Rating Trend</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -989,8 +1001,8 @@ declare var gtag: Function;
                 </div>
               </li>
               <li>
-                <div class="row justify-content-center sliderBar-container">
-                  <div class="col-6 col-sm-4 col-lg-5 col-xl-4 pgr__label">
+                <div class="row justify-content-center justify-content-xl-start sliderBar-container">
+                  <div class="col-6 col-sm-4 col-lg-5 col-xl-5 pgr__label">
                     <p>Industry Rel Strength</p>
                   </div>
                   <div class="col-5 col-sm-6 col-md-5 col-lg-5 col-xl-6 sliderProgress">
@@ -1010,15 +1022,17 @@ declare var gtag: Function;
             <div class="col-12 hidden-lg-up">
               <div class="divider__long"></div>
             </div>
-            <div class="col-12 col-lg-6 copy-block">
+
+            <div class="col-12 col-lg-6 col-xl-5 copy-block">
               <p class="paragraph">{{ summary ? summary['expertOpnionsContextSummary'][0]['generalSentence'] : null
                 }}</p>
               <p class="paragraph">
                 {{ summary ? summary['expertOpnionsContextSummary'][0]['explanatorySentence'] : null
                 }}</p>
             </div>
-            <div class="col-12">
-              <div class="row data-table">
+
+            <div class="col-12 col-xl-10">
+              <div class="row justify-content-center data-table">
                 <div class="col-12 col-sm-6">
                   <table>
                     <th colspan="4">Earnings Estimate Revisions</th>
@@ -1101,6 +1115,7 @@ declare var gtag: Function;
             </div>
           </ng-container>
 
+          <!-- COLLAPSE -->
           <div *ngIf="collapse['experts'] == true" (click)="toggleCollapse('experts')"
                class="col-12 hidden-lg-up expand-collapse">
             <img src="./assets/imgs/ux__collapse--circle.svg">
@@ -1115,6 +1130,7 @@ declare var gtag: Function;
           <div class="col-12">
             <div class="divider__full"></div>
           </div>
+
         </div>
 
         <!-- COMPETITION -->
@@ -1123,7 +1139,7 @@ declare var gtag: Function;
             <h2>The Competition</h2>
           </div>
 
-          <div class="col-12 col-md-10 col-lg-6 chart-list">
+          <div class="col-12 col-md-10 col-lg-6 col-xl-5 chart-list">
             <h4>Growth Comparison</h4>
             <div class="divider"></div>
             <ul>
@@ -1161,7 +1177,7 @@ declare var gtag: Function;
             </ul>
           </div>
 
-          <div class="col-12 col-md-10 col-lg-6 chart-list">
+          <div class="col-12 col-md-10 col-lg-6 col-xl-5 chart-list">
             <h4>Revenue Compairson</h4>
             <div class="divider"></div>
             <ul>
@@ -1817,7 +1833,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         title: {
           visible: true,
-          text: "CHAIKIN MONEY FLOW",
+          text: "RELATIVE STRENGTH",
           fontColor: "#999999",
           fontFamily: 'Rajdhani',
           fontSize: 16,

@@ -53,9 +53,27 @@ $link-grey: #999999;
 
 
 $background--verylight: #f8f8f8;
+$background--lighter: #efefef;
 $background--light: #DDDDDD;
 $background--medium: #999999;
 $background--dark: #333333;
+
+
+
+
+/*  Lines & Borders  */
+
+
+
+$divider--dotted: 2px solid #eee;
+
+$line--light: 2px solid #efefef;
+$line--light--thin: 2px solid #efefef;
+$line--white: 2px solid #ffffff;
+$line--button: 3px solid #1199ff;
+$line-divider: #efefef;
+$line--chart: #999;
+
 
 
 
@@ -84,21 +102,9 @@ $gradient--pulse-yellow--a1: linear-gradient(-135deg, rgba(250,218,61,1) 0%, rgb
 
 
 
-/*  Lines & Borders  */
 
 
-
-$divider--dotted: 4px dotted #eee;
-
-$line--light: 2px solid #efefef;
-$line--light--thin: 2px solid #f8f8f8;
-$line--white: 2px solid #ffffff;
-$line--button: 3px solid #1199ff;
-$line-divider: #efefef;
-$line--chart: #999;
-
-
-
+$border-radius1: 20px;
 
 
 

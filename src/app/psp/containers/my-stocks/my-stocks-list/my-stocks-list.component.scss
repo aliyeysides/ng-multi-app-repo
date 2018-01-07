@@ -9,23 +9,26 @@
 	}
 
 	.btn-group {
-		margin-top: 15px;
-		margin-bottom: 14px;
+		margin-top: 6px;
+		margin-bottom: 6px;
+		cursor: pointer;
+		z-index: 20;
 
 		.btn {
 		    font-weight: 600;
 		    text-align: center;
-		    border: 2px solid #ffffff;
-		    padding: 4px 15px 1px 20px;
-		    border-radius: 40px;
+		    border: $line--white;
+		    padding: 8px 15px 5px 20px;
+		    border-radius: 25px;
 		}
 		.btn-primary {
-	  		background-color: #ffffff;
-		    border-color: #ffffff;
+			cursor: pointer;
+	  		background-color: rgba(255,255,255,.9);
 		    font-size: 27px;
 		    line-height: 1;
 			color: $font-color;
 			box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
+			z-index: 20;
 		}
 		.dropdown-toggle {
 			min-width: 150px;
@@ -36,29 +39,35 @@
 	}
 	.dropdown-menu {
 	    position: absolute;
-	    z-index: 1000;
+	    z-index: 10;
 	    float: left;
-	    min-width: 150px;
-	    padding: 0.5rem 0;
-	    margin: 0;
+	    min-width: 160px;
+	    padding: 42px 0 5px;
+	    margin: -44px 0px 0px;
 	    font-size: 22px;
 	    color: $font-color;
 	    width: 100%;
+	    overflow: hidden;
 	    text-align: center;
 	    list-style: none;
-	    background-color: rgba(255,255,255, 0.97);
+	    background-color: rgba(255,255,255, 0.9);
 	    background-clip: padding-box;
-	    border: 0px solid #f0f0f0;
-	    border-top:0px solid #1199ff;
-	    border-radius: 20px;
-		box-shadow: 0 6px 20px rgba(50, 50, 50, 0.25);
+	    border: 2px solid #ffffff;
+	    border-radius: 25px;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 
 		.dropdown-item {
-			font-weight: 600;
+			cursor: pointer;
+			font-weight: 700;
 			text-overflow: ellipsis;
 			overflow: hidden;
 			white-space: nowrap;
-			padding: 0.25rem 10px;
+			padding: 10px 10px;
+			border-top:2px solid #fff;
+
+			&:hover {
+				background-color: rgba(17,153,255, 0.1);
+			}
 		}
 	}
 }
@@ -66,16 +75,12 @@
 .stocklist__powerbar {
 	background-color: $background--verylight;
 	border-top:$line--white;
-	border-bottom:$line--light;
+	//border-bottom:$line--light;
   	text-align: center;
   	padding: 0;
 
     .label {
-      	font-size: 13px;
-      	font-weight: 600;
       	line-height: 36px;
-      	text-transform: uppercase;
-      	color:$font-color--mid;
 
 	    a {
 	    	color:$link-blue;
@@ -167,46 +172,45 @@
 .stocklist__overview--green {
   background: $gradient--pulse-green;
 
-	.list-name {
-	  	color:$pulse-green;
+	.btn-primary {
+	  	//color:$pulse-green !important;
 	}
 }
 .stocklist__overview--red {
   background: $gradient--pulse-red;
 
-  	.list-name {
-  		color:$pulse-red;
+  	.btn-primary {
+  		//color:$pulse-red !important;
+	}
+}
+
+.col-headers {
+	border-bottom: $line--light--thin;
+	margin-top:5px;
+	margin-bottom: 0px;
+	padding-bottom: 7px;
+
+	p {
+		display:inline-block;
+	}
+	.sorted {
+		p {
+			color:#ffffff;
+			background-color: $background--medium;
+			border-radius: 30px;
+			display: inline-block;
+			padding:6px 8px 4px;
+		}
 	}
 }
 
 .section__list {
-	margin-bottom: 30px;
+	margin-bottom: 50px;
 	background-color: #ffffff;
 	padding:0;
-
-	.col-headers {
-		margin-top:10px;
-		font-weight:600;
-		.sort {
-			p {
-				display:inline-block;
-			}
-		}
-		.sorted {
-			p {
-				font-weight: 500;
-				color:#ffffff;
-				background-color: $background--medium;
-				border-radius: 30px;
-				display: inline-block;
-				padding:3px 8px 1px;
-			}
-		}
-	}
 	
 	.list__entry {
-		border-top: $line--light--thin;
-		//border-bottom: 1px solid #efefef;
+		border-bottom: $line--light--thin;
 	}
 }
 

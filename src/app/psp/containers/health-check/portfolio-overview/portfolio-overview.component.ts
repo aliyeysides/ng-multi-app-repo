@@ -15,8 +15,8 @@ declare var gtag: Function;
     'section--overview--green': calculations?.avgPercentageChange > 0,
     'section--overview--red': calculations?.avgPercentageChange < 0}">
 
-      <div class="row no-gutters overview__summary">
-        <div class="col-12 col-md-4 align-self-center">
+      <div class="row no-gutters overview__summary justify-content-center">
+        <div class="col-12 col-md-4 col-xl-3 align-self-center">
           <p class="timespan">THIS WEEK</p>
           <div class="btn-group" dropdown [autoClose]="true">
             <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
@@ -28,7 +28,7 @@ declare var gtag: Function;
             </ul>
           </div>
         </div>
-        <div class="col-12 col-md-4 align-self-center ">
+        <div class="col-12 col-md-4 col-xl-3 align-self-center">
           <p class="data">
             <span class="icon__arrow">
               <img *ngIf="isPortUp()" src="./assets/imgs/icon__thin-arrow--up.svg">
@@ -39,11 +39,11 @@ declare var gtag: Function;
             }}<sub>%</sub>
           </p>
         </div>
-        <div class="col-12 col-md-4 align-self-center text-md-left" style="padding:0 10px;">
+        <div class="col-12 col-md-4 col-xl-3 align-self-center text-md-left" style="padding:0 10px;">
           <p>compared to the <span class="market">S&amp;P 500</span> ---
             <span class="market market--change"> 
               <span *ngIf="isSPYUp()">Up +</span>
-              <span *ngIf="!isSPYUp()">Down</span>{{ calculations?.SPYPercentageChange | number:'.2-2' }}%
+              <span *ngIf="!isSPYUp()">Down </span>{{ calculations?.SPYPercentageChange | number:'.2-2' }}%
             </span>
             over the same timespan.
           </p>
@@ -55,7 +55,7 @@ declare var gtag: Function;
           <button class="align-absolute" (click)="getPHCReportforListId()"><i class="fa fa-file-pdf-o"
                                                                               aria-hidden="true"></i></button>
         </div>
-        <div class="col-12 col-md-8 col-lg-7 powerbar flex-md-last">
+        <div class="col-12 col-md-8 col-xl-6 powerbar flex-md-last">
           <div (click)="setToggleOptions('Bulls')"
                [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
             <p>{{ prognosisData?.BullishSymbolsCount }}</p>
@@ -68,7 +68,7 @@ declare var gtag: Function;
             <p>{{ prognosisData?.BearishSymbolsCount }}</p>
           </div>
         </div>
-        <div class="col-12 col-md-4 col-lg-3 align-self-center">
+        <div class="col-12 col-md-4 col-xl-2 align-self-center">
           <ng-template #toolTipTemp>
             <div [innerHtml]="link"></div>
           </ng-template>

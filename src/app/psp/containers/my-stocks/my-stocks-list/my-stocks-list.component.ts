@@ -4,7 +4,7 @@ import {ListSymbolObj, PortfolioStatus} from '../../../../shared/models/health-c
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';     
 
 declare var gtag: Function;
 
@@ -43,22 +43,23 @@ declare var gtag: Function;
       </div>
     </div>
 
+    <div class="row no-gutters col-headers">
+      <div class="col-3">
+        <p>RATING</p>
+      </div>
+      <div class="col-3 text-left" style="padding-left:0;">
+        <p>TICKER</p>
+      </div>
+      <div class="col-3">
+        <p>PRICE</p>
+      </div>
+      <div class="col-3">
+        <p>CHG</p>
+      </div>
+    </div>
+
     <div class="col-12 section__list" id="list--selected">
       <ul class="stock__list">
-        <li class="row col-headers">
-          <div class="col-3">
-            <p>RATING</p>
-          </div>
-          <div class="col-3" style="padding-left:0;">
-            <p class="text-left">TICKER</p>
-          </div>
-          <div class="col-3">
-            <p>PRICE</p>
-          </div>
-          <div class="col-3">
-            <p>CHG</p>
-          </div>
-        </li>
         <li (click)="selectedStock(stock.symbol)"
             *ngFor="let stock of myStocks"
             class="row list__entry">
@@ -85,8 +86,8 @@ declare var gtag: Function;
               <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide hidden-sm-up">
                 <img src="./assets/imgs/ui_slide.svg">
               </div>
-              <div (click)="emitRemoveStock(stock.symbol);$event.stopPropagation()" class="col-2">
-                <img class="align-absolute" src="./assets/imgs/icon_minus.svg">
+              <div (click)="emitRemoveStock(stock.symbol);$event.stopPropagation()" class="col-2 icon">
+                <img class="align-absolute" src="./assets/imgs/ux__minus--circle.svg">
               </div>
               <div class="col-4">
                 <p class="ticker">{{ stock.symbol }}</p>
@@ -101,6 +102,25 @@ declare var gtag: Function;
             </div>
           </div>
         </li>
+        <!-- <li>
+          <h3>Recently Viewed</h3>
+        </li>
+        <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed"
+                          class="row list__entry">
+          <div class="col-3 list-entry__pgr">
+            <img class="align-absolute"
+                 src="{{ appendPGRImage(recent['pgr']['Corrected PGR Value'], recent['pgr']['PGR Value']) }}">
+          </div>
+          <div class="col-3" style="padding-left:0;">
+            <p class="text-left">{{ recent['meta-info']['symbol'] }}</p>
+          </div>
+          <div class="col-3">
+            <p>{{ recent['meta-info']['Last'] }}</p>
+          </div>
+          <div class="col-3">
+            <p>{{ recent['meta-info']['Percentage '] }}%</p>
+          </div>
+        </li> -->
       </ul>
     </div>
   `,

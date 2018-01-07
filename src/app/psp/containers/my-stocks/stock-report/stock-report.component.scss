@@ -19,7 +19,8 @@
 		width: 75%;
 	}
 	.divider__full {
-		margin:25px auto;
+		margin:25px auto 45px;
+		width: 75%;
 	}
 	.divider__long--red,
 	.divider__long--green,
@@ -41,6 +42,7 @@
 	.divider__full {
 	 	background: $gradient--pulse-green;
 	 	opacity: 0.5;
+	 	width: 95%;
 	}
 	.stock-info {
 		h2 {
@@ -79,6 +81,7 @@
 	.divider__full {
 	  background: $gradient--pulse-red;
 	  opacity: 0.5;
+	  width: 95%;
 	}
 	.stock-info {
 		h2 {
@@ -117,6 +120,7 @@
 	.divider__full {
 	  	background-image: $gradient--pulse-yellow;
 	  	opacity: 0.5;
+	  	width: 95%;
 	}
 	.stock-info {
 		h2 {
@@ -155,6 +159,7 @@
   .divider__full {
     background-image: $gradient--pulse-grey;
     opacity: 0.9;
+    width: 95%;
   }
   .stock-info {
     h2 {
@@ -197,15 +202,16 @@
 
 	.header__button {
 		position: absolute;
-		width: 30px;
+		width: 36px;
 		height: 60px;
 		display: flex;
 		z-index: 10;
 		cursor: pointer;
 
 		img {
-			width: 30px;
-			height: 30px;
+
+			width: 36px;
+			height: 36px;
 		}
 	}
 
@@ -233,41 +239,41 @@
 			cursor: pointer;
 
 			i {
-				font-size: 28px;
+				font-size: 29px;
 				color: #ffffff;
 			}
 		}
 
-		@media screen AND (min-width:768px) {
+		@media screen AND (min-width:1023px) {
 			right:1.5%;
 			display: block;
 		}
 	}
 
 	.header__button--anchors {
-		display:none;
-		width: 250px;
-		padding-top:12px;
-		padding-right: 10px;
+		width: 38%;
+		padding-top:8px;
+		right: 3%;
 
 		.anchor {
 			display: inline-block;
 			background-color: rgba(255,255,255,0.25);
 			border-radius: 30px;
-			width: 34px;
-			height: 34px;
+			width: 40px;
+			height: 40px;
 			color:#ffffff;
-			margin: 0 5px;
-			font-size: 15px;
-			font-weight: 700;
-			line-height: 28px;
+			margin: 0 4%;
+			font-size: 16px;
+			line-height: 35px;
 			border: $line--white;
 
 		}
+		@media screen AND (max-width:1023px) {
+			right: 0;
+		}
 
-		@media screen AND (min-width:992px) {
-			right: 7%;
-			display: block;
+		@media screen AND (max-width:939px) {
+			display: none;
 		}
 	}
 
@@ -277,22 +283,27 @@
 		position: absolute;
 		cursor: default;
 
-		h1 {
+		.ticker {
 			text-align: left;
 			line-height: 64px;
 			color:#ffffff;
 			font-weight: 700;
 			font-size: 36px;
 			float: left;
-			margin: 0 3% 0 15%;
+			margin: 0 3% 0 16%;
 
 			@media screen AND (min-width:768px) {
 				font-size: 40px;
 				margin: 0 5% 0 9%;
 			}
+
+			@media screen AND (min-width:1200px) {
+				font-size: 40px;
+				margin: 0 4% 0 7%;
+			}
 		}
 
-		p {
+		.company-name {
 			text-align: left;
 			line-height: 64px;
 			color:#ffffff;
@@ -300,7 +311,11 @@
 			font-size: 18px;
 
 			@media screen AND (min-width:768px) {
-				font-size: 32px;
+				font-size: 30px;
+			}
+
+			@media screen AND (min-width:1200px) {
+				font-size: 38px;
 			}
 		}
 	}
@@ -385,8 +400,19 @@
 		line-height: 1;
 	}
 
-	.ticker {
-		font-weight: 700;
+	.pgr-section__icon {
+		height: 60px;
+		margin-top: 30px;
+		margin-bottom: -20px;
+
+		img {
+			height: 100%;
+		}
+
+		@media screen AND (max-width: 575px) {
+			//height: 50px;
+			margin-top: 20px;
+		}
 	}
 
 	.chart-list {
@@ -449,21 +475,21 @@
 
 
 
-	.stock-info--main-rating {
-		.stockview__PGR {
-			.pgr__sliders {
-				.sliderBar-container {
-					.pgr__label {
-						padding: 0;
-						p {
-							font-size: 18px;
-							line-height: 1.1;
-						}
+.stock-info--main-rating {
+	.stockview__PGR {
+		.pgr__sliders {
+			.sliderBar-container {
+				.pgr__label {
+					padding: 0;
+					p {
+						font-size: 18px;
+						line-height: 1.1;
 					}
 				}
 			}
 		}
 	}
+}
 
 
 
@@ -482,9 +508,6 @@
 
 	.label {
 		line-height: 1.4;
-		font-weight: 600;
-		cursor: default;
-		color: $font-color--mid;
 
 		@media screen AND (min-width:1200px) {
 			display: inline-block;
@@ -556,8 +579,6 @@
 	}
 	.label {
 		line-height: 1.1;
-		cursor: default;
-		color: $font-color--light;
 	}
 }
 
@@ -597,7 +618,7 @@
 		line-height: 1;
 		display: inline-block;
 		text-align: center;
-		padding:6px 10px 3px 10px;
+		padding:10px 10px 7px 10px;
 		cursor: pointer;
 	}
 
@@ -773,6 +794,17 @@
 		margin-top: 25px;
 		margin-bottom: 20px;
 	}
+	.copy-block {
+		margin-bottom: 30px;
+
+		.paragraph {
+			font-size: 18px;
+
+			span {
+				font-size: 18px;
+			}
+		}
+	}
 }
 
 
@@ -835,6 +867,18 @@
 }
 
 
+.stock-info--profile {
+	.paragraph {
+		font-size: 18px;
+		//font-weight: 300;
+
+		span {
+			font-size: 18px;
+		}
+	}
+}
+
+
 .stock-info--disclaimer {
 	padding-top:30px;
 }
@@ -847,10 +891,6 @@
 
 .data-table {
 	margin-top: 0px;
-
-	@media screen AND (min-width: 1200px) {
-		padding: 0 5%;
-	}
 
 	table {
 		color: $font-color;

@@ -26,7 +26,7 @@ declare var gtag: Function;
                               (stockClicked)="selectStock($event)"
                               [stocks]="userStocks" [powerBar]="powerBar"
                               [userLists]="allUserLists"></cpt-my-stocks-list>
-          <div class="col-12">
+<!--           <div class="col-12">
             <h3>Recently Viewed</h3>
             <div class="divider__long"></div>
             <ul class="stock__list">
@@ -61,7 +61,7 @@ declare var gtag: Function;
                 </div>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
 
         <div class="col-12 col-md-8 col-xl-9 component--stockview__container" [ngClass]="{'visible': !desktopView}">
