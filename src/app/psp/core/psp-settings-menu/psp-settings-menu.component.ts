@@ -20,42 +20,42 @@ declare let gtag: Function;
         <div class="hidden-md-down" style="height:30px;"></div>
         <ul>
           <li>
-            <a (click)="gtagClicked('education_clicked')" target="_blank" href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fa fa-graduation-cap" aria-hidden="true"></i> &nbsp;Education</a>
+            <a (click)="gtagClicked('education_clicked')" target="_blank" href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fal fa-graduation-cap" aria-hidden="true"></i> &nbsp;Education</a>
           </li>
         </ul>
         <ul class="hidden-md-down">
           <li>
-            <a (click)="gtagClicked('upgrade_clicked')" href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fa fa-star" aria-hidden="true"></i> &nbsp;Upgrade</a>
+            <a (click)="gtagClicked('upgrade_clicked')" href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fal fa-star" aria-hidden="true"></i> &nbsp;Upgrade</a>
           </li>
         </ul>
         <ul>
           <li>
-            <a class="nav--toplevel"><i class="fa fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>
+            <a class="nav--toplevel"><i class="fal fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>
           </li>
           <li class="row no-gutters sub-nav">
             <div class="col-12">
-              <a (click)="gtagClicked('about_rating_clicked')" href="https://www.chaikinanalytics.com/stock-rating/" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> About the Power Gauge</a>
+              <a (click)="gtagClicked('about_rating_clicked')" href="https://www.chaikinanalytics.com/stock-rating/" class="nav--sublevel" target="_blank"><i class="fal fa-cog" aria-hidden="true"></i> About the Power Gauge</a>
             </div>
             <div class="col-6 col-lg-12">
-              <a (click)="startOnboarding();gtagClicked('onboarding_clicked')" class="nav--sublevel"><i class="fa fa-cog" aria-hidden="true"></i> Walkthrough</a>
+              <a (click)="startOnboarding();gtagClicked('onboarding_clicked')" class="nav--sublevel"><i class="fal fa-cog" aria-hidden="true"></i> Walkthrough</a>
             </div>
             <div class="col-6 col-lg-12">
-             <a (click)="gtagClicked('user_guide_clicked')" href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> User Guide</a>
+             <a (click)="gtagClicked('user_guide_clicked')" href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/" class="nav--sublevel" target="_blank"><i class="fal fa-cog" aria-hidden="true"></i> User Guide</a>
             </div>
             <div class="col-6 col-lg-12">
-              <a (click)="gtagClicked('manage_subscription_clicked')" href="https://mh214.infusionsoft.com/app/form/pp_cancel" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Manage Subscription</a>
+              <a (click)="gtagClicked('manage_subscription_clicked')" href="https://mh214.infusionsoft.com/app/form/pp_cancel" class="nav--sublevel" target="_blank"><i class="fal fa-cog" aria-hidden="true"></i> Manage Subscription</a>
             </div>
             <div class="col-6 col-lg-12">
-             <a (click)="gtagClicked('edit_user_name_clicked')" href="https://mh214.infusionsoft.com/app/form/pp_changelogin" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Edit User Name</a>
+             <a (click)="gtagClicked('edit_user_name_clicked')" href="https://mh214.infusionsoft.com/app/form/pp_changelogin" class="nav--sublevel" target="_blank"><i class="fal fa-cog" aria-hidden="true"></i> Edit User Name</a>
             </div>
             <div class="col-6 col-lg-12">
-              <a (click)="gtagClicked('contact_us_clicked')" href="mailto:info@chaikinanalytics.com?subject=PowerPulse support request" class="nav--sublevel" target="_blank"><i class="fa fa-cog" aria-hidden="true"></i> Contact Us</a>
+              <a (click)="gtagClicked('contact_us_clicked')" href="mailto:info@chaikinanalytics.com?subject=PowerPulse support request" class="nav--sublevel" target="_blank"><i class="fal fa-cog" aria-hidden="true"></i> Contact Us</a>
             </div>
           </li>
         </ul>
         <ul>
           <li (click)="logOutSession()">
-            <a class="nav--toplevel"><i class="fa fa-user-times" aria-hidden="true"></i> &nbsp;Sign Out</a>
+            <a class="nav--toplevel"><i class="fal fa-user-times" aria-hidden="true"></i> &nbsp;Sign Out</a>
           </li>
         </ul>
       </div>

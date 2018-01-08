@@ -432,12 +432,12 @@ sub {
 
           i {
             color:#ffffff;
-            font-size: 8px;
+            font-size: 7px;
             display: inline-block;
             vertical-align: middle;
 
             @media screen AND (min-width:992px) {
-              font-size: 11px;
+              font-size: 10px;
               vertical-align: middle;
             }
           }
@@ -613,7 +613,7 @@ sub {
         .nav--toplevel {
           display: block;
           color: #ffffff;
-          line-height: 48px;
+          line-height: 47px;
           height: 45px;
           text-decoration: none;
           white-space: nowrap;
@@ -621,6 +621,12 @@ sub {
           cursor: pointer;
           font-weight: 500;
           margin: 0;
+        }
+
+        i {
+          font-size: 17px;
+          display: inline-block;
+          vertical-align: middle;
         }
       }
 

@@ -53,19 +53,19 @@ declare var gtag: Function;
         </div>
         <div *ngIf="!is_etf" class="header__button header__button--pdf">
           <button tooltip="Download Report PDF" placement="bottom" class="align-absolute"
-                  (click)="getPDFStockReport(stock)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+                  (click)="getPDFStockReport(stock)"><i class="fal fa-file-pdf" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
           <!-- <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i
-            class="fa fa-arrow-up" aria-hidden="true"></i></div> -->
+            class="fal fa-arrow-up" aria-hidden="true"></i></div> -->
           <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials);$event.stopPropagation()"><i
-            class="fa fa-university" aria-hidden="true"></i></div>
+            class="fal fa-university" aria-hidden="true"></i></div>
           <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings);$event.stopPropagation()"><i
-            class="fa fa-usd" aria-hidden="true"></i></div>
+            class="fal fa-usd" aria-hidden="true"></i></div>
           <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals);$event.stopPropagation()"><i
-            class="fa fa-line-chart" aria-hidden="true"></i></div>
+            class="fal fa-line-chart" aria-hidden="true"></i></div>
           <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts);$event.stopPropagation()"><i
-            class="fa fa-users" aria-hidden="true"></i></div>
+            class="fal fa-users" aria-hidden="true"></i></div>
         </div>
       </div>
 
@@ -83,9 +83,8 @@ declare var gtag: Function;
                 <div [innerHtml]="link"></div>
               </ng-template>
               <div class="col-12 stockview__main-rating">
-                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fa fa-info-circle"
-                                                                placement="auto" triggers="click" aria-hidden="true"
-                                                                aria-hidden="true"></i></a></p>
+                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="far fa-info-circle"
+                                                                placement="auto" triggers="click"></i></a></p>
                 <p class="rating">
                   <img src="{{ appendPGRImage(symbolData) }}">
                   <span>{{ appendPGRText(symbolData) }}</span>
