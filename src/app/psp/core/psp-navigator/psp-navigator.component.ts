@@ -37,7 +37,7 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   currentRoute: string;
   public routes: object[] = [
     {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-    {link: '/stock-analysis/AAPL', klass: 'fa fa-pie-chart', label: 'Stock Analysis'},
+    {link: '/stock-analysis', klass: 'fa fa-pie-chart', label: 'Stock Analysis'},
     {link: '/market-insights', klass: 'fa fa-heartbeat', label: 'Market Insights'},
   ];
 
@@ -61,7 +61,7 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
       .filter(x => x != undefined)
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
-        res.length ? this.firstUserStock = res[0].symbol : this.firstUserStock = 'AAPL';
+        res.length ? this.firstUserStock = res[0].symbol : this.firstUserStock = '';
         this.updateRoutes();
       });
   }
