@@ -57,7 +57,7 @@ declare let gtag: Function;
             <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
           </div>
           <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--right">
-            <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
+            <img class="align-absolute" src="assets/imgs/ux__gear.svg">
           </div>
         </div>
       </div>

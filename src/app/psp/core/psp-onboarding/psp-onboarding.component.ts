@@ -14,7 +14,7 @@ import {BsModalRef} from 'ngx-bootstrap';
       <div *ngIf="items.length">
         <ng-container *ngFor="let item of items">
           <ng-container *ngIf="currentPage === item.id">
-            <img src="{{ item.src }}">
+            <img src="{{ item.src }}" style="width:100%;">
           </ng-container>
         </ng-container>
       </div>
