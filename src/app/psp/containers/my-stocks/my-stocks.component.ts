@@ -154,7 +154,11 @@ export class MyStocksComponent implements OnInit, OnDestroy {
           if (params.symbol) {
             this.selectedStock = params.symbol.slice();
           } else {
-            this.selectedStock = 'AAPL';
+            if (this.userStocks) {
+              this.selectedStock = this.userStocks[0].symbol;
+            } else {
+              this.selectedStock = 'AAPL';
+            }
           }
         }
       );
