@@ -424,7 +424,7 @@
 			margin-bottom:25px;
 
 			li {
-				margin: 15px 0;
+				padding: 8px 0;
 
 				.data {
 					font-size: 16px;
@@ -446,6 +446,10 @@
 							vertical-align: top;
 						}
 					}
+				}
+
+				&:hover {
+					background-color: rgba(0,0,0,0.025);
 				}
 			}
 			.col-headers {
@@ -482,7 +486,7 @@
 				.pgr__label {
 					padding: 0;
 					p {
-						font-size: 18px;
+						font-size: 17px;
 						line-height: 1.1;
 					}
 				}
@@ -905,6 +909,11 @@
 			font-weight: 600;
 			white-space: nowrap;
 			border-bottom: $line--light;
+		}
+		tr {
+			&:hover {
+				background-color: rgba(0,0,0,0.025);
+			}
 		}
 		td {
 			padding:10px 0 5px;
