@@ -36,9 +36,9 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   reportOpen: boolean;
   currentRoute: string;
   public routes: object[] = [
-    {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-    {link: '/stock-analysis', klass: 'fa fa-pie-chart', label: 'Stock Analysis'},
-    {link: '/market-insights', klass: 'fa fa-heartbeat', label: 'Market Insights'},
+    {link: '/health-check', klass: 'fal fa-tachometer', label: 'Health Check'},
+    {link: '/stock-analysis', klass: 'fal fa-pie-chart', label: 'Stock Analysis'},
+    {link: '/market-insights', klass: 'fal fa-heartbeat', label: 'Market Insights'},
   ];
 
 
@@ -74,16 +74,16 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   updateRoutes() {
     if (this.reportOpen) {
       this.routes = [
-        {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-        {link: '/stock-analysis/' + this.firstUserStock, klass: 'fa fa-pie-chart', label: 'Stock Analysis'},
-        {link: '/market-insights', klass: 'fa fa-heartbeat', label: 'Market Insights'},
+        {link: '/health-check', klass: 'fal fa-tachometer', label: 'Health Check'},
+        {link: '/stock-analysis/' + this.firstUserStock, klass: 'fal fa-pie-chart', label: 'Stock Analysis'},
+        {link: '/market-insights', klass: 'fal fa-heartbeat', label: 'Market Insights'},
       ];
       return;
     }
     this.routes = [
-      {link: '/health-check', klass: 'fa fa-tachometer', label: 'Health Check'},
-      {link: '/stock-analysis', klass: 'fa fa-pie-chart', label: 'Stock Analysis'},
-      {link: '/market-insights', klass: 'fa fa-heartbeat', label: 'Market Insights'},
+      {link: '/health-check', klass: 'fal fa-tachometer', label: 'Health Check'},
+      {link: '/stock-analysis', klass: 'fal fa-pie-chart', label: 'Stock Analysis'},
+      {link: '/market-insights', klass: 'fal fa-heartbeat', label: 'Market Insights'},
     ];
   }
 
