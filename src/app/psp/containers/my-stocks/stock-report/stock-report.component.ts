@@ -33,7 +33,7 @@ declare var gtag: Function;
          'none': symbolData ? symbolData['metaInfo'][0]['PGR'] <= 0 : null }">
 
       <!-- STOCK VIEW HEADER -->
-      <div (click)="jumpToFragment(top);$event.stopPropagation()" class="stockview__header">
+      <div (click)="jumpToFragment(top, 'Top');$event.stopPropagation()" class="stockview__header">
         <div (click)="closeReport()" class="header__button header__button--left">
           <img class="align-absolute" src="./assets/imgs/icon_back-arrow--white.svg">
         </div>
@@ -58,13 +58,13 @@ declare var gtag: Function;
         <div class="header__button header__button--anchors">
           <!-- <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i
             class="fal fa-arrow-up" aria-hidden="true"></i></div> -->
-          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials);$event.stopPropagation()"><i
+          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials, 'Financials');$event.stopPropagation()"><i
             class="far fa-university" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings);$event.stopPropagation()"><i
+          <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()"><i
             class="far fa-usd" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals);$event.stopPropagation()"><i
+          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals, 'Technicals');$event.stopPropagation()"><i
             class="far fa-line-chart" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts);$event.stopPropagation()"><i
+          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts, 'Experts');$event.stopPropagation()"><i
             class="far fa-users" aria-hidden="true"></i></div>
         </div>
       </div>
@@ -2584,8 +2584,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  jumpToFragment(viewChild) {
+  jumpToFragment(viewChild, label: string) {
     viewChild.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+    gtag('event', 'report_fragment_clicked', {
+      'event_category': 'engagement',
+      'event_label': label
+    });
   }
 
   goBack() {
