@@ -256,11 +256,34 @@ sub {
   cursor: default;
 }
 
+.component--stockview {
 
+  .stock-info--main-rating {
+    .tooltip  {
+      top: -10px !important;
+      padding-left:5px;
 
+      .tooltip-inner {
+        font-size: 13px;
+        line-height: 1.4;
+        max-width: 200px;
+        padding: 8px 12px;
+        color: #fff;
+        text-align: left;
+        background-color: #000;
+        border-radius: 0.4rem;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
 
-
-
+        a {
+          color:#ffffff;
+          font-family: $font-stack2;
+          text-decoration: underline;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
 
 
 /*                                      */
@@ -1371,7 +1394,9 @@ sub {
 
 
 
-
+#epsSurprisesChart-graph-id0-plot-1-bl-1-c {
+  opacity: 0.4;
+}
 
 
 
@@ -1398,15 +1423,17 @@ sub {
 }
 
 
-
-
 .component--stockview.bullish {
-
+  #mainChart-graph-id0-crosshair-x-path,
+  #mainChart-graph-id2-crosshair-x-path,
+  #mainChart-graph-id3-crosshair-x-path,
+  #epsSurprisesChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id0-plotset-plot-0-path,
   #epsSurprisesChart-graph-id0-legend-path {
     stroke:$pulse-green;
   }
-  #mainChart-graph-id0-scales-bl-0-c {
+  #mainChart-graph-id0-scales-bl-0-c,
+  #epsSurprisesChart-graph-id0-legend-marker_0-area, {
     path {
       stroke:#E0F9EA;
     }
@@ -1421,13 +1448,12 @@ sub {
       opacity: 0.15;
     }
   }
-  #epsSurprisesChart-graph-id0-plot-1-bl-1-c {
+  #epsSurprisesChart-graph-id0-plot-0-bl-1-c {
     circle {
       fill:$pulse-green;
-      opacity: 0.85;
     }
   }
-  #epsSurprisesChart-graph-id0-legend-marker_1-path,
+  #epsSurprisesChart-graph-id0-legend-marker_0-path,
   #mainChart-graph-id0-plotset-plot-0-area-path,
   #annualEPSChart-graph-id0-plotset-plot-0-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-0-path,
@@ -1438,6 +1464,7 @@ sub {
   #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
     fill:$pulse-green;
   }
+  #epsSurprisesChart-graph-id0-hover-c,
   #annualEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-1-path,
@@ -1460,6 +1487,10 @@ sub {
 
 .component--stockview.bearish {
 
+  #mainChart-graph-id0-crosshair-x-path,
+  #mainChart-graph-id2-crosshair-x-path,
+  #mainChart-graph-id3-crosshair-x-path,
+  #epsSurprisesChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id0-plotset-plot-0-path,
   #epsSurprisesChart-graph-id0-legend-path {
     stroke:$pulse-red;
@@ -1479,13 +1510,12 @@ sub {
       opacity: 0.15;
     }
   }
-  #epsSurprisesChart-graph-id0-plot-1-bl-1-c {
+  #epsSurprisesChart-graph-id0-plot-0-bl-1-c {
     circle {
       fill:$pulse-red;
-      opacity: 0.85;
     }
   }
-  #epsSurprisesChart-graph-id0-legend-marker_1-path,
+  #epsSurprisesChart-graph-id0-legend-marker_0-path,
   #mainChart-graph-id0-plotset-plot-0-area-path,
   #annualEPSChart-graph-id0-plotset-plot-0-node-0-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-0-path,
@@ -1496,6 +1526,7 @@ sub {
   #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
     fill:$pulse-red;
   }
+  #epsSurprisesChart-graph-id0-hover-c,
   #annualEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-1-path,
@@ -1518,7 +1549,10 @@ sub {
 
 
 .component--stockview.neutral {
-
+  #mainChart-graph-id0-crosshair-x-path,
+  #mainChart-graph-id2-crosshair-x-path,
+  #mainChart-graph-id3-crosshair-x-path,
+  #epsSurprisesChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id0-plotset-plot-0-path,
   #epsSurprisesChart-graph-id0-legend-path {
     stroke:$pulse-yellow__shade1;
@@ -1539,10 +1573,9 @@ sub {
       opacity: 0.25;
     }
   }
-  #epsSurprisesChart-graph-id0-plot-1-bl-1-c {
+  #epsSurprisesChart-graph-id0-plot-0-bl-1-c {
     circle {
       fill:$pulse-yellow;
-      opacity: 0.95;
     }
   }
   #mainChart-graph-id0-plotset-plot-0-area-path,
@@ -1555,6 +1588,8 @@ sub {
   #annualRevenueChart-graph-id0-plotset-plot-0-node-1-path {
     fill:$pulse-yellow__shade1;
   }
+  #epsSurprisesChart-graph-id0-hover-c,
+  #epsSurprisesChart-graph-id0-legend-marker_0-path,
   #annualEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-1-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-1-path,
@@ -1563,7 +1598,6 @@ sub {
   #annualRevenueChart-graph-id0-plotset-plot-0-node-2-path {
     fill:$pulse-yellow;
   }
-  #epsSurprisesChart-graph-id0-legend-marker_1-path,
   #annualEPSChart-graph-id0-plotset-plot-0-node-2-path,
   #qrtEPSChart-graph-id0-plotset-plot-0-node-2-path,
   #qrtEPSChart-graph-id0-plotset-plot-1-node-2-path,

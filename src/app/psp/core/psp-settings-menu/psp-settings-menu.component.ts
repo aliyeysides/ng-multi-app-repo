@@ -25,7 +25,7 @@ declare let gtag: Function;
         </ul>
         <ul class="hidden-md-down">
           <li>
-            <a (click)="gtagClicked('upgrade_clicked')" href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fal fa-star" aria-hidden="true"></i> &nbsp;Upgrade</a>
+            <a (click)="gtagClicked('upgrade_clicked')" href="https://www.chaikinanalytics.com/powerpulse-upgrade/" class="nav--toplevel" target="_blank"><i class="fal fa-star" aria-hidden="true"></i> &nbsp;Upgrade</a>
           </li>
         </ul>
         <ul>

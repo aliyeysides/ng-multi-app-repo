@@ -56,9 +56,7 @@ declare var gtag: Function;
                   (click)="getPDFStockReport(stock)"><i class="fal fa-file-pdf" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <!-- <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i
-            class="fal fa-arrow-up" aria-hidden="true"></i></div> -->
-          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials, 'Financials');$event.stopPropagation()"><i
+          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials);$event.stopPropagation()"><i
             class="far fa-university" aria-hidden="true"></i></div>
           <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()"><i
             class="far fa-usd" aria-hidden="true"></i></div>
@@ -1524,7 +1522,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               this.getCMFConfig(dates, cmf)
             ]
           },
-          height: 660,
+          height: 650,
           width: undefined
         };
         this.loading ? this.loading.unsubscribe() : null;
@@ -1709,14 +1707,15 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       y: 0,
       crosshairX: {
         lineWidth: 2,
-        lineColor: "#999",
+        lineColor: "#444",
+        alpha: 0.5,
         shared: true,
         plotLabel: {
           fontFamily: "Open Sans",
           backgroundColor: "#b9e5fb",
           text: "Close: %v",
           borderColor: "#ffffff",
-          strokeWidth: "4",
+          strokeWidth: "2",
           height: 25,
           borderRadius: 12,
           y: -5,
@@ -1754,7 +1753,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         guide: {
           visible: true,
           lineStyle: 'solid',
-          lineColor: "#eee"
+          lineColor: "#eee",
         },
         placement: "opposite",
         item: {
@@ -1841,7 +1840,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         crosshairX: {
           lineWidth: 2,
-          lineColor: "#999",
+          lineColor: "#444",
+          alpha: 0.5,
           shared: true,
           scaleLabel: {
             visible: false
@@ -1873,10 +1873,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             rules: [
               {
                 rule: '%v < 0.5',
-                backgroundColor: "#F5A623 #FD001F",
+                backgroundColor: "#FFF352 #FD001F",
                 lineColor: "#FD001F"
               }],
-            backgroundColor: "#00C04E #F5A623",
+            backgroundColor: "#00C04E #FFF352",
             lineColor: "#00C04E",
             lineWidth: 2
           }
@@ -1923,7 +1923,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         crosshairX: {
           lineWidth: 2,
-          lineColor: "#999",
+          lineColor: "#444",
+          alpha: 0.5,
           shared: true,
           scaleLabel: {
             visible: false
@@ -2374,10 +2375,14 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "offset-y": "275px",
         },
         crosshairX: {
+          lineWidth: 2,
+          lineColor: "#444",
+          alpha: 0.5,
+
           plotLabel: {
             text: '%t: %v',
             borderWidth: 2,
-            bold: true
+            bold: true,
           }
         },
         "background-color": "white",
@@ -2437,24 +2442,24 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           {
             "values": act,
             "text": 'Actual',
-            "alpha": 0.75,
+            "alpha": 1,
             "marker": {
               "type": "circle",
               "border-width": 0,
               "size": 10,
-              "background-color": "#F54225 #B6355C",
+              "background-color": "#666",
               "shadow": false
             },
           },
           {
             "values": est,
             "text": 'Estimate',
-            "alpha": 0.75,
+            "alpha": 0.4,
             "marker": {
               "type": "circle",
               "border-width": 0,
               "size": 10,
-              "background-color": "#328ad9",
+              "background-color": "#3150C6",
               "shadow": false
             },
           },
@@ -2533,7 +2538,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "font-angle": 0,
             "bold": true,
             "font-size": "14px",
-            "font-color": "#484848",
+            "font-color": "#999",
             "offset-y": "-190px",
             "offset-x": "20px"
           },
