@@ -259,12 +259,7 @@ sub {
 
 
 
-.page-item.active .page-link {
-    z-index: 0;
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-}
+
 
 
 
@@ -476,9 +471,10 @@ sub {
     .toc__link {
       font-size: 13px;
       line-height: 1.5;
-      color: $link-blue;
-      text-decoration: none;
+      color: #ffffff;
+      text-decoration: underline;
       text-align: left;
+      opacity:0.7;
       white-space: nowrap;
     }
   }
@@ -732,7 +728,7 @@ sub {
 
 
 .section__summary {
-  margin: 35px 0;
+  margin: 25px 0 35px;
   height: 56px;
   overflow: hidden;
 
@@ -1063,6 +1059,123 @@ sub {
 
 
 
+
+
+
+.modal-dialog {
+  width:100%;
+
+  @media screen AND (min-width: 576px) {
+    max-width: 800px;
+    margin: 30px auto;
+  }
+  @media screen AND (max-width: 575px) {
+    width: 95%;
+    max-width: 375px;
+    margin: 10px auto;
+  }
+}
+
+
+
+
+.modal {
+
+
+
+  .modal-content {
+      background-color: #fff;
+      border: 0px solid rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      box-shadow: 0px 0px 30px rgba(0,0,0,0.5);
+
+    .modal-header {
+        padding: 10px 15px;
+        border-bottom: 0px solid #e9ecef;
+        text-align: center;
+
+        .modal-title {
+          text-align: center;
+          margin: 0;
+        }
+        i {
+          color:$font-color--light;
+        }
+    }
+
+    .modal-body {
+        padding: 0 15px;
+
+        img {
+          width: 100%;
+        }
+    }
+
+    .modal-footer {
+      padding: 15px;
+      height: 60px;
+      border-top: 0px solid #e9ecef;
+      position: relative;
+
+      .pagination {
+        border-radius: 0;
+
+        .page-item {
+          color: $font-color--mid;
+          margin: 10px;
+
+          .page-link {
+            text-align: center;
+            margin-left: 0px;
+            line-height: 1;
+            border: 0px solid $link-blue;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+
+
+            &:hover {
+              background-color: #FFFFFF;
+            }
+          }
+        }
+        .active {
+          .page-link {
+            color: #ffffff !important;
+            background:$gradient--pulse-blue;
+            font-weight: 700;
+
+            &:hover {
+              background-color: $gradient--pulse-blue !important;
+            }
+          }
+        }
+        .disabled {
+          .page-link {
+            color: #ffffff !important;
+          }
+        }
+        .pagination-prev {
+          .page-link {
+
+          }
+        }
+        .pagination-page {
+          .page-link {
+            color: $font-color--mid;
+            width: 32px;
+            height: 30px;
+          }
+        }
+        .pagination-next {
+          .page-link {
+            color: $pulse-blue;
+          }
+        }
+      }
+    }
+  }
+}
 
 
 

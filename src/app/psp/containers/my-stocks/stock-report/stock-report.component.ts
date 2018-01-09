@@ -59,13 +59,13 @@ declare var gtag: Function;
           <!-- <div tooltip="Jump to Top" placement="auto" class="anchor" (click)="jumpToFragment(top)"><i
             class="fal fa-arrow-up" aria-hidden="true"></i></div> -->
           <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials);$event.stopPropagation()"><i
-            class="fal fa-university" aria-hidden="true"></i></div>
+            class="far fa-university" aria-hidden="true"></i></div>
           <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings);$event.stopPropagation()"><i
-            class="fal fa-usd" aria-hidden="true"></i></div>
+            class="far fa-usd" aria-hidden="true"></i></div>
           <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals);$event.stopPropagation()"><i
-            class="fal fa-line-chart" aria-hidden="true"></i></div>
+            class="far fa-line-chart" aria-hidden="true"></i></div>
           <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts);$event.stopPropagation()"><i
-            class="fal fa-users" aria-hidden="true"></i></div>
+            class="far fa-users" aria-hidden="true"></i></div>
         </div>
       </div>
 
