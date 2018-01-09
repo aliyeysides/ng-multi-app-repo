@@ -223,23 +223,17 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
     const keys = Object.keys(alerts);
     keys.forEach(key1 => {
       if (alerts['DataAvailable'] == true && key1 != 'DataAvailable') {
-        console.log('key1', key1);
         Object.keys(alerts[key1]).forEach(key2 => {
-          console.log('key2', key2);
           if (key2 == 'SymbolsTurnedBullish') {
             Object.keys(alerts[key1][key2]).forEach(ticker => {
-              console.log('ticker', ticker);
-              let obj = alerts[key1][key2];
-              console.log('obj before', obj);
+              let obj = alerts[key1][key2][ticker];
               Object.assign(obj, {symbol: ticker});
-              console.log('obj after', obj);
               this.bullishAlerts.push(obj);
-              console.log('alerts', this.bullishAlerts);
             })
           }
           if (key2 == 'SymbolsTurnedBearish') {
             Object.keys(alerts[key1][key2]).forEach(ticker => {
-              let obj = alerts[key1][key2];
+              let obj = alerts[key1][key2][ticker];
               Object.assign(obj, {symbol: ticker});
               this.bearishAlerts.push(obj);
             })
