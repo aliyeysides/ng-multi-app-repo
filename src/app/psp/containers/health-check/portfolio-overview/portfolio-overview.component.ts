@@ -73,7 +73,7 @@ declare var gtag: Function;
             <div [innerHtml]="link"></div>
           </ng-template>
           <p class="label">Chaikin Power Bar <a> <i [tooltip]="toolTipTemp" class="fa fa-info-circle"
-                                                    placement="auto"
+                                                    placement="bottom"
                                                     triggers="click"
                                                     aria-hidden="true"></i></a></p>
         </div>
