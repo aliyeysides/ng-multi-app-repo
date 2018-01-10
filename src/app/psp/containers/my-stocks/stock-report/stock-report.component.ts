@@ -2461,21 +2461,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               "background-color": "#3150C6",
               "shadow": false
             },
-          },
-          // {
-          //   "values": diff,
-          //   "text": 'Difference',
-          //   "alpha": 0.95,
-          //   "borderRadiusTopLeft": 7,
-          //   "marker":{
-          //     "type":"circle",
-          //     "border-width":0,
-          //     "size":10,
-          //     "background-color":"#7FC9D9",
-          //     "shadow":false,
-          //     visible: false
-          //   },
-          // }
+          }
         ]
       }
     }
