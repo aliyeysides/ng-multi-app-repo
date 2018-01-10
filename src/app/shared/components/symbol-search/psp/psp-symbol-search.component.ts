@@ -1,5 +1,4 @@
-import {
-  AfterContentInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output,
+import {Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output,
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
