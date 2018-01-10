@@ -312,7 +312,7 @@ declare var gtag: Function;
         <!-- STOCK VIEW BREAKDOWN -->
         <div class="row justify-content-center stock-info stock-info--overall-breakdown">
           <div class="col-12">
-            <h2><span class="hidden-sm-down">Power Gauge</span> Rating Breakdown</h2>
+            <h2><span class="hidden-sm-down">Power Gauge</span> Rating Overview</h2>
           </div>
 
           <div class="col-12 col-lg-10 copy-block">
@@ -1250,14 +1250,13 @@ declare var gtag: Function;
     </div>
     <div *ngIf="!stock" class="etf--warning unselected--warning">
       <div class="warning-box align-absolute">
-        <p class="warning__text align-absolute">Select a stock to get started.</p>
+        <p class="warning__text align-absolute"><i class="far fa-search"></i> &nbsp;Search for a stock to get started.</p>
       </div>
     </div>
     <div *ngIf="is_etf" class="etf--warning">
       <div class="warning-box align-absolute">
-        <p class="warning__text align-absolute">Chaikin stock analysis not available for ETFs at this time. Please check
-          back later</p>
-        <div (click)="goBack()">go back.</div>
+        <p class="warning__text align-absolute">Chaikin stock analysis not available for ETFs at this time. Please check back later.<br> <a (click)="goBack()"><i class="fas fa-arrow-left"></i> &nbsp;GO BACK</a>
+        </p>
       </div>
     </div>
   `,

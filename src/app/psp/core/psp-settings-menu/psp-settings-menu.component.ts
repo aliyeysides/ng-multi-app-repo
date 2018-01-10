@@ -30,7 +30,7 @@ declare let gtag: Function;
         </ul>
         <ul>
           <li>
-            <a class="nav--toplevel"><i class="fal fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>
+            <a class="nav--toplevel" style="cursor:default;"><i class="fal fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>
           </li>
           <li class="row no-gutters sub-nav">
             <div class="col-12">
