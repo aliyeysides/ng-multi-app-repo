@@ -84,8 +84,8 @@
         "assets",
         "favicon--pulse.ico"
       ],
-      "index": "psp-index.html",
-      "main": "app/psp/main.ts",
+      "index": "app/widgets/pgr-widget/index.html",
+      "main": "app/widgets/pgr-widget/main.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
