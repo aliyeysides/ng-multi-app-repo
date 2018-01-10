@@ -81,8 +81,8 @@ declare var gtag: Function;
                 <div [innerHtml]="link"></div>
               </ng-template>
               <div class="col-12 stockview__main-rating">
-                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="far fa-info-circle"
-                                                                placement="auto" triggers="click"></i></a></p>
+                <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fas fa-info-circle"
+                                                                placement="bottom" triggers="click"></i></a></p>
                 <p class="rating">
                   <img src="{{ appendPGRImage(symbolData) }}">
                   <span>{{ appendPGRText(symbolData) }}</span>
@@ -1729,7 +1729,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         text: this.stock,
       },
       plotarea: {
-        margin: "25 75",
+        margin: "25 60",
       },
       "plot": {
         midPoint: true,
@@ -1812,7 +1812,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         y: 520,
         backgroundColor: "transparent",
         plotarea: {
-          margin: "25 75"
+          margin: "25 60"
         },
         "plot": {
           midPoint: true,
@@ -1895,7 +1895,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         y: 395,
         backgroundColor: "#fff",
         plotarea: {
-          margin: "25 75"
+          margin: "25 60"
         },
         "plot": {
           midPoint: true,
@@ -2018,7 +2018,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           }
         },
         "plotarea": {
-          "margin": "0 77"
+          "margin": "0 62 0 61"
         },
         "borderColor": "transparent",
         "backgroundColor": "transparent",

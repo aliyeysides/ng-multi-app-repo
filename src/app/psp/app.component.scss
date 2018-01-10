@@ -256,34 +256,34 @@ sub {
   cursor: default;
 }
 
-.component--stockview {
 
-  .stock-info--main-rating {
-    .tooltip  {
-      top: -10px !important;
-      padding-left:5px;
 
-      .tooltip-inner {
-        font-size: 13px;
-        line-height: 1.4;
-        max-width: 200px;
-        padding: 8px 12px;
-        color: #fff;
-        text-align: left;
-        background-color: #000;
-        border-radius: 0.4rem;
-        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+.tooltip  {
 
-        a {
-          color:#ffffff;
-          font-family: $font-stack2;
-          text-decoration: underline;
-          font-size: 13px;
-        }
-      }
+  .tooltip-inner {
+    font-size: 13px;
+    line-height: 1.4;
+    max-width: 200px;
+    padding: 8px 12px;
+    color: #fff;
+    text-align: left;
+    background-color: #000;
+    border-radius: 0.4rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+
+    a {
+      color:#ffffff;
+      font-family: $font-stack2;
+      text-decoration: underline;
+      font-size: 13px;
     }
   }
 }
+
+
+
+
+
 
 
 /*                                      */
