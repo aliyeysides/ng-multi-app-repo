@@ -2160,6 +2160,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   getAnnualEPSConfg(dates, values) {
     if (values) {
+      values.map(x => x.toFixed(2));
       return {
         "type": "bar",
         height: 360,
@@ -2237,10 +2238,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   getQrtEPSConfig(dates, values) {
     if (values) {
-      const seriesA = [values[0][0], values[1][0], values[2][0]];
-      const seriesB = [values[0][1], values[1][1], values[2][1]];
-      const seriesC = [values[0][2], values[1][2], values[2][2]];
-      const seriesD = [values[0][3], values[1][3], values[2][3]];
+      const roundNum = (num) => Number(Math.round(num * 100) / 100).toFixed(2);
+      const zeroes = (str) => str === "0.00" ? 0 : str;
+      const seriesA = [values[0][0], values[1][0], values[2][0]].map(roundNum).map(zeroes);
+      const seriesB = [values[0][1], values[1][1], values[2][1]].map(roundNum).map(zeroes);
+      const seriesC = [values[0][2], values[1][2], values[2][2]].map(roundNum).map(zeroes);
+      const seriesD = [values[0][3], values[1][3], values[2][3]].map(roundNum).map(zeroes);
       return {
         "type": "bar",
         "height": "360",
@@ -2354,6 +2357,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getEPSSurprisesConfig(values) {
+    console.log('getEPSSuprisesConfig', values);
     if (values) {
       const est = [
         +values['3 Qtr Ago'][0].slice(1),
@@ -2476,6 +2480,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getAnnualRevenueConfig(dates, values) {
+    console.log('getAnnualRevenueConfig', values);
     if (values) {
       return {
         "type": "bar",
