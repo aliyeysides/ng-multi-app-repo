@@ -48,15 +48,15 @@
 
 	.header__button {
 		position: absolute;
-		width: 36px;
-		height: 57px;
+		width: 32px;
+		height: 58px;
 		display: flex;
 		z-index: 10;
 		cursor: pointer;
 
 		img {
-			width: 36px;
-			height: 36px;
+			width: 32px;
+			height: 32px;
 		}
 	}
 
@@ -70,9 +70,14 @@
 
 	.header__button--right {
 		right:2%;
+		opacity:0.75;
 
 		@media screen AND (min-width:768px) {
 			left:2%;
+		}
+
+		&:hover {
+			opacity:1;
 		}
 	}
 

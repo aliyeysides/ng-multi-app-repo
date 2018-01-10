@@ -17,7 +17,7 @@ declare var gtag: Function;
           <h2><span class="hidden-xs-down">Chaikin</span> Power Grid</h2>
           <p class="paragraph">Holding strong stocks in strong Industry Groups can help improve your investment results.
             In the following display, Industry Groups containing your stocks are ordered to show the 8 strongest to 8 weakest Industry Groups.</p>
-          <p class="caption"><b>Note:</b> This grid shows the top 5 bullish and bottom 5 bearish stocks in each industry. Neutral stocks are not displayed.
+          <p class="caption"><b>Note:</b> Neutral stocks are not displayed.
           </p>
         </div>
       </div>
@@ -99,7 +99,7 @@ declare var gtag: Function;
                         <span *ngIf="stock[objectKeys(stock)[0]] > 50">{{ objectKeys(stock)[0] }}</span>
                       </p>
                     </td>
-                    <td class="industry industry--strong">
+                    <td class="industry industry--weak">
                       <p class="industry-text">
                         <span *ngIf="weakIndustries[index]">{{ weakIndustries[index]?.IndustryName }}</span>
                       </p>
