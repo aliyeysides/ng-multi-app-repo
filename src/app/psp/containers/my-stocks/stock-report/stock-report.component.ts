@@ -2160,13 +2160,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   getAnnualEPSConfg(dates, values) {
     if (values) {
-      values.map(x => x.toFixed(2));
       return {
         "type": "bar",
         height: 360,
         "background-color": "white",
         "tooltip": {
-          "text": "$%v"
+          "text": "$%v",
+          "decimals": 2
         },
         "plotarea": {
           "margin": "30 30 0 30",
@@ -2194,6 +2194,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
         },
         "scale-y": {
+          "min-value": 0,
+          "decimals": 2,
           "line-color": "transparent",
           item: {
             fontColor: "#999",
@@ -2238,18 +2240,17 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   getQrtEPSConfig(dates, values) {
     if (values) {
-      const roundNum = (num) => Number(Math.round(num * 100) / 100).toFixed(2);
-      const zeroes = (str) => str === "0.00" ? 0 : str;
-      const seriesA = [values[0][0], values[1][0], values[2][0]].map(roundNum).map(zeroes);
-      const seriesB = [values[0][1], values[1][1], values[2][1]].map(roundNum).map(zeroes);
-      const seriesC = [values[0][2], values[1][2], values[2][2]].map(roundNum).map(zeroes);
-      const seriesD = [values[0][3], values[1][3], values[2][3]].map(roundNum).map(zeroes);
+      const seriesA = [values[0][0], values[1][0], values[2][0]];
+      const seriesB = [values[0][1], values[1][1], values[2][1]];
+      const seriesC = [values[0][2], values[1][2], values[2][2]];
+      const seriesD = [values[0][3], values[1][3], values[2][3]];
       return {
         "type": "bar",
         "height": "360",
         "background-color": "white",
         "tooltip": {
-          "text": "$%v"
+          "text": "$%v",
+          "decimals": 2
         },
         "plotarea": {
           "margin": "30 30 0 30",
@@ -2277,8 +2278,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
         },
         "scale-y": {
+          "decimals": 2,
+          "min-value": 0,
           "line-color": "transparent",
-
           item: {
             fontColor: "#999",
             fontSize: "14",
@@ -2357,7 +2359,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getEPSSurprisesConfig(values) {
-    console.log('getEPSSuprisesConfig', values);
     if (values) {
       const est = [
         +values['3 Qtr Ago'][0].slice(1),
@@ -2371,12 +2372,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         +values['1 Qtr Ago'][1].slice(1),
         +values['Latest Qtr'][1].slice(1)
       ];
-      const diff = [
-        +values['3 Qtr Ago'][2].slice(1),
-        +values['2 Qtr Ago'][2].slice(1),
-        +values['1 Qtr Ago'][2].slice(1),
-        +values['Latest Qtr'][2].slice(1)
-      ];
       return {
         "type": "scatter",
         "height": "360",
@@ -2388,16 +2383,17 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineWidth: 2,
           lineColor: "#444",
           alpha: 0.5,
-
           plotLabel: {
             text: '%t: %v',
+            "decimals": 2,
             borderWidth: 2,
             bold: true,
           }
         },
         "background-color": "white",
         "tooltip": {
-          "text": "$%v"
+          "text": "$%v",
+          "decimals": 2
         },
         "plotarea": {
           "margin": "30 30 0 30",
@@ -2425,6 +2421,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
         },
         "scale-y": {
+          "decimals": 2,
           "line-color": "#transparent",
           item: {
             fontColor: "#999",
@@ -2480,14 +2477,15 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getAnnualRevenueConfig(dates, values) {
-    console.log('getAnnualRevenueConfig', values);
     if (values) {
       return {
         "type": "bar",
         height: 360,
         "background-color": "white",
         "tooltip": {
-          "text": "$%v (M)"
+          "text": "$%v (M)",
+          "decimals": 2,
+          "thousands-separator":",",
         },
         "plotarea": {
           "margin": "30 30 0 30",
@@ -2515,6 +2513,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
         },
         "scale-y": {
+          "short": true,
+          "thousands-separator":",",
+          "min-value": 0,
           "multiplier": true,
           "line-color": "transparent",
           "line-style": "solid",
