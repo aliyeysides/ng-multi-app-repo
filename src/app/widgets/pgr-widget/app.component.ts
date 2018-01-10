@@ -3,7 +3,6 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {SymbolSearchService} from '../../services/symbol-search.service';
 import {ReportService} from '../../services/report.service';
 import {SignalService} from '../../services/signal.service';
-import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
 
 @Component({
   selector: 'cpt-pgr-widget-app',
@@ -413,7 +412,6 @@ export class AppComponent implements OnInit {
   currentStock: BehaviorSubject<string> = new BehaviorSubject<string>('AAPL');
   is_etf: boolean;
   symbolData;
-  research;
 
   constructor(private symbolSearchService: SymbolSearchService,
               private reportService: ReportService,
@@ -441,7 +439,6 @@ export class AppComponent implements OnInit {
       .filter(Boolean)
       .subscribe(data => {
         this.symbolData = data;
-        console.log('symbolData', this.symbolData);
         this.cd.markForCheck();
       });
   }
