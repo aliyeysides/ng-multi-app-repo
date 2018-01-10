@@ -7,6 +7,7 @@ import {AccordionModule} from 'ngx-bootstrap/accordion';
 import {SymbolSearchService} from '../../services/symbol-search.service';
 import {UtilService} from '../../services/util.service';
 import {ReportService} from '../../services/report.service';
+import {SignalService} from '../../services/signal.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {ReportService} from '../../services/report.service';
   ],
   providers: [
     SymbolSearchService,
+    SignalService,
     UtilService,
     ReportService
   ],
