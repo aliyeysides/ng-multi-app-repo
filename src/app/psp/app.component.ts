@@ -1,5 +1,5 @@
 import {
-  ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, ViewChild,
+  ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
@@ -8,6 +8,8 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {HealthCheckService} from '../services/health-check.service';
 import {PortfolioStatus} from '../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
+import {PspOnboardingComponent} from './core/psp-onboarding/psp-onboarding.component';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 declare let gtag: Function;
 
@@ -75,7 +77,7 @@ declare let gtag: Function;
     </div>
   `
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('navBtn') navBtn: ElementRef;
   @ViewChild('searchBtn') searchBtn: ElementRef;
 
@@ -93,9 +95,11 @@ export class AppComponent implements OnDestroy {
   title: string;
   status: PortfolioStatus;
   menuPosition: string;
+  bsModalRef: BsModalRef;
 
   constructor(private router: Router,
               private cd: ChangeDetectorRef,
+              private modalService: BsModalService,
               private healthCheck: HealthCheckService) {
     const mobWidth = (window.screen.width);
     if (+mobWidth <= 991) this.menuPosition = 'left';
@@ -117,7 +121,14 @@ export class AppComponent implements OnDestroy {
     this.healthCheck.getPortfolioStatus()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => this.status = res);
+  }
 
+  ngOnInit() {
+    const firstLogin = localStorage.getItem('first_login');
+    if (JSON.parse(firstLogin) != false) {
+      this.bsModalRef = this.modalService.show(PspOnboardingComponent);
+    }
+    localStorage.setItem('first_login', 'false');
   }
 
   ngOnDestroy() {
