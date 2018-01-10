@@ -56,7 +56,7 @@ declare var gtag: Function;
                   (click)="getPDFStockReport(stock)"><i class="fal fa-file-pdf" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials);$event.stopPropagation()"><i
+          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials, 'Financials');$event.stopPropagation()"><i
             class="far fa-university" aria-hidden="true"></i></div>
           <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()"><i
             class="far fa-usd" aria-hidden="true"></i></div>
