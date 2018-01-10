@@ -443,7 +443,8 @@ export class AppComponent implements OnInit {
         this.symbolData = data;
         console.log('symbolData', this.symbolData);
         this.cd.markForCheck();
-      })
+      });
+  }
 
   appendSliderClass(pgr) {
     if (pgr) {
