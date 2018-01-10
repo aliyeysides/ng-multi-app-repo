@@ -3,8 +3,10 @@ import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
-import {SharedModule} from '../../shared/index';
+import {AccordionModule} from 'ngx-bootstrap/accordion';
 import {SymbolSearchService} from '../../services/symbol-search.service';
+import {UtilService} from '../../services/util.service';
+import {ReportService} from '../../services/report.service';
 
 @NgModule({
   declarations: [
@@ -13,11 +15,12 @@ import {SymbolSearchService} from '../../services/symbol-search.service';
   imports: [
     BrowserModule,
     HttpModule,
-    SharedModule,
-    // RouterModule.forRoot(ROUTES, {useHash: true}),
+    AccordionModule.forRoot()
   ],
   providers: [
-    SymbolSearchService
+    SymbolSearchService,
+    UtilService,
+    ReportService
   ],
   bootstrap: [AppComponent],
   entryComponents: []
