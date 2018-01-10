@@ -16,18 +16,22 @@ declare let gtag: Function;
         <img src="assets/imgs/logo_powerpulse.svg">
       </div>
       <div class="nav-list">
+        <!-- MAIN NAV -->
         <cpt-psp-navigator class="hidden-lg-up" *ngIf="side==='left'" (routeClicked)="navClicked()"></cpt-psp-navigator>
         <div class="hidden-md-down" style="height:30px;"></div>
+        <!-- EDUCATION -->
         <ul>
           <li>
             <a (click)="gtagClicked('education_clicked')" target="_blank" href="https://www.chaikinanalytics.com/tag/education/" class="nav--toplevel"><i class="fal fa-graduation-cap" aria-hidden="true"></i> &nbsp;Education</a>
           </li>
         </ul>
+        <!-- UPGRADE -->
         <ul class="hidden-md-down">
           <li>
             <a (click)="gtagClicked('upgrade_clicked')" href="https://www.chaikinanalytics.com/powerpulse-upgrade/" class="nav--toplevel" target="_blank"><i class="fal fa-star" aria-hidden="true"></i> &nbsp;Upgrade</a>
           </li>
         </ul>
+        <!-- SETTING -->
         <ul>
           <li>
             <a class="nav--toplevel" style="cursor:default;"><i class="fal fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>
@@ -53,12 +57,14 @@ declare let gtag: Function;
             </div>
           </li>
         </ul>
+        <!-- SIGN OUT -->
         <ul>
           <li (click)="logOutSession()">
             <a class="nav--toplevel"><i class="fal fa-user-times" aria-hidden="true"></i> &nbsp;Sign Out</a>
           </li>
         </ul>
       </div>
+      <!-- TERMS AND CONDITIONS -->
       <div class="container-fluid toc__container">
         <div class="row" style="">
           <div class="col-6">

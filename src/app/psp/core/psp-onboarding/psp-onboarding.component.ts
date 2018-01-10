@@ -45,11 +45,15 @@ export class PspOnboardingComponent implements OnInit {
     },
     {
       id: 3,
-      src: 'assets/imgs/screen-insights-100217-1.png'
+      src: 'assets/imgs/img_onboard-screen3.png'
     },
     {
       id: 4,
-      src: 'assets/imgs/screen-insights-100217-2.png'
+      src: 'assets/imgs/img_onboard-screen4.png'
+    },
+    {
+      id: 5,
+      src: 'assets/imgs/img_onboard-screen5.png'
     },
   ];
 

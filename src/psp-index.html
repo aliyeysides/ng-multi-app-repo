@@ -32,6 +32,7 @@
       background-size: 100% 100%;
       width: 100%;
       height: 100vh;
+      z-index: 2;
       position: relative;
       overflow-x: hidden;
       padding-top: 300px;
@@ -44,6 +45,18 @@
       left: 50%;
       transform: translate(-50%, -50%);
     }
+
+    .preload-images {
+      position: absolute;
+      z-index: 3;
+      background: url(assets/imgs/img_onboard-screen1.png) no-repeat -9999px -9999px;
+      background: url(assets/imgs/img_onboard-screen1.png) no-repeat -9999px -9999px,
+            url(assets/imgs/img_onboard-screen2.png) no-repeat -9999px -9999px,
+            url(assets/imgs/img_onboard-screen3.png) no-repeat -9999px -9999px,
+            url(assets/imgs/img_onboard-screen4.png) no-repeat -9999px -9999px,
+            url(assets/imgs/img_onboard-screen5.png) no-repeat -9999px -9999px;
+    }
+
   </style>
 
 
@@ -78,6 +91,11 @@
     </div>
   </div>
 </cpt-psp-root>
+
+
+<div class="preload-images">
+
+</div>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109763576-2"></script>
