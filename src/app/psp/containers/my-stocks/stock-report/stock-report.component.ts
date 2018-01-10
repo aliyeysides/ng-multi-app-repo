@@ -56,13 +56,17 @@ declare var gtag: Function;
                   (click)="getPDFStockReport(stock)"><i class="fal fa-file-pdf" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <div tooltip="Jump to Financials" placement="auto" class="anchor" (click)="jumpToFragment(financials);$event.stopPropagation()"><i
+          <div tooltip="Jump to Financials" placement="auto" class="anchor"
+               (click)="jumpToFragment(financials, 'Financials');$event.stopPropagation()"><i
             class="far fa-university" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Earnings" placement="auto" class="anchor" (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()"><i
+          <div tooltip="Jump to Earnings" placement="auto" class="anchor"
+               (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()"><i
             class="far fa-usd" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Technicals" placement="auto" class="anchor" (click)="jumpToFragment(technicals, 'Technicals');$event.stopPropagation()"><i
+          <div tooltip="Jump to Technicals" placement="auto" class="anchor"
+               (click)="jumpToFragment(technicals, 'Technicals');$event.stopPropagation()"><i
             class="far fa-line-chart" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Experts" placement="auto" class="anchor" (click)="jumpToFragment(experts, 'Experts');$event.stopPropagation()"><i
+          <div tooltip="Jump to Experts" placement="auto" class="anchor"
+               (click)="jumpToFragment(experts, 'Experts');$event.stopPropagation()"><i
             class="far fa-users" aria-hidden="true"></i></div>
         </div>
       </div>
@@ -424,7 +428,7 @@ declare var gtag: Function;
               <div class="divider__long"></div>
             </div>
             <div class="col-12 col-lg-6 col-xl-5 copy-block">
-              <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s</span>
+              <p class="paragraph">
                 {{ summary ? summary['financialContextSummary'][0]['generalSentence'] : null }}</p>
               <p class="paragraph">{{ summary ? summary['financialContextSummary'][0]['explanatorySentence'] : null
                 }}</p>
@@ -654,7 +658,7 @@ declare var gtag: Function;
             </div>
 
             <div class="col-12 col-lg-6 col-xl-5 copy-block">
-              <p class="paragraph"><span>{{ stock?.toUpperCase() }}'s:</span>
+              <p class="paragraph">
                 {{ summary ? summary['earningsContextSummary'][0]['generalSentence'] : null }}</p>
               <p class="paragraph">{{ summary ? summary['earningsContextSummary'][0]['explanatorySentence'] : null
                 }}</p>
@@ -670,7 +674,8 @@ declare var gtag: Function;
                   {{ research && research['EPS Quarterly Results'].hasOwnProperty('label') ? research['EPS Quarterly Results']['label'][0] : ''
                   }}</p>
               </div>
-              <p class="empty-chart" *ngIf="(annualEPSChart['data']['graphset'][0] | json) === '{}'">No Data Available.</p>
+              <p class="empty-chart" *ngIf="(annualEPSChart['data']['graphset'][0] | json) === '{}'">No Data
+                Available.</p>
             </div>
 
             <div class="col-12 col-lg-6 col-xl-5 section__chart">
@@ -1250,12 +1255,14 @@ declare var gtag: Function;
     </div>
     <div *ngIf="!stock" class="etf--warning unselected--warning">
       <div class="warning-box align-absolute">
-        <p class="warning__text align-absolute"><i class="far fa-search"></i> &nbsp;Search for a stock to get started.</p>
+        <p class="warning__text align-absolute"><i class="far fa-search"></i> &nbsp;Search for a stock to get started.
+        </p>
       </div>
     </div>
     <div *ngIf="is_etf" class="etf--warning">
       <div class="warning-box align-absolute">
-        <p class="warning__text align-absolute">Chaikin stock analysis not available for ETFs at this time. Please check back later.<br> <a (click)="goBack()"><i class="fas fa-arrow-left"></i> &nbsp;GO BACK</a>
+        <p class="warning__text align-absolute">Chaikin stock analysis not available for ETFs at this time. Please check
+          back later.<br> <a (click)="goBack()"><i class="fas fa-arrow-left"></i> &nbsp;GO BACK</a>
         </p>
       </div>
     </div>
@@ -2158,7 +2165,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         height: 360,
         "background-color": "white",
         "tooltip": {
-          "text": "$%v"
+          "text": "$%v",
+          "decimals": 2
         },
         "plotarea": {
           "margin": "30 30 0 30",
@@ -2186,6 +2194,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
         },
         "scale-y": {
+          "min-value": 0,
+          "decimals": 2,
           "line-color": "transparent",
           item: {
             fontColor: "#999",
@@ -2239,7 +2249,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "height": "360",
         "background-color": "white",
         "tooltip": {
-          "text": "$%v"
+          "text": "$%v",
+          "decimals": 2
         },
         "plotarea": {
           "margin": "30 30 0 30",
@@ -2267,8 +2278,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
         },
         "scale-y": {
+          "decimals": 2,
+          "min-value": 0,
           "line-color": "transparent",
-
           item: {
             fontColor: "#999",
             fontSize: "14",
@@ -2360,12 +2372,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         +values['1 Qtr Ago'][1].slice(1),
         +values['Latest Qtr'][1].slice(1)
       ];
-      const diff = [
-        +values['3 Qtr Ago'][2].slice(1),
-        +values['2 Qtr Ago'][2].slice(1),
-        +values['1 Qtr Ago'][2].slice(1),
-        +values['Latest Qtr'][2].slice(1)
-      ];
       return {
         "type": "scatter",
         "height": "360",
@@ -2377,16 +2383,17 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineWidth: 2,
           lineColor: "#444",
           alpha: 0.5,
-
           plotLabel: {
             text: '%t: %v',
+            "decimals": 2,
             borderWidth: 2,
             bold: true,
           }
         },
         "background-color": "white",
         "tooltip": {
-          "text": "$%v"
+          "text": "$%v",
+          "decimals": 2
         },
         "plotarea": {
           "margin": "30 30 0 30",
@@ -2414,6 +2421,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
         },
         "scale-y": {
+          "decimals": 2,
           "line-color": "#transparent",
           item: {
             fontColor: "#999",
@@ -2475,7 +2483,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         height: 360,
         "background-color": "white",
         "tooltip": {
-          "text": "$%v (M)"
+          "text": "$%v (M)",
+          "decimals": 2,
+          "thousands-separator":",",
         },
         "plotarea": {
           "margin": "30 30 0 30",
@@ -2503,6 +2513,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
         },
         "scale-y": {
+          "short": true,
+          "thousands-separator":",",
+          "min-value": 0,
           "multiplier": true,
           "line-color": "transparent",
           "line-style": "solid",
