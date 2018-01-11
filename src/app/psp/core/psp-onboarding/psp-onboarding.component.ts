@@ -42,12 +42,10 @@ export class PspOnboardingComponent implements OnInit {
     {
       id: 1,
       src: 'assets/imgs/img_onboard-screen1.png',
-      link: undefined
     },
     {
       id: 2,
       src: 'assets/imgs/img_onboard-screen2.png',
-      link: undefined
     },
     {
       id: 3,
@@ -57,12 +55,10 @@ export class PspOnboardingComponent implements OnInit {
     {
       id: 4,
       src: 'assets/imgs/img_onboard-screen4.png',
-      link: undefined
     },
     {
       id: 5,
       src: 'assets/imgs/img_onboard-screen5.png',
-      link: undefined
     },
   ];
 
