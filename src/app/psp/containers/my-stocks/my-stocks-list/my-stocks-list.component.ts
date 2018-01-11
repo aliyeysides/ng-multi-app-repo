@@ -4,7 +4,7 @@ import {ListSymbolObj, PortfolioStatus} from '../../../../shared/models/health-c
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
-import {ActivatedRoute} from '@angular/router';     
+import {ActivatedRoute} from '@angular/router';
 
 declare var gtag: Function;
 
@@ -59,7 +59,7 @@ declare var gtag: Function;
     </div>
 
     <div class="col-12 section__list" id="list--selected">
-      <ul class="stock__list">
+      <ul class="stock__list" *ngIf="myStocks?.length">
         <li (click)="selectedStock(stock.symbol)"
             *ngFor="let stock of myStocks"
             class="row list__entry">
@@ -121,6 +121,9 @@ declare var gtag: Function;
             <p>{{ recent['meta-info']['Percentage '] }}%</p>
           </div>
         </li> -->
+      </ul>
+      <ul *ngIf="!myStocks?.length">
+        <p>Search for a stock to get started.</p>
       </ul>
     </div>
   `,
