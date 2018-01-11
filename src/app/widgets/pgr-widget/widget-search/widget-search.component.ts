@@ -83,7 +83,7 @@ export class WidgetSearchComponent extends BaseSymbolSearchComponent implements 
     //
   }
 
-  onSubmit() {
+  onSubmit(any) {
     //
   }
 
