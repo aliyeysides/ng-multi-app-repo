@@ -2194,7 +2194,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           },
         },
         "scale-y": {
-          "min-value": 0,
           "decimals": 2,
           "line-color": "transparent",
           item: {
@@ -2279,7 +2278,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         "scale-y": {
           "decimals": 2,
-          "min-value": 0,
           "line-color": "transparent",
           item: {
             fontColor: "#999",
@@ -2515,7 +2513,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "scale-y": {
           "short": true,
           "thousands-separator":",",
-          "min-value": 0,
           "multiplier": true,
           "line-color": "transparent",
           "line-style": "solid",

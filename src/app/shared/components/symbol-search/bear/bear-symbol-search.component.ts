@@ -88,11 +88,11 @@ export class BearSymbolSearchComponent extends BaseSymbolSearchComponent impleme
 
   public loading: Subscription;
 
-  constructor(public router: Router,
-              public authService: AuthService,
+  constructor(public authService: AuthService,
               public ideasService: IdeasService,
-              public symbolSearchService: SymbolSearchService) {
-    super(router, authService, ideasService, symbolSearchService);
+              public symbolSearchService: SymbolSearchService,
+              public router: Router) {
+    super(authService, ideasService, symbolSearchService, router);
     this.symbolSearchForm = new FormControl();
   }
 
