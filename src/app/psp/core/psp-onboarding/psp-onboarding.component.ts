@@ -26,6 +26,9 @@ import {BsModalRef} from 'ngx-bootstrap';
       <div class="col-12">
         <pagination class="align-absolute" [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage"></pagination>
       </div>
+      <ng-container *ngIf="currentPage === ( totalItems / itemsPerPage )">
+        <a (click)="bsModalRef.hide()">Go to app</a>
+      </ng-container>
     </div>
   `,
   styleUrls: ['./psp-onboarding.component.scss']
