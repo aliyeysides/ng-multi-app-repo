@@ -2169,7 +2169,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "decimals": 2
         },
         "plotarea": {
-          "margin": "30 30 0 30",
+          "margin": "30 25 0 35",
           "y": "15"
         },
         "plot": {
@@ -2253,7 +2253,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "decimals": 2
         },
         "plotarea": {
-          "margin": "30 30 0 30",
+          "margin": "30 25 0 35",
           "y": "15"
         },
         "plot": {
@@ -2396,7 +2396,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "decimals": 2
         },
         "plotarea": {
-          "margin": "30 30 0 30",
+          "margin": "30 25 0 35",
           "y": "15px"
         },
         "plot": {
@@ -2488,7 +2488,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "thousands-separator":",",
         },
         "plotarea": {
-          "margin": "30 30 0 30",
+          "margin": "30 20 0 35",
           "y": "15px"
         },
         "plot": {

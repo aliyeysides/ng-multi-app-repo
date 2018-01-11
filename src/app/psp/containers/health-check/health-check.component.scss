@@ -392,7 +392,7 @@
 	}
 
 	.list-item__mover {
-	  margin:7px 0;
+	  margin:3px 0;
 	  padding: 6px 0 4px;
 
 	  &:first-child {
@@ -787,6 +787,10 @@
 			.powergrid__row#industry-1 {
 				.bear {
 					background-image: linear-gradient(57deg, #D80032 3%, #00C04E 33%);
+					border-radius: 10px 0px 0px 0px;
+				}
+				.bull {
+					border-radius: 0px 10px 0px 0px;
 				}
 			}
 			.powergrid__row#industry-2 {
@@ -862,6 +866,10 @@
 			.powergrid__row#industry-16 {
 				.bull {
 					background-image: linear-gradient(57deg, #FD4500 63%, #009049 93%);
+					border-radius: 0px 0px 10px 0px;
+				}
+				.bear {
+					border-radius: 0px 0px 0px 10px;
 				}
 			}
 		}

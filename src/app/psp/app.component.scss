@@ -1062,7 +1062,7 @@ sub {
 
       @media screen AND (min-width: 768px) {
         font-size: 36px;
-        line-height: 1.5;
+        line-height: 1.3;
       }
   }
   a {
@@ -1101,13 +1101,13 @@ sub {
 .modal-dialog {
   width:100%;
 
-  @media screen AND (min-width: 576px) {
+  @media screen AND (min-width: 768px) {
     max-width: 800px;
     margin: 30px auto;
   }
-  @media screen AND (max-width: 575px) {
+  @media screen AND (max-width: 767px) {
     width: 95%;
-    max-width: 375px;
+    min-width: 350px;
     margin: 10px auto;
   }
 }
@@ -1117,13 +1117,12 @@ sub {
 
 .modal {
 
-
-
   .modal-content {
       background-color: #fff;
       border: 0px solid rgba(0, 0, 0, 0.2);
       border-radius: 20px;
       box-shadow: 0px 0px 30px rgba(0,0,0,0.5);
+      overflow: hidden;
 
     .modal-header {
         padding: 10px 15px;
@@ -1141,9 +1140,22 @@ sub {
 
     .modal-body {
         padding: 0 15px;
+        text-align: center;
 
         img {
           width: 100%;
+
+          @media screen AND (max-width:767px) {
+            width: 150%;
+            margin-left: -25%;
+          }
+        }
+
+        .link__watch-video {
+          font-size: 20px;
+          font-weight: 600;
+          color:$link-blue;
+          margin-bottom:25px;
         }
     }
 
@@ -1158,7 +1170,7 @@ sub {
 
         .page-item {
           color: $font-color--mid;
-          margin: 10px;
+          margin: 10px 5px;
 
           .page-link {
             text-align: center;
@@ -1167,8 +1179,6 @@ sub {
             border: 0px solid $link-blue;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 16px;
-
 
             &:hover {
               background-color: #FFFFFF;
@@ -1193,7 +1203,8 @@ sub {
         }
         .pagination-prev {
           .page-link {
-
+            font-size: 14px;
+            color: $pulse-blue;
           }
         }
         .pagination-page {
@@ -1201,13 +1212,26 @@ sub {
             color: $font-color--mid;
             width: 32px;
             height: 30px;
+            font-size: 16px;
           }
         }
         .pagination-next {
           .page-link {
             color: $pulse-blue;
+            font-size: 14px;
           }
         }
+      }
+
+      .link__get-started {
+        position: absolute;
+        color: $pulse-blue;
+        font-size: 16px;
+        right:50%;
+        bottom:18px;
+        font-weight: 600;
+        margin-right:-200px;
+        font-size: 14px;
       }
     }
   }
@@ -1402,6 +1426,11 @@ sub {
     margin-left:12px;
   }
 }
+
+
+
+
+
 
 
 

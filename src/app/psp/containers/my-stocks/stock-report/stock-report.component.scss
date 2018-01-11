@@ -348,8 +348,8 @@
 
 
 
-/*           PGR            */
 
+/*           PGR            */
 
 
 .stockview__main-rating {
@@ -508,7 +508,7 @@
 
 
 .stock-info--stats {
-	padding:0px 0 30px;
+	padding:5px 0 35px;
 
 	.label {
 	}
@@ -550,7 +550,7 @@
 
 
 .stock-info--news {
-	padding:25px 0px;
+	padding:20px 0px 0px;
 
 	h2 {
 		margin-bottom: 30px;
@@ -644,14 +644,14 @@
 		}
 	}
 	h2 {
-		margin-top: 25px;
-		margin-bottom: 20px;
+		margin-top: 20px;
+		margin-bottom: 25px;
 	}
 	.copy-block {
 		margin-bottom: 30px;
 
 		.paragraph {
-			font-size: 18px;
+			font-size: 16px;
 
 			span {
 				font-size: 18px;
@@ -722,8 +722,7 @@
 
 .stock-info--profile {
 	.paragraph {
-		font-size: 18px;
-		//font-weight: 300;
+		font-size: 16px;
 
 		span {
 			font-size: 18px;
