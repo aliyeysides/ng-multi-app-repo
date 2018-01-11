@@ -58,24 +58,23 @@
 
 	.section--author {
 		text-align: center;
-		font-size: 18px;
+		font-size: 17px;
 		font-weight: 600;
 		line-height: 1;
-		padding:10px 0 20px;
+		padding:8px 0 15px;
 		color: $font-color--mid;
 
 		@media screen AND (min-width: 992px) {
-			padding:15px 0 20px;
+			padding:10px 0 20px;
 			font-size: 24px;
 		}
 	}
 
 	.section--date-select {
-		margin-top: 5px;
 
 		.btn-group {
-			margin-top: 5px;
-			margin-bottom: 0px;
+			margin-top: 0px;
+			margin-bottom: 5px;
 			cursor: pointer;
 
 			.btn {
@@ -151,6 +150,10 @@
 		.article__body.opened {
 			overflow:visible;
 			height: 100%;
+
+			@media screen AND (max-width:576px) {
+				margin-top:40px;
+			}
 		}
 		.article__read-more {
 			display: block;

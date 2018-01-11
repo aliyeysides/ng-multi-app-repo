@@ -18,7 +18,7 @@ import {BsModalRef} from 'ngx-bootstrap';
         <ng-container *ngFor="let item of items">
           <ng-container *ngIf="currentPage === item.id">
             <img src="{{ item.src }}">
-            <a target="_blank" *ngIf="item.link" href="item.link">link here</a>
+            <a class="link__watch-video" target="_blank" *ngIf="item.link" href="item.link"><i class="far fa-play-circle"></i> &nbsp; WATCH THE VIDEO</a>
           </ng-container>
         </ng-container>
       </div>
@@ -28,7 +28,7 @@ import {BsModalRef} from 'ngx-bootstrap';
         <pagination class="align-absolute" [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage"></pagination>
       </div>
       <ng-container *ngIf="currentPage === ( totalItems / itemsPerPage )">
-        <a (click)="bsModalRef.hide()">Go to app</a>
+        <a class="link__get-started" (click)="bsModalRef.hide()">Get Started</a>
       </ng-container>
     </div>
   `,
@@ -50,15 +50,17 @@ export class PspOnboardingComponent implements OnInit {
     {
       id: 3,
       src: 'assets/imgs/img_onboard-screen3.png',
-      link: 'https://valor-software.com/ngx-bootstrap/#/pagination'
+      link: 'https://www.chaikinanalytics.com/powerpulse-health-check-video/'
     },
     {
       id: 4,
       src: 'assets/imgs/img_onboard-screen4.png',
+      link: 'https://www.chaikinanalytics.com/powerpulse-stock-analysis/'
     },
     {
       id: 5,
       src: 'assets/imgs/img_onboard-screen5.png',
+      link: 'https://www.chaikinanalytics.com/powerpulse-market-insights-video/'
     },
   ];
 
