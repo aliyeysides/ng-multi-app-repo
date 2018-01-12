@@ -97,8 +97,4 @@ export class WidgetSearchComponent implements OnInit {
     console.log('args', args);
   }
 
-  onSubmit(any) {
-    //
-  }
-
 }
