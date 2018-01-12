@@ -1,10 +1,9 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {BaseSymbolSearchComponent} from '../../../shared/components/symbol-search/symbol-search.component';
-import {Router} from '@angular/router';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output,
+  ViewChild
+} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
-import {AuthService} from '../../../services/auth.service';
-import {IdeasService} from '../../../services/ideas.service';
 import {SymbolSearchService} from '../../../services/symbol-search.service';
 import {Subscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
@@ -45,7 +44,8 @@ import {Subject} from 'rxjs/Subject';
       </ul>
     </div>
   `,
-  styleUrls: ['./widget-search.component.scss']
+  styleUrls: ['./widget-search.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WidgetSearchComponent implements OnInit {
 
@@ -60,7 +60,8 @@ export class WidgetSearchComponent implements OnInit {
   public focus: boolean = false;
   public loading: Subscription;
 
-  constructor(private symbolSearchService: SymbolSearchService) {
+  constructor(private symbolSearchService: SymbolSearchService,
+              private cd: ChangeDetectorRef) {
     this.symbolSearchForm = new FormControl();
   }
 
@@ -72,7 +73,9 @@ export class WidgetSearchComponent implements OnInit {
       .switchMap(val => this.symbolSearchService.symbolLookup(val))
       .takeUntil(this.ngUnsubscribe)
       .subscribe(val => {
+        console.log('val updated');
         this.searchResults = val;
+        this.cd.detectChanges();
       });
   }
 
