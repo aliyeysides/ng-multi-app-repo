@@ -384,6 +384,10 @@
 	.section__chart {
 		margin: 10px 0 30px;
 
+		@media screen AND (min-width: 1200px) {
+			margin: 35px 0 30px;
+		}
+
 		.col-header--per-chg {
 			@media screen AND (min-width: 1200px) {
 				padding-left: 20px;

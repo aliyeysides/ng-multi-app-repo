@@ -96,15 +96,15 @@ declare var gtag: Function;
           </div>
           <div class="col-12">
             <p class="ticker">
-              <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['bullishSymbol']" style="display: inline-block;">
+              <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['bullishSymbol']">
                 <img width="40px" class="" src="./assets/imgs/arc_Bullish.svg">
                 {{ ticker }}
               </span>
-              <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['neturalSymbol']" style="display: inline-block;">
+              <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['neturalSymbol']">
                 <img width="40px" class="" src="./assets/imgs/arc_Neutral.svg">
                 {{ ticker }}
               </span>
-              <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['bearishSymbol']" style="display: inline-block;">
+              <span (click)="gotoReport(ticker)" *ngFor="let ticker of selectedDayData['bearishSymbol']">
                 <img width="40px" class="" src="./assets/imgs/arc_Bearish.svg">
                 {{ ticker }}
               </span>
