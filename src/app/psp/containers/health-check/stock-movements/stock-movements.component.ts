@@ -9,7 +9,6 @@ import {Router} from '@angular/router';
 declare var gtag: Function;
 
 interface ToggleOptions {
-  currentToggleOptionText: string,
   all?: FilterFunc,
   bulls?: FilterFunc,
   bears?: FilterFunc,
@@ -124,7 +123,7 @@ interface FilterFunc {
             </div>
           </div>
         </div>
-
+      </div>
     </div>
   `,
   styleUrls: ['../health-check.component.scss'],
@@ -163,7 +162,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   toggleOptions: ToggleOptions = {
-    currentToggleOptionText: 'Top Movers',
     all(stock: StockStatus) {
       this.currentToggleOptionText = 'All';
       return true;
@@ -190,6 +188,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
     }
   };
   selectedToggleOption: Function = this.toggleOptions.movers;
+  currentToggleOptionText: string = 'Top Movers';
   calculations: PortfolioStatus;
   selectedTimespan: string = 'WEEK';
 
@@ -285,7 +284,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
     this.updateData();
     gtag('event', 'stock_movements_filter_clicked', {
       'event_category': 'engagement',
-      'event_label': this.toggleOptions.currentToggleOptionText
+      'event_label': this.currentToggleOptionText
     });
   }
 
