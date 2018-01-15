@@ -26,92 +26,104 @@ interface FilterFunc {
   template: `
     <div id="HC--Stock-Movements" class="">
 
-      <div class="row section__toggle">
-        <div class="col-12 toggle toggle--timespan">
-          <p (click)="selectTimespan('TODAY')" [ngClass]="{'selected':this.selectedTimespan==='TODAY'}"
-             class="toggle__left">TODAY</p>
-          <p (click)="selectTimespan('WEEK')" [ngClass]="{'selected':this.selectedTimespan==='WEEK'}"
-             class="toggle__right">LAST WEEK</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12">
-          <h2>Stock Movements</h2>
-        </div>
-      </div>
-
-      <div class="row no-gutters section__summary justify-content-center">
-        <div class="col-6 col-md-5 col-lg-4 summary--left">
-          <p><img
-            src="./assets/imgs/icon_circle-movement--green.svg">{{ selectedTimespan == 'WEEK' ? upStocksWeekly : upStocksDaily
-            }}</p>
-        </div>
-        <div class="col-6 col-md-5 col-lg-4 summary--right">
-          <p><img
-            src="./assets/imgs/icon_circle-movement--red.svg">{{ selectedTimespan == 'WEEK' ? downStocksWeekly : downStocksDaily
-            }}</p>
-        </div>
-      </div>
-
-      <div *ngIf="!collapse" class="row">
-        <div class="col-12">
-          <p class="label">SHOWING:</p>
-          <div class="btn-group" dropdown [autoClose]="true">
-            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-              {{ currentToggleOptionText }}
-            </button>
-            <ul *dropdownMenu class="dropdown-menu" role="menu">
-              <li (click)="selectToggleOption(toggleOptions.movers);" role="menuitem"><a
-                class="dropdown-item">Top Movers</a></li>
-              <li (click)="selectToggleOption(toggleOptions.all);" role="menuitem"><a
-                class="dropdown-item">All</a></li>
-              <li (click)="selectToggleOption(toggleOptions.bulls)" role="menuitem"><a class="dropdown-item">Bulls</a>
-              </li>
-              <li (click)="selectToggleOption(toggleOptions.bears)" role="menuitem"><a class="dropdown-item">Bears</a>
-              </li>
-              <li (click)="selectToggleOption(toggleOptions.neutral)" role="menuitem"><a
-                class="dropdown-item">Neutral</a>
-              </li>
-            </ul>
+      <div class="row no-gutters">
+        <div class="col-12 col-xl-4">
+          <div class="row section__toggle">
+            <div class="col-12 toggle toggle--timespan">
+              <p (click)="selectTimespan('TODAY')" [ngClass]="{'selected':this.selectedTimespan==='TODAY'}"
+                 class="toggle__left">TODAY</p>
+              <p (click)="selectTimespan('WEEK')" [ngClass]="{'selected':this.selectedTimespan==='WEEK'}"
+                 class="toggle__right">LAST WEEK</p>
+            </div>
           </div>
-          <ul class="section__chart">
-            <li class="row no-gutters col-headers justify-content-center">
-              <div class="col-4 col-sm-2 col-xl-1">
-                <p class="text-left">RATING / TICKER</p>
-              </div>
-              <div class="col-8 col-sm-8 col-xl-7">
-                <p class="text-left col-header--per-chg">% CHANGE</p>
-              </div>
-            </li>
-            <li (click)="gotoReport(stock.symbol)" *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
-                class="row no-gutters list-item__mover justify-content-center">
-              <div class="col-4 col-sm-2 col-lg-2 col-xl-1 mover__stock">
-                <p class="ticker"><img *ngIf="stock.arcColor != 2"
-                     src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}"> {{ stock.symbol }}</p>
-              </div>
-              <div class="col-8 col-sm-8 col-lg-8 col-xl-7 mover__data">
-                <div class="mover__bar" [style.width]="stock['barWidth']"
-                     [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0,'indice':stock.arcColor==2}">
-                  <p class="data" [ngClass]="{'data--right':stock['width']<25}">{{ stock.percentageChange | decimal
-                    }}%</p>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
 
-      <div class="row">
-        <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-          <img src="./assets/imgs/ux__collapse--circle.svg">
-          <p>Collapse</p>
+          <div class="row">
+            <div class="col-12">
+              <h2>Stock Movements</h2>
+            </div>
+          </div>
+
+          <div class="row no-gutters section__summary justify-content-center">
+            <div class="col-6 col-md-5 col-lg-4 col-xl-6 summary--left">
+              <p><img
+                src="./assets/imgs/icon_circle-movement--green.svg">{{ selectedTimespan == 'WEEK' ? upStocksWeekly : upStocksDaily
+                }}</p>
+            </div>
+            <div class="col-6 col-md-5 col-lg-4 col-xl-6 summary--right">
+              <p><img
+                src="./assets/imgs/icon_circle-movement--red.svg">{{ selectedTimespan == 'WEEK' ? downStocksWeekly : downStocksDaily
+                }}</p>
+            </div>
+          </div>
+
+          <div class="row no-gutters">
+            <div class="col-12">
+              <p class="label">SHOWING:</p>
+              <div class="btn-group" dropdown [autoClose]="true">
+                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                  {{ currentToggleOptionText }}
+                </button>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                  <li (click)="selectToggleOption(toggleOptions.movers);" role="menuitem"><a
+                    class="dropdown-item">Top Movers</a></li>
+                  <li (click)="selectToggleOption(toggleOptions.all);" role="menuitem"><a
+                    class="dropdown-item">All</a></li>
+                  <li (click)="selectToggleOption(toggleOptions.bulls)" role="menuitem"><a class="dropdown-item">Bulls</a>
+                  </li>
+                  <li (click)="selectToggleOption(toggleOptions.bears)" role="menuitem"><a class="dropdown-item">Bears</a>
+                  </li>
+                  <li (click)="selectToggleOption(toggleOptions.neutral)" role="menuitem"><a
+                    class="dropdown-item">Neutral</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-        <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-          <img src="./assets/imgs/ux__expand--dots.svg">
-          <p>Expand for Detail</p>
+
+        <div class="col-12 col-xl-8">
+          <div *ngIf="!collapse" class="row">
+            <div class="col-12">
+              <ul class="section__chart">
+                <li class="row no-gutters col-headers justify-content-center">
+                  <div class="col-4 col-sm-2 col-xl-2">
+                    <p class="text-left">RATING / TICKER</p>
+                  </div>
+                  <div class="col-8 col-sm-8 col-xl-8">
+                    <p class="text-left col-header--per-chg">% CHANGE</p>
+                  </div>
+                </li>
+                <li (click)="gotoReport(stock.symbol)" *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
+                    class="row no-gutters list-item__mover justify-content-center">
+                  <div class="col-4 col-sm-2 col-lg-2 col-xl-2 mover__stock">
+                    <p class="ticker"><img *ngIf="stock.arcColor != 2"
+                         src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}"> {{ stock.symbol }}</p>
+                  </div>
+                  <div class="col-8 col-sm-8 col-lg-8 col-xl-8 mover__data">
+                    <div class="mover__bar" [style.width]="stock['barWidth']"
+                         [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0,'indice':stock.arcColor==2}">
+                      <p class="data" [ngClass]="{'data--right':stock['width']<25}">{{ stock.percentageChange | decimal
+                        }}%</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
+
+        <div class="col-12 hidden-xl-up">
+          <div class="row">
+            <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+              <img src="./assets/imgs/ux__collapse--circle.svg">
+              <p>Collapse</p>
+            </div>
+            <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+              <img src="./assets/imgs/ux__expand--dots.svg">
+              <p>Expand for Detail</p>
+            </div>
+          </div>
+        </div>
 
     </div>
   `,

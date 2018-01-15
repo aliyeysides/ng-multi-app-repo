@@ -35,10 +35,10 @@ interface EarningsReportObj {
 
       <div class="row no-gutters section__summary justify-content-center">
         <div class="col-6 col-md-5 col-lg-4 summary--left">
-          <p><img src="./assets/imgs/icon_circle-arrow--green.svg">{{ upCount }}</p>
+          <p><img src="./assets/imgs/icon_circle-exclaimation--green.svg">{{ upCount }}</p>
         </div>
         <div class="col-6 col-md-5 col-lg-4 summary--right">
-          <p><img src="./assets/imgs/icon_circle-arrow--red.svg">{{ downCount }}</p>
+          <p><img src="./assets/imgs/icon_circle-exclaimation--red.svg">{{ downCount }}</p>
         </div>
       </div>
 

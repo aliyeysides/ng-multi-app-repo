@@ -16,7 +16,7 @@
 
 	.divider__long {
 		margin:25px auto;
-		width: 75%;
+		width: 60%;
 	}
 	.divider__full {
 		margin:25px auto 45px;
@@ -252,17 +252,19 @@
 	}
 
 	.pgr-section__icon {
-		height: 60px;
-		margin-top: 30px;
-		margin-bottom: -20px;
+		display: block;
+		background-color: rgba(200,200,200,0.1);
+		border-radius: 33px;
+		width: 66px;
+		height: 66px;
+		color:#ccc;
+		font-size: 38px;
+		line-height: 62px;
+		border: 3px solid #ccc;
+		margin: 23px auto -13px;
 
-		img {
-			height: 100%;
-		}
-
-		@media screen AND (max-width: 575px) {
-			//height: 50px;
-			margin-top: 20px;
+		i {
+			color:#ccc;
 		}
 	}
 
@@ -534,11 +536,11 @@
 	}
 
 	.stock-industry {
-		margin-bottom:25px;
+		margin-bottom:30px;
 	}
 
 	.divider__full {
-		margin:10px auto 0;
+		margin:10px auto 15px;
 	}
 }
 
@@ -607,6 +609,10 @@
 				line-height: 35px;
 				padding-right: 10px;
 				text-transform: uppercase;
+			}
+
+			&:last-child {
+				margin-right: 0px;
 			}
 		}
 	}
@@ -710,6 +716,10 @@
 		ul {
 			.col-headers {
 				cursor: default;
+
+				&:hover {
+					background-color: rgba(0,0,0,0);
+				}
 			}
 
 			li {
@@ -763,6 +773,11 @@
 				background-color: rgba(0,0,0,0.025);
 			}
 		}
+		.tr-labels {
+			&:hover {
+				background-color: rgba(0,0,0,0);
+			}
+		}
 		td {
 			padding:10px 0 5px;
 			min-width: 50px;
@@ -788,6 +803,12 @@
 		}
 	}
 }
+
+
+
+
+
+
 
 .unselected--warning {
   @media screen AND (max-width:768px) {
@@ -856,6 +877,15 @@
 .component--stockview.bullish {
 	background: $gradient--pulse-green--a1;
 
+	.pgr-section__icon {
+		background-color: rgba(0,192,78,0.04);
+		border-color: $pulse-green;
+
+		i {
+			color:$pulse-green;
+		}
+	}
+
 	.divider__full {
 	 	background: $gradient--pulse-green;
 	 	opacity: 0.5;
@@ -894,6 +924,15 @@
 
 .component--stockview.bearish {
 	background: $gradient--pulse-red--a1;
+
+	.pgr-section__icon {
+		background-color: rgba(253,0,31,0.04);
+		border-color: $pulse-red;
+
+		i {
+			color:$pulse-red;
+		}
+	}
 
 	.divider__full {
 	  background: $gradient--pulse-red;
@@ -934,6 +973,14 @@
 .component--stockview.neutral {
 	background-image: $gradient--pulse-yellow--a1;
 
+	.pgr-section__icon {
+		background-color: rgba(250,218,61,0.04);
+		border-color: $pulse-yellow;
+
+		i {
+			color:$pulse-yellow;
+		}
+	}
 	.divider__full {
 	  	background-image: $gradient--pulse-yellow;
 	  	opacity: 0.5;

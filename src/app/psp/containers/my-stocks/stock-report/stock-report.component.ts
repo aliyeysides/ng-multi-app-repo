@@ -60,11 +60,9 @@ declare var gtag: Function;
                (click)="jumpToFragment(financials, 'Financials');$event.stopPropagation()"><i
             class="far fa-university" aria-hidden="true"></i></div>
           <div tooltip="Jump to Earnings" placement="auto" class="anchor"
-               (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()"><i
-            class="far fa-usd" aria-hidden="true"></i></div>
+               (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()"><i class="far fa-money-bill"></i></div>
           <div tooltip="Jump to Technicals" placement="auto" class="anchor"
-               (click)="jumpToFragment(technicals, 'Technicals');$event.stopPropagation()"><i
-            class="far fa-line-chart" aria-hidden="true"></i></div>
+               (click)="jumpToFragment(technicals, 'Technicals');$event.stopPropagation()"><i class="far fa-chart-pie"></i></div>
           <div tooltip="Jump to Experts" placement="auto" class="anchor"
                (click)="jumpToFragment(experts, 'Experts');$event.stopPropagation()"><i
             class="far fa-users" aria-hidden="true"></i></div>
@@ -334,8 +332,10 @@ declare var gtag: Function;
 
         <!-- BREAKDOWN - FINANCIALS -->
         <div #financials class="row justify-content-center stock-info stock-info--breakdown">
-          <div class="pgr-section__icon col-12">
-            <img class="align-absolute" src="./assets/imgs/icon__H1-Financials.svg">
+          <div class="col-12">
+            <div class="pgr-section__icon">
+              <i class="fal fa-university"></i>
+            </div>
           </div>
           <div class="col-12">
             <h1>Financials:
@@ -564,8 +564,10 @@ declare var gtag: Function;
 
         <!-- BREAKDOWN - EARNINGS -->
         <div #earnings class="row justify-content-center stock-info stock-info--breakdown">
-          <div class="pgr-section__icon col-12">
-            <img class="align-absolute" src="./assets/imgs/icon__H1-Earnings.svg">
+          <div class="col-12">
+            <div class="pgr-section__icon">
+               <i class="fal fa-money-bill"></i>
+            </div>
           </div>
           <div class="col-12">
             <h1>Earnings: <span class="">{{ summary ? summary['earningsContextSummary'][0]['status'] : null
@@ -734,8 +736,10 @@ declare var gtag: Function;
 
         <!-- BREAKDOWN - TECHNICALS -->
         <div #technicals class="row justify-content-center stock-info stock-info--breakdown">
-          <div class="pgr-section__icon col-12">
-            <img class="align-absolute" src="./assets/imgs/icon__H1-Technicals.svg">
+          <div class="col-12">
+            <div class="pgr-section__icon">
+               <i class="fal fa-chart-pie"></i>
+            </div>
           </div>
           <div class="col-12">
             <h1>Technicals: <span>{{ summary ? summary['priceVolumeContextSummary'][0]['status'] : null }}</span></h1>
@@ -933,8 +937,10 @@ declare var gtag: Function;
 
         <!-- BREAKDOWN - EXPERTS -->
         <div #experts class="row justify-content-center stock-info stock-info--breakdown">
-          <div class="pgr-section__icon col-12">
-            <img class="align-absolute" src="./assets/imgs/icon__H1-Experts.svg">
+          <div class="col-12">
+            <div class="pgr-section__icon">
+               <i class="fal fa-users"></i>
+            </div>
           </div>
           <div class="col-12">
             <h1>Experts: <span>{{ summary ? summary['expertOpnionsContextSummary'][0]['status'] : null }}</span></h1>
@@ -1038,7 +1044,7 @@ declare var gtag: Function;
                 <div class="col-12 col-sm-6">
                   <table>
                     <th colspan="4">Earnings Estimate Revisions</th>
-                    <tr>
+                    <tr class="tr-labels">
                       <td class="label"></td>
                       <td class="label text-center">Current</td>
                       <td class="label text-center">7d Ago</td>
@@ -1879,10 +1885,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             rules: [
               {
                 rule: '%v < 0.5',
-                backgroundColor: "#FFF352 #FD001F",
+
                 lineColor: "#FD001F"
               }],
-            backgroundColor: "#00C04E #FFF352",
+            "gradient-colors": "Green GreenYellow Gold Orange OrangeRed Red FireBrick",  
+            "gradient-stops":".1 .2 .4 .5 .6 .8 .9",
             lineColor: "#00C04E",
             lineWidth: 2
           }

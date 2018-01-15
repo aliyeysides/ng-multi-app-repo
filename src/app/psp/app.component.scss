@@ -431,8 +431,10 @@ sub {
           i {
             color:#ffffff;
             font-size: 28px;
+            width: 35px;
             display: inline-block;
             vertical-align: middle;
+            text-align: center;
           }
         }
       }
@@ -656,9 +658,12 @@ sub {
         }
 
         i {
-          font-size: 17px;
+          font-size: 19px;
           display: inline-block;
           vertical-align: middle;
+          width: 25px;
+          text-align: center;
+          margin-top: -3px;
         }
       }
 
@@ -867,7 +872,7 @@ sub {
   }
 
   @media screen AND (max-width: 375px) {
-    padding-bottom: 200px;
+    padding-bottom: 220px;
   }
 
   .col-headers {
