@@ -1044,7 +1044,7 @@ declare var gtag: Function;
                 <div class="col-12 col-sm-6">
                   <table>
                     <th colspan="4">Earnings Estimate Revisions</th>
-                    <tr>
+                    <tr class="tr-labels">
                       <td class="label"></td>
                       <td class="label text-center">Current</td>
                       <td class="label text-center">7d Ago</td>
@@ -1885,10 +1885,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             rules: [
               {
                 rule: '%v < 0.5',
-                backgroundColor: "#FFF352 #FD001F",
+
                 lineColor: "#FD001F"
               }],
-            backgroundColor: "#00C04E #FFF352",
+            "gradient-colors": "Green GreenYellow Gold Orange OrangeRed Red FireBrick",  
+            "gradient-stops":".1 .2 .4 .5 .6 .8 .9",
             lineColor: "#00C04E",
             lineWidth: 2
           }
