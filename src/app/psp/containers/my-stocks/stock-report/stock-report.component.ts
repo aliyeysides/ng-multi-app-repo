@@ -256,8 +256,8 @@ declare var gtag: Function;
           </div>
           <div class="col-4">
             <p class="data data--large">
-              {{ (symbolData ? symbolData['fundamentalData']['Revenue'] : null) / 1000 | number:'.2-2' }}B</p>
-            <p class="label">REVENUE</p>
+              {{ symbolData ? (symbolData['fundamentalData']['P/E'] | decimal ) : null }}</p>
+            <p class="label">P/E</p>
           </div>
           <div class="col-12">
             <div class="divider__long"></div>
@@ -498,7 +498,7 @@ declare var gtag: Function;
                     <tr>
                       <td class="label">Payout</td>
                       <td class="data">
-                        {{ symbolData ? ((symbolData['fundamentalData']['payout']) * 100 | decimal ) : null }}%
+                        {{ symbolData ? (symbolData['fundamentalData']['payout'] | decimal ) : null }}%
                       </td>
                     </tr>
                     <tr>
@@ -509,7 +509,7 @@ declare var gtag: Function;
                     <tr>
                       <td class="label">5Y Growth Rate</td>
                       <td class="data">
-                        {{ symbolData ? ((symbolData['fundamentalData']['growth_rate']) * 100 | decimal ) : null
+                        {{ symbolData ? (symbolData['fundamentalData']['growth_rate'] | decimal ) : null
                         }}%
                       </td>
                     </tr>
@@ -1888,7 +1888,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
                 lineColor: "#FD001F"
               }],
-            "gradient-colors": "Green GreenYellow Gold Orange OrangeRed Red FireBrick",  
+            "gradient-colors": "Green GreenYellow Gold Orange OrangeRed Red FireBrick",
             "gradient-stops":".1 .2 .4 .5 .6 .8 .9",
             lineColor: "#00C04E",
             lineWidth: 2

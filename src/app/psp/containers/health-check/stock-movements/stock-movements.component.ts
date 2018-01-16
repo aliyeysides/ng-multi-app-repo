@@ -5,6 +5,7 @@ import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
 
 declare var gtag: Function;
 
@@ -60,16 +61,18 @@ interface FilterFunc {
               <p class="label">SHOWING:</p>
               <div class="btn-group" dropdown [autoClose]="true">
                 <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-                  {{ currentToggleOptionText }}
+                  {{ currentToggleOptionText$ | async }}
                 </button>
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
                   <li (click)="selectToggleOption(toggleOptions.movers);" role="menuitem"><a
                     class="dropdown-item">Top Movers</a></li>
                   <li (click)="selectToggleOption(toggleOptions.all);" role="menuitem"><a
                     class="dropdown-item">All</a></li>
-                  <li (click)="selectToggleOption(toggleOptions.bulls)" role="menuitem"><a class="dropdown-item">Bulls</a>
+                  <li (click)="selectToggleOption(toggleOptions.bulls)" role="menuitem"><a
+                    class="dropdown-item">Bulls</a>
                   </li>
-                  <li (click)="selectToggleOption(toggleOptions.bears)" role="menuitem"><a class="dropdown-item">Bears</a>
+                  <li (click)="selectToggleOption(toggleOptions.bears)" role="menuitem"><a
+                    class="dropdown-item">Bears</a>
                   </li>
                   <li (click)="selectToggleOption(toggleOptions.neutral)" role="menuitem"><a
                     class="dropdown-item">Neutral</a>
@@ -92,11 +95,13 @@ interface FilterFunc {
                     <p class="text-left col-header--per-chg">% CHANGE</p>
                   </div>
                 </li>
-                <li (click)="gotoReport(stock.symbol)" *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
+                <li (click)="gotoReport(stock.symbol)"
+                    *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
                     class="row no-gutters list-item__mover justify-content-center">
                   <div class="col-4 col-sm-2 col-lg-2 col-xl-2 mover__stock">
                     <p class="ticker"><img *ngIf="stock.arcColor != 2"
-                         src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}"> {{ stock.symbol }}</p>
+                                           src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
+                      {{ stock.symbol }}</p>
                   </div>
                   <div class="col-8 col-sm-8 col-lg-8 col-xl-8 mover__data">
                     <div class="mover__bar" [style.width]="stock['barWidth']"
@@ -163,32 +168,32 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
 
   toggleOptions: ToggleOptions = {
     all(stock: StockStatus) {
-      this.currentToggleOptionText = 'All';
+      this.currentToggleOptionText$.next('All');
       return true;
     },
 
     bulls(stock: StockStatus) {
-      this.currentToggleOptionText = 'Bulls';
+      this.currentToggleOptionText$.next('Bulls');
       return stock['arcColor'] >= 1;
     },
 
     bears(stock: StockStatus) {
-      this.currentToggleOptionText = 'Bears';
+      this.currentToggleOptionText$.next('Bears');
       return stock['arcColor'] === -1 || stock['arcColor'] === 2;
     },
 
     neutral(stock: StockStatus) {
-      this.currentToggleOptionText = 'Neutral';
+      this.currentToggleOptionText$.next('Neutral');
       return stock['arcColor'] === 0 || stock['arcColor'] === 2;
     },
 
     movers(stock: StockStatus) {
-      this.currentToggleOptionText = 'Top Movers';
+      this.currentToggleOptionText$.next('Top Movers');
       return true;
     }
   };
-  selectedToggleOption: Function = this.toggleOptions.movers;
-  currentToggleOptionText: string = 'Top Movers';
+  selectedToggleOption$: BehaviorSubject<FilterFunc> = new BehaviorSubject<FilterFunc>({} as FilterFunc);
+  currentToggleOptionText$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   calculations: PortfolioStatus;
   selectedTimespan: string = 'TODAY';
 
@@ -232,6 +237,14 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
       .takeUntil(this._ngUnsubscribe)
       .filter(x => x != undefined)
       .subscribe(res => this.calculations = res);
+
+    this.selectedToggleOption$
+      .takeUntil(this._ngUnsubscribe)
+      .subscribe(res => {
+        console.log('res', res);
+        // const stock_movement_toggle_option
+      });
+
   }
 
   ngOnDestroy() {
@@ -276,15 +289,17 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
         this.upStocksDaily = this.dailyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] > 0).length;
         this.downStocksDaily = this.dailyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] < 0).length;
       });
-
   }
 
   selectToggleOption(fn: FilterFunc) {
-    this.selectedToggleOption = fn;
+    this.selectedToggleOption$.next(fn);
+    // const strToggleOption = JSON.stringify(this.selectedToggleOption$);
+    // console.log('strToggleOption', strToggleOption, this.selectedToggleOption$);
+    // localStorage.setItem('stock_movement_toggle_option', strToggleOption);
     this.updateData();
     gtag('event', 'stock_movements_filter_clicked', {
       'event_category': 'engagement',
-      'event_label': this.currentToggleOptionText
+      'event_label': this.currentToggleOptionText$.getValue()
     });
   }
 
@@ -305,12 +320,12 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
     });
   }
 
-  public parseStockStatus(res) {
+  parseStockStatus(res) {
     let result = res
-      .filter(x => this.selectedToggleOption(x))
+      .filter(x => this.selectedToggleOption$.getValue().call(this, x))
       .sort((x, y) => y['percentageChange'] - x['percentageChange']);
 
-    if (this.selectedToggleOption === this.toggleOptions.movers) {
+    if (this.selectedToggleOption$.getValue() === this.toggleOptions.movers) {
       const stocks = result.filter(x => x['symbol'] != 'S&P 500');
       const SPY = result.filter(x => x['symbol'] == 'S&P 500');
       if (stocks.length >= 6) {
@@ -325,7 +340,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
     return result;
   }
 
-  public appendPGRImage(pgr, rawPgr) {
+  appendPGRImage(pgr, rawPgr) {
     return this.signalService.appendPGRImage(pgr, rawPgr)
   }
 
@@ -358,7 +373,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   gotoReport(ticker: string) {
-    if (ticker === 'S&P 500' ) return;
+    if (ticker === 'S&P 500') return;
     this.router.navigate(['stock-analysis', ticker]);
     gtag('event', 'stock_clicked', {
       'event_category': 'engagement',

@@ -102,7 +102,7 @@ declare var gtag: Function;
             </div>
           </div>
         </li>
-        <!-- <li>
+        <li>
           <h3>Recently Viewed</h3>
         </li>
         <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed"
@@ -120,7 +120,7 @@ declare var gtag: Function;
           <div class="col-3">
             <p>{{ recent['meta-info']['Percentage '] }}%</p>
           </div>
-        </li> -->
+        </li>
       </ul>
       <ul *ngIf="!myStocks?.length">
         <p>Search for a stock to get started.</p>
