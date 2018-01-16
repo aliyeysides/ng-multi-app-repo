@@ -18,6 +18,7 @@ import {BsModalRef} from 'ngx-bootstrap';
         <ng-container *ngFor="let item of items">
           <ng-container *ngIf="currentPage === item.id">
             <img src="{{ item.src }}">
+            <img *ngIf="item.mobileSrc" src="{{ item.mobileSrc }}">
             <a class="link__watch-video" target="_blank" *ngIf="item.link" href="item.link"><i class="far fa-play-circle"></i> &nbsp; WATCH THE VIDEO</a>
           </ng-container>
         </ng-container>
@@ -42,6 +43,7 @@ export class PspOnboardingComponent implements OnInit {
     {
       id: 1,
       src: 'assets/imgs/img_onboard-screen1.png',
+      mobileSrc: 'assets/imgs/img_onboard-screen2.png'
     },
     {
       id: 2,
