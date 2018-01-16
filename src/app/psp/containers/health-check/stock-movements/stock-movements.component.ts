@@ -190,7 +190,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   selectedToggleOption: Function = this.toggleOptions.movers;
   currentToggleOptionText: string = 'Top Movers';
   calculations: PortfolioStatus;
-  selectedTimespan: string = 'WEEK';
+  selectedTimespan: string = 'TODAY';
 
   weeklyStockData: StockStatus[];
   dailyStockData;
