@@ -92,7 +92,6 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
   public currentList: string;
 
   constructor(private authService: AuthService,
-              private signalService: SignalService,
               private healthCheck: HealthCheckService,
               private marketsSummary: MarketsSummaryService) {
   }
@@ -170,7 +169,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
       this.healthCheck.getChaikinCalculations(listId, lastWeekStart, lastWeekEnd),
       this.healthCheck.getPrognosisData(listId),
       this.healthCheck.getUserPortfolioStockStatus(listId, lastWeekStart, lastWeekEnd),
-      this.healthCheck.getPGRWeeklyChangeData(listId, lastWeekStart, lastWeekEnd),
+      this.healthCheck.getPGRWeeklyChangeData(listId),
       this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
       this.healthCheck.getAnalystRevisions(listId, lastWeekEnd),
       this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, listId, startDate, endDate),

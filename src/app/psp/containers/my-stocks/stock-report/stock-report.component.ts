@@ -256,8 +256,8 @@ declare var gtag: Function;
           </div>
           <div class="col-4">
             <p class="data data--large">
-              {{ (symbolData ? symbolData['fundamentalData']['Revenue'] : null) / 1000 | number:'.2-2' }}B</p>
-            <p class="label">REVENUE</p>
+              {{ symbolData ? (symbolData['fundamentalData']['P/E'] | decimal ) : null }}</p>
+            <p class="label">P/E</p>
           </div>
           <div class="col-12">
             <div class="divider__long"></div>
@@ -498,7 +498,7 @@ declare var gtag: Function;
                     <tr>
                       <td class="label">Payout</td>
                       <td class="data">
-                        {{ symbolData ? ((symbolData['fundamentalData']['payout']) * 100 | decimal ) : null }}%
+                        {{ symbolData ? (symbolData['fundamentalData']['payout'] | decimal ) : null }}%
                       </td>
                     </tr>
                     <tr>
@@ -509,7 +509,7 @@ declare var gtag: Function;
                     <tr>
                       <td class="label">5Y Growth Rate</td>
                       <td class="data">
-                        {{ symbolData ? ((symbolData['fundamentalData']['growth_rate']) * 100 | decimal ) : null
+                        {{ symbolData ? (symbolData['fundamentalData']['growth_rate'] | decimal ) : null
                         }}%
                       </td>
                     </tr>
@@ -1514,12 +1514,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe(data => {
         this.data = data;
 
-        let dates, closePrices, pgrData, cmf, relStr;
+        let dates, closePrices, pgrData, cmf, relStr, dema;
         this.current === '5Y' ? dates = data['five_year_chart_data']['formatted_dates'] : dates = data['one_year_chart_data']['formatted_dates'].reverse();
         this.current === '5Y' ? closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse() : closePrices = data['one_year_chart_data']['close_price'].map(x => +x).reverse();
         this.current === '5Y' ? pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse() : pgrData = data['one_year_pgr_data']['pgr_data'].map(x => +x).reverse();
         this.current === '5Y' ? cmf = data['five_year_chart_data']['cmf'].map(x => +x).reverse() : cmf = data['one_year_chart_data']['cmf'].map(x => +x).reverse();
         this.current === '5Y' ? relStr = data['five_year_chart_data']['relative_strength'].map(x => +x).reverse() : relStr = data['one_year_chart_data']['relative_strength'].map(x => +x).reverse();
+        this.current === '5Y' ? dema = data['five_year_chart_data']['chaikin_trend_20001'].map(x => +x).reverse() : dema = data['one_year_chart_data']['chaikin_trend_20001'].map(x => +x).reverse();
 
         this.timespanPerChange = this.calculatePricePerChange(closePrices[0], closePrices[closePrices.length - 1]);
         this.timespanPriceChange = this.calculatePriceChange(closePrices[0], closePrices[closePrices.length - 1]);
@@ -1529,6 +1530,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             layout: "vertical",
             graphset: [
               this.getCloseConfig(dates, closePrices),
+              this.getDemaConfig(dates, dema),
               this.getPGRConfig(dates, pgrData),
               this.getRSIConfig(dates, relStr),
               this.getCMFConfig(dates, cmf)
@@ -1580,6 +1582,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     const pgrData = this.data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
     const cmf = this.data['five_year_chart_data']['cmf'].map(x => +x).reverse();
     const relStr = this.data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
+    const dema = this.data['five_year_chart_data']['chaikin_trend_20001'].map(x => +x).reverse();
 
     this.timespanPerChange = this.calculatePricePerChange(closePrices[0], closePrices[closePrices.length - 1]);
     this.timespanPriceChange = this.calculatePriceChange(closePrices[0], closePrices[closePrices.length - 1]);
@@ -1589,6 +1592,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         layout: "vertical",
         graphset: [
           this.getCloseConfig(dates, closePrices),
+          this.getDemaConfig(dates, dema),
           this.getPGRConfig(dates, pgrData),
           this.getRSIConfig(dates, relStr),
           this.getCMFConfig(dates, cmf)
@@ -1630,6 +1634,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       .slice(this.data['one_year_chart_data']['cmf'].length - cut);
     const relStr = this.data['one_year_chart_data']['relative_strength'].map(x => +x).reverse()
       .slice(this.data['one_year_chart_data']['relative_strength'].length - cut);
+    const dema = this.data['one_year_chart_data']['chaikin_trend_20001'].map(x => +x).reverse()
+      .slice(this.data['one_year_chart_data']['chaikin_trend_20001'].length - cut);
 
     this.timespanPerChange = this.calculatePricePerChange(closePrices[0], closePrices[closePrices.length - 1]);
     this.timespanPriceChange = this.calculatePriceChange(closePrices[0], closePrices[closePrices.length - 1]);
@@ -1639,6 +1645,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         layout: "vertical",
         graphset: [
           this.getCloseConfig(dates, closePrices),
+          this.getDemaConfig(dates, dema),
           this.getPGRConfig(dates, pgrData),
           this.getRSIConfig(dates, relStr),
           this.getCMFConfig(dates, cmf)
@@ -1710,6 +1717,112 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getCloseConfig(dates, values) {
+    return {
+      type: 'mixed',
+      backgroundColor: "transparent",
+      borderColor: "transparent",
+      height: 380,
+      x: 0,
+      y: 0,
+      crosshairX: {
+        lineWidth: 2,
+        lineColor: "#444",
+        alpha: 0.5,
+        shared: true,
+        plotLabel: {
+          fontFamily: "Open Sans",
+          backgroundColor: "#b9e5fb",
+          text: "Close: %v",
+          borderColor: "#ffffff",
+          strokeWidth: "2",
+          height: 25,
+          borderRadius: 12,
+          y: -5,
+        },
+        scaleLabel: {
+          visible: false,
+        }
+      },
+      title: {
+        visible: false,
+        text: this.stock,
+      },
+      plotarea: {
+        margin: "25 60",
+      },
+      "plot": {
+        midPoint: true,
+        "marker": {
+          "visible": false
+        }
+      },
+      tooltip: {
+        visible: false,
+        text: "CLOSE: %v",
+        backgroundColor: "#BBB",
+        borderColor: "transparent"
+      },
+      scaleYN: {
+        lineColor: "#fff"
+      },
+      scaleY: {
+        maxValue: Math.max(...values),
+        minValue: Math.min(...values),
+        autoFit: true,
+        guide: {
+          visible: true,
+          lineStyle: 'solid',
+          lineColor: "#eee",
+        },
+        placement: "opposite",
+        item: {
+          fontColor: "#999",
+          fontSize: "14",
+          fontWeight: "500",
+          fontFamily: "Rajdhani"
+        },
+        tick: {
+          visible: false,
+        },
+      },
+      scaleXN: {
+        lineColor: "#fff"
+      },
+      scaleX: {
+        offset: 0,
+        guide: {
+          visible: false,
+          lineStyle: 'solid',
+          lineColor: "#eee"
+        },
+        values: dates,
+        transform: {
+          type: 'date',
+          all: '%m/%d/%y'
+        },
+        item: {
+          fontColor: "#999",
+          fontSize: "14",
+          fontWeight: "500",
+          fontFamily: "Rajdhani"
+        },
+        tick: {
+          visible: false,
+        },
+      },
+      series: [
+        {
+          type: "area",
+          values: values,
+          lineColor: "#1199ff",
+          lineWidth: 2,
+          backgroundColor: "#1199ff #b9e5fb",
+        }
+      ]
+    };
+  }
+
+  getDemaConfig(dates, values) {
     return {
       type: 'mixed',
       backgroundColor: "transparent",
@@ -1888,7 +2001,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
                 lineColor: "#FD001F"
               }],
-            "gradient-colors": "Green GreenYellow Gold Orange OrangeRed Red FireBrick",  
+            "gradient-colors": "Green GreenYellow Gold Orange OrangeRed Red FireBrick",
             "gradient-stops":".1 .2 .4 .5 .6 .8 .9",
             lineColor: "#00C04E",
             lineWidth: 2

@@ -44,16 +44,16 @@ declare var gtag: Function;
     </div>
 
     <div class="row no-gutters col-headers">
-      <div class="col-3">
+      <div (click)="toggleOrderByObject('PGR', $event)" class="col-3">
         <p>RATING</p>
       </div>
-      <div class="col-3 text-left" style="padding-left:0;">
+      <div (click)="toggleOrderByObject('symbol', $event)" class="col-3 text-left" style="padding-left:0;">
         <p>TICKER</p>
       </div>
-      <div class="col-3">
+      <div (click)="toggleOrderByObject('Last', $event)" class="col-3">
         <p>PRICE</p>
       </div>
-      <div class="col-3">
+      <div (click)="toggleOrderByObject('Percentage ', $event)" class="col-3">
         <p>CHG</p>
       </div>
     </div>
@@ -61,7 +61,7 @@ declare var gtag: Function;
     <div class="col-12 section__list" id="list--selected">
       <ul class="stock__list" *ngIf="myStocks?.length">
         <li (click)="selectedStock(stock.symbol)"
-            *ngFor="let stock of myStocks"
+            *ngFor="let stock of myStocks | orderBy:orderByObject?.field:orderByObject?.ascending "
             class="row list__entry">
           <div class="col-3 list-entry__pgr">
             <img class="align-absolute" src="{{ appendPGRImage(stock.PGR, stock.raw_PGR) }}">
@@ -102,7 +102,7 @@ declare var gtag: Function;
             </div>
           </div>
         </li>
-        <!-- <li>
+        <li>
           <h3>Recently Viewed</h3>
         </li>
         <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed"
@@ -120,7 +120,7 @@ declare var gtag: Function;
           <div class="col-3">
             <p>{{ recent['meta-info']['Percentage '] }}%</p>
           </div>
-        </li> -->
+        </li>
       </ul>
       <ul *ngIf="!myStocks?.length">
         <p>Search for a stock to get started.</p>
@@ -174,6 +174,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   myStocks: ListSymbolObj[];
   sliderObj: object = {};
   selectedListName: string;
+  orderByObject: object = {};
 
   constructor(private signalService: SignalService,
               private route: ActivatedRoute,
@@ -232,6 +233,13 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
       return;
     }
     this.sliderObj[ticker] = !this.sliderObj[ticker];
+  }
+
+  toggleOrderByObject(val: string, e: Event) {
+    e.preventDefault();
+    gtag('event', 'sort_by_clicked', {'event_label': val});
+    this.orderByObject['field'] = val;
+    this.orderByObject['ascending'] = !this.orderByObject['ascending'];
   }
 
   emitAddStock(ticker: string) {
