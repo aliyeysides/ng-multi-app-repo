@@ -27,7 +27,7 @@ interface FilterFunc {
     <div id="HC--Stock-Movements" class="">
 
       <div class="row no-gutters">
-        <div class="col-12 col-xl-4">
+        <div class="col-12 col-xl-12">
           <div class="row section__toggle">
             <div class="col-12 toggle toggle--timespan">
               <p (click)="selectTimespan('TODAY')" [ngClass]="{'selected':this.selectedTimespan==='TODAY'}"
@@ -44,12 +44,12 @@ interface FilterFunc {
           </div>
 
           <div class="row no-gutters section__summary justify-content-center">
-            <div class="col-6 col-md-5 col-lg-4 col-xl-6 summary--left">
+            <div class="col-6 col-md-5 col-lg-4 col-xl-4 summary--left">
               <p><img
                 src="./assets/imgs/icon_circle-movement--green.svg">{{ selectedTimespan == 'WEEK' ? upStocksWeekly : upStocksDaily
                 }}</p>
             </div>
-            <div class="col-6 col-md-5 col-lg-4 col-xl-6 summary--right">
+            <div class="col-6 col-md-5 col-lg-4 col-xl-4 summary--right">
               <p><img
                 src="./assets/imgs/icon_circle-movement--red.svg">{{ selectedTimespan == 'WEEK' ? downStocksWeekly : downStocksDaily
                 }}</p>
@@ -83,7 +83,7 @@ interface FilterFunc {
           </div>
         </div>
 
-        <div class="col-12 col-xl-8">
+        <div class="col-12 col-xl-12">
           <div *ngIf="!collapse" class="row">
             <div class="col-12">
               <ul class="section__chart">
@@ -116,7 +116,7 @@ interface FilterFunc {
           </div>
         </div>
 
-        <div class="col-12 hidden-xl-up">
+        <div class="col-12">
           <div class="row">
             <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
               <img src="./assets/imgs/ux__collapse--circle.svg">
