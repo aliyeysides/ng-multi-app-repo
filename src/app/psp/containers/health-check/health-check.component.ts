@@ -92,7 +92,6 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
   public currentList: string;
 
   constructor(private authService: AuthService,
-              private signalService: SignalService,
               private healthCheck: HealthCheckService,
               private marketsSummary: MarketsSummaryService) {
   }
