@@ -31,7 +31,7 @@ import {SignalService} from '../../../services/signal.service';
 
         <!-- HEALTH-CHECK - Stock Movements -->
         <cpt-psp-stock-movements [calc]="calculations" [weeklyStocks]="stocksStatus"
-                                 [dailyStocks]="dailySymbolList" class="col-12 col-lg-10 col-xl-12"></cpt-psp-stock-movements>
+                                 [dailyStocks]="dailySymbolList" class="col-12 col-lg-10"></cpt-psp-stock-movements>
 
         <!-- HEALTH-CHECK - Ratings Changes -->
         <cpt-psp-rating-changes [alerts]="pgrChanges" class="col-12 col-lg-10"></cpt-psp-rating-changes>
