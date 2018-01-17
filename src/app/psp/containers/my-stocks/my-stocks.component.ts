@@ -26,42 +26,6 @@ declare var gtag: Function;
                               (stockClicked)="selectStock($event)"
                               [stocks]="userStocks" [powerBar]="powerBar"
                               [userLists]="allUserLists"></cpt-my-stocks-list>
-          <!--           <div class="col-12">
-                      <h3>Recently Viewed</h3>
-                      <div class="divider__long"></div>
-                      <ul class="stock__list">
-                        <li class="row col-headers">
-                          <div class="col-3">
-                            <p>RATING</p>
-                          </div>
-                          <div class="col-3" style="padding-left:0;">
-                            <p class="text-left">TICKER</p>
-                          </div>
-                          <div class="col-3">
-                            <p>PRICE</p>
-                          </div>
-                          <div class="col-3">
-                            <p>CHG</p>
-                          </div>
-                        </li>
-                        <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed"
-                            class="row list__entry">
-                          <div class="col-3 list-entry__pgr">
-                            <img class="align-absolute"
-                                 src="{{ appendPGRImage(recent['pgr']['Corrected PGR Value'], recent['pgr']['PGR Value']) }}">
-                          </div>
-                          <div class="col-3" style="padding-left:0;">
-                            <p class="text-left">{{ recent['meta-info']['symbol'] }}</p>
-                          </div>
-                          <div class="col-3">
-                            <p>{{ recent['meta-info']['Last'] }}</p>
-                          </div>
-                          <div class="col-3">
-                            <p>{{ recent['meta-info']['Percentage '] }}%</p>
-                          </div>
-                        </li>
-                      </ul>
-                    </div> -->
         </div>
 
         <div class="col-12 col-md-8 col-xl-9 component--stockview__container" [ngClass]="{'visible': !desktopView}">
