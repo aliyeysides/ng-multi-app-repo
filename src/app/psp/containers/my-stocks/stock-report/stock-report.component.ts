@@ -290,7 +290,7 @@ declare var gtag: Function;
           <ul #newsList *ngIf="headlines?.length" class="col-10 news__slider">
             <li *ngFor="let headline of headlines" class="headline__container">
               <div class="row">
-                <div (click)="goToHeadline(headline)" class="col-12">
+                <div (click)="goToHeadline(headline)" class="col-12 headline__link">
                   <p class="headline">{{ headline.title }}&nbsp;→</p>
                 </div>
                 <div class="col-6">
@@ -1824,7 +1824,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   getDemaConfig(dates, values) {
     return {
-      type: 'mixed',
+      type: 'line',
       backgroundColor: "transparent",
       borderColor: "transparent",
       height: 380,
@@ -1833,9 +1833,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       crosshairX: {
         lineWidth: 2,
         lineColor: "#444",
-        alpha: 0.5,
+        alpha: 0,
+        visible: false,
         shared: true,
         plotLabel: {
+          visible: false,
           fontFamily: "Open Sans",
           backgroundColor: "#b9e5fb",
           text: "Close: %v",
@@ -1843,7 +1845,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           strokeWidth: "2",
           height: 25,
           borderRadius: 12,
-          y: -5,
+          y: 35,
         },
         scaleLabel: {
           visible: false,
@@ -1851,7 +1853,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       },
       title: {
         visible: false,
-        text: this.stock,
       },
       plotarea: {
         margin: "25 60",
@@ -1864,9 +1865,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       },
       tooltip: {
         visible: false,
-        text: "CLOSE: %v",
-        backgroundColor: "#BBB",
-        borderColor: "transparent"
       },
       scaleYN: {
         lineColor: "#fff"
@@ -1876,12 +1874,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         minValue: Math.min(...values),
         autoFit: true,
         guide: {
-          visible: true,
+          visible: false,
           lineStyle: 'solid',
           lineColor: "#eee",
         },
         placement: "opposite",
         item: {
+          visible: false,
           fontColor: "#999",
           fontSize: "14",
           fontWeight: "500",
@@ -1896,6 +1895,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       },
       scaleX: {
         offset: 0,
+        visible: false,
         guide: {
           visible: false,
           lineStyle: 'solid',
@@ -1907,6 +1907,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           all: '%m/%d/%y'
         },
         item: {
+          visible: false,
           fontColor: "#999",
           fontSize: "14",
           fontWeight: "500",
@@ -1918,11 +1919,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       },
       series: [
         {
-          type: "area",
+          type: "line",
           values: values,
-          lineColor: "#1199ff",
+          lineColor: "#3150C6",
           lineWidth: 2,
-          backgroundColor: "#1199ff #b9e5fb",
+          lineStyle: "dashdot",
+          alpha: 0.5,
         }
       ]
     };
@@ -1998,11 +2000,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             rules: [
               {
                 rule: '%v < 0.5',
-
+                backgroundColor: "Yellow Red",
                 lineColor: "#FD001F"
               }],
-            "gradient-colors": "Green GreenYellow Gold Orange OrangeRed Red FireBrick",
-            "gradient-stops":".1 .2 .4 .5 .6 .8 .9",
+            backgroundColor: "LimeGreen Yellow",
             lineColor: "#00C04E",
             lineWidth: 2
           }
@@ -2194,6 +2195,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "shared": true,
           "lineColor": "transparent",
           "visible": false,
+          alpha: 0,
           "plotLabel": {
             "multiple": false,
             "visible": false,
