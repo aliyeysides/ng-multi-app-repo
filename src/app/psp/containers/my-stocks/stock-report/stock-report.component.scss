@@ -366,7 +366,7 @@
 	.label {
 		line-height: 1.4;
 
-		@media screen AND (min-width:1200px) {
+		@media screen AND (min-width:1400px) {
 			display: inline-block;
 			margin-right:5%;
 			vertical-align: super;
@@ -380,7 +380,7 @@
 	.rating {
 		margin-bottom:10px;
 
-		@media screen AND (min-width:1200px) {
+		@media screen AND (min-width:1400px) {
 			display: inline-block;
 		}
 
@@ -552,7 +552,7 @@
 
 
 .stock-info--news {
-	padding:20px 0px 0px;
+	padding:10px 0px 10px;
 
 	h2 {
 		margin-bottom: 30px;
@@ -577,27 +577,38 @@
 			width: 300px;
 			margin-right:50px;
 
-			.headline {
-				font-weight: 400;
-				font-size: 20px;
-				line-height: 1.4;
-				margin-bottom: 5px;
-				font-family: $font-stack2;
-				text-align: left;
-				opacity: 0.8;
-				white-space: normal;
-				cursor: pointer;
+			.headline__link {
+				max-height: 195px;
+				overflow: hidden;
+				display: -webkit-box;
+				max-width: 100%;
+				-webkit-line-clamp: 6;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+				text-overflow: ellipsis;
 
-				&:hover {
-					opacity: 1;
-					text-decoration: underline;
+				.headline {
+					font-weight: 500;
+					font-size: 20px;
+					line-height: 1.4;
+					margin-bottom: 5px;
+					font-family: $font-stack2;
+					text-align: left;
+					opacity: 0.8;
+					white-space: normal;
+					cursor: pointer;
+
+					&:hover {
+						opacity: 1;
+						text-decoration: underline;
+					}
 				}
 			}
 
 			.source {
 				text-align: left;
 				font-size: 15px;
-				font-weight: 500;
+				font-weight: 600;
 				line-height: 35px;
 			}
 

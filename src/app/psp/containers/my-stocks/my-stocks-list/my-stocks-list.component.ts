@@ -102,11 +102,10 @@ declare var gtag: Function;
             </div>
           </div>
         </li>
-        <li>
+        <li class="heading__recent">
           <h3>Recently Viewed</h3>
         </li>
-        <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed"
-                          class="row list__entry">
+        <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed" class="row list__entry">
           <div class="col-3 list-entry__pgr">
             <img class="align-absolute"
                  src="{{ appendPGRImage(recent['pgr']['Corrected PGR Value'], recent['pgr']['PGR Value']) }}">

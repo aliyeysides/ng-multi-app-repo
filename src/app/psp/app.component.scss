@@ -1101,6 +1101,9 @@ sub {
 
 
 
+/*         ONBOARDING MODAL            */
+
+
 
 
 .modal-dialog {
@@ -1449,7 +1452,6 @@ sub {
 }
 
 
-
 #epsSurprisesChart-menu-trigger-gear-path,
 #qrtEPSChart-menu-trigger-gear-path,
 #annualEPSChart-menu-trigger-gear-path,
@@ -1467,16 +1469,25 @@ sub {
 }
 
 
-
-#mainChart-graph-id1-scale-y-guide-267-path {
+#mainChart-graph-id1-scale-y-guide-267-path, 
+#mainChart-graph-id2-scale-y-guide-267-path {
   stroke: none;
 }
+
+
+
+
+
+
 
 
 .component--stockview.bullish {
   #mainChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id2-crosshair-x-path,
   #mainChart-graph-id3-crosshair-x-path,
+  #mainChart-graph-id4-crosshair-x-path, {
+    stroke:$pulse-green__shade2;
+  }
   #epsSurprisesChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id0-plotset-plot-0-path,
   #epsSurprisesChart-graph-id0-legend-path {
@@ -1497,6 +1508,11 @@ sub {
       stroke-dasharray: (0,0);
       opacity: 0.15;
     }
+  }
+  #mainChart-graph-id1-scale-y-guide-4-path {
+      stroke:$pulse-green;
+      stroke-dasharray: (0,0);
+      opacity: 0.15;
   }
   #epsSurprisesChart-graph-id0-plot-0-bl-1-c {
     circle {
@@ -1536,10 +1552,13 @@ sub {
 
 
 .component--stockview.bearish {
-
   #mainChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id2-crosshair-x-path,
   #mainChart-graph-id3-crosshair-x-path,
+  #mainChart-graph-id4-crosshair-x-path, {
+    stroke:$pulse-red__shade2;
+  }
+  #mainChart-graph-id1-scale-y-guide-4-path,
   #epsSurprisesChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id0-plotset-plot-0-path,
   #epsSurprisesChart-graph-id0-legend-path {
@@ -1559,6 +1578,11 @@ sub {
       stroke-dasharray: (0,0);
       opacity: 0.15;
     }
+  }
+  #mainChart-graph-id1-scale-y-guide-4-path {
+      stroke:$pulse-red;
+      stroke-dasharray: (0,0);
+      opacity: 0.15;
   }
   #epsSurprisesChart-graph-id0-plot-0-bl-1-c {
     circle {
@@ -1602,6 +1626,10 @@ sub {
   #mainChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id2-crosshair-x-path,
   #mainChart-graph-id3-crosshair-x-path,
+  #mainChart-graph-id4-crosshair-x-path, {
+    stroke:$pulse-yellow__shade2;
+  }
+  #mainChart-graph-id1-scale-y-guide-4-path,
   #epsSurprisesChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id0-plotset-plot-0-path,
   #epsSurprisesChart-graph-id0-legend-path {
@@ -1627,6 +1655,11 @@ sub {
     circle {
       fill:$pulse-yellow;
     }
+  }
+  #mainChart-graph-id1-scale-y-guide-4-path {
+      stroke:$pulse-yellow;
+      stroke-dasharray: (0,0);
+      opacity: 0.15;
   }
   #mainChart-graph-id0-plotset-plot-0-area-path,
   #annualEPSChart-graph-id0-plotset-plot-0-node-0-path,
