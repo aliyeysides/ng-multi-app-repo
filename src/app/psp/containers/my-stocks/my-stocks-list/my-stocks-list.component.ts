@@ -44,16 +44,16 @@ declare var gtag: Function;
     </div>
 
     <div class="row no-gutters col-headers">
-      <div (click)="toggleOrderByObject('PGR', $event)" class="col-3">
+      <div [ngClass]="{'sorted': orderByObject['field'] === 'PGR'}" (click)="toggleOrderByObject('PGR', $event)" class="col-3">
         <p>RATING</p>
       </div>
-      <div (click)="toggleOrderByObject('symbol', $event)" class="col-3 text-left" style="padding-left:0;">
+      <div [ngClass]="{'sorted': orderByObject['field'] === 'symbol'}" (click)="toggleOrderByObject('symbol', $event)" class="col-3 text-left" style="padding-left:0;">
         <p>TICKER</p>
       </div>
-      <div (click)="toggleOrderByObject('Last', $event)" class="col-3">
+      <div [ngClass]="{'sorted': orderByObject['field'] === 'Last'}" (click)="toggleOrderByObject('Last', $event)" class="col-3">
         <p>PRICE</p>
       </div>
-      <div (click)="toggleOrderByObject('Percentage ', $event)" class="col-3">
+      <div [ngClass]="{'sorted': orderByObject['field'] === 'Percentage '}" (click)="toggleOrderByObject('Percentage ', $event)" class="col-3">
         <p>CHG</p>
       </div>
     </div>
@@ -102,29 +102,29 @@ declare var gtag: Function;
             </div>
           </div>
         </li>
-        <li class="heading__recent">
-          <h3>Recently Viewed</h3>
-        </li>
-        <li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed" class="row list__entry">
-          <div class="col-3 list-entry__pgr">
-            <img class="align-absolute"
-                 src="{{ appendPGRImage(recent['pgr']['Corrected PGR Value'], recent['pgr']['PGR Value']) }}">
-          </div>
-          <div class="col-3" style="padding-left:0;">
-            <p class="text-left">{{ recent['meta-info']['symbol'] }}</p>
-          </div>
-          <div class="col-3">
-            <p>{{ recent['meta-info']['Last'] }}</p>
-          </div>
-          <div class="col-3">
-            <p>{{ recent['meta-info']['Percentage '] }}%</p>
-          </div>
-        </li>
-      </ul>
-      <ul *ngIf="!myStocks?.length">
-        <p>Search for a stock to get started.</p>
-      </ul>
-    </div>
+        <!--<li class="heading__recent">-->
+          <!--<h3>Recently Viewed</h3>-->
+        <!--</li>-->
+        <!--<li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed" class="row list__entry">-->
+          <!--<div class="col-3 list-entry__pgr">-->
+            <!--<img class="align-absolute"-->
+                 <!--src="{{ appendPGRImage(recent['pgr']['Corrected PGR Value'], recent['pgr']['PGR Value']) }}">-->
+          <!--</div>-->
+          <!--<div class="col-3" style="padding-left:0;">-->
+            <!--<p class="text-left">{{ recent['meta-info']['symbol'] }}</p>-->
+          <!--</div>-->
+          <!--<div class="col-3">-->
+            <!--<p>{{ recent['meta-info']['Last'] }}</p>-->
+          <!--</div>-->
+          <!--<div class="col-3">-->
+            <!--<p>{{ recent['meta-info']['Percentage '] }}%</p>-->
+          <!--</div>-->
+        <!--</li>-->
+      <!--</ul>-->
+      <!--<ul *ngIf="!myStocks?.length">-->
+        <!--<p>Search for a stock to get started.</p>-->
+      <!--</ul>-->
+    <!--</div>-->
   `,
   styleUrls: ['./my-stocks-list.component.scss']
 })
@@ -218,6 +218,8 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
       );
 
     this.selectedListName = this.healthCheck.currentList;
+    this.orderByObject['field'] = 'PGR';
+    this.orderByObject['ascending'] = false;
   }
 
   ngOnDestroy() {

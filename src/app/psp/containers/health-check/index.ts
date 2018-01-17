@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {routing} from './health-check.routing';
 
 import {HealthCheckComponent} from './health-check.component';
-import {HealthCheckService} from '../../../services/health-check.service';
 import {StockMovementsComponent} from './stock-movements/stock-movements.component';
 import {PortfolioOverviewComponent} from './portfolio-overview/portfolio-overview.component';
 import {RatingChangesComponent} from './rating-changes/rating-changes.component';

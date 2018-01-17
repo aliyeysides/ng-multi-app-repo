@@ -9,8 +9,6 @@ import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
-import {isNullOrUndefined} from 'util';
-import {isEmpty} from 'rxjs/operator/isEmpty';
 
 declare var gtag: Function;
 
@@ -200,7 +198,7 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
 
   @Input('expected') expected: ExpectedEarningsReports;
 
-  constructor(private signalSerivce: SignalService,
+  constructor(private signalService: SignalService,
               private healthCheck: HealthCheckService,
               private router: Router) {
   }
@@ -227,11 +225,11 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
   }
 
   appendPGRUrl(pgr: number) {
-    return this.signalSerivce.calculatePGR(pgr)
+    return this.signalService.calculatePGR(pgr)
   }
 
   appendPGRImage(pgr, raw_pgr) {
-    return this.signalSerivce.appendPGRImage(pgr, raw_pgr);
+    return this.signalService.appendPGRImage(pgr, raw_pgr);
   }
 
   toggleCollapse() {

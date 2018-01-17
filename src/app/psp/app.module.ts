@@ -23,7 +23,6 @@ import {SignalService} from '../services/signal.service';
 import {NotificationsService} from 'angular2-notifications/dist';
 import {SymbolSearchService} from '../services/symbol-search.service';
 import {PspAuthGuard} from '../shared/guards/psp-auth.guard';
-import {HealthCheckService} from '../services/health-check.service';
 import {PspOnboardingComponent} from './core/psp-onboarding/psp-onboarding.component';
 import {PspOnboardingModule} from './core/psp-onboarding/index';
 
@@ -47,7 +46,6 @@ import {PspOnboardingModule} from './core/psp-onboarding/index';
     AuthService,
     PspAuthGuard,
     IdeasService,
-    HealthCheckService,
     SignalService,
     NotificationsService,
     SymbolSearchService
