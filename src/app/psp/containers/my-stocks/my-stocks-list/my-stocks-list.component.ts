@@ -44,16 +44,16 @@ declare var gtag: Function;
     </div>
 
     <div class="row no-gutters col-headers">
-      <div (click)="toggleOrderByObject('PGR', $event)" class="col-3">
+      <div [ngClass]="{'sorted': orderByObject['field'] === 'PGR'}" (click)="toggleOrderByObject('PGR', $event)" class="col-3">
         <p>RATING</p>
       </div>
-      <div (click)="toggleOrderByObject('symbol', $event)" class="col-3 text-left" style="padding-left:0;">
+      <div [ngClass]="{'sorted': orderByObject['field'] === 'symbol'}" (click)="toggleOrderByObject('symbol', $event)" class="col-3 text-left" style="padding-left:0;">
         <p>TICKER</p>
       </div>
-      <div (click)="toggleOrderByObject('Last', $event)" class="col-3">
+      <div [ngClass]="{'sorted': orderByObject['field'] === 'Last'}" (click)="toggleOrderByObject('Last', $event)" class="col-3">
         <p>PRICE</p>
       </div>
-      <div (click)="toggleOrderByObject('Percentage ', $event)" class="col-3">
+      <div [ngClass]="{'sorted': orderByObject['field'] === 'Percentage '}" (click)="toggleOrderByObject('Percentage ', $event)" class="col-3">
         <p>CHG</p>
       </div>
     </div>
@@ -218,6 +218,8 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
       );
 
     this.selectedListName = this.healthCheck.currentList;
+    this.orderByObject['field'] = 'PGR';
+    this.orderByObject['ascending'] = false;
   }
 
   ngOnDestroy() {
