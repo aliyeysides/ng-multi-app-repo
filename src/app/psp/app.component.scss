@@ -1154,11 +1154,6 @@ sub {
 
         img {
           width: 100%;
-
-          @media screen AND (max-width:767px) {
-            width: 150%;
-            margin-left: -25%;
-          }
         }
 
         .link__watch-video {
@@ -1239,10 +1234,11 @@ sub {
         color: $pulse-blue;
         font-size: 16px;
         right:50%;
-        bottom:18px;
+        bottom:15px;
         font-weight: 600;
-        margin-right:-200px;
+        margin-right:-160px;
         font-size: 14px;
+        text-align: left;
       }
     }
   }
