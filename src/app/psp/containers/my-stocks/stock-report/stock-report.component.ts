@@ -1837,15 +1837,14 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         visible: false,
         shared: true,
         plotLabel: {
-          visible: false,
+          visible: true,
           fontFamily: "Open Sans",
           backgroundColor: "#b9e5fb",
-          text: "Close: %v",
+          text: "Long Term Avg: %v",
           borderColor: "#ffffff",
           strokeWidth: "2",
           height: 25,
           borderRadius: 12,
-          y: 35,
         },
         scaleLabel: {
           visible: false,
