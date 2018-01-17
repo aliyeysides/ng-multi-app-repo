@@ -242,7 +242,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
         console.log('res', res);
-        // const stock_movement_toggle_option
       });
 
   }
