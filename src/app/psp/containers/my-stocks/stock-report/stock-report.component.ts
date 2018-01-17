@@ -1530,7 +1530,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             layout: "vertical",
             graphset: [
               this.getCloseConfig(dates, closePrices),
-              this.getDemaConfig(dates, dema),
+              this.getDemaConfig(dates, dema, closePrices),
               this.getPGRConfig(dates, pgrData),
               this.getRSIConfig(dates, relStr),
               this.getCMFConfig(dates, cmf)
@@ -1592,7 +1592,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         layout: "vertical",
         graphset: [
           this.getCloseConfig(dates, closePrices),
-          this.getDemaConfig(dates, dema),
+          this.getDemaConfig(dates, dema, closePrices),
           this.getPGRConfig(dates, pgrData),
           this.getRSIConfig(dates, relStr),
           this.getCMFConfig(dates, cmf)
@@ -1645,7 +1645,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         layout: "vertical",
         graphset: [
           this.getCloseConfig(dates, closePrices),
-          this.getDemaConfig(dates, dema),
+          this.getDemaConfig(dates, dema, closePrices),
           this.getPGRConfig(dates, pgrData),
           this.getRSIConfig(dates, relStr),
           this.getCMFConfig(dates, cmf)
@@ -1822,7 +1822,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     };
   }
 
-  getDemaConfig(dates, values) {
+  getDemaConfig(dates, values, yValues) {
     return {
       type: 'line',
       backgroundColor: "transparent",
@@ -1870,9 +1870,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         lineColor: "#fff"
       },
       scaleY: {
-        maxValue: Math.max(...values),
-        minValue: Math.min(...values),
-        autoFit: true,
+        blended: true,
+        maxValue: Math.max(...yValues),
+        minValue: Math.min(...yValues),
         guide: {
           visible: false,
           lineStyle: 'solid',
