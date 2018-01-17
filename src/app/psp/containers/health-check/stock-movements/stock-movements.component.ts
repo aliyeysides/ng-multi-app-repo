@@ -64,17 +64,17 @@ interface FilterFunc {
                   {{ currentToggleOptionText$ | async }}
                 </button>
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
-                  <li (click)="selectToggleOption(toggleOptions.movers);" role="menuitem"><a
+                  <li (click)="selectToggleOption(toggleOptions.movers, 'Top Movers');" role="menuitem"><a
                     class="dropdown-item">Top Movers</a></li>
-                  <li (click)="selectToggleOption(toggleOptions.all);" role="menuitem"><a
+                  <li (click)="selectToggleOption(toggleOptions.all, 'All');" role="menuitem"><a
                     class="dropdown-item">All</a></li>
-                  <li (click)="selectToggleOption(toggleOptions.bulls)" role="menuitem"><a
+                  <li (click)="selectToggleOption(toggleOptions.bulls, 'Bulls')" role="menuitem"><a
                     class="dropdown-item">Bulls</a>
                   </li>
-                  <li (click)="selectToggleOption(toggleOptions.bears)" role="menuitem"><a
+                  <li (click)="selectToggleOption(toggleOptions.bears, 'Bears')" role="menuitem"><a
                     class="dropdown-item">Bears</a>
                   </li>
-                  <li (click)="selectToggleOption(toggleOptions.neutral)" role="menuitem"><a
+                  <li (click)="selectToggleOption(toggleOptions.neutral, 'Neutral')" role="menuitem"><a
                     class="dropdown-item">Neutral</a>
                   </li>
                 </ul>
@@ -131,6 +131,7 @@ interface FilterFunc {
       </div>
     </div>
   `,
+  providers: [HealthCheckService],
   styleUrls: ['../health-check.component.scss'],
 })
 export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
@@ -218,17 +219,21 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
     this.healthCheck.getToggleOptions()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
+        console.log('res', res);
         if (res == 'Top Movers') {
-          this.selectToggleOption(this.toggleOptions.movers);
+          this.selectToggleOption(this.toggleOptions.movers, res);
+        }
+        if (res == 'All') {
+          this.selectToggleOption(this.toggleOptions.all, res);
         }
         if (res == 'Bulls') {
-          this.selectToggleOption(this.toggleOptions.bulls);
+          this.selectToggleOption(this.toggleOptions.bulls, res);
         }
         if (res == 'Neutral') {
-          this.selectToggleOption(this.toggleOptions.neutral);
+          this.selectToggleOption(this.toggleOptions.neutral, res);
         }
         if (res == 'Bears') {
-          this.selectToggleOption(this.toggleOptions.bears);
+          this.selectToggleOption(this.toggleOptions.bears, res);
         }
         this.updateData();
       });
@@ -237,12 +242,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
       .takeUntil(this._ngUnsubscribe)
       .filter(x => x != undefined)
       .subscribe(res => this.calculations = res);
-
-    this.selectedToggleOption$
-      .takeUntil(this._ngUnsubscribe)
-      .subscribe(res => {
-        console.log('res', res);
-      });
 
   }
 
@@ -290,15 +289,13 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
       });
   }
 
-  selectToggleOption(fn: FilterFunc) {
+  selectToggleOption(fn: FilterFunc, label: string) {
     this.selectedToggleOption$.next(fn);
-    // const strToggleOption = JSON.stringify(this.selectedToggleOption$);
-    // console.log('strToggleOption', strToggleOption, this.selectedToggleOption$);
-    // localStorage.setItem('stock_movement_toggle_option', strToggleOption);
+    localStorage.setItem('stock_toggle_option', label);
     this.updateData();
     gtag('event', 'stock_movements_filter_clicked', {
       'event_category': 'engagement',
-      'event_label': this.currentToggleOptionText$.getValue()
+      'event_label': label
     });
   }
 

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {UtilService} from './util.service';
 import {URLSearchParams} from '@angular/http';
 import {ListSymbolObj, PGRChanges, PortfolioStatus, PrognosisData, StockStatus} from '../shared/models/health-check';
@@ -23,7 +23,8 @@ export class HealthCheckService {
 
   private _portfolioStatus: Subject<PortfolioStatus> = new Subject<PortfolioStatus>();
   private _currentUserList: BehaviorSubject<string> = new BehaviorSubject<string>('My Stocks');
-  private _toggleOptions: BehaviorSubject<string> = new BehaviorSubject<string>('Top Movers');
+  private _defaultToggle: string = localStorage.getItem('stock_toggle_option') || 'All';
+  private _toggleOptions: BehaviorSubject<string> = new BehaviorSubject<string>(this._defaultToggle);
   private _updateMyStocksList: Subject<void> = new Subject<void>();
   private _userStocks: BehaviorSubject<Array<StockStatus|ListSymbolObj>> = new BehaviorSubject<Array<StockStatus|ListSymbolObj>>(undefined as Array<StockStatus|ListSymbolObj>);
 
