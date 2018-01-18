@@ -744,11 +744,36 @@
 
 
 .stock-info--profile {
+	.copy-block {
+		margin-bottom:35px;
+	}
 	.paragraph {
 		font-size: 16px;
 
 		span {
 			font-size: 18px;
+		}
+	}
+	.data {
+		font-size: 22px;
+		font-weight: 400;
+		line-height: 1.5;
+
+		sub {
+			bottom:0;
+		}
+	}
+	.label {
+		margin-bottom:20px;
+	}
+
+	.data--large {
+		font-size: 34px;
+		line-height: 1.4;
+
+		sub {
+			font-size: 24px;
+			bottom:0;
 		}
 	}
 }
@@ -926,6 +951,11 @@
 			}
 		}
 	}
+	.stock-info--profile {
+		.label {
+			color:$pulse-green__shade2;
+		}
+	}
 	.data-table {
 		table {
 			.label {
@@ -974,6 +1004,11 @@
 			}
 		}
 	}
+	.stock-info--profile {
+		.label {
+			color:$pulse-red__shade2;
+		}
+	}
 	.data-table {
 		table {
 			.label {
@@ -1019,6 +1054,11 @@
 			.source {
 				color:$pulse-yellow__shade2;
 			}
+		}
+	}
+	.stock-info--profile {
+		.label {
+			color:$pulse-yellow__shade2;
 		}
 	}
 	.data-table {
