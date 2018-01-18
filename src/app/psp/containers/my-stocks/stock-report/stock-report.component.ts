@@ -1234,48 +1234,47 @@ declare var gtag: Function;
           <div class="col-12">
             <h2>Company Profile</h2>
           </div>
-
-          <div class="col-12 col-md-8 copy-block">
+          <div class="col-12 col-lg-10 copy-block">
             <p class="paragraph">{{ symbolData ? symbolData['fundamentalData']['Company Text Blurb'] : null }}</p>
           </div>
-          <div class="col-12 col-md-4">
+          <div class="col-12">
             <div class="row">
-              <div class="col-12">
-                <p class="data data--large">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
+              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                <p class="data">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
                 <p class="label">Company Name</p>
               </div>
-              <div class="col-12">
-                <p class="data data--large">{{ research ? research['Details']['Address1'] : null }}</p>
+              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                <p class="data">{{ research ? research['Details']['Address1'] : null }}</p>
                 <p class="label">Address</p>
               </div>
-              <div class="col-12">
-                <p class="data data--large">{{ research ? research['Details']['City'] : null }}</p>
+              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                <p class="data">{{ research ? research['Details']['City'] : null }}</p>
                 <p class="label">City</p>
               </div>
-              <div class="col-12">
-                <p class="data data--large">{{ research ? research['Details']['ZipCode'] : null }}</p>
+              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                <p class="data">{{ research ? research['Details']['ZipCode'] : null }}</p>
                 <p class="label">Zip</p>
               </div>
-              <div class="col-12">
-                <p class="data data--large">{{ research ? research['Details']['PhoneNumber'] : null }}</p>
+              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                <p class="data">{{ research ? research['Details']['PhoneNumber'] : null }}</p>
                 <p class="label">Phone</p>
               </div>
-              <div class="col-12">
-                <p class="data data--large">{{ research ? research['Details']['FaxNumber'] : null }}</p>
+              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                <p class="data">{{ research ? research['Details']['FaxNumber'] : null }}</p>
                 <p class="label">Fax</p>
               </div>
-              <div class="col-12">
-                <p class="data data--large"><a target="_blank"
+              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                <p class="data"><a target="_blank"
                                                href="{{ research ? research['Details']['URL'] : null }}">{{ research ? research['Details']['URL'] : null
                   }}</a></p>
                 <p class="label">Website</p>
               </div>
-              <div class="col-12">
-                <p class="data data--large">{{ research ? research['Details']['EmployeesCount'] : null }}</p>
+              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                <p class="data">{{ research ? research['Details']['EmployeesCount'] : null }}</p>
                 <p class="label">Full Time Employees</p>
               </div>
-              <div class="col-12">
-                <p class="data data--large">{{ research ? research['Details']['Sector'] : null }}</p>
+              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                <p class="data">{{ research ? research['Details']['Sector'] : null }}</p>
                 <p class="label">Sector</p>
               </div>
             </div>
