@@ -1447,6 +1447,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           if (!this.is_etf) {
             if (this.reportDataSub) this.reportDataSub.unsubscribe();
             this.getReportData(this.stock);
+            this.createSymbolDataRx(this.stock);
             this.getMainChart(this.stock);
           }
           this.cd.detectChanges();
@@ -1466,13 +1467,22 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     this._ngUnsubscribe.complete();
   }
 
+  createSymbolDataRx(stock: string) {
+    this.reportDataSub = Observable.timer(0, 30 * 1000).switchMap(() => {
+      return this.reportService.getSymbolData(stock);
+    })
+      .filter(x => x != undefined)
+      .map(res => {
+        this.symbolData = res;
+        this.cd.markForCheck();
+      })
+      .subscribe()
+  }
+
   getReportData(stock: string) {
     this.current = '1Y';
-    this.reportDataSub = Observable.timer(0, 30 * 1000)
-      .switchMap(() => {
-        return this.reportService.getSymbolData(stock)
-      })
-      // .take(1)
+    this.reportService.getSymbolData(stock)
+      .take(1)
       .filter(x => x != undefined)
       .map(res => {
         this.symbolData = res;
@@ -1486,7 +1496,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.ideasService.getHeadlines(stock)
         )
       })
-      // .take(1)
+      .take(1)
       .subscribe(([summary, competitors, research, headlines]) => {
         this.summary = summary;
         const sen = this.summary['pgrContextSummary'][0]['mainSentence'];

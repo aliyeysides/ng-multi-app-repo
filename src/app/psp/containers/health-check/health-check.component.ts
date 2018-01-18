@@ -169,7 +169,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
       this.healthCheck.getChaikinCalculations(listId, lastWeekStart, lastWeekEnd),
       this.healthCheck.getPrognosisData(listId),
       this.healthCheck.getUserPortfolioStockStatus(listId, lastWeekStart, lastWeekEnd),
-      this.healthCheck.getPGRWeeklyChangeData(listId, lastWeekEnd ),
+      this.healthCheck.getPGRWeeklyChangeData(listId, lastWeekEnd),
       this.healthCheck.getEarningsSurprise(listId, startDate, endDate),
       this.healthCheck.getAnalystRevisions(listId, lastWeekEnd),
       this.healthCheck.getExpectedEarningsReportsWithPGRValues(this._uid, listId, startDate, endDate),
@@ -208,17 +208,21 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
   }
 
   loadDailyData() {
+    const lastWeekStart = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
+    lastWeekEnd = moment(lastWeekStart).add(7, 'days').format('YYYY-MM-DD');
     Observable.timer(0, 30 * 1000)
       .switchMap(() => {
         return Observable.combineLatest(
           this.healthCheck.getListSymbols(this.listId, this._uid),
+          this.healthCheck.getPGRWeeklyChangeData(this.listId, lastWeekEnd),
           this.marketsSummary.initialMarketSectorData({components: 'majorMarketIndices,sectors'})
         )
       })
       .takeUntil(this._ngUnsubscribe)
-      .subscribe(([stocks, data]) => {
+      .subscribe(([stocks, pgr, data]) => {
         this.dailySymbolList = stocks['symbols'].filter(x => x['symbol'] != 'S&P 500');
         this.healthCheck.setUserStocks(this.dailySymbolList);
+        this.pgrChanges = pgr;
         const indicies = data['market_indices'];
         this.dailySymbolList.push(Object.assign({}, { // Push Daily SPY into collection.
           "symbol": 'S&P 500',

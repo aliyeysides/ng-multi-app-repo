@@ -23,8 +23,8 @@ export class HealthCheckService {
 
   private _portfolioStatus: Subject<PortfolioStatus> = new Subject<PortfolioStatus>();
   private _currentUserList: BehaviorSubject<string> = new BehaviorSubject<string>('My Stocks');
-  // private _defaultToggle: string = localStorage.getItem('stock_toggle_option') || 'All';
-  private _toggleOptions: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private _defaultToggle: BehaviorSubject<string> = new BehaviorSubject<string>(localStorage.getItem('stock_toggle_option') || 'All');
+  private _toggleOptions: BehaviorSubject<string> = new BehaviorSubject<string>(this._defaultToggle.getValue());
   private _updateMyStocksList: Subject<void> = new Subject<void>();
   private _userStocks: BehaviorSubject<Array<StockStatus | ListSymbolObj>> = new BehaviorSubject<Array<StockStatus | ListSymbolObj>>(undefined as Array<StockStatus | ListSymbolObj>);
 
@@ -40,9 +40,13 @@ export class HealthCheckService {
     this.phcParams = new URLSearchParams;
     this.listSymbolsParams = new URLSearchParams;
 
-    console.log('constructed');
-    const _defaultToggle: string = localStorage.getItem('stock_toggle_option') || 'All';
-    this._toggleOptions.next(_defaultToggle);
+    Observable.of(localStorage.getItem('stock_toggle_option'))
+      .map(val => {
+        console.log('val', val);
+        this._defaultToggle.next(val);
+      }).subscribe();
+    // this._defaultToggle
+    //   .subscribe(res => console.log('res', res));
   }
 
   public setPortfolioStatus(val: PortfolioStatus) {
