@@ -1366,7 +1366,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   data;
 
   toolTipText: string = "Stock rating based on a 20-factor model that produces a rating from Very Bullish (or likely to outperform the market) to Very Bearish (unlikely to perform in the short to medium term). ";
-  link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/stock-rating/">Read more here.</a>`;
+  link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/">Read more here.</a>`;
 
   current: string = '1Y';
   mainChart: ZingChart = {
