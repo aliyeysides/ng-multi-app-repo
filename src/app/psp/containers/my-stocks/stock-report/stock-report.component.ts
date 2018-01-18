@@ -1233,9 +1233,22 @@ declare var gtag: Function;
             <h2>Company Profile</h2>
           </div>
 
-          <div class="col-12 col-lg-10 copy-block">
+          <div class="col-12 col-md-8 copy-block">
             <p class="paragraph">{{ symbolData ? symbolData['fundamentalData']['Company Text Blurb'] : null }}</p>
           </div>
+          <div class="col-12 col-md-4">
+            <div class="row">
+              <div class="col-12">
+                <p class="data data--large"></p>
+                <p class="label"></p>
+              </div>
+              <div class="col-12">
+                <p class="data data--large"></p>
+                <p class="label"></p>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <!-- DISCLAIMER -->
