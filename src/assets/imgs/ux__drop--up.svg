@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="50px" viewBox="0 0 100 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>ux__drop--up</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ux__drop--up" fill="#EDEDED" fill-rule="nonzero">
+            <path d="M69.0583199,27.1283468 L37.6449866,58.0616801 C36.3916532,59.3150134 34.3649866,59.3150134 33.1116532,58.0616801 L31.2183199,56.1683468 C29.9649866,54.9150134 29.9649866,52.8883468 31.2183199,51.6350134 L58.4983199,24.8616801 L31.2449866,-1.91165323 C29.9916532,-3.16498656 29.9916532,-5.19165323 31.2449866,-6.44498656 L33.1383199,-8.33831989 C34.3916532,-9.59165323 36.4183199,-9.59165323 37.6716532,-8.33831989 L69.0849866,22.5950134 C70.3116532,23.8483468 70.3116532,25.8750134 69.0583199,27.1283468 Z" id="Shape" transform="translate(50.140000, 24.861680) rotate(-90.000000) translate(-50.140000, -24.861680) "></path>
+        </g>
+    </g>
+</svg>

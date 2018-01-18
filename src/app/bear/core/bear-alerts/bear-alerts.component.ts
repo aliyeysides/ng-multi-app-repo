@@ -7,7 +7,6 @@ import {IdeasService} from '../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
 import {BaseSettingsMenuComponent} from '../../../shared/components/menus/settings-menu.component';
 
-import * as moment from 'moment';
 declare let gtag: Function;
 
 @Component({
@@ -221,9 +220,9 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
       .take(1)
       .subscribe(res => {
         this.holdingListAlerts = res[0]['EarningEstimate'].concat(res[0]['EarningSurprise'], res[0]['PGR'])
-          .filter(this.assignPageUrl.bind(this));
+          .filter(this.assignPgrUrl.bind(this));
         this.watchingListAlerts = res[1]['EarningEstimate'].concat(res[1]['EarningSurprise'], res[1]['PGR'])
-          .filter(this.assignPageUrl.bind(this));
+          .filter(this.assignPgrUrl.bind(this));
         this.bearListSignals = res[2].filter(x => {
           Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['pgrData'][0]['pgr_rating'], x['pgrData'][0]['raw_pgr_rating"'])});
           if (x['Signals'] === '[000000000100]') {
@@ -240,7 +239,7 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
       })
   }
 
-  assignPageUrl(x) {
+  assignPgrUrl(x) {
     if (x['Text'] == 'Estimate Revision' || x['Text'] == 'Earnings Surprise') {
       return Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['pgrRating'], x['rawPgrRating'])});
     }

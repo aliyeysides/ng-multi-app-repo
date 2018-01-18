@@ -1,5 +1,5 @@
 import {
-  AfterContentInit, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild,
+  AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild,
 } from '@angular/core';
 
 import {FormControl} from '@angular/forms';
@@ -25,10 +25,10 @@ export class BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
   public focus: boolean = false;
   public loading: Subscription;
 
-  constructor(public router: Router,
-              public authService: AuthService,
+  constructor(public authService: AuthService,
               public ideasService: IdeasService,
-              public symbolSearchService: SymbolSearchService) {
+              public symbolSearchService: SymbolSearchService,
+              public router: Router) {
     this.symbolSearchForm = new FormControl();
 
     router.events

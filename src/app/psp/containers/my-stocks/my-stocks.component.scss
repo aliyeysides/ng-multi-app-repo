@@ -1,0 +1,40 @@
+@import 'variablesPulse';
+
+
+
+.component--mystocks {
+	background-color: #ffffff;
+	padding:0;
+	z-index: 10;
+	position:fixed;
+	left:0;
+	top:47px;
+
+	@media screen AND (min-width:768px) {
+		z-index: 8;
+	}
+}
+.stocklist__overview--green {
+  background: $gradient--pulse-green;
+
+	.list-name {
+	  	color:$pulse-green;
+	}
+}
+.stocklist__overview--red {
+  background: $gradient--pulse-red;
+
+  	.list-name {
+  		color:$pulse-red;
+	}
+}
+
+.component--stockview__container {
+	position:fixed;
+	right:0;
+	z-index: 9;
+}
+
+.component--stockview__container.visible {
+	z-index: 11;
+}

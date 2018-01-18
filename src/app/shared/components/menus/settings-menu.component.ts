@@ -1,4 +1,4 @@
-import {ElementRef, HostListener, ViewChild} from '@angular/core';
+import {ElementRef, HostListener, Input, ViewChild} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {AuthService} from '../../../services/auth.service';
 
