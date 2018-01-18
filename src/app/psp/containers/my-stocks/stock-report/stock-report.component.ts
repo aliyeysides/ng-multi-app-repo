@@ -865,13 +865,13 @@ declare var gtag: Function;
                       <td class="label">% chg 4 wk rel S&amp;P</td>
                       <td class="data">
                         {{ research ? (research['PriceActivity2']['% Change Price - 4 Wks Rel to S&P'] | decimal ) : null
-                        }}
+                        }}%
                       </td>
                     <tr>
                       <td class="label">% chg 24 wk rel S&amp;P</td>
                       <td class="data">
                         {{ research ? (research['PriceActivity2']['% Change Price - 24 Wks Rel to S&P'] | decimal ) : null
-                        }}
+                        }}%
                       </td>
                     </tr>
                   </table>
@@ -1062,7 +1062,7 @@ declare var gtag: Function;
                         {{ research ? (research['Earning Estimate Revisions']['Current Qtr'][1] | decimal ) : null }}
                       </td>
                       <td class="data text-center">
-                        {{ research ? (research['Earning Estimate Revisions']['Current Qtr'][2] | decimal ) : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Current Qtr'][2] | decimal ) : null }}%
                       </td>
                     </tr>
                     <tr>
@@ -1074,7 +1074,7 @@ declare var gtag: Function;
                         {{ research ? (research['Earning Estimate Revisions']['Next Qtr'][1] | decimal ) : null }}
                       </td>
                       <td class="data text-center">
-                        {{ research ? (research['Earning Estimate Revisions']['Next Qtr'][2] | decimal ) : null }}
+                        {{ research ? (research['Earning Estimate Revisions']['Next Qtr'][2] | decimal ) : null }}%
                       </td>
                     </tr>
                   </table>
@@ -1203,7 +1203,7 @@ declare var gtag: Function;
                   <p>PE</p>
                 </div>
                 <div class="col-3">
-                  <p>REVENUE</p>
+                  <p>REVENUE (M)</p>
                 </div>
               </li>
               <li (click)="gotoReport(stock['symbol'])" *ngFor="let stock of competitors" class="row no-gutters">
@@ -1271,7 +1271,7 @@ declare var gtag: Function;
                 <p class="label">Website</p>
               </div>
               <div class="col-12 col-sm-4 col-md-6 col-lg-4">
-                <p class="data">{{ research ? research['Details']['EmployeesCount'] : null }}</p>
+                <p class="data">{{ research ? (research['Details']['EmployeesCount'] | number:'.0') : null }}</p>
                 <p class="label">Full Time Employees</p>
               </div>
               <div class="col-12 col-sm-4 col-md-6 col-lg-4">
@@ -1929,8 +1929,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       },
       scaleY: {
         blended: true,
-        maxValue: Math.max(...yValues),
-        minValue: Math.min(...yValues),
+        maxValue: Math.max(...yValues,...values),
+        minValue: Math.min(...yValues,...values),
         guide: {
           visible: false,
           lineStyle: 'solid',
@@ -2562,7 +2562,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineColor: "#444",
           alpha: 0.5,
           plotLabel: {
-            text: '%t: %v',
+            text: '%t: $%v',
             "decimals": 2,
             borderWidth: 2,
             bold: true,
