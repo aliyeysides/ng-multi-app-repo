@@ -19,7 +19,7 @@ import {BsModalRef} from 'ngx-bootstrap';
           <ng-container *ngIf="currentPage === item.id">
             <img class="desktop hidden-sm-down" src="{{ item.src }}">
             <img class="mobile hidden-sm-up" *ngIf="item.mobileSrc" src="{{ item.mobileSrc }}">
-            <a class="link__watch-video" target="_blank" *ngIf="item.link" href="item.link"><i class="far fa-play-circle"></i> &nbsp; WATCH THE VIDEO</a>
+            <a class="link__watch-video" target="_blank" *ngIf="item.link" href="{{ item.link }}"><i class="far fa-play-circle"></i> &nbsp; WATCH THE VIDEO</a>
           </ng-container>
         </ng-container>
       </div>
