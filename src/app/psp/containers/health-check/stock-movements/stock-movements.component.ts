@@ -218,7 +218,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
     this.healthCheck.getToggleOptions()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
-        console.log('getToggleOptions res', res);
         if (res == 'Top Movers') {
           this.selectToggleOption(this.toggleOptions.movers, res);
         }
@@ -290,7 +289,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
 
   selectToggleOption(fn: FilterFunc, label: string) {
     this.selectedToggleOption$.next(fn);
-    localStorage.setItem('stock_toggle_option', label);
     this.updateData();
     gtag('event', 'stock_movements_filter_clicked', {
       'event_category': 'engagement',
