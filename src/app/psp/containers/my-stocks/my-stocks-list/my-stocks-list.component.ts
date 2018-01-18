@@ -75,7 +75,7 @@ declare var gtag: Function;
           </div>
           <div class="col-3 list-entry__data">
             <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">
-              {{ stock['Percentage '] | decimal }}%</p>
+              (<span *ngIf="stock.Change>0">+</span>{{ stock['Percentage '] | decimal }}%)</p>
           </div>
           <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide hidden-sm-up">
             <img src="./assets/imgs/ui_slide.svg">
@@ -97,7 +97,7 @@ declare var gtag: Function;
                 <img *ngIf="stock.Change<0" class="align-absolute" src="./assets/imgs/icon_arrow-down.svg">
               </div>
               <div class="col-4">
-                <p class="data">{{ stock['Percentage '] | decimal }}%</p>
+                <p class="data">(<span *ngIf="stock.Change>0">+</span>{{ stock['Percentage '] | decimal }}%)</p>
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@ declare var gtag: Function;
             <!--<p>{{ recent['meta-info']['Last'] }}</p>-->
           <!--</div>-->
           <!--<div class="col-3">-->
-            <!--<p>{{ recent['meta-info']['Percentage '] }}%</p>-->
+            <!--<p>(<span *ngIf="stock.Change>0">+</span>{{ recent['meta-info']['Percentage '] }}%)</p>-->
           <!--</div>-->
         <!--</li>-->
       <!--</ul>-->

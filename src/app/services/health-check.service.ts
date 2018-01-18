@@ -23,10 +23,10 @@ export class HealthCheckService {
 
   private _portfolioStatus: Subject<PortfolioStatus> = new Subject<PortfolioStatus>();
   private _currentUserList: BehaviorSubject<string> = new BehaviorSubject<string>('My Stocks');
-  private _defaultToggle: string = localStorage.getItem('stock_toggle_option') || 'All';
-  private _toggleOptions: BehaviorSubject<string> = new BehaviorSubject<string>(this._defaultToggle);
+  private _defaultToggle: BehaviorSubject<string> = new BehaviorSubject<string>(localStorage.getItem('stock_toggle_option') || 'All');
+  private _toggleOptions: BehaviorSubject<string> = new BehaviorSubject<string>(this._defaultToggle.getValue());
   private _updateMyStocksList: Subject<void> = new Subject<void>();
-  private _userStocks: BehaviorSubject<Array<StockStatus|ListSymbolObj>> = new BehaviorSubject<Array<StockStatus|ListSymbolObj>>(undefined as Array<StockStatus|ListSymbolObj>);
+  private _userStocks: BehaviorSubject<Array<StockStatus | ListSymbolObj>> = new BehaviorSubject<Array<StockStatus | ListSymbolObj>>(undefined as Array<StockStatus | ListSymbolObj>);
 
   constructor(private utilService: UtilService) {
     this.prognosisParams = new URLSearchParams;
@@ -39,6 +39,14 @@ export class HealthCheckService {
     this.earningsReportParams = new URLSearchParams;
     this.phcParams = new URLSearchParams;
     this.listSymbolsParams = new URLSearchParams;
+
+    Observable.of(localStorage.getItem('stock_toggle_option'))
+      .map(val => {
+        console.log('val', val);
+        this._defaultToggle.next(val);
+      }).subscribe();
+    // this._defaultToggle
+    //   .subscribe(res => console.log('res', res));
   }
 
   public setPortfolioStatus(val: PortfolioStatus) {
@@ -58,7 +66,7 @@ export class HealthCheckService {
   }
 
   public setToggleOptions(val) {
-    console.log('val', val);
+    console.log('setToggleOptions', val);
     this._toggleOptions.next(val);
   }
 
@@ -74,7 +82,7 @@ export class HealthCheckService {
     return this._updateMyStocksList;
   }
 
-  public setUserStocks(val: Array<StockStatus|ListSymbolObj>) {
+  public setUserStocks(val: Array<StockStatus | ListSymbolObj>) {
     this._userStocks.next(val);
   }
 
