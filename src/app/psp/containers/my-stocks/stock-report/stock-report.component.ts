@@ -183,8 +183,9 @@ declare var gtag: Function;
               <div class="col-6">
                 <p class="data"
                    [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">
-                  {{ symbolData ? (symbolData['metaInfo'][0]['Percentage '] | decimal ) : null
-                  }}<sub>%</sub></p>
+                  (<span
+                  *ngIf="symbolData?.metaInfo[0]['Change']>0">+</span>{{ symbolData ? (symbolData['metaInfo'][0]['Percentage '] | decimal ) : null
+                  }}<sub>%)</sub></p>
                 <p class="label">% CHG</p>
               </div>
             </div>
@@ -248,7 +249,7 @@ declare var gtag: Function;
           </div>
           <div class="col-4">
             <p class="data data--large">
-              {{ (symbolData ? symbolData['fundamentalData']['Mkt Capitalization'] : null) | marketCap | number:'.2-2'
+              $ {{ (symbolData ? symbolData['fundamentalData']['Mkt Capitalization'] : null) | marketCap | number:'.2-2'
               }}B</p>
             <p class="label">MKT CAP</p>
           </div>
@@ -456,12 +457,12 @@ declare var gtag: Function;
                     <tr>
                       <td class="label">% Earn on Eqty</td>
                       <td class="data">{{ research ? (research['Returns']['Return on Equity'] | number:'.2-2' ) : null
-                        }}
+                        }}%
                       </td>
                     </tr>
                     <tr>
                       <td class="label">Book Value</td>
-                      <td class="data">{{ research ? (research['Valuation']['Price/Book'] | number:'.2-2' ) : null }}
+                      <td class="data">$ {{ research ? (research['Valuation']['Price/Book'] | number:'.2-2' ) : null }}
                       </td>
                     </tr>
                   </table>
@@ -522,24 +523,24 @@ declare var gtag: Function;
                     <th colspan="2">Returns</th>
                     <tr>
                       <td class="label">On Investment</td>
-                      <td class="data">{{ research ? (research['Returns']['Return on Invest'] | decimal ) : null }}
+                      <td class="data">{{ research ? (research['Returns']['Return on Invest'] | decimal ) : null }}%
                       </td>
                     </tr>
                     <tr>
                       <td class="label">On Equity</td>
-                      <td class="data">{{ research ? (research['Returns']['Return on Equity'] | decimal ) : null }}
+                      <td class="data">{{ research ? (research['Returns']['Return on Equity'] | decimal ) : null }}%
                       </td>
                     </tr>
                     <tr>
                       <td class="label">1 Month Return</td>
                       <td class="data">
-                        {{ research ? (research['PriceActivity2']['% Change Price - 4 Weeks'] | decimal ) : null }}
+                        {{ research ? (research['PriceActivity2']['% Change Price - 4 Weeks'] | decimal ) : null }}%
                       </td>
                     </tr>
                     <tr>
                       <td class="label">3 Month Return</td>
                       <td class="data">
-                        {{ research ? (research['PriceActivity2']['% Change Price - 24 Weeks'] | decimal ) : null }}
+                        {{ research ? (research['PriceActivity2']['% Change Price - 24 Weeks'] | decimal ) : null }}%
                       </td>
                     </tr>
                   </table>
@@ -1418,6 +1419,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     'experts': true
   };
   loading: Subscription;
+  reportDataSub: Subscription;
 
   timespanPerChange: number;
   timespanPriceChange: number;
@@ -1443,6 +1445,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         .subscribe(val => {
           val[0] ? this.is_etf = val[0]['is_etf'] : this.is_etf = true;
           if (!this.is_etf) {
+            if (this.reportDataSub) this.reportDataSub.unsubscribe();
             this.getReportData(this.stock);
             this.getMainChart(this.stock);
           }
@@ -1465,8 +1468,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   getReportData(stock: string) {
     this.current = '1Y';
-    this.reportService.getSymbolData(stock)
-      .take(1)
+    this.reportDataSub = Observable.timer(0, 30 * 1000)
+      .switchMap(() => {
+        return this.reportService.getSymbolData(stock)
+      })
+      // .take(1)
       .filter(x => x != undefined)
       .map(res => {
         this.symbolData = res;
@@ -1480,7 +1486,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.ideasService.getHeadlines(stock)
         )
       })
-      .take(1)
+      // .take(1)
       .subscribe(([summary, competitors, research, headlines]) => {
         this.summary = summary;
         const sen = this.summary['pgrContextSummary'][0]['mainSentence'];
@@ -1884,7 +1890,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           visible: true,
           fontFamily: "Open Sans",
           backgroundColor: "#b9e5fb",
-          text: "Long Term Avg: %v",
+          text: "Long Term Trend: %v",
           borderColor: "#ffffff",
           strokeWidth: "2",
           height: 25,

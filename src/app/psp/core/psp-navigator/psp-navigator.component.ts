@@ -63,7 +63,6 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
       .filter(x => x != undefined)
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
-        console.log('res', res);
         res.length ? this.firstUserStock = this.orderByPipe.transform(res, 'PGR', false)[0].symbol : this.firstUserStock = '';
         this.updateRoutes();
       });

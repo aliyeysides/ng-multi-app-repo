@@ -131,7 +131,6 @@ interface FilterFunc {
       </div>
     </div>
   `,
-  providers: [HealthCheckService],
   styleUrls: ['../health-check.component.scss'],
 })
 export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
@@ -219,7 +218,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
     this.healthCheck.getToggleOptions()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
-        console.log('rec', res);
+        console.log('getToggleOptions res', res);
         if (res == 'Top Movers') {
           this.selectToggleOption(this.toggleOptions.movers, res);
         }
@@ -261,8 +260,8 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe(res => {
         this.weeklyStockData = this.parseStockStatus(res);
         this.calculateBarWidth(this.weeklyStockData);
-        this.upStocksWeekly = this.weeklyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] > 0).length;
-        this.downStocksWeekly = this.weeklyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] < 0).length;
+        this.upStocksWeekly = res.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] > 0).length;
+        this.downStocksWeekly = res.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] < 0).length;
       });
 
     this._dailyStocks
@@ -284,8 +283,8 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
         });
         this.dailyStockData = this.parseStockStatus(res);
         this.calculateBarWidth(this.dailyStockData);
-        this.upStocksDaily = this.dailyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] > 0).length;
-        this.downStocksDaily = this.dailyStockData.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] < 0).length;
+        this.upStocksDaily = res.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] > 0).length;
+        this.downStocksDaily = res.filter(x => x['symbol'] != 'S&P 500' && x['percentageChange'] < 0).length;
       });
   }
 

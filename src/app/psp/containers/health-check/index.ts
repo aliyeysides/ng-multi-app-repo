@@ -12,6 +12,7 @@ import {SharedModule} from '../../../shared/index';
 
 import {TooltipModule, BsDropdownModule} from 'ngx-bootstrap';
 import {MarketsSummaryService} from '../../../services/markets-summary.service';
+import {HealthCheckService} from '../../../services/health-check.service';
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import {MarketsSummaryService} from '../../../services/markets-summary.service';
     PowerGridComponent,
     ReportingCalendarComponent
   ],
-  providers: [MarketsSummaryService]
+  providers: [MarketsSummaryService, HealthCheckService]
 })
 export class HealthCheckModule {
 }
