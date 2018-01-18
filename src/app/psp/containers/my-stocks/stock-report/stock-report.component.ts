@@ -60,9 +60,11 @@ declare var gtag: Function;
                (click)="jumpToFragment(financials, 'Financials');$event.stopPropagation()"><i
             class="far fa-university" aria-hidden="true"></i></div>
           <div tooltip="Jump to Earnings" placement="auto" class="anchor"
-               (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()"><i class="far fa-money-bill"></i></div>
+               (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()"><i class="far fa-money-bill"></i>
+          </div>
           <div tooltip="Jump to Technicals" placement="auto" class="anchor"
-               (click)="jumpToFragment(technicals, 'Technicals');$event.stopPropagation()"><i class="far fa-chart-pie"></i></div>
+               (click)="jumpToFragment(technicals, 'Technicals');$event.stopPropagation()"><i
+            class="far fa-chart-pie"></i></div>
           <div tooltip="Jump to Experts" placement="auto" class="anchor"
                (click)="jumpToFragment(experts, 'Experts');$event.stopPropagation()"><i
             class="far fa-users" aria-hidden="true"></i></div>
@@ -566,7 +568,7 @@ declare var gtag: Function;
         <div #earnings class="row justify-content-center stock-info stock-info--breakdown">
           <div class="col-12">
             <div class="pgr-section__icon">
-               <i class="fal fa-money-bill"></i>
+              <i class="fal fa-money-bill"></i>
             </div>
           </div>
           <div class="col-12">
@@ -738,7 +740,7 @@ declare var gtag: Function;
         <div #technicals class="row justify-content-center stock-info stock-info--breakdown">
           <div class="col-12">
             <div class="pgr-section__icon">
-               <i class="fal fa-chart-pie"></i>
+              <i class="fal fa-chart-pie"></i>
             </div>
           </div>
           <div class="col-12">
@@ -939,7 +941,7 @@ declare var gtag: Function;
         <div #experts class="row justify-content-center stock-info stock-info--breakdown">
           <div class="col-12">
             <div class="pgr-section__icon">
-               <i class="fal fa-users"></i>
+              <i class="fal fa-users"></i>
             </div>
           </div>
           <div class="col-12">
@@ -1239,16 +1241,45 @@ declare var gtag: Function;
           <div class="col-12 col-md-4">
             <div class="row">
               <div class="col-12">
-                <p class="data data--large"></p>
-                <p class="label"></p>
+                <p class="data data--large">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
+                <p class="label">Company Name</p>
               </div>
               <div class="col-12">
-                <p class="data data--large"></p>
-                <p class="label"></p>
+                <p class="data data--large">{{ research ? research['Details']['Address1'] : null }}</p>
+                <p class="label">Address</p>
+              </div>
+              <div class="col-12">
+                <p class="data data--large">{{ research ? research['Details']['City'] : null }}</p>
+                <p class="label">City</p>
+              </div>
+              <div class="col-12">
+                <p class="data data--large">{{ research ? research['Details']['ZipCode'] : null }}</p>
+                <p class="label">Zip</p>
+              </div>
+              <div class="col-12">
+                <p class="data data--large">{{ research ? research['Details']['PhoneNumber'] : null }}</p>
+                <p class="label">Phone</p>
+              </div>
+              <div class="col-12">
+                <p class="data data--large">{{ research ? research['Details']['FaxNumber'] : null }}</p>
+                <p class="label">Fax</p>
+              </div>
+              <div class="col-12">
+                <p class="data data--large"><a target="_blank"
+                                               href="{{ research ? research['Details']['URL'] : null }}">{{ research ? research['Details']['URL'] : null
+                  }}</a></p>
+                <p class="label">Website</p>
+              </div>
+              <div class="col-12">
+                <p class="data data--large">{{ research ? research['Details']['EmployeesCount'] : null }}</p>
+                <p class="label">Full Time Employees</p>
+              </div>
+              <div class="col-12">
+                <p class="data data--large">{{ research ? research['Details']['Sector'] : null }}</p>
+                <p class="label">Sector</p>
               </div>
             </div>
           </div>
-
         </div>
 
         <!-- DISCLAIMER -->
@@ -2617,7 +2648,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "tooltip": {
           "text": "$%v (M)",
           "decimals": 2,
-          "thousands-separator":",",
+          "thousands-separator": ",",
         },
         "plotarea": {
           "margin": "30 20 0 35",
@@ -2646,7 +2677,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         "scale-y": {
           "short": true,
-          "thousands-separator":",",
+          "thousands-separator": ",",
           "multiplier": true,
           "line-color": "transparent",
           "line-style": "solid",
