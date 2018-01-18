@@ -192,6 +192,7 @@
 
 	p {
 		display:inline-block;
+		cursor:pointer;
 	}
 	.sorted {
 		p {
@@ -200,6 +201,7 @@
 			border-radius: 30px;
 			display: inline-block;
 			padding:6px 8px 4px;
+			cursor: default;
 		}
 	}
 }
