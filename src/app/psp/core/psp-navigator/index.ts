@@ -10,7 +10,7 @@ import {HealthCheckService} from '../../../services/health-check.service';
   ],
   exports: [PspNavigatorComponent],
   declarations: [PspNavigatorComponent],
-  providers: [DatePipe, HealthCheckService]
+  providers: [DatePipe]
 })
 export class PspNavigatorModule {
 }

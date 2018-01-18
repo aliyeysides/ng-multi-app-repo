@@ -219,7 +219,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
     this.healthCheck.getToggleOptions()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
-        console.log('res', res);
+        console.log('rec', res);
         if (res == 'Top Movers') {
           this.selectToggleOption(this.toggleOptions.movers, res);
         }
