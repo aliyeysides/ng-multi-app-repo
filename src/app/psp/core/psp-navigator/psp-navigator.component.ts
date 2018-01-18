@@ -5,6 +5,7 @@ import {
 import {HealthCheckService} from '../../../services/health-check.service';
 import {Subject} from 'rxjs/Subject';
 import {NavigationEnd, Router} from '@angular/router';
+import {OrderByPipe} from '../../../shared/pipes/order-by.pipe';
 
 @Component({
   selector: 'cpt-psp-navigator',
@@ -43,6 +44,7 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
 
 
   constructor(private healthCheck: HealthCheckService,
+              private orderByPipe: OrderByPipe,
               private router: Router) {
 
     const mobWidth = (window.screen.width);
@@ -61,7 +63,8 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
       .filter(x => x != undefined)
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
-        res.length ? this.firstUserStock = res[0].symbol : this.firstUserStock = '';
+        console.log('res', res);
+        res.length ? this.firstUserStock = this.orderByPipe.transform(res, 'PGR', false)[0].symbol : this.firstUserStock = '';
         this.updateRoutes();
       });
   }
