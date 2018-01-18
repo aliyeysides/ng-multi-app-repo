@@ -25,6 +25,7 @@ import {SymbolSearchService} from '../services/symbol-search.service';
 import {PspAuthGuard} from '../shared/guards/psp-auth.guard';
 import {PspOnboardingComponent} from './core/psp-onboarding/psp-onboarding.component';
 import {PspOnboardingModule} from './core/psp-onboarding/index';
+import {HealthCheckService} from '../services/health-check.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {PspOnboardingModule} from './core/psp-onboarding/index';
     AuthService,
     PspAuthGuard,
     IdeasService,
+    HealthCheckService,
     SignalService,
     NotificationsService,
     SymbolSearchService

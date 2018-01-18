@@ -58,6 +58,7 @@ export class HealthCheckService {
   }
 
   public setToggleOptions(val) {
+    console.log('val', val);
     this._toggleOptions.next(val);
   }
 

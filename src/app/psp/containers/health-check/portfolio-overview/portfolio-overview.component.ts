@@ -172,6 +172,7 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   }
 
   setToggleOptions(option: string) {
+    console.log('option', option);
     this.healthCheck.setToggleOptions(option);
     gtag('event', 'power_bar_filter_clicked', {
       'event_category': 'engagement',
