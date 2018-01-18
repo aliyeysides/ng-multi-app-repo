@@ -175,7 +175,7 @@ export class SignalService {
     return result;
   }
 
-  private calculatePGR(pgr) {
+  public calculatePGR(pgr) {
     if (pgr >= 0 && pgr < 15) {
       pgr = 1;
     } else if (pgr >= 15 && pgr < 29) {
@@ -194,7 +194,7 @@ export class SignalService {
 
   public appendPGRImage(pgr, rawPgr) {
     const imageUrl = 'assets/imgs/';
-    if (pgr === 1 || pgr === 0) {
+    if (pgr === 1) {
       return imageUrl + 'arc_VeryBearish.svg';
     } else if (pgr === 2) {
       return imageUrl + 'arc_Bearish.svg';

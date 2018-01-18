@@ -70,7 +70,7 @@ export class IdeasService {
   }
 
   public addStockIntoList(listId: string, symbol: string) {
-    const allowed = 30;
+    const allowed = 1000;
     const addStockIntoListUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/addStockIntoList?`;
     this.addStockIntoListParams.set('listId', listId);
     this.addStockIntoListParams.set('symbol', symbol);

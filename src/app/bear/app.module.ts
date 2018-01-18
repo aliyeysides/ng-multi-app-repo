@@ -16,7 +16,7 @@ import {UtilService} from '../services/util.service';
 import {AuthService} from '../services/auth.service';
 
 import {BusyModule} from 'angular2-busy';
-import {AuthGuard} from '../shared/auth.guard';
+import {AuthGuard} from '../shared/guards/auth.guard';
 import {loadingMaskConfig} from '../../loading-mask-config';
 import {IdeasService} from '../services/ideas.service';
 import {SignalService} from '../services/signal.service';

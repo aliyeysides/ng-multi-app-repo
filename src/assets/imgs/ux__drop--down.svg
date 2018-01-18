@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="50px" viewBox="0 0 100 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>ux__drop--down</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ux__drop--down" fill="#EDEDED" fill-rule="nonzero">
+            <g id="angle-right" transform="translate(16.000000, 5.000000)">
+                <path d="M53.0583199,22.1283468 L21.6449866,53.0616801 C20.3916532,54.3150134 18.3649866,54.3150134 17.1116532,53.0616801 L15.2183199,51.1683468 C13.9649866,49.9150134 13.9649866,47.8883468 15.2183199,46.6350134 L42.4983199,19.8616801 L15.2449866,-6.91165323 C13.9916532,-8.16498656 13.9916532,-10.1916532 15.2449866,-11.4449866 L17.1383199,-13.3383199 C18.3916532,-14.5916532 20.4183199,-14.5916532 21.6716532,-13.3383199 L53.0849866,17.5950134 C54.3116532,18.8483468 54.3116532,20.8750134 53.0583199,22.1283468 Z" id="Shape" transform="translate(34.140000, 19.861680) rotate(-270.000000) translate(-34.140000, -19.861680) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

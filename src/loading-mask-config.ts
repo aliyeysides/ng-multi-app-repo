@@ -14,3 +14,26 @@ export const loadingMaskConfig: BusyConfig = ({
   </div>`,
   wrapperClass: 'ng-busy'
 });
+
+export const loadingMaskConfig2: BusyConfig = ({
+  message: '',
+  backdrop: true,
+  delay: 0,
+  minDuration: 0,
+  template: `<div class="sk-folding-cube">
+  <div class="sk-cube1 sk-cube"></div>
+  <div class="sk-cube2 sk-cube"></div>
+  <div class="sk-cube4 sk-cube"></div>
+  <div class="sk-cube3 sk-cube"></div>
+</div>`,
+  wrapperClass: 'ng-busy'
+});
+
+export const loadingMaskConfig3: BusyConfig = ({
+  message: '',
+  backdrop: true,
+  delay: 0,
+  minDuration: 0,
+  template: `<div class="spinner"></div>`,
+  wrapperClass: 'ng-busy'
+});

@@ -14,6 +14,8 @@ export class AuthService {
   private currentUser: BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
   currentUser$ = this.currentUser.asObservable();
 
+  private _userLists: BehaviorSubject<object[]> = new BehaviorSubject<object[]>({} as object[]);
+
   private loginParams: URLSearchParams;
   public loggedIn: boolean;
 
@@ -25,6 +27,14 @@ export class AuthService {
 
   public setCurrentUser(usr: User) {
     this.currentUser.next(usr);
+  }
+
+  set userLists(lists: object[]) {
+    this._userLists.next(lists);
+  }
+
+  get userLists() {
+    return this._userLists.getValue();
   }
 
   public login(): Observable<any> {
@@ -56,19 +66,5 @@ export class AuthService {
   public isLoggedIn(): boolean {
     return this.loggedIn;
   }
-
-  // public getBearHoldingListId() {
-  //   // const uid = this.currentUser.getValue()['UID'];
-  //   // this.ideasService.getIdeasList(uid, 'Bear')
-  //   //   .take(1)
-  //   //   .subscribe(res => {
-  //   //     this.holdingListId = res[2]['user_lists'][0]['list_id'];
-  //   //     this.watchingListId = res[2]['user_lists'][1]['list_id'];
-  //   //   });
-  // }
-  //
-  // public getBearWatchingListId() {
-  //   console.log('watchinglistId', this.currentUser.getValue());
-  // }
 
 }

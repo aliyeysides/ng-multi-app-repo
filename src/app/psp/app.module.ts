@@ -16,14 +16,16 @@ import {UtilService} from '../services/util.service';
 import {AuthService} from '../services/auth.service';
 
 import {BusyModule} from 'angular2-busy';
-import {AuthGuard} from '../shared/auth.guard';
-import {loadingMaskConfig} from '../../loading-mask-config';
+import {loadingMaskConfig3} from '../../loading-mask-config';
 import {IdeasService} from '../services/ideas.service';
 import {SignalService} from '../services/signal.service';
 
-import {SimpleNotificationsModule} from 'angular2-notifications';
 import {NotificationsService} from 'angular2-notifications/dist';
-import {WordpressService} from '../services/wordpress.service';
+import {SymbolSearchService} from '../services/symbol-search.service';
+import {PspAuthGuard} from '../shared/guards/psp-auth.guard';
+import {PspOnboardingComponent} from './core/psp-onboarding/psp-onboarding.component';
+import {PspOnboardingModule} from './core/psp-onboarding/index';
+import {HealthCheckService} from '../services/health-check.service';
 
 @NgModule({
   declarations: [
@@ -34,14 +36,24 @@ import {WordpressService} from '../services/wordpress.service';
     HttpModule,
     SharedModule,
     BrowserAnimationsModule,
+    PspOnboardingModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
-    BusyModule.forRoot(loadingMaskConfig),
-    SimpleNotificationsModule.forRoot(),
+    BusyModule.forRoot(loadingMaskConfig3),
     ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES,
   ],
-  providers: [UtilService, AuthService, AuthGuard, IdeasService, SignalService, NotificationsService, WordpressService],
-  bootstrap: [AppComponent]
+  providers: [
+    UtilService,
+    AuthService,
+    PspAuthGuard,
+    IdeasService,
+    HealthCheckService,
+    SignalService,
+    NotificationsService,
+    SymbolSearchService
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [PspOnboardingComponent]
 })
 export class AppModule {
 }
