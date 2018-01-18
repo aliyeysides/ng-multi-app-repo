@@ -1,657 +1,134 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../../variables';
+@import '../../assets/styles/variablesPulse';
 @import '../../../node_modules/bootstrap/scss/bootstrap';
 
 
 
 
 
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 100px auto;
+  background-color: $link-blue;
 
+  border-radius: 100%;
+  -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
+}
 
+@-webkit-keyframes sk-scaleout {
+  0% { -webkit-transform: scale(0) }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
 
-
-
-
-.page__contents--mystocks .stock__list.stock__list--recent {
-  margin-top:0px;
+@keyframes sk-scaleout {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 100% {
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
+      opacity: 0;
+    }
 }
 
 
-.stock__list {
-  margin-bottom:20px;
-}
 
-.page__contents--mystocks .stock__list {
-  margin-top:30px;
-}
 
-.stock__list .list__entry {
-  height: 60px;
-  overflow: hidden;
-  margin: 10px 0;
+.sk-folding-cube {
+  margin: 20px auto;
+  width: 40px;
+  height: 40px;
   position: relative;
-  padding:5px;
+  -webkit-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
 }
 
-
-.page__contents--mystocks .chart__header {
-  margin-top: 30px;
-}
-
-.page__contents--mystocks .chart__header h3 {
-  text-align: center;
-}
-
-.list__entry .list-entry__pgr {
+.sk-folding-cube .sk-cube {
+  float: left;
+  width: 50%;
+  height: 50%;
   position: relative;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
 }
-
-.list-entry__pgr img {
-  width: 44px;
-  height: auto;
-}
-
-.list__entry  .list-entry__info {
-  padding-left:5px;
-}
-
-.list-entry__info .ticker {
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 1;
-  text-align: left;
-}
-
-.list-entry__info .company {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: left;
-  white-space: nowrap;
-}
-
-.list__entry .list-entry__data {
-
-}
-
-.list-entry__data .data {
-  font-size: 18px;
-  font-weight: 500;
-  text-align: center;
-}
-
-
-
-
-.button__slide {
+.sk-folding-cube .sk-cube:before {
+  content: '';
   position: absolute;
-  right:2%;
-  top:15px;
-  cursor: pointer;
-}
-
-
-
-.list-entry__overlay {
-  display: none;
-  position: absolute;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  background-color: $link-blue;
+  -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
+  animation: sk-foldCubeAngle 2.4s infinite linear both;
+  -webkit-transform-origin: 100% 100%;
+  -ms-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
+}
+.sk-folding-cube .sk-cube2 {
+  -webkit-transform: scale(1.1) rotateZ(90deg);
+  transform: scale(1.1) rotateZ(90deg);
+}
+.sk-folding-cube .sk-cube3 {
+  -webkit-transform: scale(1.1) rotateZ(180deg);
+  transform: scale(1.1) rotateZ(180deg);
+}
+.sk-folding-cube .sk-cube4 {
+  -webkit-transform: scale(1.1) rotateZ(270deg);
+  transform: scale(1.1) rotateZ(270deg);
+}
+.sk-folding-cube .sk-cube2:before {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+.sk-folding-cube .sk-cube3:before {
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+}
+.sk-folding-cube .sk-cube4:before {
+  -webkit-animation-delay: 0.9s;
+  animation-delay: 0.9s;
+}
+@-webkit-keyframes sk-foldCubeAngle {
+  0%, 10% {
+    -webkit-transform: perspective(140px) rotateX(-180deg);
+    transform: perspective(140px) rotateX(-180deg);
+    opacity: 0;
+  } 25%, 75% {
+      -webkit-transform: perspective(140px) rotateX(0deg);
+      transform: perspective(140px) rotateX(0deg);
+      opacity: 1;
+    } 90%, 100% {
+        -webkit-transform: perspective(140px) rotateY(180deg);
+        transform: perspective(140px) rotateY(180deg);
+        opacity: 0;
+      }
+}
+
+@keyframes sk-foldCubeAngle {
+  0%, 10% {
+    -webkit-transform: perspective(140px) rotateX(-180deg);
+    transform: perspective(140px) rotateX(-180deg);
+    opacity: 0;
+  } 25%, 75% {
+      -webkit-transform: perspective(140px) rotateX(0deg);
+      transform: perspective(140px) rotateX(0deg);
+      opacity: 1;
+    } 90%, 100% {
+        -webkit-transform: perspective(140px) rotateY(180deg);
+        transform: perspective(140px) rotateY(180deg);
+        opacity: 0;
+      }
 }
 
-.list-entry__overlay.show {
-  display:block;
-}
-
-.list-entry__overlay.red {
-  background: rgba(253,0,31,0.9);
-}
-
-.list-entry__overlay.green {
-  background: rgba(0,192,78,0.95);
-}
-
-.overlay__contents {
-  height: 60px;
-}
-
-.list-entry__overlay .button__remove {
-  position: absolute;
-  right:5%;
-  top:10px;
-  cursor: pointer;
-  width: 30px;
-}
-
-.list-entry__overlay .ticker {
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 62px;
-  color:#ffffff;
-  text-align: left;
-}
-
-.list-entry__overlay .data {
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 62px;
-  color:#ffffff;
-  text-align: left;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-/*                                                     */
-/*           CONTAINER -- STOCK VIEW PAGE              */
-/*                                                     */
-
-
-.container--stockview {
-  position: absolute;
-  width: 100%;
-  top:0;
-  left:0;
-  display: none;
-  z-index: 100;
-}
-
-.container--stockview.open {
-  display:block;
-}
-
-.container--stockview.bearish {
-  background: linear-gradient(to right, rgba(255,50,50,1) 2%,rgba(170,0,119,1) 100%); 
-}
-.container--stockview.bullish {
-  background: linear-gradient(to right, rgba(0,204,0,1) 0%,rgba(0,170,119,1) 100%);
-}
-
-
-
-
-/*           HEADER            */
-
-
-.stockview__header {
-  width: 100%;
-}
-
-.stockview__header .header__button {
-  position: absolute;
-  width: 30px;
-  height: 60px;
-  display: flex;
-  z-index: 10;
-}
-.stockview__header .header__button--left {
-  left:3%;
-}
-.stockview__header .header__button--right {
-  right:3%;
-}
-.stockview__header .header__button  img {
-  width: 30px;
-  height: 30px;
-}
-
-.stockview__header .header__stock {
-  width: 100%;
-  height: 60px;
-  position: absolute;
-}
-.stockview__header .header__stock h1 {
-  text-align: left;
-  line-height: 64px;
-  color:#ffffff;
-  font-weight: 700;
-  font-size: 36px;
-  float: left;
-  margin: 0 5% 0 15%;
-}
-.stockview__header .header__stock p {
-  text-align: left;
-  line-height: 64px;
-  color:#ffffff;
-  float: left;
-  font-size: 18px;
-}
-
-
-
-
-
-
-
-
-/*           STOCK VIEW CONTENTS            */
-
-
-.contents--stockview {
-  background-color: #ffffff;
-  border-radius: 10px 10px 0 0;
-  box-shadow: 0px -5px 19px rgba(0,0,0,0.15);
-  margin: 60px 0 0;
-  padding-bottom: 30px;
-}
-
-.contents--breakdown-overall {
-  border-bottom: 0px solid #F8F8F8;
-  margin-bottom: 0;
-  padding-top: 20px;
-  padding-bottom: 0px;
-}
-
-.contents--breakdown {
-  margin-bottom: 0;
-  padding-top: 10px;
-  padding-bottom: 20px;
-}
-
-
-
-
-
-.stock-info {
-}
-
-.stock-info h1 {
-  font-weight: 300;
-  font-size: 26px;
-  line-height: 1.3;
-  margin: 30px 0;
-  color: #999999;
-}
-.stock-info h1 span {
-  font-weight: 600;
-  color: #999999;
-}
-.stock-info h1 span.red {
-  font-weight: 600;
-  color:#FD001F;
-}
-
-.stock-info h1 span.yellow {
-  font-weight: 600;
-  color:#FF9900;
-}
-
-.stock-info .paragraph {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
-  margin-bottom: 15px;
-  text-align: left;
-  font-weight: 300;
-  line-height: 1.6;
-}
-
-.stock-info .paragraph span {
-  font-weight: 700;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
-}
-
-.stock-info .copy-block {
-  padding:10px 0 15px;
-}
-
-
-
-
-
-
-
-
-
-
-
-/*           PGR            */
-
-
-
-.stockview__main-rating {
-  text-align: center;
-  margin: 10px 0 5px;
-}
-.stockview__main-rating .label {
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1;
-}
-.stockview__main-rating .label i {
-  color: #1199ff;
-}
-.stockview__main-rating .rating span {
-  display: inline-block;
-  font-size: 36px;
-  font-weight: 700;
-}
-.stockview__main-rating .rating img {
-  display: inline-block;
-  width: 44px;
-  height: 25px;
-  margin-right: 7px;
-  vertical-align: baseline;
-  padding-top: 3px;
-}
-
-
-
-
-
-
-
-
-/*           PRICE            */
-
-
-.contents--stockview .stock-info .current-price {
-  font-size: 64px;
-  line-height: 1;
-  font-weight: 400;
-  margin-bottom: 10px;
-}
-.contents--stockview .stock-info .current-price sub {
-  font-size: 36px;
-  bottom:0;
-}
-.contents--stockview .stock-info.stock-info--price .data {
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1.5;
-}
-.contents--stockview .stock-info.stock-info--price .label {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.1;
-}
-
-
-
-
-
-
-
-/*           CHARTS/GRAPHS            */
-
 
-.stock-info--chart-toggle {
-  margin: 10px 0;
-}
-
-.stock-info--chart-toggle .chart-header__breakdown {
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1.5;
-  margin-bottom: 10px;
-}
-
-.stock-info--chart-toggle .date-select {
-  font-size: 18px;
-  font-weight: 600;
-  opacity: 0.5;
-  color: #484848;
-}
-
-.stock-info--chart-toggle .date-select.selected {
-  opacity: 1;
-}
-
-.container--stockview.bearish .stock-info--chart-toggle .date-select.selected {
-  color:#FD001F;
-  border-bottom:3px solid #FD001F;
-}
-
-
-
-
-
-.contents--stockview .stock-info--chart {
-  height: 100px;
-}
-
-
-
-
-
-/*           STATS            */
-
-
-.stock-info.stock-info--stats .label {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.1;
-}
-.container--stockview.bearish .stock-info.stock-info--stats .label {
-  color:#FD001F;
-}
-
-.stock-info.stock-info--stats .data {
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 1.5;
-}
-.stock-info.stock-info--stats .data sub {
-  bottom:0;
-}
-
-.stock-info.stock-info--stats .data--large {
-  font-size: 34px;
-  line-height: 1.4;
-}
-.stock-info.stock-info--stats .data--large sub {
-  font-size: 24px;
-  bottom:0;
-}
-
-.stock-info.stock-info--stats .stock-industry {
-  margin-bottom:15px;
-  margin-top: 5px;
-}
-
-
-
-
-
-/*           NEWS            */
-
-
-.stock-info--news .news__slider .headline {
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 1.5;
-  margin-bottom: 5px;
-  font-family: 'Open Sans', sans-serif;
-  text-align: left;
-  opacity: 0.8;
-}
-
-.stock-info--news .news__slider .source {
-  text-align: left;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 35px;
-}
-.container--stockview.bearish .news__slider .source {
-  color: #FD001F;
-}
-
-.stock-info--news .news__slider .date {
-  text-align: right;
-  font-size: 11px;
-  font-weight: 400;
-  font-style: italic;
-  line-height: 35px;
-}
-
-.news__pagination {
-}
-.news__pagination p {
-  font-size: 16px;
-  font-weight: 400;
-}
-.news__pagination p span {
-  font-weight: 600;
-}
-.container--stockview.bearish .news__pagination p {
-  color:#FD001F;
-}
-.container--stockview.bearish .news__pagination p span {
-  color:#FD001F;
-}
-
-
-
-
-
-
-/*                                                     */
-/*             CONTAINER -- PGR BREAKDOWN              */
-/*                                                     */
-
-.stock-info--breakdown .stockview__PGR {
-
-}
-
-
-.stock-info--overall-breakdown .rating {
-  font-size: 36px;
-  font-weight: 500;
-  margin-bottom: 25px;
-  line-height: 1.3;
-  margin-top: 10px;
-}
 
-.stock-info--overall-breakdown .rating span {
-  font-weight: 700;
-}
-
-
-
-.stock-info--overall-breakdown h1 {
-  margin-bottom: 25px;
-}
-
-.stock-info--breakdown h1 {
-  margin: 25px 0 20px;
-  color:#484848;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.data-table {
-
-}
-
-.data-table table {
-  color: #484848;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 30px;
-}
-
-.container--stockview.bearish .data-table .label {
-  color:#FD001F;
-}
-
-.data-table th {
-  text-align: center;
-  font-size: 17px;
-  line-height: 2;
-  font-weight: 500;
-  border-bottom: 2px solid #DDDDDD;
-}
-
-.data-table td {
-  padding:10px 0 5px;
-  min-width: 50px;
-}
 
-.data-table .data {
-  text-align: right;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 20px;
-}
-
-.data-table .label {
-  text-align: left;
-  font-size: 12px;
-  white-space: nowrap;
-  font-weight: 500;
-  line-height: 20px;
-}
-
-
-
-
-
-.table--short-interest td {
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-
-
-
-
-
-
 
 
-
-
-
-.twentypercent {
-  width: 20%;
-}
-
-.thirtypercent {
-  width: 30%;
-}
-
-.thirtyfivepercent {
-  width: 35%;
-}
-
-.fortypercent {
-  width: 45%;
-}
-
-.sixtypercent {
-  width: 70%;
-}
-
-.seventypercent{
-  width: 80%;
-}
-
-.hundredpercent{
-  width: 100%;
-}

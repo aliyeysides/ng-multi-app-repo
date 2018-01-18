@@ -1,0 +1,131 @@
+/*  Colors  */
+
+
+$veryBullish-green: #24A300;
+$bullish-green: #6ACC00;
+$neutral-yellow: #F5A623;
+$bearish-red: #FD4500;
+$veryBearish-red: #D0021B;
+
+
+
+$pulse-blue: #3150C6;
+$pulse-blue__shade1: #1199ff;
+$pulse-blue__shade2: #540086;
+
+$pulse-green: #00C04E;
+$pulse-green__shade1: #00C07B;
+$pulse-green__shade2: #00C1A9;
+
+$pulse-red: #FD001F;
+$pulse-red__shade1: #EA003D;
+$pulse-red__shade2: #B70056;
+
+$pulse-yellow: #F9BA3B;
+$pulse-yellow__shade1: #FADA3D;
+$pulse-yellow__shade2: #F89939;
+
+$pulse-grey: #999999;
+$pulse-grey__shade1: #666666;
+$pulse-grey__shade2: #333333;
+
+
+
+
+/*  Fonts  */
+
+
+$font-stack: 'Rajdhani', 'Open Sans', sans-serif;
+$font-stack2: 'Open Sans', sans-serif;
+
+$font-color: #54555A;
+$font-color--light: #CCCDD1;
+$font-color--mid: #999999;
+
+$link-blue: #1199ff;
+$link-grey: #999999;
+
+
+
+
+
+/*  Backgrounds  */
+
+
+$background--verylight: #f8f8f8;
+$background--lighter: #efefef;
+$background--light: #DDDDDD;
+$background--medium: #999999;
+$background--dark: #333333;
+
+
+
+
+/*  Lines & Borders  */
+
+
+
+$divider--dotted: 2px solid #eee;
+
+$line--light: 2px solid #efefef;
+$line--light--thin: 2px solid #efefef;
+$line--white: 2px solid #ffffff;
+$line--button: 3px solid #1199ff;
+$line-divider: #efefef;
+$line--chart: #999;
+
+
+
+
+
+
+/*  Gradients  */
+
+
+$gradient--pulse-red: linear-gradient(45deg, rgba(253,0,31,0.95) 0%, rgba(234,0,61,0.95) 51%, rgba(183,0,86,0.95) 100%);
+
+$gradient--pulse-grey: linear-gradient(13deg, rgba(157,158,163,0.95) 20%, rgba(189,187,190,0.95) 100%);
+
+$gradient--pulse-green: linear-gradient(135deg, rgba(0,192,78,0.95) 0%, rgba(0,193,169,0.95) 100%);
+
+$gradient--pulse-blue: linear-gradient(-45deg, rgba(84,0,134,0.95) 0%, rgba(17,153,255,0.95) 100%);
+
+$gradient--pulse-yellow: linear-gradient(-135deg, rgba(250,218,61,0.95) 0%, rgba(248,153,57,0.95) 100%);
+
+$gradient--pulse-red--a1: linear-gradient(45deg, rgba(253,0,31,1) 0%, rgba(234,0,61,1) 51%, rgba(183,0,86,1) 100%);
+
+$gradient--pulse-green--a1: linear-gradient(135deg, rgba(0,192,78,1) 0%, rgba(0,193,169,1) 100%);
+
+$gradient--pulse-yellow--a1: linear-gradient(-135deg, rgba(250,218,61,1) 0%, rgba(248,153,57,1) 100%);
+
+
+
+
+
+
+
+$border-radius1: 20px;
+
+
+
+
+
+$zindex-dropdown-backdrop:  990 !default;
+$zindex-navbar:            1000 !default;
+$zindex-dropdown:          1000 !default;
+$zindex-fixed:             1030 !default;
+$zindex-sticky:            1030 !default;
+$zindex-modal-backdrop:    1040 !default;
+$zindex-modal:             1050 !default;
+$zindex-popover:           1060 !default;
+$zindex-tooltip:           1070 !default;
+
+
+
+
+
+
+
+
+
+

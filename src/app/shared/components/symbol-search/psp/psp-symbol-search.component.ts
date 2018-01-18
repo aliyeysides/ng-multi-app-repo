@@ -1,5 +1,5 @@
-import {
-  AfterContentInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild,
+import {Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output,
+  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 
@@ -10,13 +10,15 @@ import {IdeasService} from '../../../../services/ideas.service';
 import {AuthService} from '../../../../services/auth.service';
 import {Subscription} from 'rxjs/Subscription';
 import {BaseSymbolSearchComponent} from '../symbol-search.component';
+import {HealthCheckService} from '../../../../services/health-check.service';
+import {ListSymbolObj} from '../../../models/health-check';
 
 declare let gtag: Function;
 
 @Component({
   selector: 'cpt-psp-symbol-search',
   template: `
-    <form class="form-inline" (submit)="onSubmit()">
+    <form class="form-inline" (submit)="onSubmit(symbolSearchForm.value)">
       <div class="form-group">
         <input #search (focusout)="toggleFocus()" (focus)="toggleFocus()" [formControl]="symbolSearchForm" type="search"
                class="form-control search-box"
@@ -28,37 +30,35 @@ declare let gtag: Function;
     <div (mousedown)="$event.preventDefault();" *ngIf="searchResults && symbolSearchForm.value && focus == true"
          class="search__dropdown">
       <ul [ngBusy]="loading" *ngFor="let result of searchResults" class="container">
-        <li (click)="onClick(result.Symbol)" class="row search__entry"
+        <li (click)="onClick(result.Symbol)" class="row no-gutters search__entry"
             [ngClass]="{'search--match': result.Symbol == symbolSearchForm.value.toUpperCase() }">
           <div class="col-3 search__company">
             <p class="company-ticker">
               {{ result.Symbol }}
             </p>
           </div>
-          <div class="col-7">
+          <div class="col-8">
             <p class="company-name">
               {{ result.CompanyName }}
             </p>
           </div>
-          <div (click)="addToList(holdingListId, result.Symbol);$event.stopPropagation()" class="col-1 search__action">
-            <svg class="align-absolute" width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
-                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <div *ngIf="!resultInUserList(userStocks, result.Symbol)" (click)="addToList(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
+            <svg class="align-absolute" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <defs></defs>
-              <g id="icon_holding--PLUS" fill="#1199ff" stroke="none" stroke-width="1" fill-rule="evenodd">
-                <path
-                  d="M213.966667,212.966667 L181,212.966667 L181,233.033333 L213.966667,233.033333 L213.966667,266 L234.033333,266 L234.033333,233.033333 L267,233.033333 L267,212.966667 L234.033333,212.966667 L234.033333,180 L213.966667,180 L213.966667,212.966667 Z M300.000007,185.274347 C297.559,180.398718 294.6656,175.788924 291.374844,171.5 L300,171.5 L300,185.274334 Z M158.459408,279 L26.7857143,279 C12.0535714,279 0,266.90625 0,252.125 L0,171.5 L112.5,171.5 L112.5,198.375 C112.5,204.253906 117.354911,209.125 123.214286,209.125 L139.203224,209.125 C138.411994,213.798601 138,218.601187 138,223.5 C138,244.681735 145.702518,264.06445 158.459408,279 Z M143.600382,193 L128.571429,193 L128.571429,171.5 L155.625156,171.5 C150.642052,177.994603 146.570096,185.224969 143.600388,192.999999 Z M275.17234,155.375 C260.819295,144.471456 242.915393,138 223.5,138 C204.084607,138 186.180705,144.471456 171.82766,155.375 L0,155.375 L0,90.875 C0,76.09375 12.0535714,64 26.7857143,64 L85.7142857,64 L85.7142857,37.125 C85.7142857,28.2226562 92.9129464,21 101.785714,21 L198.214286,21 C207.087054,21 214.285714,28.2226562 214.285714,37.125 L214.285714,64 L273.214286,64 C287.946429,64 300,76.09375 300,90.875 L300,155.375 L275.17234,155.375 Z M107.142857,64 L192.857143,64 L192.857143,42.5 L107.142857,42.5 L107.142857,64 Z M223.5,300 C181.250217,300 147,265.749783 147,223.5 C147,181.250217 181.250217,147 223.5,147 C265.749783,147 300,181.250217 300,223.5 C300,265.749783 265.749783,300 223.5,300 Z"
-                  id="Combined-Shape"></path>
+              <g id="Add-Stock" stroke="none" stroke-width="1" fill="#FFFFFF" fill-rule="evenodd">
+                  <g id="" transform="translate(-344.000000, -54.000000)" fill-rule="nonzero">
+                    <path d="M365.428571,55.7142857 C365.9,55.7142857 366.285714,56.1 366.285714,56.5714286 L366.285714,75.4285714 C366.285714,75.9 365.9,76.2857143 365.428571,76.2857143 L346.571429,76.2857143 C346.1,76.2857143 345.714286,75.9 345.714286,75.4285714 L345.714286,56.5714286 C345.714286,56.1 346.1,55.7142857 346.571429,55.7142857 L365.428571,55.7142857 L365.428571,55.7142857 Z M365.428571,54 L346.571429,54 C345.151786,54 344,55.1517857 344,56.5714286 L344,75.4285714 C344,76.8482143 345.151786,78 346.571429,78 L365.428571,78 C366.848214,78 368,76.8482143 368,75.4285714 L368,56.5714286 C368,55.1517857 366.848214,54 365.428571,54 Z M362.214286,65.0357143 L356.964286,65.0357143 L356.964286,59.7857143 C356.964286,59.4321429 356.675,59.1428571 356.321429,59.1428571 L355.678571,59.1428571 C355.325,59.1428571 355.035714,59.4321429 355.035714,59.7857143 L355.035714,65.0357143 L349.785714,65.0357143 C349.432143,65.0357143 349.142857,65.325 349.142857,65.6785714 L349.142857,66.3214286 C349.142857,66.675 349.432143,66.9642857 349.785714,66.9642857 L355.035714,66.9642857 L355.035714,72.2142857 C355.035714,72.5678571 355.325,72.8571429 355.678571,72.8571429 L356.321429,72.8571429 C356.675,72.8571429 356.964286,72.5678571 356.964286,72.2142857 L356.964286,66.9642857 L362.214286,66.9642857 C362.567857,66.9642857 362.857143,66.675 362.857143,66.3214286 L362.857143,65.6785714 C362.857143,65.325 362.567857,65.0357143 362.214286,65.0357143 Z" id="Shape"></path>
+                </g>
               </g>
             </svg>
           </div>
-          <div (click)="addToList(watchingListId, result.Symbol);$event.stopPropagation()" class="col-1 search__action">
-            <svg class="align-absolute" width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
-                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <div *ngIf="resultInUserList(userStocks, result.Symbol)" (click)="removeStock(result.Symbol);$event.stopPropagation()" class="col-1 search__action">
+            <svg class="align-absolute" width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <defs></defs>
-              <g id="icon_watching--PLUS" fill="#000000" stroke="none" stroke-width="1" fill-rule="evenodd">
-                <path
-                  d="M213.966667,211.966667 L181,211.966667 L181,232.033333 L213.966667,232.033333 L213.966667,265 L234.033333,265 L234.033333,232.033333 L267,232.033333 L267,211.966667 L234.033333,211.966667 L234.033333,179 L213.966667,179 L213.966667,211.966667 Z M171.428571,154.68002 C165.189102,159.477775 159.630502,165.11725 154.922645,171.428571 L128.571429,171.428571 L128.571429,53.5714286 L171.428571,53.5714286 L171.428571,154.68002 Z M300,260.725666 L300,289.285714 C300,295.145089 295.145089,300 289.285714,300 L259.659152,300 C277.129395,291.834943 291.383287,277.936554 300.000007,260.725653 Z M182.142857,147.649982 L182.142857,53.5714286 L253.125,53.5714286 C255.46875,53.5714286 257.645089,55.078125 258.314732,57.421875 L290.107658,168.888637 C274.43528,149.441678 250.420595,137 223.5,137 C208.498306,137 194.399,140.863583 182.14284,147.649992 Z M117.857143,53.5714286 L117.857143,182.142857 C117.857143,188.002232 113.002232,192.857143 107.142857,192.857143 L107.142857,289.285714 C107.142857,295.145089 102.287946,300 96.4285714,300 L10.7142857,300 C4.85491071,300 0,295.145089 0,289.285714 L0,203.571429 L41.6852679,57.421875 C42.3549107,55.078125 44.53125,53.5714286 46.875,53.5714286 L117.857143,53.5714286 Z M123.214286,5.35714286 L123.214286,42.8571429 L64.2857143,42.8571429 L64.2857143,5.35714286 C64.2857143,2.34375 66.6294643,0 69.6428571,0 L117.857143,0 C120.870536,0 123.214286,2.34375 123.214286,5.35714286 Z M235.714286,5.35714286 L235.714286,42.8571429 L176.785714,42.8571429 L176.785714,5.35714286 C176.785714,2.34375 179.129464,0 182.142857,0 L230.357143,0 C233.370536,0 235.714286,2.34375 235.714286,5.35714286 Z M223.5,300 C181.250217,300 147,265.749783 147,223.5 C147,181.250217 181.250217,147 223.5,147 C265.749783,147 300,181.250217 300,223.5 C300,265.749783 265.749783,300 223.5,300 Z"
-                  id="Combined-Shape"></path>
+              <g id="Minus-Stock" stroke="none" stroke-width="1" fill="#FFFFFF" fill-rule="evenodd">
+                <g id="" transform="translate(-18.000000, -451.000000)" fill-rule="nonzero" fill="#FFFFFF">
+                    <path d="M44.7857143,453.142857 C45.375,453.142857 45.8571429,453.625 45.8571429,454.214286 L45.8571429,477.785714 C45.8571429,478.375 45.375,478.857143 44.7857143,478.857143 L21.2142857,478.857143 C20.625,478.857143 20.1428571,478.375 20.1428571,477.785714 L20.1428571,454.214286 C20.1428571,453.625 20.625,453.142857 21.2142857,453.142857 L44.7857143,453.142857 L44.7857143,453.142857 Z M44.7857143,451 L21.2142857,451 C19.4397321,451 18,452.439732 18,454.214286 L18,477.785714 C18,479.560268 19.4397321,481 21.2142857,481 L44.7857143,481 C46.5602679,481 48,479.560268 48,477.785714 L48,454.214286 C48,452.439732 46.5602679,451 44.7857143,451 Z M40.7678571,464.794643 L34.2053571,464.794643 L31.7946429,464.794643 L25.2321429,464.794643 C24.7901786,464.794643 24.4285714,465.15625 24.4285714,465.598214 L24.4285714,466.401786 C24.4285714,466.84375 24.7901786,467.205357 25.2321429,467.205357 L31.7946429,467.205357 L34.2053571,467.205357 L40.7678571,467.205357 C41.2098214,467.205357 41.5714286,466.84375 41.5714286,466.401786 L41.5714286,465.598214 C41.5714286,465.15625 41.2098214,464.794643 40.7678571,464.794643 Z" id="Shape"></path>
+                </g>
               </g>
             </svg>
           </div>
@@ -74,36 +74,92 @@ declare let gtag: Function;
   styleUrls: ['./psp-symbol-search.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
+export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implements OnDestroy {
   @Input('placeholder') placeholder: string;
+  @Input('btn') btn: HTMLElement;
   @ViewChild('search') search: ElementRef;
   @Output('focused') focused: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output('toggleSearch') toggleSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @HostListener('document:click', ['$event']) offClick(e: Event) {
+    e.preventDefault();
+    if (!this.el.nativeElement.contains(e.target) && !this.btn.contains(e.target as Node)) {
+      this.toggleSearch.emit();
+      return;
+    }
+  }
+
+  @HostListener('document:keydown.enter', ['$event']) onEnter(e: KeyboardEvent) {
+    this.searchResults.length ? this.onSubmit(this.searchResults[0].Symbol) : null;
+  }
+
+  private _listId: string;
+  private _uid: string;
 
   public symbolSearchForm: FormControl;
   public searchResults: Array<any>;
-  public holdingListId: string;
-  public watchingListId: string;
+  public userStocks: ListSymbolObj[];
 
   public loading: Subscription;
 
-  constructor(public router: Router,
-              public authService: AuthService,
+  constructor(public authService: AuthService,
               public ideasService: IdeasService,
-              public symbolSearchService: SymbolSearchService) {
-    super(router, authService, ideasService, symbolSearchService);
+              public symbolSearchService: SymbolSearchService,
+              private healthCheck: HealthCheckService,
+              private el: ElementRef,
+              public router: Router,) {
+    super(authService, ideasService, symbolSearchService, router);
     this.symbolSearchForm = new FormControl();
   }
 
-  ngAfterContentInit() {
-    this.search.nativeElement.focus();
-    this.searchResults = [];
-    this.symbolSearchForm.valueChanges
-      .debounceTime(500)
-      .switchMap(val => this.symbolSearchService.symbolLookup(val))
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe(val => {
-        this.searchResults = val;
+  ngOnInit() {
+    this.loading = this.authService.currentUser$
+      .map(usr => this._uid = usr['UID'])
+      .map(res => this._listId = this.authService.userLists[0]['User Lists'].filter(x => x['name'] == this.healthCheck.currentList)[0]['list_id'])
+      .switchMap(listId => {
+        return this.healthCheck.getListSymbols(listId, this._uid)
+      })
+      .take(1)
+      .subscribe(res => {
+        this.userStocks = res['symbols'];
+      })
+  }
+
+  onSubmit(ticker: string) {
+    this.router.navigate(['stock-analysis', ticker.toUpperCase()]);
+    this.toggleSearch.emit();
+    gtag('event', 'search', {'search_term': ticker});
+  }
+
+  addToList(ticker: string) {
+    this.ideasService.addStockIntoList(this._listId.toString(), ticker)
+      .take(1)
+      .subscribe(res => {
+        this.healthCheck.updateMyStocksList();
+        this.toggleSearch.emit();
       });
+    gtag('event', 'search', {'search_term': ticker});
+  }
+
+  removeStock(ticker: string) {
+    this.ideasService.deleteSymbolFromList(this._listId, ticker)
+      .take(1)
+      .subscribe(res => {
+        this.healthCheck.updateMyStocksList();
+        this.toggleSearch.emit();
+      });
+  }
+
+  onClick(ticker: string) {
+    this.router.navigate(['stock-analysis', ticker]);
+    this.toggleSearch.emit();
+    gtag('event', 'search', {'search_term': ticker});
+  }
+
+  resultInUserList(arr: ListSymbolObj[], ticker: string): boolean {
+    if (arr) {
+      return arr.filter(x => x['symbol'] == ticker).length > 0;
+    }
   }
 
 }

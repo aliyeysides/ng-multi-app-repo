@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Power Pulse</title>
+  <base href="/">
+
+  <meta name="description" content="Chaikin Stock Summary Sheet">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+
+  <!-- JS STARTS HERE -->
+
+  <script src="https://use.fontawesome.com/aa9c7466cb.js"></script>
+  <!--   <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/v4-shims.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+  <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+  <script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+          integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+          crossorigin="anonymous"></script>
+  <style>
+
+    .loading-Pulse {
+      background-image: url("assets/imgs/loading_splash--Pulse2.png");
+      background-size: 100% 100%;
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      padding-top: 300px;
+      background-color: rgba(255, 255, 255, 1);
+    }
+
+    .align-absolute {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+
+
+  <!-- User defined js -->
+  <!-- Web animations pollyfill -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.2.2/web-animations.min.js"></script>
+
+
+
+  <link rel="stylesheet" href="assets/styles/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/styles/css/fontawesome-all.css">
+
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  <!-- GOOGLE FONT (OPEN SANS) -->
+  <link href="https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
+  <!-- Enable bootstrap 4 theme -->
+  <link rel="icon" type="image/x-icon" href="favicon--pulse.ico">
+</head>
+<body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Enable bootstrap 4 theme -->
+<script>window.__theme = 'bs4';</script>
+<cpt-pgr-widget-app>
+  <div class="loading loading-Pulse">
+    <div style="width: 100%; position: relative;">
+      <img class="align-absolute" width="239" src="assets/imgs/loading_splash--Pulse__logo.png">
+    </div>
+  </div>
+</cpt-pgr-widget-app>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109763576-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-109763576-2');
+</script>
+
+
+</body>
+</html>

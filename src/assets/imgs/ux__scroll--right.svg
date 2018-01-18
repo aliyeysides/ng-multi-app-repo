@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="100px" viewBox="0 0 50 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>ux__scroll--right</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ux__scroll--right" fill="#EDEDED" fill-rule="nonzero">
+            <g id="angle-right" transform="translate(5.000000, 16.000000)">
+                <path d="M38.9066667,36.6666667 L7.49333333,67.6 C6.24,68.8533333 4.21333333,68.8533333 2.96,67.6 L1.06666667,65.7066667 C-0.186666667,64.4533333 -0.186666667,62.4266667 1.06666667,61.1733333 L28.3466667,34.4 L1.09333333,7.62666667 C-0.16,6.37333333 -0.16,4.34666667 1.09333333,3.09333333 L2.98666667,1.2 C4.24,-0.0533333333 6.26666667,-0.0533333333 7.52,1.2 L38.9333333,32.1333333 C40.16,33.3866667 40.16,35.4133333 38.9066667,36.6666667 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
