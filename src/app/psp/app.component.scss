@@ -409,6 +409,10 @@ sub {
   transition: 0.5s;
   box-shadow: -7px 0 20px 0px rgba(0, 0, 0, 0.2);
 
+  @media screen AND (max-width:575px) {
+    padding-bottom:25px;
+  }
+
   .nav-list {
     padding:15px 0 0px;
 
@@ -974,7 +978,7 @@ sub {
 
   .data {
     font-weight: 400;
-    font-size: 34px;
+    font-size: 32px;
     line-height: 72px;
     color:#ffffff;
     text-align: left;

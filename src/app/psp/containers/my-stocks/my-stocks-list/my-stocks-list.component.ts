@@ -97,7 +97,7 @@ declare var gtag: Function;
                 <img *ngIf="stock.Change<0" class="align-absolute" src="./assets/imgs/icon_arrow-down.svg">
               </div>
               <div class="col-4">
-                <p class="data">(<span *ngIf="stock.Change>0">+</span>{{ stock['Percentage '] | decimal }}%)</p>
+                <p class="data">(<span *ngIf="stock.Change>0">+</span>{{ stock['Percentage '] | decimal }}<sub>%</sub>)</p>
               </div>
             </div>
           </div>
@@ -120,11 +120,11 @@ declare var gtag: Function;
             <!--<p>(<span *ngIf="stock.Change>0">+</span>{{ recent['meta-info']['Percentage '] }}%)</p>-->
           <!--</div>-->
         <!--</li>-->
-      <!--</ul>-->
-      <!--<ul *ngIf="!myStocks?.length">-->
-        <!--<p>Search for a stock to get started.</p>-->
-      <!--</ul>-->
-    <!--</div>-->
+      </ul>
+      <ul *ngIf="!myStocks?.length">
+        <p>Search for a stock to get started.</p>>
+      </ul>
+    </div>
   `,
   styleUrls: ['./my-stocks-list.component.scss']
 })

@@ -433,6 +433,7 @@
 		line-height: 1.4;
 		margin-top:15px;
 		cursor: default;
+		white-space: nowrap;
 	}
 	.label {
 		line-height: 1.1;
@@ -512,7 +513,7 @@
 
 
 .stock-info--stats {
-	padding:5px 0 35px;
+	padding:5px 0 40px;
 
 	.label {
 	}
@@ -534,11 +535,24 @@
 		sub {
 			font-size: 24px;
 			bottom:0;
+
+			@media screen AND (min-width: 1200px) {
+				font-size: 28px;
+			}
+		}
+
+		@media screen AND (min-width: 1200px) {
+			font-size: 40px;
+		}
+
+		@media screen AND (max-width: 370px) {
+			font-size: 30px;
 		}
 	}
 
 	.stock-industry {
-		margin-bottom:30px;
+		margin-top: 5px;
+		margin-bottom:25px;
 	}
 
 	.divider__full {

@@ -185,7 +185,7 @@ declare var gtag: Function;
                    [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">
                   (<span
                   *ngIf="symbolData?.metaInfo[0]['Change']>0">+</span>{{ symbolData ? (symbolData['metaInfo'][0]['Percentage '] | decimal ) : null
-                  }}<sub>%)</sub></p>
+                  }}<sub>%</sub>)</p>
                 <p class="label">% CHG</p>
               </div>
             </div>
@@ -211,7 +211,7 @@ declare var gtag: Function;
               <span class="bold"
                     [ngClass]="{ 'green': timespanPerChange>0, 'red': timespanPerChange<0}">{{ timespanPriceChange | decimal
                 }} &nbsp;({{ timespanPerChange | decimal
-                }}%)</span> over the last:
+                }}<sub>%</sub>)</span> over the last:
             </p>
           </div>
           <div (click)="toggleChartTime('1W')" class="col-2">
@@ -243,18 +243,18 @@ declare var gtag: Function;
         </div>
 
         <!-- STOCK VIEW STATS -->
-        <div class="row stock-info stock-info--stats">
+        <div class="row no-gutters stock-info stock-info--stats">
           <div class="col-12">
             <h2><b>{{ stock }}</b> Stats</h2>
           </div>
           <div class="col-4">
             <p class="data data--large">
-              $ {{ (symbolData ? symbolData['fundamentalData']['Mkt Capitalization'] : null) | marketCap | number:'.2-2'
-              }}B</p>
+              <sub style="display:inline-block; margin-right: -8px;">$</sub> {{ (symbolData ? symbolData['fundamentalData']['Mkt Capitalization'] : null) | marketCap | number:'.2-2'
+              }}<sub>B</sub></p>
             <p class="label">MKT CAP</p>
           </div>
           <div class="col-4">
-            <p class="data data--large">{{ (symbolData ? symbolData['fundamentalData']['Yield'] : null) }}%</p>
+            <p class="data data--large">{{ (symbolData ? symbolData['fundamentalData']['Yield'] : null) }}<sub>%</sub></p>
             <p class="label">YIELD</p>
           </div>
           <div class="col-4">
@@ -1248,19 +1248,19 @@ declare var gtag: Function;
                 <p class="data">{{ research ? research['Details']['Address1'] : null }}</p>
                 <p class="label">Address</p>
               </div>
-              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+              <div class="col-6 col-sm-4 col-md-6 col-lg-4">
                 <p class="data">{{ research ? research['Details']['City'] : null }}</p>
                 <p class="label">City</p>
               </div>
-              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+              <div class="col-6 col-sm-4 col-md-6 col-lg-4">
                 <p class="data">{{ research ? research['Details']['ZipCode'] : null }}</p>
                 <p class="label">Zip</p>
               </div>
-              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+              <div class="col-6 col-sm-4 col-md-6 col-lg-4">
                 <p class="data">{{ research ? research['Details']['PhoneNumber'] : null }}</p>
                 <p class="label">Phone</p>
               </div>
-              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+              <div class="col-6 col-sm-4 col-md-6 col-lg-4">
                 <p class="data">{{ research ? research['Details']['FaxNumber'] : null }}</p>
                 <p class="label">Fax</p>
               </div>
@@ -1270,11 +1270,11 @@ declare var gtag: Function;
                   }}</a></p>
                 <p class="label">Website</p>
               </div>
-              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+              <div class="col-6 col-sm-4 col-md-6 col-lg-4">
                 <p class="data">{{ research ? (research['Details']['EmployeesCount'] | number:'.0') : null }}</p>
                 <p class="label">Full Time Employees</p>
               </div>
-              <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+              <div class="col-6 col-sm-4 col-md-6 col-lg-4">
                 <p class="data">{{ research ? research['Details']['Sector'] : null }}</p>
                 <p class="label">Sector</p>
               </div>
