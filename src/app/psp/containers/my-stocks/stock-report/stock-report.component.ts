@@ -170,22 +170,22 @@ declare var gtag: Function;
             <div class="row no-gutters stock-info stock-info--price">
               <div class="col-12">
                 <p class="current-price"
-                   [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">
-                  <sub>$</sub>{{ symbolData ? (symbolData['metaInfo'][0]['Last'] | decimal ) : null }}</p>
+                   [ngClass]="{'green': stockState ? stockState['Change']>0:null, 'red': stockState ? stockState['Change']<0:null}">
+                  <sub>$</sub>{{ stockState ? (stockState['Last'] | decimal ) : null }}</p>
                 <p class="label">Current</p>
               </div>
               <div class="col-6">
                 <p class="data"
-                   [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">
-                  {{ symbolData ? (symbolData['metaInfo'][0]['Change'] | decimal ) : null }}</p>
+                   [ngClass]="{'green': stockState ? stockState['Change']>0:null, 'red': stockState ? stockState['Change']<0:null}">
+                  {{ stockState ? (stockState['Change'] | decimal ) : null }}</p>
                 <p class="label">$ CHG</p>
               </div>
               <div class="col-6">
                 <p class="data"
-                   [ngClass]="{'green': symbolData ? symbolData['metaInfo'][0]['Change']>0:null, 'red': symbolData ? symbolData['metaInfo'][0]['Change']<0:null}">
+                   [ngClass]="{'green': stockState ? stockState['Change']>0:null, 'red': stockState ? stockState['Change']<0:null}">
                   (<span
-                  *ngIf="symbolData?.metaInfo[0]['Change']>0">+</span>{{ symbolData ? (symbolData['metaInfo'][0]['Percentage '] | decimal ) : null
-                  }}<sub>%</sub>)</p>
+                  *ngIf="stockState?.Change>0">+</span>{{ stockState ? (stockState['Percentage '] | decimal ) : null
+                  }}<sub>%)</sub></p>
                 <p class="label">% CHG</p>
               </div>
             </div>
@@ -1331,6 +1331,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _listId: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _userStocks: BehaviorSubject<ListSymbolObj[]> = new BehaviorSubject<ListSymbolObj[]>([] as ListSymbolObj[]);
+  private _stockState: BehaviorSubject<ListSymbolObj> = new BehaviorSubject<ListSymbolObj>({} as ListSymbolObj);
   private _apiHostName = this.utilService.getApiHostName();
 
   @Input('stock') stock: string;
@@ -1352,6 +1353,15 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   get userStocks() {
     return this._userStocks.getValue();
+  }
+
+  @Input('stockState')
+  set stockState(val: ListSymbolObj) {
+    this._stockState.next(val);
+  }
+
+  get stockState() {
+    return this._stockState.getValue();
   }
 
   @Output('closeClicked') closeClicked: EventEmitter<void> = new EventEmitter<void>();
@@ -1446,7 +1456,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           if (!this.is_etf) {
             if (this.reportDataSub) this.reportDataSub.unsubscribe();
             this.getReportData(this.stock);
-            this.createSymbolDataRx(this.stock);
             this.getMainChart(this.stock);
           }
           this.cd.detectChanges();
@@ -1464,18 +1473,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   ngOnDestroy() {
     this._ngUnsubscribe.next();
     this._ngUnsubscribe.complete();
-  }
-
-  createSymbolDataRx(stock: string) {
-    this.reportDataSub = Observable.timer(0, 30 * 1000).switchMap(() => {
-      return this.reportService.getSymbolData(stock);
-    })
-      .filter(x => x != undefined)
-      .map(res => {
-        this.symbolData = res;
-        this.cd.markForCheck();
-      })
-      .subscribe()
   }
 
   getReportData(stock: string) {

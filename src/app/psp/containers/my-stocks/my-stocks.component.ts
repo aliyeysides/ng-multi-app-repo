@@ -33,7 +33,8 @@ declare var gtag: Function;
                                 [listId]="listId" (addStockClicked)="addStock($event)"
                                 (removeStockClicked)="removeStock($event)" (closeClicked)="closeReport()"
                                 [show]="!!selectedStock || desktopView"
-                                [stock]="selectedStock">
+                                [stock]="selectedStock"
+                                [stockState]="selectedStockSymbolData">
           </cpt-psp-stock-report>
         </div>
 
@@ -61,6 +62,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
 
   listId: string;
   selectedStock: string | boolean;
+  selectedStockSymbolData: ListSymbolObj;
   desktopView: boolean;
   userStocks: ListSymbolObj[];
   powerBar: string;
@@ -103,6 +105,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       })
       .subscribe(([symbols, calc]) => {
         this.userStocks = symbols['symbols'];
+        this.selectedStockSymbolData = this.userStocks.filter(x => x['symbol'] == this.selectedStock)[0];
         this.healthCheck.setUserStocks(this.userStocks);
         this.powerBar = symbols['PowerBar'];
         this.healthCheck.setPortfolioStatus(calc[Object.keys(calc)[0]]);
@@ -121,14 +124,14 @@ export class MyStocksComponent implements OnInit, OnDestroy {
         }
       );
 
-    // TODO: Uncomment for recently viewed functionality
-    const recentlyViewedString = localStorage.getItem('recentlyViewed');
-    if (recentlyViewedString) {
-      const viewed = JSON.parse(recentlyViewedString).symbols;
-      Observable.from(viewed)
-        .flatMap(ticker => this.ideasService.getStockCardData(ticker as string))
-        .subscribe(res => this.recentlyViewed.push(res));
-    }
+    // // TODO: Uncomment for recently viewed functionality
+    // const recentlyViewedString = localStorage.getItem('recentlyViewed');
+    // if (recentlyViewedString) {
+    //   const viewed = JSON.parse(recentlyViewedString).symbols;
+    //   Observable.from(viewed)
+    //     .flatMap(ticker => this.ideasService.getStockCardData(ticker as string))
+    //     .subscribe(res => this.recentlyViewed.push(res));
+    // }
   }
 
   ngOnDestroy() {
@@ -142,16 +145,9 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       .take(1)
       .subscribe(res => {
         this.userStocks = res['symbols'];
+        this.selectedStockSymbolData = this.userStocks.filter(x => x['symbol'] == this.selectedStock)[0];
         this.healthCheck.setUserStocks(res['symbols']);
         this.powerBar = res['PowerBar'];
-        // this.recentlyViewed = [];
-        // const recentlyViewedString = localStorage.getItem('recentlyViewed');
-        // if (recentlyViewedString) {
-        //   const viewed = JSON.parse(recentlyViewedString).symbols;
-        //   Observable.from(viewed)
-        //     .flatMap(ticker => this.ideasService.getStockCardData(ticker as string))
-        //     .subscribe(res => this.recentlyViewed.push(res));
-        // }
       })
   }
 
@@ -176,6 +172,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   selectStock(ticker: string) {
+    this.updateData();
     this.gotoReport(ticker);
     gtag('event', 'stock_clicked', {
       'event_category': 'engagement',
