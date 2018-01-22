@@ -8,19 +8,28 @@ import {AuthService} from '../../../services/auth.service';
 @Component({
   selector: 'cpt-dashboard',
   template: `
-    <div class="container-fluid dashboard">
+    <div class="container-fluid dashboard__container">
       <div class="row">
-        <div class="col-md-6 col-lg-7 col-xl-8">
-          <cpt-bearish-insights></cpt-bearish-insights>
-          <div class="bear-lists__dashboard">
-            <cpt-idea-lists [lists]="allLists" (listSelected)="listSelected($event)"></cpt-idea-lists>
+
+        <div class="col-12 bearish-insights__container">
+          <div class="row no-gutters">
+            <div class="col-12 col-md-7 col-lg-8">
+              <cpt-bearish-insights></cpt-bearish-insights>
+            </div>
+            <div class="col-12 col-md-5 col-lg-4">
+              <cpt-bear-of-the-week></cpt-bear-of-the-week>
+            </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-          <cpt-bear-of-the-week></cpt-bear-of-the-week>
-          <cpt-user-lists></cpt-user-lists>
+
+        <div class="col-12 col-md-5 col-lg-4">
           <cpt-best-bear-ideas></cpt-best-bear-ideas>
         </div>
+
+        <div class="col-12 col-md-7 col-lg-8">
+          <cpt-idea-lists [lists]="allLists" (listSelected)="listSelected($event)"></cpt-idea-lists>
+        </div>
+
       </div>
     </div>
   `,

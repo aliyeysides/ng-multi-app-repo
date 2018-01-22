@@ -12,8 +12,8 @@ declare let gtag: Function;
 @Component({
   selector: 'cpt-bearish-insights',
   template: `
-    <div class="insights__container insights__container--large insights__container--mainbear">
-      <div class="post-head post-head--insights">
+    <div class="insights__container">
+      <div class="post-head">
         <h2>Mastering The Bear</h2>
         <div class="divider-h"></div>
         <p class="header__post-date">{{ post ? post['post_date_formatted'] : null }}</p>

@@ -14,20 +14,6 @@
 		z-index: 8;
 	}
 }
-.stocklist__overview--green {
-  background: $gradient--pulse-green;
-
-	.list-name {
-	  	color:$pulse-green;
-	}
-}
-.stocklist__overview--red {
-  background: $gradient--pulse-red;
-
-  	.list-name {
-  		color:$pulse-red;
-	}
-}
 
 .component--stockview__container {
 	position:fixed;
