@@ -23,6 +23,7 @@ import {SignalService} from '../services/signal.service';
 
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {NotificationsService} from 'angular2-notifications/dist';
+import {TooltipModule} from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {NotificationsService} from 'angular2-notifications/dist';
     HttpModule,
     SharedModule,
     BrowserAnimationsModule,
+    TooltipModule.forRoot(),
     RouterModule.forRoot(ROUTES, {useHash: true}),
     BusyModule.forRoot(loadingMaskConfig),
     SimpleNotificationsModule.forRoot(),
