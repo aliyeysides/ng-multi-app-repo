@@ -1,6 +1,6 @@
 import {
   ChangeDetectionStrategy, ChangeDetectorRef,
-  Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output,
+  Component, ElementRef, EventEmitter, Input, NgZone, OnChanges, OnDestroy, OnInit, Output,
   SimpleChanges, ViewChild
 } from '@angular/core';
 import {ReportService} from '../../../../services/report.service';
@@ -17,6 +17,7 @@ import {ListSymbolObj} from '../../../../shared/models/health-check';
 import {AuthService} from '../../../../services/auth.service';
 import {SymbolSearchService} from '../../../../services/symbol-search.service';
 import {Location} from '@angular/common';
+import {fadeIn} from '../../../../shared/animations/fadeIn';
 
 declare var zingchart: any;
 declare var gtag: Function;
@@ -167,7 +168,7 @@ declare var gtag: Function;
 
           <div class="col-12 col-md-5 col-xl-5 align-self-center">
             <!-- STOCK VIEW PRICE -->
-            <div class="row no-gutters stock-info stock-info--price">
+            <div class="row no-gutters stock-info stock-info--price" [@fadeIn]="fadeInPriceInfoState" (@fadeIn.done)="resetPriceInfo()">
               <div class="col-12">
                 <p class="current-price"
                    [ngClass]="{'green': stockState ? stockState['Change']>0:null, 'red': stockState ? stockState['Change']<0:null}">
@@ -1319,6 +1320,7 @@ declare var gtag: Function;
       </div>
     </div>
   `,
+  animations: [fadeIn()],
   styleUrls: ['./stock-report.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -1359,6 +1361,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input('stockState')
   set stockState(val: ListSymbolObj) {
+    if (val && this._stockState.getValue() && val['Last'] != this._stockState.getValue()['Last']) {
+      this.triggerPriceInfoAnim();
+    }
     this._stockState.next(val);
   }
 
@@ -1437,12 +1442,15 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   is_etf: boolean;
 
+  fadeInPriceInfoState: string;
+
   constructor(private reportService: ReportService,
               private authService: AuthService,
               private signalService: SignalService,
               private ideasService: IdeasService,
               private utilService: UtilService,
               private cd: ChangeDetectorRef,
+              private zone: NgZone,
               private location: Location,
               private symbolSearchService: SymbolSearchService,
               private router: Router) {
@@ -2773,6 +2781,16 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   goBack() {
     this.location.back();
+  }
+
+  triggerPriceInfoAnim() {
+    this.fadeInPriceInfoState = 'active';
+  }
+
+  resetPriceInfo() {
+    this.zone.run(() => {
+      this.fadeInPriceInfoState = 'inactive';
+    });
   }
 
 }
