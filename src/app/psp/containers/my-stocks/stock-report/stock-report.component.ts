@@ -171,20 +171,20 @@ declare var gtag: Function;
               <div class="col-12">
                 <p class="current-price"
                    [ngClass]="{'green': stockState ? stockState['Change']>0:null, 'red': stockState ? stockState['Change']<0:null}">
-                  <sub>$</sub>{{ stockState ? (stockState['Last'] | decimal ) : null }}</p>
+                  <sub>$</sub>{{ stockState ? (stockState['Last'] | decimal ) : ( symbolData?.metaInfo[0]['Last'] | decimal ) }}</p>
                 <p class="label">Current</p>
               </div>
               <div class="col-6">
                 <p class="data"
                    [ngClass]="{'green': stockState ? stockState['Change']>0:null, 'red': stockState ? stockState['Change']<0:null}">
-                  {{ stockState ? (stockState['Change'] | decimal ) : null }}</p>
+                  {{ stockState ? (stockState['Change'] | decimal ) : ( symbolData?.metaInfo[0]['Change'] | decimal ) }}</p>
                 <p class="label">$ CHG</p>
               </div>
               <div class="col-6">
                 <p class="data"
                    [ngClass]="{'green': stockState ? stockState['Change']>0:null, 'red': stockState ? stockState['Change']<0:null}">
                   (<span
-                  *ngIf="stockState?.Change>0">+</span>{{ stockState ? (stockState['Percentage '] | decimal ) : null
+                  *ngIf="stockState?.Change>0">+</span>{{ stockState ? (stockState['Percentage '] | decimal ) : ( symbolData?.metaInfo[0]['Percentage '] | decimal )
                   }}<sub>%)</sub></p>
                 <p class="label">% CHG</p>
               </div>
@@ -249,12 +249,14 @@ declare var gtag: Function;
           </div>
           <div class="col-4">
             <p class="data data--large">
-              <sub style="display:inline-block; margin-right: -8px;">$</sub> {{ (symbolData ? symbolData['fundamentalData']['Mkt Capitalization'] : null) | marketCap | number:'.2-2'
+              <sub style="display:inline-block; margin-right: -8px;">$</sub>
+              {{ (symbolData ? symbolData['fundamentalData']['Mkt Capitalization'] : null) | marketCap | number:'.2-2'
               }}<sub>B</sub></p>
             <p class="label">MKT CAP</p>
           </div>
           <div class="col-4">
-            <p class="data data--large">{{ (symbolData ? symbolData['fundamentalData']['Yield'] : null) }}<sub>%</sub></p>
+            <p class="data data--large">{{ (symbolData ? symbolData['fundamentalData']['Yield'] : null) }}<sub>%</sub>
+            </p>
             <p class="label">YIELD</p>
           </div>
           <div class="col-4">
@@ -1266,7 +1268,7 @@ declare var gtag: Function;
               </div>
               <div class="col-12 col-sm-4 col-md-6 col-lg-4">
                 <p class="data"><a target="_blank"
-                                               href="{{ research ? research['Details']['URL'] : null }}">{{ research ? research['Details']['URL'] : null
+                                   href="{{ research ? research['Details']['URL'] : null }}">{{ research ? research['Details']['URL'] : null
                   }}</a></p>
                 <p class="label">Website</p>
               </div>
@@ -1496,7 +1498,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe(([summary, competitors, research, headlines]) => {
         this.summary = summary;
         const sen = this.summary['pgrContextSummary'][0]['mainSentence'];
-        Object.assign(this.summary['pgrContextSummary'][0], {mainSentenceTM: sen.replace(/<TRADEMARK>/, '')});
+        sen ? Object.assign(this.summary['pgrContextSummary'][0], {mainSentenceTM: sen.replace(/<TRADEMARK>/, '')}) : null;
 
         this.competitors = competitors['compititors'];
         this.research = research;
@@ -1926,8 +1928,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       },
       scaleY: {
         blended: true,
-        maxValue: Math.max(...yValues,...values),
-        minValue: Math.min(...yValues,...values),
+        maxValue: Math.max(...yValues, ...values),
+        minValue: Math.min(...yValues, ...values),
         guide: {
           visible: false,
           lineStyle: 'solid',

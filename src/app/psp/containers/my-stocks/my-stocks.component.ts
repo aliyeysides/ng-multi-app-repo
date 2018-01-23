@@ -10,6 +10,7 @@ import {Observable} from 'rxjs/Observable';
 import {SignalService} from '../../../services/signal.service';
 
 import * as moment from 'moment';
+import {ReportService} from '../../../services/report.service';
 
 declare var gtag: Function;
 
@@ -67,12 +68,14 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   userStocks: ListSymbolObj[];
   powerBar: string;
   loading: Subscription;
+  selectedStockSub: Subscription;
   allUserLists: object[];
   currentList: string;
   recentlyViewed: object[] = [];
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService,
+              private reportService: ReportService,
               private ideasService: IdeasService,
               private route: ActivatedRoute,
               private router: Router,
@@ -105,7 +108,6 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       })
       .subscribe(([symbols, calc]) => {
         this.userStocks = symbols['symbols'];
-        this.selectedStockSymbolData = this.userStocks.filter(x => x['symbol'] == this.selectedStock)[0];
         this.healthCheck.setUserStocks(this.userStocks);
         this.powerBar = symbols['PowerBar'];
         this.healthCheck.setPortfolioStatus(calc[Object.keys(calc)[0]]);
@@ -119,7 +121,9 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(params => {
           if (params.symbol) {
+            if (this.selectedStockSub) this.selectedStockSub.unsubscribe();
             this.selectedStock = params.symbol.slice();
+            this.createSymbolDataRx(params.symbol);
           }
         }
       );
@@ -145,10 +149,20 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       .take(1)
       .subscribe(res => {
         this.userStocks = res['symbols'];
-        this.selectedStockSymbolData = this.userStocks.filter(x => x['symbol'] == this.selectedStock)[0];
         this.healthCheck.setUserStocks(res['symbols']);
         this.powerBar = res['PowerBar'];
       })
+  }
+
+  createSymbolDataRx(stock: string) {
+    this.selectedStockSub = Observable.timer(0, 30 * 1000).switchMap(() => {
+      return this.reportService.getSymbolData(stock);
+    })
+      .filter(x => x != undefined)
+      .map(res => {
+        this.selectedStockSymbolData = res['metaInfo'][0];
+      })
+      .subscribe()
   }
 
   addStock(ticker: string) {
