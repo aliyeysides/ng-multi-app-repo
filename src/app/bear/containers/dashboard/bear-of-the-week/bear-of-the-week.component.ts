@@ -15,17 +15,17 @@ declare let gtag: Function;
 @Component({
   selector: 'cpt-bear-of-the-week',
   template: `
-    <div class="insights__container insights__container--small" [ngBusy]="loading">
-      <div class="post-head post-head--pick">
+    <div class="dashboard__panel dashboard__panel--bearpick" [ngBusy]="loading">
+      <div class="dash-head">
         <h4>Bear of the Week</h4>
         <div class="divider-h"></div>
         <p class="header__post-date">{{ post ? post['post_date_formatted'] : null }}</p>
-        <a (click)="openPreviousModal()" class="post-head__button">
+        <a (click)="openPreviousModal()" class="dash-head__button">
           <i class="fa fa-calendar" aria-hidden="true"></i>
           <span>&nbsp;Previous</span>
         </a>
       </div>
-      <div class="post-body post-body--bearpick">
+      <div class="dash-body dash-body--bearpick">
         <div class="container">
           <div class="row no-gutters">
             <div class="col-6">

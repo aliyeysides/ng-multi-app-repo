@@ -8,11 +8,11 @@ import {AuthService} from '../../../services/auth.service';
 @Component({
   selector: 'cpt-dashboard',
   template: `
-    <div class="container-fluid dashboard__container">
-      <div class="row">
+    <div class="container-fluid dashboard">
+      <div class="row bearish-insights__container">
 
-        <div class="col-12 bearish-insights__container">
-          <div class="row no-gutters">
+        <div class="col-12">
+          <div class="row" style="height: 100%;">
             <div class="col-12 col-md-7 col-lg-8">
               <cpt-bearish-insights></cpt-bearish-insights>
             </div>
@@ -21,6 +21,9 @@ import {AuthService} from '../../../services/auth.service';
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="row bearish-ideas__container">
 
         <div class="col-12 col-md-5 col-lg-4">
           <cpt-best-bear-ideas></cpt-best-bear-ideas>

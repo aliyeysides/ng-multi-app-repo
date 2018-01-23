@@ -1,14 +1,23 @@
  @import 'variables';
 
  .dashboard {
- 	padding: 20px 25px 70px 25px;
- }
+ 	height: 100%;
+ 	padding:0 15px;
+ 
+	.bearish-insights__container {
+		height: 44%;
+		padding: 1% 1.5%;
+		overflow: hidden;
+		position:relative;
+		background-image: url("./../../../../assets/imgs/BG__bearish-insights__container.png");
+	    background-repeat: no-repeat;
+	    background-size: cover; 
+	    background-position: center;
+	    border-left:1px solid #ddd;
+	}
 
-.bearish-insights__container {
-	height: 400px;
-	overflow: hidden;
-	background-image: url("./../../../../assets/imgs/BG__bearish-insights__container.png");
-    background-repeat: no-repeat;
-    background-size: cover; 
-    background-position: center;
+	.bearish-ideas__container {
+		height: 50%;
+		padding: 2% 1%;
+	}
 }

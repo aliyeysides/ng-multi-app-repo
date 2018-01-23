@@ -13,20 +13,23 @@ declare let gtag: Function;
   selector: 'cpt-bearish-insights',
   template: `
     <div class="insights__container">
-      <div class="post-head">
-        <h2>Mastering The Bear</h2>
-        <div class="divider-h"></div>
-        <p class="header__post-date">{{ post ? post['post_date_formatted'] : null }}</p>
-        <a (click)="openPreviousModal()" class="post-head__button">
-          <i class="fa fa-calendar" aria-hidden="true"></i>
-          <span>&nbsp;Previous</span>
-        </a>
+      <div class="post-head row">
+        <div class="col-6 post-head__logo">
+          <img src="./assets/imgs/logo__bearish-insights.png">
+        </div>
+        <div class="col-6 post-head__date">
+          <p class="">{{ post ? post['post_date_formatted'] : null }}</p>
+          <a (click)="openPreviousModal()" class="post-head__button">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <span>&nbsp;Previous</span>
+          </a>
+        </div>
       </div>
-      <div class="post-body post-body--insights" [ngBusy]="loading">
+      <div class="row post-body post-body--insights" [ngBusy]="loading">
         <div [innerHtml]="commentary"></div>
       </div>
-      <div (click)="openCommentaryModal()" class="link__read-all">
-        <a>Read the full commentary &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+      <div (click)="openCommentaryModal()" class="row no-gutters link__read-all">
+        <a>Read the Weekly Newsletter &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
       </div>
     </div>
   `,
