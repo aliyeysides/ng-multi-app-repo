@@ -149,6 +149,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       .take(1)
       .subscribe(res => {
         this.userStocks = res['symbols'];
+        this.selectedStockSymbolData = this.userStocks.filter(x => x['symbol'] == this.selectedStock)[0];
         this.healthCheck.setUserStocks(res['symbols']);
         this.powerBar = res['PowerBar'];
       })
