@@ -1192,7 +1192,7 @@ declare var gtag: Function;
           </div>
 
           <div class="col-12 col-md-10 col-lg-6 col-xl-5 chart-list">
-            <h4>Revenue Compairson</h4>
+            <h4>Revenue Comparison</h4>
             <div class="divider"></div>
             <ul>
               <li class="row no-gutters col-headers">
