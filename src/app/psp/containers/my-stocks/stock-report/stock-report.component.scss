@@ -118,6 +118,10 @@
 			border: $line--white;
 
 		}
+		@media screen AND (min-width:1200px) {
+			width: 32%;
+		}
+
 		@media screen AND (max-width:1023px) {
 			right: 0;
 		}
@@ -144,12 +148,12 @@
 
 			@media screen AND (min-width:768px) {
 				font-size: 40px;
-				margin: 0 5% 0 9%;
+				margin: 0 4% 0 9%;
 			}
 
 			@media screen AND (min-width:1200px) {
 				font-size: 40px;
-				margin: 0 4% 0 7%;
+				margin: 0 3% 0 7%;
 			}
 		}
 
@@ -160,13 +164,22 @@
 			float: left;
 			font-size: 25px;
 			cursor:pointer;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			width: 35%;
 
 			@media screen AND (min-width:768px) {
 				font-size: 30px;
 			}
 
+			@media screen AND (max-width:939px) {
+				width: 63%;
+			}
+
 			@media screen AND (min-width:1200px) {
-				font-size: 38px;
+				font-size: 35px;
+				width: 43%;
 			}
 		}
 	}

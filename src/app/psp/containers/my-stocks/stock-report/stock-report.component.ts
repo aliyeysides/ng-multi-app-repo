@@ -186,7 +186,7 @@ declare var gtag: Function;
                    [ngClass]="{'green': stockState ? stockState['Change']>0:null, 'red': stockState ? stockState['Change']<0:null}">
                   (<span
                   *ngIf="stockState?.Change>0">+</span>{{ stockState ? (stockState['Percentage '] | decimal ) : ( symbolData?.metaInfo[0]['Percentage '] | decimal )
-                  }}<sub>%)</sub></p>
+                  }}<sub>%</sub>)</p>
                 <p class="label">% CHG</p>
               </div>
             </div>
