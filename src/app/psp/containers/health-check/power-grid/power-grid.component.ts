@@ -16,7 +16,7 @@ declare var gtag: Function;
         <div class="col-12 col-xl-10" style="margin-bottom: 20px;">
           <h2><span class="hidden-xs-down">Chaikin</span> Power Grid</h2>
           <p class="paragraph">Holding strong stocks in strong Industry Groups can help improve your investment results.
-            In the following display, Industry Groups containing your stocks are ordered to show the 8 strongest to 8 weakest Industry Groups.</p>
+            In the following display, Industry Groups containing your stocks are ordered to show the 7 strongest to 7 weakest Industry Groups.</p>
           <p class="caption"><b>Note:</b> Neutral stocks are not displayed.
           </p>
         </div>
