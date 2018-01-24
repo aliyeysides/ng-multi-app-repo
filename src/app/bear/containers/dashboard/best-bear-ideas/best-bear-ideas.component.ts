@@ -13,14 +13,18 @@ declare let gtag: Function;
 @Component({
   selector: 'cpt-best-bear-ideas',
   template: `
-    <div class="insights__container insights__container--list">
-      <div class="post-head">
-        <div class="clearfix">
-          <h4>Best Bear Ideas</h4>
-          <a (click)="viewBearList()" class="post-head__button">
+    <div class="dashboard__panel dashboard__panel--list">
+      <div class="dash-head">
+        <div class="row no-gutters">
+          <div class="col-8">
+            <h4>Best Bear Ideas</h4>
+          </div>
+          <div class="col-4">
+            <a (click)="viewBearList()" class="dash-head__button">
             <i class="fa fa-external-link-square" aria-hidden="true"></i>
             <span>&nbsp;View List</span>
-          </a>
+            </a>
+          </div>
         </div>
         <div class="col-header__container row no-gutters">
           <div class="col-header col-2">Rating</div>
@@ -30,7 +34,7 @@ declare let gtag: Function;
           <div class="col-header col-3">% Chg</div>
         </div>
       </div>
-      <ul [ngBusy]="loading" class="post-body post-body--bearlist">
+      <ul [ngBusy]="loading" class="dash-body dash-body--bearlist">
         <li *ngFor="let stock of bestBearIdeas" class="row no-gutters">
           <div class="col-2 stock__PGR">
             <img class="align-absolute" src="{{ appendPGRImage(stock?.PGR, stock?.raw_PGR) }}">

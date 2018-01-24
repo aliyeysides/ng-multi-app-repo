@@ -9,18 +9,30 @@ import {AuthService} from '../../../services/auth.service';
   selector: 'cpt-dashboard',
   template: `
     <div class="container-fluid dashboard">
-      <div class="row">
-        <div class="col-md-6 col-lg-7 col-xl-8">
-          <cpt-bearish-insights></cpt-bearish-insights>
-          <div class="bear-lists__dashboard">
-            <cpt-idea-lists [lists]="allLists" (listSelected)="listSelected($event)"></cpt-idea-lists>
+      <div class="row bearish-insights__container">
+
+        <div class="col-12">
+          <div class="row" style="height: 100%;">
+            <div class="col-12 col-md-7 col-lg-8">
+              <cpt-bearish-insights></cpt-bearish-insights>
+            </div>
+            <div class="col-12 col-md-5 col-lg-4">
+              <cpt-bear-of-the-week></cpt-bear-of-the-week>
+            </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-          <cpt-bear-of-the-week></cpt-bear-of-the-week>
-          <cpt-user-lists></cpt-user-lists>
+      </div>
+
+      <div class="row bearish-ideas__container">
+
+        <div class="col-12 col-md-5 col-lg-4">
           <cpt-best-bear-ideas></cpt-best-bear-ideas>
         </div>
+
+        <div class="col-12 col-md-7 col-lg-8">
+          <cpt-idea-lists [lists]="allLists" (listSelected)="listSelected($event)"></cpt-idea-lists>
+        </div>
+
       </div>
     </div>
   `,

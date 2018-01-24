@@ -4,13 +4,10 @@ import { Component, OnInit } from '@angular/core';
   selector: 'cpt-bear-brand',
   template: `
       <div class="sidebar__logo sidebar__logo--open">
-        <img class="align-absolute" src="./assets/imgs/logo-chaikin-W.svg" alt="logo">
+        <img class="align-absolute" src="./assets/imgs/logo_bear.png" alt="logo">
       </div>
       <div class="sidebar__logo sidebar__logo--collapsed">
-        <img class="align-absolute" src="./assets/imgs/logo-chaikin-arch.svg" alt="logo">
-      </div>
-      <div class="tagline">
-        <p>Mastering The Bear</p>
+        <img class="align-absolute" src="./assets/imgs/logo_bear--collapsed.png" alt="logo">
       </div>
   `,
   styleUrls: ['./bear-brand.component.scss']

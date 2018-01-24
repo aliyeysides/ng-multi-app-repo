@@ -1,53 +1,38 @@
 @import 'variables';
 
 
+.insights__container {
+	padding-top: 10px;
 
-.insights__container.insights__container--mainbear {
-	height: 480px;
-	overflow: hidden;
-  margin-bottom: 25px;
+	.post-head {
+		margin-bottom:20px;
 
-  .post-head--insights {
-    .divider-h {
-      @media screen and (max-width: 1120px) and (min-width: 767px) {
-        display: none;
-      }
-    }
+	    h2 {
+	      	color:#ffffff;
+	    }
+	    .post-head__logo {
+		    img {
+		        width: 280px;
+		        height: auto;
+		    }
+	    }
+	    .post-head__date {
+	      	color: #FFFFFF;
+	      	text-align: right;
 
-    .header__post-date {
-      @media screen and (max-width: 1120px) and (min-width: 767px) {
-        display: none;
-      }
-    }
-  } 
+	      	p {
+
+	      	}
+	    }
+	}
+
+	.post-body.post-body--insights {
+
+	}
 
 	.link__read-all {
-    z-index: 200;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    height: 50px;
-    background-color: #ffffff;
-
-    a {
-      width: 100%;
-      color: $link-blue;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      position: absolute;
-      bottom:15px;
-      text-align: center;
-
-      &:hover {
-        color: $link-blue;
-      }
-    }
-  }
-
-  @media screen and (max-height: 800px) {
-    height: 445px;
-    margin-bottom: 15px;
-  }
+		color:#CF263E;
+		font-weight: 700;
+		font-size: 16px;
+	}
 }
-

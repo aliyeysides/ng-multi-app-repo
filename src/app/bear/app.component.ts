@@ -35,9 +35,6 @@ declare let gtag: Function;
 
     <div *ngIf="!isOpen" class="sidebar-collapsed">
       <cpt-bear-brand></cpt-bear-brand>
-      <div class="sub-title__icon">
-        <img src="./assets/imgs/img_list-classicbears.svg">
-      </div>
       <div class="side-nav__rule">
         <p>&ndash;&ndash;&ndash;&ndash;&ndash;&ndash;</p>
       </div>
