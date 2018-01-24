@@ -40,9 +40,9 @@ declare var gtag: Function;
           </p>
         </div>
         <div class="col-12 col-md-4 col-xl-3 align-self-center text-md-left" style="padding:0 10px;">
-          <p>compared to the <span (click)="getPHCReportforListId('44493')" class="market">S&amp;P 500</span> ---
-            <span class="market market--change"> 
-              <span *ngIf="isSPYUp()">Up +</span>
+          <p>compared to the <button (click)="getPHCReportforListId('44493')" class="market">S&amp;P 500</button> &mdash;&mdash;
+            <span class="market--change"> 
+              <span *ngIf="isSPYUp()">Up </span>
               <span *ngIf="!isSPYUp()">Down </span>{{ calculations?.SPYPercentageChange | number:'.2-2' }}%
             </span>
             over the same timespan.
