@@ -144,11 +144,11 @@
 			font-weight: 700;
 			font-size: 36px;
 			float: left;
-			margin: 0 4% 0 16%;
+			margin: 0 4% 0 13%;
 
 			@media screen AND (min-width:768px) {
 				font-size: 40px;
-				margin: 0 4% 0 9%;
+				margin: 0 4% 0 8%;
 			}
 
 			@media screen AND (min-width:1200px) {
@@ -162,19 +162,23 @@
 			line-height: 64px;
 			color:#ffffff;
 			float: left;
-			font-size: 25px;
+			font-size: 24px;
 			cursor:pointer;
 			overflow: hidden;
 			white-space: nowrap;
 			text-overflow: ellipsis;
 			width: 35%;
 
+			@media screen AND (max-width:500px) {
+				width: 53%;
+			}
+
 			@media screen AND (min-width:768px) {
 				font-size: 30px;
 			}
 
-			@media screen AND (max-width:939px) {
-				width: 63%;
+			@media screen AND (min-width:501px) AND (max-width:939px) {
+				width: 62%;
 			}
 
 			@media screen AND (min-width:1200px) {
@@ -528,9 +532,6 @@
 .stock-info--stats {
 	padding:5px 0 40px;
 
-	.label {
-	}
-
 	.data {
 		font-size: 24px;
 		font-weight: 400;
@@ -559,7 +560,7 @@
 		}
 
 		@media screen AND (max-width: 370px) {
-			font-size: 30px;
+			font-size: 28px;
 		}
 	}
 
