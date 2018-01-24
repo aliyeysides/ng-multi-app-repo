@@ -480,7 +480,7 @@ declare var gtag: Function;
                     </tr>
                     <tr>
                       <td class="label">PEG</td>
-                      <td class="data">{{ (competitors && competitors[0]['PEG']) ? (competitors[0]['PEG'] | decimal ) : null }}</td>
+                      <td class="data">{{ (competitors?.length && competitors[0]['PEG']) ? (competitors[0]['PEG'] | decimal ) : null }}</td>
                     </tr>
                     <tr>
                       <td class="label">Price to Book</td>
