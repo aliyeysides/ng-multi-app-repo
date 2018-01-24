@@ -113,20 +113,18 @@ export class MyStocksComponent implements OnInit, OnDestroy {
         this.healthCheck.setPortfolioStatus(calc[Object.keys(calc)[0]]);
       });
 
-    Observable.interval(30 * 1000)
-      .takeUntil(this._ngUnsubscribe)
-      .subscribe(res => this.updateData());
-
     this.route.params
       .takeUntil(this._ngUnsubscribe)
       .subscribe(params => {
-          if (params.symbol) {
-            if (this.selectedStockSub) this.selectedStockSub.unsubscribe();
-            this.selectedStock = params.symbol.slice();
-            this.createSymbolDataRx(params.symbol);
-          }
+        if (params.symbol) {
+          if (this.selectedStockSub) this.selectedStockSub.unsubscribe();
+          this.selectedStock = params.symbol.slice();
+          this.createSymbolDataRx(params.symbol);
+          Observable.interval(30 * 1000)
+            .takeUntil(this._ngUnsubscribe)
+            .subscribe(res => this.updateData());
         }
-      );
+      });
 
     // // TODO: Uncomment for recently viewed functionality
     // const recentlyViewedString = localStorage.getItem('recentlyViewed');
@@ -149,7 +147,9 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       .take(1)
       .subscribe(res => {
         this.userStocks = res['symbols'];
-        this.selectedStockSymbolData = this.userStocks.filter(x => x['symbol'] == this.selectedStock)[0];
+        if (this.resultInUserList(this.userStocks, this.selectedStock as string)) {
+          this.selectedStockSymbolData = this.userStocks.filter(x => x['symbol'] == this.selectedStock)[0];
+        }
         this.healthCheck.setUserStocks(res['symbols']);
         this.powerBar = res['PowerBar'];
       })
@@ -205,6 +205,12 @@ export class MyStocksComponent implements OnInit, OnDestroy {
 
   appendPGRImage(pgr, rawPgr) {
     return this.signalService.appendPGRImage(pgr, rawPgr);
+  }
+
+  resultInUserList(arr: ListSymbolObj[], ticker: string): boolean {
+    if (arr) {
+      return arr.filter(x => x['symbol'] == ticker).length > 0;
+    }
   }
 
 }
