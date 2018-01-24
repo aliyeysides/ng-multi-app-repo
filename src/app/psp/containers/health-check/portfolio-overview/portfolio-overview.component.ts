@@ -40,7 +40,7 @@ declare var gtag: Function;
           </p>
         </div>
         <div class="col-12 col-md-4 col-xl-3 align-self-center text-md-left" style="padding:0 10px;">
-          <p>compared to the <span class="market">S&amp;P 500</span> ---
+          <p>compared to the <span (click)="getPHCReportforListId('44493')" class="market">S&amp;P 500</span> ---
             <span class="market market--change"> 
               <span *ngIf="isSPYUp()">Up +</span>
               <span *ngIf="!isSPYUp()">Down </span>{{ calculations?.SPYPercentageChange | number:'.2-2' }}%
@@ -52,7 +52,7 @@ declare var gtag: Function;
 
       <div class="row justify-content-center overview__powerbar">
         <div tooltip="Download Report PDF" placement="auto" class="button--pdf">
-          <button class="align-absolute" (click)="getPHCReportforListId()"><i class="fal fa-file-pdf"
+          <button class="align-absolute" (click)="getPHCReportforListId(listId)"><i class="fal fa-file-pdf"
                                                                               aria-hidden="true"></i></button>
         </div>
         <div class="col-12 col-md-8 col-xl-6 powerbar flex-md-last">
@@ -188,15 +188,16 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
     });
   }
 
-  getPHCReportforListId() {
+  getPHCReportforListId(listId: string) {
     this.authService.currentUser$
       .filter(x => x != undefined)
       .take(1)
       .subscribe(usr => {
-        window.open(`${this._apiHostName}/CPTRestSecure/app/phc/getPHCReportForListID?listID=${this.listId}&uid=${usr['UID']}&response=file&additionalSymbols=SPY&phcVersion=1.3&_=1513675654286`, "_blank");
+        window.open(`${this._apiHostName}/CPTRestSecure/app/phc/getPHCReportForListID?listID=${listId}&uid=${usr['UID']}&response=file&additionalSymbols=SPY&phcVersion=1.3&_=1513675654286`, "_blank");
       });
     gtag('event', 'phc_pdf_clicked', {
       'event_category': 'engagement'
     });
   }
+
 }
