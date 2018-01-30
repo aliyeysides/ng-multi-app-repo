@@ -56,9 +56,9 @@ declare var gtag: Function;
       </div>
     </div>
   `,
-  styleUrls: ['./bear-of-the-week.component.scss']
+  styleUrls: ['./commentary.scss']
 })
-export class MarketBeatComponent implements OnInit, OnDestroy {
+export class CommentaryComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
 
   loadCount: number = 4;
