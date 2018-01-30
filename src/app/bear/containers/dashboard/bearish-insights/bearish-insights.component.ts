@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {WordpressService} from '../../../../services/wordpress.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
@@ -34,7 +33,6 @@ export class BearishInsightsComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   public loading: Subscription;
-  public insightsModalRef: BsModalRef;
   public title: string;
   public post: object;
   public commentary: string;
@@ -45,16 +43,8 @@ export class BearishInsightsComponent implements OnInit, OnDestroy {
     ignoreBackdropClick: false,
     class: 'modal-dialog--fullscreen',
   };
-  public config2 = {
-    animated: true,
-    keyboard: true,
-    backdrop: false,
-    ignoreBackdropClick: false,
-    class: 'modal-dialog--popup',
-  };
 
-  constructor(public modalService: BsModalService,
-              private router: Router,
+  constructor(private router: Router,
               private wordpressService: WordpressService) {
   }
 
