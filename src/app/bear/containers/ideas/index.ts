@@ -6,7 +6,6 @@ import {SharedModule} from '../../../shared/index';
 import {ListViewComponent} from './list-view/list-view.component';
 import {ChartComponent} from './list-view/chart-view.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
-import {IdeasService} from '../../../services/ideas.service';
 
 import {TooltipModule} from 'ngx-bootstrap';
 

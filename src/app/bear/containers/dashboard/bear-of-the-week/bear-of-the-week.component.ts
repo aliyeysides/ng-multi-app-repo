@@ -132,9 +132,10 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   }
 
   public openCommentaryModal() {
-    this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
-    this.bearModalRef.content.commentary = this.wordpressService.getInsightPostBody(this.post);
-    this.bearModalRef.content.date = this.post['post_date_formatted'];
+    console.log('open commentary');
+    // this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
+    // this.bearModalRef.content.commentary = this.wordpressService.getInsightPostBody(this.post);
+    // this.bearModalRef.content.date = this.post['post_date_formatted'];
     gtag('event', 'bear_of_the_week_opened', {
       'event_category': 'engagement',
       'event_label': this.ticker
