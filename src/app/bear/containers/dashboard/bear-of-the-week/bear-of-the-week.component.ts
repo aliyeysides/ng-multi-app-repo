@@ -9,6 +9,7 @@ import {IdeasService} from '../../../../services/ideas.service';
 import {Idea} from '../../../../shared/models/idea';
 import {Subscription} from 'rxjs/Subscription';
 import {SignalService} from '../../../../services/signal.service';
+import {Router} from '@angular/router';
 
 declare let gtag: Function;
 
@@ -90,6 +91,7 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
 
   constructor(public modalService: BsModalService,
               private ideasService: IdeasService,
+              private router: Router,
               private wordpressService: WordpressService,
               private signalService: SignalService) {
   }
@@ -132,11 +134,8 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   }
 
   public openCommentaryModal() {
-    console.log('open commentary');
-    // this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
-    // this.bearModalRef.content.commentary = this.wordpressService.getInsightPostBody(this.post);
-    // this.bearModalRef.content.date = this.post['post_date_formatted'];
-    gtag('event', 'bear_of_the_week_opened', {
+    this.router.navigate(['commentary']);
+    gtag('event', 'bear_of_the_week__commentary_opened', {
       'event_category': 'engagement',
       'event_label': this.ticker
     });
