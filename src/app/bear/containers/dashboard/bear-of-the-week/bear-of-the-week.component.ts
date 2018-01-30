@@ -91,7 +91,6 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
 
   constructor(public modalService: BsModalService,
               private ideasService: IdeasService,
-              private router: Router,
               private wordpressService: WordpressService,
               private signalService: SignalService) {
   }
@@ -134,7 +133,9 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   }
 
   public openCommentaryModal() {
-    this.router.navigate(['commentary']);
+    this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
+    this.bearModalRef.content.commentary = this.wordpressService.getInsightPostBody(this.post);
+    this.bearModalRef.content.date = this.post['post_date_formatted'];
     gtag('event', 'bear_of_the_week__commentary_opened', {
       'event_category': 'engagement',
       'event_label': this.ticker

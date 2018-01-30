@@ -6,6 +6,7 @@ import {WordpressService} from '../../../../services/wordpress.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
+import {Router} from '@angular/router';
 
 declare let gtag: Function;
 
@@ -59,6 +60,7 @@ export class BearishInsightsComponent implements OnInit, OnDestroy {
   };
 
   constructor(public modalService: BsModalService,
+              private router: Router,
               private wordpressService: WordpressService) {
   }
 
@@ -85,10 +87,7 @@ export class BearishInsightsComponent implements OnInit, OnDestroy {
   }
 
   public openCommentaryModal() {
-    this.insightsModalRef = this.modalService.show(InsightsCommentaryModalComponent, this.config);
-    this.insightsModalRef.content.title = this.title;
-    this.insightsModalRef.content.commentary = this.commentary;
-    this.insightsModalRef.content.date = this.post['post_date_formatted'];
+    this.router.navigate(['commentary']);
     gtag('event', 'insight_opened', {
       'event_category': 'engagement',
       'event_label': this.title
