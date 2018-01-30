@@ -1,7 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {PreviousInsightsModalComponent} from './modals/previous-modal.component';
-import {InsightsCommentaryModalComponent} from './modals/commentary-modal.component';
 import {WordpressService} from '../../../../services/wordpress.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
@@ -20,10 +18,6 @@ declare let gtag: Function;
         </div>
         <div class="col-6 post-head__date">
           <p class="">{{ post ? post['post_date_formatted'] : null }}</p>
-          <a (click)="openPreviousModal()" class="post-head__button">
-            <i class="fa fa-calendar" aria-hidden="true"></i>
-            <span>&nbsp;Previous</span>
-          </a>
         </div>
       </div>
       <div class="row post-body post-body--insights" [ngBusy]="loading">
@@ -80,10 +74,6 @@ export class BearishInsightsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
-  }
-
-  public openPreviousModal() {
-    this.insightsModalRef = this.modalService.show(PreviousInsightsModalComponent, this.config2);
   }
 
   public openCommentaryModal() {
