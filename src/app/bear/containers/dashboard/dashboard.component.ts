@@ -30,7 +30,7 @@ import {AuthService} from '../../../services/auth.service';
         </div>
 
         <div class="col-12 col-md-7 col-lg-8">
-          <cpt-idea-lists [lists]="allLists" (listSelected)="listSelected($event)"></cpt-idea-lists>
+          <cpt-idea-lists [lists]="allLists" (selectList)="selectList($event)"></cpt-idea-lists>
         </div>
 
       </div>
@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  public listSelected(list: IdeaList) {
+  public selectList(list: IdeaList) {
     this.selectedList = list;
   }
 
