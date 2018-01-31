@@ -1127,15 +1127,17 @@ a.quick-link {
         border-left: 0px;
         margin-right: 0;
         margin-top: 5px;
-        float: right !important;
+        float: left;
       }
     }
     .slider__scroll {
       display: none;
     }
     .idea-lists__container {
-      padding:10px 0; 
-      height: auto;
+      margin-top:10px;
+      padding:0; 
+      height: 100%;
+      position: relative;
 
       ul {
         width: 100%;
@@ -1146,9 +1148,10 @@ a.quick-link {
         position: relative;
         overflow: visible;
         overflow-x: auto;
+        overflow-y: auto;
 
         .list__option {
-          display: block;
+          display: inline-block;
           float: left;
           position: relative;
 

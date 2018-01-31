@@ -29,32 +29,76 @@ declare let gtag: Function;
       <div class="dash-body dash-body--bearpick">
         <div class="container">
           <div class="row no-gutters">
-            <div class="col-6">
-              <p class="ticker">
-                <img class="rating"
-                     src="{{ appendPGRImage(stockDataPGR ? stockDataPGR['Corrected PGR Value'] : null, stockDataPGR ? stockDataPGR['PGR Value'] : null) }}">
-                <span [innerHTML]="ticker"></span>
-              </p>
+            <div class="col-6 col-xl-7">
+              <div class="ticker-info">
+                <p class="ticker"><span><img class="rating" src="./assets/imgs/arc_VeryBearish.svg"></span>CMSCA</p>
+                <p class="company-name">Comcast Corp A</p>
+              </div>
+              <div class="price-data">
+                <p class="data price down-change">$151.54</p>
+                <p class="data change down-change"><span>-0.64</span> <span>(-0.42%)</span></p>
+              </div>
+              <div class="link__see-more">
+                <a class="">See Commentary <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+              </div>
             </div>
-            <div class="col-6 price-data">
-              <p class="data data--change"
-                 [ngClass]="{'down-change':stockDataMeta?.Change<0, 'up-change':stockDataMeta?.Change>0}">
-                (<span *ngIf="stockDataMeta?.Change>0" class="up-change">+</span>{{ stockDataMeta ? stockDataMeta['Percentage '] : null | number:'.2-2' }}%)</p>
-              <p class="data" [ngClass]="{'down-change':stockDataMeta?.Change<0, 'up-change':stockDataMeta?.Change>0}">
-                {{ stockDataMeta?.Last.toFixed(2) }}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <p class="company-name">{{ stockDataMeta?.name }}</p>
-            </div>
-            <div class="col-6">
-              <p class="industry-name">{{ stockDataMeta?.industry_name }}</p>
-            </div>
-          </div>
-          <div (click)="openCommentaryModal()" class="row">
-            <div class="link__see-more col-sm-12">
-              <a class="">See Commentary <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+            <div class="quick-view__pgr col-6 col-xl-5">
+              <p class="pgr__title">Power Gauge Rating:</p>
+              <p class="pgr__text veryBearish">Very Bearish</p>
+              <ul class="pgr__sliders row">
+                <li class="col-12">
+                  <div class="sliderBar-container">
+                    <div class="sliderProgress">
+                      <div [ngClass]="appendSliderClass(idea.pgr.Financials)"></div>
+                      <div [ngClass]="appendSliderBarClass(idea.pgr.Financials)" class="sliderBar" role="progressbar"
+                           aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div class="pgr__label">
+                      <p>Financials</p>
+                    </div>
+                  </div>
+                </li>
+                <li class="col-12">
+                  <div class="sliderBar-container">
+                    <div class="sliderProgress">
+                      <div [ngClass]="appendSliderClass(idea.pgr.Earnings)"></div>
+                      <div [ngClass]="appendSliderBarClass(idea.pgr.Earnings)" class="sliderBar" role="progressbar"
+                           aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div class="pgr__label">
+                      <p>Earnings</p>
+                    </div>
+                  </div>
+                </li>
+                <li class="col-12">
+                  <div class="sliderBar-container">
+                    <div class="sliderProgress">
+                      <div [ngClass]="appendSliderClass(idea.pgr.Technicals)"></div>
+                      <div [ngClass]="appendSliderBarClass(idea.pgr.Technicals)" class="sliderBar" role="progressbar"
+                           aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div class="pgr__label">
+                      <p>Technicals</p>
+                    </div>
+                  </div>
+                </li>
+                <li class="col-12">
+                  <div class="sliderBar-container">
+                    <div class="sliderProgress">
+                      <div [ngClass]="appendSliderClass(idea.pgr.Experts)"></div>
+                      <div [ngClass]="appendSliderBarClass(idea.pgr.Experts)" class="sliderBar" role="progressbar"
+                           aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div class="pgr__label">
+                      <p>Experts</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
