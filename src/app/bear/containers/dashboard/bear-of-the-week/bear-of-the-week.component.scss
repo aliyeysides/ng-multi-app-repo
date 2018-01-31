@@ -2,7 +2,7 @@
 
 
 .dashboard__panel.dashboard__panel--bearpick {
-  height: 100%;
+  height: 300px;
   border:2px solid #ffffff;
   border-radius: 12px;
 
@@ -38,79 +38,115 @@
 }
 
 .dash-body--bearpick {
-	padding: 5px 0px;
+	padding: 20px 0px 0;
 
-	.ticker {
-		float: left;
-		font-size: 28px;
-		font-weight: 700;
-		line-height: 1;
+	.ticker-info {
+		width: 100%;
+		margin-bottom:20px;
 
-		.rating {
-			width: 48px;
-			height: 25px;
-			display: inline-block;
-			margin: 1px 5px 0 0;
+		.ticker {
+			font-size: 30px;
+			font-weight: 700;
+			line-height: 1;
+			margin-bottom:8px;
+
+			.rating {
+				width: auto;
+				height: 26px;
+				display: inline-block;
+				margin: -6px 5px 0 0;
+			}
 		}
 
-		span {
-			display: inline-block;
+		.company-name {
+			font-size: 17px;
+			font-weight: 400;
+			line-height: 1.5;
+		    white-space: nowrap;
+		    text-overflow: ellipsis;
+		    overflow: hidden;
+		    color: $font-color--MD;
 		}
 	}
 
 	.price-data {
-		margin: 0 0px 0 0;
+		width: 100%;
+		text-align: left;
 
-		.data {
-		    display: inline-block;
-		    float: right;
-		    font-size: 17px;
-		    font-weight: 600;
+		.change {
+		    font-size: 18px;
+		    font-weight: 400;
 		    line-height: 32px;
-		    margin-left: 0px;
-		    vertical-align: middle;
+
+		    span {
+		    	margin-right:30px;
+
+		    	&:last-child {
+		    		margin-right:0;
+		    	}
+		    }
 		}
 
-		.data--change {
-			margin-left:15%;
+		.price {
+			font-size: 28px;
+		    font-weight: 700;
+		    line-height: 32px;
+		    margin-bottom: 5px;
 		}
-	}
-
-	.company-name {
-		font-size: 20px;
-		font-weight: 400;
-		line-height: 1.3;
-	    white-space: nowrap;
-	    text-overflow: ellipsis;
-	    overflow: hidden;
-	}
-
-	.industry-name {
-		font-size: 13px;
-	    font-weight: 400;
-	    line-height: 24px;
-	    height: 24px;
-	    color: $font-color--MD;
-	    font-style: italic;
-	    text-align: left;
-	    white-space: nowrap;
-	    text-overflow: ellipsis;
-	    overflow: hidden;
 	}
 
 	.link__see-more {
-		font-weight: 600;
-		font-size: 14px;
-		text-align: center;
-		line-height: 1;
+		position: absolute;
+		bottom:5px;
 
 		a {
 			color: $link-blue;
 			cursor: pointer;
+			font-weight: 600;
+			font-size: 14px;
+			line-height: 1;
 
 		    &:hover {
 		       	color: $link-blue;
 		    }
 		}
 	}
+	.quick-view__pgr {
+		.pgr__title {
+	        font-weight: 600;
+	        font-size: 9px;
+	        color: $font-color--MD;
+	        text-transform: uppercase;
+	        line-height: 1;
+	        white-space: nowrap;
+	        margin-bottom:0px;
+        }
+
+        .pgr__text {
+            font-weight: 700;
+            font-size: 22px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            line-height: 1.3;
+        }
+
+        .pgr__sliders {
+          	margin-top: 10px;
+
+          	li {
+           		margin: 2px 0 5px;
+
+            	.sliderBar-container {
+
+              		.pgr__label {
+                		font-weight: 600;
+                		font-size: 11px;
+                		color: $font-color--MD;
+                		text-transform: uppercase;
+                		margin: -1px 2px 2px;
+              		}
+            	}
+          	}
+        }
+    }
 }

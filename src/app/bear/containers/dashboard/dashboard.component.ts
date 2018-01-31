@@ -11,12 +11,12 @@ import {AuthService} from '../../../services/auth.service';
     <div class="container-fluid dashboard">
       <div class="row bearish-insights__container">
 
-        <div class="col-12">
-          <div class="row" style="height: 100%;">
-            <div class="col-12 col-md-7 col-lg-8">
+        <div class="col-12 align-self-center" style="padding:0;">
+          <div class="row no-gutters" style="height: 100%;">
+            <div class="col-12 col-md-7 col-xl-8">
               <cpt-bearish-insights></cpt-bearish-insights>
             </div>
-            <div class="col-12 col-md-5 col-lg-4">
+            <div class="col-12 col-md-5 col-xl-4">
               <cpt-bear-of-the-week></cpt-bear-of-the-week>
             </div>
           </div>
@@ -25,11 +25,11 @@ import {AuthService} from '../../../services/auth.service';
 
       <div class="row bearish-ideas__container">
 
-        <div class="col-12 col-md-5 col-lg-4">
+        <div class="col-12 col-md-5 col-xl-4">
           <cpt-best-bear-ideas></cpt-best-bear-ideas>
         </div>
 
-        <div class="col-12 col-md-7 col-lg-8">
+        <div class="col-12 col-md-7 col-xl-8 dashboard__panel" id="bearish-ideas__list">
           <cpt-idea-lists [lists]="allLists" (selectList)="selectList($event)"></cpt-idea-lists>
         </div>
 

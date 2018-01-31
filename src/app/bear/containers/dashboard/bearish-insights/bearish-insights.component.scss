@@ -2,7 +2,7 @@
 
 
 .insights__container {
-	padding-top: 10px;
+	padding: 0 15px;
 
 	.post-head {
 		margin-bottom:20px;
@@ -22,6 +22,21 @@
 
 	      	p {
 
+	      	}
+	    }
+	    .post-head__button {
+	      	font-weight: 400;
+	      	font-size: 11px;
+	      	height: 37px;
+	      	padding: 11px 15px;
+	      	color: #ffffff;
+
+	      	i {
+	        	font-size: 16px;
+	      	}
+
+	      	span {
+	        	margin-left: 3px;
 	      	}
 	    }
 	}
