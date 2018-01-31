@@ -23,7 +23,7 @@ declare let gtag: Function;
         <p class="header__post-date">{{ post ? post['post_date_formatted'] : null }}</p>
         <a (click)="openPreviousModal()" class="dash-head__button">
           <i class="fa fa-calendar" aria-hidden="true"></i>
-          <span>&nbsp;Previous</span>
+          <span>&nbsp;Prev</span>
         </a>
       </div>
       <div class="dash-body dash-body--bearpick">
