@@ -29,7 +29,7 @@ import {AuthService} from '../../../services/auth.service';
           <cpt-best-bear-ideas></cpt-best-bear-ideas>
         </div>
 
-        <div class="col-12 col-md-7 col-lg-8">
+        <div class="col-12 col-md-7 col-lg-8 dashboard__panel" id="bearish-ideas__list">
           <cpt-idea-lists [lists]="allLists" (selectList)="selectList($event)"></cpt-idea-lists>
         </div>
 
