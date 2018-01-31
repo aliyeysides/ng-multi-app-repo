@@ -11,20 +11,25 @@ declare let gtag: Function;
   selector: 'cpt-bearish-insights',
   template: `
     <div class="insights__container">
-      <div class="post-head row">
-        <div class="col-6 post-head__logo">
+      <div class="post-head row no-gutters">
+        <div class="col-12 col-sm-6 post-head__logo">
           <img src="./assets/imgs/logo__bearish-insights.png">
         </div>
-        <div class="col-6 post-head__date">
+<!--         <div class="col-6 post-head__date">
           <p class="">{{ post ? post['post_date_formatted'] : null }}</p>
-          <a (click)="openPreviousModal()" class="post-head__button">
-            <i class="fa fa-calendar" aria-hidden="true"></i>
-            <span>&nbsp;Previous</span>
-          </a>
+        </div> -->
+        <div class="col-12 col-sm-6 post-head__date">
+          <p class="">January 31, 2018</p>
         </div>
       </div>
-      <div class="row post-body post-body--insights" [ngBusy]="loading">
+<!--       <div class="row post-body post-body--insights" [ngBusy]="loading">
         <div [innerHtml]="commentary"></div>
+      </div> -->
+      <div class="row no-gutters post-body post-body--insights">
+        <div class="col-12 headline">
+          <h1>Overbought Conditions, Narrowing Breadth and Rising VIX Levels Trigger Sharpest Sell-Off Since Last Fall</h1>
+        </div>
+        <p class="post-author">By John Schlitz</p>
       </div>
       <div (click)="openCommentaryModal()" class="row no-gutters link__read-all">
         <a>Read the Weekly Newsletter &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>

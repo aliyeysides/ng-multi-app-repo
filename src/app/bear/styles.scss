@@ -1059,11 +1059,14 @@ a.quick-link {
         font-weight: 700;
       }
       .section-header__actions {
-        height: 38px;
-        border-left: 0px;
-        margin-right: 0;
-        margin-top: 5px;
-        float: left;
+        height: 30px;
+        margin-top: 10px;
+        float: right;
+        border-left: 4px dotted rgba(100, 100, 100, 0.15);
+
+        .long {
+          padding-top:8px;
+        }
       }
     }
     .slider__scroll {
@@ -1082,7 +1085,7 @@ a.quick-link {
         margin: auto;
         white-space: normal;
         position: relative;
-        overflow: visible;
+        overflow: hidden;
         overflow-x: auto;
         overflow-y: auto;
 

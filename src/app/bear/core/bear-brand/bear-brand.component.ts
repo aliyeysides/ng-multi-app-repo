@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'cpt-bear-brand',
   template: `
       <div class="sidebar__logo sidebar__logo--open">
-        <img class="align-absolute" src="./assets/imgs/logo_bear.png" alt="logo">
+        <img class="align-absolute" src="./assets/imgs/logo_bear.svg" alt="logo">
       </div>
       <div class="sidebar__logo sidebar__logo--collapsed">
         <img class="align-absolute" src="./assets/imgs/logo_bear--collapsed.png" alt="logo">
