@@ -800,6 +800,7 @@ a.quick-link {
 
 \*----------------------------------------------------*/
 
+
 /*------------------------------------*\
   #DASHBOARD CONTAINERS
 \*------------------------------------*/
@@ -828,6 +829,14 @@ a.quick-link {
     h4 {
       font-size: 20px;
       font-weight: 600;
+
+      a {
+        cursor: pointer;
+
+        &:hover {
+          color:$link-blue;
+        }
+      }
     }
 
     .dash-head__button {
@@ -849,6 +858,52 @@ a.quick-link {
         vertical-align: middle;
       }
     }
+
+    .dash-head__toggle {
+      font-size:14px;
+      line-height: 1;
+      margin: 10px 5px 0 0;
+      float:right;
+
+      .dash-head__chevron {
+        display: block;
+        float: left;
+        color:$font-color--LT;
+        padding:0px 5px;
+        font-size:20px;
+        cursor: pointer;
+
+        &:hover {
+          color:$font-color--MD;
+        }
+      }
+      .dash-head__pagination {
+        display: block;
+        float: left;
+        list-style-type: none;
+        padding-top: 2px;
+
+        li {
+          opacity: 0.25;
+          color:$link-blue;
+          cursor: pointer;
+          display: inline-block;
+          padding:0 5px;
+
+          &:hover {
+            opacity:0.5;
+          }
+        }
+        .active {
+          opacity: 1;
+          cursor: default;
+
+          &:hover {
+            opacity:1;
+          }
+        }
+      }
+    }
   }
 
   .dash-body {
@@ -856,9 +911,9 @@ a.quick-link {
   }
 }
 
-/*------------------------------------*\
-  #LARGE CONTAINER
-\*------------------------------------*/
+
+
+
 
 
 
