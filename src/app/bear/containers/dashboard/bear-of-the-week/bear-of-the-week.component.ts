@@ -20,7 +20,6 @@ declare let gtag: Function;
     <div class="dashboard__panel dashboard__panel--bearpick" [ngBusy]="loading">
       <div class="dash-head">
         <h4>Bear of the Week</h4>
-        <p class="header__post-date">{{ post ? post['post_date_formatted'] : null }}</p>
         <a (click)="openPreviousModal()" class="dash-head__button">
           <i class="fa fa-calendar" aria-hidden="true"></i>
           <span>&nbsp;Previous</span>
@@ -31,26 +30,32 @@ declare let gtag: Function;
           <div class="row no-gutters">
             <div class="col-7 col-xl-7">
               <div class="ticker-info">
-                <p class="ticker"><span><img class="rating" src="./assets/imgs/arc_VeryBearish.svg"></span>CMSCA</p>
-                <p class="company-name">Comcast Corp A</p>
+                <p class="ticker"><span><img class="rating"
+                                             src="{{ appendPGRImage(stockDataPGR ? stockDataPGR['Corrected PGR Value'] : 0, stockDataPGR ? stockDataPGR['PGR Value'] : 0) }}"></span>{{ stockDataMeta?.symbol
+                  }}</p>
+                <p class="company-name">{{ stockDataMeta?.name }}</p>
               </div>
               <div class="price-data">
-                <p class="data price down-change">$151.54</p>
-                <p class="data change down-change"><span>-0.64</span> <span>(-0.42%)</span></p>
+                <p class="data price down-change">{{ stockDataMeta?.Last | decimal }}</p>
+                <p class="data change down-change"><span>{{ stockDataMeta?.Change | decimal }}</span>
+                  <span>({{ stockDataMeta ? (stockDataMeta['Percentage '] | decimal) : null }}%)</span></p>
               </div>
-              <div class="link__see-more">
+              <div (click)="openCommentaryModal()" class="link__see-more">
                 <a class="">See Commentary <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
               </div>
             </div>
             <div class="quick-view__pgr col-5 col-xl-5">
               <p class="pgr__title">Power Gauge Rating:</p>
-              <p class="pgr__text veryBearish">Very Bearish</p>
+              <p class="pgr__text veryBearish">
+                {{ appendPGRText(stockDataPGR ? stockDataPGR['Corrected PGR Value'] : 0, stockDataPGR ? stockDataPGR['PGR Value'] : 0)
+                }}</p>
               <ul class="pgr__sliders row">
                 <li class="col-12">
                   <div class="sliderBar-container">
                     <div class="sliderProgress">
                       <div [ngClass]="appendSliderClass(stockDataPGR?.Financials)"></div>
-                      <div [ngClass]="appendSliderBarClass(stockDataPGR?.Financials)" class="sliderBar" role="progressbar"
+                      <div [ngClass]="appendSliderBarClass(stockDataPGR?.Financials)" class="sliderBar"
+                           role="progressbar"
                            aria-valuemin="0" aria-valuemax="100">
                       </div>
                     </div>
@@ -76,7 +81,8 @@ declare let gtag: Function;
                   <div class="sliderBar-container">
                     <div class="sliderProgress">
                       <div [ngClass]="appendSliderClass(stockDataPGR?.Technicals)"></div>
-                      <div [ngClass]="appendSliderBarClass(stockDataPGR?.Technicals)" class="sliderBar" role="progressbar"
+                      <div [ngClass]="appendSliderBarClass(stockDataPGR?.Technicals)" class="sliderBar"
+                           role="progressbar"
                            aria-valuemin="0" aria-valuemax="100">
                       </div>
                     </div>
@@ -168,7 +174,6 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         this.stockDataMeta = data['meta-info'];
         this.stockDataPGR = data['pgr'];
-        console.log('meta-info', this.stockDataMeta, 'pgr', this.stockDataPGR);
       })
   }
 
@@ -196,5 +201,9 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
 
   public appendSliderBarClass(pgr: number) {
     return this.signalService.appendSliderBarClass(pgr);
+  }
+
+  public appendPGRText(pgr: number, rawPgr: number) {
+    return this.signalService.appendPGRText(pgr, rawPgr);
   }
 }
