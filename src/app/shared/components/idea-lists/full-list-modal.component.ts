@@ -20,19 +20,23 @@ interface SelectedList {
 @Component({
   selector: 'cpt-full-list-modal',
   template: `
-    <div [ngBusy]="loading" class="insights__container insights__container--large insights__container--modal">
-      <div class="post-head post-head--bearpick">
-        <h2 class="">{{ title }}</h2>
-        <button type="button" class="post-head__button" aria-label="Close" (click)="bsModalRef.hide()">
-          <a class="">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
-            <span>&nbsp;Close</span>
-          </a>
-        </button>
+    <div [ngBusy]="loading" class="container-fluid modal-content--idealist">
+      <div class="row no-gutters modal-head">
+        <div class="col-8">
+          <h2 class="">{{ title }}</h2>
+        </div>
+        <div class="col-4">
+          <button type="button" class="modal-head__button" aria-label="Close" (click)="bsModalRef.hide()">
+            <a class="">
+              <i class="fa fa-times-circle" aria-hidden="true"></i>
+              <span>&nbsp;Close</span>
+            </a>
+          </button>
+        </div>
       </div>
-      <div class="post-body">
+      <div class="modal__body">
         <div class="idea-list__container row no-gutters">
-          <div class="idea-list__left-col col-sm-6 col-md-5 col-lg-4 col-xl-4">
+          <div class="idea-list__left-col col-6 col-md-5 col-lg-4 col-xl-4">
             <ul class="idea-list__list">
               <li (click)="selectList(list);trackList(list)" *ngFor="let list of allLists" class="list__option" [ngClass]="{'selected':selectedList===list}">
                 <div class="list__image">
@@ -42,7 +46,7 @@ interface SelectedList {
               </li>
             </ul>
           </div>
-          <div class="idea-list__right-col col-sm-6 col-md-7 col-lg-8 col-xl-8">
+          <div class="idea-list__right-col col-6 col-md-7 col-lg-8 col-xl-8">
             <div class="idea-list__descriptions">
               <div class="list-description__header">
                 <img src="assets/imgs/{{ appendListColoredImageUrl(selectedList?.name) }}">

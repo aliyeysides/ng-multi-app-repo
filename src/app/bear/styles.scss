@@ -428,14 +428,7 @@ a.quick-link {
   }
 }
 
-.modal-dialog.modal-dialog--fullscreen {
-  margin: 0px auto;
-  position: relative;
-  width: 100%;
-  padding: 50px 15px 10px;
-  max-width: 1024px;
-
-  .modal-content {
+.modal-content {
     position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -444,36 +437,19 @@ a.quick-link {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+    pointer-events: auto;
     background-color: transparent;
     background-clip: padding-box;
     border: 0px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0rem;
+    border-radius: 10px;
     outline: 0;
-    box-shadow: 0px 10px 65px 10px rgba(0, 0, 0, 0.6);
-  }
-
-  .insights__container {
-    margin-bottom: 0;
-  }
 }
 
-.modal-dialog.modal-dialog--popup {
-  border-radius: 0.5rem;
+.modal-dialog--popup {
   padding-top: 50px 0 10px;
 
   .modal-content {
-    width: 100%;
     max-width: 500px;
-    margin: 0px auto;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    background-clip: padding-box;
-    border-radius: 0.5rem;
-    outline: 0;
-    background-color: transparent;
-    border: 0px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 10px 65px 10px rgba(0, 0, 0, 0.6);
   }
 
   .insights__container {
@@ -570,73 +546,20 @@ a.quick-link {
   }
 }
 
-.modal-dialog.modal-dialog--fullscreen {
+.modal-dialog--fullscreen {
   margin: 0px auto;
   position: relative;
   width: 100%;
   padding: 50px 15px 10px;
   max-width: 1024px;
-
-  .modal-content {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    background-color: transparent;
-    background-clip: padding-box;
-    border: 0px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0rem;
-    outline: 0;
-    box-shadow: 0px 10px 65px 10px rgba(0, 0, 0, 0.6);
-  }
-
-  .insights__container {
-    margin-bottom: 0;
-
-    ul {
-      margin-left: 40px;
-      margin-bottom: 10px;
-
-      li {
-        padding:7px 0;
-        color: $font-color;
-        font-size: 16px;
-        line-height: 1.5;
-        position: relative;
-      }
-
-      @media screen and (max-width: 1024px) {
-        margin-left: 10px;
-      }
-    }
-
-    h6 {
-      margin-bottom:15px;
-    }
-
-    img {
-      width: 95%;
-    }
-
-    h1 {
-      color: #9F2C53 ;
-      font-size: 32px;
-      font-weight: 300;
-      font-family: $font-stack;
-      line-height: 1.5;
-      margin-bottom: 15px;
-      padding: 0;
-
-      @media screen and (max-width: 1024px) {
-        font-size: 26px !important;
-      }
-    }
-  }
 }
+
+
+
+
+
+
+
 
 /*------------------------------------*\
   #DROPDOWN
@@ -806,8 +729,6 @@ a.quick-link {
 \*------------------------------------*/
 
 
-
-
 .dashboard__panel {
   width: 100%;
   overflow: hidden;
@@ -824,6 +745,7 @@ a.quick-link {
       color: $font-color;
       display: inline-block;
       float: left;
+      white-space: nowrap;
     }
 
     h4 {
@@ -931,10 +853,11 @@ a.quick-link {
     border-bottom:1px solid #eee;
 
     h4 {
-      margin: 0 10px 0 15px;
+      margin: 0 10px 0 10px;
       line-height: 38px;
       height: 38px;
       font-weight: 700;
+      white-space: nowrap;
     }
 
     .dash-head__button {
@@ -956,7 +879,6 @@ a.quick-link {
       margin-left: 0;
       margin-right: 0;
       margin-top: 8px;
-
 
       .col-header {
         color: $font-color;
@@ -1107,7 +1029,7 @@ a.quick-link {
       border-bottom: 1px solid #eee;
 
       h1 {
-        margin: 6px 10px 0 10px;
+        margin: 6px 10px 0 0px;
         line-height: 38px;
         height: 38px;
         font-size: 20px;
@@ -1121,6 +1043,8 @@ a.quick-link {
 
         .long {
           padding-top:8px;
+          width: 170px;
+          margin-left:30px;
         }
       }
     }
