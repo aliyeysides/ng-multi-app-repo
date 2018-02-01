@@ -30,10 +30,11 @@ declare let gtag: Function;
           <div class="row no-gutters">
             <div class="col-7 col-xl-7">
               <div class="ticker-info">
-                <p class="ticker"><span><img class="rating"
-                                             src="{{ appendPGRImage(stockDataPGR ? stockDataPGR['Corrected PGR Value'] : 0, stockDataPGR ? stockDataPGR['PGR Value'] : 0) }}"></span>{{ stockDataMeta?.symbol
-                  }}</p>
-                <p class="company-name">{{ stockDataMeta?.name }}</p>
+                <p class="ticker">
+                  <span><img class="rating" src="{{ pgrImgUrl }}"></span>
+                  {{ stockDataMeta?.symbol }}
+                </p>
+                <p class=" company-name">{{ stockDataMeta?.name }}</p>
               </div>
               <div class="price-data">
                 <p class="data price"
@@ -52,7 +53,8 @@ declare let gtag: Function;
             </div>
             <div class="quick-view__pgr col-5 col-xl-5">
               <p class="pgr__title">Power Gauge Rating:</p>
-              <p class="pgr__text veryBearish" [ngClass]="{'veryBearish':pgrText=='veryBearish','bearish':pgrText=='bearish','neutral':pgrText=='neutral','bullish':pgrText=='bullish','veryBullish':pgrText=='veryBullish'}">
+              <p class="pgr__text"
+                 [ngClass]="{'veryBearish':pgrText=='Very Bearish','bearish':pgrText=='Bearish','neutral':pgrText=='Neutral','bullish':pgrText=='Bullish','veryBullish':pgrText=='Very Bullish'}">
                 {{ pgrText }}</p>
               <ul class="pgr__sliders row">
                 <li class="col-12">
@@ -128,6 +130,7 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   public stockDataMeta: Idea;
   public stockDataPGR?: number;
   public pgrText: string;
+  public pgrImgUrl: string;
   public loading: Subscription;
   public config = {
     animated: true,
@@ -181,6 +184,7 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
         this.stockDataMeta = data['meta-info'];
         this.stockDataPGR = data['pgr'];
         this.pgrText = this.appendPGRText(this.stockDataPGR['Corrected PGR Value'], this.stockDataPGR['PGR Value']);
+        this.pgrImgUrl = this.appendPGRImage(this.stockDataPGR['Corrected PGR Value'], this.stockDataPGR['PGR Value']);
       })
   }
 
