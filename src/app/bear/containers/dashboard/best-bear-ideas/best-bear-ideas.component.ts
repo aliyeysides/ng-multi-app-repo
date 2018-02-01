@@ -16,14 +16,19 @@ declare let gtag: Function;
     <div class="dashboard__panel dashboard__panel--list">
       <div class="dash-head">
         <div class="row no-gutters">
-          <div class="col-8">
-            <h4>Best Bear Ideas</h4>
+          <div class="col-7">
+            <h4><a>Best Bear Ideas</a></h4>
           </div>
-          <div class="col-4">
-            <a (click)="viewBearList()" class="dash-head__button">
-            <i class="fa fa-external-link-square" aria-hidden="true"></i>
-            <span>&nbsp;View List</span>
-            </a>
+          <div class="col-5">
+            <div class="dash-head__toggle">
+              <div class="dash-head__chevron"><a><i class="fa fa-chevron-left"></i></a></div>
+              <ul class="dash-head__pagination">
+                <li class="active"><a><i class="fa fa-circle"></i></a></li>
+                <li class=""><a><i class="fa fa-circle"></i></a></li>
+                <li class=""><a><i class="fa fa-circle"></i></a></li>
+              </ul>
+              <div class="dash-head__chevron"><i class="fa fa-chevron-right"></i></div>
+            </div>
           </div>
         </div>
         <div class="col-header__container row no-gutters">

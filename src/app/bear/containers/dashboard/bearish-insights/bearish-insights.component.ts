@@ -29,7 +29,7 @@ declare let gtag: Function;
         <div class="col-12 headline">
           <h1>Overbought Conditions, Narrowing Breadth and Rising VIX Levels Trigger Sharpest Sell-Off Since Last Fall</h1>
         </div>
-        <p class="post-author">By John Schlitz</p>
+        <p class="post-author">Weekly Commentary By John Schlitz</p>
       </div>
       <div (click)="openCommentaryModal()" class="row no-gutters link__read-all">
         <a>Read the Weekly Newsletter &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>

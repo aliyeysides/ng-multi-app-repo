@@ -3,7 +3,7 @@
 .sidebar__logo {
 	position: relative;
 	height: 60px;
-	margin-bottom:36px;
+	margin-bottom:60px;
 }
 
 .sidebar__logo.sidebar__logo--open {
@@ -13,13 +13,17 @@
 		width: 155px;
 		height: auto;
 	}
+
+	.logo__CA {
+		margin-top:35px;
+	}
 }
 
 .sidebar__logo.sidebar__logo--collapsed {
 	position: relative;
 	height: 74px;
 	margin-top: 6px;
-	margin-bottom:16px;
+	margin-bottom:40px;
 
 	img {
 		width: 42px;
