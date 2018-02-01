@@ -10,6 +10,7 @@ import {Idea} from '../../../../shared/models/idea';
 import {Subscription} from 'rxjs/Subscription';
 import {SignalService} from '../../../../services/signal.service';
 import {Router} from '@angular/router';
+import {UtilService} from '../../../../services/util.service';
 
 declare let gtag: Function;
 
@@ -44,12 +45,12 @@ declare let gtag: Function;
             <div class="quick-view__pgr col-5 col-xl-5">
               <p class="pgr__title">Power Gauge Rating:</p>
               <p class="pgr__text veryBearish">Very Bearish</p>
-<!--               <ul class="pgr__sliders row">
+              <ul class="pgr__sliders row">
                 <li class="col-12">
                   <div class="sliderBar-container">
                     <div class="sliderProgress">
-                      <div [ngClass]="appendSliderClass(idea.pgr.Financials)"></div>
-                      <div [ngClass]="appendSliderBarClass(idea.pgr.Financials)" class="sliderBar" role="progressbar"
+                      <div [ngClass]="appendSliderClass(stockDataPGR?.Financials)"></div>
+                      <div [ngClass]="appendSliderBarClass(stockDataPGR?.Financials)" class="sliderBar" role="progressbar"
                            aria-valuemin="0" aria-valuemax="100">
                       </div>
                     </div>
@@ -61,8 +62,8 @@ declare let gtag: Function;
                 <li class="col-12">
                   <div class="sliderBar-container">
                     <div class="sliderProgress">
-                      <div [ngClass]="appendSliderClass(idea.pgr.Earnings)"></div>
-                      <div [ngClass]="appendSliderBarClass(idea.pgr.Earnings)" class="sliderBar" role="progressbar"
+                      <div [ngClass]="appendSliderClass(stockDataPGR?.Earnings)"></div>
+                      <div [ngClass]="appendSliderBarClass(stockDataPGR?.Earnings)" class="sliderBar" role="progressbar"
                            aria-valuemin="0" aria-valuemax="100">
                       </div>
                     </div>
@@ -74,8 +75,8 @@ declare let gtag: Function;
                 <li class="col-12">
                   <div class="sliderBar-container">
                     <div class="sliderProgress">
-                      <div [ngClass]="appendSliderClass(idea.pgr.Technicals)"></div>
-                      <div [ngClass]="appendSliderBarClass(idea.pgr.Technicals)" class="sliderBar" role="progressbar"
+                      <div [ngClass]="appendSliderClass(stockDataPGR?.Technicals)"></div>
+                      <div [ngClass]="appendSliderBarClass(stockDataPGR?.Technicals)" class="sliderBar" role="progressbar"
                            aria-valuemin="0" aria-valuemax="100">
                       </div>
                     </div>
@@ -87,8 +88,8 @@ declare let gtag: Function;
                 <li class="col-12">
                   <div class="sliderBar-container">
                     <div class="sliderProgress">
-                      <div [ngClass]="appendSliderClass(idea.pgr.Experts)"></div>
-                      <div [ngClass]="appendSliderBarClass(idea.pgr.Experts)" class="sliderBar" role="progressbar"
+                      <div [ngClass]="appendSliderClass(stockDataPGR?.Experts)"></div>
+                      <div [ngClass]="appendSliderBarClass(stockDataPGR?.Experts)" class="sliderBar" role="progressbar"
                            aria-valuemin="0" aria-valuemax="100">
                       </div>
                     </div>
@@ -97,7 +98,7 @@ declare let gtag: Function;
                     </div>
                   </div>
                 </li>
-              </ul> -->
+              </ul>
             </div>
           </div>
         </div>
@@ -114,7 +115,7 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   public post: object;
   public ticker: string;
   public stockDataMeta: Idea;
-  public stockDataPGR: number;
+  public stockDataPGR?: number;
   public loading: Subscription;
   public config = {
     animated: true,
@@ -123,7 +124,6 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
     ignoreBackdropClick: false,
     class: 'modal-dialog--fullscreen',
   };
-
   public config2 = {
     animated: true,
     keyboard: true,
@@ -168,6 +168,7 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         this.stockDataMeta = data['meta-info'];
         this.stockDataPGR = data['pgr'];
+        console.log('meta-info', this.stockDataMeta, 'pgr', this.stockDataPGR);
       })
   }
 
@@ -187,5 +188,13 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
 
   public appendPGRImage(pgr: number, rawPgr: number) {
     return this.signalService.appendPGRImage(pgr, rawPgr);
+  }
+
+  public appendSliderClass(pgr: number) {
+    return this.signalService.appendSliderClass(pgr);
+  }
+
+  public appendSliderBarClass(pgr: number) {
+    return this.signalService.appendSliderBarClass(pgr);
   }
 }
