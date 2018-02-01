@@ -13,18 +13,12 @@ declare let gtag: Function;
     <div class="insights__container">
       <div class="post-head row no-gutters">
         <div class="col-12 col-sm-6 post-head__logo">
-          <img src="./assets/imgs/logo__bearish-insights.png">
+          <img src="assets/imgs/logo__bearish-insights.png">
         </div>
-<!--         <div class="col-6 post-head__date">
-          <p class="">{{ post ? post['post_date_formatted'] : null }}</p>
-        </div> -->
         <div class="col-12 col-sm-6 post-head__date">
           <p class="">January 31, 2018</p>
         </div>
       </div>
-<!--       <div class="row post-body post-body--insights" [ngBusy]="loading">
-        <div [innerHtml]="commentary"></div>
-      </div> -->
       <div class="row no-gutters post-body post-body--insights">
         <div class="col-12 headline">
           <h1>Overbought Conditions, Narrowing Breadth and Rising VIX Levels Trigger Sharpest Sell-Off Since Last Fall</h1>
@@ -45,13 +39,13 @@ export class BearishInsightsComponent implements OnInit, OnDestroy {
   public title: string;
   public post: object;
   public commentary: string;
-  public config = {
-    animated: true,
-    keyboard: true,
-    backdrop: false,
-    ignoreBackdropClick: false,
-    class: 'modal-dialog--fullscreen',
-  };
+  // public config = {
+  //   animated: true,
+  //   keyboard: true,
+  //   backdrop: false,
+  //   ignoreBackdropClick: false,
+  //   class: 'modal-dialog--fullscreen',
+  // };
 
   constructor(private router: Router,
               private wordpressService: WordpressService) {

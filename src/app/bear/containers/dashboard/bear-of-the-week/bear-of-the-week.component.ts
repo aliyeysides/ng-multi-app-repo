@@ -36,9 +36,9 @@ declare let gtag: Function;
                 <p class="company-name">{{ stockDataMeta?.name }}</p>
               </div>
               <div class="price-data">
-                <p class="data price down-change">{{ stockDataMeta?.Last | decimal }}</p>
-                <p class="data change down-change"><span>{{ stockDataMeta?.Change | decimal }}</span>
-                  <span>({{ stockDataMeta ? (stockDataMeta['Percentage '] | decimal) : null }}%)</span></p>
+                <p class="data price" [ngClass]="{'down-change': stockDataMeta?.Change<0,'up-change':stockDataMeta?.Change>0}">{{ stockDataMeta?.Last | decimal }}</p>
+                <p class="data change" [ngClass]="{'down-change': stockDataMeta?.Change<0,'up-change':stockDataMeta?.Change>0}"><span>{{ stockDataMeta?.Change | decimal }}</span>
+                  <span>(<span *ngIf="stockDataMeta?.Change>0">+</span>{{ stockDataMeta ? (stockDataMeta['Percentage '] | decimal) : null }}%)</span></p>
               </div>
               <div (click)="openCommentaryModal()" class="link__see-more">
                 <a class="">See Commentary <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
