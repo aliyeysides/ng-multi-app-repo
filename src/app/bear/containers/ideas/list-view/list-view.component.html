@@ -225,7 +225,7 @@
             <div class="col-md-3 col-lg-2 col-xl-2 stock__price">
               <p class="data"
                  [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">
-                (<span *ngIf="idea?.Change>0" class="up-change">+</span>{{ idea["Percentage "] | decimal}}%)</p>
+                <span *ngIf="idea?.Change>0" class="up-change">+</span>{{ idea["Percentage "] | decimal}}%</p>
             </div>
             <!-- <div (click)="toggleOptions(idea, $event)"
                  class="stock__options-button">
@@ -354,11 +354,14 @@
               </div>
             </div>
             <div class="stock-panel__details row no-gutters">
-              <div class="col-md-6">
+              <div class="col-md-6 col-xl-4">
                 <p>Mkt&nbsp;Cap:<span>{{selectedStock?.market_cap | marketCap | number:'.2-2' }}B</span></p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 col-xl-3">
                 <p>Yield:<span>{{selectedStock?.div_yield | decimal }}%</span></p>
+              </div>
+              <div class="col-md-12 col-xl-5">
+                <p>Reports:<span>Thu Jan 25</span></p>
               </div>
             </div>
           </div>
@@ -592,11 +595,14 @@
               <div class="col-lg-6">
                 <p>Yield:<span>{{ idea['meta-info'].div_yield | decimal }}%</span></p>
               </div>
+              <div class="col-md-12 col-xl-4">
+                <p>Reports:<span>Thu Jan 25</span></p>
+              </div>
             </div>
           </div>
 
           <div class="quick-view__pgr col-lg-4">
-            <p class="pgr__title">Power Gauge:</p>
+            <p class="pgr__title">Power Gauge: <a class="info-icon"><i class="fa fa-info-circle"></i></a></p>
             <p class="pgr__text" [ngClass]="appendPGRClass(idea.pgr['Corrected PGR Value'])">
               {{ appendPGRText(idea.pgr['Corrected PGR Value'], idea.pgr['PGR Value']) }}
             </p>

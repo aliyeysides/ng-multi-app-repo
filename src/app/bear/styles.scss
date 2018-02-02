@@ -341,18 +341,20 @@ a.quick-link {
       }
     }
   }
-
+  .section-header__actions.section-header__actions--last {
+    border-left: 0px dotted rgba(0, 0, 0, 0.25);
+  }
   .section-header__actions {
     float: right;
-    height: 45px;
-    border-left: $border-dashed--MD;
+    height: 39px;
+    border-left: 4px dotted rgba(0, 0, 0, 0.25);
     margin-left: 15px;
-    margin-top: 8px;
+    margin-top: 11px;
 
     a {
       display: inline-block;
       margin-left: 10px;
-      padding-top: 5px;
+      padding-top: 1px;
       height: 40px;
       width: 40px;
       text-align: center;
@@ -394,8 +396,8 @@ a.quick-link {
       width: 50px;
 
       img, svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
       }
     }
   }
