@@ -17,6 +17,7 @@ import {InsightsCommentaryModalComponent} from './bearish-insights/modals/commen
 import {WeeklyCommentaryModalComponent} from './bear-of-the-week/modals/commentary-modal.component';
 import {WordpressService} from '../../../services/wordpress.service';
 import {DatePipe} from '@angular/common';
+import {ListsContainerComponent} from './lists-container/lists-container.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import {DatePipe} from '@angular/common';
     PreviousBearsModalComponent,
     InsightsCommentaryModalComponent,
     WeeklyCommentaryModalComponent,
+    ListsContainerComponent
   ],
   entryComponents: [
     PreviousInsightsModalComponent,
