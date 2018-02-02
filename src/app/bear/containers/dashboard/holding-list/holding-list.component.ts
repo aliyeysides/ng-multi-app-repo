@@ -12,7 +12,7 @@ import {Observable} from 'rxjs/Observable';
   selector: 'cpt-holding-list',
   template: `
     <div class="dashboard__panel dashboard__panel--list">
-      <ul [ngBusy]="loading" *ngIf="currentList === 'Holding'" class="post-body post-body--userlist">
+      <ul [ngBusy]="loading" class="post-body post-body--userlist">
         <ng-container *ngIf="holdingListIdeas?.length>0">
           <li *ngFor="let item of holdingListIdeas" class="row no-gutters">
             <div class="col-2 stock__PGR">

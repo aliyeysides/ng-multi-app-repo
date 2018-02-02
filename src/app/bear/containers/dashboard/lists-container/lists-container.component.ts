@@ -16,9 +16,12 @@ import {WatchingListComponent} from '../watching-list/watching-list.component';
             <div class="dash-head__toggle">
               <div class="dash-head__chevron"><a><i class="fa fa-chevron-left"></i></a></div>
               <ul class="dash-head__pagination">
-                <li [ngClass]="{'active': currentListComponent == 'Best Bear Ideas'}" (click)="loadBestBearIdeasComponent()"><a><i class="fa fa-circle"></i></a></li>
-                <li [ngClass]="{'active': currentListComponent == 'Holding'}" (click)="loadHoldingComponent()"><a><i class="fa fa-circle"></i></a></li>
-                <li [ngClass]="{'active': currentListComponent == 'Watching'}" (click)="loadWatchingComponent()"><a><i class="fa fa-circle"></i></a></li>
+                <li [ngClass]="{'active': currentListComponent == 'Best Bear Ideas'}"
+                    (click)="loadBestBearIdeasComponent()"><a><i class="fa fa-circle"></i></a></li>
+                <li [ngClass]="{'active': currentListComponent == 'Holding'}" (click)="loadHoldingComponent()"><a><i
+                  class="fa fa-circle"></i></a></li>
+                <li [ngClass]="{'active': currentListComponent == 'Watching'}" (click)="loadWatchingComponent()"><a><i
+                  class="fa fa-circle"></i></a></li>
               </ul>
               <div class="dash-head__chevron"><i class="fa fa-chevron-right"></i></div>
             </div>
