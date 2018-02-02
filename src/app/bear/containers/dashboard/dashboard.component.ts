@@ -25,7 +25,7 @@ import {AuthService} from '../../../services/auth.service';
       <div class="row bearish-ideas__container">
 
         <div class="col-12 col-md-5 col-xl-4">
-          <cpt-best-bear-ideas></cpt-best-bear-ideas>
+          <cpt-lists-container></cpt-lists-container>
         </div>
 
         <div class="col-12 col-md-7 col-xl-8 dashboard__panel" id="bearish-ideas__list">
