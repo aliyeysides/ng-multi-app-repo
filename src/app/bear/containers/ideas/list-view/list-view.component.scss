@@ -497,7 +497,7 @@
       }
 
       .stock-panel__details {
-        padding:10px 0;
+        padding:7px 0;
 
         p {
           font-weight: 600;
@@ -505,7 +505,7 @@
           line-height: 1.4;
           color: $font-color--MD;
           text-transform: uppercase;
-          margin: 0px;
+          margin: 0px 0px 4px;
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;

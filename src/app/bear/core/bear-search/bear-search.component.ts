@@ -34,7 +34,7 @@ declare let gtag: Function;
         <h3>Search</h3>
       </div>
 
-      <cpt-bear-symbol-search [placeholder]="'Ticker or Symbol'"></cpt-bear-symbol-search>
+      <cpt-bear-symbol-search [placeholder]="'Ticker or Company Name'"></cpt-bear-symbol-search>
     </div>
   `,
   styleUrls: ['./bear-search.component.scss']

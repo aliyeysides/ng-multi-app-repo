@@ -56,6 +56,15 @@ export class BearNavigatorComponent implements OnInit {
       fn: () => {
         gtag('event', 'pgr_education_clicked', {'event_category': 'engagement'});
       }
+    },
+    {
+      label: 'Education',
+      icon: './assets/imgs/icon_education.svg',
+      link: 'https://masteringthebear.com/education',
+      target: '_blank',
+      fn: () => {
+        gtag('event', 'pgr_education_clicked', {'event_category': 'engagement'});
+      }
     }
   ];
 

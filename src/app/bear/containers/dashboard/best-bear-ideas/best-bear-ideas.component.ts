@@ -57,8 +57,8 @@ declare let gtag: Function;
           </div>
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">
-              (<span *ngIf="stock?.Change>0" class="up-change">+</span>{{ stock['Percentage '] | decimal
-              }}%)</p>
+              <span *ngIf="stock?.Change>0" class="up-change">+</span>{{ stock['Percentage '] | decimal
+              }}%</p>
           </div>
         </li>
       </ul>
