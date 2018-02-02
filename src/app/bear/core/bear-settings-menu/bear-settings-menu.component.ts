@@ -84,7 +84,7 @@ export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
     {
       title: 'Upgrade',
       icon: 'fa fa-upload',
-      href: 'https://mh214.infusionsoft.com/app/form/bear_upgrade-form',
+      href: 'https://masteringthebear.com/upgrade',
       target: '_blank',
       fn: () => {
         gtag('event', 'upgrade_clicked');

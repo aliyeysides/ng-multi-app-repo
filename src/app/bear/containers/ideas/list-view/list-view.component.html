@@ -134,7 +134,7 @@
           <li [ngClass]="{'active selected' : selectedStock == idea}"
               (click)="toggleOptions(idea, $event); selectStock(idea);trackSelectedStock(idea)" class="row no-gutters list__entry"
               *ngFor="let idea of ideaList | orderBy:orderByObject?.field:orderByObject?.ascending ">
-            <div *ngIf="popupOptionsMap[idea.symbol] == true" class="stock-options__popup">
+<!--             <div *ngIf="popupOptionsMap[idea.symbol] == true" class="stock-options__popup">
               <ul class="nav nav-justified">
                 <li *ngIf="!idea.is_holding_stock" (click)="addToList('Holding', idea.symbol, $event)" class="nav-item">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
@@ -207,7 +207,7 @@
                   </g>
                 </svg>
               </div>
-            </div>
+            </div> -->
             <div class="col-md-3 col-lg-2 col-xl-2 stock__PGR">
               <img class="align-absolute" src="{{appendPGRImage(idea.PGR, idea.raw_PGR)}}">
             </div>
@@ -227,7 +227,7 @@
                  [ngClass]="{'up-change' : idea['Percentage '] > 0, 'down-change' : idea['Percentage '] < 0}">
                 (<span *ngIf="idea?.Change>0" class="up-change">+</span>{{ idea["Percentage "] | decimal}}%)</p>
             </div>
-            <div (click)="toggleOptions(idea, $event)"
+            <!-- <div (click)="toggleOptions(idea, $event)"
                  class="stock__options-button">
               <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg"
                    xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -237,7 +237,7 @@
                     d="M150.5,67 C131.998461,67 117,52.0015391 117,33.5 C117,14.9984609 131.998461,0 150.5,0 C169.001539,0 184,14.9984609 184,33.5 C184,52.0015391 169.001539,67 150.5,67 Z M150.5,184 C131.998461,184 117,169.001539 117,150.5 C117,131.998461 131.998461,117 150.5,117 C169.001539,117 184,131.998461 184,150.5 C184,169.001539 169.001539,184 150.5,184 Z M150.5,300 C131.998461,300 117,285.001539 117,266.5 C117,247.998461 131.998461,233 150.5,233 C169.001539,233 184,247.998461 184,266.5 C184,285.001539 169.001539,300 150.5,300 Z"></path>
                 </g>
               </svg>
-            </div>
+            </div> -->
           </li>
         </ul>
       </div>
@@ -364,7 +364,7 @@
           </div>
           <!-- QUICKVIEW PANEL - - - PGR  -->
           <div class="quick-view__pgr col-lg-4">
-            <p class="pgr__title">Power Gauge:</p>
+            <p class="pgr__title">Power Gauge: <a class="info-icon"><i class="fa fa-info-circle"></i></a></p>
             <p class="pgr__text" [ngClass]="appendPGRClass(selectedStock.PGR)">
               {{ appendPGRText(selectedStock.PGR, selectedStock.raw_PGR) }}
             </p>

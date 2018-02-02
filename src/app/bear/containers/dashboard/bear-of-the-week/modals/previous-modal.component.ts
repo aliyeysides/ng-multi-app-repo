@@ -13,17 +13,21 @@ declare let gtag: Function;
 @Component({
   selector: 'cpt-bear-weekly-previous-modal',
   template: `
-    <div class="insights__container insights__container--large insights__container--modal">
-      <div class="post-head post-head--bearpick">
-        <h2 class="modal-title pull-left">{{ title }}</h2>
-        <button type="button" class="post-head__button" aria-label="Close" (click)="bsModalRef.hide()">
-          <a class="">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
-            <span>&nbsp;Close</span>
-          </a>
-        </button>
+    <div class="container-fluid modal-content--bearpick">
+      <div class="row no-gutters modal-head modal-head--bearpick">
+        <div class="col-8">
+          <h2 class="modal-title">{{ title }}</h2>
+        </div>
+        <div class="col-4">
+          <button type="button" class="modal-head__button" aria-label="Close" (click)="bsModalRef.hide()">
+            <a class="">
+              <i class="fa fa-times-circle" aria-hidden="true"></i>
+              <span>&nbsp;Close</span>
+            </a>
+          </button>
+        </div>
       </div>
-      <div class="post-body post-body--previous-pick">
+      <div class="modal-body">
         <ul class="container" [ngBusy]="loading">
           <li class="row" *ngFor="let post of posts">
             <ng-container *ngIf="post['data']">
