@@ -45,7 +45,7 @@ declare let gtag: Function;
               </div>
             </div>
             <div class="quick-view__pgr col-5 col-xl-5">
-              <p class="pgr__title">Power Gauge Rating:</p>
+              <p class="pgr__title">Power Gauge Rating: <a class="info-icon"><i class="fa fa-info-circle"></i></a></p>
               <p class="pgr__text veryBearish">
                 {{ appendPGRText(stockDataPGR ? stockDataPGR['Corrected PGR Value'] : 0, stockDataPGR ? stockDataPGR['PGR Value'] : 0)
                 }}</p>
