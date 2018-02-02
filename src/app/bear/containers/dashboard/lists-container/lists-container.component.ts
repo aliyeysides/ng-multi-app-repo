@@ -10,15 +10,15 @@ import {WatchingListComponent} from '../watching-list/watching-list.component';
       <div class="dash-head">
         <div class="row no-gutters">
           <div class="col-7">
-            <h4><a>List title goes here</a></h4>
+            <h4><a>{{ currentListComponent }}</a></h4>
           </div>
           <div class="col-5">
             <div class="dash-head__toggle">
               <div class="dash-head__chevron"><a><i class="fa fa-chevron-left"></i></a></div>
               <ul class="dash-head__pagination">
-                <li class="" (click)="loadBestBearIdeasComponent()"><a><i class="fa fa-circle"></i></a></li>
-                <li class="" (click)="loadHoldingComponent()"><a><i class="fa fa-circle"></i></a></li>
-                <li class="" (click)="loadWatchingComponent()"><a><i class="fa fa-circle"></i></a></li>
+                <li [ngClass]="{'active': currentListComponent == 'Best Bear Ideas'}" (click)="loadBestBearIdeasComponent()"><a><i class="fa fa-circle"></i></a></li>
+                <li [ngClass]="{'active': currentListComponent == 'Holding'}" (click)="loadHoldingComponent()"><a><i class="fa fa-circle"></i></a></li>
+                <li [ngClass]="{'active': currentListComponent == 'Watching'}" (click)="loadWatchingComponent()"><a><i class="fa fa-circle"></i></a></li>
               </ul>
               <div class="dash-head__chevron"><i class="fa fa-chevron-right"></i></div>
             </div>
@@ -41,7 +41,7 @@ import {WatchingListComponent} from '../watching-list/watching-list.component';
 export class ListsContainerComponent implements OnInit {
   @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef;
 
-  currentListComponent;
+  currentListComponent: string;
 
   constructor(private resolver: ComponentFactoryResolver) {
   }
@@ -58,13 +58,16 @@ export class ListsContainerComponent implements OnInit {
 
   loadBestBearIdeasComponent() {
     this.loadComponent(BestBearIdeasComponent);
+    this.currentListComponent = 'Best Bear Ideas';
   }
 
   loadHoldingComponent() {
     this.loadComponent(HoldingListComponent);
+    this.currentListComponent = 'Holding';
   }
 
   loadWatchingComponent() {
     this.loadComponent(WatchingListComponent);
+    this.currentListComponent = 'Watching';
   }
 }
