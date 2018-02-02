@@ -18,10 +18,6 @@ export interface MarketData {
   selector: 'cpt-market-summary',
   template: `
     <div class="market-summary__contents">
-      <div class="market-summary__title">
-        <h4>Markets</h4>
-        <p class="current-time">As of {{ currentTime }}</p>
-      </div>
       <p class="indice">
         <span>
           <img *ngIf="SPY?.change<0" src="./assets/imgs/icon_arrow--down.svg">
@@ -58,6 +54,10 @@ export interface MarketData {
           <span *ngIf="QQQ?.change>0" class="up-change">+</span>{{QQQ?.percent_change.toFixed(2) }}%
         </span>
       </p>
+      <div class="market-summary__title">
+<!--         <h4>Markets</h4> -->
+        <p class="current-time"><sup>*</sup>As of {{ currentTime }}</p>
+      </div>
     </div>
   `,
   animations: [fadeInDown()],
