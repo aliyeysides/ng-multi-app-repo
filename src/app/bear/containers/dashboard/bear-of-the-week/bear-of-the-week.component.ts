@@ -30,25 +30,32 @@ declare let gtag: Function;
           <div class="row no-gutters">
             <div class="col-7 col-xl-7">
               <div class="ticker-info">
-                <p class="ticker"><span><img class="rating"
-                                             src="{{ appendPGRImage(stockDataPGR ? stockDataPGR['Corrected PGR Value'] : 0, stockDataPGR ? stockDataPGR['PGR Value'] : 0) }}"></span>{{ stockDataMeta?.symbol
-                  }}</p>
-                <p class="company-name">{{ stockDataMeta?.name }}</p>
+                <p class="ticker">
+                  <span><img class="rating" src="{{ pgrImgUrl }}"></span>
+                  {{ stockDataMeta?.symbol }}
+                </p>
+                <p class=" company-name">{{ stockDataMeta?.name }}</p>
               </div>
               <div class="price-data">
-                <p class="data price down-change">{{ stockDataMeta?.Last | decimal }}</p>
-                <p class="data change down-change"><span>{{ stockDataMeta?.Change | decimal }}</span>
-                  <span>({{ stockDataMeta ? (stockDataMeta['Percentage '] | decimal) : null }}%)</span></p>
+                <p class="data price"
+                   [ngClass]="{'down-change': stockDataMeta?.Change<0,'up-change':stockDataMeta?.Change>0}">
+                  {{ stockDataMeta?.Last | decimal }}</p>
+                <p class="data change"
+                   [ngClass]="{'down-change': stockDataMeta?.Change<0,'up-change':stockDataMeta?.Change>0}">
+                  <span>{{ stockDataMeta?.Change | decimal }}</span>
+                  <span>(<span
+                    *ngIf="stockDataMeta?.Change>0">+</span>{{ stockDataMeta ? (stockDataMeta['Percentage '] | decimal) : null
+                    }}%)</span></p>
               </div>
               <div (click)="openCommentaryModal()" class="link__see-more">
                 <a class="">See Commentary <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
               </div>
             </div>
             <div class="quick-view__pgr col-5 col-xl-5">
-              <p class="pgr__title">Power Gauge Rating: <a class="info-icon"><i class="fa fa-info-circle"></i></a></p>
-              <p class="pgr__text veryBearish">
-                {{ appendPGRText(stockDataPGR ? stockDataPGR['Corrected PGR Value'] : 0, stockDataPGR ? stockDataPGR['PGR Value'] : 0)
-                }}</p>
+              <p class="pgr__title">Power Gauge Rating:</p>
+              <p class="pgr__text"
+                 [ngClass]="{'veryBearish':pgrText=='Very Bearish','bearish':pgrText=='Bearish','neutral':pgrText=='Neutral','bullish':pgrText=='Bullish','veryBullish':pgrText=='Very Bullish'}">
+                {{ pgrText }}</p>
               <ul class="pgr__sliders row">
                 <li class="col-12">
                   <div class="sliderBar-container">
@@ -122,6 +129,8 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   public ticker: string;
   public stockDataMeta: Idea;
   public stockDataPGR?: number;
+  public pgrText: string;
+  public pgrImgUrl: string;
   public loading: Subscription;
   public config = {
     animated: true,
@@ -174,6 +183,8 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         this.stockDataMeta = data['meta-info'];
         this.stockDataPGR = data['pgr'];
+        this.pgrText = this.appendPGRText(this.stockDataPGR['Corrected PGR Value'], this.stockDataPGR['PGR Value']);
+        this.pgrImgUrl = this.appendPGRImage(this.stockDataPGR['Corrected PGR Value'], this.stockDataPGR['PGR Value']);
       })
   }
 

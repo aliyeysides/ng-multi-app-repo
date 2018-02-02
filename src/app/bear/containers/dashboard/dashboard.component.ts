@@ -10,7 +10,6 @@ import {AuthService} from '../../../services/auth.service';
   template: `
     <div class="container-fluid dashboard">
       <div class="row bearish-insights__container">
-
         <div class="col-12 align-self-center" style="padding:0;">
           <div class="row no-gutters" style="height: 100%;">
             <div class="col-12 col-md-7 col-xl-8">
@@ -46,7 +45,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public loading: Subscription;
 
   constructor(private ideasService: IdeasService,
-              private authService: AuthService) { }
+              private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.loading = this.authService.currentUser$
