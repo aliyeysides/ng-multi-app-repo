@@ -9,11 +9,7 @@ import {AuthService} from '../../../services/auth.service';
   selector: 'cpt-dashboard',
   template: `
     <div class="container-fluid dashboard">
-      <div [ngStyle]="{ 'background-image': 'url(../assets/imgs/BG__bearish-insights__container.png)' }"
-           class="row bearish-insights__container">
-        <!--<div [ngStyle]="{
-        'background-image': 'url(' + photo + ')'
-        }"></div>-->
+      <div class="row bearish-insights__container">
         <div class="col-12 align-self-center" style="padding:0;">
           <div class="row no-gutters" style="height: 100%;">
             <div class="col-12 col-md-7 col-xl-8">
