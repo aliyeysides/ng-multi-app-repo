@@ -1,5 +1,7 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {BestBearIdeasComponent} from '../best-bear-ideas/best-bear-ideas.component';
+import {HoldingListComponent} from '../holding-list/holding-list.component';
+import {WatchingListComponent} from '../watching-list/watching-list.component';
 
 @Component({
   selector: 'cpt-lists-container',
@@ -33,7 +35,7 @@ import {BestBearIdeasComponent} from '../best-bear-ideas/best-bear-ideas.compone
       <ng-template #container></ng-template>
     </div>
   `,
-  entryComponents: [BestBearIdeasComponent],
+  entryComponents: [BestBearIdeasComponent, HoldingListComponent, WatchingListComponent],
   styleUrls: ['./lists-container.component.scss']
 })
 export class ListsContainerComponent implements OnInit {
@@ -41,26 +43,28 @@ export class ListsContainerComponent implements OnInit {
 
   currentListComponent;
 
-  constructor(private resolver: ComponentFactoryResolver) { }
+  constructor(private resolver: ComponentFactoryResolver) {
+  }
 
   ngOnInit() {
+    this.loadBestBearIdeasComponent();
+  }
+
+  loadComponent(cmp) {
+    this.container.clear();
+    const factory = this.resolver.resolveComponentFactory(cmp);
+    this.container.createComponent(factory);
   }
 
   loadBestBearIdeasComponent() {
-    this.container.clear();
-    const factory = this.resolver.resolveComponentFactory(BestBearIdeasComponent);
-    this.container.createComponent(factory);
+    this.loadComponent(BestBearIdeasComponent);
   }
 
   loadHoldingComponent() {
-    this.container.clear();
-    const factory = this.resolver.resolveComponentFactory(BestBearIdeasComponent);
-    this.container.createComponent(factory);
+    this.loadComponent(HoldingListComponent);
   }
 
   loadWatchingComponent() {
-    this.container.clear();
-    const factory = this.resolver.resolveComponentFactory(BestBearIdeasComponent);
-    this.container.createComponent(factory);
+    this.loadComponent(WatchingListComponent);
   }
 }
