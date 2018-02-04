@@ -15,10 +15,10 @@ declare let gtag: Function;
   template: `
     <div class="container-fluid modal-content--bearpick">
       <div class="row no-gutters modal-head modal-head--bearpick">
-        <div class="col-8">
+        <div class="col-9">
           <h2 class="modal-title">{{ title }}</h2>
         </div>
-        <div class="col-4">
+        <div class="col-3">
           <button type="button" class="modal-head__button" aria-label="Close" (click)="bsModalRef.hide()">
             <a class="">
               <i class="fa fa-times-circle" aria-hidden="true"></i>

@@ -6,11 +6,11 @@ import {BsModalRef} from 'ngx-bootstrap';
   template: `
     <div class="container-fluid modal-content--bearpick">
       <div class="row no-gutters modal-head modal-head--bearpick">
-        <div class="col-8">
+        <div class="col-9 col-md-10">
           <h2 class="">{{ title }}</h2>
-          <p class="header__post-date">{{ date }}</p>
+          <p class="modal-head__date">{{ date }}</p>
         </div>
-        <div class="col-4">
+        <div class="col-3 col-md-2">
           <button type="button" class="modal-head__button" aria-label="Close" (click)="bsModalRef.hide()">
             <a class="">
               <i class="fa fa-times-circle" aria-hidden="true"></i>
