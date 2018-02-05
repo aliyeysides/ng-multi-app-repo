@@ -14,7 +14,7 @@ import {WatchingListComponent} from '../watching-list/watching-list.component';
           </div>
           <div class="col-5">
             <div class="dash-head__toggle">
-              <div class="dash-head__chevron"><a><i class="fa fa-chevron-left"></i></a></div>
+              <div (click)="leftClickPage()" class="dash-head__chevron"><a><i class="fa fa-chevron-left"></i></a></div>
               <ul class="dash-head__pagination">
                 <li [ngClass]="{'active': currentListComponent == 'Best Bear Ideas'}"
                     (click)="loadBestBearIdeasComponent()"><a><i class="fa fa-circle"></i></a></li>
@@ -23,7 +23,7 @@ import {WatchingListComponent} from '../watching-list/watching-list.component';
                 <li [ngClass]="{'active': currentListComponent == 'Watching'}" (click)="loadWatchingComponent()"><a><i
                   class="fa fa-circle"></i></a></li>
               </ul>
-              <div class="dash-head__chevron"><i class="fa fa-chevron-right"></i></div>
+              <div (click)="rightClickPage()" class="dash-head__chevron"><i class="fa fa-chevron-right"></i></div>
             </div>
           </div>
         </div>
@@ -72,5 +72,12 @@ export class ListsContainerComponent implements OnInit {
   loadWatchingComponent() {
     this.loadComponent(WatchingListComponent);
     this.currentListComponent = 'Watching';
+  }
+
+  leftClickPage() {
+
+  }
+
+  rightClickPage() {
   }
 }
