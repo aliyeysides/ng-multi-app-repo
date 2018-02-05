@@ -124,7 +124,7 @@ export class InteractiveChart {
       data.yAxisData.rectData[i] = parseInt(data.yAxisData.rectData[i]);
       data.yAxisData.areaData[i] = parseFloat(data.yAxisData.areaData[i]);
     }
-    data.xAxisFormatedData = data.xAxisFormatedData.map(res => moment(res).format('MMM DD YYYY'));
+    data.xAxisFormatedData = data.xAxisFormatedData.map(res => moment(res).format("MMM 'YY"));
     this.chartData = data;
   }
   public init() {
