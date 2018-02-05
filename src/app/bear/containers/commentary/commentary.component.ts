@@ -9,51 +9,50 @@ declare var gtag: Function;
   selector: 'cpt-market-beat',
   template: `
     <!-- PANEL CONTENTS -->
-    <div [ngBusy]="loading" class="container-fluid component component--marketbeat">
-	    <div class="row">
-	      	<div class="col-12 section--masthead masthead--featured">
-	      		<h2>Market Insights</h2>
-	      	</div>
-	    </div>
-	    <div class="row">
-        <div class="container">
-          <div class="row">
-            <div class="col-12 section--author">
-              <p class=""><sub>BY</sub> Marc Chaikin</p>
+    <div [ngBusy]="loading" class="container-fluid article__container">
+      <div class="article__masthead">
+        <div class="row no-gutters justify-content-center masthead__head">
+          <div class="col-12 col-sm-6 col-xl-5 masthead__logo">
+            <img src="assets/imgs/logo__bearish-insights.png">
+          </div>
+          <div class="col-12 col-sm-6 col-xl-5 masthead__date">
+            <p>January 31, 2018</p>
+            <div class="section--date-select">
+              <div class="btn-group" dropdown [autoClose]="true">
+                  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                    {{ selectedInsight ? selectedInsight['post_title'].slice(26) : null }}
+                  </button>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                    <li (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem"><a
+                      class="dropdown-item">{{ post['post_title'].slice(26) }}</a></li>
+                </ul>
+              </div>
             </div>
-    	    	<div class="col-12 section--date-select">
-    	        <div class="btn-group" dropdown [autoClose]="true">
-    	          	<button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-    	            	{{ selectedInsight ? selectedInsight['post_title'].slice(26) : null }}
-    	          	</button>
-    		        <ul *dropdownMenu class="dropdown-menu" role="menu">
-    		            <li (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem"><a
-    		              class="dropdown-item">{{ post['post_title'].slice(26) }}</a></li>
-    		        </ul>
-    	        </div>
-    		    </div>
-  	      	<div class="col-12 section--article featured--article">
-  	      		<div class="article__body" [class.opened]="opened">
-  	      			<div class="article" [innerHTML]="commentary"></div>
-  	      		</div>
-              <div *ngIf="!opened" (click)="toggleReadMore()"
-               class="expand-collapse">
-                <img src="./assets/imgs/ux__expand--dots.svg">
-                <p class="article__read-more">READ FULL ARTICLE</p>
-              </div>
-              <div *ngIf="opened" (click)="toggleReadMore()"
-               class="expand-collapse">
-                <img src="./assets/imgs/ux__collapse--circle.svg">
-                <p class="article__read-more">COLLAPSE ARTICLE</p>
-              </div>
-  	      	</div>
           </div>
         </div>
-	    </div>
-
-      <div class="anchor__top" *ngIf="opened" (click)="jumpToTop()">
-        <p>Top</p>
+        <div class="row justify-content-center masthead__body">
+          <div class="col-12 col-xl-10 headline">
+            <h1>Overbought Conditions, Narrowing Breadth and Rising VIX Levels Trigger Sharpest Sell-Off Since Last Fall</h1>
+          </div>
+          <div class="col-12 col-xl-10 author">
+            <p class="">Weekly Commentary By John Schlitz</p>
+          </div>
+        </div>
       </div>
+      <div class="article__body">
+        <div class="row">
+          <div class="col-12 col-xl-10 featured__article">
+            <div class="article__wrapper">
+              <div class="article" [innerHTML]="commentary"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!--       <div class="anchor__top" *ngIf="opened" (click)="jumpToTop()">
+        <p>Top</p>
+      </div> -->
+
     </div>
   `,
   styleUrls: ['./commentary.scss']

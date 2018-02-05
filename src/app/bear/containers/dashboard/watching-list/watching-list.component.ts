@@ -11,8 +11,8 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'cpt-holding-list',
   template: `
-    <div class="dashboard__panel dashboard__panel--list">
-      <ul [ngBusy]="loading" class="post-body post-body--userlist">
+    <div class="dashboard__panel--list">
+      <ul [ngBusy]="loading" class="dash-body dash-body--userlist">
         <ng-container *ngIf="watchingListIdeas?.length>0">
           <li *ngFor="let item of watchingListIdeas" class="row no-gutters">
             <div class="col-2 stock__PGR">

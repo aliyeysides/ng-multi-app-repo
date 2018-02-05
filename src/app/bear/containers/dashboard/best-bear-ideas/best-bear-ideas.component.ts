@@ -13,7 +13,7 @@ declare let gtag: Function;
 @Component({
   selector: 'cpt-best-bear-ideas',
   template: `
-    <div class="dashboard__panel dashboard__panel--list">
+    <div class="dashboard__panel--list">
       <ul [ngBusy]="loading" class="dash-body dash-body--bearlist">
         <li *ngFor="let stock of bestBearIdeas" class="row no-gutters">
           <div class="col-2 stock__PGR">
