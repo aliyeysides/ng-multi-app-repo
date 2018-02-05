@@ -40,7 +40,7 @@ declare var gtag: Function;
         </div>
       </div>
       <div class="article__body">
-        <div class="row">
+        <div class="row no-gutters justify-content-center">
           <div class="col-12 col-xl-10 featured__article">
             <div class="article__wrapper">
               <div class="article" [innerHTML]="commentary"></div>

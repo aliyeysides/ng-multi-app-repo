@@ -209,7 +209,34 @@ a.quick-link {
 
 \*----------------------------------------------------*/
 
+.article__body {
+  .featured__article {
+    .article__wrapper {
+      .article {
+        color: #484848;
+          line-height: 1.5;
+          font-size: 18px;
 
+          h1 {
+          color: $font-color;
+            line-height: 1.5;
+            font-size: 32px;
+          }
+
+          ul {
+            list-style-type: disc;
+            margin: 20px 20px 35px;
+            padding: 0;
+            font-size: 18px;
+
+            li {
+
+            }
+          }
+      }
+    }
+  }
+}
 
 
 /*------------------------------------*\
@@ -422,6 +449,7 @@ a.quick-link {
 
   button {
     outline: 0;
+    background:transparent;
   }
 }
 
@@ -461,7 +489,7 @@ a.quick-link {
 
 
 .modal-content--bearpick {
-    height: 600px;
+    min-height: 400px;
     overflow: hidden;
     border-radius: 10px;
     background-color: #fafafa;
@@ -530,6 +558,7 @@ a.quick-link {
       .modal-footer {
           position: relative;
           width:100%;
+          padding-top:15px;
 
           .post-footer__button {
       
