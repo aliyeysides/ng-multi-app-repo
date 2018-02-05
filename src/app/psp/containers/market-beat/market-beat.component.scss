@@ -4,8 +4,171 @@
 
 
 .component--marketbeat {
+	padding:0;
 
-	.section--masthead {
+	.article__masthead {
+
+		padding: 60px 2.5% 20px;
+	    overflow: hidden;
+	    position: relative;
+	    background-image: url('/../../../../assets/imgs/BG__bearish-insights__container.png');
+	    background-repeat: no-repeat;
+	    background-size: cover;
+	    background-position: center;
+	    border-left: 1px solid #ddd;
+
+		.masthead__head {
+			margin:10px 0 25px;
+
+		    .masthead__logo {
+			    img {
+			        width: 300px;
+			        height: auto;
+			    }
+		    }
+		    .masthead__date {
+		      	text-align: center;
+
+	      		.section--date-select {
+	      			display:block;
+	      			margin: 30px auto 0;
+	      			
+					.btn-group {
+						margin-top: 0px;
+						margin-bottom: 5px;
+						cursor: pointer;
+
+						.btn {
+						    font-weight: 700;
+						    text-align: center;
+						    border: none;
+						    padding: 0;
+						    font-size: 18px;
+						    border-radius: 0px;
+						    cursor: pointer;
+						}
+						.btn-primary {
+					  		background-color: transparent;
+						    border-color: transparent;
+						    font-size: 22px;
+						    line-height: 1;
+							color: #ffffff;
+							font-weight: 700;
+							box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
+							z-index: 10;
+						}
+						.dropdown-toggle {
+							min-width: 200px;
+
+							&::after {
+								vertical-align:middle;
+							}
+						}
+					}
+					.dropdown-menu {
+					    position: absolute;
+					    cursor: pointer;
+					    z-index: 5;
+					    float: left;
+					    min-width: 100%;
+					    padding: 40px 0 5px;
+					    margin: -40px 0 0;
+					    font-size: 24px;
+					    color: $font-color;
+					    width: 100%;
+					    text-align: center;
+					    list-style: none;
+					    background-color: rgba(255,255,255, 0.92);
+					    background-clip: padding-box;
+					    border: 2px solid #ffffff;
+					    border-radius: 20px;
+						box-shadow: 0 6px 40px rgba(50, 50, 50, 0.26);
+
+						.dropdown-item {
+							font-weight: 600;
+						}
+					}
+				}
+		    }
+		    .masthead__button {
+		      	font-weight: 400;
+		      	font-size: 26px;
+		      	height: 45px;
+		      	padding: 11px 15px;
+		      	color: #ffffff;
+
+		      	i {
+		        	font-size: 20px;
+		      	}
+
+		      	span {
+		        	margin-left: 3px;
+		      	}
+		    }
+		}
+
+		.masthead__body {
+			.headline {
+
+				h1 {
+					color: #ffffff;
+					font-size: 38px;
+					font-weight: 400;
+					line-height: 1.3;
+				}
+			}
+
+			.author {
+				margin-top: 15px;
+
+				p {
+					color: #ffffff;
+					font-size: 18px;
+					font-weight: 600;
+					line-height: 1.5;
+				}	
+			}
+		}
+
+		.link__read-all {
+			margin-top: 30px;
+			color:#1199ff;
+			font-weight: 400;
+			font-size: 20px;
+			line-height: 1.3;
+			cursor:pointer;
+		}
+	}
+
+	.article__body {
+		.featured__article {
+			.article__wrapper {
+				.article {
+					color: #484848;
+    				line-height: 1.5;
+    				font-size: 18px;
+
+    				h1 {
+						color: $font-color;
+	    				line-height: 1.5;
+	    				font-size: 32px;
+    				}
+
+    				ul {
+    					list-style-type: disc;
+    					margin: 20px 20px 35px;
+    					padding: 0;
+    					font-size: 18px;
+
+    					li {
+
+    					}
+    				}
+				}
+			}
+		}
+	}
+/*	.section--masthead {
 		padding:100px 0 0 0;
 		background-repeat: no-repeat;
 		background-position: center center;
@@ -140,7 +303,7 @@
 			padding-bottom: 20px;
 
 			.article {
-				/*  styling done on app.component.scss  */
+				/*  styling done on app.component.scss  
 			}
 
 			@media screen AND (min-width: 576px) {
@@ -163,7 +326,7 @@
 			margin: 5px 0 15px;
 			text-align: center;
 		}
-	}
+	} */
 }
 
 
