@@ -13,7 +13,7 @@ declare var gtag: Function;
       <div class="article__masthead">
         <div class="row no-gutters justify-content-center masthead__head">
           <div class="col-12 col-sm-6 col-xl-5 masthead__logo">
-            <img src="assets/imgs/logo__bearish-insights.png">
+            <img src="http://www.chaikinanalytics.com/images/logo__bearish-insights.png" alt="BearishInsights">
           </div>
           <div class="col-12 col-sm-6 col-xl-5 masthead__date">
             <p>January 31, 2018</p>

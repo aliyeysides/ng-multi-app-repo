@@ -13,7 +13,7 @@ declare let gtag: Function;
     <div class="insights__container">
       <div class="post-head row no-gutters">
         <div class="col-12 col-sm-6 post-head__logo">
-          <img src="assets/imgs/logo__bearish-insights.png">
+          <img src="http://www.chaikinanalytics.com/images/logo__bearish-insights.png" alt="BearishInsights">
         </div>
         <div class="col-12 col-sm-6 post-head__date">
           <p class="">January 31, 2018</p>

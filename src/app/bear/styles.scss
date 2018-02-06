@@ -214,25 +214,35 @@ a.quick-link {
     .article__wrapper {
       .article {
         color: #484848;
+        line-height: 1.5;
+        font-size: 18px;
+
+        h1 {
+          color: $font-color;
           line-height: 1.5;
+          font-size: 32px;
+
+          &:first-of-type {
+            display: none;
+          }
+        }
+
+        a {
+          &:first-of-type {
+            display: none;
+          }
+        }
+
+        ul {
+          list-style-type: disc !important;
+          margin: 0px 30px 45px;
+          padding: 0;
           font-size: 18px;
 
-          h1 {
-          color: $font-color;
-            line-height: 1.5;
-            font-size: 32px;
+          li {
+            padding: 7px 0;
           }
-
-          ul {
-            list-style-type: disc;
-            margin: 20px 20px 35px;
-            padding: 0;
-            font-size: 18px;
-
-            li {
-
-            }
-          }
+        }
       }
     }
   }
