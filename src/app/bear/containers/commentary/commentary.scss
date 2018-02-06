@@ -8,10 +8,11 @@
 		padding: 2.5%;
 	    overflow: hidden;
 	    position: relative;
-	    background-image: url('/../../../../assets/imgs/BG__bearish-insights__container.png');
+	    background-image: url("http://www.chaikinanalytics.com/images/BG__bearish-insights__container.png");
 	    background-repeat: no-repeat;
 	    background-size: cover;
 	    background-position: center;
+	    background-color:#6d0019;
 	    border-left: 1px solid #ddd;
 	    min-height: 300px;
 
@@ -153,26 +154,7 @@
 		.featured__article {
 			.article__wrapper {
 				.article {
-					color: #484848;
-    				line-height: 1.5;
-    				font-size: 18px;
-
-    				h1 {
-						color: $font-color;
-	    				line-height: 1.5;
-	    				font-size: 32px;
-    				}
-
-    				ul {
-    					list-style-type: disc;
-    					margin: 20px 20px 35px;
-    					padding: 0;
-    					font-size: 18px;
-
-    					li {
-
-    					}
-    				}
+	/*          STYLING DONE IN STYLE.SCSS             */
 				}
 			}
 		}
