@@ -1,6 +1,8 @@
 import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {BaseSettingsMenuComponent} from '../../../shared/components/menus/settings-menu.component';
+import {BearOnboardingComponent} from '../bear-onboarding/bear-onboarding.component';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 declare let gtag: Function;
 
@@ -51,9 +53,21 @@ declare let gtag: Function;
   styleUrls: ['./bear-settings-menu.component.scss']
 })
 export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
-  @ViewChild('nav') nav: ElementRef;
+  @ViewChild('nav') nav: HTMLElement;
+
+  bsModalRef: BsModalRef;
 
   public items: object[] = [
+    {
+      title: 'Quick start',
+      icon: 'fa fa-book',
+      href: '#',
+      target: '',
+      fn: () => {
+        gtag('event', 'quick_start_clicked');
+        this.startOnboarding();
+      }
+    },
     {
       title: 'User guide',
       icon: 'fa fa-book',
@@ -117,8 +131,15 @@ export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
     }
   ];
 
-  constructor(public el: ElementRef, public authService: AuthService) {
+  constructor(public el: ElementRef,
+              public authService: AuthService,
+              private modalService: BsModalService) {
     super(el, authService);
+  }
+
+  startOnboarding() {
+    this.bsModalRef = this.modalService.show(BearOnboardingComponent);
+    this.toggleNav(this.nav, '0', false);
   }
 
 }

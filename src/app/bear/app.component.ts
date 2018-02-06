@@ -1,5 +1,7 @@
 import {Component, HostListener, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import {BearOnboardingComponent} from './core/bear-onboarding/bear-onboarding.component';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 declare let gtag: Function;
 
@@ -83,7 +85,9 @@ export class AppComponent {
     timeOut: 5000,
   };
 
-  constructor(private router: Router) {
+  bsModalRef: BsModalRef;
+
+  constructor(private router: Router, private modalService: BsModalService) {
     const mobWidth = (window.screen.width);
     if (+mobWidth <= 1024) this.isOpen = false;
 
@@ -95,6 +99,14 @@ export class AppComponent {
         });
       }
     });
+  }
+
+  ngOnInit() {
+    const firstLogin = localStorage.getItem('first_login');
+    if (JSON.parse(firstLogin) != false) {
+      this.bsModalRef = this.modalService.show(BearOnboardingComponent);
+    }
+    localStorage.setItem('first_login', 'false');
   }
 
   toggleMenu() {

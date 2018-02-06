@@ -24,6 +24,7 @@ import {SignalService} from '../services/signal.service';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {NotificationsService} from 'angular2-notifications/dist';
 import {TooltipModule} from 'ngx-bootstrap';
+import {BearOnboardingComponent} from './core/bear-onboarding/bear-onboarding.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {TooltipModule} from 'ngx-bootstrap';
     ...APP_CONTAINER_MODULES,
   ],
   providers: [UtilService, AuthService, AuthGuard, IdeasService, SignalService, NotificationsService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [BearOnboardingComponent]
 })
 export class AppModule {
 }
