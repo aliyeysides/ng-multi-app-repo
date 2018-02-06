@@ -4,6 +4,7 @@ import {MarketSummaryModule} from './market-summary/index';
 import {BearSearchModule} from './bear-search/index';
 import {BearAlertsModule} from './bear-alerts/index';
 import {BearSettingsMenuModule} from './bear-settings-menu/index';
+import {BearOnboardingModule} from './bear-onboarding/index';
 
 export const APP_CORE_MODULES = [
   BearBrandModule,
@@ -11,5 +12,6 @@ export const APP_CORE_MODULES = [
   MarketSummaryModule,
   BearSearchModule,
   BearAlertsModule,
-  BearSettingsMenuModule
+  BearSettingsMenuModule,
+  BearOnboardingModule
 ];
