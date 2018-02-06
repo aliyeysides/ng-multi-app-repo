@@ -19,7 +19,7 @@ declare let gtag: Function;
           <div class="col-2 stock__PGR">
             <img class="align-absolute" src="{{ appendPGRImage(stock?.PGR, stock?.raw_PGR) }}">
           </div>
-          <div class="col-3 stock__ticker">
+          <div (click)="gotoReport(stock?.symbol)" class="col-3 stock__ticker">
             <p class="ticker">{{ stock?.symbol }}</p>
           </div>
           <div (click)="openAlerts();$event.stopPropagation()" class="col-1 stock__alert down-alert">
@@ -101,6 +101,10 @@ export class BestBearIdeasComponent implements OnInit {
 
   openAlerts() {
     this.signalService.openAlerts();
+  }
+
+  gotoReport(ticker: string) {
+    this.router.navigate(['/report', ticker]);
   }
 
 }
