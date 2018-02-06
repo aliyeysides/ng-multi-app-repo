@@ -6,6 +6,7 @@ import {AuthService} from '../../../services/auth.service';
 import {IdeasService} from '../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
 import {BaseSettingsMenuComponent} from '../../../shared/components/menus/settings-menu.component';
+import {Router} from '@angular/router';
 
 declare let gtag: Function;
 
@@ -52,7 +53,7 @@ declare let gtag: Function;
               <div class="col-4 alert__stock">
                 <p class="ticker">
                   <img class="rating" src="{{ alert['pgr_url'] }}">
-                  <span>{{ alert['Symbol'] }}</span>
+                  <span (click)="gotoReport(alert['Symbol'])">{{ alert['Symbol'] }}</span>
                 </p>
               </div>
               <div class="col-8 alert__info">
@@ -90,7 +91,7 @@ declare let gtag: Function;
               <div class="col-4 alert__stock">
                 <p class="ticker">
                   <img class="rating" src="{{ alert['pgr_url'] }}">
-                  <span>{{ alert['Symbol'] }}</span>
+                  <span (click)="gotoReport(alert['Symbol'])">{{ alert['Symbol'] }}</span>
                 </p>
               </div>
               <div class="col-8 alert__info">
@@ -129,7 +130,7 @@ declare let gtag: Function;
               <div class="col-4 alert__stock">
                 <p class="ticker">
                   <img class="rating" src="{{ alert['pgr_url'] }}">
-                  <span>{{ alert['Symbol'] }}</span>
+                  <span (click)="gotoReport(alert['Symbol'])">{{ alert['Symbol'] }}</span>
                 </p>
               </div>
               <div class="col-1 stock__alert down-alert">
@@ -175,6 +176,7 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
   public loading: Subscription;
 
   constructor(public el: ElementRef,
+              private router: Router,
               public authService: AuthService,
               private signalService: SignalService,
               private ideasService: IdeasService) {
@@ -244,6 +246,10 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
       return Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['pgrRating'], x['rawPgrRating'])});
     }
     return Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['Value'], 0) });
+  }
+
+  gotoReport(ticker: string) {
+    this.router.navigate(['/report', ticker]);
   }
 
 }

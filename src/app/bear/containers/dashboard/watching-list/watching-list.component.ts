@@ -7,6 +7,7 @@ import {SignalService} from '../../../../services/signal.service';
 import {SymbolSearchService} from '../../../../services/symbol-search.service';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'cpt-holding-list',
@@ -18,7 +19,7 @@ import {Observable} from 'rxjs/Observable';
             <div class="col-2 stock__PGR">
               <img class="align-absolute" src="{{ appendPGRImage(item.PGR, item.raw_PGR) }}">
             </div>
-            <div class="col-3 stock__ticker">
+            <div (click)="gotoReport(item.symbol)" class="col-3 stock__ticker">
               <p class="ticker">{{ item.symbol }}</p>
             </div>
             <div class="col-1">
@@ -55,7 +56,6 @@ export class WatchingListComponent implements OnInit {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private uid: string;
 
-  public currentList = 'Holding';
   public holdingListIdeas: Array<Idea>;
   public watchingListIdeas: Array<Idea>;
 
@@ -69,6 +69,7 @@ export class WatchingListComponent implements OnInit {
 
   constructor(private ideasService: IdeasService,
               private authService: AuthService,
+              private router: Router,
               private signalService: SignalService,
               private searchService: SymbolSearchService) {
   }
@@ -182,6 +183,10 @@ export class WatchingListComponent implements OnInit {
 
   openAlerts() {
     this.signalService.openAlerts();
+  }
+
+  gotoReport(ticker: string) {
+    this.router.navigate(['/report', ticker]);
   }
 
 }
