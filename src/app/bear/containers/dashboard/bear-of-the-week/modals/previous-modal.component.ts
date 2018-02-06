@@ -32,8 +32,7 @@ declare let gtag: Function;
           <li class="row" *ngFor="let post of posts">
             <ng-container *ngIf="post['data']">
               <div class="col-6">
-                <img class="rating" src="{{ appendPGRImage(post['data']['pgr']['Corrected PGR Value'], post['data']['pgr']['PGR Value']) }}">
-                <p class="ticker">{{ post.ticker }}</p>
+                <p class="ticker"><img class="rating" src="{{ appendPGRImage(post['data']['pgr']['Corrected PGR Value'], post['data']['pgr']['PGR Value']) }}">{{ post.ticker }}</p>
               </div>
               <div class="col-6">
                 <p class="company">{{ post['data']['meta-info'].name }}</p>
