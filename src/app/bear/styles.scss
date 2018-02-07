@@ -60,7 +60,7 @@ h6 {
   font-size: 16px;
 }
 
-ul, li {
+ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -221,6 +221,7 @@ a.quick-link {
           color: $font-color;
           line-height: 1.5;
           font-size: 32px;
+          margin-top: 45px;
 
           &:first-of-type {
             display: none;
@@ -235,13 +236,17 @@ a.quick-link {
 
         ul {
           list-style-type: disc !important;
-          margin: 0px 30px 45px;
+          margin: 0px 50px 15px;
           padding: 0;
           font-size: 18px;
 
           li {
             padding: 7px 0;
           }
+        }
+
+        img {
+          margin: 0 auto;
         }
       }
     }
