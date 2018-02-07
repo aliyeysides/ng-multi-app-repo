@@ -29,7 +29,7 @@ declare let gtag: Function;
       </div>
       <div class="modal-body">
         <ul class="container" [ngBusy]="loading">
-          <li class="row" *ngFor="let post of posts">
+          <li class="row no-gutters" *ngFor="let post of posts">
             <ng-container *ngIf="post['data']">
               <div class="col-6">
                 <p class="ticker"><img class="rating" src="{{ appendPGRImage(post['data']['pgr']['Corrected PGR Value'], post['data']['pgr']['PGR Value']) }}">{{ post.ticker }}</p>
@@ -44,7 +44,7 @@ declare let gtag: Function;
                 <p class="industry">{{ post['data']['meta-info'].industry_name }}</p>
               </div>
               <div class="col-12">
-                <a (click)="openCommentaryModal(post)">Commentary &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                <a (click)="openCommentaryModal(post)">See Commentary &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
               </div>
             </ng-container>
           </li>
