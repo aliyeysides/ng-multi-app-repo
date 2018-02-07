@@ -215,13 +215,13 @@ a.quick-link {
       .article {
         color: #484848;
         line-height: 1.5;
-        font-size: 18px;
+        font-size: 17px;
 
         h1 {
           color: $font-color;
           line-height: 1.5;
-          font-size: 32px;
-          margin-top: 45px;
+          font-size: 28px;
+          margin-top: 55px;
 
           &:first-of-type {
             display: none;
@@ -236,21 +236,12 @@ a.quick-link {
 
         ul {
           list-style-type: disc !important;
-          margin: 0px 50px 15px;
+          margin: 0px 50px 25px;
           padding: 0;
           font-size: 18px;
 
           li {
             padding: 7px 0;
-          }
-        }
-
-        i {
-          font-size:14px;
-          font-style: italic;
-          
-          span {
-            margin-top: 5px;
           }
         }
 
@@ -525,7 +516,7 @@ a.quick-link {
       border-radius: 10px 10px 0 0;
 
       h2 {
-        margin:10px 0 10px 15px;
+        margin:6px 0 10px 15px;
         color:#ffffff;
         display: inline-block;
         float: left;
@@ -603,7 +594,7 @@ a.quick-link {
           width: auto;
           height: 23px;
           display: inline-block;
-          margin: -6px 4px 0 0;
+          margin: -6px 8px 0 0;
         }
       }
 
@@ -618,7 +609,7 @@ a.quick-link {
       }
 
       .pick-date {
-        float: right;
+        float: left;
         color: $font-color--MD;
         font-size: 16px;
         font-weight: 600;
@@ -626,7 +617,7 @@ a.quick-link {
       }
 
       .industry {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 400;
         line-height: 1.5;
         white-space: nowrap;
