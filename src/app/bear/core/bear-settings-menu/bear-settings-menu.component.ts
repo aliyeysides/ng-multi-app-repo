@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {BaseSettingsMenuComponent} from '../../../shared/components/menus/settings-menu.component';
 import {BearOnboardingComponent} from '../bear-onboarding/bear-onboarding.component';
@@ -9,7 +9,7 @@ declare let gtag: Function;
 @Component({
   selector: 'cpt-bear-settings-menu',
   template: `
-    <a class="quick-link">
+    <button tooltip="Settings" placement="bottom"  class="quick-link">
       <svg class="align-absolute" width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <defs></defs>
@@ -19,7 +19,7 @@ declare let gtag: Function;
             id="icon"></path>
         </g>
       </svg>
-    </a>
+    </button>
     <div #nav id="settingsSideNav" class="sidenav">
 
       <div class="right-sidebar__header">
