@@ -79,16 +79,18 @@ export class BearNavigatorComponent implements OnInit {
       .map(post => this.wordpressService.getInsightPostTicker(post))
       .subscribe(ticker => {
         this.bearOfTheWeekSymbol = ticker.trim();
-        this.siteRoutes = [
-          {link: '/dashboard', icon: './assets/imgs/icon_home.svg', label: 'Home'},
-          {link: '/ideas', icon: './assets/imgs/icon_bulb.svg', label: 'Stock Ideas'},
-          {
-            link: '/discovery/' + this.bearOfTheWeekSymbol,
-            icon: './assets/imgs/icon_discovery.svg',
-            label: 'Discovery'
-          },
-          {link: '/report/' + this.bearOfTheWeekSymbol, icon: './assets/imgs/icon_stockview.svg', label: 'Stock View'}
-        ];
+        if (this.bearOfTheWeekSymbol) {
+          this.siteRoutes = [
+            {link: '/dashboard', icon: './assets/imgs/icon_home.svg', label: 'Home'},
+            {link: '/ideas', icon: './assets/imgs/icon_bulb.svg', label: 'Stock Ideas'},
+            {
+              link: '/discovery/' + this.bearOfTheWeekSymbol,
+              icon: './assets/imgs/icon_discovery.svg',
+              label: 'Discovery'
+            },
+            {link: '/report/' + this.bearOfTheWeekSymbol, icon: './assets/imgs/icon_stockview.svg', label: 'Stock View'}
+          ];
+        }
       })
   }
 
