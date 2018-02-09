@@ -47,7 +47,7 @@ import {AuthService} from '../../../services/auth.service';
               <span>Hold</span>
             </a>
           </div>          
-          <div class="section-header__actions section-header__actions--last">
+          <div (click)="goBack()" class="section-header__actions section-header__actions--last">
             <a>
               <svg width="300px" height="259px" viewBox="0 0 300 259" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <defs></defs>
