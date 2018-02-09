@@ -208,12 +208,12 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
         return Observable.combineLatest(
           this.signalService.getAllAlerts({
             list_id: this.holdingListId,
-            period: '1',
+            period: '2',
             uid: this.uid
           }),
           this.signalService.getAllAlerts({
             list_id: this.watchingListId,
-            period: '1',
+            period: '2',
             uid: this.uid
           }),
           this.signalService.getSignalDataForList(this.bestBearsListId.toString(), '1', this.uid)
