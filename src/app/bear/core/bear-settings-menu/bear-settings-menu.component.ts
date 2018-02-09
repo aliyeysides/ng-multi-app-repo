@@ -59,7 +59,7 @@ export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
 
   public items: object[] = [
     {
-      title: 'Quick start',
+      title: 'Getting Started',
       icon: 'fa fa-book',
       href: '#',
       target: '',
