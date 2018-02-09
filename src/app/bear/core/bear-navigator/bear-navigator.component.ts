@@ -51,7 +51,7 @@ export class BearNavigatorComponent implements OnInit {
     {
       label: 'Power Gauge',
       icon: './assets/imgs/icon_aboutPGR.svg',
-      link: 'https://www.chaikinanalytics.com/stock-rating/',
+      link: 'https://masteringthebear.com/user-guide/',
       target: '_blank',
       fn: () => {
         gtag('event', 'pgr_education_clicked', {'event_category': 'engagement'});

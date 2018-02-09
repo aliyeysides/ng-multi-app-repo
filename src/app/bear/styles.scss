@@ -476,6 +476,7 @@ iframe {
 
   .modal-content {
     max-width: 500px;
+    margin: 30px auto;
   }
 }
 
@@ -650,6 +651,144 @@ iframe {
       }
     }
 }
+
+
+/*         ONBOARDING MODAL            */
+
+
+
+
+
+.modal-dialog {
+  width:100%;
+
+  @media screen AND (min-width: 576px) {
+    max-width: 800px;
+    margin: 30px auto;
+  }
+}
+
+
+#onboarding-modal {
+  background-color: #fff;
+  border: 0px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0px 0px 30px rgba(0,0,0,0.5);
+  overflow: hidden;
+  max-width: 800px;
+  width:100%;
+
+  .modal-header {
+      padding: 10px 15px;
+      border-bottom: 0px solid #e9ecef;
+      text-align: center;
+
+      .modal-title {
+        text-align: center;
+        margin: 0;
+        color:$font-color;
+
+      }
+      i {
+        color:$font-color--MD;
+      }
+  }
+
+  .modal-body {
+      padding: 0 15px 15px;
+      text-align: center;
+
+      img {
+        width: 100%;
+      }
+
+      .link__watch-video {
+        font-size: 20px;
+        font-weight: 600;
+        color:$link-blue;
+        margin-top:10px;
+        padding-bottom:20px;
+      }
+  }
+
+  .modal-footer {
+    padding:  20px 15px 10px;
+    height: 60px;
+    border-top: 0px solid #e9ecef;
+    position: relative;
+
+    .pagination {
+      border-radius: 0;
+
+      .page-item {
+        color: $font-color--MD;
+        margin: 10px 5px;
+
+        .page-link {
+          text-align: center;
+          margin-left: 0px;
+          line-height: 1;
+          border: 0px solid $link-blue;
+          border-radius: 30px;
+          font-weight: 600;
+
+          &:hover {
+            background-color: #FFFFFF;
+          }
+        }
+      }
+      .active {
+        .page-link {
+          color: #ffffff !important;
+          background: $link-blue;
+          font-weight: 700;
+
+          &:hover {
+            background-color: $link-blue !important;
+          }
+        }
+      }
+      .disabled {
+        .page-link {
+          color: #ffffff !important;
+        }
+      }
+      .pagination-prev {
+        .page-link {
+          font-size: 14px;
+          color:$link-blue;
+        }
+      }
+      .pagination-page {
+        .page-link {
+          color: $font-color;
+          width: 32px;
+          height: 30px;
+          font-size: 16px;
+        }
+      }
+      .pagination-next {
+        .page-link {
+          color:$link-blue;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .link__get-started {
+      position: absolute;
+      color:$link-blue;
+      font-size: 16px;
+      right:50%;
+      bottom:15px;
+      font-weight: 600;
+      margin-right:-160px;
+      font-size: 14px;
+      text-align: left;
+    }
+  }
+}
+
 
 
 
