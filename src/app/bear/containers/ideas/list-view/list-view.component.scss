@@ -109,6 +109,7 @@
       font-size: 18px;
       color: #ffffff;
       position: relative;
+      cursor: pointer;
 
       i {
         color: #ffffff;
@@ -121,6 +122,7 @@
 
     .view-toggle.active  {
       background-color: rgba(255,255,255,1);
+       cursor: default;
     }
   }
 }
@@ -417,7 +419,7 @@
         .button__add-to-list {
           float: left;
 
-          a {
+          button {
             margin-right: 15px;
             cursor: pointer;
 

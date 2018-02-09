@@ -20,7 +20,7 @@ declare var gtag: Function;
           </div>
           <div class="col-5">
             <div class="dash-head__toggle">
-              <button tooltip="Previous" placement="bottom" (click)="leftClickPage()" class="dash-head__chevron"><a><i class="fa fa-chevron-left"></i></a></button>
+              <button tooltip="Previous" placement="right" (click)="leftClickPage()" class="dash-head__chevron"><a><i class="fa fa-chevron-left"></i></a></button>
               <ul class="dash-head__pagination">
                 <li [ngClass]="{'active': currentListComponent == 'Best Bear Ideas'}"
                     (click)="loadBestBearIdeasComponent()"><a><i class="fa fa-circle"></i></a></li>
@@ -29,7 +29,7 @@ declare var gtag: Function;
                 <li [ngClass]="{'active': currentListComponent == 'Watching'}" (click)="loadWatchingComponent()"><a><i
                   class="fa fa-circle"></i></a></li>
               </ul>
-              <button tooltip="Next" placement="bottom" (click)="rightClickPage()" class="dash-head__chevron"><i class="fa fa-chevron-right"></i></button>
+              <button tooltip="Next" placement="left" (click)="rightClickPage()" class="dash-head__chevron"><i class="fa fa-chevron-right"></i></button>
             </div>
           </div>
         </div>
