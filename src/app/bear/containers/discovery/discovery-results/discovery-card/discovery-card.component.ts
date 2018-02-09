@@ -107,7 +107,7 @@ import {Idea} from '../../../../../shared/models/idea';
           </div>
           <div class="tile__actions">
             <ul class="nav">
-              <li (click)="addToList('Holding', stock.symbol)" class="nav-item">
+              <li tooltip="Add to Holding" placement="bottom" (click)="addToList('Holding', stock.symbol)" class="nav-item">
                 <a class="nav-link">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <defs></defs>
@@ -117,7 +117,7 @@ import {Idea} from '../../../../../shared/models/idea';
                   </svg>
                 </a>
               </li>
-              <li (click)="addToList('Watching', stock.symbol)" class="nav-item">
+              <li tooltip="Add to Watching" placement="bottom" (click)="addToList('Watching', stock.symbol)" class="nav-item">
                 <a class="nav-link">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <defs></defs>
@@ -127,7 +127,7 @@ import {Idea} from '../../../../../shared/models/idea';
                   </svg>
                 </a>
               </li>
-              <li (click)="viewStockDiscovery(stock.symbol)" class="nav-item">
+              <li tooltip="Discover stocks like this" placement="bottom" (click)="viewStockDiscovery(stock.symbol)" class="nav-item">
                 <a class="nav-link">
                   <svg class="" width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -139,7 +139,7 @@ import {Idea} from '../../../../../shared/models/idea';
                   </svg>
                 </a>
               </li>
-              <li (click)="viewStockReport(stock.symbol)" class="nav-item">
+              <li tooltip="Go to Report" placement="bottom" (click)="viewStockReport(stock.symbol)" class="nav-item">
                 <a class="nav-link">
                   <svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
