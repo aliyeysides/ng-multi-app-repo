@@ -8,8 +8,9 @@ import {BearishInsightsComponent} from './bearish-insights/bearish-insights.comp
 import {BearOfTheWeekComponent} from './bear-of-the-week/bear-of-the-week.component';
 import {BestBearIdeasComponent} from './best-bear-ideas/best-bear-ideas.component';
 
-import {BsModalService} from 'ngx-bootstrap';
+import {BsModalService, TooltipModule} from 'ngx-bootstrap';
 import {ModalModule} from 'ngx-bootstrap/modal';
+
 import {PreviousInsightsModalComponent} from './bearish-insights/modals/previous-modal.component';
 import {PreviousBearsModalComponent} from './bear-of-the-week/modals/previous-modal.component';
 import {InsightsCommentaryModalComponent} from './bearish-insights/modals/commentary-modal.component';
@@ -24,7 +25,8 @@ import {WatchingListComponent} from './watching-list/watching-list.component';
   imports: [
     routing,
     SharedModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   exports: [DashboardComponent],
   declarations: [

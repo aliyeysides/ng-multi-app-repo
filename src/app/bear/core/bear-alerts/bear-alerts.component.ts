@@ -13,7 +13,7 @@ declare let gtag: Function;
 @Component({
   selector: 'cpt-bear-alerts',
   template: `
-    <a class="quick-link">
+    <button tooltip="Alerts" placement="bottom"  class="quick-link">
       <svg class="align-absolute" width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
            xmlns="http://www.w3.org/2000/svg"
            xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -25,7 +25,7 @@ declare let gtag: Function;
         </g>
       </svg>
       <span *ngIf="allItems>0" class="badge badge-danger align-absolute">{{ allItems }}</span>
-    </a>
+    </button>
     <div #nav id="notificationSideNav" class="sidenav sidenav--alerts">
 
       <div class="right-sidebar__header">
