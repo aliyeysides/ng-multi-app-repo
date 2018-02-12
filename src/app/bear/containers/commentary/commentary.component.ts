@@ -4,6 +4,7 @@ import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
 
 declare var gtag: Function;
+import * as moment from 'moment';
 
 @Component({
   selector: 'cpt-market-beat',
@@ -16,7 +17,7 @@ declare var gtag: Function;
             <img src="http://www.chaikinanalytics.com/images/logo__bearish-insights.png" alt="BearishInsights">
           </div>
           <div class="col-12 col-sm-6 col-xl-5 masthead__date">
-            <p>January 31, 2018</p>
+            <p>{{ shortDate }}</p>
             <div class="section--date-select">
               <div class="btn-group" dropdown [autoClose]="true">
                   <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
@@ -32,10 +33,10 @@ declare var gtag: Function;
         </div>
         <div class="row justify-content-center masthead__body">
           <div class="col-12 col-xl-10 headline">
-            <h1>Overbought Conditions, Narrowing Breadth and Rising VIX Levels Trigger Sharpest Sell-Off Since Last Fall</h1>
+            <h1>{{ title }}</h1>
           </div>
           <div class="col-12 col-xl-10 author">
-            <p class="">Weekly Commentary By John Schlitz</p>
+            <p class="">Weekly Commentary By {{ post?.author ? post['author'] : 'John Schlitz' }}</p>
           </div>
         </div>
       </div>
@@ -48,11 +49,6 @@ declare var gtag: Function;
           </div>
         </div>
       </div>
-
-<!--       <div class="anchor__top" *ngIf="opened" (click)="jumpToTop()">
-        <p>Top</p>
-      </div> -->
-
     </div>
   `,
   styleUrls: ['./commentary.scss']
@@ -66,17 +62,19 @@ export class CommentaryComponent implements OnInit, OnDestroy {
   commentary: string;
   opened: boolean = false;
   loading: Subscription;
+  title: string;
+  shortDate: string;
+
 
   constructor(private wp: WordpressService,
               private el: ElementRef) { }
 
   ngOnInit() {
-    this.loading = this.wp.getWordPressJson('2', this.loadCount)
+    this.loading = this.wp.getWordPressJson('47', this.loadCount)
       .takeUntil(this._ngUnsubscribe)
       .subscribe(posts => {
-        this.posts = posts[0]['2'];
+        this.posts = posts[0]['47'];
         this.selectInsight(this.posts[0]);
-        console.log('posts in commentary', this.posts)
       })
   }
 
@@ -89,6 +87,9 @@ export class CommentaryComponent implements OnInit, OnDestroy {
     this.selectedInsight = post;
     this.opened = false;
     this.commentary = this.wp.getInsightPostBody(post);
+    this.title = post['post_title'];
+    this.shortDate = moment(post['post_date_parsed']).format('MMMM Do, YYYY');
+    this.wp.assignAuthorProp([post]);
     gtag('event', 'insight_clicked', {
       'event_category': 'engagement',
       'event_label': post['post_title'].slice(26)
