@@ -10,7 +10,6 @@ import {Idea} from '../../../../shared/models/idea';
 import {Subscription} from 'rxjs/Subscription';
 import {SignalService} from '../../../../services/signal.service';
 import {Router} from '@angular/router';
-import {UtilService} from '../../../../services/util.service';
 
 declare let gtag: Function;
 
@@ -30,7 +29,7 @@ declare let gtag: Function;
           <div class="row no-gutters">
             <div class="col-7 col-xl-7">
               <div class="ticker-info">
-                <p class="ticker">
+                <p (click)="gotoReport(stockDataMeta?.symbol)" class="ticker">
                   <span><img class="rating" src="{{ pgrImgUrl }}"></span>
                   {{ stockDataMeta?.symbol }}
                 </p>
@@ -149,6 +148,7 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
 
   constructor(public modalService: BsModalService,
               private ideasService: IdeasService,
+              private router: Router,
               private wordpressService: WordpressService,
               private signalService: SignalService) {
   }
@@ -216,5 +216,9 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
 
   public appendPGRText(pgr: number, rawPgr: number) {
     return this.signalService.appendPGRText(pgr, rawPgr);
+  }
+
+  public gotoReport(ticker: string) {
+    this.router.navigate(['/report', ticker]);
   }
 }
