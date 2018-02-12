@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import {Router} from '@angular/router';
 
 declare let gtag: Function;
+import * as moment from 'moment';
 
 @Component({
   selector: 'cpt-bearish-insights',
@@ -16,14 +17,14 @@ declare let gtag: Function;
           <img src="http://www.chaikinanalytics.com/images/logo__bearish-insights.png" alt="BearishInsights">
         </div>
         <div class="col-12 col-sm-6 post-head__date">
-          <p class="">January 31, 2018</p>
+          <p class="">{{ shortDate }}</p>
         </div>
       </div>
       <div class="row no-gutters post-body post-body--insights">
         <div class="col-12 headline">
-          <h1>Overbought Conditions, Narrowing Breadth and Rising VIX Levels Trigger Sharpest Sell-Off Since Last Fall</h1>
+          <h1>{{ title }}</h1>
         </div>
-        <p class="post-author">Weekly Commentary By John Schlitz</p>
+        <p class="post-author">Weekly Commentary By {{ post?.author ? post['author'] : 'John Schlitz' }}</p>
       </div>
       <div (click)="openCommentaryModal()" class="row no-gutters link__read-all">
         <a>Read the Weekly Newsletter &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
@@ -37,15 +38,9 @@ export class BearishInsightsComponent implements OnInit, OnDestroy {
 
   public loading: Subscription;
   public title: string;
+  public shortDate: string;
   public post: object;
   public commentary: string;
-  // public config = {
-  //   animated: true,
-  //   keyboard: true,
-  //   backdrop: false,
-  //   ignoreBackdropClick: false,
-  //   class: 'modal-dialog--fullscreen',
-  // };
 
   constructor(private router: Router,
               private wordpressService: WordpressService) {
@@ -59,6 +54,9 @@ export class BearishInsightsComponent implements OnInit, OnDestroy {
       .subscribe(post => {
         this.post = post;
         this.title = post['post_title'];
+        this.shortDate = moment(this.post['post_date_parsed']).format('MMMM Do, YYYY');
+        this.wordpressService.assignAuthorProp([post]);
+        console.log('author', this.post);
         this.commentary = this.wordpressService.getInsightPostBody(this.post);
         this.wordpressService.assignWordPressDateProperties([post]);
       })

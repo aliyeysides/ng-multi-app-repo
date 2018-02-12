@@ -32,8 +32,11 @@ export class WordpressService {
   public assignAuthorProp(postArr: object[]): void {
     postArr.map(post => {
       const dom = this.getInsightPostDom(post);
-      const author = dom.getElementById('author').innerText;
-      return Object.assign(post, {author: author})
+      const ref = dom.getElementById('author');
+      if (ref) {
+        const author = ref.innerText;
+        return Object.assign(post, {author: author})
+      }
     });
   }
 

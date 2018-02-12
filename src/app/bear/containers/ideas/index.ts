@@ -8,6 +8,7 @@ import {ChartComponent} from './list-view/chart-view.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 import {TooltipModule} from 'ngx-bootstrap';
+import {ReportService} from '../../../services/report.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import {TooltipModule} from 'ngx-bootstrap';
     ListViewComponent,
     ChartComponent
   ],
-  providers: []
+  providers: [ReportService]
 })
 export class IdeasModule {
 }
