@@ -272,7 +272,7 @@ export class InteractiveChart {
       .tickSizeOuter(0)
       .tickPadding(7);
 
-    let xAxisGroup = this.mainSVG.select(`.xAxisGroup`).attr("transform", "translate(" + (this.areaChartMargins.left) + "," + (this.chartHeight + 5) + ")")
+    /*let xAxisGroup = this.mainSVG.select(`.xAxisGroup`).attr("transform", "translate(" + (this.areaChartMargins.left) + "," + (this.chartHeight + 5) + ")")
       //.attr("clip-path","url(#xAxisClip)")
       .call(this.xAxis).attr("fill", "none").attr("display", "block")
       .selectAll("text")
@@ -288,7 +288,7 @@ export class InteractiveChart {
       .attr('x', function(d, i) {
         return (2 * i) + 'em';
       })
-      .text(String);
+      .text(String);*/
 
     this.xAxisDummy = d3.axisBottom(this.xScale)
       .tickValues(this.getTicksIndex(0, this.chartData.xAxisData.length, maxStringLength, this.scaleWidth))
@@ -310,7 +310,7 @@ export class InteractiveChart {
       .append('tspan')
       .attr('dy', 0)
       .attr('x', function(d, i) {
-        return (2 * i) + 'em';
+          return ((2 * i) - 1) + 'em';
       })
       .text(String);
 
@@ -442,25 +442,28 @@ export class InteractiveChart {
   }
   public getTicksIndex(minVal, maxVal, maxCharacterLength, svgWidth) {
     let tickArray = [];
+    let xAxisDateTracker = [];
     //let maxTickWidth = 2 * 6.5 * maxCharacterLength;
     let maxTickWidth = maxCharacterLength
     //let totalTicks = (svgWidth / maxTickWidth);
     let totalTicks = this.noOfTicks;
     let curval = minVal;
     tickArray.push(curval);
+    xAxisDateTracker.push(this.chartData.xAxisFormatedData[curval]);
     let factor = (maxVal - minVal) / totalTicks;
-
-    while (curval < maxVal) {
-      //alert(curval+"::"+maxVal+"::"+factor);
+    while (curval < maxVal) {  
       curval = Math.floor(curval + factor);
-      if (tickArray.indexOf(curval) == -1 && curval <= maxVal - 1)
-        tickArray.push(curval);
-      else
-        curval++;
+      if (tickArray.indexOf(curval) == -1 && curval <= maxVal - 1 && (xAxisDateTracker.indexOf(this.chartData.xAxisFormatedData[curval])==-1)) {
+            xAxisDateTracker.push(this.chartData.xAxisFormatedData[curval]);
+            tickArray.push(curval);
+        }
+        else{
+          curval++;
+        }
 
-    }
+      }
     return tickArray;
-  }
+   }
 
   public textLength(xAxis) {
     var textWidth = 0;
