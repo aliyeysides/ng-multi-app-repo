@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {UtilService} from './util.service';
 import {URLSearchParams} from '@angular/http';
 import {ListSymbolObj, PGRChanges, PortfolioStatus, PrognosisData, StockStatus} from '../shared/models/health-check';
@@ -57,7 +57,6 @@ export class HealthCheckService {
   }
 
   public setToggleOptions(val) {
-    console.log('setToggleOptions', val);
     this._toggleOptions.next(val);
   }
 

@@ -24,12 +24,11 @@ export class IdeasService {
   private _selectedList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>({name: 'default'} as IdeaList);
   selectedList = this._selectedList.asObservable();
 
+  private _selectedStock: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  selectedStock$ = this._selectedStock.asObservable();
+
   private _updateAlerts: Subject<void> = new Subject<void>();
   updateAlerts$ = this._updateAlerts.asObservable();
-
-  setSelectedList(list: IdeaList) {
-    this._selectedList.next(list);
-  }
 
   constructor(private utilService: UtilService,
               private toast: NotificationsService,
@@ -41,6 +40,18 @@ export class IdeasService {
     this.headlinesParams = new URLSearchParams();
     this.addStockIntoListParams = new URLSearchParams();
     this.deleteSymbolFromListParams = new URLSearchParams();
+  }
+
+  get selectedStock() {
+    return this._selectedStock.getValue();
+  }
+
+  set selectedStock(val) {
+    this._selectedStock.next(val);
+  }
+
+  setSelectedList(list: IdeaList) {
+    this._selectedList.next(list);
   }
 
   public getIdeasList(uid: string, product: string): Observable<Array<object>> {

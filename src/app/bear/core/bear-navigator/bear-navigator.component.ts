@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {WordpressService} from '../../../services/wordpress.service';
+import {IdeasService} from '../../../services/ideas.service';
 
 declare let gtag: Function;
 
@@ -68,10 +69,25 @@ export class BearNavigatorComponent implements OnInit {
     }
   ];
 
-  constructor(private wordpressService: WordpressService) {
+  constructor(private wordpressService: WordpressService,
+              private ideasService: IdeasService) {
   }
 
   ngOnInit() {
+    this.ideasService.selectedStock$.subscribe(res => {
+      if (res != '') {
+        this.siteRoutes = [
+          {link: '/dashboard', icon: './assets/imgs/icon_home.svg', label: 'Home'},
+          {link: '/ideas', icon: './assets/imgs/icon_bulb.svg', label: 'Stock Ideas'},
+          {
+            link: '/discovery/' + res,
+            icon: './assets/imgs/icon_discovery.svg',
+            label: 'Discovery'
+          },
+          {link: '/report/' + res, icon: './assets/imgs/icon_stockview.svg', label: 'Stock View'}
+        ];
+      }
+    });
     return this.wordpressService.getWordPressJson('48', 1)
       .take(1)
       .filter(x => x !== undefined)
@@ -79,19 +95,19 @@ export class BearNavigatorComponent implements OnInit {
       .map(post => this.wordpressService.getInsightPostTicker(post))
       .subscribe(ticker => {
         this.bearOfTheWeekSymbol = ticker.trim();
-        if (this.bearOfTheWeekSymbol) {
-          this.siteRoutes = [
-            {link: '/dashboard', icon: './assets/imgs/icon_home.svg', label: 'Home'},
-            {link: '/ideas', icon: './assets/imgs/icon_bulb.svg', label: 'Stock Ideas'},
-            {
-              link: '/discovery/' + this.bearOfTheWeekSymbol,
-              icon: './assets/imgs/icon_discovery.svg',
-              label: 'Discovery'
-            },
-            {link: '/report/' + this.bearOfTheWeekSymbol, icon: './assets/imgs/icon_stockview.svg', label: 'Stock View'}
-          ];
-        }
-      })
+        // if (this.bearOfTheWeekSymbol) {
+        //   this.siteRoutes = [
+        //     {link: '/dashboard', icon: './assets/imgs/icon_home.svg', label: 'Home'},
+        //     {link: '/ideas', icon: './assets/imgs/icon_bulb.svg', label: 'Stock Ideas'},
+        //     {
+        //       link: '/discovery/' + this.bearOfTheWeekSymbol,
+        //       icon: './assets/imgs/icon_discovery.svg',
+        //       label: 'Discovery'
+        //     },
+        //     {link: '/report/' + this.bearOfTheWeekSymbol, icon: './assets/imgs/icon_stockview.svg', label: 'Stock View'}
+        //   ];
+        // }
+      });
   }
 
 }

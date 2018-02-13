@@ -129,6 +129,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public selectStock(stock: Idea) {
     this.selectedStock = stock;
+    this.ideaService.selectedStock = stock.symbol;
     if (stock) {
       this.getSelectedStockData(stock, this.assignSelectedStock.bind(this));
       this.getSelectedStockHeadlines(stock);
