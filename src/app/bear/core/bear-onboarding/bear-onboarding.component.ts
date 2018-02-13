@@ -7,7 +7,7 @@ import {BsModalRef} from 'ngx-bootstrap';
     <div id="onboarding-modal">
       <div class="modal-header row">
         <div class="col-2"></div>
-        <div class=" col-8"><h4 class="modal-title">Mastering The Bear Quick Start</h4></div>
+        <div class=" col-8"><h4 class="modal-title">Mastering The Bear Quick-Start</h4></div>
         <div class="col-2">
           <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
             <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
@@ -30,7 +30,7 @@ import {BsModalRef} from 'ngx-bootstrap';
           <pagination class="align-absolute" [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage"></pagination>
         </div>
         <ng-container *ngIf="currentPage === ( totalItems / itemsPerPage )">
-          <a class="link__get-started" (click)="bsModalRef.hide()">Start!</a>
+          <a class="link__get-started" (click)="bsModalRef.hide()">Get Started!</a>
         </ng-container>
       </div>
     </div>
@@ -45,28 +45,33 @@ export class BearOnboardingComponent implements OnInit {
     {
       id: 1,
       src: 'assets/imgs/MTB-onboarding__modal-1.png',
-      mobileSrc: 'assets/imgs/img_onboard-screen1--mobile.png'
+      mobileSrc: ''
     },
     {
       id: 2,
       src: 'assets/imgs/MTB-onboarding__modal-2.png',
-      mobileSrc: 'assets/imgs/img_onboard-screen2--mobile.png',
+      mobileSrc: '',
       link: 'https://www.chaikinanalytics.com/powerpulse-health-check-video/'
     },
     {
       id: 3,
       src: 'assets/imgs/MTB-onboarding__modal-3.png',
-      mobileSrc: 'assets/imgs/img_onboard-screen3--mobile.png',
+      mobileSrc: '',
     },
     {
       id: 4,
       src: 'assets/imgs/MTB-onboarding__modal-4.png',
-      mobileSrc: 'assets/imgs/img_onboard-screen4--mobile.png',
+      mobileSrc: '',
     },
     {
       id: 5,
-      src: 'assets/imgs/img_onboard-screen5.png',
-      mobileSrc: 'assets/imgs/img_onboard-screen5--mobile.png',
+      src: 'assets/imgs/MTB-onboarding__modal-5.png',
+      mobileSrc: '',
+    },
+    {
+      id: 6,
+      src: 'assets/imgs/MTB-onboarding__modal-6.png',
+      mobileSrc: '',
     },
   ];
 
