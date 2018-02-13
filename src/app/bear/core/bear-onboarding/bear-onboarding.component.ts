@@ -7,7 +7,7 @@ import {BsModalRef} from 'ngx-bootstrap';
     <div id="onboarding-modal">
       <div class="modal-header row">
         <div class="col-2"></div>
-        <div class=" col-8"><h4 class="modal-title">Welcome to Mastering The Bear</h4></div>
+        <div class=" col-8"><h4 class="modal-title">Mastering The Bear Quick Start</h4></div>
         <div class="col-2">
           <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
             <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
@@ -20,7 +20,7 @@ import {BsModalRef} from 'ngx-bootstrap';
             <ng-container *ngIf="currentPage === item.id">
               <img class="desktop hidden-sm-down" src="{{ item.src }}">
               <img class="mobile hidden-sm-up" *ngIf="item.mobileSrc" src="{{ item.mobileSrc }}">
-              <a class="link__watch-video" target="_blank" *ngIf="item.link" href="{{ item.link }}"><i class="fa fa-play-circle"></i> &nbsp; WATCH THE VIDEO</a>
+              <a class="link__watch-video" target="_blank" *ngIf="item.link" href="{{ item.link }}">Learn more here &raquo;</a>
             </ng-container>
           </ng-container>
         </div>
@@ -44,31 +44,29 @@ export class BearOnboardingComponent implements OnInit {
   items: Array<object> = [
     {
       id: 1,
-      src: 'assets/imgs/img_onboard-screen1.png',
+      src: 'assets/imgs/MTB-onboarding__modal-1.png',
       mobileSrc: 'assets/imgs/img_onboard-screen1--mobile.png'
     },
     {
       id: 2,
-      src: 'assets/imgs/img_onboard-screen2.png',
-      mobileSrc: 'assets/imgs/img_onboard-screen2--mobile.png'
-    },
-    {
-      id: 3,
-      src: 'assets/imgs/img_onboard-screen3.png',
-      mobileSrc: 'assets/imgs/img_onboard-screen3--mobile.png',
+      src: 'assets/imgs/MTB-onboarding__modal-2.png',
+      mobileSrc: 'assets/imgs/img_onboard-screen2--mobile.png',
       link: 'https://www.chaikinanalytics.com/powerpulse-health-check-video/'
     },
     {
+      id: 3,
+      src: 'assets/imgs/MTB-onboarding__modal-3.png',
+      mobileSrc: 'assets/imgs/img_onboard-screen3--mobile.png',
+    },
+    {
       id: 4,
-      src: 'assets/imgs/img_onboard-screen4.png',
+      src: 'assets/imgs/MTB-onboarding__modal-4.png',
       mobileSrc: 'assets/imgs/img_onboard-screen4--mobile.png',
-      link: 'https://www.chaikinanalytics.com/powerpulse-stock-analysis/'
     },
     {
       id: 5,
       src: 'assets/imgs/img_onboard-screen5.png',
       mobileSrc: 'assets/imgs/img_onboard-screen5--mobile.png',
-      link: 'https://www.chaikinanalytics.com/powerpulse-market-insights-video/'
     },
   ];
 

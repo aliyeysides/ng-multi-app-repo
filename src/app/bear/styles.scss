@@ -727,8 +727,7 @@ iframe {
   }
 
   .modal-footer {
-    padding:  20px 15px 10px;
-    height: 60px;
+    height: 70px;
     border-top: 0px solid #e9ecef;
     position: relative;
 
@@ -755,11 +754,9 @@ iframe {
       .active {
         .page-link {
           color: #ffffff !important;
-          background: $link-blue;
           font-weight: 700;
 
           &:hover {
-            background-color: $link-blue !important;
           }
         }
       }
@@ -770,11 +767,17 @@ iframe {
       }
       .pagination-prev {
         .page-link {
-          font-size: 14px;
-          color:$link-blue;
+          padding: 10px 25px;
+          background-image: linear-gradient(-180deg, #6F7689 0%, #313540 100%);
+          box-shadow: 0 1px 1px 0 rgba(0,0,0,0.50), inset 0 1px 1px 0 rgba(255,255,255,0.21);
+          border-radius: 6px;
+          font-size: 24px;
+          color: #ffffff;
         }
       }
       .pagination-page {
+        display: none;
+
         .page-link {
           color: $font-color;
           width: 32px;
@@ -784,8 +787,12 @@ iframe {
       }
       .pagination-next {
         .page-link {
-          color:$link-blue;
-          font-size: 14px;
+          padding: 10px 25px;
+          background-image: linear-gradient(-230deg, #EC2E2E 0%, #8D135F 100%);
+          box-shadow: 0 1px 1px 0 rgba(0,0,0,0.50), inset 0 1px 1px 0 rgba(255,255,255,0.21);
+          border-radius: 6px;
+          color: #ffffff;
+          font-size: 24px;
         }
       }
     }
