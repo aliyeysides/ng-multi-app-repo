@@ -18,8 +18,7 @@ import {BsModalRef} from 'ngx-bootstrap';
         <div *ngIf="items.length">
           <ng-container *ngFor="let item of items">
             <ng-container *ngIf="currentPage === item.id">
-              <img class="desktop hidden-sm-down" src="{{ item.src }}">
-              <img class="mobile hidden-sm-up" *ngIf="item.mobileSrc" src="{{ item.mobileSrc }}">
+              <img class="desktop" src="{{ item.src }}">
               <a class="link__watch-video" target="_blank" *ngIf="item.link" href="{{ item.link }}">Learn more here &raquo;</a>
             </ng-container>
           </ng-container>
@@ -28,6 +27,9 @@ import {BsModalRef} from 'ngx-bootstrap';
       <div class="modal-footer row">
         <div class="col-12">
           <pagination class="align-absolute" [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage"></pagination>
+          <button type="button" class="skip" aria-label="Close" (click)="bsModalRef.hide()">
+            <span aria-hidden="true">Skip Tour &nbsp;<i class="fa fa-share"></i></span>
+          </button>
         </div>
         <ng-container *ngIf="currentPage === ( totalItems / itemsPerPage )">
           <a class="link__get-started" (click)="bsModalRef.hide()">Get Started!</a>
@@ -45,33 +47,27 @@ export class BearOnboardingComponent implements OnInit {
     {
       id: 1,
       src: 'assets/imgs/MTB-onboarding__modal-1.png',
-      mobileSrc: ''
     },
     {
       id: 2,
       src: 'assets/imgs/MTB-onboarding__modal-2.png',
-      mobileSrc: '',
       link: 'https://www.chaikinanalytics.com/powerpulse-health-check-video/'
     },
     {
       id: 3,
       src: 'assets/imgs/MTB-onboarding__modal-3.png',
-      mobileSrc: '',
     },
     {
       id: 4,
       src: 'assets/imgs/MTB-onboarding__modal-4.png',
-      mobileSrc: '',
     },
     {
       id: 5,
       src: 'assets/imgs/MTB-onboarding__modal-5.png',
-      mobileSrc: '',
     },
     {
       id: 6,
       src: 'assets/imgs/MTB-onboarding__modal-6.png',
-      mobileSrc: '',
     },
   ];
 
