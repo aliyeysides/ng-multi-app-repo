@@ -219,6 +219,7 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   }
 
   public gotoReport(ticker: string) {
+    this.ideasService.selectedStock = ticker;
     this.router.navigate(['/report', ticker]);
   }
 }

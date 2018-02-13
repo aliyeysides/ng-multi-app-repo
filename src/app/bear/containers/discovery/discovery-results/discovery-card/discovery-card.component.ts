@@ -2,6 +2,8 @@ import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/co
 import {SignalService} from '../../../../../services/signal.service';
 import {Router} from '@angular/router';
 import {Idea} from '../../../../../shared/models/idea';
+import {IdeasComponent} from '../../../ideas/ideas.component';
+import {IdeasService} from '../../../../../services/ideas.service';
 
 @Component({
   selector: 'cpt-discovery-card',
@@ -170,6 +172,7 @@ export class DiscoveryCardComponent implements AfterViewInit {
   @Input() stock: Idea;
 
   constructor(private signalService: SignalService,
+              private ideasService: IdeasService,
               private router: Router) {
   }
 
@@ -193,6 +196,7 @@ export class DiscoveryCardComponent implements AfterViewInit {
   }
 
   public viewStockReport(ticker: string) {
+    this.ideasService.selectedStock = ticker;
     this.router.navigate(['/report', ticker]);
   }
 

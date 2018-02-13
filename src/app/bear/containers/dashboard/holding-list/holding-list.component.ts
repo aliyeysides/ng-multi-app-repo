@@ -187,6 +187,7 @@ export class HoldingListComponent implements OnInit {
   }
 
   gotoReport(ticker: string) {
+    this.ideasService.selectedStock = ticker;
     this.router.navigate(['/report', ticker]);
   }
 

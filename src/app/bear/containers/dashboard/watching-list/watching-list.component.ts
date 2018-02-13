@@ -186,6 +186,7 @@ export class WatchingListComponent implements OnInit {
   }
 
   gotoReport(ticker: string) {
+    this.ideasService.selectedStock = ticker;
     this.router.navigate(['/report', ticker]);
   }
 

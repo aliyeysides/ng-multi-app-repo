@@ -104,6 +104,7 @@ export class BestBearIdeasComponent implements OnInit {
   }
 
   gotoReport(ticker: string) {
+    this.ideasService.selectedStock = ticker;
     this.router.navigate(['/report', ticker]);
   }
 
