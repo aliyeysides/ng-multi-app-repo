@@ -120,15 +120,18 @@ export class BearSymbolSearchComponent extends BaseSymbolSearchComponent impleme
 
   gotoReport(symbol: string) {
     this.symbolSearchForm.reset();
-    this.router.navigate(['/report', symbol]);
+    this.ideasService.selectedStock = symbol;
+      this.router.navigate(['/report', symbol]);
   }
 
   gotoDiscovery(symbol: string) {
     this.symbolSearchForm.reset();
+    this.ideasService.selectedStock = symbol;
     this.router.navigate(['/discovery', symbol]);
   }
 
   onClick(symbol: string) {
+    this.ideasService.selectedStock = symbol;
     if (this.navEndLocation == 'DiscoveryComponent') {
       this.gotoDiscovery(symbol);
     } else {
@@ -139,6 +142,7 @@ export class BearSymbolSearchComponent extends BaseSymbolSearchComponent impleme
 
   onSubmit() {
     if (this.searchResults.length != 0) {
+      this.ideasService.selectedStock = this.searchResults[0].Symbol;
       if (this.navEndLocation == 'DiscoveryComponent') {
         this.gotoDiscovery(this.searchResults[0].Symbol);
       } else {

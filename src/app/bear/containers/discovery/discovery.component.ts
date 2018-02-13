@@ -129,10 +129,12 @@ export class DiscoveryComponent implements OnInit, OnDestroy {
   }
 
   public viewStockReport(ticker: string) {
+    this.ideasService.selectedStock = ticker;
     this.router.navigate(['/report', ticker]);
   }
 
   public viewStockDiscovery(ticker: string) {
+    this.ideasService.selectedStock = ticker;
     this.updateData();
     this.router.navigate(['/discovery', ticker]);
   }

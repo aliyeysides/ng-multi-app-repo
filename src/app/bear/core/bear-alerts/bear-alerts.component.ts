@@ -249,6 +249,7 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
   }
 
   gotoReport(ticker: string) {
+    this.ideasService.selectedStock = ticker;
     this.router.navigate(['/report', ticker]);
   }
 
