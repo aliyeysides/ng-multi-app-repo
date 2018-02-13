@@ -69,6 +69,7 @@ ul {
 button {
   border: 0;
   outline: 0;
+  background: transparent;
 }
 
 input, input:focus {
@@ -222,6 +223,7 @@ iframe {
           line-height: 1.3;
           font-size: 38px;
           margin-top: 45px;
+          margin-bottom:15px;
 
           strong {
             font-weight: 300;
@@ -229,6 +231,9 @@ iframe {
 
           &:first-of-type {
             display: none;
+          }
+          &:nth-first-child(2) {
+            margin-bottom:0px
           }
         }
 
@@ -240,7 +245,7 @@ iframe {
 
           strong {
             margin-top:20px;
-            display: inline;
+            display: inline-block;
           }
 
           &:first-of-type {
@@ -484,6 +489,14 @@ iframe {
   }
 }
 
+.modal-dialog {
+  width:100%;
+
+  @media screen AND (min-width: 576px) {
+    max-width: 960px;
+    margin: 30px auto;
+  }
+}
 
 .modal-dialog--popup {
   padding-top: 50px 0 10px;
@@ -667,20 +680,9 @@ iframe {
 }
 
 
+
+
 /*         ONBOARDING MODAL            */
-
-
-
-
-
-.modal-dialog {
-  width:100%;
-
-  @media screen AND (min-width: 576px) {
-    max-width: 960px;
-    margin: 30px auto;
-  }
-}
 
 
 #onboarding-modal {
@@ -733,6 +735,18 @@ iframe {
     border-top: 0px solid #e9ecef;
     position: relative;
 
+    .skip {
+      cursor: pointer;
+      margin-left:10px;
+
+      span {
+        font-size: 15px;
+        color: $font-color--MD;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+    }
+
     .pagination {
       border-radius: 0;
 
@@ -741,54 +755,42 @@ iframe {
 
         .page-link {
           text-align: center;
-          line-height: 1;
-          border: 0px solid $link-blue;
+          border: 0px;
           font-weight: 700;
+          cursor: pointer;
+          border-radius: 6px;
+          margin-bottom:10px;
 
           &:hover {
-            background-color: #FFFFFF;
           }
         }
       }
       .active {
         .page-link {
-          &:hover {
-          }
         }
       }
       .disabled {
         display: none;
-
-        .page-link {
-          color: #ffffff !important;
-        }
       }
       .pagination-prev {
         .page-link {
-          padding: 10px 25px;
+          padding: 10px 20px;
           background-image: linear-gradient(-180deg, #6F7689 0%, #313540 100%);
           box-shadow: 0 1px 1px 0 rgba(0,0,0,0.50), inset 0 1px 1px 0 rgba(255,255,255,0.21);
-          border-radius: 6px;
           font-size: 24px;
           color: #ffffff;
-          margin-bottom:10px;
         }
       }
       .pagination-page {
         display: none;
-
-        .page-link {
-        }
       }
       .pagination-next {
         .page-link {
-          padding: 10px 25px;
+          padding: 10px 35px;
           background-image: linear-gradient(-230deg, #EC2E2E 0%, #8D135F 100%);
           box-shadow: 0 1px 1px 0 rgba(0,0,0,0.50), inset 0 1px 1px 0 rgba(255,255,255,0.21);
-          border-radius: 6px;
           color: #ffffff;
           font-size: 24px;
-          margin-bottom:10px;
         }
       }
     }
