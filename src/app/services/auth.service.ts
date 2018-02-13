@@ -4,7 +4,6 @@ import {UtilService} from './util.service';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../shared/models/user';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {IdeasService} from './ideas.service';
 
 @Injectable()
 export class AuthService {
