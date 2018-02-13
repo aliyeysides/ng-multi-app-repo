@@ -36,7 +36,7 @@ import * as moment from 'moment';
             <h1>{{ title }}</h1>
           </div>
           <div class="col-12 col-xl-10 author">
-            <p class="">Weekly Commentary By {{ post?.author ? post['author'] : 'John Schlitz' }}</p>
+            <p class="">Weekly commentary by {{ post?.author ? post['author'] : 'John Schlitz' }}</p>
           </div>
         </div>
       </div>
