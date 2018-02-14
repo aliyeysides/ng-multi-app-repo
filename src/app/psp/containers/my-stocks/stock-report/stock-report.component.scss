@@ -213,6 +213,10 @@
 		padding-bottom: 133px;
 	}
 
+	@media screen AND (min-width: 1024px) {
+		border-radius: 0;
+	}
+
 	&::-webkit-scrollbar {
 	    display:none;
 	}
