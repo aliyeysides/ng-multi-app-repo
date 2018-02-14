@@ -365,6 +365,7 @@
   .quick-view__panel {
     padding: 25px 30px 320px;
     overflow-y: scroll;
+    overflow-x:hidden;
     height: 100vh;
 
     .quick-view__data {
@@ -835,7 +836,7 @@
         .button__add-to-list {
           float: left;
 
-          a {
+          button {
             margin-right: 15px;
             cursor: pointer;
 
