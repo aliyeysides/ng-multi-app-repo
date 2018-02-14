@@ -86,6 +86,7 @@ export class BearNavigatorComponent implements OnInit {
           },
           {link: '/report/' + res, icon: './assets/imgs/icon_stockview.svg', label: 'Stock View'}
         ];
+        return;
       }
       return this.wordpressService.getWordPressJson('48', 1)
         .take(1)
