@@ -30,12 +30,12 @@ declare let gtag: Function;
       <ul [ngBusy]="loading" *ngFor="let result of searchResults" class="container">
         <li (click)="onClick(result.Symbol)" class="row search__entry"
             [ngClass]="{'search--match': result.Symbol == symbolSearchForm.value.toUpperCase() }">
-          <div class="col-3 search__company">
+          <div class="col-3 search__company" style="padding:0 0px 0 10px;">
             <p class="company-ticker">
               {{ result.Symbol }}
             </p>
           </div>
-          <div class="col-7">
+          <div class="col-7" style="padding:0;">
             <p class="company-name">
               {{ result.CompanyName }}
             </p>
