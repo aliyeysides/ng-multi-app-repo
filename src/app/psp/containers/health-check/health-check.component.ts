@@ -13,9 +13,6 @@ import {Observable} from 'rxjs/Observable';
 import {MarketsSummaryService} from '../../../services/markets-summary.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
-import {ReportService} from '../../../services/report.service';
-import {UtilService} from '../../../services/util.service';
-import {SignalService} from '../../../services/signal.service';
 
 @Component({
   selector: 'cpt-health-check',

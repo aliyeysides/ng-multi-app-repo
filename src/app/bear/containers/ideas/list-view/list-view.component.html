@@ -282,7 +282,10 @@
           </div>
           <!-- QUICKVIEW PANEL - - - PGR  -->
           <div class="quick-view__pgr col-lg-4">
-            <p class="pgr__title">Power Gauge: <a class="info-icon"><i class="fa fa-info-circle"></i></a></p>
+            <ng-template #toolTipTemp>
+              <div [innerHtml]="link"></div>
+            </ng-template>
+            <p class="pgr__title">Power Gauge: <a class="info-icon"><i [tooltip]="toolTipTemp" placement="bottom" triggers="click" class="fa fa-info-circle"></i></a></p>
             <p class="pgr__text" [ngClass]="appendPGRClass(selectedStock.PGR)">
               {{ appendPGRText(selectedStock.PGR, selectedStock.raw_PGR) }}
             </p>
@@ -517,7 +520,10 @@
           </div>
 
           <div class="quick-view__pgr col-lg-4">
-            <p class="pgr__title">Power Gauge: <a class="info-icon"><i class="fa fa-info-circle"></i></a></p>
+            <ng-template #toolTipTemp1>
+              <div [innerHtml]="link"></div>
+            </ng-template>
+            <p class="pgr__title">Power Gauge: <a class="info-icon"><i [tooltip]="toolTipTemp1" placement="bottom" triggers="click" class="fa fa-info-circle"></i></a></p>
             <p class="pgr__text" [ngClass]="appendPGRClass(idea.pgr['Corrected PGR Value'])">
               {{ appendPGRText(idea.pgr['Corrected PGR Value'], idea.pgr['PGR Value']) }}
             </p>

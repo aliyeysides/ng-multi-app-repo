@@ -51,7 +51,10 @@ declare let gtag: Function;
               </div>
             </div>
             <div class="quick-view__pgr col-5 col-xl-5">
-              <p class="pgr__title">Power Gauge Rating:</p>
+              <ng-template #toolTipTemp>
+                <div [innerHtml]="link"></div>
+              </ng-template>
+              <p class="pgr__title">Power Gauge Rating: <a class="info-icon"><i [tooltip]="toolTipTemp" placement="bottom" triggers="click" class="fa fa-info-circle"></i></a></p>
               <p class="pgr__text"
                  [ngClass]="{'veryBearish':pgrText=='Very Bearish','bearish':pgrText=='Bearish','neutral':pgrText=='Neutral','bullish':pgrText=='Bullish','veryBullish':pgrText=='Very Bullish'}">
                 {{ pgrText }}</p>
@@ -145,6 +148,9 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
     ignoreBackdropClick: false,
     class: 'modal-dialog--popup',
   };
+
+  toolTipText: string = "The Chaikin Power Gauge Rating combines 20 fundamental and technical factors into a reliable indication of a stock's potential to outperform the market (Very Bullish) or underperform (Very Bearish) over a 1 to 6 month time frame.";
+  link: string = `${this.toolTipText}<a target="_blank" href="https://masteringthebear.com/user-guide/">[Read more here].</a>`;
 
   constructor(public modalService: BsModalService,
               private ideasService: IdeasService,

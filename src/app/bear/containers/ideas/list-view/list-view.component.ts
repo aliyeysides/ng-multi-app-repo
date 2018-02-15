@@ -58,6 +58,9 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public symbolData;
 
+  toolTipText: string = "The Chaikin Power Gauge Rating combines 20 fundamental and technical factors into a reliable indication of a stock's potential to outperform the market (Very Bullish) or underperform (Very Bearish) over a 1 to 6 month time frame.";
+  link: string = `${this.toolTipText}<a target="_blank" href="https://masteringthebear.com/user-guide/">[Read more here].</a>`;
+
   constructor(private router: Router,
               private authService: AuthService,
               private utilService: UtilService,
