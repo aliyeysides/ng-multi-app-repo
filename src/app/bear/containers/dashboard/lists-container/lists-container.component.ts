@@ -20,16 +20,24 @@ declare var gtag: Function;
           </div>
           <div class="col-5">
             <div class="dash-head__toggle">
-              <button tooltip="Previous" placement="right" (click)="leftClickPage()" class="dash-head__chevron"><a><i class="fa fa-chevron-left"></i></a></button>
+              <button (click)="leftClickPage()" class="dash-head__chevron"><a><i
+                class="fa fa-chevron-left"></i></a></button>
               <ul class="dash-head__pagination">
                 <li [ngClass]="{'active': currentListComponent == 'Best Bear Ideas'}"
-                    (click)="loadBestBearIdeasComponent()"><a><i class="fa fa-circle"></i></a></li>
-                <li [ngClass]="{'active': currentListComponent == 'Holding'}" (click)="loadHoldingComponent()"><a><i
-                  class="fa fa-circle"></i></a></li>
-                <li [ngClass]="{'active': currentListComponent == 'Watching'}" (click)="loadWatchingComponent()"><a><i
-                  class="fa fa-circle"></i></a></li>
+                    (click)="loadBestBearIdeasComponent()">
+                  <button tooltip="Best Bears" placement="bottom"><i class="fa fa-circle"></i></button>
+                </li>
+                <li [ngClass]="{'active': currentListComponent == 'Holding'}" (click)="loadHoldingComponent()">
+                  <button tooltip="Holding" placement="bottom"><i
+                    class="fa fa-circle"></i></button>
+                </li>
+                <li [ngClass]="{'active': currentListComponent == 'Watching'}" (click)="loadWatchingComponent()">
+                  <button tooltip="Watching" placement="bottom"><i
+                    class="fa fa-circle"></i></button>
+                </li>
               </ul>
-              <button tooltip="Next" placement="left" (click)="rightClickPage()" class="dash-head__chevron"><i class="fa fa-chevron-right"></i></button>
+              <button (click)="rightClickPage()" class="dash-head__chevron"><i
+                class="fa fa-chevron-right"></i></button>
             </div>
           </div>
         </div>
