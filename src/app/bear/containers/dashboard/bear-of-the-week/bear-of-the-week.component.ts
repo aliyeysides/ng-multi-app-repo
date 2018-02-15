@@ -38,10 +38,10 @@ declare let gtag: Function;
               <div class="price-data">
                 <p class="data price"
                    [ngClass]="{'down-change': stockDataMeta?.Change<0,'up-change':stockDataMeta?.Change>0}">
-                  <span *ngIf="stockDataMeta?.Change>0">+</span>{{ stockDataMeta?.Last | decimal }}</p>
+                  {{ stockDataMeta?.Last | decimal }}</p>
                 <p class="data change"
                    [ngClass]="{'down-change': stockDataMeta?.Change<0,'up-change':stockDataMeta?.Change>0}">
-                  <span>{{ stockDataMeta?.Change | decimal }}</span>
+                  <span><span *ngIf="stockDataMeta?.Change>0">+</span>{{ stockDataMeta?.Change | decimal }}</span>
                   <span>(<span
                     *ngIf="stockDataMeta?.Change>0">+</span>{{ stockDataMeta ? (stockDataMeta['Percentage '] | decimal) : null
                     }}%)</span></p>
