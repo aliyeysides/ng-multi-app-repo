@@ -6,7 +6,7 @@
 .article__container {
 	.article__masthead {
 		padding: 2% 2.5%;
-	    overflow: hidden;
+	    //overflow: hidden;
 	    position: relative;
 	    background-image: url("http://www.chaikinanalytics.com/images/BG__bearish-insights__container.png");
 	    background-repeat: no-repeat;
@@ -34,61 +34,81 @@
 		      		font-size: 18px;
 		      	}
 	      		.section--date-select {
-	      			//display:none;
 
 					.btn-group {
 						margin-top: 0px;
 						margin-bottom: 5px;
 						cursor: pointer;
 
-						.btn {
-						    font-weight: 700;
-						    text-align: center;
-						    border: none;
-						    padding: 0;
-						    font-size: 18px;
-						    border-radius: 0px;
-						    cursor: pointer;
-						}
 						.btn-primary {
+							text-align: center;
+						    border: 0;
+						    padding: 10px 38px 5px 10px;
+						    border-radius: 0;
+							cursor: pointer;
 					  		background-color: transparent;
-						    border-color: transparent;
-						    font-size: 18px;
+						    font-size: 30px;
 						    line-height: 1;
-							color: #FD001F;
-							font-weight: 700;
+							color: #ffffff;
 							box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
-							z-index: 10;
-						}
+							z-index: 20;
+						    font-weight: 600;
+						}			
 						.dropdown-toggle {
 							min-width: 200px;
-
-							&::after {
-								vertical-align:middle;
-							}
+						    &:after {
+								content:  none;
+						    }
+						}
+						&:after {
+						    font-family: "Font Awesome 5 Pro";
+						    content: "\f271 ";
+						    display: inline-block;
+						    position: absolute;
+						    right: 0px;
+						    top: 2px;
+						    color:#ffffff;
+						    font-size: 28px;
+						    vertical-align: middle;
+						    font-weight: 300;
 						}
 					}
 					.dropdown-menu {
 					    position: absolute;
-					    cursor: pointer;
-					    z-index: 5;
+					    z-index: 10;
 					    float: left;
-					    min-width: 100%;
-					    padding: 40px 0 5px;
-					    margin: -40px 0 0;
-					    font-size: 24px;
+					    min-width: 200px;
+					    padding: 15px 0px 15px;
+					    margin: 7px auto 0px;
+					    font-size: 20px;
 					    color: $font-color;
 					    width: 100%;
+					    overflow: hidden;
 					    text-align: center;
 					    list-style: none;
-					    background-color: rgba(255,255,255, 0.92);
+					    background-color: rgba(255,255,255, 0.95);
 					    background-clip: padding-box;
-					    border: 2px solid #ffffff;
-					    border-radius: 20px;
-						box-shadow: 0 6px 40px rgba(50, 50, 50, 0.26);
+					    border: 0;
+					    border-radius: 0 0 10px 10px;
+						box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 
+						.label {
+							padding-bottom: 10px;
+							border-bottom:1px solid #ddd;
+							margin: 0 10px 10px;
+						}
 						.dropdown-item {
+							cursor: pointer;
 							font-weight: 600;
+							text-overflow: ellipsis;
+							overflow: hidden;
+							white-space: nowrap;
+							padding: 10px 10px;
+							border-top:0px solid #fff;
+
+							&:hover {
+								background-color: rgba(0,0,0, 0.05);
+							}
 						}
 					}
 				}
@@ -153,7 +173,7 @@
 	.article__body {
 		.featured__article {
 			.article__wrapper {
-				margin-bottom:100px;
+				margin:0 25px 100px;
 
 				.article {
 	/*          STYLING DONE IN STYLE.SCSS             */
