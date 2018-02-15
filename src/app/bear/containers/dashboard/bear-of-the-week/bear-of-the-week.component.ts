@@ -38,7 +38,7 @@ declare let gtag: Function;
               <div class="price-data">
                 <p class="data price"
                    [ngClass]="{'down-change': stockDataMeta?.Change<0,'up-change':stockDataMeta?.Change>0}">
-                  {{ stockDataMeta?.Last | decimal }}</p>
+                  <span *ngIf="stockDataMeta?.Change>0">+</span>{{ stockDataMeta?.Last | decimal }}</p>
                 <p class="data change"
                    [ngClass]="{'down-change': stockDataMeta?.Change<0,'up-change':stockDataMeta?.Change>0}">
                   <span>{{ stockDataMeta?.Change | decimal }}</span>
@@ -54,7 +54,9 @@ declare let gtag: Function;
               <ng-template #toolTipTemp>
                 <div [innerHtml]="link"></div>
               </ng-template>
-              <p class="pgr__title">Power Gauge Rating: <a class="info-icon"><i [tooltip]="toolTipTemp" placement="bottom" triggers="click" class="fa fa-info-circle"></i></a></p>
+              <p class="pgr__title">Power Gauge Rating: <a class="info-icon"><i [tooltip]="toolTipTemp"
+                                                                                placement="bottom" triggers="click"
+                                                                                class="fa fa-info-circle"></i></a></p>
               <p class="pgr__text"
                  [ngClass]="{'veryBearish':pgrText=='Very Bearish','bearish':pgrText=='Bearish','neutral':pgrText=='Neutral','bullish':pgrText=='Bullish','veryBullish':pgrText=='Very Bullish'}">
                 {{ pgrText }}</p>
