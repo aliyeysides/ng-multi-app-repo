@@ -51,7 +51,7 @@ export class BearOnboardingComponent implements OnInit {
     {
       id: 2,
       src: 'assets/imgs/MTB-onboarding__modal-2.png',
-      link: 'https://www.chaikinanalytics.com/powerpulse-health-check-video/'
+      link: 'https://masteringthebear.com/user-guide/'
     },
     {
       id: 3,

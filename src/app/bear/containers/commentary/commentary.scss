@@ -43,13 +43,13 @@
 						.btn-primary {
 							text-align: center;
 						    border: 0;
-						    padding: 10px 38px 5px 10px;
+						    padding: 0px 34px 0px 10px;
 						    border-radius: 0;
 							cursor: pointer;
 					  		background-color: transparent;
-						    font-size: 30px;
+						    font-size: 24px;
 						    line-height: 1;
-							color: #ffffff;
+							color: #FD001F;
 							box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
 							z-index: 20;
 						    font-weight: 600;
@@ -67,8 +67,8 @@
 						    position: absolute;
 						    right: 0px;
 						    top: 2px;
-						    color:#ffffff;
-						    font-size: 28px;
+						    color:#FD001F;
+						    font-size: 24px;
 						    vertical-align: middle;
 						    font-weight: 300;
 						}
@@ -80,7 +80,7 @@
 					    min-width: 200px;
 					    padding: 15px 0px 15px;
 					    margin: 7px auto 0px;
-					    font-size: 20px;
+					    font-size: 18px;
 					    color: $font-color;
 					    width: 100%;
 					    overflow: hidden;
@@ -89,8 +89,8 @@
 					    background-color: rgba(255,255,255, 0.95);
 					    background-clip: padding-box;
 					    border: 0;
-					    border-radius: 0 0 10px 10px;
-						box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+					    border-radius: 0 0 5px 5px;
+						box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
 
 						.label {
 							padding-bottom: 10px;
@@ -99,7 +99,7 @@
 						}
 						.dropdown-item {
 							cursor: pointer;
-							font-weight: 600;
+							font-weight: 400;
 							text-overflow: ellipsis;
 							overflow: hidden;
 							white-space: nowrap;
