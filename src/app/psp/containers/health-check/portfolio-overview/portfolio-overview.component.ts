@@ -23,6 +23,7 @@ declare var gtag: Function;
               {{ selectedListName }}
             </button>
             <ul *dropdownMenu class="dropdown-menu" role="menu">
+              <li class="label">Your Stock Lists</li>
               <li (click)="selectList(list)" *ngFor="let list of allUserLists" role="menuitem"><a
                 class="dropdown-item">{{ list['name'] }}</a></li>
             </ul>

@@ -13,12 +13,12 @@
 		margin-bottom: 6px;
 		cursor: pointer;
 		z-index: 20;
-		min-width: 160px;
+		min-width: 200px;
 
 		.btn-primary {
 			text-align: center;
 		    border: 0;
-		    padding: 10px 38px 5px 0px;
+		    padding: 10px 38px 5px 10px;
 		    border-radius: 0;
 		    //border-bottom:4px dotted #ffffff;
 			cursor: pointer;
@@ -31,7 +31,7 @@
 		    font-weight: 600;
 		}			
 		.dropdown-toggle {
-			min-width: 160px;
+			min-width: 200px;
 		    &:after {
 				content:  none;
 		    }
@@ -53,9 +53,9 @@
 	    position: absolute;
 	    z-index: 10;
 	    float: left;
-	    min-width: 160px;
-	    padding: 42px 0 5px;
-	    margin: -44px 0px 0px;
+	    min-width: 200px;
+	    padding: 15px 0px 15px;
+	    margin: 7px auto 0px;
 	    font-size: 20px;
 	    color: $font-color;
 	    width: 100%;
@@ -64,10 +64,15 @@
 	    list-style: none;
 	    background-color: rgba(255,255,255, 0.95);
 	    background-clip: padding-box;
-	    border: 2px solid #ffffff;
-	    border-radius: 25px;
+	    border: 0;
+	    border-radius: 0 0 10px 10px;
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 
+		.label {
+			padding-bottom: 10px;
+			border-bottom:1px solid #ddd;
+			margin: 0 10px 10px;
+		}
 		.dropdown-item {
 			cursor: pointer;
 			font-weight: 600;
@@ -78,7 +83,7 @@
 			border-top:0px solid #fff;
 
 			&:hover {
-				background-color: rgba(17,153,255, 0.1);
+				background-color: rgba(0,0,0, 0.05);
 			}
 		}
 	}
