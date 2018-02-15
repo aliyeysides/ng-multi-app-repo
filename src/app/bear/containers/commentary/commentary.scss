@@ -43,11 +43,11 @@
 						.btn-primary {
 							text-align: center;
 						    border: 0;
-						    padding: 0px 34px 0px 10px;
+						    padding: 0px 45px 0px 5px;
 						    border-radius: 0;
 							cursor: pointer;
 					  		background-color: transparent;
-						    font-size: 24px;
+						    font-size: 21px;
 						    line-height: 1;
 							color: #FD001F;
 							box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
@@ -61,12 +61,12 @@
 						    }
 						}
 						&:after {
-						    font-family: "Font Awesome 5 Pro";
+						    font-family: "FontAwesome";
 						    content: "\f271 ";
 						    display: inline-block;
 						    position: absolute;
 						    right: 0px;
-						    top: 2px;
+						    top: -4px;
 						    color:#FD001F;
 						    font-size: 24px;
 						    vertical-align: middle;
@@ -78,8 +78,8 @@
 					    z-index: 10;
 					    float: left;
 					    min-width: 200px;
-					    padding: 15px 0px 15px;
-					    margin: 7px auto 0px;
+					    padding: 10px 0px;
+					    margin: 10px auto 0px;
 					    font-size: 18px;
 					    color: $font-color;
 					    width: 100%;
@@ -103,7 +103,7 @@
 							text-overflow: ellipsis;
 							overflow: hidden;
 							white-space: nowrap;
-							padding: 10px 10px;
+							padding: 10px 5px;
 							border-top:0px solid #fff;
 
 							&:hover {

@@ -1074,22 +1074,26 @@ iframe {
         padding-top: 2px;
 
         li {
-          opacity: 0.25;
-          color:$link-blue;
           cursor: pointer;
           display: inline-block;
           padding:0 5px;
 
-          &:hover {
-            opacity:0.5;
+          button {
+            color:$link-blue;
+            opacity:0.25;
+
+            &:hover {
+              opacity:0.5;
+            }
           }
         }
         .active {
-          opacity: 1;
-          cursor: default;
-
-          &:hover {
+          button {
             opacity:1;
+
+            &:hover {
+              opacity:1;
+            }
           }
         }
       }
@@ -1173,6 +1177,7 @@ iframe {
     li {
       padding: 6px 0;
       position: relative;
+      cursor: pointer;
 
       .stock__PGR {
         position: relative;
