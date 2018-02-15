@@ -54,7 +54,7 @@ export class BearishInsightsComponent implements OnInit, OnDestroy {
       .subscribe(post => {
         this.post = post;
         this.title = post['post_title'];
-        this.shortDate = moment(this.post['post_date_parsed']).format('MMMM Do, YYYY');
+        this.shortDate = moment(this.post['post_date']).format('MMMM Do, YYYY');
         this.wordpressService.assignAuthorProp([post]);
         this.commentary = this.wordpressService.getInsightPostBody(this.post);
         this.wordpressService.assignWordPressDateProperties([post]);

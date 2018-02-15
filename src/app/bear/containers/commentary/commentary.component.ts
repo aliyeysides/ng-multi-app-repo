@@ -21,11 +21,11 @@ import * as moment from 'moment';
             <div class="section--date-select">
               <div class="btn-group" dropdown [autoClose]="true">
                   <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-                    {{ selectedInsight ? moment(selectedInsight['post_date_parsed']).format('MMMM Do, YYYY') : null }}
+                    {{ selectedInsight ? moment(selectedInsight['post_date']).format('MMMM Do, YYYY') : null }}
                   </button>
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
                     <li (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem"><a
-                      class="dropdown-item">{{ moment(post['post_date_parsed']).format('MMMM Do, YYYY') }}</a></li>
+                      class="dropdown-item">{{ moment(post['post_date']).format('MMMM Do, YYYY') }}</a></li>
                 </ul>
               </div>
             </div>
@@ -89,7 +89,7 @@ export class CommentaryComponent implements OnInit, OnDestroy {
     this.opened = false;
     this.commentary = this.wp.getInsightPostBody(post);
     this.title = post['post_title'];
-    this.shortDate = moment(post['post_date_parsed']).format('MMMM Do, YYYY')
+    this.shortDate = moment(post['post_date']).format('MMMM Do, YYYY');
     this.wp.assignAuthorProp([post]);
     gtag('event', 'insight_clicked', {
       'event_category': 'engagement',
