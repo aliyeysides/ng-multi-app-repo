@@ -106,7 +106,7 @@ export class InteractiveChart {
       5: "VERY BULLISH"
 
     },
-      this.formatData(data)
+    this.formatData(data)
   }
   public formatData(res) {
     let chartData = res;
@@ -124,7 +124,7 @@ export class InteractiveChart {
       data.yAxisData.rectData[i] = parseInt(data.yAxisData.rectData[i]);
       data.yAxisData.areaData[i] = parseFloat(data.yAxisData.areaData[i]);
     }
-    data.xAxisFormatedData = data.xAxisFormatedData.map(res => moment(res).format("MMM 'YY"));
+    data.xAxisFormatedData = data.xAxisFormatedData.map(res => moment(res).format("DD MMM 'YY"));
     this.chartData = data;
   }
   public init() {
@@ -149,9 +149,9 @@ export class InteractiveChart {
     }
 
     this.mainSVG = d3.select(`#${this.id}`).append("svg")
-      .attr("preserveAspectRatio", "none")
-      .attr("viewBox", "0 0 " + this.width + " " + this.height + "")
-      .attr("type", "chart")
+    .attr("preserveAspectRatio", "none")
+    .attr("viewBox", "0 0 " + this.width + " " + this.height + "")
+    .attr("type", "chart")
 
     this.parentGroup = this.mainSVG.append("g").attr("class", "parentGroup").attr("transform", "translate(" + this.margins.left + "," + this.margins.top + ")");
     this.dummyParentGroup = this.mainSVG.append("g").attr("class", "dummyGroup").attr("transform", "translate(" + (this.margins.left + this.areaChartMargins.left) + "," + (this.margins.top + this.areaChartMargins.top) + ")");
@@ -168,26 +168,26 @@ export class InteractiveChart {
     this.scaleHeight = this.scaleHeight - this.areaChartMargins.top - this.areaChartMargins.bottom;
 
     this.parentGroup.append("g").attr("class", "area-clip-path")
-      .attr("transform", "translate(" + this.areaChartMargins.left + "," + this.areaChartMargins.top + ")")
-      .append("defs").append("clipPath").attr("id", "areaClip").append("rect").attr("class", "areaPathViewport").attr("width", this.scaleWidth)
-      .attr("height", this.scaleHeight);
+    .attr("transform", "translate(" + this.areaChartMargins.left + "," + this.areaChartMargins.top + ")")
+    .append("defs").append("clipPath").attr("id", "areaClip").append("rect").attr("class", "areaPathViewport").attr("width", this.scaleWidth)
+    .attr("height", this.scaleHeight);
 
     this.dummyParentGroup.append("g").attr("class", "chart-clip-path")
-      .append("defs").append("clipPath").attr("id", "chartClip").append("rect").attr("class", "areaPathViewport").attr("width", this.scaleWidth)
-      .attr("height", this.chartHeight + this.areaChartMargins.bottom);
+    .append("defs").append("clipPath").attr("id", "chartClip").append("rect").attr("class", "areaPathViewport").attr("width", this.scaleWidth)
+    .attr("height", this.chartHeight + this.areaChartMargins.bottom);
 
     this.areaGroup = this.parentGroup.append("g").attr("class", "areaGroup")
-      .attr("transform", "translate(" + this.areaChartMargins.left + "," + this.areaChartMargins.top + ")");
+    .attr("transform", "translate(" + this.areaChartMargins.left + "," + this.areaChartMargins.top + ")");
 
     this.parentGroup.append("g").attr("class", "brush-backgroud-group").attr("transform", "translate(" + (this.areaChartMargins.left) + "," + ((this.margins.bottom / 2) + this.chartHeight) + ")")
-      .append("rect").attr("class", "brush-background-rect")
-      .attr("y", 3).attr("height", this.brushHeight)
-      .attr("width", this.scaleWidth).attr("fill", "blue")
-      .attr("opacity", 0.03);
+    .append("rect").attr("class", "brush-background-rect")
+    .attr("y", 3).attr("height", this.brushHeight)
+    .attr("width", this.scaleWidth).attr("fill", "blue")
+    .attr("opacity", 0.03);
 
     //Create brush for the charts
     this.parentGroup.append("g").attr("transform", "translate(" + (this.areaChartMargins.left) + "," + ((this.margins.bottom / 2) + this.chartHeight) + ")")
-      .attr("class", "x brush");
+    .attr("class", "x brush");
 
     this.dummyParentGroup.append("g").attr("class", "xAxisGroup axis");
     this.visibleXAxis.append("g").attr("class", "xAxisGroupDummy axis");
@@ -198,17 +198,17 @@ export class InteractiveChart {
 
     //Parent sector group for all other sectors.
     this.parentSectorGroup = this.parentGroup.append("g").attr("class", "parentSectorGroup")
-      .attr("transform", "translate(" + this.areaChartMargins.left + "," + (this.scaleHeight + this.areaChartMargins.bottom + this.areaChartMargins.top) + ")");
+    .attr("transform", "translate(" + this.areaChartMargins.left + "," + (this.scaleHeight + this.areaChartMargins.bottom + this.areaChartMargins.top) + ")");
 
     this.mainPGRGroup = this.parentSectorGroup.append("g").attr("class", "main-pgr-group")
 
     //actual container group for bars.
     this.pgrBarChartGroup = this.mainPGRGroup.append("g").attr("class", "pgr-bars-group")
-      .attr("transform", "translate(" + (0) + "," + (0) + ")");
+    .attr("transform", "translate(" + (0) + "," + (0) + ")");
 
     this.pgrBarChartGroup.append("g").attr("class", "pgr-clip-path")
-      .append("defs").append("clipPath").attr("id", "pgrClip").append("rect").attr("class", "areaPathViewport").attr("width", this.scaleWidth)
-      .attr("height", this.scaleHeight);
+    .append("defs").append("clipPath").attr("id", "pgrClip").append("rect").attr("class", "areaPathViewport").attr("width", this.scaleWidth)
+    .attr("height", this.scaleHeight);
 
     this.pgrBarHeight = this.chartHeight - (this.scaleHeight + this.areaChartMargins.top + this.areaChartMargins.bottom);
 
@@ -231,7 +231,7 @@ export class InteractiveChart {
     });
 
     this.brushXScale = d3.scaleLinear().domain([0, this.chartData.xAxisData.length - 1])
-      .range([0, this.scaleWidth]);
+    .range([0, this.scaleWidth]);
 
     let startingExtentIndex = null;
 
@@ -247,8 +247,8 @@ export class InteractiveChart {
         .handleSize(this.brushHeight)
         .on("brush", function () {
          // this.brushed(this)
-        });*/
-    }
+       });*/
+     }
 
     /*this.mainSVG.select(`.brush`).call(this.brush)
       .selectAll("rect").attr("y", 3)
@@ -258,15 +258,15 @@ export class InteractiveChart {
       .attr("fill", "#000")
       .attr("opacity", .3);*/
 
-    let rectwidth = this.scaleWidth / (this.chartData.xAxisData.length);
+      let rectwidth = this.scaleWidth / (this.chartData.xAxisData.length);
 
-    this.dummyScale = d3.scaleLinear().domain([0, this.chartData.xAxisData.length - 1])
+      this.dummyScale = d3.scaleLinear().domain([0, this.chartData.xAxisData.length - 1])
       .range([0, this.scaleWidth]);
 
-    this.xScale = d3.scaleLinear().domain([0, this.chartData.xAxisData.length - 1])
+      this.xScale = d3.scaleLinear().domain([0, this.chartData.xAxisData.length - 1])
       .range([rectwidth / 2, this.scaleWidth - (rectwidth / 2)]);
 
-    this.xAxis = d3.axisBottom(this.xScale)
+      this.xAxis = d3.axisBottom(this.xScale)
       .tickValues(this.getTicksIndex(0, this.chartData.xAxisData.length, maxStringLength, this.scaleWidth))
       .tickSizeInner(-this.chartHeight)
       .tickSizeOuter(0)
@@ -290,27 +290,27 @@ export class InteractiveChart {
       })
       .text(String);*/
 
-    this.xAxisDummy = d3.axisBottom(this.xScale)
-      .tickValues(this.getTicksIndex(0, this.chartData.xAxisData.length, maxStringLength, this.scaleWidth))
+      this.xAxisDummy = d3.axisBottom(this.xScale)
+        .tickValues(this.getFirtMonthTick(0, this.chartData.xAxisData.length, maxStringLength, this.scaleWidth))
       //  .tickSizeInner(0)
       //  .tickSizeOuter(0)
       .tickPadding(4);
 
-    let xAxisGroupDummy = this.mainSVG.select(".xAxisGroupDummy").attr("transform", "translate(" + (this.areaChartMargins.left) + "," + (this.chartHeight + 5) + ")")
+      let xAxisGroupDummy = this.mainSVG.select(".xAxisGroupDummy").attr("transform", "translate(" + (this.areaChartMargins.left) + "," + (this.chartHeight + 5) + ")")
       //.attr("clip-path","url(#xAxisClip)")
       .call(this.xAxisDummy).attr("fill", "none").attr("display", "block")
       .selectAll("text").attr("fill", "#999999")
       .text('')
       .selectAll('tspan')
       .data(function(d, i) {
-        var dateLabel = chartObj.xAxisFormatedData[d];
+        var dateLabel = chartObj.xAxisFormatedData[d].split(" ")[1] +" "+ chartObj.xAxisFormatedData[d].split(" ")[2];
         return (dateLabel.toString()).split(" ");
       })
       .enter()
       .append('tspan')
       .attr('dy', 0)
       .attr('x', function(d, i) {
-          return ((2 * i) - 1) + 'em';
+        return ((2 * i) - 1) + 'em';
       })
       .text(String);
 
@@ -318,20 +318,20 @@ export class InteractiveChart {
     this.yScale = d3.scaleLinear().domain([this.yMin, this.yMax]).range([this.scaleHeight, 0]);
 
     this.yAxis = d3.axisRight(this.yScale)
-      .tickFormat(function(d) {
-        return d.toFixed(2);
-      })
-      .tickSizeInner(-this.scaleWidth)
-      .tickSizeOuter(0)
-      .tickPadding(5)
-      .ticks(this.scaleHeight / 40);
+    .tickFormat(function(d) {
+      return d.toFixed(2);
+    })
+    .tickSizeInner(-this.scaleWidth)
+    .tickSizeOuter(0)
+    .tickPadding(5)
+    .ticks(this.scaleHeight / 40);
 
     this.mainSVG.select(".yAxisGroup")
-      .attr("transform", "translate(" + (this.scaleWidth + this.areaChartMargins.left) + "," + (this.areaChartMargins.top) + ")")
-      .call(this.yAxis)
-      .attr("fill", "none")
-      .selectAll("text")
-      .attr("fill", "#999999")
+    .attr("transform", "translate(" + (this.scaleWidth + this.areaChartMargins.left) + "," + (this.areaChartMargins.top) + ")")
+    .call(this.yAxis)
+    .attr("fill", "none")
+    .selectAll("text")
+    .attr("fill", "#999999")
 
     let dummyScale = this.dummyScale;
     let yScale = this.yScale;
@@ -342,38 +342,38 @@ export class InteractiveChart {
 
     this.mainSVG.selectAll(".close-line").remove();
     let lineFunction = d3.line()
-      .x(function(d, i) {
-        return dummyScale(i);
-      })
-      .y(function(d, i) {
-        return yScale(d);
-      })
-      .defined(function(d) {
-        return d;
-      })
+    .x(function(d, i) {
+      return dummyScale(i);
+    })
+    .y(function(d, i) {
+      return yScale(d);
+    })
+    .defined(function(d) {
+      return d;
+    })
 
     let area = d3.area()
-      .x(function(d, i) {
-        return dummyScale(i);
-      })
-      .y0(yScale(yMin))
-      .y1(function(d, i) {
-        return yScale(d);
-      })
-      .defined(function(d) {
-        return d;
-      })
+    .x(function(d, i) {
+      return dummyScale(i);
+    })
+    .y0(yScale(yMin))
+    .y1(function(d, i) {
+      return yScale(d);
+    })
+    .defined(function(d) {
+      return d;
+    })
 
     this.areaGroup.append("path")
-      .attr("d", area(chartObj.yAxisData.areaData))
-      .attr("class", "area-chart")
-      .attr("id", "areaChart")
-      .attr("stroke-width", 2)
-      .attr("fill", '#e7f5ff')
+    .attr("d", area(chartObj.yAxisData.areaData))
+    .attr("class", "area-chart")
+    .attr("id", "areaChart")
+    .attr("stroke-width", 2)
+    .attr("fill", '#e7f5ff')
       //.style("opacity", .3)
       .attr("display", "block")
 
-    this.areaGroup.append("path")
+      this.areaGroup.append("path")
       .attr("d", lineFunction(chartObj.yAxisData.areaData))
       .attr("class", "area-line-chart")
       .attr("stroke", "#1199ff")
@@ -383,7 +383,7 @@ export class InteractiveChart {
       .style("opacity", 1)
       .style('shape-rendering', 'geometricPrecision')
 
-    this.areaGroup.append("path")
+      this.areaGroup.append("path")
       .attr("d", lineFunction(chartObj.yAxisData.lineData))
       .attr("class", "close-line-chart")
       .attr("stroke", "#ff9c17")
@@ -394,7 +394,7 @@ export class InteractiveChart {
       .style("stroke-dasharray", ("3, 3"))
       .style('shape-rendering', 'geometricPrecision')
 
-    this.pgrBarChartGroup.selectAll("rect.rel-strength")
+      this.pgrBarChartGroup.selectAll("rect.rel-strength")
       .data(chartObj.yAxisData.rectData)
       .enter()
       .append("svg:rect")
@@ -431,18 +431,34 @@ export class InteractiveChart {
         return palette[d];
       });
 
-    this.mainSVG.selectAll('.axis path').style('display', 'none');
-    this.mainSVG.selectAll('.xAxisGroupDummy line').style('display', 'none');
-    this.mainSVG.selectAll("line").style('shape-rendering', 'geometricPrecision')
+      this.mainSVG.selectAll('.axis path').style('display', 'none');
+      this.mainSVG.selectAll('.xAxisGroupDummy line').style('display', 'none');
+      this.mainSVG.selectAll("line").style('shape-rendering', 'geometricPrecision')
       .style('stroke', '#c6c6c6');
 
-    this.areaGroup.attr("clip-path", "url(#areaClip)");
-    this.pgrBarChartGroup.attr("clip-path", "url(#pgrClip)");
-    this.dummyParentGroup.attr("clip-path", "url(#chartClip)");
-  }
-  public getTicksIndex(minVal, maxVal, maxCharacterLength, svgWidth) {
-    let tickArray = [];
-    let xAxisDateTracker = [];
+      this.areaGroup.attr("clip-path", "url(#areaClip)");
+      this.pgrBarChartGroup.attr("clip-path", "url(#pgrClip)");
+      this.dummyParentGroup.attr("clip-path", "url(#chartClip)");
+    }
+    public getFirtMonthTick(minVal, maxVal, maxCharacterLength, svgWidth) {
+      let tickArray = [];
+      let xAxisDateTracker = [];
+      let curval = minVal;
+      while (curval < maxVal) { 
+       // (this.chartData.xAxisFormatedData[curval]).split(' ')[0] == '01' || 
+        if ((xAxisDateTracker.indexOf(this.chartData.xAxisFormatedData[curval].split(' ')[1]) == -1) && (this.chartData.xAxisFormatedData[curval]).split(' ')[0] <10) {
+          xAxisDateTracker.push(this.chartData.xAxisFormatedData[curval].split(' ')[1]);
+          tickArray.push(curval);
+          curval++;
+        }else{
+          curval++;
+        }
+      }
+      return tickArray;
+    }
+    public getTicksIndex(minVal, maxVal, maxCharacterLength, svgWidth) {
+      let tickArray = [];
+      let xAxisDateTracker = [];
     //let maxTickWidth = 2 * 6.5 * maxCharacterLength;
     let maxTickWidth = maxCharacterLength
     //let totalTicks = (svgWidth / maxTickWidth);
@@ -454,16 +470,16 @@ export class InteractiveChart {
     while (curval < maxVal) {  
       curval = Math.floor(curval + factor);
       if (tickArray.indexOf(curval) == -1 && curval <= maxVal - 1 && (xAxisDateTracker.indexOf(this.chartData.xAxisFormatedData[curval])==-1)) {
-            xAxisDateTracker.push(this.chartData.xAxisFormatedData[curval]);
-            tickArray.push(curval);
-        }
-        else{
-          curval++;
-        }
-
+        xAxisDateTracker.push(this.chartData.xAxisFormatedData[curval]);
+        tickArray.push(curval);
       }
+      else{
+        curval++;
+      }
+
+    }
     return tickArray;
-   }
+  }
 
   public textLength(xAxis) {
     var textWidth = 0;
@@ -485,11 +501,11 @@ export class InteractiveChart {
      1. displacementFactor is for increase or decrease textLength which result to dec. and inc. number of ticks.
      2. maxCharacterLength is a text length of single tick.
      3. width is total space on which ticks are to be drawn. */
-    var displacementFactor = resObj.displacement;
-    var maxCharacterLength = resObj.textWidth;
-    var width = resObj.chartWidth;
-    var maxTickWidth = displacementFactor * maxCharacterLength;
-    var totalTicks = Math.round(width / maxTickWidth);
-    return totalTicks;
-  }
-}
+     var displacementFactor = resObj.displacement;
+     var maxCharacterLength = resObj.textWidth;
+     var width = resObj.chartWidth;
+     var maxTickWidth = displacementFactor * maxCharacterLength;
+     var totalTicks = Math.round(width / maxTickWidth);
+     return totalTicks;
+   }
+ }
