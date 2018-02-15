@@ -55,7 +55,7 @@ declare let gtag: Function;
                 <div [innerHtml]="link"></div>
               </ng-template>
               <p class="pgr__title">Power Gauge Rating: <a class="info-icon"><i [tooltip]="toolTipTemp"
-                                                                                placement="bottom" triggers="click"
+                                                                                placement="left top" triggers="click"
                                                                                 class="fa fa-info-circle"></i></a></p>
               <p class="pgr__text"
                  [ngClass]="{'veryBearish':pgrText=='Very Bearish','bearish':pgrText=='Bearish','neutral':pgrText=='Neutral','bullish':pgrText=='Bullish','veryBullish':pgrText=='Very Bullish'}">
