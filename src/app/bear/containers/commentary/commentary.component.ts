@@ -17,15 +17,15 @@ import * as moment from 'moment';
             <img src="http://www.chaikinanalytics.com/images/logo__bearish-insights.png" alt="BearishInsights">
           </div>
           <div class="col-12 col-sm-6 col-xl-5 masthead__date">
-            <p>{{ shortDate }}</p>
+            <!--<p>{{ shortDate }}</p>-->
             <div class="section--date-select">
               <div class="btn-group" dropdown [autoClose]="true">
                   <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-                    {{ selectedInsight ? selectedInsight['post_title'].slice(26) : null }}
+                    {{ selectedInsight ? moment(selectedInsight['post_date_parsed']).format('MMMM Do, YYYY') : null }}
                   </button>
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
                     <li (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem"><a
-                      class="dropdown-item">{{ post['post_title'].slice(26) }}</a></li>
+                      class="dropdown-item">{{ moment(post['post_date_parsed']).format('MMMM Do, YYYY') }}</a></li>
                 </ul>
               </div>
             </div>
@@ -64,6 +64,7 @@ export class CommentaryComponent implements OnInit, OnDestroy {
   loading: Subscription;
   title: string;
   shortDate: string;
+  moment = moment;
 
 
   constructor(private wp: WordpressService,
@@ -88,11 +89,11 @@ export class CommentaryComponent implements OnInit, OnDestroy {
     this.opened = false;
     this.commentary = this.wp.getInsightPostBody(post);
     this.title = post['post_title'];
-    this.shortDate = moment(post['post_date_parsed']).format('MMMM Do, YYYY');
+    this.shortDate = moment(post['post_date_parsed']).format('MMMM Do, YYYY')
     this.wp.assignAuthorProp([post]);
     gtag('event', 'insight_clicked', {
       'event_category': 'engagement',
-      'event_label': post['post_title'].slice(26)
+      'event_label': post['post_title']
     });
   }
 
@@ -100,7 +101,7 @@ export class CommentaryComponent implements OnInit, OnDestroy {
     this.opened = !this.opened;
     gtag('event', 'read_more_toggle', {
       'event_category': 'engagement',
-      'event_label': this.selectedInsight['post_title'].slice(26)
+      'event_label': this.selectedInsight['post_title']
     });
   }
 
