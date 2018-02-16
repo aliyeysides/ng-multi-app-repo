@@ -24,7 +24,7 @@ import * as moment from 'moment';
         <div class="col-12 headline">
           <h1>{{ title }}</h1>
         </div>
-        <p class="post-author">Weekly commentary by {{ post?.author ? post['author'] : 'John Schlitz' }}</p>
+        <!--<p class="post-author">Weekly commentary by {{ post?.author ? post['author'] : 'John Schlitz' }}</p>-->
       </div>
       <div (click)="openCommentaryModal()" class="row no-gutters link__read-all">
         <a>Read the Weekly Newsletter &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
