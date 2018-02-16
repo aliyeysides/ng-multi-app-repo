@@ -821,22 +821,27 @@ sub {
       line-height: 1;
       font-weight: 700;
       display: inline-block;
-      color: $font-color--light;
+      color: $font-color--mid;
       font-weight: 600;
       text-transform: uppercase;
       margin: 10px 0 10px;
+      min-width: 100px;
     }
 
     .toggle__left {
       border-radius: 20px 0px 0px 20px;
       padding:8px 10px 5px 15px;
       cursor: pointer;
+      margin-right: -3px;
+      box-shadow: inset 0 0px 10px 0 rgba(0, 0, 0, 0.1);
     }
 
     .toggle__right {
       border-radius: 0px 20px 20px 0;
       padding:8px 15px 5px 10px;
       cursor: pointer;
+      margin-left: -3px;
+      box-shadow: inset 0 0px 10px 0 rgba(0, 0, 0, 0.1);
     }
 
     .toggle__only {
@@ -848,6 +853,7 @@ sub {
     .selected {
       background-color: $font-color;
       color:#ffffff;
+      box-shadow: inset 0 0px 10px 0 rgba(0, 0, 0, 0);
     }
   }
 }
