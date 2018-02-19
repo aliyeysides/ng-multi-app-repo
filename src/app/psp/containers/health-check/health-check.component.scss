@@ -74,6 +74,7 @@
 			    font-size: 28px;
 			    vertical-align: middle;
 			    font-weight: 300;
+			    opacity:0.85;
 			}
 		}
 		.dropdown-menu {
@@ -171,7 +172,7 @@
 	.overview__powerbar {
 		background-color: $background--verylight;
 		border-top:$line--white;
-		border-bottom:$line--light;
+		//border-bottom:$line--light;
 	  	text-align: center;
 	  	padding: 0px;
 	  	position: relative;
@@ -360,6 +361,7 @@
 		position: relative;
 
 		.btn-primary {
+			min-width: 200px;
 			font-weight: 600;
 		    text-align: center;
 		    border: $line--button;
@@ -401,6 +403,7 @@
 	    font-size: 24px;
 	    color: $font-color;
 	    width: 100%;
+	    min-width: 200px;
 	    text-align: center;
 	    list-style: none;
 	    background-color: rgba(255,255,255, 0.92);
@@ -430,7 +433,7 @@
 
 	.list-item__mover {
 	  margin:0;
-	  padding: 6px 0 4px;
+	  padding: 5px 0 3px;
 
 	  &:first-child {
 	  	margin-top:15px;
