@@ -1,16 +1,13 @@
 import {Injectable} from '@angular/core';
-import {URLSearchParams} from '@angular/http';
 import {UtilService} from './util.service';
 import {DatePipe} from '@angular/common';
 
 @Injectable()
 export class WordpressService {
-  private wordpressParams: URLSearchParams;
   private apiHostName = this.utilService.getApiHostName();
 
   constructor(private utilService: UtilService,
               private datePipe: DatePipe) {
-    this.wordpressParams = new URLSearchParams();
   }
 
   public getInsightPostDom(post: object): Document {
@@ -64,9 +61,11 @@ export class WordpressService {
 
   public getWordPressJson(id: string, count: number) {
     const insightsUrl = `${this.apiHostName}/insights/?json=secursive.get_product_updates&dev=1`;
-    this.wordpressParams.set('id', id);
-    this.wordpressParams.set('count', count.toString());
-    return this.utilService.getJson(insightsUrl, this.wordpressParams);
+    const params = {
+      'id': id,
+      'count': count.toString()
+    };
+    return this.utilService.getJson(insightsUrl, { params, withCredentials: true });
   }
 
 }

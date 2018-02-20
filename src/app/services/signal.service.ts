@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {UtilService} from './util.service';
 import {Subject} from 'rxjs/Subject';
+import {HttpParams} from '@angular/common/http';
 
 @Injectable()
 export class SignalService {
@@ -21,9 +21,6 @@ export class SignalService {
     "11": "Rel. Strength Breakdown"
   };
 
-  private alertsLookupParams: URLSearchParams;
-  private signalsLookupParams: URLSearchParams;
-  private allAlertsParams: URLSearchParams;
   private apiHostName = this.utilService.getApiHostName();
   private apiPrependText = '/CPTRestSecure/app';
 
@@ -31,9 +28,6 @@ export class SignalService {
   alertsOpen$ = this._alertsOpen.asObservable();
 
   constructor(private utilService: UtilService) {
-    this.alertsLookupParams = new URLSearchParams();
-    this.signalsLookupParams = new URLSearchParams();
-    this.allAlertsParams = new URLSearchParams();
   }
 
   openAlerts() {
@@ -95,26 +89,30 @@ export class SignalService {
 
   public getAlertsData(query): Observable<Array<object>> {
     const alertsLookupUrl = `${this.apiHostName}${this.apiPrependText}/midTier/getInitialData?`;
+    const params = new HttpParams();
     Object.keys(query).forEach((key) => {
-      this.alertsLookupParams.set(key, query[key]);
+      params.append(key, query[key]);
     });
-    return this.utilService.getJson(alertsLookupUrl, this.alertsLookupParams);
+    return this.utilService.getJson(alertsLookupUrl, { params, withCredentials: true });
   }
 
   public getSignalDataForList(listId: string, period: string, uid: string) {
     const signalsLookupUrl = `${this.apiHostName}${this.apiPrependText}/signals/getSignalDataForList?`;
-    this.signalsLookupParams.set('list_ID', listId);
-    this.signalsLookupParams.set('period', period);
-    this.signalsLookupParams.set('uid', uid);
-    return this.utilService.getJson(signalsLookupUrl, this.signalsLookupParams);
+    const params = {
+      'list_ID': listId,
+      'period': period,
+      'uid': uid
+    };
+    return this.utilService.getJson(signalsLookupUrl, { params, withCredentials: true });
   }
 
   public getAllAlerts(query) {
     const url = `${this.apiHostName}${this.apiPrependText}/alerts/getAllAlerts?`;
+    const params = new HttpParams();
     Object.keys(query).forEach((key) => {
-      this.allAlertsParams.set(key, query[key]);
+      params.append(key, query[key]);
     });
-    return this.utilService.getJson(url, this.allAlertsParams);
+    return this.utilService.getJson(url, { params, withCredentials: true });
   }
 
   public parseAlertData(res) {

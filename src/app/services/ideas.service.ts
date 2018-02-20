@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Http, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {UtilService} from './util.service';
 import {IdeaList} from '../shared/models/idea';
@@ -7,6 +6,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {NotificationsService} from 'angular2-notifications/dist';
 import {Subject} from 'rxjs/Subject';
 import {AuthService} from './auth.service';
+import {HttpClient} from "@angular/common/http";
 
 declare let gtag: Function;
 
@@ -14,12 +14,6 @@ declare let gtag: Function;
 export class IdeasService {
 
   private apiHostName = this.utilService.getApiHostName();
-  private ideaListsParams: URLSearchParams;
-  private listSymbolsParams: URLSearchParams;
-  private stockCardParams: URLSearchParams;
-  private headlinesParams: URLSearchParams;
-  private addStockIntoListParams: URLSearchParams;
-  private deleteSymbolFromListParams: URLSearchParams;
 
   private _selectedList: BehaviorSubject<IdeaList> = new BehaviorSubject<IdeaList>({name: 'default'} as IdeaList);
   selectedList = this._selectedList.asObservable();
@@ -32,14 +26,8 @@ export class IdeasService {
 
   constructor(private utilService: UtilService,
               private toast: NotificationsService,
-              private http: Http,
+              private http: HttpClient,
               private authService: AuthService) {
-    this.ideaListsParams = new URLSearchParams();
-    this.listSymbolsParams = new URLSearchParams();
-    this.stockCardParams = new URLSearchParams();
-    this.headlinesParams = new URLSearchParams();
-    this.addStockIntoListParams = new URLSearchParams();
-    this.deleteSymbolFromListParams = new URLSearchParams();
   }
 
   get selectedStock() {
@@ -56,35 +44,41 @@ export class IdeasService {
 
   public getIdeasList(uid: string, product: string): Observable<Array<object>> {
     const ideaListLookupUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/getMidTierUserLists?`;
-    this.ideaListsParams.set('uid', uid);
-    this.ideaListsParams.set('productName', product);
-    return this.utilService.getJson(ideaListLookupUrl, this.ideaListsParams);
+    const params = {
+      'uid': uid,
+      'productName': product,
+    };
+    return this.utilService.getJson(ideaListLookupUrl, { params, withCredentials: true });
   }
 
   public getListSymbols(listId: string, uid: string): Observable<Array<object>> {
     const listSymbolsUrl = `${this.apiHostName}/CPTRestSecure/app/midTier/getListSymbols?`;
-    this.listSymbolsParams.set('listId', listId);
-    this.listSymbolsParams.set('uid', uid);
-    return this.utilService.getJson(listSymbolsUrl, this.listSymbolsParams);
+    const params = {
+      'uid': uid,
+      'listId': listId
+    };
+    return this.utilService.getJson(listSymbolsUrl, { params, withCredentials: true });
   }
 
   public getStockCardData(symbol: string) {
     const getStockCardDataUrl = `${this.apiHostName}/CPTRestSecure/app/midTier/getStockCardData?`;
-    this.stockCardParams.set('symbol', symbol);
-    return this.utilService.getJson(getStockCardDataUrl, this.stockCardParams);
+    const params = {'symbol': symbol};
+    return this.utilService.getJson(getStockCardDataUrl, { params, withCredentials: true });
   }
 
   public getHeadlines(symbol: string) {
     const getHeadlinesUrl = `${this.apiHostName}/CPTRestSecure/app/xigniteNews/getHeadlines?`;
-    this.headlinesParams.set('symbol', symbol);
-    return this.utilService.getJson(getHeadlinesUrl, this.headlinesParams);
+    const params = {'symbol': symbol};
+    return this.utilService.getJson(getHeadlinesUrl, { params, withCredentials: true });
   }
 
   public addStockIntoList(listId: string, symbol: string) {
     const allowed = 1000;
     const addStockIntoListUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/addStockIntoList?`;
-    this.addStockIntoListParams.set('listId', listId);
-    this.addStockIntoListParams.set('symbol', symbol);
+    const params = {
+      'listId': listId,
+      'symbol': symbol,
+    };
 
     return this.authService
       .currentUser$
@@ -98,17 +92,12 @@ export class IdeasService {
       .map(res => res['symbols'].length < allowed)
       .flatMap(allowed => {
         if (allowed) {
-
-          return this.http.get(addStockIntoListUrl, {
-            search: this.addStockIntoListParams,
-            withCredentials: true
-          }).map(res => {
-            const result = res.json();
-            Object.keys(result).forEach((key) => {
+          return this.http.get(addStockIntoListUrl, { params, withCredentials: true }).map(res => {
+            Object.keys(res).forEach((key) => {
               this.toast.success('Success!', 'Successfully added ' + key);
               this._updateAlerts.next();
             });
-            return result as Observable<any>;
+            return res as Observable<any>;
           }).catch((err) => Observable.throw(err))
 
         } else {
@@ -120,20 +109,21 @@ export class IdeasService {
 
   public deleteSymbolFromList(listId: string, symbol: string) {
     const deleteSymbolFromListUrl = `${this.apiHostName}/CPTRestSecure/app/portfolio/deleteSymbolFromList?`;
-    this.deleteSymbolFromListParams.set('symbol', symbol);
-    this.deleteSymbolFromListParams.set('listId', listId);
+    const params = {
+      'symbol': symbol,
+      'listId': listId,
+    };
+
     gtag('event', 'remove_from_user_list_clicked', {
       'event_category': 'engagement',
       'event_label': symbol
     });
-    return this.http.get(deleteSymbolFromListUrl, {
-      search: this.deleteSymbolFromListParams,
-      withCredentials: true
-    }).map(res => {
+
+    return this.http.get(deleteSymbolFromListUrl, { params, withCredentials: true }).map(res => {
       this._updateAlerts.next();
-      return res.json();
+      return res;
     })
-      .catch(res => res.json())
+      .catch(err => err)
   }
 
 

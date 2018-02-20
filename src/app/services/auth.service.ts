@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Http, URLSearchParams} from '@angular/http';
 import {UtilService} from './util.service';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../shared/models/user';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
@@ -15,13 +15,11 @@ export class AuthService {
 
   private _userLists: BehaviorSubject<object[]> = new BehaviorSubject<object[]>({} as object[]);
 
-  private loginParams: URLSearchParams;
   public loggedIn: boolean;
 
 
   constructor(private utilService: UtilService,
-              private http: Http) {
-    this.loginParams = new URLSearchParams;
+              private http: HttpClient) {
   }
 
   public setCurrentUser(usr: User) {
@@ -39,23 +37,18 @@ export class AuthService {
   public login(): Observable<any> {
     const email = localStorage.getItem('email');
     const getLoginUrl = `${this.apiHostName}/CPTRestSecure/app/user/login?`;
-    this.loginParams.set('deviceId', email);
-    return this.http.get(getLoginUrl, {
-      search: this.loginParams,
-      withCredentials: true
-    }).map(res => {
+    const params = { 'deviceId': email };
+
+    return this.http.get(getLoginUrl, { params, withCredentials: true }).map(res => {
       this.loggedIn = true;
-      return res.json();
+      return res;
     })
       .catch(this.utilService.handleError);
   }
 
   public logOutSession(): Observable<any> {
     const getLogoutUrl = `${this.apiHostName}/CPTRestSecure/app/session/killsessions?`;
-    return this.http.get(getLogoutUrl, {
-      search: this.loginParams,
-      withCredentials: true
-    }).map(() => {
+    return this.http.get(getLogoutUrl, { withCredentials: true }).map(() => {
       this.loggedIn = false;
       window.location.href = this.apiHostName;
     })
