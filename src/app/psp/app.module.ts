@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -26,6 +25,7 @@ import {PspAuthGuard} from '../shared/guards/psp-auth.guard';
 import {PspOnboardingComponent} from './core/psp-onboarding/psp-onboarding.component';
 import {PspOnboardingModule} from './core/psp-onboarding/index';
 import {HealthCheckService} from '../services/health-check.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import {HealthCheckService} from '../services/health-check.service';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     SharedModule,
     BrowserAnimationsModule,
     PspOnboardingModule,

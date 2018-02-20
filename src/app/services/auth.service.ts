@@ -36,23 +36,22 @@ export class AuthService {
 
   public login(): Observable<any> {
     const email = localStorage.getItem('email');
+    console.log('email', email);
     const getLoginUrl = `${this.apiHostName}/CPTRestSecure/app/user/login?`;
-    const params = { 'deviceId': email };
+    const params = {'deviceId': email};
 
-    return this.http.get(getLoginUrl, { params, withCredentials: true }).map(res => {
+    return this.http.get(getLoginUrl, {params, withCredentials: true}).map(res => {
       this.loggedIn = true;
       return res;
-    })
-      .catch(this.utilService.handleError);
+    }).catch(this.utilService.handleError);
   }
 
   public logOutSession(): Observable<any> {
     const getLogoutUrl = `${this.apiHostName}/CPTRestSecure/app/session/killsessions?`;
-    return this.http.get(getLogoutUrl, { withCredentials: true }).map(() => {
+    return this.http.get(getLogoutUrl, {withCredentials: true}).map(() => {
       this.loggedIn = false;
       window.location.href = this.apiHostName;
-    })
-      .catch(this.utilService.handleError);
+    }).catch(this.utilService.handleError);
   }
 
   public isLoggedIn(): boolean {

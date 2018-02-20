@@ -59,6 +59,7 @@ export class IdeasComponent implements OnInit, OnDestroy {
       .filter(x => x !== undefined)
       .take(1)
       .map(res => {
+        console.log('res', res);
         this.holdingListId = res[2]['user_lists'][0]['list_id'];
         this.watchingListId = res[2]['user_lists'][1]['list_id'];
         this.allLists = res[2]['user_lists'].concat(res[0]['idea_lists']).concat(res[1]['theme_lists']);
