@@ -1,12 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
-import { Subject } from "rxjs/Subject";
-import { Observable } from 'rxjs/Rx';
-
 import * as d3 from 'd3';
 import * as moment from 'moment';
-
-
 
 export class InteractiveChart {
   public chartData: any;
@@ -444,8 +437,8 @@ export class InteractiveChart {
       let tickArray = [];
       let xAxisDateTracker = [];
       let curval = minVal;
-      while (curval < maxVal) { 
-       // (this.chartData.xAxisFormatedData[curval]).split(' ')[0] == '01' || 
+      while (curval < maxVal) {
+       // (this.chartData.xAxisFormatedData[curval]).split(' ')[0] == '01' ||
         if ((xAxisDateTracker.indexOf(this.chartData.xAxisFormatedData[curval].split(' ')[1]) == -1) && (this.chartData.xAxisFormatedData[curval]).split(' ')[0] <10) {
           xAxisDateTracker.push(this.chartData.xAxisFormatedData[curval].split(' ')[1]);
           tickArray.push(curval);
@@ -467,7 +460,7 @@ export class InteractiveChart {
     tickArray.push(curval);
     xAxisDateTracker.push(this.chartData.xAxisFormatedData[curval]);
     let factor = (maxVal - minVal) / totalTicks;
-    while (curval < maxVal) {  
+    while (curval < maxVal) {
       curval = Math.floor(curval + factor);
       if (tickArray.indexOf(curval) == -1 && curval <= maxVal - 1 && (xAxisDateTracker.indexOf(this.chartData.xAxisFormatedData[curval])==-1)) {
         xAxisDateTracker.push(this.chartData.xAxisFormatedData[curval]);

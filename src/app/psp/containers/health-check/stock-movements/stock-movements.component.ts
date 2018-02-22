@@ -5,7 +5,6 @@ import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
 
 declare var gtag: Function;
 

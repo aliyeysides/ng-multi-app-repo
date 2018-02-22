@@ -1,24 +1,21 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Rx';
-import {Http} from '@angular/http';
 import {environment} from '../../environments/environment';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class UtilService {
 
   protected apiHostName = environment.envProtocol + '://' + environment.envHostName;
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   public getApiHostName() {
     return this.apiHostName;
   }
 
-  public getJson(url, params) {
-    return this.http.get(url, {
-      search: params,
-      withCredentials: true
-    }).map(res => res.json())
+  public getJson(url, options) {
+    return this.http.get(url, options)
       .catch(this.handleError);
   }
 

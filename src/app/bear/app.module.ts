@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -25,6 +24,8 @@ import {SimpleNotificationsModule} from 'angular2-notifications';
 import {NotificationsService} from 'angular2-notifications/dist';
 import {TooltipModule} from 'ngx-bootstrap';
 import {BearOnboardingComponent} from './core/bear-onboarding/bear-onboarding.component';
+import {HttpClientModule} from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {BearOnboardingComponent} from './core/bear-onboarding/bear-onboarding.co
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     SharedModule,
     BrowserAnimationsModule,
     TooltipModule.forRoot(),
