@@ -26,6 +26,7 @@ import {PspOnboardingComponent} from './core/psp-onboarding/psp-onboarding.compo
 import {PspOnboardingModule} from './core/psp-onboarding/index';
 import {HealthCheckService} from '../services/health-check.service';
 import {HttpClientModule} from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [

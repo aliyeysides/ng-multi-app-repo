@@ -25,6 +25,7 @@ import {NotificationsService} from 'angular2-notifications/dist';
 import {TooltipModule} from 'ngx-bootstrap';
 import {BearOnboardingComponent} from './core/bear-onboarding/bear-onboarding.component';
 import {HttpClientModule} from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     HttpClientModule,
     SharedModule,
     BrowserAnimationsModule,

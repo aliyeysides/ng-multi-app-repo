@@ -3,7 +3,8 @@ import {UtilService} from './util.service';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../shared/models/user';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient} from "@angular/common/http";
+import {Http, URLSearchParams} from '@angular/http';
 
 @Injectable()
 export class AuthService {
@@ -17,9 +18,11 @@ export class AuthService {
 
   public loggedIn: boolean;
 
+  private loginParams: URLSearchParams;
 
   constructor(private utilService: UtilService,
-              private http: HttpClient) {
+              private http: Http) {
+    this.loginParams = new URLSearchParams;
   }
 
   public setCurrentUser(usr: User) {
@@ -34,16 +37,37 @@ export class AuthService {
     return this._userLists.getValue();
   }
 
+  // public login(): Observable<any> {
+  //   console.log('localStorage', localStorage);
+  //   const email = localStorage.getItem('email');
+  //   console.log('email', email);
+  //   const getLoginUrl = `${this.apiHostName}/CPTRestSecure/app/user/login?`;
+  //   const options = {
+  //     params: {
+  //       'deviceId': email
+  //     },
+  //     withCredentials: true,
+  //   };
+  //
+  //   return this.http.get(getLoginUrl, options).map((res: Response) => {
+  //     console.log('res', res);
+  //     this.loggedIn = true;
+  //     return res;
+  //   }).catch(this.utilService.handleError);
+  // }
+  //
   public login(): Observable<any> {
     const email = localStorage.getItem('email');
-    console.log('email', email);
     const getLoginUrl = `${this.apiHostName}/CPTRestSecure/app/user/login?`;
-    const params = {'deviceId': email};
-
-    return this.http.get(getLoginUrl, {params, withCredentials: true}).map(res => {
+    this.loginParams.set('deviceId', email);
+    return this.http.get(getLoginUrl, {
+      search: this.loginParams,
+      withCredentials: true
+    }).map(res => {
       this.loggedIn = true;
-      return res;
-    }).catch(this.utilService.handleError);
+      return res.json();
+    })
+      .catch(this.utilService.handleError);
   }
 
   public logOutSession(): Observable<any> {
