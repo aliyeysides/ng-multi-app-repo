@@ -4,6 +4,7 @@ import {ListSymbolObj, PGRChanges, PortfolioStatus, PrognosisData, StockStatus} 
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Http} from '@angular/http';
 
 @Injectable()
 export class HealthCheckService {
@@ -90,9 +91,9 @@ export class HealthCheckService {
   }
 
   public getListSymbols(listId: string, uid: string): Observable<Array<object>> {
-    const listSymbolsUrl = `${this.apiHost}/CPTRestSecure/app/portfolio/getListSymbols?`;
-    const params = {'listID': listId, 'uid': uid};
-    return this.utilService.getJson(listSymbolsUrl, { params, withCredentials: true });
+    const url = `${this.apiHost}/CPTRestSecure/app/portfolio/getListSymbols?`;
+    const params = {'listId': listId, 'uid': uid};
+    return this.utilService.getJson(url, { params, withCredentials: true });
   }
 
   public getUserPortfolioStockStatus(listId: string, startDate, endDate): Observable<PortfolioStatus> {

@@ -34,6 +34,7 @@ import {HttpModule} from '@angular/http';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     HttpClientModule,
     SharedModule,
     BrowserAnimationsModule,
