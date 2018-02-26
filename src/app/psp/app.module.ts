@@ -19,7 +19,7 @@ import {loadingMaskConfig3} from '../../loading-mask-config';
 import {IdeasService} from '../services/ideas.service';
 import {SignalService} from '../services/signal.service';
 
-import {NotificationsService} from 'angular2-notifications/dist';
+import {NotificationsService} from 'angular2-notifications';
 import {SymbolSearchService} from '../services/symbol-search.service';
 import {PspAuthGuard} from '../shared/guards/psp-auth.guard';
 import {PspOnboardingComponent} from './core/psp-onboarding/psp-onboarding.component';

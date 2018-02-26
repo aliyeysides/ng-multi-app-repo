@@ -21,7 +21,7 @@ import {IdeasService} from '../services/ideas.service';
 import {SignalService} from '../services/signal.service';
 
 import {SimpleNotificationsModule} from 'angular2-notifications';
-import {NotificationsService} from 'angular2-notifications/dist';
+import {NotificationsService} from 'angular2-notifications';
 import {TooltipModule} from 'ngx-bootstrap';
 import {BearOnboardingComponent} from './core/bear-onboarding/bear-onboarding.component';
 import {HttpClientModule} from '@angular/common/http';

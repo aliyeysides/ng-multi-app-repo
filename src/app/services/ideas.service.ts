@@ -3,7 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {UtilService} from './util.service';
 import {IdeaList} from '../shared/models/idea';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {NotificationsService} from 'angular2-notifications/dist';
+import {NotificationsService} from 'angular2-notifications';
 import {Subject} from 'rxjs/Subject';
 import {AuthService} from './auth.service';
 import {HttpClient} from "@angular/common/http";
