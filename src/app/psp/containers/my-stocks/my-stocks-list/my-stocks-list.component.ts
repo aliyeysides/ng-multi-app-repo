@@ -123,7 +123,7 @@ declare var gtag: Function;
         <!--</li>-->
       </ul>
       <ul *ngIf="!myStocks?.length">
-        <p>Search for a stock to get started.</p>>
+        <p class="empty-chart">Search for a stock to get started.</p>
       </ul>
     </div>
   `,

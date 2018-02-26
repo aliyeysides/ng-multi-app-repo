@@ -37,11 +37,11 @@ declare let gtag: Function;
             <a class="nav--toplevel" style="cursor:default;"><i class="fal fa-cogs" aria-hidden="true"></i> &nbsp;Settings</a>
           </li>
           <li class="row no-gutters sub-nav">
+            <div class="col-6 col-lg-12">
+              <a (click)="startOnboarding();gtagClicked('onboarding_clicked')" class="nav--sublevel"><i class="fal fa-cog" aria-hidden="true"></i> Getting Started</a>
+            </div>
             <div class="col-12">
               <a (click)="gtagClicked('about_rating_clicked')" href="https://www.chaikinanalytics.com/stock-rating/" class="nav--sublevel" target="_blank"><i class="fal fa-cog" aria-hidden="true"></i> About the Power Gauge</a>
-            </div>
-            <div class="col-6 col-lg-12">
-              <a (click)="startOnboarding();gtagClicked('onboarding_clicked')" class="nav--sublevel"><i class="fal fa-cog" aria-hidden="true"></i> Walkthrough</a>
             </div>
             <div class="col-6 col-lg-12">
              <a (click)="gtagClicked('user_guide_clicked')" href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/" class="nav--sublevel" target="_blank"><i class="fal fa-cog" aria-hidden="true"></i> User Guide</a>

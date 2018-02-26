@@ -1602,7 +1602,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               this.getCMFConfig(dates, cmf)
             ]
           },
-          height: 650,
+          height: 610,
           width: undefined
         };
         this.loading ? this.loading.unsubscribe() : null;
@@ -1664,7 +1664,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.getCMFConfig(dates, cmf)
         ]
       },
-      height: 640,
+      height: 600,
       width: undefined
     };
     this.loading ? this.loading.unsubscribe() : null;
@@ -1717,7 +1717,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           this.getCMFConfig(dates, cmf)
         ]
       },
-      height: 630,
+      height: 590,
       width: undefined
     };
     this.loading ? this.loading.unsubscribe() : null;
@@ -1787,7 +1787,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       type: 'mixed',
       backgroundColor: "transparent",
       borderColor: "transparent",
-      height: 380,
+      height: 340,
       x: 0,
       y: 0,
       crosshairX: {
@@ -1893,7 +1893,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       type: 'line',
       backgroundColor: "transparent",
       borderColor: "transparent",
-      height: 380,
+      height: 340,
       x: 0,
       y: 0,
       crosshairX: {
@@ -2001,7 +2001,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         type: 'mixed',
         height: 130,
         x: 0,
-        y: 520,
+        y: 480,
         backgroundColor: "transparent",
         plotarea: {
           margin: "25 60"
@@ -2084,7 +2084,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         type: 'mixed',
         height: 130,
         x: 0,
-        y: 395,
+        y: 355,
         backgroundColor: "#fff",
         plotarea: {
           margin: "25 60"
@@ -2201,7 +2201,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "type": "mixed",
         "height": 30,
         "x": 0,
-        "y": 331,
+        "y": 291,
         "plot": {
           midPoint: true,
           "stacked": true,
