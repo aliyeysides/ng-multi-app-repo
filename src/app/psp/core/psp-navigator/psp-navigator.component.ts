@@ -37,8 +37,8 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   reportOpen: boolean;
   currentRoute: string;
   public routes: object[] = [
-    {link: '/health-check', klass: 'fal fa-heartbeat', label: 'Health Check'},
-    {link: '/stock-analysis', klass: 'fal fa-tachometer', label: 'Stock Analysis'},
+    {link: '/health-check', klass: 'far fa-heartbeat', label: 'Health Check'},
+    {link: '/stock-analysis', klass: 'far fa-tachometer', label: 'Stock Analysis'},
     {link: '/market-insights', klass: 'fab fa-medapps', label: 'Market Insights'},
   ];
 
@@ -77,9 +77,9 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   updateRoutes() {
     if (this.reportOpen) {
       this.routes = [
-        {link: '/health-check', klass: 'fal fa-heartbeat', label: 'Health Check'},
-        {link: '/stock-analysis/' + this.firstUserStock, klass: 'fal fa-tachometer', label: 'Stock Analysis'},
-        {link: '/market-insights', klass: 'fab fa-medapps', label: 'Market Insights'},
+        {link: '/health-check', klass: 'far fa-heartbeat', label: 'Health Check'},
+        {link: '/stock-analysis/' + this.firstUserStock, klass: 'far fa-tachometer', label: 'Stock Analysis'},
+        {link: '/market-insights', klass: 'far fa-lightbulb', label: 'Market Insights'},
       ];
       return;
     }

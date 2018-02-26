@@ -59,14 +59,14 @@ interface FilterFunc {
             <div class="col-12">
               <p class="label">SHOWING:</p>
               <div class="btn-group" dropdown [autoClose]="true">
-                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                <button dropdownToggle type="button" class="btn btn-primary">
                   {{ currentToggleOptionText$ | async }}
                 </button>
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
                   <li (click)="selectToggleOption(toggleOptions.movers, 'Top Movers');" role="menuitem"><a
                     class="dropdown-item">Top Movers</a></li>
-                  <li (click)="selectToggleOption(toggleOptions.all, 'All');" role="menuitem"><a
-                    class="dropdown-item">All</a></li>
+                  <li (click)="selectToggleOption(toggleOptions.all, 'All Stocks');" role="menuitem"><a
+                    class="dropdown-item">All Stocks</a></li>
                   <li (click)="selectToggleOption(toggleOptions.bulls, 'Bulls')" role="menuitem"><a
                     class="dropdown-item">Bulls</a>
                   </li>
@@ -167,7 +167,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
 
   toggleOptions: ToggleOptions = {
     all(stock: StockStatus) {
-      this.currentToggleOptionText$.next('All');
+      this.currentToggleOptionText$.next('All Stocks');
       return true;
     },
 
