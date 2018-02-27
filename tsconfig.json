@@ -17,7 +17,7 @@
       "dom"
     ]
   },
-      "angularCompilerOptions": {
-      "preserveWhitespaces": false
-    }
+  "angularCompilerOptions": {
+    "preserveWhitespaces": false
+  }
 }
