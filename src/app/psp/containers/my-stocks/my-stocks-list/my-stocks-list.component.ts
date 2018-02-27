@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ListSymbolObj, PortfolioStatus} from '../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {ActivatedRoute} from '@angular/router';
+import {OrderByPipe} from '../../../../shared/pipes/order-by.pipe';
 
 declare var gtag: Function;
 
@@ -61,7 +62,7 @@ declare var gtag: Function;
 
     <div class="col-12 section__list" id="list--selected">
       <ul class="stock__list" *ngIf="myStocks?.length">
-        <li (click)="selectedStock(stock.symbol)"
+        <li (click)="selectStock(stock.symbol)"
             *ngFor="let stock of myStocks | orderBy:orderByObject?.field:orderByObject?.ascending "
             class="row list__entry">
           <div class="col-3 list-entry__pgr">
@@ -135,6 +136,23 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   private _powerbar: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _userlists: BehaviorSubject<object[]> = new BehaviorSubject<object[]>({} as object[]);
 
+  @HostListener('window:keydown', ['$event']) onKeyDown(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const ordArr = this.orderBy.transform(this.myStocks, 'PGR', false);
+    const indx = ordArr.map(x => x.symbol).indexOf(this.selectedStock);
+    if (e.key === 'Tab') {
+      const next = ordArr.map(x => x.symbol).indexOf(this.selectedStock) + 1;
+      if (ordArr.length > next) this.selectStock(ordArr[next].symbol);
+    }
+    if (e.key === "ArrowUp") {
+      if (indx-1 >= 0) this.selectStock(ordArr[indx-1].symbol);
+    }
+    if (e.key === "ArrowDown") {
+      if (ordArr.length > indx+1) this.selectStock(ordArr[indx+1].symbol);
+    }
+  }
+
   @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @Output('removeStockClicked') removeStockClicked: EventEmitter<string> = new EventEmitter<string>();
   @Output('stockClicked') stockClicked: EventEmitter<string> = new EventEmitter<string>();
@@ -174,10 +192,12 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   myStocks: ListSymbolObj[];
   sliderObj: object = {};
   selectedListName: string;
+  selectedStock: string;
   orderByObject: object = {};
 
   constructor(private signalService: SignalService,
               private route: ActivatedRoute,
+              private orderBy: OrderByPipe,
               private healthCheck: HealthCheckService) {
   }
 
@@ -210,10 +230,11 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .subscribe(params => {
           if (params.symbol) {
+            this.selectedStock = params.symbol;
             this.sliderObj = {};
             this.sliderObj[params.symbol] = true;
           } else {
-            // this.selectedStock = 'AAPL';
+            // this.selectStock = 'AAPL';
           }
         }
       );
@@ -256,7 +277,8 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
     return this.signalService.appendPGRImage(pgr, rawPgr);
   }
 
-  selectedStock(ticker: string) {
+  selectStock(ticker: string) {
+    this.selectedStock = ticker;
     this.stockClicked.emit(ticker);
     this.toggleSlider(ticker);
   }

@@ -132,7 +132,7 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   public post: object;
   public ticker: string;
   public stockDataMeta: Idea;
-  public stockDataPGR?: number;
+  public stockDataPGR;
   public pgrText: string;
   public pgrImgUrl: string;
   public loading: Subscription;
