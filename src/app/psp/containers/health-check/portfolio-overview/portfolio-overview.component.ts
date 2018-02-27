@@ -56,7 +56,7 @@ declare var gtag: Function;
           <button class="align-absolute" (click)="getPHCReportforListId(listId)"><i class="fal fa-file-pdf"
                                                                               aria-hidden="true"></i></button>
         </div>
-        <div class="col-12 col-md-8 col-xl-6 powerbar flex-md-last">
+        <div class="col-12 col-md-6 col-xl-6 powerbar flex-md-last">
           <div (click)="setToggleOptions('Bulls')"
                [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
             <p>{{ prognosisData?.BullishSymbolsCount }}</p>
@@ -69,7 +69,7 @@ declare var gtag: Function;
             <p>{{ prognosisData?.BearishSymbolsCount }}</p>
           </div>
         </div>
-        <div class="col-12 col-md-4 col-xl-2 align-self-center">
+        <div class="col-12 col-md-3 col-xl-2 align-self-center">
           <ng-template #toolTipTemp>
             <div [innerHtml]="link"></div>
           </ng-template>

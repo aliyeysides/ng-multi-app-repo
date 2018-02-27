@@ -25,7 +25,7 @@ interface FilterFunc {
   template: `
     <div id="HC--Stock-Movements" class="">
 
-      <div class="row no-gutters">
+      <div class="row no-gutters panel">
         <div class="col-12 col-xl-12">
           <div class="row section__toggle">
             <div class="col-12 toggle toggle--timespan">

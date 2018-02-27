@@ -832,13 +832,13 @@ sub {
     p {
       font-size: 16px;
       line-height: 1;
-      font-weight: 700;
       display: inline-block;
       color: $font-color--mid;
       font-weight: 600;
       text-transform: uppercase;
       margin: 10px 0 10px;
       min-width: 100px;
+      background-color: #ffffff;
     }
 
     .toggle__left {
@@ -846,7 +846,7 @@ sub {
       padding:8px 10px 5px 15px;
       cursor: pointer;
       margin-right: -3px;
-      box-shadow: inset 0 0px 10px 0 rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0 0px 6px 0px rgba(0, 0, 0, 0.25), inset 0 0px 0px 1px rgba(0, 0, 0, 0.1);
     }
 
     .toggle__right {
@@ -854,7 +854,7 @@ sub {
       padding:8px 15px 5px 10px;
       cursor: pointer;
       margin-left: -3px;
-      box-shadow: inset 0 0px 10px 0 rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0 0px 6px 0px rgba(0, 0, 0, 0.25), inset 0 0px 0px 1px rgba(0, 0, 0, 0.1);
     }
 
     .toggle__only {
@@ -866,7 +866,7 @@ sub {
     .selected {
       background-color: $font-color;
       color:#ffffff;
-      box-shadow: inset 0 0px 10px 0 rgba(0, 0, 0, 0);
+      box-shadow: inset 0 0px 6px 0px rgba(0, 0, 0, 0), inset 0 0px 0px 1px rgba(0, 0, 0, 0);
     }
   }
 }
