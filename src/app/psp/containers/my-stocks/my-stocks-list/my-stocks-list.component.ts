@@ -138,7 +138,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keydown', ['$event']) onKeyDown(e) {
     const valid = ['Tab', 'ArrowUp', 'ArrowDown'];
-    const ordArr = this.orderBy.transform(this.myStocks, 'PGR', false);
+    const ordArr = this.orderBy.transform(this.myStocks, this.orderByObject['field'], this.orderByObject['ascending']);
     const indx = ordArr.map(x => x.symbol).indexOf(this.selectedStock);
 
     if (valid.filter(x => x === e.key).length > 0) {
