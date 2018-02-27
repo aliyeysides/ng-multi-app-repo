@@ -48,21 +48,22 @@
 
 	.header__button {
 		position: absolute;
-		width: 32px;
+		width: 28px;
 		height: 58px;
 		display: flex;
 		z-index: 10;
 		cursor: pointer;
 
 		img {
-			width: 32px;
-			height: 32px;
+			width: 28px;
+			height: 28px;
 		}
 	}
 
 	.header__button--left {
 		left:2%;
-				img {
+		
+		img {
 			width: 26px;
 			height: 26px;
 		}
