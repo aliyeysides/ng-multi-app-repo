@@ -1454,12 +1454,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               private location: Location,
               private symbolSearchService: SymbolSearchService,
               private router: Router) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        console.log('event', event);
-        this.cd.detach();
-      }
-    });
   }
 
   ngOnInit() {
