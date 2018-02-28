@@ -28,27 +28,22 @@ import {Subscription} from 'rxjs/Subscription';
 
         <!-- HEALTH-CHECK - Stock Movements -->
         <cpt-psp-stock-movements [calc]="calculations" [weeklyStocks]="stocksStatus"
-                                 [dailyStocks]="dailySymbolList" class="col-12 col-lg-10"></cpt-psp-stock-movements>
+                                 [dailyStocks]="dailySymbolList" class="col-12 col-lg-10 HC-panel__padding"></cpt-psp-stock-movements>
 
         <!-- HEALTH-CHECK - Ratings Changes -->
-        <cpt-psp-rating-changes [alerts]="pgrChanges" class="col-12 col-lg-10"></cpt-psp-rating-changes>
+        <cpt-psp-rating-changes [alerts]="pgrChanges" class="col-12 col-lg-10 HC-panel__padding"></cpt-psp-rating-changes>
 
         <!-- HEALTH-CHECK - Earnings Reports -->
         <cpt-psp-earnings-report [surprises]="earningsSurprise"
                                  [revisions]="analystRevisions"
-                                 [expected]="expectedEarnings" class="col-12 col-lg-10"></cpt-psp-earnings-report>
+                                 [expected]="expectedEarnings" class="col-12 col-lg-10 HC-panel__padding"></cpt-psp-earnings-report>
 
         <!-- HEALTH-CHECK - Power Grid -->
-        <cpt-psp-power-grid [data]="pgrGridData" class="col-12 col-lg-10"></cpt-psp-power-grid>
+        <cpt-psp-power-grid [data]="pgrGridData" class="col-12 col-lg-10 HC-panel__padding"></cpt-psp-power-grid>
 
         <!-- HEALTH-CHECK - DISCLAIMER -->
         <div class="col-12 col-lg-10" id="HC--Disclaimer">
           <div class="row justify-content-center">
-            <div class="col-12">
-              <div class="divider__long"
-                   [ngClass]="{'divider__long--green': calculations?.avgPercentageChange>0, 'divider__long--red': calculations?.avgPercentageChange<0}">
-              </div>
-            </div>
 
             <div class="col-12 col-lg-10">
               <h4>Disclaimer:</h4>

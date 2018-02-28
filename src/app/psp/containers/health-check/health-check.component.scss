@@ -7,10 +7,25 @@
 }
 
 
+
+
+.panel {
+	background-color: #ffffff;
+	border-radius: 15px;
+	border:1px solid #ddd;
+	padding-bottom:7px;
+}
+
+
 .HC-overview {
 	width: 100%;
 	margin:0;
 	padding:0;
+}
+
+.HC-panel__padding {
+	padding-left:10px;
+	padding-right: 10px;
 }
 
 
@@ -332,25 +347,15 @@
 
 
 
-.panel {
-	background-color: #ffffff;
-	border-radius: 15px;
-	border:1px solid #ddd;
-	padding-bottom:7px;
-}
-
-
 
 /*     CONTENTS -- MOVERS     */
 
 
 #HC--Stock-Movements {
-	padding-top: 5px;
 	background-color:$background--verylight;
 	margin-bottom:20px;
 
 	@media screen AND (min-width: 576px) {
-		padding-top:0px;
 	}
 
 	.panel {
@@ -554,6 +559,10 @@
 
 	.panel {
 		padding-top:10px;
+
+		@media screen AND (max-width: 575px) {
+			padding-top:0px;
+		}
 	}
 
 	h2 {
@@ -592,12 +601,15 @@
   	}
   	.panel {
 		padding-top:10px;
+
+		@media screen AND (max-width: 575px) {
+			padding-top:0px;
+		}
 	}
 }
 
 .earnings__entry {
   	height: 36px;
-  	overflow: hidden;
   	margin: 8px 0;
   	cursor: pointer;
 
@@ -713,7 +725,9 @@
 
 
 #HC--PowerGrid {
-	background-color:#ffffff;
+	padding-top: 5px;
+	background-color:$background--verylight;
+	margin-bottom:20px;
 	position: relative;
 
 	h2 {
@@ -1026,7 +1040,8 @@
 
 
 #HC--Disclaimer {
-	background-color: #ffffff;
+	background-color: #f8f8f8;
+	margin-top: 10px;
 
 	@media screen AND (max-width:575px) {
 		padding-bottom: 20px;
