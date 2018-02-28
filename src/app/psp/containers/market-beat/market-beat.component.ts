@@ -16,7 +16,7 @@ declare var gtag: Function;
             <img class="float-md-left" src="http://www.chaikinanalytics.com/images/logo__market-insights.png">
           </div>
           <div class="col-12 col-md-6 author">
-            <p class="">Weekly Commentary By John Schlitz</p>
+            <p>Weekly Commentary By Marc Chaikin</p>
           </div>
           <div class="col-12 masthead__date">
             <div class="section--date-select">
