@@ -25,7 +25,7 @@ interface EarningsReportObj {
   template: `
     <div id="HC--Earnings" class="">
 
-      <div class="panel">
+      <div class="panel container">
 
         <div class="row">
           <div class="col-12">

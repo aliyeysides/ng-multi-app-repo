@@ -13,7 +13,7 @@ declare var gtag: Function;
   template: `
     <div id="HC--Ratings-Changes" class="">
 
-      <div class="panel">
+      <div class="panel container">
       
         <div class="row">
           <div class="col-12">
