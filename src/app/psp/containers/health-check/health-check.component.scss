@@ -521,8 +521,16 @@
 			  	cursor: default;
 			}
 		    .data--right {
-		      padding-left: 110%;
+		      padding-left: 115%;
 		      color: $font-color;
+
+		      @media screen AND (max-width:575px) {
+		      	padding-left: 130%;
+		      }
+
+		      @media screen AND (min-width:1200px) {
+		      	padding-left: 105%;
+		      }
 		    }
 		}
 		.mover__bar.positive {
