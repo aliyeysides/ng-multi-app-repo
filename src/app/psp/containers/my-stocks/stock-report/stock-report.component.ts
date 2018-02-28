@@ -10,7 +10,7 @@ import {IdeasService} from '../../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {ZingChart} from '../../../../shared/models/zingchart';
-import {Router} from '@angular/router';
+import {NavigationStart, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {UtilService} from '../../../../services/util.service';
 import {ListSymbolObj} from '../../../../shared/models/health-check';
@@ -1454,6 +1454,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               private location: Location,
               private symbolSearchService: SymbolSearchService,
               private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        console.log('event', event);
+        this.cd.detach();
+      }
+    });
   }
 
   ngOnInit() {

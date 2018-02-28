@@ -7,7 +7,7 @@ import {TooltipModule} from 'ngx-bootstrap/tooltip';
 @NgModule({
   imports: [
     SharedModule,
-    TooltipModule
+    TooltipModule.forRoot()
   ],
   exports: [BearSearchComponent],
   declarations: [BearSearchComponent],
