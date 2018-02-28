@@ -11,9 +11,9 @@ declare var gtag: Function;
     <!-- PANEL CONTENTS -->
     <div [ngBusy]="loading" class="container-fluid component component--marketbeat">
       <div class="article__masthead">
-        <div class="row no-gutters justify-content-center masthead__head">
+        <div class="row justify-content-center masthead__head">
           <div class="col-12 col-md-6 masthead__logo">
-            <img src="assets/imgs/logo__bearish-insights.png">
+            <img class="float-md-left" src="http://www.chaikinanalytics.com/images/logo__market-insights.png">
           </div>
           <div class="col-12 col-md-6 author">
             <p class="">Weekly Commentary By John Schlitz</p>
@@ -33,7 +33,7 @@ declare var gtag: Function;
             </div>
           </div>
         </div>
-        <div class="row justify-content-center masthead__body">
+        <div class="row no-gutters justify-content-center masthead__body">
           <div class="col-12 col-xl-10 headline">
             <h1>Overbought Conditions, Narrowing Breadth and Rising VIX Levels Trigger Sharpest Sell-Off Since Last Fall</h1>
           </div>

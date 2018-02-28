@@ -89,11 +89,10 @@
 }
 
 .stocklist__powerbar {
-	background-color: $background--verylight;
-	border-top:$line--white;
-	//border-bottom:$line--light;
+	background-color: #ffffff;
+	border-bottom:1px solid #eee;
   	text-align: center;
-  	padding: 0;
+  	padding: 2px 0 0;
 
     .label {
       	line-height: 36px;
@@ -121,7 +120,7 @@
 	      	color:#ffffff;
 	      	font-weight: 600;
 	      	font-size: 21px;
-	      	line-height: 30px;
+	      	line-height: 27px;
 	      	white-space: nowrap;
 	    }
 
@@ -132,6 +131,7 @@
 	      	width: 56%;
 	      	border-radius: 25px 0px 0px 25px;
 	      	border: 2px solid #ffffff;
+	      	box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
 	    }
         .bullish--less {
           height: 30px;
@@ -140,6 +140,7 @@
           width: 28%;
           border-radius: 25px 0px 0px 25px;
           border: 2px solid #ffffff;
+	      box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
         }
         .bullish--same {
           height: 30px;
@@ -148,6 +149,7 @@
           width: 42%;
           border-radius: 25px 0px 0px 25px;
           border: 2px solid #ffffff;
+          box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
         }
 	    .neutral {
 	      	width: 16%;
@@ -157,14 +159,16 @@
 	      	border-radius: 1px;
 	      	border-top: 2px solid #ffffff;
 	      	border-bottom: 2px solid #ffffff;
+	      	box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.15);
 	    }
 	    .bearish--more {
-	      	height: 30px;
+	      	height: 40px;
 	      	background-color: $veryBearish-red;
 	      	float: left;
 	      	width: 56%;
 	      	border-radius:0px 25px 25px 0px;
 	      	border: 2px solid #ffffff;
+	      	box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
 	    }
         .bearish--less {
           height: 30px;
@@ -173,6 +177,7 @@
           width: 28%;
           border-radius:0px 25px 25px 0px;
           border: 2px solid #ffffff;
+	      box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
         }
         .bearish--same {
           height: 30px;
@@ -181,6 +186,7 @@
           width: 42%;
           border-radius:0px 25px 25px 0px;
           border: 2px solid #ffffff;
+	      	box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
         }
   	}
 }
@@ -201,10 +207,10 @@
 }
 
 .col-headers {
-	border-bottom: $line--light--thin;
-	margin-top:5px;
-	margin-bottom: 0px;
-	padding-bottom: 7px;
+	//border-bottom: $line--light--thin;
+	background-color: $background--verylight;
+	margin:0px;
+	padding: 4px 0 5px;
 
 	p {
 		display:inline-block;
@@ -216,7 +222,7 @@
 			background-color: $background--medium;
 			border-radius: 30px;
 			display: inline-block;
-			padding:6px 8px 4px;
+			padding:5px 8px 3px;
 			cursor: default;
 		}
 	}
