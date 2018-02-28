@@ -136,6 +136,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       .take(1)
       .subscribe(res => {
         this.healthCheck.updateMyStocksList();
+        this.router.navigate(['stock-analysis', ticker]);
         this.toggleSearch.emit();
       });
     gtag('event', 'search', {'search_term': ticker});

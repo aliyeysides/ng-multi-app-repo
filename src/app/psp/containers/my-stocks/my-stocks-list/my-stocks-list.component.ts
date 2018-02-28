@@ -137,19 +137,24 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   private _userlists: BehaviorSubject<object[]> = new BehaviorSubject<object[]>({} as object[]);
 
   @HostListener('window:keydown', ['$event']) onKeyDown(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    const ordArr = this.orderBy.transform(this.myStocks, 'PGR', false);
+    const valid = ['Tab', 'ArrowUp', 'ArrowDown'];
+    const ordArr = this.orderBy.transform(this.myStocks, this.orderByObject['field'], this.orderByObject['ascending']);
     const indx = ordArr.map(x => x.symbol).indexOf(this.selectedStock);
-    if (e.key === 'Tab') {
-      const next = ordArr.map(x => x.symbol).indexOf(this.selectedStock) + 1;
-      if (ordArr.length > next) this.selectStock(ordArr[next].symbol);
-    }
-    if (e.key === "ArrowUp") {
-      if (indx-1 >= 0) this.selectStock(ordArr[indx-1].symbol);
-    }
-    if (e.key === "ArrowDown") {
-      if (ordArr.length > indx+1) this.selectStock(ordArr[indx+1].symbol);
+
+    if (valid.filter(x => x === e.key).length > 0) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.key === 'Tab') {
+        const next = ordArr.map(x => x.symbol).indexOf(this.selectedStock) + 1;
+        if (ordArr.length > next) this.selectStock(ordArr[next].symbol);
+        if (ordArr.length <= next) this.selectStock(ordArr[0].symbol);
+      }
+      if (e.key === "ArrowUp") {
+        if (indx-1 >= 0) this.selectStock(ordArr[indx-1].symbol);
+      }
+      if (e.key === "ArrowDown") {
+        if (ordArr.length > indx+1) this.selectStock(ordArr[indx+1].symbol);
+      }
     }
   }
 
