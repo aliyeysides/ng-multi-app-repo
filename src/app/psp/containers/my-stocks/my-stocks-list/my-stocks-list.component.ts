@@ -147,6 +147,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
       if (e.key === 'Tab') {
         const next = ordArr.map(x => x.symbol).indexOf(this.selectedStock) + 1;
         if (ordArr.length > next) this.selectStock(ordArr[next].symbol);
+        if (ordArr.length <= next) this.selectStock(ordArr[0].symbol);
       }
       if (e.key === "ArrowUp") {
         if (indx-1 >= 0) this.selectStock(ordArr[indx-1].symbol);

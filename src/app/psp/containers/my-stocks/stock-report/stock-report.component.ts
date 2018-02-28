@@ -1581,7 +1581,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         this.data = data;
 
         let dates, closePrices, pgrData, cmf, relStr, dema;
-        this.current === '5Y' ? dates = data['five_year_chart_data']['formatted_dates'] : dates = data['one_year_chart_data']['formatted_dates'].reverse();
+        this.current === '5Y' ? dates = data['five_year_chart_data']['calculations_dates'] : dates = data['one_year_chart_data']['calculations_dates'].reverse();
         this.current === '5Y' ? closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse() : closePrices = data['one_year_chart_data']['close_price'].map(x => +x).reverse();
         this.current === '5Y' ? pgrData = data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse() : pgrData = data['one_year_pgr_data']['pgr_data'].map(x => +x).reverse();
         this.current === '5Y' ? cmf = data['five_year_chart_data']['cmf'].map(x => +x).reverse() : cmf = data['one_year_chart_data']['cmf'].map(x => +x).reverse();
@@ -1644,7 +1644,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     this.loading = new Subscription();
 
     const closePrices = this.data['five_year_chart_data']['close_price'].map(x => +x).reverse();
-    const dates = this.data['five_year_chart_data']['formatted_dates'].slice().reverse();
+    const dates = this.data['five_year_chart_data']['calculations_dates'].slice().reverse();
     const pgrData = this.data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
     const cmf = this.data['five_year_chart_data']['cmf'].map(x => +x).reverse();
     const relStr = this.data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
@@ -1691,7 +1691,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         break;
     }
 
-    const dates = this.data['one_year_chart_data']['formatted_dates'].slice(this.data['one_year_chart_data']['formatted_dates'].length - cut);
+    const dates = this.data['one_year_chart_data']['calculations_dates'].slice(this.data['one_year_chart_data']['calculations_dates'].length - cut);
     const closePrices = this.data['one_year_chart_data']['close_price'].map(x => +x).reverse()
       .slice(this.data['one_year_chart_data']['close_price'].length - cut);
     const pgrData = this.data['one_year_pgr_data']['pgr_data'].map(x => +x).reverse()
@@ -1807,6 +1807,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         scaleLabel: {
           visible: false,
+          color: '#004c66',
+          bold: true,
+          backgroundColor: '#30f300'
         }
       },
       title: {
@@ -1862,10 +1865,15 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineColor: "#eee"
         },
         values: dates,
-        transform: {
-          type: 'date',
-          all: '%m/%d/%y'
+        "label": {
+          "font-size": "14px",
+          "font-weight": "normal",
+          "offset-x": "10%",
         },
+        // transform: {
+        //   type: 'date',
+        //   all: '%m/%d/%y'
+        // },
         item: {
           fontColor: "#999",
           fontSize: "14",
