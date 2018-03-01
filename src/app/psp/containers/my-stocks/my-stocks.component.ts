@@ -18,7 +18,6 @@ declare var gtag: Function;
   selector: 'cpt-my-stocks',
   template: `
     <div class="container-fluid">
-
       <div class="row">
         <div class="col-12 col-md-4 col-xl-3 component--mystocks">
           <cpt-my-stocks-list [ngBusy]="loading" (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
