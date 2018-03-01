@@ -5,7 +5,19 @@
 
 
 
+.mat-menu-panel {
+    min-width: 200px !important;
+    max-width: 300px !important;
+    border-radius: 5px !important;
 
+    .dropdown-item, .label {
+        text-align: center !important;
+
+        &:focus {
+          outline:0px;
+        }
+    }
+}
 
 .spinner {
   width: 40px;
