@@ -75,7 +75,6 @@ export class AuthService {
     return this.http.get(getLogoutUrl, {withCredentials: true}).map(() => {
       this.loggedIn = false;
       window.location.href = this.apiHostName;
-      console.log('things')
     }).catch(this.utilService.handleError);
   }
 
