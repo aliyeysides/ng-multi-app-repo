@@ -117,7 +117,6 @@ export class MyStocksComponent implements OnInit, OnDestroy {
       .takeUntil(this._ngUnsubscribe)
       .debounceTime(500)
       .switchMap(params => {
-        console.log('params', params);
         if (params.symbol) {
           if (this.selectedStockSub) this.selectedStockSub.unsubscribe();
           this.selectedStock = params.symbol.slice();
@@ -145,7 +144,6 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   updateData() {
-    console.log('updateData');
     this.healthCheck.getListSymbols(this.listId, this._uid)
       .filter(x => x != undefined)
       .take(1)
