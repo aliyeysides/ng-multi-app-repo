@@ -1457,7 +1457,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
+    const chartComponents = 'oneYearChartData,fiveYearChartData,oneYearPgrData,fiveYearPgrData';
     if (this.stock) {
       this.symbolSearchService.symbolLookup(this.stock)
         .take(1)
@@ -1466,7 +1466,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           if (!this.is_etf) {
             if (this.reportDataSub) this.reportDataSub.unsubscribe();
             this.getReportData(this.stock);
-            this.getMainChart(this.stock);
+            this.getMainChart(this.stock, chartComponents);
           }
           this.cd.detectChanges();
         });
@@ -1476,7 +1476,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['stock'] && this.loading) {
       this.loading.unsubscribe();
-      // this.ngOnInit();
     }
     if (changes['stock']) {
       this.ngOnInit();
@@ -1577,8 +1576,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       });
   }
 
-  getMainChart(stock: string) {
-    this.loading = this.reportService.getStockSummaryData(stock)
+  getMainChart(stock: string, components?: string) {
+    this.loading = this.reportService.getStockSummaryData(stock, components)
       .take(1)
       .subscribe(data => {
         this.data = data;

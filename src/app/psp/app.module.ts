@@ -16,6 +16,7 @@ import {AuthService} from '../services/auth.service';
 
 import {BusyModule} from 'angular2-busy';
 import {loadingMaskConfig3} from '../../loading-mask-config';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {IdeasService} from '../services/ideas.service';
 import {SignalService} from '../services/signal.service';
 
@@ -25,8 +26,9 @@ import {PspAuthGuard} from '../shared/guards/psp-auth.guard';
 import {PspOnboardingComponent} from './core/psp-onboarding/psp-onboarding.component';
 import {PspOnboardingModule} from './core/psp-onboarding/index';
 import {HealthCheckService} from '../services/health-check.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
+import {AuthInterceptor} from '../shared/inteceptors/auth.inteceptor';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import {HttpModule} from '@angular/http';
     BrowserAnimationsModule,
     PspOnboardingModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
-    BusyModule.forRoot(loadingMaskConfig3),
+    MatProgressSpinnerModule,
+    // BusyModule.forRoot(loadingMaskConfig3),
     ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES,
   ],
@@ -52,7 +55,12 @@ import {HttpModule} from '@angular/http';
     HealthCheckService,
     SignalService,
     NotificationsService,
-    SymbolSearchService
+    SymbolSearchService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [PspOnboardingComponent]

@@ -38,11 +38,11 @@ export class ReportService {
     return this.utilService.getJson(url, { params, withCredentials: true });
   }
 
-  public getStockSummaryData(symbol: string) {
+  public getStockSummaryData(symbol: string, components?: string) {
     const url = `${this._apiHost}/CPTRestSecure/app/stockSummary/getStockSummaryData?`;
     const params = {
       'symbol': symbol,
-      'components': 'stockSummaryData,oneYearChartData,fiveYearChartData,oneYearPgrData,fiveYearPgrData'
+      'components': components ? components : 'stockSummaryData,oneYearChartData,fiveYearChartData,oneYearPgrData,fiveYearPgrData'
     };
     return this.utilService.getJson(url, { params, withCredentials: true });
   }
