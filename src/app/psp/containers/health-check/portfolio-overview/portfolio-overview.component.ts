@@ -19,14 +19,29 @@ declare var gtag: Function;
         <div class="col-12 col-md-4 col-xl-3 align-self-center">
           <p class="timespan">LAST WEEK</p>
           <div class="btn-group" dropdown [autoClose]="true">
-            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+            
+            <!--<button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">-->
+              <!--{{ selectedListName }}-->
+            <!--</button>-->
+
+            <!--<ul *dropdownMenu class="dropdown-menu" role="menu">-->
+              <!--<li class="label">Your Stock Lists</li>-->
+              <!--<li (click)="selectList(list)" *ngFor="let list of allUserLists" role="menuitem"><a-->
+                <!--class="dropdown-item">{{ list['name'] }}</a></li>-->
+            <!--</ul>-->
+
+
+            <button mat-icon-button [matMenuTriggerFor]="appMenu">
               {{ selectedListName }}
             </button>
-            <ul *dropdownMenu class="dropdown-menu" role="menu">
-              <li class="label">Your Stock Lists</li>
-              <li (click)="selectList(list)" *ngFor="let list of allUserLists" role="menuitem"><a
-                class="dropdown-item">{{ list['name'] }}</a></li>
-            </ul>
+
+            <mat-menu #appMenu="matMenu">
+              <button mat-menu-item class="label">Your Stock Lists</button>
+              <button mat-menu-item (click)="selectList(list)" *ngFor="let list of allUserLists" role="menuitem"><a
+                class="dropdown-item">{{ list['name'] }}</a></button>
+            </mat-menu>
+
+            
           </div>
         </div>
         <div class="col-12 col-md-4 col-xl-3 align-self-center">

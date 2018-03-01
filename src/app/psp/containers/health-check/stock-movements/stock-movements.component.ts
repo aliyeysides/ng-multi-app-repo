@@ -23,6 +23,21 @@ interface FilterFunc {
 @Component({
   selector: 'cpt-psp-stock-movements',
   template: `
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          This is the expansion title
+        </mat-panel-title>
+        <mat-panel-description>
+          This is a summary of the content
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <p>This is the primary content of the panel.</p>
+
+    </mat-expansion-panel>
+    
+    
     <div id="HC--Stock-Movements" class="">
 
       <div class="panel container">
