@@ -227,6 +227,19 @@ sub {
 
 
 
+.panel {
+  .add-stock {
+    .tooltip {
+      .tooltip-inner {
+        width: 100px;
+      }
+      .tooltip-arrow {
+        margin-left:-6px;
+      }
+    }
+  }
+}
+
 
 
 
@@ -241,7 +254,7 @@ sub {
     color: #fff;
     text-align: left;
     background-color: #000;
-    border-radius: 0.4rem;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
     text-align: center;
 
@@ -257,9 +270,11 @@ sub {
     }
   }
   .tooltip-arrow {
-
   }
 }
+
+
+
 
 .HC-overview {
   .tooltip  {
@@ -270,6 +285,43 @@ sub {
     }
   }
 }
+
+
+
+
+/*.mat-menu-panel {
+    min-width: 200px !important;
+    max-width: 300px !important;
+    border-radius: 5px !important;
+
+    .dropdown-item, .label {
+        text-align: center !important;
+
+        &:focus {
+          outline:0px;
+        }
+    }
+}*/
+
+
+
+
+.overview__powerbar {
+  .tooltip {
+    margin-right:5px;
+
+    .tooltip-inner {
+      min-width: 150px;
+    }
+    .tooltip-arrow {
+      margin-top:-6px;
+    }
+  }
+}
+
+
+
+
 
 .tab--slide {
   width: 26%;
@@ -672,19 +724,19 @@ sub {
           height: 45px;
           text-decoration: none;
           white-space: nowrap;
-          font-size: 19px;
+          font-size: 16px;
           cursor: pointer;
           font-weight: 500;
           margin: 0;
         }
 
         i {
-          font-size: 19px;
+          font-size: 15px;
           display: inline-block;
           vertical-align: middle;
           width: 25px;
           text-align: center;
-          margin-top: -3px;
+          margin-top: 0px;
         }
       }
 

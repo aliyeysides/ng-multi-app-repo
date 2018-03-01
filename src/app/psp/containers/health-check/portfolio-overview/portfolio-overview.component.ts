@@ -16,7 +16,7 @@ declare var gtag: Function;
     'section--overview--red': calculations?.avgPercentageChange < 0}">
 
       <div class="row no-gutters overview__summary justify-content-center">
-        <div class="col-12 col-md-4 col-xl-3 align-self-center">
+        <div class="col-12 col-md-4 align-self-center">
           <p class="timespan">LAST WEEK</p>
           <div class="btn-group" dropdown [autoClose]="true">
             
@@ -31,20 +31,21 @@ declare var gtag: Function;
             <!--</ul>-->
 
 
-            <button mat-icon-button [matMenuTriggerFor]="appMenu">
+            <button class="btn btn-primary dropdown-toggle" mat-icon-button [matMenuTriggerFor]="appMenu">
               {{ selectedListName }}
             </button>
 
-            <mat-menu #appMenu="matMenu">
+            <mat-menu #appMenu="matMenu" class="mat-menu-panel">
               <button mat-menu-item class="label">Your Stock Lists</button>
-              <button mat-menu-item (click)="selectList(list)" *ngFor="let list of allUserLists" role="menuitem"><a
-                class="dropdown-item">{{ list['name'] }}</a></button>
+              <button mat-menu-item (click)="selectList(list)" *ngFor="let list of allUserLists" role="menuitem">
+                <a class="dropdown-item">{{ list['name'] }}</a>
+              </button>
             </mat-menu>
 
             
           </div>
         </div>
-        <div class="col-12 col-md-4 col-xl-3 align-self-center">
+        <div class="col-12 col-md-4 align-self-center">
           <p class="data">
             <span class="icon__arrow">
               <img *ngIf="isPortUp()" src="./assets/imgs/icon__thin-arrow--up.svg">
@@ -55,8 +56,8 @@ declare var gtag: Function;
             }}<sub>%</sub>
           </p>
         </div>
-        <div class="col-12 col-md-4 col-xl-3 align-self-center text-md-left" style="padding:0 10px;">
-          <p>compared to the <button tooltip="Download S&P 500 Health Check PDF" placement="bottom" (click)="getPHCReportforListId('44493')" class="market">S&amp;P 500</button> &mdash;&mdash;
+        <div class="col-12 col-md-4 align-self-center text-md-left" style="padding:0 10px;">
+          <p>Compared to the <button tooltip="Download S&P 500 Health Check PDF" placement="bottom" (click)="getPHCReportforListId('44493')" class="market">S&amp;P 500</button> &mdash;&mdash;
             <span class="market--change"> 
               <span *ngIf="isSPYUp()">Up </span>
               <span *ngIf="!isSPYUp()">Down </span>{{ calculations?.SPYPercentageChange | number:'.2-2' }}%
