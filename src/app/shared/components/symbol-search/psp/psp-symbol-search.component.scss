@@ -104,17 +104,31 @@
       opacity: 1;
       position: relative;
 
-      svg, img {
-        width: 24px;
-        height: 24px;
-      }
+      p {
+        float: right;
+        text-align: right;
+        color: $font-color;
+        font-size: 15px;
+        line-height: 40px;
+        text-transform: uppercase;
+        font-weight: 600;
+        width: 100%;
+        display: block;
 
-      svg g {
-        fill: $link-grey;
+        i {
+          display: inline-block;
+          opacity: 0.7;
+          font-size: 28px;
+          vertical-align: middle;
+        }
       }
 
       &:hover {
-        opacity: 1;
+        p {
+          i {
+            opacity: 1;
+          }
+        }
       }
     }
 
@@ -124,9 +138,13 @@
       .company-name {
         color: #ffffff;
       }
-
-      svg g {
-        fill: #ffffff;
+      .search__action {
+        p {
+          color: #ffffff;
+          i {
+            color: #ffffff;
+          }
+        }
       }
 
       .company-ticker {
