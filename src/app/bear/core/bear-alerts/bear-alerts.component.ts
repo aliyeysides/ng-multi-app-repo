@@ -226,7 +226,6 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
         this.watchingListAlerts = res[1]['EarningEstimate'].concat(res[1]['EarningSurprise'], res[1]['PGR'])
           .filter(this.assignPgrUrl.bind(this));
         this.bearListSignals = res[2].filter(x => {
-          console.log('x', x);
           Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['pgrData'][0]['pgr_rating'], x['pgrData'][0]['raw_pgr_rating"'])});
           if (x['Signals'] === '[000000000100]') {
             return Object.assign(x, {signal_text: 'Rel. Strength Sell'});

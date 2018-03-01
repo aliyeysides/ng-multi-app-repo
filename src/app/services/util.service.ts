@@ -1,20 +1,44 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class UtilService {
 
   protected apiHostName = environment.envProtocol + '://' + environment.envHostName;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public getApiHostName() {
     return this.apiHostName;
   }
 
+  public httpService(url, options) {
+    // httpRequest$ stream that allows us to push new requests
+    const httpRequest$ = new Subject();
+
+    // httpResponse$ stream that allows clients of the httpService
+    // to handle our responses (HttpClient here can be replaced with whatever
+    // http library you're using).
+    const httpResponse$ = httpRequest$
+      .switchMap(() => this.http.get(url, options));
+
+    // Expose a single method get() that pushes a new
+    // request onto the httpRequest stream. Expose the
+    // httpResponse$ stream to handle responses.
+    return {
+      get: () => httpRequest$.next(),
+      httpResponse$
+    };
+  }
+
   public getJson(url, options) {
+    // console.log(this.httpService(url, options).get());
+    // return this.httpService(url, options)
+    //   .catch(this.handleError);
     return this.http.get(url, options)
       .catch(this.handleError);
   }
