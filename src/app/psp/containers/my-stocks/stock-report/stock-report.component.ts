@@ -1476,6 +1476,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['stock'] && this.loading) {
       this.loading.unsubscribe();
+      // this.ngOnInit();
+    }
+    if (changes['stock']) {
       this.ngOnInit();
     }
   }
