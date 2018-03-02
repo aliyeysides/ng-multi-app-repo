@@ -34,7 +34,7 @@
     visibility: hidden;
   }
   .search__dropdown {
-    top:78px;
+    top:76px;
   }
 }
 
@@ -96,9 +96,10 @@
   border-radius: 0;
   background-color: rgba(255,255,255,0.95);
   height: 80vh;
+  max-height: 602px;
   overflow-y: scroll;
   border-radius: 8px;
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,.15), 0 2px 2px 0 rgba(0,0,0,.15), 0 4px 20px 0 rgba(0,0,0,.25);
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.15), 0 2px 2px 0 rgba(0,0,0,.05), 0 4px 20px 0 rgba(0,0,0,.15);
 
 
   .search__entry {
