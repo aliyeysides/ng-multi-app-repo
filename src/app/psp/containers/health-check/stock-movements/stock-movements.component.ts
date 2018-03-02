@@ -307,6 +307,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   selectToggleOption(fn: FilterFunc, label: string) {
+    if (this.collapse == 'closed') this.collapse = 'opened';
     this.selectedToggleOption$.next(fn);
     this.updateData();
     gtag('event', 'stock_movements_filter_clicked', {
