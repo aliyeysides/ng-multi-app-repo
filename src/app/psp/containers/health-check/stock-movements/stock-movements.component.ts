@@ -111,8 +111,8 @@ interface FilterFunc {
                       <p class="text-left col-header--per-chg">% CHANGE</p>
                     </div>
                   </li>
-                  <mat-expansion-panel [disabled]="stock.arcColor==2"
-                      *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
+                  <mat-expansion-panel [disabled]="stock.arcColor==2" [expanded]="false"
+                      *ngFor="let stock of (selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData); trackBy: trackStock"
                       class="row no-gutters list-item__mover justify-content-center">
                       <mat-expansion-panel-header>
                     <div class="col-4 col-sm-2 col-lg-2 col-xl-2 mover__stock">
@@ -405,6 +405,10 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
 
   emitRemoveStock(ticker: string) {
     this.removeStockClicked.emit(ticker);
+  }
+
+  trackStock(idx, stock) {
+    return stock ? stock.symbol : undefined;
   }
 
 }
