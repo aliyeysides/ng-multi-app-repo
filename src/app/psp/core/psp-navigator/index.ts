@@ -2,12 +2,13 @@ import {NgModule} from '@angular/core';
 import {PspNavigatorComponent} from './psp-navigator.component';
 import {SharedModule} from '../../../shared/index';
 import {DatePipe} from '@angular/common';
-import {HealthCheckService} from '../../../services/health-check.service';
 import {OrderByPipe} from '../../../shared/pipes/order-by.pipe';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   imports: [
-    SharedModule
+    SharedModule,
+    MatButtonModule,
   ],
   exports: [PspNavigatorComponent],
   declarations: [PspNavigatorComponent],

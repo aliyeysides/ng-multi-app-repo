@@ -5,6 +5,7 @@ import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {Router} from '@angular/router';
+import {expandHeight} from '../../../../shared/animations/expandHeight';
 
 declare var gtag: Function;
 
@@ -30,7 +31,7 @@ declare var gtag: Function;
           </div>
         </div> 
 
-        <div *ngIf="!collapse" class="row">
+        <div [@expandHeight]="collapse" class="row">
 
           <div class="col-12 col-md-6">
             <div class="row" style="min-height:10px;">
@@ -128,11 +129,11 @@ declare var gtag: Function;
         </div>
 
         <div class="row">
-          <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+          <div *ngIf="collapse!='closed'" (click)="collapse = 'closed'" class="col-12 expand-collapse">
             <img src="./assets/imgs/ux__collapse--circle.svg">
             <p>Collapse</p>
           </div>
-          <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+          <div *ngIf="collapse!='opened'" (click)="collapse = 'opened'" class="col-12 expand-collapse">
             <img src="./assets/imgs/ux__expand--dots.svg">
             <p>Expand for detail</p>
           </div>
@@ -141,7 +142,8 @@ declare var gtag: Function;
       </div>
     </div>
   `,
-  styleUrls: ['../health-check.component.scss']
+  styleUrls: ['../health-check.component.scss'],
+  animations: [expandHeight()]
 })
 export class RatingChangesComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -158,7 +160,7 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
 
   bearishAlerts: Array<object> = [];
   bullishAlerts: Array<object> = [];
-  collapse: boolean = true;
+  collapse: string = 'closed';
   portUp: boolean;
 
   constructor(private signalService: SignalService,
@@ -186,14 +188,6 @@ export class RatingChangesComponent implements OnInit, OnDestroy {
 
   appendPGRImage(pgr, raw_pgr) {
     return this.signalService.appendPGRImage(pgr, raw_pgr);
-  }
-
-  toggleCollapse() {
-    this.collapse = !this.collapse;
-    gtag('event', 'rating_changes_collapse_clicked', {
-      'event_category': 'engagement',
-      'event_label': this.collapse
-    });
   }
 
   gotoReport(ticker: string) {

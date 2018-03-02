@@ -14,7 +14,7 @@ import {OrderByPipe} from '../../../shared/pipes/order-by.pipe';
       <li (click)="closeNav($event)" *ngFor="let route of routes"
           [ngClass]="{active: currentRoute?.slice(0,10) === route.link.slice(0,10) }"
           routerLink="{{ route.link }}">
-        <a class="nav--toplevel"><i class="{{ route.klass }}" aria-hidden="true"></i> &nbsp;{{ route.label }}</a>
+        <a mat-button class="nav--toplevel"><i class="{{ route.klass }}" aria-hidden="true"></i> &nbsp;{{ route.label }}</a>
       </li>
     </ul>
   `,
