@@ -63,7 +63,7 @@ declare var gtag: Function;
     <div class="col-12 section__list" id="list--selected">
       <ul class="stock__list" *ngIf="myStocks?.length">
         <li (click)="selectStock(stock.symbol)"
-            *ngFor="let stock of myStocks | orderBy:orderByObject?.field:orderByObject?.ascending "
+            *ngFor="let stock of myStocks | orderBy:orderByObject?.field:orderByObject?.ascending; trackBy: trackStock"
             class="row list__entry">
           <div class="col-3 list-entry__pgr">
             <img class="align-absolute" src="{{ appendPGRImage(stock.PGR, stock.raw_PGR) }}">
@@ -295,6 +295,10 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
     gtag('event', 'list_switched', {
       'event_label': this.selectedListName
     });
+  }
+
+  trackStock(idx, stock) {
+    return stock ? stock.symbol : undefined;
   }
 
 }
