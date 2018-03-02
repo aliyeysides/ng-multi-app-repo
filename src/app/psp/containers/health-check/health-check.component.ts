@@ -3,6 +3,8 @@ import {HealthCheckService} from '../../../services/health-check.service';
 import {AuthService} from '../../../services/auth.service';
 
 import * as moment from 'moment';
+declare var gtag: Function;
+
 import {
   EarningsAnalystRevisions,
   EarningsReportSurprises, ExpectedEarningsReports, ListSymbolObj, PGRChanges, PHCGridData, PortfolioStatus,
@@ -13,6 +15,8 @@ import {Observable} from 'rxjs/Observable';
 import {MarketsSummaryService} from '../../../services/markets-summary.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
+import {IdeasService} from '../../../services/ideas.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'cpt-health-check',
@@ -28,6 +32,7 @@ import {Subscription} from 'rxjs/Subscription';
 
         <!-- HEALTH-CHECK - Stock Movements -->
         <cpt-psp-stock-movements [calc]="calculations" [weeklyStocks]="stocksStatus"
+                                 (removeStockClicked)="removeStock($event)"
                                  [dailyStocks]="dailySymbolList" class="col-12 col-lg-10 HC-panel__padding"></cpt-psp-stock-movements>
 
         <!-- HEALTH-CHECK - Ratings Changes -->
@@ -84,6 +89,8 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
   public currentList: string;
 
   constructor(private authService: AuthService,
+              public snackBar: MatSnackBar,
+              private ideasService: IdeasService,
               private healthCheck: HealthCheckService,
               private marketsSummary: MarketsSummaryService) {
   }
@@ -201,7 +208,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
 
   loadDailyData() {
     const lastWeekStart = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
-    lastWeekEnd = moment(lastWeekStart).add(7, 'days').format('YYYY-MM-DD');
+      lastWeekEnd = moment(lastWeekStart).add(7, 'days').format('YYYY-MM-DD');
     Observable.timer(0, 30 * 1000)
       .switchMap(() => {
         return Observable.combineLatest(
@@ -227,6 +234,37 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
         }));
         this.dailySymbolList = this.dailySymbolList.slice(0); // hack to bypass dirty checking for non-primitives
       });
+  }
+
+  addStock(ticker: string) {
+    this.ideasService.addStockIntoList(this.listId.toString(), ticker)
+      .take(1)
+      .subscribe(res => this.updateData());
+    gtag('event', 'add_stock_clicked', {
+      'event_category': 'engagement',
+      'event_label': ticker
+    });
+  }
+
+  removeStock(ticker: string) {
+    this.ideasService.deleteSymbolFromList(this.listId, ticker)
+      .take(1)
+      .finally(() => this.openSnackBar(ticker))
+      .subscribe(res => this.updateData());
+
+    gtag('event', 'remove_stock_clicked', {
+      'event_category': 'engagement',
+      'event_label': ticker
+    });
+  }
+
+  openSnackBar(ticker: string) {
+    let snackBarRef = this.snackBar.open(ticker + ' removed', 'Undo', {
+      duration: 3000
+    });
+    snackBarRef.onAction().subscribe(() => {
+      this.addStock(ticker);
+    });
   }
 
 }

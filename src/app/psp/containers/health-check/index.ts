@@ -13,12 +13,14 @@ import {SharedModule} from '../../../shared/index';
 import {TooltipModule, BsDropdownModule} from 'ngx-bootstrap';
 import {MarketsSummaryService} from '../../../services/markets-summary.service';
 import {HealthCheckService} from '../../../services/health-check.service';
+
 import {
   MatExpansionModule,
   MatIconModule,
   MatMenuModule,
   MatButtonModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 @NgModule({
@@ -31,7 +33,8 @@ import {
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule
   ],
   exports: [HealthCheckComponent],
   declarations: [
