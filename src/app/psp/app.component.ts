@@ -48,7 +48,7 @@ declare let gtag: Function;
         <div class="col-2 col-lg-3 logo--desktop">
           <img src="assets/imgs/logo_powerpulse.svg">
         </div>
-        <div class="col-8 col-lg-7 col-xl-6 header__search">
+        <div class="col-8 col-lg-7 col-xl-6 header__search" id="desktop-search">
           <cpt-psp-navigator *ngIf="!searchOpened" class="desktop-nav"></cpt-psp-navigator>
           <cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
                                  *ngIf="searchOpened"></cpt-psp-symbol-search>

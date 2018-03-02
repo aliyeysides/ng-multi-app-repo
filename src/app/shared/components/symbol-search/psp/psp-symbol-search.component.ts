@@ -24,10 +24,12 @@ declare let gtag: Function;
         <mat-form-field>
           <input matInput #search (focusout)="toggleFocus()" (focus)="toggleFocus()" [formControl]="symbolSearchForm"
                  type="search"
-                 class="form-control search-box"
+                 class="search-box"
                  placeholder="{{ placeholder }}"
                  aria-describedby="basic-addon1">
-          <button type="submit"><i (click)="search.focus()" class="fa fa-search" aria-hidden="true"></i></button>
+          <button class="search-submit" type="submit">
+            <i (click)="search.focus()" class="fa fa-search" aria-hidden="true"></i>
+          </button>
         </mat-form-field>
       </div>
     </form>
