@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Output, EventEmitter, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ListSymbolObj, PortfolioStatus, StockStatus} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
@@ -111,9 +111,10 @@ interface FilterFunc {
                       <p class="text-left col-header--per-chg">% CHANGE</p>
                     </div>
                   </li>
-                  <li (click)="gotoReport(stock.symbol)"
+                  <mat-expansion-panel [disabled]="stock.arcColor==2"
                       *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
                       class="row no-gutters list-item__mover justify-content-center">
+                      <mat-expansion-panel-header>
                     <div class="col-4 col-sm-2 col-lg-2 col-xl-2 mover__stock">
                       <p class="ticker" [ngClass]="{'market': stock.arcColor==2}"><img *ngIf="stock.arcColor != 2"
                                              src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
@@ -127,7 +128,15 @@ interface FilterFunc {
                           }}%</p>
                       </div>
                     </div>
-                  </li>
+                    </mat-expansion-panel-header>
+                    <mat-action-row>
+                      {{ stock['companyName'] }}
+                      {{ stock['industry_name'] }}
+                      {{ stock['closePrice'] }}
+                      <button mat-raised-button color="warn" (click)="emitRemoveStock(stock.symbol)">Remove</button>
+                      <button mat-raised-button color="accent" (click)="gotoReport(stock.symbol)">Analyze</button>
+                    </mat-action-row>
+                  </mat-expansion-panel>
                 </ul>
               </div>
             </div>
@@ -157,6 +166,9 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   private _calc: BehaviorSubject<PortfolioStatus> = new BehaviorSubject<PortfolioStatus>({} as PortfolioStatus);
   private _weeklyStocks: BehaviorSubject<StockStatus[]> = new BehaviorSubject<StockStatus[]>({} as StockStatus[]);
   private _dailyStocks: BehaviorSubject<ListSymbolObj[]> = new BehaviorSubject<ListSymbolObj[]>({} as ListSymbolObj[]);
+
+  @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
+  @Output('removeStockClicked') removeStockClicked: EventEmitter<string> = new EventEmitter<string>();
 
   @Input('calc')
   set calc(val: PortfolioStatus) {
@@ -385,6 +397,14 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
       'event_category': 'engagement',
       'event_label': ticker
     });
+  }
+
+  emitAddStock(ticker: string) {
+    this.addStockClicked.emit(ticker);
+  }
+
+  emitRemoveStock(ticker: string) {
+    this.removeStockClicked.emit(ticker);
   }
 
 }
