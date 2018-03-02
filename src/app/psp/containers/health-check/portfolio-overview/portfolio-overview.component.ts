@@ -60,7 +60,7 @@ declare var gtag: Function;
           <button mat-icon-button class="align-absolute" (click)="getPHCReportforListId(listId)"><i class="fal fa-file-pdf"
                                                                               aria-hidden="true"></i></button>
         </div>
-        <div class="col-12 col-md-6 col-xl-6 powerbar flex-md-last">
+        <div class="col-12 col-md-6 col-xl-6 powerbar flex-md-last" id="powerbar">
           <button mat-raised-button (click)="setToggleOptions('Bulls')"
                [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
             <p>{{ prognosisData?.BullishSymbolsCount }}</p>
