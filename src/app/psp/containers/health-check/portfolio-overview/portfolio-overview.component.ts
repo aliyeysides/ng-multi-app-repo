@@ -61,17 +61,17 @@ declare var gtag: Function;
                                                                               aria-hidden="true"></i></button>
         </div>
         <div class="col-12 col-md-6 col-xl-6 powerbar flex-md-last">
-          <div (click)="setToggleOptions('Bulls')"
+          <button mat-raised-button (click)="setToggleOptions('Bulls')"
                [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
             <p>{{ prognosisData?.BullishSymbolsCount }}</p>
-          </div>
-          <div (click)="setToggleOptions('Neutral')" class="neutral">
+          </button>
+          <button mat-raised-button (click)="setToggleOptions('Neutral')" class="neutral">
             <p>{{ prognosisData?.NeutralSymbolsCount }}</p>
-          </div>
-          <div (click)="setToggleOptions('Bears')"
+          </button>
+          <button mat-raised-button (click)="setToggleOptions('Bears')"
                [ngClass]="{'bearish--more':prognosisData?.BearishSymbolsCount>prognosisData?.BullishSymbolsCount, 'bearish--less':prognosisData?.BearishSymbolsCount<prognosisData?.BullishSymbolsCount,'bearish--same':prognosisData?.BearishSymbolsCount==prognosisData?.BullishSymbolsCount}">
             <p>{{ prognosisData?.BearishSymbolsCount }}</p>
-          </div>
+          </button>
         </div>
         <div class="col-12 col-md-3 col-xl-2 align-self-center">
           <ng-template #toolTipTemp>

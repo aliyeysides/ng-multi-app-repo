@@ -9,6 +9,7 @@ import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
+import {expandHeight} from '../../../../shared/animations/expandHeight';
 
 declare var gtag: Function;
 
@@ -42,7 +43,7 @@ interface EarningsReportObj {
           </div>
         </div>
 
-        <div *ngIf="!collapse" class="row justify-content-center">
+        <div [@expandHeight]="collapse" class="row justify-content-center">
 
           <div class="col-12 col-sm-8 col-md-6 col-xl-4">
             <div class="row justify-content-center" style="min-height:10px;">
@@ -148,11 +149,11 @@ interface EarningsReportObj {
         </div>
 
         <div class="row">
-          <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+          <div *ngIf="collapse!='closed'" (click)="collapse = 'closed'" class="col-12 expand-collapse">
             <img src="./assets/imgs/ux__collapse--circle.svg">
             <p>Collapse</p>
           </div>
-          <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+          <div *ngIf="collapse!='opened'" (click)="collapse = 'opened'" class="col-12 expand-collapse">
             <img src="./assets/imgs/ux__expand--dots.svg">
             <p>Expand for detail</p>
           </div>
@@ -161,7 +162,8 @@ interface EarningsReportObj {
       </div>
     </div>
   `,
-  styleUrls: ['../health-check.component.scss']
+  styleUrls: ['../health-check.component.scss'],
+  animations: [expandHeight()]
 })
 export class EarningsReportComponent implements OnInit, OnDestroy {
   private _ngUnsubsribe: Subject<void> = new Subject<void>();
@@ -173,7 +175,7 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
 
   public upCount: number = 0;
   public downCount: number = 0;
-  public collapse: boolean = true;
+  public collapse: string = 'closed';
   public portUp: boolean;
 
   @Input('surprises')
@@ -228,14 +230,6 @@ export class EarningsReportComponent implements OnInit, OnDestroy {
 
   appendPGRImage(pgr, raw_pgr) {
     return this.signalService.appendPGRImage(pgr, raw_pgr);
-  }
-
-  toggleCollapse() {
-    this.collapse = !this.collapse;
-    gtag('event', 'earnings_report_collapsed_clicked', {
-      'event_category': 'engagement',
-      'event_label': this.collapse
-    });
   }
 
   gotoReport(ticker: string) {

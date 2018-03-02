@@ -4,6 +4,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {Router} from '@angular/router';
+import {expandHeight} from '../../../../shared/animations/expandHeight';
 
 declare var gtag: Function;
 
@@ -23,7 +24,7 @@ declare var gtag: Function;
           </div>
         </div>
 
-        <div *ngIf="!collapse" class="container-fluid">
+        <div [@expandHeight]="collapse" class="container-fluid">
 
           <div class="row">
             <div class="col-12 powergrid__container hidden-xs-down">
@@ -235,11 +236,11 @@ declare var gtag: Function;
           </div>
         </div>
         <div class="row">
-          <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+          <div *ngIf="collapse!='closed'" (click)="collapse = 'closed'" class="col-12 expand-collapse">
             <img src="./assets/imgs/ux__collapse--circle.svg">
             <p>Collapse</p>
           </div>
-          <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
+          <div *ngIf="collapse!='opened'" (click)="collapse = 'opened'" class="col-12 expand-collapse">
             <img src="./assets/imgs/ux__expand--dots.svg">
             <p>Expand for detail</p>
           </div>
@@ -247,7 +248,8 @@ declare var gtag: Function;
       </div>
     </div>
   `,
-  styleUrls: ['../health-check.component.scss']
+  styleUrls: ['../health-check.component.scss'],
+  animations: [expandHeight()]
 })
 export class PowerGridComponent implements OnInit, OnDestroy {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -266,7 +268,7 @@ export class PowerGridComponent implements OnInit, OnDestroy {
   neutralIndustries: Array<PHCIndustryData> = [];
   weakIndustries: Array<PHCIndustryData>;
   portUp: boolean;
-  collapse: boolean = false;
+  collapse: string = 'opened';
   rows: Array<number> = new Array(7);
   neutralRows: Array<number> = new Array(2);
   objectKeys = Object.keys;
@@ -303,14 +305,6 @@ export class PowerGridComponent implements OnInit, OnDestroy {
 
   isWeakStock(arr: Array<object>): Array<object> {
     return arr.filter(x => Object.values(x)[0] < 50);
-  }
-
-  toggleCollapse() {
-    this.collapse = !this.collapse;
-    gtag('event', 'powergrid_collapse_clicked', {
-      'event_category': 'engagement',
-      'event_label': this.collapse
-    });
   }
 
   gotoReport(ticker: string) {
