@@ -1,60 +1,80 @@
 @import 'variables';
 
 
+#desktop-search {
+  .form-inline {
+    position: relative;
+    height: 24px;
+
+    .search-box {
+      height: 60px;
+      font-size: 32px;
+      padding: 0px 15px;
+      border-radius: 10px;
+      background-color: rgba(255,255,255,1);
+      color: #484848;
+      position: absolute;
+      top:0px;
+      box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,0.18);
+    }
+    .search-submit {
+      display: block;
+      width: 60px;
+      height: 60px;
+      margin: 0px;
+      position: absolute;
+      top: 0;
+      right: 0px;
+      font-size: 30px;
+      opacity: 0.2;
+      cursor: default;
+    }
+  }
+  label {
+    visibility: hidden;
+  }
+  .search__dropdown {
+    top:76px;
+  }
+}
+
 
 .form-inline {
+  height: 47px;
+
   .form-group {
     width: 100%;
-    height: 100%;
-
-    .form-control {
-      width: 100%;
-      font-weight: 400;
-      background-color: #ffffff;
-
-      &:focus {
-        border-color: transparent;
-        outline: 0;
-        box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0), 0 0 0px rgba(0, 0, 0, 0);
-        border-bottom: 0px solid #1199ff;
-      }
-    }
 
     button {
-      display: none;
     }
 
     .search-box {
-        font-family: "Rajdhani", sans-serif;
-        width: 100%;
-        height: 45px;
-        font-size: 32px;
-        text-align: left;
-        padding: 0px 15px;
-        border: 0;
-        border-radius: 0px;
-        outline: none;
-        border-bottom: 0px solid #f8f8f8;
-        background-color: rgba(255,255,255,1);
-        color: #484848;
+      font-family: "Rajdhani", sans-serif;
+      width: 100%;
+      height: 47px;
+      font-size: 32px;
+      text-align: left;
+      padding: 0px 15px;
+      font-weight: 600;
+      border: 0;
+      border-radius: 0px;
+      outline: none;
+      border-bottom: 0px;
+      background-color: rgba(255,255,255,1);
+      color: #484848;
+      box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.125);
     }
 
     .search-submit {
-      width: 60px;
-      height: 50px;
+      display: none;
+      width: 30px;
+      height: 30px;
       margin: 0px;
-      position: relative;
-
-      svg {
-        width: 26px;
-        height: 26px;
-        shape-rendering: optimizeQuality;
-      }
-
-      svg g {
-        fill: #ffffff;
-        shape-rendering: optimizeQuality;
-      }
+      position: absolute;
+      top: 0;
+      right: 0px;
+      font-size: 26px;
+      opacity: 0.2;
     }
   }
 }
@@ -68,14 +88,19 @@
 
 .search__dropdown {
   position: absolute;
-  top: 47px;
+  top:49px;
   z-index: 1003;
   width: 100%;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
   border-radius: 0;
-  background-color: rgba(255,255,255,0.667);
-  height: 100vh;
+  background-color: rgba(255,255,255,0.95);
+  height: 80vh;
+  max-height: 602px;
+  overflow-y: scroll;
+  border-radius: 8px;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.15), 0 2px 2px 0 rgba(0,0,0,.05), 0 4px 20px 0 rgba(0,0,0,.15);
+
 
   .search__entry {
     height: 60px;
@@ -84,7 +109,7 @@
     padding:0 15px;
 
     .company-name {
-      font-weight: 400;
+      font-weight: 600;
       font-size: 20px;
       color: $font-color;
       line-height: 60px;
@@ -94,7 +119,7 @@
     }
 
     .company-ticker {
-      font-weight: 700;
+      font-weight: 800;
       font-size: 28px;
       line-height: 60px;
       color: $font-color;
@@ -104,47 +129,55 @@
       opacity: 1;
       position: relative;
 
-      svg, img {
-        width: 24px;
-        height: 24px;
-      }
+      p {
+        float: right;
+        text-align: left;
+        color: $font-color;
+        font-size: 15px;
+        line-height: 40px;
+        text-transform: uppercase;
+        font-weight: 600;
+        width: 100%;
+        display: block;
+        cursor: pointer;
 
-      svg g {
-        fill: $link-grey;
+        i {
+          display: inline-block;
+          opacity: 0.7;
+          font-size: 28px;
+          vertical-align: middle;
+        }
       }
 
       &:hover {
-        opacity: 1;
+        p {
+          i {
+            opacity: 1;
+          }
+        }
       }
     }
 
     &:hover {
-      background-color: $link-blue;
-
-      .company-name {
-        color: #ffffff;
-      }
-
-      svg g {
-        fill: #ffffff;
-      }
-
-      .company-ticker {
-        color: #ffffff;
-      }
+      background-color: rgba(0,0,0,0.125);
     }
 
   }
 
   .search--match {
-    background-color: rgba(17, 153, 255, 0.8);
+    background-color: rgba(17, 153, 255, 1);
 
     .company-name {
       color: #ffffff;
     }
 
-    svg g {
-      fill: #ffffff !important;
+    .search__action {
+      p {
+        color: #ffffff;
+        i {
+          color: #ffffff;
+        }
+      }
     }
 
     .search__company {
@@ -152,6 +185,10 @@
       .company-ticker {
         color: #ffffff;
       }
+    }
+
+    &:hover {
+      background-color: rgba(17, 153, 255, 1);
     }
   }
 
