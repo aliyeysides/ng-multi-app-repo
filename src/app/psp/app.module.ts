@@ -43,7 +43,7 @@ import {AuthInterceptor} from '../shared/inteceptors/auth.inteceptor';
     PspOnboardingModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
     MatProgressSpinnerModule,
-    // BusyModule.forRoot(loadingMaskConfig3),
+    BusyModule.forRoot(loadingMaskConfig3),
     ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES,
   ],
