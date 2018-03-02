@@ -115,7 +115,7 @@ interface FilterFunc {
                       *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
                       class="row no-gutters list-item__mover justify-content-center">
                     <div class="col-4 col-sm-2 col-lg-2 col-xl-2 mover__stock">
-                      <p class="ticker"><img *ngIf="stock.arcColor != 2"
+                      <p class="ticker" [ngClass]="{'market': stock.arcColor==2}"><img *ngIf="stock.arcColor != 2"
                                              src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
                         {{ stock.symbol }}</p>
                     </div>
