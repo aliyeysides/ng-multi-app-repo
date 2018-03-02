@@ -57,7 +57,7 @@ declare var gtag: Function;
 
       <div class="row justify-content-center overview__powerbar">
         <div tooltip="Download Report PDF" placement="left" class="button--pdf">
-          <button class="align-absolute" (click)="getPHCReportforListId(listId)"><i class="fal fa-file-pdf"
+          <button mat-icon-button class="align-absolute" (click)="getPHCReportforListId(listId)"><i class="fal fa-file-pdf"
                                                                               aria-hidden="true"></i></button>
         </div>
         <div class="col-12 col-md-6 col-xl-6 powerbar flex-md-last">

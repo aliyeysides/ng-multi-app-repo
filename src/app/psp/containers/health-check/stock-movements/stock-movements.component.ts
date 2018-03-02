@@ -70,24 +70,30 @@ interface FilterFunc {
               <div class="col-12">
                 <p class="label">SHOWING:</p>
                 <div class="btn-group" dropdown [autoClose]="true">
-                  <button dropdownToggle type="button" class="btn btn-primary">
+                
+                  <button class="btn btn-primary dropdown-toggle" mat-icon-button [matMenuTriggerFor]="appMenu">
                     {{ currentToggleOptionText$ | async }}
                   </button>
-                  <ul *dropdownMenu class="dropdown-menu" role="menu">
-                    <li (click)="selectToggleOption(toggleOptions.movers, 'Top Movers');" role="menuitem"><a
-                      class="dropdown-item">Top Movers</a></li>
-                    <li (click)="selectToggleOption(toggleOptions.all, 'All Stocks');" role="menuitem"><a
-                      class="dropdown-item">All Stocks</a></li>
-                    <li (click)="selectToggleOption(toggleOptions.bulls, 'Bulls')" role="menuitem"><a
-                      class="dropdown-item">Bulls</a>
-                    </li>
-                    <li (click)="selectToggleOption(toggleOptions.bears, 'Bears')" role="menuitem"><a
-                      class="dropdown-item">Bears</a>
-                    </li>
-                    <li (click)="selectToggleOption(toggleOptions.neutral, 'Neutral')" role="menuitem"><a
-                      class="dropdown-item">Neutral</a>
-                    </li>
-                  </ul>
+      
+                  <mat-menu #appMenu="matMenu">
+                    <button mat-menu-item class="label">Sort By:</button>
+                    <button mat-menu-item (click)="selectToggleOption(toggleOptions.movers, 'Top Movers');" role="menuitem">
+                      <a class="dropdown-item">Top Movers</a>
+                    </button>
+                    <button mat-menu-item (click)="selectToggleOption(toggleOptions.all, 'All Stocks');" role="menuitem">
+                      <a class="dropdown-item">All Stocks</a>
+                    </button>
+                    <button mat-menu-item (click)="selectToggleOption(toggleOptions.bulls, 'Bulls');" role="menuitem">
+                      <a class="dropdown-item">Bulls</a>
+                    </button>
+                    <button mat-menu-item (click)="selectToggleOption(toggleOptions.bears, 'Bears');" role="menuitem">
+                      <a class="dropdown-item">Bears</a>
+                    </button>
+                    <button mat-menu-item (click)="selectToggleOption(toggleOptions.neutral, 'Neutral');" role="menuitem">
+                      <a class="dropdown-item">Neutral</a>
+                    </button>
+                  </mat-menu>
+                  
                 </div>
               </div>
             </div>
@@ -372,7 +378,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   gotoReport(ticker: string) {
-    if (ticker === 'S&P 500') return;
+    if (ticker === 'S&P 500' || this.collapse == 'closed') return;
     this.router.navigate(['stock-analysis', ticker]);
     gtag('event', 'stock_clicked', {
       'event_category': 'engagement',
