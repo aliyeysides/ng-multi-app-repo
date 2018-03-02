@@ -48,7 +48,7 @@
       	}
 
 		.btn-group {
-			margin-top: 10px;
+			margin-top: 7px;
 			margin-bottom: 2px;
 			cursor: pointer;
 			z-index: 20;
@@ -223,7 +223,7 @@
 		      	color:#ffffff;
 		      	font-weight: 600;
 		      	font-size: 28px;
-		      	line-height: 41px;
+		      	line-height: 40px;
 		      	white-space: nowrap;
 		    	cursor: pointer;
 		    }
@@ -293,6 +293,15 @@
 		      	box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
 	        }
 	  	}
+	  	#powerbar {
+	  		button {
+	  			outline:0;
+	  			overflow: hidden;
+	  		}
+	  		.mat-raised-button, .mat-button {
+	  			min-width: 30px;
+	  		}
+	  	}
 	}
 }
 .section--overview--green {
@@ -321,12 +330,12 @@
 		margin-top:40px;
 
 		.section__toggle {
-			margin-top:-25px;
+			margin-top:-19px;
 		}
 	}
 
 	h2 {
-		margin-top:25px;
+		margin-top:35px;
 	}
 
 	.label {
@@ -340,69 +349,83 @@
   		color:$font-color--mid;
   		margin-top: 0px;
   	}
-
-	.btn-group {
-		margin: 5px 0;
-		cursor: pointer;
-		position: relative;
+  	.btn-group {
+  		position: relative;
+  		margin-top: 8px;
 
 		.btn-primary {
-			min-width: 200px;
-			font-weight: 600;
-		    text-align: center;
-		    border: $line--button;
-		    padding: 9px 50px 6px 20px;
-		    font-size: 26px;
-		    border-radius: 40px;
-		    cursor: pointer;
-	  		background-color: $font-color;
-		    border-color: #ffffff;
-		    font-size: 25px;
-		    line-height: 1;
-			color: #FFFFFF;
+			text-align: center;
+			height:50px;
+		    border: 0;
+		    padding: 0px 40px 0px 6px;
+		    border-radius: 8px;
+		    border-bottom:0px;
+			cursor: pointer;
+	  		background-color: transparent;
+		    font-size: 28px;
+		    line-height: 50px;
+			color: $font-color;
+			box-shadow: inset 0 0px 20px 2px rgba(0, 0, 0, 0.1);
+			z-index: 20;
+		    font-weight: 600;
 
-			box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
-			z-index: 10;
-
-			&:after {
-				font-family: "Font Awesome 5 Pro";
-			    content: "\f13a ";
-			    display: inline-block;
-			    position: absolute;
-			    right: 6px;
-			    top: 7px;
-			    color:#ffffff;
-			    z-index: 20;
-			    font-size: 28px;
-			    font-weight: 300;
+		    &:hover {
+		    	box-shadow: inset 0 0px 20px 2px rgba(0, 0, 0, 0.25);
+		    	//background-color: rgba(255,255,255,0.0625);
 		    }
 		}
-	}
-	.dropdown-menu {
-	    position: absolute;
-	    cursor: pointer;
-	    z-index: 5;
-	    float: left;
-	    min-width: 100%;
-	    padding: 40px 0 5px;
-	    margin: -40px 0 0;
-	    font-size: 24px;
-	    color: $font-color;
-	    width: 100%;
-	    min-width: 200px;
-	    text-align: center;
-	    list-style: none;
-	    background-color: rgba(255,255,255, 0.92);
-	    background-clip: padding-box;
-	    border: 2px solid #ffffff;
-	    border-top:0px;
-	    border-radius: 20px;
-		box-shadow: 0 6px 40px rgba(50, 50, 50, 0.25);
+		.dropdown-toggle {
+			min-width: 200px;
 
-		.dropdown-item {
-			font-weight: 600;
+		    &:after {
+				content: none;
+		    }
+		}
+		&:after {
+		    font-family: "Font Awesome 5 Pro";
+		    content: "\f078 ";
+		    display: inline-block;
+		    position: absolute;
+		    right: 11px;
+		    top: 7px;
+		    color:$font-color;
+		    font-size: 26px;
+		    vertical-align: middle;
+		    font-weight: 500;
+		    opacity:0.5;
+		}
+		&:hover {
+			&:after {
+			    opacity:1;
+			}
+		}
+		.dropdown-menu {
+		    position: absolute;
+		    cursor: pointer;
+		    z-index: 5;
+		    float: left;
+		    min-width: 100%;
+		    padding: 40px 0 5px;
+		    margin: -40px 0 0;
+		    font-size: 24px;
+		    color: $font-color;
+		    width: 100%;
+		    min-width: 200px;
+		    text-align: center;
+		    list-style: none;
+		    background-color: rgba(255,255,255, 0.92);
+		    background-clip: padding-box;
+		    border: 2px solid #ffffff;
+		    border-top:0px;
+		    border-radius: 20px;
+			box-shadow: 0 6px 40px rgba(50, 50, 50, 0.25);
+
+			.dropdown-item {
+				font-weight: 600;
+			}
 		}
 	}
+
 	.section__chart {
 		margin: 10px 0;
 
@@ -434,6 +457,8 @@
 	  	border-radius: 10px;
 	  }
 	}
+
+
 
 	.mover__stock {
 		cursor: pointer;

@@ -3,6 +3,46 @@
 @import '../../../node_modules/bootstrap/scss/bootstrap';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+#movement-timespan {
+  .mat-tab-header, .mat-tab-nav-bar {
+      border-bottom: 0px solid rgba(0,0,0,0);
+      margin:0 auto;
+  }
+  .mat-tab-label-content {
+     font-family: $font-stack;
+  }
+  .mat-tab-label {
+    height: 36px;
+    line-height: 36px;
+    padding: 0 20px;
+    cursor: pointer;
+    box-sizing: border-box;
+    opacity: 1;
+    min-width: 100px;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    white-space: nowrap;
+    position: relative;
+    border:1px solid #ddd;
+    font-weight: 600;
+    color: $font-color--mid;
+  }
+  .mat-tab-label-active {
+    background-color: #484848;
+    color: #fff;
+    border:0px solid #ddd;
+  }
+  #mat-tab-label-0-1 {
+    border-radius: 0px 20px 20px 0px;
+  }
+  #mat-tab-label-0-0 {
+    border-radius: 20px 0px 0px 20px; 
+  }
+}
+
 
 
 .mat-menu-panel {

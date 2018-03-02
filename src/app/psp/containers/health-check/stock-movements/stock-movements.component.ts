@@ -30,7 +30,7 @@ interface FilterFunc {
         <div class="row">
           <div class="col-12">
 
-            <div class="row section__toggle">
+            <div class="row section__toggle" id="movement-timespan">
               <mat-tab-group (selectedTabChange)="selectTimespan($event)" class="col-12 toggle toggle--timespan">
                 <mat-tab label="TODAY"
                          [ngClass]="{'selected':this.selectedTimespan==='TODAY'}"
