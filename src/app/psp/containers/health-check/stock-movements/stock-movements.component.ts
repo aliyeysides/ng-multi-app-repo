@@ -43,7 +43,7 @@ interface FilterFunc {
 
             <div class="add-stock">
               <button mat-icon-button class="button--add" tooltip="Add a stock" placement="bottom">
-                <img class="align-absolute" src="./assets/imgs/ux__plus--circle.svg">
+                <i class="fas fa-plus align-absolute"></i>
               </button>
             </div>
 
@@ -101,7 +101,7 @@ interface FilterFunc {
 
           <div class="col-12">
             <div [@expandHeight]="collapse" class="row">
-              <div class="col-12" style="padding: 0 8px;">
+              <div class="col-12" id="mover-wrapper">
                 <ul class="section__chart">
                   <li class="row no-gutters col-headers justify-content-center">
                     <div class="col-4 col-sm-2 col-xl-2">
