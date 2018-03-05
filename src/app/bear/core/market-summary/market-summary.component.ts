@@ -55,7 +55,6 @@ export interface MarketData {
         </span>
       </p>
       <div class="market-summary__title">
-<!--         <h4>Markets</h4> -->
         <p class="current-time"><sup>*</sup>As of {{ currentTime }}</p>
       </div>
     </div>

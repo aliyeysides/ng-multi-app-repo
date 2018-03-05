@@ -19,6 +19,7 @@ declare let gtag: Function;
   styleUrls: ['./app.component.scss'],
   template: `
     <!-- PANEL HEADER - Fixed to the top of each panel-->
+      <cpt-market-summary></cpt-market-summary>
 
     <div class="page__header"
          [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}"
@@ -50,8 +51,7 @@ declare let gtag: Function;
         </div>
         <div class="col-8 col-lg-7 col-xl-6 header__search" >
           <cpt-psp-navigator *ngIf="!searchOpened" class="desktop-nav" id="desktop-nav__wrapper"></cpt-psp-navigator>
-          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
-                                 *ngIf="searchOpened"></cpt-psp-symbol-search>
+          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search'"></cpt-psp-symbol-search>
         </div>
         <div class="col-2 col-lg-2 col-xl-3">
           <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--left"

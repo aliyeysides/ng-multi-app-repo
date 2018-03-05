@@ -6,6 +6,7 @@ import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {Router} from '@angular/router';
 import {expandHeight} from '../../../../shared/animations/expandHeight';
+import {SymbolSearchService} from '../../../../services/symbol-search.service';
 
 declare var gtag: Function;
 
@@ -42,7 +43,7 @@ interface FilterFunc {
             </div>
 
             <div class="add-stock">
-              <button mat-icon-button class="button--add" tooltip="Add a stock" placement="bottom">
+              <button (click)="emitAddStock()" mat-icon-button class="button--add" tooltip="Add a stock" placement="bottom">
                 <i class="fas fa-plus align-absolute"></i>
               </button>
             </div>
@@ -111,6 +112,7 @@ interface FilterFunc {
                       <p class="text-left col-header--per-chg">% CHANGE</p>
                     </div>
                   </li>
+                  <mat-accordion [multi]="false">
                   <mat-expansion-panel [disabled]="stock.arcColor==2" [expanded]="false"
                       *ngFor="let stock of (selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData); trackBy: trackStock"
                       class="row no-gutters list-item__mover justify-content-center">
@@ -133,13 +135,14 @@ interface FilterFunc {
                       <p class="details">
                         <span class="company">{{ stock['companyName'] }}</span>
                         <span class="industry hidden-md-down">{{ stock['industry_name'] }}</span>
-                        <span class="prices hidden-md-down">{{ stock['closePrice'] }}</span>
+                        <span class="prices hidden-md-down">{{ stock['closePrice'] | decimal }}</span>
                       </p>
                       <button class="remove" mat-raised-button (click)="emitRemoveStock(stock.symbol)"><i class="fas fa-times"></i></button>
                       <button class="analyze" mat-raised-button (click)="gotoReport(stock.symbol)"><i class="fas fa-chart-pie"></i></button>
                       
                     </mat-action-row>
                   </mat-expansion-panel>
+                  </mat-accordion>
                 </ul>
               </div>
             </div>
@@ -242,13 +245,12 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   collapse: string = 'opened';
 
   constructor(private signalService: SignalService,
+              private searchService: SymbolSearchService,
               private healthCheck: HealthCheckService,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.updateData();
-
     this.healthCheck.getToggleOptions()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
