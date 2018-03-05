@@ -43,7 +43,7 @@ interface FilterFunc {
 
             <div class="add-stock">
               <button mat-icon-button class="button--add" tooltip="Add a stock" placement="bottom">
-                <img class="align-absolute" src="./assets/imgs/ux__plus--circle.svg">
+                <i class="fas fa-plus align-absolute"></i>
               </button>
             </div>
 
@@ -101,7 +101,7 @@ interface FilterFunc {
 
           <div class="col-12">
             <div [@expandHeight]="collapse" class="row">
-              <div class="col-12" style="padding: 0 8px;">
+              <div class="col-12" id="mover-wrapper">
                 <ul class="section__chart">
                   <li class="row no-gutters col-headers justify-content-center">
                     <div class="col-4 col-sm-2 col-xl-2">
@@ -130,11 +130,14 @@ interface FilterFunc {
                     </div>
                     </mat-expansion-panel-header>
                     <mat-action-row>
-                      {{ stock['companyName'] }}
-                      {{ stock['industry_name'] }}
-                      {{ stock['closePrice'] }}
-                      <button mat-raised-button color="warn" (click)="emitRemoveStock(stock.symbol)">Remove</button>
-                      <button mat-raised-button color="accent" (click)="gotoReport(stock.symbol)">Analyze</button>
+                      <p class="details">
+                        <span class="company">{{ stock['companyName'] }}</span>
+                        <span class="industry hidden-md-down">{{ stock['industry_name'] }}</span>
+                        <span class="prices hidden-md-down">{{ stock['closePrice'] }}</span>
+                      </p>
+                      <button class="remove" mat-raised-button (click)="emitRemoveStock(stock.symbol)"><i class="fas fa-times"></i></button>
+                      <button class="analyze" mat-raised-button (click)="gotoReport(stock.symbol)"><i class="fas fa-chart-pie"></i></button>
+                      
                     </mat-action-row>
                   </mat-expansion-panel>
                 </ul>
