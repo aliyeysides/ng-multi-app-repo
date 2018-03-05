@@ -31,6 +31,8 @@ import {HttpModule} from '@angular/http';
 import {AuthInterceptor} from '../shared/inteceptors/auth.inteceptor';
 import {MarketSummaryModule} from '../bear/core/market-summary';
 
+import {MatTooltipModule} from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent,

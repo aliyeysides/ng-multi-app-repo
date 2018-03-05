@@ -42,8 +42,8 @@ interface FilterFunc {
               </mat-tab-group>
             </div>
 
-            <div class="add-stock">
-              <button (click)="emitAddStock()" mat-icon-button class="button--add" tooltip="Add a stock" placement="bottom">
+            <div matTooltip="Add a stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="add-stock">
+              <button (click)="emitAddStock()" mat-icon-button class="button--add">
                 <i class="fas fa-plus align-absolute"></i>
               </button>
             </div>
@@ -137,9 +137,12 @@ interface FilterFunc {
                         <span class="industry hidden-md-down">{{ stock['industry_name'] }}</span>
                         <span class="prices hidden-md-down">{{ stock['closePrice'] | decimal }}</span>
                       </p>
-                      <button class="remove" mat-raised-button (click)="emitRemoveStock(stock.symbol)"><i class="fas fa-times"></i></button>
-                      <button class="analyze" mat-raised-button (click)="gotoReport(stock.symbol)"><i class="fas fa-chart-pie"></i></button>
-                      
+                      <span matTooltip="Remove stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500">
+                        <button class="remove" mat-raised-button (click)="emitRemoveStock(stock.symbol)"><i class="fas fa-times"></i></button>
+                      </span>
+                      <span matTooltip="Analyze stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500">
+                        <button class="analyze" mat-raised-button (click)="gotoReport(stock.symbol)"><i class="fas fa-chart-pie"></i></button>
+                      </span>
                     </mat-action-row>
                   </mat-expansion-panel>
                   </mat-accordion>
@@ -168,8 +171,12 @@ interface FilterFunc {
                         <span class="industry hidden-md-down">{{ stock['industry_name'] }}</span>
                         <span class="prices hidden-md-down">{{ stock['closePrice'] | decimal }}</span>
                       </p>
-                      <button class="remove" mat-raised-button (click)="emitRemoveStock(stock.symbol)"><i class="fas fa-times"></i></button>
-                      <button class="analyze" mat-raised-button (click)="gotoReport(stock.symbol)"><i class="fas fa-chart-pie"></i></button>
+                      <span matTooltip="Remove stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500">
+                        <button class="remove" mat-raised-button (click)="emitRemoveStock(stock.symbol)"><i class="fas fa-times"></i></button>
+                      </span>
+                      <span matTooltip="Analyze stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500">
+                        <button class="analyze" mat-raised-button (click)="gotoReport(stock.symbol)"><i class="fas fa-chart-pie"></i></button>
+                      </span>
                       
                     </mat-action-row>
                   </mat-expansion-panel>

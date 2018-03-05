@@ -19,12 +19,10 @@ declare let gtag: Function;
   styleUrls: ['./app.component.scss'],
   template: `
     <!-- PANEL HEADER - Fixed to the top of each panel-->
-      <cpt-market-summary></cpt-market-summary>
-
     <div class="page__header"
          [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}"
          id="page__header">
-
+         
       <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--left" id="header_button--left">
         <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
       </div>
@@ -45,6 +43,9 @@ declare let gtag: Function;
     </div>
 
     <div class="page__header--desktop">
+      <div class="row">
+        <cpt-market-summary></cpt-market-summary>
+      </div>
       <div class="row no-gutters">
         <div class="col-2 col-lg-3 logo--desktop">
           <img src="assets/imgs/logo_powerpulse.svg">
