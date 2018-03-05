@@ -29,6 +29,7 @@ import {HealthCheckService} from '../services/health-check.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import {AuthInterceptor} from '../shared/inteceptors/auth.inteceptor';
+import {MarketSummaryModule} from '../bear/core/market-summary';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {AuthInterceptor} from '../shared/inteceptors/auth.inteceptor';
     SharedModule,
     BrowserAnimationsModule,
     PspOnboardingModule,
+    MarketSummaryModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
     MatProgressSpinnerModule,
     // BusyModule.forRoot(loadingMaskConfig3),

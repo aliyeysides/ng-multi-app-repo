@@ -6,6 +6,7 @@ import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {Router} from '@angular/router';
 import {expandHeight} from '../../../../shared/animations/expandHeight';
+import {SymbolSearchService} from '../../../../services/symbol-search.service';
 
 declare var gtag: Function;
 
@@ -42,7 +43,7 @@ interface FilterFunc {
             </div>
 
             <div class="add-stock">
-              <button mat-icon-button class="button--add" tooltip="Add a stock" placement="bottom">
+              <button (click)="emitAddStock()" mat-icon-button class="button--add" tooltip="Add a stock" placement="bottom">
                 <i class="fas fa-plus align-absolute"></i>
               </button>
             </div>
@@ -244,13 +245,12 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   collapse: string = 'opened';
 
   constructor(private signalService: SignalService,
+              private searchService: SymbolSearchService,
               private healthCheck: HealthCheckService,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.updateData();
-
     this.healthCheck.getToggleOptions()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
