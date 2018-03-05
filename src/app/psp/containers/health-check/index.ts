@@ -20,7 +20,8 @@ import {
   MatMenuModule,
   MatButtonModule,
   MatTabsModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTooltipModule
 } from '@angular/material';
 
 @NgModule({
@@ -34,7 +35,8 @@ import {
     MatIconModule,
     MatButtonModule,
     MatTabsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   exports: [HealthCheckComponent],
   declarations: [
