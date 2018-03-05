@@ -387,7 +387,7 @@ sub {
     padding:15px 0 0px;
 
     ul {
-      padding:10px 20px;
+      padding:10px 15px;
       margin:0;
       border-top: 2px solid rgba(255,255,255,0.1);
 
@@ -401,6 +401,7 @@ sub {
           white-space: nowrap;
           font-size: 22px;
           cursor: pointer;
+          padding: 0px;
 
           i {
             color:#ffffff;
@@ -453,7 +454,7 @@ sub {
   }
 
   .logo {
-    padding:20px 20px 0 18px;
+    padding:20px 20px 0 15px;
     width: 280px;
 
     img {
@@ -700,8 +701,8 @@ sub {
 
   .add-stock {
     position: absolute;
-    right:15px;
-    top:-18px;
+    right:14px;
+    top:-19px;
     z-index: 10;
 
     button {
