@@ -111,6 +111,7 @@ interface FilterFunc {
                       <p class="text-left col-header--per-chg">% CHANGE</p>
                     </div>
                   </li>
+                  <mat-accordion [multi]="false">
                   <mat-expansion-panel [disabled]="stock.arcColor==2" [expanded]="false"
                       *ngFor="let stock of (selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData); trackBy: trackStock"
                       class="row no-gutters list-item__mover justify-content-center">
@@ -133,13 +134,14 @@ interface FilterFunc {
                       <p class="details">
                         <span class="company">{{ stock['companyName'] }}</span>
                         <span class="industry hidden-md-down">{{ stock['industry_name'] }}</span>
-                        <span class="prices hidden-md-down">{{ stock['closePrice'] }}</span>
+                        <span class="prices hidden-md-down">{{ stock['closePrice'] | decimal }}</span>
                       </p>
                       <button class="remove" mat-raised-button (click)="emitRemoveStock(stock.symbol)"><i class="fas fa-times"></i></button>
                       <button class="analyze" mat-raised-button (click)="gotoReport(stock.symbol)"><i class="fas fa-chart-pie"></i></button>
                       
                     </mat-action-row>
                   </mat-expansion-panel>
+                  </mat-accordion>
                 </ul>
               </div>
             </div>
