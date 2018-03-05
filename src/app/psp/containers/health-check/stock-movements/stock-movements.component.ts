@@ -6,7 +6,6 @@ import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {Router} from '@angular/router';
 import {expandHeight} from '../../../../shared/animations/expandHeight';
-import {SymbolSearchService} from '../../../../services/symbol-search.service';
 
 declare var gtag: Function;
 
@@ -43,7 +42,7 @@ interface FilterFunc {
             </div>
 
             <div matTooltip="Add a stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="add-stock">
-              <button (click)="emitAddStock()" mat-icon-button class="button--add">
+              <button mat-icon-button class="button--add">
                 <i class="fas fa-plus align-absolute"></i>
               </button>
             </div>
@@ -283,7 +282,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   collapse: string = 'opened';
 
   constructor(private signalService: SignalService,
-              private searchService: SymbolSearchService,
               private healthCheck: HealthCheckService,
               private router: Router) {
   }
