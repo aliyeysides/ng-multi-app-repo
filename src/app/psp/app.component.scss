@@ -559,7 +559,7 @@ sub {
 .page__header--desktop {
   position: fixed;
   width: 100%;
-  height: 45px;
+  height: 90px;
   color: #ffffff;
   z-index: 100;
   background: $background--dark;
@@ -569,16 +569,32 @@ sub {
     display: none;
   }
 
-  .logo--desktop {
-    display: relative;
+  .header--first {
+    background-color:#ffffff;
+    height: 45px;
 
-    img {
-      position: absolute;
-      height: 34px;
-      left:10px;
-      top:6px;
+    .logo--desktop {
+      display: relative;
+
+      img {
+        position: absolute;
+        height: 34px;
+        left:10px;
+        top:6px;
+      }
+    }
+
+    .header__markets {
+
     }
   }
+
+  .header--second {
+    height: 45px;
+    background: $background--dark;
+  }
+
+
 
   .header__button {
     position: absolute;

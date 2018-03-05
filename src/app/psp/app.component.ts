@@ -42,23 +42,27 @@ declare let gtag: Function;
       </div>
     </div>
 
-    <div class="page__header--desktop">
-      <div class="row">
-        <cpt-market-summary></cpt-market-summary>
-      </div>
-      <div class="row no-gutters">
+    <div class="page__header--desktop container-fluid">
+      <div class="row header--first">
         <div class="col-2 col-lg-3 logo--desktop">
-          <img src="assets/imgs/logo_powerpulse.svg">
+          <img src="assets/imgs/logo_powerpulse--desktop-Dark.svg">
         </div>
-        <div class="col-8 col-lg-7 col-xl-6 header__search" >
+        <div class="col-8 col-lg-7 header__markets">
+          <cpt-market-summary></cpt-market-summary>
+        </div>
+      </div>
+      <div class="row header--second">
+        <div class="col-6 col-lg-6 col-xl-6 header__search" >
           <cpt-psp-navigator *ngIf="!searchOpened" class="desktop-nav" id="desktop-nav__wrapper"></cpt-psp-navigator>
-          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search'"></cpt-psp-symbol-search>
         </div>
-        <div class="col-2 col-lg-2 col-xl-3">
-          <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--left"
+        <div class="col-5 col-lg-5 col-xl-5">
+          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search'"></cpt-psp-symbol-search>
+<!--           <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--left"
                id="header_button--right">
             <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
-          </div>
+          </div> -->
+        </div>
+        <div class="col-1 col-lg-1 col-xl-1">
           <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--right">
             <img class="align-absolute" src="assets/imgs/ux__gear.svg">
           </div>
