@@ -32,7 +32,7 @@ interface FilterFunc {
           <div class="col-12">
 
             <div class="row section__toggle" id="movement-timespan">
-              <mat-tab-group (selectedTabChange)="selectTimespan($event)" class="col-12 toggle toggle--timespan">
+              <mat-tab-group (selectedTabChange)="selectTimespan($event);" class="col-12 toggle toggle--timespan">
                 <mat-tab label="TODAY"
                          [ngClass]="{'selected':this.selectedTimespan==='TODAY'}"
                          class="toggle__left"></mat-tab>
@@ -112,9 +112,40 @@ interface FilterFunc {
                       <p class="text-left col-header--per-chg">% CHANGE</p>
                     </div>
                   </li>
-                  <mat-accordion [multi]="false">
-                  <mat-expansion-panel [disabled]="stock.arcColor==2" [expanded]="false"
-                      *ngFor="let stock of (selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData); trackBy: trackStock"
+                  <mat-accordion *ngIf="selectedTimespan == 'TODAY'" [multi]="false">
+                    <mat-expansion-panel [disabled]="stock.arcColor==2" [expanded]="false"
+                      *ngFor="let stock of dailyStockData; trackBy: trackStock"
+                      class="row no-gutters list-item__mover justify-content-center">
+                      <mat-expansion-panel-header>
+                    <div class="col-4 col-sm-2 col-lg-2 col-xl-2 mover__stock">
+                      <p class="ticker" [ngClass]="{'market': stock.arcColor==2}"><img *ngIf="stock.arcColor != 2"
+                                             src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
+                        {{ stock.symbol }}</p>
+                    </div>
+                    <div class="col-8 col-sm-8 col-lg-8 col-xl-8 mover__data">
+                      <div class="mover__bar" [style.width]="stock['barWidth']"
+                           [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0,'indice':stock.arcColor==2}">
+                        <p class="data" [ngClass]="{'data--right':stock['width']<25}">
+                          {{ stock.percentageChange | decimal
+                          }}%</p>
+                      </div>
+                    </div>
+                    </mat-expansion-panel-header>
+                    <mat-action-row>
+                      <p class="details">
+                        <span class="company">{{ stock['companyName'] }}</span>
+                        <span class="industry hidden-md-down">{{ stock['industry_name'] }}</span>
+                        <span class="prices hidden-md-down">{{ stock['closePrice'] | decimal }}</span>
+                      </p>
+                      <button class="remove" mat-raised-button (click)="emitRemoveStock(stock.symbol)"><i class="fas fa-times"></i></button>
+                      <button class="analyze" mat-raised-button (click)="gotoReport(stock.symbol)"><i class="fas fa-chart-pie"></i></button>
+                      
+                    </mat-action-row>
+                  </mat-expansion-panel>
+                  </mat-accordion>
+                  <mat-accordion *ngIf="selectedTimespan == 'WEEK'" [multi]="false">
+                    <mat-expansion-panel [disabled]="stock.arcColor==2" [expanded]="false"
+                      *ngFor="let stock of weeklyStockData; trackBy: trackStock"
                       class="row no-gutters list-item__mover justify-content-center">
                       <mat-expansion-panel-header>
                     <div class="col-4 col-sm-2 col-lg-2 col-xl-2 mover__stock">
