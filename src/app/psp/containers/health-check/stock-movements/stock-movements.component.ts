@@ -130,11 +130,14 @@ interface FilterFunc {
                     </div>
                     </mat-expansion-panel-header>
                     <mat-action-row>
-                      {{ stock['companyName'] }}
-                      {{ stock['industry_name'] }}
-                      {{ stock['closePrice'] }}
-                      <button mat-raised-button color="warn" (click)="emitRemoveStock(stock.symbol)">Remove</button>
-                      <button mat-raised-button color="accent" (click)="gotoReport(stock.symbol)">Analyze</button>
+                      <p class="details">
+                        <span class="company">{{ stock['companyName'] }}</span>
+                        <span class="industry hidden-md-down">{{ stock['industry_name'] }}</span>
+                        <span class="prices hidden-md-down">{{ stock['closePrice'] }}</span>
+                      </p>
+                      <button class="remove" mat-raised-button (click)="emitRemoveStock(stock.symbol)"><i class="fas fa-times"></i></button>
+                      <button class="analyze" mat-raised-button (click)="gotoReport(stock.symbol)"><i class="fas fa-chart-pie"></i></button>
+                      
                     </mat-action-row>
                   </mat-expansion-panel>
                 </ul>

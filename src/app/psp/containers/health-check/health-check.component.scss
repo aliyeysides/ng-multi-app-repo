@@ -351,7 +351,7 @@
   	}
   	.btn-group {
   		position: relative;
-  		margin-top: 8px;
+  		margin: 8px 0;
 
 		.btn-primary {
 			text-align: center;
@@ -429,6 +429,10 @@
 
 	.section__chart {
 		margin: 10px 0;
+
+		.col-headers {
+			display: none;
+		}
 
 		.col-header--per-chg {
 			@media screen AND (min-width: 1200px) {

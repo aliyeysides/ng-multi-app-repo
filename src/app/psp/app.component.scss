@@ -266,10 +266,6 @@ sub {
 
 
 
-
-
-
-
 .overview__powerbar {
   .tooltip {
     margin-right:7px;
@@ -623,9 +619,11 @@ sub {
         text-align: center;
 
         .nav--toplevel {
-          display: block;
+          display: inline-block;
+          width: 100%;
           color: #ffffff;
-          line-height: 45px;
+          line-height: 43px;
+          vertical-align: middle;
           height: 45px;
           text-decoration: none;
           white-space: nowrap;
@@ -702,7 +700,7 @@ sub {
 
   .add-stock {
     position: absolute;
-    right:20px;
+    right:15px;
     top:-18px;
     z-index: 10;
 
