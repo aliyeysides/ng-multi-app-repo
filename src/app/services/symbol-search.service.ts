@@ -24,12 +24,12 @@ export class SymbolSearchService {
   constructor(private utilService: UtilService) {
   }
 
-  public symbolLookup(query: string): Observable<Array<object>> {
+  public symbolLookup(query: string, mode?: string): Observable<Array<object>> {
     const symbolLookupUrl = `${this.apiHostName}/CPTRestSecure/app/stocks/symbol-lookupV1?`;
     const params = {
       'q': query,
       'searchColumn': 'symbol',
-      'mode': 'mid-tier'
+      'mode': mode ? mode : null
     };
     return this.utilService.getJson(symbolLookupUrl, { params, withCredentials: true });
   }

@@ -465,7 +465,7 @@ declare var gtag: Function;
                     </tr>
                     <tr>
                       <td class="label">Book Value</td>
-                      <td class="data">$ {{ research ? (research['Valuation']['Price/Book'] | number:'.2-2' ) : null }}
+                      <td class="data">$ {{ research ? (research['Valuation']['Price/Value'] | number:'.2-2' ) : null }}
                       </td>
                     </tr>
                   </table>

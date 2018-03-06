@@ -44,7 +44,7 @@ declare let gtag: Function;
 
 
     <!-- DESKTOP HEADER-->
-    <div class="page__header--desktop container-fluid">
+    <div class="page__header--desktop container-fluid" [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}">
 
       <!-- FIRST HEADER-->
       <div class="row header--first justify-content-center">

@@ -14,6 +14,7 @@ declare let gtag: Function;
 
 export class BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
   @Input('placeholder') placeholder: string;
+  @Input('defaultFocus') focus: boolean;
   @ViewChild('search') search: ElementRef;
   @Output('focused') focused: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -22,7 +23,6 @@ export class BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
 
   public symbolSearchForm: FormControl;
   public searchResults: Array<any>;
-  public focus: boolean = false;
   public loading: Subscription;
 
   constructor(public authService: AuthService,
@@ -37,7 +37,7 @@ export class BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
   }
 
   ngAfterContentInit() {
-    this.search.nativeElement.focus();
+    if (this.focus) this.search.nativeElement.focus();
     this.searchResults = [];
     this.symbolSearchForm.valueChanges
       .debounceTime(500)
