@@ -43,26 +43,30 @@ declare let gtag: Function;
     </div>
 
 
-    <!-- DESKTOP HEADER-->
-    <div class="page__header--desktop container-fluid" [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}">
+    <!-- DESKTOP HEADER -->
+    <div class="page__header--desktop container-fluid"
+      [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}" >
 
-      <!-- FIRST HEADER-->
+      <!-- FIRST HEADER -->
       <div class="row header--first justify-content-center">
-        <div class="col-2 col-lg-2 col-xl-4 logo--desktop">
+        <!-- LOGO-->
+        <div class="col-3 col-xl-2 logo--desktop">
           <img class="float-left" src="assets/imgs/logo_powerpulse--desktop-Dark.svg">
-<!--           <img class="float-left" src="assets/imgs/logo_powerpulse--desktop-Dark.svg">
- -->        </div>
-        <div class="col-6 col-lg-5 col-xl-4">
-          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search by symbol or company name'"></cpt-psp-symbol-search>
+          <img class="float-left hidden-xl-down" src="assets/imgs/logo_powerpulse--icon.svg">
         </div>
-        <div class="col-4 col-lg-5 col-xl-4 header__markets">
+        <!-- SEARCH -->
+        <div class="col-6 col-xl-5 search--desktop">
+          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search'"></cpt-psp-symbol-search>
+        </div>
+        <!-- MARKETS -->
+        <div class="col-3 col-xl-5 markets--desktop">
           <cpt-market-summary id="desktop-markets"></cpt-market-summary>
         </div>
       </div>
 
       <!-- SECOND HEADER-->
       <div class="row header--second justify-content-center">
-        <div class="col-7 header__nav">
+        <div class="col-10 col-lg-9 col-xl-7 header__nav">
           <cpt-psp-navigator *ngIf="!searchOpened" class="desktop-nav" id="desktop-nav__wrapper"></cpt-psp-navigator>
         </div>
         <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--right">
@@ -71,7 +75,7 @@ declare let gtag: Function;
       </div>
 
     </div>
-    <!-- END DESKTOP HEADER-->
+    <!-- END DESKTOP HEADER -->
 
     <!-- Onboarding Modal -->
     <cpt-psp-onboarding style="display:none;"></cpt-psp-onboarding>

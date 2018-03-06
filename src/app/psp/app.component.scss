@@ -153,12 +153,6 @@ sub {
 }
 
 
-.bold {
-  font-weight:600;
-}
-.bolder {
-  font-weight:700;
-}
 
 .ticker {
   cursor: pointer;
@@ -236,60 +230,7 @@ sub {
 
 
 
-.HC-overview {
-  .tooltip  {
-    width: 220px;
 
-    @media screen AND (min-width: 576px) {
-      left: 15%;
-    }
-  }
-}
-
-
-
-
-
-.panel {
-  .add-stock {
-    .tooltip {
-      .tooltip-inner {
-        width: 100px;
-      }
-      .tooltip-arrow {
-        margin-left:-6px;
-      }
-    }
-  }
-}
-
-
-
-
-.overview__powerbar {
-  .tooltip {
-    margin-right:7px;
-
-    .tooltip-inner {
-      min-width: 150px;
-    }
-    .tooltip-arrow {
-      margin-top:-6px;
-    }
-  }
-  .label {
-    .tooltip {
-      margin-left:-7px;
-
-      .tooltip-inner {
-        min-width: 150px;
-      }
-      .tooltip-arrow {
-        margin-top:0px;
-      }
-    }
-  }
-}
 
 
 
@@ -563,8 +504,7 @@ sub {
   color: #ffffff;
   z-index: 100;
   background: $background--dark;
-  //box-shadow: 0px 1px 0px 0px rgba(255,255,255,1);
-  box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.08);
 
   @media screen AND (max-width: 991px) {
     display: none;
@@ -576,6 +516,7 @@ sub {
 
     .logo--desktop {
       display: relative;
+      padding:0 0px 0 15px;
 
       img {
         position: absolute;
@@ -584,35 +525,24 @@ sub {
         top:6px;
       }
     }
+    .search--desktop {
+      padding:0;
+    }
+    .markets--desktop {
+      padding:0 15px 0 0;
 
-    .header__markets {
       #desktop-markets {
         .market-summary__contents {
           width: 100%;
-          padding-left: 0px;
           height: 45px;
-          float: right;
+          padding:0;
           white-space: nowrap;
           overflow: hidden;
 
           .market-summary__title {
             display: none;
-            //display: inline-block;
-            float: left;
-            height: 45px;
-            margin-right:5%;
-            //padding-top:5px;
-
-            h4 {
-              text-transform: uppercase;
-              font-size: 18px;
-              font-weight: 600;
-              line-height: 1.4;
-              color: #7E7E7E;
-            }
 
             p.current-time {
-              display: none;
               font-weight: 400;
               font-size: 11px;
               line-height:45px;
@@ -622,12 +552,13 @@ sub {
 
           .indice {
             display: inline-block;
-            float: left;
+            float: right;
             font-weight: 700;
             font-size: 18px;
             color: #4A4A4A;
             line-height: 45px;
-            margin-right: 5%;
+            margin-left: 5%;
+            margin-right: 0;
 
             span {
               margin-right: 5px;
@@ -643,7 +574,7 @@ sub {
             }
 
             &:last-child {
-              margin-right: 0;
+              margin-left: 0px;
             }
           }
         }
@@ -683,7 +614,6 @@ sub {
     #desktop-nav__wrapper{
       .mat-button {
         min-width: 150px;
-        //border-radius: 0px;
       }
     }
     .desktop-nav {
@@ -708,7 +638,7 @@ sub {
             height: 37px;
             text-decoration: none;
             white-space: nowrap;
-            font-size: 16px;
+            font-size: 17px;
             cursor: pointer;
             font-weight: 500;
             margin: 4px 0;
@@ -722,7 +652,7 @@ sub {
             font-weight: 300;
             vertical-align: middle;
             text-align: center;
-            left:7px;
+            left:10px;
             top:6px;
 
           }
@@ -732,17 +662,17 @@ sub {
 
           .nav--toplevel {
             font-weight: 600;
-            //color:$font-color;
+            color:$font-color;
             //color:#ffffff;
-            color:$link-blue;
+            //color:$link-blue;
             background-color: rgba(255,255,255,1);
-            box-shadow: inset 0 0px 5px 1px rgba(0, 0, 0, 0.2);
-            //text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-            border: 1px solid #666;
+            box-shadow: inset 0 0px 5px 0px rgba(0, 0, 0, 0.3);
+            border: 1px solid #fff;
+
+            &:hover {
+              background-color: rgba(255,255,255,1);
+            } 
           }
-/*          &:hover {
-            background-color: $link-blue;
-          }*/
         }
       }
     }
