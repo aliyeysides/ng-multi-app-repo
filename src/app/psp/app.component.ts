@@ -66,7 +66,7 @@ declare let gtag: Function;
           <cpt-psp-navigator *ngIf="!searchOpened" class="desktop-nav" id="desktop-nav__wrapper"></cpt-psp-navigator>
         </div>
         <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--right">
-          <i class="align-absolute fal fa-cog"></i>
+          <i class="align-absolute fal fa-cog fa-spin-hover"></i>
         </div>
       </div>
 
