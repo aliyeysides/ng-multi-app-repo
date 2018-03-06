@@ -83,7 +83,7 @@ button {
   font-family: $font-stack !important;
 }
 span, button {
-  font-family: $font-stack !important; 
+  font-family: $font-stack !important;
 }
 :focus {
   outline: none;
@@ -653,7 +653,7 @@ sub {
 
   .header--second {
     height: 45px;
-    background: $background--dark;
+    //background: $background--dark;
 
     .header__button {
       position: absolute;
@@ -967,7 +967,7 @@ sub {
   padding-right: 10px;
 
   &::-webkit-scrollbar {
-    
+
   }
 
   @media screen AND (max-width: 375px) {
@@ -1642,7 +1642,7 @@ sub {
 }
 
 
-#mainChart-graph-id1-scale-y-guide-267-path, 
+#mainChart-graph-id1-scale-y-guide-267-path,
 #mainChart-graph-id2-scale-y-guide-267-path {
   stroke: none;
 }

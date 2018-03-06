@@ -92,6 +92,7 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
 
   closeNav(e: Event) {
     this.routeClicked.emit();
+    window.scrollTo({behavior: "smooth", top: 0});
     e.stopPropagation();
   }
 }
