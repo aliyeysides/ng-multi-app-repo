@@ -266,35 +266,6 @@
 
 
 
-.tooltip  {
-  .tooltip-inner {
-    font-size: 13px;
-    line-height: 1.4;
-    max-width: 220px;
-    padding: 8px 12px;
-    color: #fff;
-    text-align: left;
-    background-color: #000;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    text-align: center;
-
-    a {
-      color:#ffffff;
-      font-family: $font-stack2;
-      text-decoration: underline;
-      font-size: 13px;
-    }
-
-    &:before {
-      display: none;
-    }
-  }
-  .tooltip-arrow {
-  }
-}
-
-
 .fa-spin-hover:hover {
   -webkit-animation: fa-spin 2s infinite linear;
   -moz-animation: fa-spin 2s infinite linear;
