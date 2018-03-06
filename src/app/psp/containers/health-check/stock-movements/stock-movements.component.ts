@@ -145,7 +145,7 @@ interface FilterFunc {
                     </mat-action-row>
                   </mat-expansion-panel>
                   </mat-accordion>
-                  <mat-accordion *ngIf="selectedTimespan == 'WEEK' && stock.arcColor!=2" [multi]="false">
+                  <mat-accordion *ngIf="selectedTimespan == 'WEEK'" [multi]="false">
                     <mat-expansion-panel [id]="stock.symbol" [disabled]="stock.arcColor==2" [expanded]="false"
                       *ngFor="let stock of weeklyStockData; trackBy: trackStock"
                       class="row no-gutters list-item__mover justify-content-center">
