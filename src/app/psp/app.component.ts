@@ -42,34 +42,37 @@ declare let gtag: Function;
       </div>
     </div>
 
+
+    <!-- DESKTOP HEADER-->
     <div class="page__header--desktop container-fluid">
-      <div class="row header--first">
-        <div class="col-2 col-lg-3 logo--desktop">
-          <img src="assets/imgs/logo_powerpulse--desktop-Dark.svg">
+
+      <!-- FIRST HEADER-->
+      <div class="row header--first justify-content-center">
+        <div class="col-2 col-lg-2 col-xl-4 logo--desktop">
+          <img class="float-left" src="assets/imgs/logo_powerpulse--desktop-Dark.svg">
+<!--           <img class="float-left" src="assets/imgs/logo_powerpulse--desktop-Dark.svg">
+ -->        </div>
+        <div class="col-6 col-lg-5 col-xl-4">
+          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search'"></cpt-psp-symbol-search>
         </div>
-        <div class="col-8 col-lg-7 header__markets">
-          <cpt-market-summary></cpt-market-summary>
+        <div class="col-4 col-lg-5 col-xl-4 header__markets">
+          <cpt-market-summary id="desktop-markets"></cpt-market-summary>
         </div>
       </div>
-      <div class="row header--second">
-        <div class="col-6 col-lg-6 col-xl-6 header__search" >
+
+      <!-- SECOND HEADER-->
+      <div class="row header--second justify-content-center">
+        <div class="col-7 header__nav">
           <cpt-psp-navigator *ngIf="!searchOpened" class="desktop-nav" id="desktop-nav__wrapper"></cpt-psp-navigator>
         </div>
-        <div class="col-5 col-lg-5 col-xl-5">
-          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search'"></cpt-psp-symbol-search>
-<!--           <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--left"
-               id="header_button--right">
-            <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
-          </div> -->
-        </div>
-        <div class="col-1 col-lg-1 col-xl-1">
-          <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--right">
-            <img class="align-absolute" src="assets/imgs/ux__gear.svg">
-          </div>
+        <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--right">
+          <i class="align-absolute fal fa-cog"></i>
         </div>
       </div>
+
     </div>
-    
+    <!-- END DESKTOP HEADER-->
+
     <!-- Onboarding Modal -->
     <cpt-psp-onboarding style="display:none;"></cpt-psp-onboarding>
 

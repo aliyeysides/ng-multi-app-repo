@@ -7,31 +7,31 @@
     //height: 24px;
 
     .search-box {
-      height: 45px;
+      height: 36px;
       font-size: 32px;
       padding: 0px 15px;
-      border-radius: 0px;
-      background-color: rgba(255,255,255,1);
+      border-radius: 30px;
+      border-radius: 20px;
+      background-color: white;
       color: #484848;
-/*      position: absolute;*/
-      //top:0px;
-      box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,0.18);
+      box-shadow: inset 0px 0px 8px 0px rgba(0, 0, 0, 0.180);
+      border: 1px solid #ccc;
     }
     .search-submit {
       display: block;
-      width: 45px;
-      height: 45px;
+      width: 36px;
+      height: 36px;
       margin: 0px;
       position: absolute;
       top: 0;
-      right: 0px;
+      left: 0;
       font-size: 24px;
       opacity: 0.2;
       cursor: default;
     }
   }
   label {
-    visibility: hidden;
+    //visibility: hidden;
   }
   .search__dropdown {
     //top:76px;
