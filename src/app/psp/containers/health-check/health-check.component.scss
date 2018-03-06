@@ -1027,7 +1027,7 @@
 }
 
 .mat-expansion-panel-content:not(.mat-expanded) {
-  //height: 0px !important;
+  height: 0px !important;
   visibility: hidden !important;
   //display: none !important;
 }
