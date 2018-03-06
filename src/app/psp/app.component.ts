@@ -53,7 +53,7 @@ declare let gtag: Function;
 <!--           <img class="float-left" src="assets/imgs/logo_powerpulse--desktop-Dark.svg">
  -->        </div>
         <div class="col-6 col-lg-5 col-xl-4">
-          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search'"></cpt-psp-symbol-search>
+          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search by symbol or company name'"></cpt-psp-symbol-search>
         </div>
         <div class="col-4 col-lg-5 col-xl-4 header__markets">
           <cpt-market-summary id="desktop-markets"></cpt-market-summary>
@@ -66,7 +66,7 @@ declare let gtag: Function;
           <cpt-psp-navigator *ngIf="!searchOpened" class="desktop-nav" id="desktop-nav__wrapper"></cpt-psp-navigator>
         </div>
         <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--right">
-          <i class="align-absolute fal fa-cog"></i>
+          <i class="align-absolute fal fa-cog fa-spin-hover"></i>
         </div>
       </div>
 
