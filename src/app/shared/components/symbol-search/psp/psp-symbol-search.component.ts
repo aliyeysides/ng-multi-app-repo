@@ -1,7 +1,8 @@
 import {
   Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
+  AfterViewInit,
 } from '@angular/core';
 
 import {FormControl} from '@angular/forms';
@@ -13,6 +14,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {BaseSymbolSearchComponent} from '../symbol-search.component';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {ListSymbolObj} from '../../../models/health-check';
+import {MatAutocompleteTrigger} from '@angular/material';
 
 declare let gtag: Function;
 
@@ -29,29 +31,23 @@ declare let gtag: Function;
                  [matAutocomplete]="auto"
                  aria-describedby="basic-addon1">
           <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let result of searchResults" [value]="result.CompanyName">
-              <!--<div class="col-3 search__company">-->
-                <!--<p class="company-ticker">-->
-                  {{ result.Symbol }}
-                <!--</p>-->
-              <!--</div>-->
-              <!--<div class="col-6">-->
-                <!--<p class="company-name">-->
-                  {{ result.CompanyName }}
-                <!--</p>-->
-              <!--</div>-->
-              <!--<div *ngIf="!resultInUserList(userStocks, result.Symbol)"-->
-                   <!--(click)="addToList(result.Symbol);$event.stopPropagation()" class="col-3 search__action">-->
-                <!--<p class="align-absolute"><i class="far fa-plus-circle"></i> &nbsp; Add stock</p>-->
-              <!--</div>-->
-              <!--<div *ngIf="resultInUserList(userStocks, result.Symbol)"-->
-                   <!--(click)="removeStock(result.Symbol);$event.stopPropagation()" class="col-3 search__action">-->
-                <!--<p class="align-absolute"><i class="far fa-minus-circle"></i> &nbsp; Remove stock</p>-->
-              <!--</div>-->
-            </mat-option>
+            <mat-optgroup *ngIf="!searchResults.length">
+              <mat-option>
+                FACEBOOK
+              </mat-option>
+            </mat-optgroup>
+            <mat-optgroup *ngIf="searchResults.length">
+              <mat-option *ngFor="let result of searchResults" [value]="result.CompanyName">
+                {{ result.Symbol }}
+                {{ result.CompanyName }}
+              </mat-option>
+            </mat-optgroup>
           </mat-autocomplete>
           <button class="search-submit" type="submit">
-            <i (click)="search.focus()" class="fa fa-search" aria-hidden="true"></i>
+            <!--<i (click)="search.focus()" class="fa fa-search" aria-hidden="true"></i>-->
+            <button mat-icon-button *ngIf="search.value" matSuffix mat-icon-button aria-label="Clear" (click)="search.value=''">
+              <mat-icon>close</mat-icon>            
+            </button>
           </button>
         </mat-form-field>
       </div>
@@ -91,10 +87,13 @@ declare let gtag: Function;
   styleUrls: ['./psp-symbol-search.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implements OnDestroy {
+export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implements AfterViewInit, OnDestroy {
   @Input('placeholder') placeholder: string;
   @Input('btn') btn: HTMLElement;
+
   @ViewChild('search') search: ElementRef;
+  @ViewChild('auto') auto: MatAutocompleteTrigger;
+
   @Output('focused') focused: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output('toggleSearch') toggleSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -129,7 +128,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
     this.symbolSearchForm = new FormControl();
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.loading = this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
       .map(res => this._listId = this.authService.userLists[0]['User Lists'].filter(x => x['name'] == this.healthCheck.currentList)[0]['list_id'])
@@ -139,7 +138,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       .take(1)
       .subscribe(res => {
         this.userStocks = res['symbols'];
-      })
+      });
   }
 
   onSubmit(ticker: string) {
@@ -178,6 +177,10 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
     if (arr) {
       return arr.filter(x => x['symbol'] == ticker).length > 0;
     }
+  }
+
+  openAutoComplete() {
+    this.auto.openPanel();
   }
 
 }

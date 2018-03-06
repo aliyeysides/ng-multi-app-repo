@@ -11,6 +11,7 @@ import {PipesModule} from './pipes/index';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     PipesModule,
     MatInputModule,
     MatAutocompleteModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatIconModule
   ],
   exports: [
     CommonModule,

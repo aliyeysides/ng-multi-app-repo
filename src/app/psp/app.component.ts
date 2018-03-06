@@ -53,7 +53,7 @@ declare let gtag: Function;
 <!--           <img class="float-left" src="assets/imgs/logo_powerpulse--desktop-Dark.svg">
  -->        </div>
         <div class="col-6 col-lg-5 col-xl-4">
-          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search'"></cpt-psp-symbol-search>
+          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search by symbol or company name'"></cpt-psp-symbol-search>
         </div>
         <div class="col-4 col-lg-5 col-xl-4 header__markets">
           <cpt-market-summary id="desktop-markets"></cpt-market-summary>
