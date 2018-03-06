@@ -26,44 +26,67 @@ declare let gtag: Function;
                  type="search"
                  class="search-box"
                  placeholder="{{ placeholder }}"
+                 [matAutocomplete]="auto"
                  aria-describedby="basic-addon1">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let result of searchResults" [value]="result.CompanyName">
+              <!--<div class="col-3 search__company">-->
+                <!--<p class="company-ticker">-->
+                  {{ result.Symbol }}
+                <!--</p>-->
+              <!--</div>-->
+              <!--<div class="col-6">-->
+                <!--<p class="company-name">-->
+                  {{ result.CompanyName }}
+                <!--</p>-->
+              <!--</div>-->
+              <!--<div *ngIf="!resultInUserList(userStocks, result.Symbol)"-->
+                   <!--(click)="addToList(result.Symbol);$event.stopPropagation()" class="col-3 search__action">-->
+                <!--<p class="align-absolute"><i class="far fa-plus-circle"></i> &nbsp; Add stock</p>-->
+              <!--</div>-->
+              <!--<div *ngIf="resultInUserList(userStocks, result.Symbol)"-->
+                   <!--(click)="removeStock(result.Symbol);$event.stopPropagation()" class="col-3 search__action">-->
+                <!--<p class="align-absolute"><i class="far fa-minus-circle"></i> &nbsp; Remove stock</p>-->
+              <!--</div>-->
+            </mat-option>
+          </mat-autocomplete>
           <button class="search-submit" type="submit">
             <i (click)="search.focus()" class="fa fa-search" aria-hidden="true"></i>
           </button>
         </mat-form-field>
       </div>
     </form>
-    <div (mousedown)="$event.preventDefault();" *ngIf="searchResults && symbolSearchForm.value && focus == true"
-         class="search__dropdown">
-      <ul [ngBusy]="loading" *ngFor="let result of searchResults" class="container">
-        <li (click)="onClick(result.Symbol)" class="row no-gutters search__entry"
-            [ngClass]="{'search--match': result.Symbol == symbolSearchForm.value.toUpperCase() }">
-          <div class="col-3 search__company">
-            <p class="company-ticker">
-              {{ result.Symbol }}
-            </p>
-          </div>
-          <div class="col-6">
-            <p class="company-name">
-              {{ result.CompanyName }}
-            </p>
-          </div>
-          <div *ngIf="!resultInUserList(userStocks, result.Symbol)"
-               (click)="addToList(result.Symbol);$event.stopPropagation()" class="col-3 search__action">
-            <p class="align-absolute"><i class="far fa-plus-circle"></i> &nbsp; Add stock</p>
-          </div>
-          <div *ngIf="resultInUserList(userStocks, result.Symbol)"
-               (click)="removeStock(result.Symbol);$event.stopPropagation()" class="col-3 search__action">
-            <p class="align-absolute"><i class="far fa-minus-circle"></i> &nbsp; Remove stock</p>
-          </div>
-        </li>
-      </ul>
-      <ul *ngIf="searchResults && symbolSearchForm.value && searchResults.length == 0">
-        <li>
-          <p class="search__none">Symbol not found</p>
-        </li>
-      </ul>
-    </div>
+    <!--<div (mousedown)="$event.preventDefault();" *ngIf="searchResults && symbolSearchForm.value && focus == true"-->
+         <!--class="search__dropdown">-->
+      <!--<ul [ngBusy]="loading" *ngFor="let result of searchResults" class="container">-->
+        <!--<li (click)="onClick(result.Symbol)" class="row no-gutters search__entry"-->
+            <!--[ngClass]="{'search&#45;&#45;match': result.Symbol == symbolSearchForm.value.toUpperCase() }">-->
+          <!--<div class="col-3 search__company">-->
+            <!--<p class="company-ticker">-->
+              <!--{{ result.Symbol }}-->
+            <!--</p>-->
+          <!--</div>-->
+          <!--<div class="col-6">-->
+            <!--<p class="company-name">-->
+              <!--{{ result.CompanyName }}-->
+            <!--</p>-->
+          <!--</div>-->
+          <!--<div *ngIf="!resultInUserList(userStocks, result.Symbol)"-->
+               <!--(click)="addToList(result.Symbol);$event.stopPropagation()" class="col-3 search__action">-->
+            <!--<p class="align-absolute"><i class="far fa-plus-circle"></i> &nbsp; Add stock</p>-->
+          <!--</div>-->
+          <!--<div *ngIf="resultInUserList(userStocks, result.Symbol)"-->
+               <!--(click)="removeStock(result.Symbol);$event.stopPropagation()" class="col-3 search__action">-->
+            <!--<p class="align-absolute"><i class="far fa-minus-circle"></i> &nbsp; Remove stock</p>-->
+          <!--</div>-->
+        <!--</li>-->
+      <!--</ul>-->
+      <!--<ul *ngIf="searchResults && symbolSearchForm.value && searchResults.length == 0">-->
+        <!--<li>-->
+          <!--<p class="search__none">Symbol not found</p>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
   `,
   styleUrls: ['./psp-symbol-search.component.scss'],
   encapsulation: ViewEncapsulation.None
