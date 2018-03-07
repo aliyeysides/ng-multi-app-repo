@@ -27,7 +27,7 @@ declare let gtag: Function;
           <input matInput #search (focusout)="toggleFocus()" (focus)="toggleFocus()" [formControl]="symbolSearchForm"
                  type="search"
                  class="search-box"
-                 placeholder="{{ placeholder }}"
+                 placeholder="Search and Add"
                  [matAutocomplete]="auto"
                  aria-describedby="basic-addon1">
           <mat-autocomplete #auto="matAutocomplete">
@@ -44,7 +44,7 @@ declare let gtag: Function;
             </mat-optgroup>
           </mat-autocomplete>
           <button class="search-submit" type="submit">
-            <!--<i (click)="search.focus()" class="fa fa-search" aria-hidden="true"></i>-->
+            <i class="far fa-search" aria-hidden="true"></i>
             <button mat-icon-button *ngIf="search.value" matSuffix mat-icon-button aria-label="Clear" (click)="search.value=''">
               <mat-icon>close</mat-icon>            
             </button>

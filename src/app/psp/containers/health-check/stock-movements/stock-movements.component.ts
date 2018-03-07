@@ -171,13 +171,13 @@ interface FilterFunc {
                         <span class="prices hidden-md-down">{{ stock['closePrice'] | decimal }}</span>
                       </p>
                       <span matTooltip="Remove stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500">
-                        <button class="remove" mat-raised-button (click)="emitRemoveStock(stock.symbol)"><i class="fas fa-times"></i></button>
+                        <button class="remove" mat-raised-button (click)="emitRemoveStock(stock.symbol)"><i class="fas fa-times"></i> Remove Stock</button>
                       </span>
                       <span matTooltip="Analyze stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500">
-                        <button class="analyze" mat-raised-button (click)="gotoReport(stock.symbol)"><i class="fas fa-chart-pie"></i></button>
+                        <button class="analyze" mat-raised-button (click)="gotoReport(stock.symbol)"><i class="fas fa-chart-pie"></i> Stock Analysis</button>
                       </span>
                       
-                    </mat-action-row>
+                    </mat-action-row> 
                   </mat-expansion-panel>
                   </mat-accordion>
                 </ul>
