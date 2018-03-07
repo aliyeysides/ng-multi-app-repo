@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, EventEmitter, Output} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HealthCheckService} from '../../../services/health-check.service';
 import {AuthService} from '../../../services/auth.service';
 
