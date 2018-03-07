@@ -45,7 +45,7 @@ declare var gtag: Function;
           </p>
         </div>
         <div class="col-12 col-md-4 align-self-center text-md-left" style="padding:0 10px;">
-          <p>Compared to the <button matTooltip="Download S&P 500 Health Check PDF" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" (click)="getPHCReportforListId('44493')" class="market">S&amp;P 500</button> &mdash;&mdash;
+          <p>While the <button matTooltip="Download S&P 500 Health Check PDF" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" (click)="getPHCReportforListId('44493')" class="market">S&amp;P 500</button> was 
             <span class="market--change"> 
               <span *ngIf="isSPYUp()">Up </span>
               <span *ngIf="!isSPYUp()">Down </span>{{ calculations?.SPYPercentageChange | number:'.2-2' }}%

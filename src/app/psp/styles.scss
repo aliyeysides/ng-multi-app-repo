@@ -3,6 +3,9 @@
 @import '../../../node_modules/bootstrap/scss/bootstrap';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+
+
+
 #movement-timespan {
   .mat-tab-header, .mat-tab-nav-bar {
       border-bottom: 0px solid rgba(0,0,0,0);
@@ -52,108 +55,7 @@
 
 
 
-#mover-wrapper {
-  padding:0px;
 
-  .mat-expansion-panel {
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,0),
-                0 2px 2px 0 rgba(0,0,0,0),
-                0 1px 5px 0 rgba(0,0,0,0);
-
-    .mat-expansion-panel-header.mat-expanded {
-      background: rgba(0,0,0,.02);
-    }
-    .mat-expansion-panel-header {
-      padding: 0px 15px 0px 0px;
-
-      &:hover {
-        background: rgba(0,0,0,.02);
-      }
-
-      .mat-content {
-      }
-      .mat-expansion-indicator {
-        width: 20px;
-        height: 20px;
-        border-radius: 5px;
-
-        &:hover {
-          background-color: #efefef;
-          box-shadow: inset 0 0px 20px 2px rgba(0, 0, 0, 0.175);
-        }
-      }
-    }
-    .mat-expansion-panel-content {
-      .mat-expansion-panel-body {
-        padding: 0;
-      }
-
-      .mat-action-row {
-        background: rgba(0,0,0,.02);
-        border-top-style: solid;
-        border-top-width: 0px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        padding: 0px 10px 15px 5px;
-        box-shadow: inset 0 -2px 7px -3px rgba(0, 0, 0, 0.175);
-        overflow: hidden;
-        position: relative;
-
-        .details {
-          display: flex;
-          position: absolute;
-          left:12px;
-          font-size: 22px;
-          font-weight: 600;
-          line-height: 36px;
-
-          .company {
-            margin-right: 20px;
-            color:$font-color--mid;
-          }
-          .industry {
-            margin-right: 20px;
-            font-size: 18px;
-            font-weight: 400;
-            font-style: italic;
-          }
-          .close {
-
-          }
-        }
-
-        .mat-raised-button {
-            position: relative;
-            cursor: pointer;
-            overflow: hidden;
-            outline: 0;
-            border: none;
-            vertical-align: baseline;
-            text-align: center;
-            margin: 0 8px 0 8px;
-            min-width: 38px;
-            width: 38px;
-            font-size: 20px;
-            line-height: 38px;
-            padding: 0px;
-            border-radius: 20px;
-            transform: translate3d(0,0,0);
-            transition: background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);
-            box-shadow: 0 1px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.1), 0 1px 5px 0 rgba(0,0,0,.08);
-        }
-        .mat-raised-button.remove {
-            background-color: #666;
-            color: #ffffff;
-        }
-        .mat-raised-button.analyze {
-            background-color: #1199ff;
-            color: #ffffff;
-        }
-      }
-    }
-  }
-}
 
 
 

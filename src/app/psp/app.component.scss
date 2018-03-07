@@ -591,6 +591,7 @@ sub {
       height: 45px;
       z-index: 10;
       cursor: pointer;
+      padding-top: 8px;
 
       img {
         width: auto;
@@ -607,7 +608,7 @@ sub {
     }
 
     .header__button--right {
-      right:30px;
+      right:15px;
       z-index: 12;
     }
 
