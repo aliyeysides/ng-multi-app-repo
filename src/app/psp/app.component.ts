@@ -32,7 +32,7 @@ declare let gtag: Function;
 
       <div class="header__title header__search">
         <h1 *ngIf="!searchOpened">{{ title }}</h1>
-        <cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
+        <cpt-psp-symbol-search id="mobile-search" [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
                                *ngIf="searchOpened"></cpt-psp-symbol-search>
       </div>
 

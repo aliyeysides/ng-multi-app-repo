@@ -430,7 +430,6 @@
 		}
 	}
 
-
 	.section__chart {
 		margin: 10px 0;
 
@@ -445,95 +444,98 @@
 		}
 	}
 
+
+
 	.list-item__mover {
-	  margin:0;
-	  padding: 0px;
-	}
+/*	  margin:0;
+	  padding: 0px;*/
 
-	.mover__stock {
-		cursor: pointer;
+		.mover__stock {
+			cursor: pointer;
 
-		.ticker {
-		  	font-weight: 700;
-		  	font-size: 22px;
-		  	white-space: nowrap;
-		  	text-align: left;
+			.ticker {
+			  	font-weight: 700;
+			  	font-size: 22px;
+			  	white-space: nowrap;
+			  	text-align: left;
 
-		  	@media screen AND (min-width: 1024px) {
-				padding-left: 12px;
+			  	@media screen AND (min-width: 1024px) {
+					padding-left: 12px;
+				}
+
+			  	@media screen AND (min-width: 1200px) {
+					padding-left: 25px;
+				}
+
+			  	@media screen AND (min-width: 1280px) {
+					padding-left: 45px;
+				}
+
+			  	img {
+				  display: inline-block;
+				  float:left;
+				  width: 28px;
+				  height: auto;
+				  margin-right:5px;
+				  margin-top: 8px;
+				}
 			}
-
-		  	@media screen AND (min-width: 1200px) {
-				padding-left: 25px;
-			}
-
-		  	@media screen AND (min-width: 1280px) {
-				padding-left: 45px;
-			}
-
-		  	img {
-			  display: inline-block;
-			  float:left;
-			  width: 28px;
-			  height: auto;
-			  margin-right:5px;
-			  margin-top: 8px;
+			.ticker.market {
+			  color: $pulse-blue;
 			}
 		}
-		.ticker.market {
-		  color: $pulse-blue;
-		}
-	}
 
-	.mover__data {
+		.mover__data {
 
-		.mover__bar {
-		  	border-radius: 5px;
-		  	height: 30px;
-		  	background-color: $background--medium;
-		  	min-width: 5px;
+			.mover__bar {
+			  	border-radius: 5px;
+			  	height: 30px;
+			  	background-color: $background--medium;
+			  	min-width: 5px;
 
-		  	.data {
-			  	line-height: 32px;
-			  	font-size: 20px;
-			  	color:#ffffff;
-			  	font-weight: 600;
-			  	text-align: right;
-			  	margin-right:8px;
-			  	cursor: default;
-			}
-		    .data--right {
-		      	padding-left: calc(100% + 10px);
-		      	color: $font-color;
+			  	.data {
+				  	line-height: 32px;
+				  	font-size: 20px;
+				  	color:#ffffff;
+				  	font-weight: 600;
+				  	text-align: right;
+				  	margin-right:8px;
+				  	cursor: default;
+				}
+			    .data--right {
+			      	padding-left: calc(100% + 10px);
+			      	color: $font-color;
 
-		      	@media screen AND (max-width:575px) {
+			      	@media screen AND (max-width:575px) {
+				    }
+
+				    @media screen AND (min-width:1200px) {
+				    }
 			    }
+			}
+			.mover__bar.positive {
+			  	background: $gradient--pulse-green;
 
-			    @media screen AND (min-width:1200px) {
+			  	.data--right {
+			      	color:$pulse-green__shade2;
 			    }
-		    }
-		}
-		.mover__bar.positive {
-		  	background: $gradient--pulse-green;
+			}
+			.mover__bar.negative {
+			  	background: $gradient--pulse-red;
 
-		  	.data--right {
-		      	color:$pulse-green__shade2;
-		    }
-		}
-		.mover__bar.negative {
-		  	background: $gradient--pulse-red;
+			  	.data--right {
+			      	color:$pulse-red__shade2;
+			    }
+			}
+			.mover__bar.indice {
+			  	background-image: $gradient--pulse-blue;
+				margin-left:-3px;
 
-		  	.data--right {
-		      	color:$pulse-red__shade2;
-		    }
-		}
-		.mover__bar.indice {
-		  	background-image: $gradient--pulse-blue;
-
-		  	.data--right {
-		      	color:$pulse-blue__shade2;
-		      	//padding-left: 200% !important;
-		    }
+			  	.data--right {
+			      	color:$pulse-blue__shade2;
+			      	
+			    }
+			}
 		}
 	}
 
@@ -550,6 +552,7 @@
 		    }
 		    .mat-expansion-panel-header {
 		      	padding: 0px 15px 0px 0px;
+		      	height: 48px;
 
 		      	&:hover {
 		        	background: rgba(0,0,0,.02);
