@@ -18,7 +18,7 @@ declare var gtag: Function;
       <div class="row no-gutters overview__summary justify-content-center">
         <div class="col-12 col-md-4 align-self-center">
           <p class="timespan">LAST WEEK</p>
-          <div class="btn-group" dropdown [autoClose]="true">
+          <div class="btn-group">
 
             <button class="btn btn-primary dropdown-toggle" mat-icon-button [matMenuTriggerFor]="appMenu">
               {{ selectedListName }}
