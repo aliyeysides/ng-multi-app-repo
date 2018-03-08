@@ -134,19 +134,20 @@ declare var gtag: Function;
                 </div>
               </div>
               <div *ngFor="let industry of strongIndustries" class="row grid__row">
-                <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant green">
+                <div *ngIf="getStrongStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant green">
                   <p class="ticker">
                     <a (click)="gotoReport(stock)"
-                       *ngFor="let stock of isStrongStock(industry.SymbolPGRMappings);let last = last">
+                       *ngFor="let stock of getStrongStock(industry.SymbolPGRMappings);let last = last">
                       {{ objectKeys(stock)[0] }}
                       <span *ngIf="industry.SymbolPGRMappings.length>1 && !last">, </span>
                     </a>
                   </p>
                 </div>
-                <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6">
+                <div *ngIf="getStrongStock(industry.SymbolPGRMappings).length>0" class="col-6">
                   <p class="industry green">{{ industry.IndustryName }}</p>
                 </div>
               </div>
+              <p *ngIf="getIndustryStockCount(strongIndustries, getStrongStock)==0">None.</p>
             </div>
 
             <div class="col-12 hidden-sm-up powerGrid">
@@ -158,19 +159,20 @@ declare var gtag: Function;
                 </div>
               </div>
               <div *ngFor="let industry of strongIndustries" class="row grid__row">
-                <div *ngIf="isWeakStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant red">
+                <div *ngIf="getWeakStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant red">
                   <p class="ticker">
                     <a (click)="gotoReport(stock)"
-                       *ngFor="let stock of isWeakStock(industry.SymbolPGRMappings);let last = last">
+                       *ngFor="let stock of getWeakStock(industry.SymbolPGRMappings);let last = last">
                       {{ objectKeys(stock)[0] }}
                       <span *ngIf="industry.SymbolPGRMappings.length>1 && !last">, </span>
                     </a>
                   </p>
                 </div>
-                <div *ngIf="isWeakStock(industry.SymbolPGRMappings).length>0" class="col-6">
+                <div *ngIf="getWeakStock(industry.SymbolPGRMappings).length>0" class="col-6">
                   <p class="industry green">{{ industry.IndustryName }}</p>
                 </div>
               </div>
+              <p *ngIf="getIndustryStockCount(strongIndustries, getWeakStock)==0">None.</p>
             </div>
 
             <div class="col-12 hidden-sm-up">
@@ -193,20 +195,21 @@ declare var gtag: Function;
                 <div class="col-6">
                 </div>
               </div>
-              <div *ngFor="let industry of weakIndustries" class="row grid__row">
-                <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant green">
+              <div *ngFor="let industry of weakIndustries;let last = last" class="row grid__row">
+                <div *ngIf="getStrongStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant green">
                   <p class="ticker">
                     <a (click)="gotoReport(stock)"
-                       *ngFor="let stock of isStrongStock(industry.SymbolPGRMappings);let last = last">
+                       *ngFor="let stock of getStrongStock(industry.SymbolPGRMappings);let last = last">
                       {{ objectKeys(stock)[0] }}
                       <span *ngIf="industry.SymbolPGRMappings.length>1 && !last">, </span>
                     </a>
                   </p>
                 </div>
-                <div *ngIf="isStrongStock(industry.SymbolPGRMappings).length>0" class="col-6">
+                <div *ngIf="getStrongStock(industry.SymbolPGRMappings).length>0" class="col-6">
                   <p class="industry red">{{ industry.IndustryName }}</p>
                 </div>
               </div>
+              <p *ngIf="getIndustryStockCount(weakIndustries, getStrongStock)==0">None.</p>
             </div>
 
             <div class="col-12 hidden-sm-up powerGrid">
@@ -217,20 +220,21 @@ declare var gtag: Function;
                 <div class="col-6">
                 </div>
               </div>
-              <div *ngFor="let industry of weakIndustries" class="row grid__row">
-                <div *ngIf="isWeakStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant red">
+              <div *ngFor="let industry of weakIndustries;let last = last" class="row grid__row">
+                <div *ngIf="getWeakStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant red">
                   <p class="ticker">
                     <a (click)="gotoReport(stock)"
-                       *ngFor="let stock of isWeakStock(industry.SymbolPGRMappings);let last = last">
+                       *ngFor="let stock of getWeakStock(industry.SymbolPGRMappings);let last = last">
                       {{ objectKeys(stock)[0] }}
                       <span *ngIf="industry.SymbolPGRMappings.length>1 && !last">, </span>
                     </a>
                   </p>
                 </div>
-                <div *ngIf="isWeakStock(industry.SymbolPGRMappings).length>0" class="col-6">
+                <div *ngIf="getWeakStock(industry.SymbolPGRMappings).length>0" class="col-6">
                   <p class="industry red">{{ industry.IndustryName }}</p>
                 </div>
               </div>
+              <p *ngIf="getIndustryStockCount(weakIndustries, getWeakStock)==0">None.</p>
             </div>
 
           </div>
@@ -299,12 +303,23 @@ export class PowerGridComponent implements OnInit, OnDestroy {
     this._ngUnsubscribe.complete();
   }
 
-  isStrongStock(arr: Array<object>): Array<object> {
+  getStrongStock(arr: Array<object>): Array<object> {
     return arr.filter(x => Object.values(x)[0] > 50);
   }
 
-  isWeakStock(arr: Array<object>): Array<object> {
+  getWeakStock(arr: Array<object>): Array<object> {
     return arr.filter(x => Object.values(x)[0] < 50);
+  }
+
+  getIndustryStockCount(industries: Array<object>, fn: Function): number {
+    if (industries) {
+      let result;
+      if (industries.length == 0) return 0;
+      industries.forEach(ind => {
+        result = fn(ind['SymbolPGRMappings']).length;
+      });
+      return result;
+    }
   }
 
   gotoReport(ticker: string) {
