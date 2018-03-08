@@ -6,10 +6,6 @@ body {
   color:$font-color;
   font-size: 14px;
   background-color: #ffffff;
-
-  @media screen AND (max-width:400px) {
-
-  }
 }
 
 p, a, h1, h2, h3, h4, h5, h6, label, ul, li, table, td, th, tr, button {
@@ -312,7 +308,7 @@ sub {
   color:#ffffff;
   width: 0; /* 0 width - change this with JavaScript */
   z-index: 1000;
-  top: 0;
+  top: 45px;
   right: 0;
   overflow: hidden;
   overflow-y: scroll;
@@ -322,6 +318,10 @@ sub {
 
   @media screen AND (max-width:575px) {
     padding-bottom:25px;
+  }
+
+  @media screen AND (max-width:767px) {
+    top: 0;
   }
 
   .nav-list {
