@@ -126,15 +126,6 @@ export class MyStocksComponent implements OnInit, OnDestroy {
         }
         return Observable.empty();
       }).subscribe();
-
-    // // TODO: Uncomment for recently viewed functionality
-    // const recentlyViewedString = localStorage.getItem('recentlyViewed');
-    // if (recentlyViewedString) {
-    //   const viewed = JSON.parse(recentlyViewedString).symbols;
-    //   Observable.from(viewed)
-    //     .flatMap(ticker => this.ideasService.getStockCardData(ticker as string))
-    //     .subscribe(res => this.recentlyViewed.push(res));
-    // }
   }
 
   ngOnDestroy() {
