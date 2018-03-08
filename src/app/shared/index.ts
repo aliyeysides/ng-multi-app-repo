@@ -8,10 +8,7 @@ import {SHARED_COMPONENTS} from './components/index';
 import {FullListModalComponent} from "app/shared/components/idea-lists";
 import {BusyModule} from 'angular2-busy';
 import {PipesModule} from './pipes/index';
-import {MatInputModule} from '@angular/material/input';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
+import {MaterialModule} from './modules/material';
 
 @NgModule({
   imports: [
@@ -21,10 +18,7 @@ import {MatIconModule} from '@angular/material/icon';
     RouterModule,
     BusyModule,
     PipesModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatIconModule
+    MaterialModule
   ],
   exports: [
     CommonModule,
@@ -33,6 +27,7 @@ import {MatIconModule} from '@angular/material/icon';
     RouterModule,
     BusyModule,
     PipesModule,
+    MaterialModule,
     ...SHARED_COMPONENTS
   ],
   entryComponents: [

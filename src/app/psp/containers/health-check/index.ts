@@ -14,29 +14,12 @@ import {TooltipModule, BsDropdownModule} from 'ngx-bootstrap';
 import {MarketsSummaryService} from '../../../services/markets-summary.service';
 import {HealthCheckService} from '../../../services/health-check.service';
 
-import {
-  MatExpansionModule,
-  MatIconModule,
-  MatMenuModule,
-  MatButtonModule,
-  MatTabsModule,
-  MatSnackBarModule,
-  MatTooltipModule
-} from '@angular/material';
-
 @NgModule({
   imports: [
     routing,
     SharedModule,
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
-    MatExpansionModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatSnackBarModule,
-    MatTooltipModule
   ],
   exports: [HealthCheckComponent],
   declarations: [

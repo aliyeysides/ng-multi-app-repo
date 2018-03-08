@@ -14,15 +14,17 @@ declare var gtag: Function;
   template: `
     <div class="col-12 stocklist__overview"
          [ngClass]="{'stocklist__overview--green': status?.avgPercentageChange > 0,'stocklist__overview--red': status?.avgPercentageChange < 0 }">
-      <div class="btn-group" dropdown [autoClose]="true">
-        <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+      <div class="btn-group">
+        <button class="btn btn-primary dropdown-toggle" mat-icon-button [matMenuTriggerFor]="appMenu">
           {{ selectedListName }}
         </button>
-        <ul *dropdownMenu class="dropdown-menu" role="menu">
-          <li class="label">Your Stock Lists</li>
-          <li (click)="selectList(list)" *ngFor="let list of userlists" role="menuitem"><a
-            class="dropdown-item">{{ list['name'] }}</a></li>
-        </ul>
+
+        <mat-menu #appMenu="matMenu">
+          <button mat-menu-item class="label">My Current Lists</button>
+          <button mat-menu-item (click)="selectList(list)" *ngFor="let list of userlists" role="menuitem">
+            <a class="dropdown-item">{{ list['name'] }}</a>
+          </button>
+        </mat-menu>
       </div>
     </div>
 
@@ -104,24 +106,6 @@ declare var gtag: Function;
             </div>
           </div>
         </li>
-        <!--<li class="heading__recent">-->
-          <!--<h3>Recently Viewed</h3>-->
-        <!--</li>-->
-        <!--<li (click)="selectStock(recent['meta-info']['symbol'])" *ngFor="let recent of recentlyViewed" class="row list__entry">-->
-          <!--<div class="col-3 list-entry__pgr">-->
-            <!--<img class="align-absolute"-->
-                 <!--src="{{ appendPGRImage(recent['pgr']['Corrected PGR Value'], recent['pgr']['PGR Value']) }}">-->
-          <!--</div>-->
-          <!--<div class="col-3" style="padding-left:0;">-->
-            <!--<p class="text-left">{{ recent['meta-info']['symbol'] }}</p>-->
-          <!--</div>-->
-          <!--<div class="col-3">-->
-            <!--<p>{{ recent['meta-info']['Last'] }}</p>-->
-          <!--</div>-->
-          <!--<div class="col-3">-->
-            <!--<p>(<span *ngIf="stock.Change>0">+</span>{{ recent['meta-info']['Percentage '] }}%)</p>-->
-          <!--</div>-->
-        <!--</li>-->
       </ul>
       <ul *ngIf="!myStocks?.length">
         <p class="empty-chart">Search for a stock to get started.</p>
@@ -150,10 +134,10 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
         if (ordArr.length <= next) this.selectStock(ordArr[0].symbol);
       }
       if (e.key === "ArrowUp") {
-        if (indx-1 >= 0) this.selectStock(ordArr[indx-1].symbol);
+        if (indx - 1 >= 0) this.selectStock(ordArr[indx - 1].symbol);
       }
       if (e.key === "ArrowDown") {
-        if (ordArr.length > indx+1) this.selectStock(ordArr[indx+1].symbol);
+        if (ordArr.length > indx + 1) this.selectStock(ordArr[indx + 1].symbol);
       }
     }
   }

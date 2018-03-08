@@ -11,6 +11,7 @@ import {SignalService} from '../../../services/signal.service';
 
 import * as moment from 'moment';
 import {ReportService} from '../../../services/report.service';
+import {MatSnackBar} from '@angular/material';
 
 declare var gtag: Function;
 
@@ -20,7 +21,7 @@ declare var gtag: Function;
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 col-md-4 col-xl-3 component--mystocks">
-          <cpt-my-stocks-list [ngBusy]="loading" (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
+          <cpt-my-stocks-list (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
                               (removeStockClicked)="removeStock($event)"
                               (updateData)="updateData()"
                               (stockClicked)="selectStock($event)"
@@ -77,6 +78,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
               private reportService: ReportService,
               private ideasService: IdeasService,
               private route: ActivatedRoute,
+              public snackBar: MatSnackBar,
               private router: Router,
               private signalService: SignalService) {
     const mobWidth = (window.screen.width);
@@ -85,7 +87,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loading = this.authService.currentUser$
+    this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
       .do(() => this.currentList = this.healthCheck.currentList)
       .take(1)
@@ -126,15 +128,6 @@ export class MyStocksComponent implements OnInit, OnDestroy {
         }
         return Observable.empty();
       }).subscribe();
-
-    // // TODO: Uncomment for recently viewed functionality
-    // const recentlyViewedString = localStorage.getItem('recentlyViewed');
-    // if (recentlyViewedString) {
-    //   const viewed = JSON.parse(recentlyViewedString).symbols;
-    //   Observable.from(viewed)
-    //     .flatMap(ticker => this.ideasService.getStockCardData(ticker as string))
-    //     .subscribe(res => this.recentlyViewed.push(res));
-    // }
   }
 
   ngOnDestroy() {
@@ -181,6 +174,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   removeStock(ticker: string) {
     this.ideasService.deleteSymbolFromList(this.listId, ticker)
       .take(1)
+      .finally(() => this.openSnackBar(ticker))
       .subscribe(res => this.updateData());
     gtag('event', 'remove_stock_clicked', {
       'event_category': 'engagement',
@@ -213,6 +207,15 @@ export class MyStocksComponent implements OnInit, OnDestroy {
     if (arr) {
       return arr.filter(x => x['symbol'] == ticker).length > 0;
     }
+  }
+
+  openSnackBar(ticker: string) {
+    let snackBarRef = this.snackBar.open(ticker + ' removed', 'Undo', {
+      duration: 3000
+    });
+    snackBarRef.onAction().subscribe(() => {
+      this.addStock(ticker);
+    });
   }
 
 }
