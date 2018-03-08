@@ -21,7 +21,7 @@ declare var gtag: Function;
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 col-md-4 col-xl-3 component--mystocks">
-          <cpt-my-stocks-list [ngBusy]="loading" (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
+          <cpt-my-stocks-list (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
                               (removeStockClicked)="removeStock($event)"
                               (updateData)="updateData()"
                               (stockClicked)="selectStock($event)"
@@ -87,7 +87,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loading = this.authService.currentUser$
+    this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
       .do(() => this.currentList = this.healthCheck.currentList)
       .take(1)

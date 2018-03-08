@@ -235,7 +235,8 @@ declare var gtag: Function;
         <!-- STOCK VIEW MAIN CHART -->
         <div class="row stock-info stock-info--chart">
           <div class="col-12 main-chart">
-            <cpt-zingchart [ngBusy]="loading" [chart]="mainChart"></cpt-zingchart>
+            <span *ngIf="loading"><mat-spinner></mat-spinner></span>
+            <cpt-zingchart *ngIf="!loading" [chart]="mainChart"></cpt-zingchart>
           </div>
 
           <div class="col-12">
@@ -1434,7 +1435,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     'technicals': true,
     'experts': true
   };
-  loading: Subscription;
+  loading: boolean;
   reportDataSub: Subscription;
 
   timespanPerChange: number;
@@ -1475,7 +1476,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['stock'] && this.loading) {
-      this.loading.unsubscribe();
+      this.loading = false;
     }
     if (changes['stock']) {
       this.ngOnInit();
@@ -1577,7 +1578,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getMainChart(stock: string, components?: string) {
-    this.loading = this.reportService.getStockSummaryData(stock, components)
+    this.loading = true;
+    this.reportService.getStockSummaryData(stock, components)
       .take(1)
       .subscribe(data => {
         this.data = data;
@@ -1607,7 +1609,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           height: 610,
           width: undefined
         };
-        this.loading ? this.loading.unsubscribe() : null;
+        this.loading ? this.loading = false : null;
         this.cd.markForCheck();
       });
   }
@@ -1643,7 +1645,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   getFiveYearChart() {
     this.current = '5Y';
-    this.loading = new Subscription();
+    this.loading = true;
 
     const closePrices = this.data['five_year_chart_data']['close_price'].map(x => +x).reverse();
     const dates = this.data['five_year_chart_data']['calculations_dates'].slice().reverse();
@@ -1669,13 +1671,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       height: 600,
       width: undefined
     };
-    this.loading ? this.loading.unsubscribe() : null;
+    this.loading ? this.loading = false : null;
     this.cd.detectChanges();
   }
 
   toggleChartTime(span: string) {
     this.current = span;
-    this.loading = new Subscription();
+    this.loading = true;
 
     var cut = 0;
     switch (span) {
@@ -1722,7 +1724,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       height: 590,
       width: undefined
     };
-    this.loading ? this.loading.unsubscribe() : null;
+    this.loading ? this.loading = false : null;
     this.cd.detectChanges();
     gtag('event', 'chart_timespan_toggle', {
       'event_category': 'engagement',

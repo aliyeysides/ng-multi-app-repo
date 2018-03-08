@@ -10,6 +10,7 @@ import {
   MatInputModule,
   MatAutocompleteModule,
   MatFormFieldModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 @NgModule({
@@ -24,6 +25,7 @@ import {
     MatInputModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatExpansionModule,
@@ -36,6 +38,7 @@ import {
     MatInputModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule {}
