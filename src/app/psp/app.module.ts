@@ -14,13 +14,9 @@ import {APP_CONTAINER_MODULES} from './containers/index';
 import {UtilService} from '../services/util.service';
 import {AuthService} from '../services/auth.service';
 
-import {BusyModule} from 'angular2-busy';
-import {loadingMaskConfig3} from '../../loading-mask-config';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {IdeasService} from '../services/ideas.service';
 import {SignalService} from '../services/signal.service';
 
-import {NotificationsService} from 'angular2-notifications';
 import {SymbolSearchService} from '../services/symbol-search.service';
 import {PspAuthGuard} from '../shared/guards/psp-auth.guard';
 import {PspOnboardingComponent} from './core/psp-onboarding/psp-onboarding.component';
@@ -30,8 +26,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import {AuthInterceptor} from '../shared/inteceptors/auth.inteceptor';
 import {MarketSummaryModule} from '../bear/core/market-summary';
-
-import {MatTooltipModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -46,8 +40,6 @@ import {MatTooltipModule} from '@angular/material';
     PspOnboardingModule,
     MarketSummaryModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
-    MatProgressSpinnerModule,
-    // BusyModule.forRoot(loadingMaskConfig3),
     ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES,
   ],
@@ -58,7 +50,6 @@ import {MatTooltipModule} from '@angular/material';
     IdeasService,
     HealthCheckService,
     SignalService,
-    NotificationsService,
     SymbolSearchService,
     {
       provide: HTTP_INTERCEPTORS,

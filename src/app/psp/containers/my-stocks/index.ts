@@ -7,7 +7,6 @@ import {SharedModule} from '../../../shared/index';
 
 import {TooltipModule, BsDropdownModule} from 'ngx-bootstrap';
 import {ReportService} from '../../../services/report.service';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -15,7 +14,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     SharedModule,
     TooltipModule,
     BsDropdownModule,
-    MatProgressSpinnerModule
   ],
   exports: [MyStocksComponent],
   declarations: [

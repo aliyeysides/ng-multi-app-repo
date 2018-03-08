@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {EarningsReport, ExpectedEarningsReports} from '../../../../../shared/models/health-check';
+import {ExpectedEarningsReports} from '../../../../../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 
 import * as moment from 'moment';

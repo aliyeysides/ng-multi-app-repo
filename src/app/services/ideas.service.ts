@@ -25,7 +25,6 @@ export class IdeasService {
   updateAlerts$ = this._updateAlerts.asObservable();
 
   constructor(private utilService: UtilService,
-              private toast: NotificationsService,
               private http: HttpClient,
               private authService: AuthService) {
   }
@@ -94,14 +93,12 @@ export class IdeasService {
         if (allowed) {
           return this.http.get(addStockIntoListUrl, { params, withCredentials: true }).map(res => {
             Object.keys(res).forEach((key) => {
-              this.toast.success('Success!', 'Successfully added ' + key);
               this._updateAlerts.next();
             });
             return res as Observable<any>;
           }).catch((err) => Observable.throw(err))
 
         } else {
-          this.toast.error('Oops...', "You have reached the 30 stock limit for what can be added to your user list. To add a stock, you must first remove something from your list.");
           return Observable.throw("You have reached the 30 stock limit for what can be added to your user list. To add a stock, you must first remove something from your list.")
         }
       });
