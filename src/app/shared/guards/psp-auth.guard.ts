@@ -1,6 +1,5 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {Subject} from 'rxjs/Subject';
 import {AuthService} from '../../services/auth.service';
 import {UtilService} from '../../services/util.service';
 import {AuthGuard} from './auth.guard';
