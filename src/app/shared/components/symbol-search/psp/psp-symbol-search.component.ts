@@ -30,16 +30,16 @@ declare let gtag: Function;
                  placeholder="Search and Add"
                  [matAutocomplete]="auto"
                  aria-describedby="basic-addon1">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-optgroup *ngIf="!searchResults.length">
+          <mat-autocomplete #auto="matAutocomplete" class="search__dropdown">
+            <mat-optgroup *ngIf="!searchResults.length" class="search__entry">
               <mat-option>
                 FACEBOOK
               </mat-option>
             </mat-optgroup>
             <mat-optgroup *ngIf="searchResults.length">
               <mat-option *ngFor="let result of searchResults" [value]="result.CompanyName">
-                {{ result.Symbol }}
-                {{ result.CompanyName }}
+                <span class="ticker">{{ result.Symbol }}</span>
+                <span class="company">{{ result.CompanyName }}</span>
               </mat-option>
             </mat-optgroup>
           </mat-autocomplete>

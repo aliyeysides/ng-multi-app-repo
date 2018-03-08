@@ -7,8 +7,8 @@
 
     .search-box {
       height: 36px;
-      font-size: 26px;
-      padding: 3px 5px 3px 35px;
+      font-size: 24px;
+      padding: 4px 5px 4px 45px;
       border-radius: 30px;
       background-color: #f8f8f8;
       box-shadow: inset 0px 0px 8px 0px rgba(0, 0, 0, 0);
@@ -28,9 +28,10 @@
       height: 36px;
       margin: 0px;
       position: absolute;
-      top: 1px;
+      top: 3px;
       left: 6px;
       font-size: 26px;
+      line-height: 36px;
       opacity: 0.4;
       cursor: default;
     }
@@ -46,7 +47,68 @@
     color: #ccc;
   }
   .search__dropdown {
-    top:42px;
+    border-radius: 10px;
+
+    .search__entry {
+/*      height: 60px;
+      color: #484848;
+      width: 100%;
+      padding:0 15px;*/
+
+      .company {
+        font-weight: 600;
+        font-size: 20px;
+        color: $font-color;
+        line-height: 60px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .ticker {
+        font-weight: 800;
+        font-size: 28px;
+        line-height: 60px;
+        color: $font-color;
+      }
+
+      .search__action {
+        opacity: 1;
+        position: relative;
+
+        p {
+          float: right;
+          text-align: left;
+          color: $font-color;
+          font-size: 15px;
+          line-height: 40px;
+          text-transform: uppercase;
+          font-weight: 600;
+          width: 100%;
+          display: block;
+          cursor: pointer;
+
+          i {
+            display: inline-block;
+            opacity: 0.7;
+            font-size: 28px;
+            vertical-align: middle;
+          }
+        }
+
+        &:hover {
+          p {
+            i {
+              opacity: 1;
+            }
+          }
+        }
+      }
+
+      &:hover {
+        background-color: rgba(0,0,0,0.125);
+      }
+    }
   }
 }
 
@@ -94,7 +156,7 @@
   padding:0;
 }
 
-
+/*
 .search__dropdown {
   position: absolute;
   top:49px;
@@ -210,7 +272,7 @@
     margin: 20px 0;
     color: $font-color;
   }
-}
+}*/
 
 
 

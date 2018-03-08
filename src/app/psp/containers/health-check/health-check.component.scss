@@ -589,12 +589,13 @@
 		          		display: flex;
 		          		position: absolute;
 		          		left:12px;
-		          		font-size: 22px;
+		          		top:3px;
+		          		font-size: 20px;
 		          		font-weight: 600;
 		          		line-height: 36px;
 
 			        	@media screen AND (min-width: 1024px) {
-							left: 241px;
+							left: 24px;
 						}
 
 					  	@media screen AND (min-width: 1200px) {
@@ -606,38 +607,44 @@
 						}
 
 			          	.company {
-			            	margin-right: 20px;
+			            	margin-right: 25px;
 			            	color:$font-color--mid;
+			            	font-weight: 400;
 			          	}
 			          	.industry {
-			            	margin-right: 20px;
-			            	font-size: 18px;
+			            	font-size: 20px;
 			            	font-weight: 400;
 			            	font-style: italic;
+			            	color:$font-color;
 			          	}
-			          	.close {
-
+			          	.prices {
+			            	margin-right: 25px;
+			            	font-weight: 600;
+			            	color:$font-color;
 			          	}
 		        	}
 
 			        .mat-raised-button {
 			            position: relative;
 			            cursor: pointer;
-			            overflow: hidden;
 			            outline: 0;
+			            overflow: hidden;
 			            border: none;
-			            vertical-align: baseline;
 			            text-align: center;
-			            margin: 0 8px 0 8px;
-			            min-width: 38px;
-			            //width: 38px;
+			            margin: 0 8px;
+			            min-width: 36px;
 			            font-size: 20px;
-			            line-height: 38px;
-			            padding: 0px;
+			            font-weight: 400;
+			            line-height: 36px;
+			            padding: 0px 15px;
 			            border-radius: 20px;
 			            transform: translate3d(0,0,0);
 			            transition: background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);
-			            box-shadow: 0 1px 1px -2px rgba(0,0,0,0), 0 2px 2px 0 rgba(0,0,0,0), 0 1px 5px 0 rgba(0,0,0,.0);
+			            box-shadow: none;
+
+			            @media screen AND (max-width: 767px) {
+			            	padding: 0px;
+			            }
 			        }
 			        .mat-raised-button.remove {
 			            background-color: #666;
