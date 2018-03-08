@@ -11,6 +11,7 @@ import {SignalService} from '../../../services/signal.service';
 
 import * as moment from 'moment';
 import {ReportService} from '../../../services/report.service';
+import {MatSnackBar} from '@angular/material';
 
 declare var gtag: Function;
 
@@ -77,6 +78,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
               private reportService: ReportService,
               private ideasService: IdeasService,
               private route: ActivatedRoute,
+              public snackBar: MatSnackBar,
               private router: Router,
               private signalService: SignalService) {
     const mobWidth = (window.screen.width);
@@ -172,6 +174,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   removeStock(ticker: string) {
     this.ideasService.deleteSymbolFromList(this.listId, ticker)
       .take(1)
+      .finally(() => this.openSnackBar(ticker))
       .subscribe(res => this.updateData());
     gtag('event', 'remove_stock_clicked', {
       'event_category': 'engagement',
@@ -204,6 +207,15 @@ export class MyStocksComponent implements OnInit, OnDestroy {
     if (arr) {
       return arr.filter(x => x['symbol'] == ticker).length > 0;
     }
+  }
+
+  openSnackBar(ticker: string) {
+    let snackBarRef = this.snackBar.open(ticker + ' removed', 'Undo', {
+      duration: 3000
+    });
+    snackBarRef.onAction().subscribe(() => {
+      this.addStock(ticker);
+    });
   }
 
 }

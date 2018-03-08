@@ -18,10 +18,10 @@ import {IdeasService} from '../services/ideas.service';
 import {SignalService} from '../services/signal.service';
 import {SymbolSearchService} from '../services/symbol-search.service';
 
+import {SharedModule} from '../shared/index';
 import {PspAuthGuard} from '../shared/guards/psp-auth.guard';
 import {AuthInterceptor} from '../shared/inteceptors/auth.inteceptor';
 
-import {SharedModule} from '../shared/index';
 import {PspOnboardingComponent} from './core/psp-onboarding/psp-onboarding.component';
 import {PspOnboardingModule} from './core/psp-onboarding/index';
 import {MarketSummaryModule} from '../bear/core/market-summary';

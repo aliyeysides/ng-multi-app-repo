@@ -42,33 +42,33 @@ declare var gtag: Function;
           <h1 class="ticker">{{ stock }}</h1>
           <p *ngIf="!is_etf" class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
         </div>
-        <div tooltip="Add stock to list" placement="auto" *ngIf="!resultInUserList(userStocks, stock) && !is_etf"
+        <div matTooltip="Add stock to list" [matTooltipPosition]="'after'" [matTooltipShowDelay]="500" *ngIf="!resultInUserList(userStocks, stock) && !is_etf"
              (click)="addStock(stock);$event.stopPropagation()"
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/ux__plus--circle.svg">
         </div>
-        <div tooltip="Remove stock from list" placement="auto" *ngIf="resultInUserList(userStocks, stock)"
+        <div matTooltip="Remove stock from list" [matTooltipPosition]="'after'" [matTooltipShowDelay]="500" *ngIf="resultInUserList(userStocks, stock)"
              (click)="removeStock(stock);$event.stopPropagation()"
              class="header__button header__button--right">
           <img class="align-absolute" src="./assets/imgs/ux__minus--circle.svg">
         </div>
         <div *ngIf="!is_etf" class="header__button header__button--pdf">
-          <button tooltip="Download Report PDF" placement="bottom" class="align-absolute"
+          <button matTooltip="Download PDF Report" [matTooltipPosition]="'before'" [matTooltipShowDelay]="500" class="align-absolute"
                   (click)="getPDFStockReport(stock)"><i class="fal fa-file-pdf" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <div tooltip="Jump to Financials" placement="auto" class="anchor"
+          <button mat-raised-button matTooltip="Jump to Financials" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor"
                (click)="jumpToFragment(financials, 'Financials');$event.stopPropagation()"><i
-            class="far fa-university" aria-hidden="true"></i></div>
-          <div tooltip="Jump to Earnings" placement="auto" class="anchor"
+            class="far fa-university" aria-hidden="true"></i></button>
+          <button mat-raised-button matTooltip="Jump to Earnings" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor"
                (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()"><i class="far fa-money-bill"></i>
-          </div>
-          <div tooltip="Jump to Technicals" placement="auto" class="anchor"
+          </button>
+          <button mat-raised-button matTooltip="Jump to Technicals" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor"
                (click)="jumpToFragment(technicals, 'Technicals');$event.stopPropagation()"><i
-            class="far fa-chart-pie"></i></div>
-          <div tooltip="Jump to Experts" placement="auto" class="anchor"
+            class="far fa-chart-pie"></i></button>
+          <button mat-raised-button matTooltip="Jump to Experts" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor"
                (click)="jumpToFragment(experts, 'Experts');$event.stopPropagation()"><i
-            class="far fa-users" aria-hidden="true"></i></div>
+            class="far fa-users" aria-hidden="true"></i></button>
         </div>
       </div>
 
