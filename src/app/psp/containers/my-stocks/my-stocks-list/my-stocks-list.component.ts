@@ -15,26 +15,16 @@ declare var gtag: Function;
     <div class="col-12 stocklist__overview"
          [ngClass]="{'stocklist__overview--green': status?.avgPercentageChange > 0,'stocklist__overview--red': status?.avgPercentageChange < 0 }">
       <div class="btn-group">
-      
-        <!--<button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">-->
-          <!--{{ selectedListName }}-->
-        <!--</button>-->
-        <!--<ul *dropdownMenu class="dropdown-menu" role="menu">-->
-          <!--<li class="label">Your Stock Lists</li>-->
-          <!--<li (click)="selectList(list)" *ngFor="let list of userlists" role="menuitem"><a-->
-            <!--class="dropdown-item">{{ list['name'] }}</a></li>-->
-        <!--</ul>-->
-        
-        <!--<button class="btn btn-primary dropdown-toggle" mat-icon-button [matMenuTriggerFor]="appMenu">-->
-          <!--{{ selectedListName }}-->
-        <!--</button>-->
+        <button class="btn btn-primary dropdown-toggle" mat-icon-button [matMenuTriggerFor]="appMenu">
+          {{ selectedListName }}
+        </button>
 
-        <!--<mat-menu #appMenu="matMenu">-->
-          <!--<button mat-menu-item class="label">My Current Lists</button>-->
-          <!--<button mat-menu-item (click)="selectList(list)" *ngFor="let list of userlists" role="menuitem">-->
-            <!--<a class="dropdown-item">{{ list['name'] }}</a>-->
-          <!--</button>-->
-        <!--</mat-menu>-->
+        <mat-menu #appMenu="matMenu">
+          <button mat-menu-item class="label">My Current Lists</button>
+          <button mat-menu-item (click)="selectList(list)" *ngFor="let list of userlists" role="menuitem">
+            <a class="dropdown-item">{{ list['name'] }}</a>
+          </button>
+        </mat-menu>
       </div>
     </div>
 
