@@ -8,10 +8,13 @@
 	z-index: 10;
 	position:fixed;
 	left:0;
-	top:90px;
+	top:92px;
 
 	@media screen AND (min-width:768px) {
 		z-index: 8;
+	}
+	@media screen AND (max-width:991px) {
+		top:45px;
 	}
 }
 

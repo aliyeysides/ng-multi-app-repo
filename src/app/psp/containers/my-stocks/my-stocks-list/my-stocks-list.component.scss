@@ -3,6 +3,7 @@
 
 .stocklist__overview {
 	background: $gradient--pulse-grey;
+	height: 58px;
 
 	@media screen AND (min-width:768px) {
 		border-right: 2px solid #ffffff;
@@ -18,11 +19,11 @@
 		.btn-primary {
 			text-align: center;
 		    border: 0;
-		    padding: 6px 38px 5px 10px;
+		    padding: 7px 15px 6px 0px;
 		    border-radius: 0;
 			cursor: pointer;
 	  		background-color: transparent;
-		    font-size: 30px;
+		    font-size: 28px;
 		    line-height: 1;
 			color: #ffffff;
 			box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
@@ -37,7 +38,7 @@
 		}
 		&:after {
 		    font-family: "Font Awesome 5 Pro";
-		    content: "\f13a ";
+		    content: "\f107 ";
 		    display: inline-block;
 		    position: absolute;
 		    right: 0px;

@@ -34,7 +34,7 @@ declare var gtag: Function;
          'none': symbolData ? symbolData['metaInfo'][0]['PGR'] <= 0 : null }">
 
       <!-- STOCK VIEW HEADER -->
-      <div (click)="jumpToFragment(top, 'Top');$event.stopPropagation()" class="stockview__header">
+      <div (click)="jumpToFragment(top, 'Top');$event.stopPropagation()" class="stockview__header" id="stockview">
         <div (click)="closeReport()" class="header__button header__button--left">
           <img class="align-absolute" src="./assets/imgs/icon_back-arrow--white.svg">
         </div>

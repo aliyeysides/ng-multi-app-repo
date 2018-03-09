@@ -77,6 +77,10 @@ button {
   background: transparent;
   cursor: pointer;
   font-family: $font-stack !important;
+
+  &:focus {
+    outline:0;
+  }
 }
 span, button {
   font-family: $font-stack !important;
