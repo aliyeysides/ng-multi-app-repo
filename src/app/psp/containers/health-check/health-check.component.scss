@@ -1146,7 +1146,26 @@
 		  	cursor: default;
 		}
 	}
+	.powergrid__empty {
+		background-color: #ddd;
+		height: 48px;
+		border-radius: 8px;
+		display: block;
+		width: 100%;
+		margin:0px 0 10px;
+
+		.none {
+		  	color:#ffffff;
+		  	font-weight: 600;
+		  	font-size: 18px;
+		  	line-height: 48px;
+		  	overflow: hidden;
+		  	text-overflow: ellipsis;
+		  	white-space: nowrap;
+		}
+	}
 }
+
 .flex-md-last.powerGrid {
 	margin-bottom: 20px;
 }

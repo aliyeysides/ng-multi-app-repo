@@ -13,7 +13,7 @@ declare var gtag: Function;
       <div class="panel container article__masthead">
         <div class="row no-gutters justify-content-center masthead__head">
           <div class="col-12 col-md-6 masthead__logo">
-            <img class="align-absolute" src="http://www.chaikinanalytics.com/images/logo__market-insights.png">
+            <img class="float-md-left" src="http://www.chaikinanalytics.com/images/logo__market-insights.png">
           </div>
           <div class="col-12 col-md-6 masthead__date">
             <div class="section--date-select">
