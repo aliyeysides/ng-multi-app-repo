@@ -18,6 +18,12 @@ import {MatAutocompleteTrigger} from '@angular/material';
 
 declare let gtag: Function;
 
+interface SearchResult {
+  Symbol: string,
+  CompanyName: string,
+  is_etf: boolean
+}
+
 @Component({
   selector: 'cpt-psp-symbol-search',
   template: `
@@ -32,13 +38,13 @@ declare let gtag: Function;
                  aria-describedby="basic-addon1">
           <mat-autocomplete #auto="matAutocomplete">
             <mat-optgroup *ngIf="!searchResults.length">
-              <mat-option>
-                <span class="ticker">FB</span>
-                <span class="company">Facebook</span>
+              <mat-option *ngFor="let result of searchSuggestions" [value]="result.Symbol">
+                <span class="ticker">{{ result.Symbol }}</span>
+                <span class="company">{{ result.CompanyName }}</span>
               </mat-option>
             </mat-optgroup>
             <mat-optgroup *ngIf="searchResults.length">
-              <mat-option *ngFor="let result of searchResults" [value]="result.CompanyName">
+              <mat-option *ngFor="let result of searchResults" [value]="result.Symbol">
                 <span class="ticker">{{ result.Symbol }}</span>
                 <span class="company">{{ result.CompanyName }}</span>
                 <div *ngIf="!resultInUserList(userStocks, result.Symbol)"
@@ -124,8 +130,24 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   public symbolSearchForm: FormControl;
   public searchResults: Array<any>;
   public userStocks: ListSymbolObj[];
-
   public loading: Subscription;
+  public searchSuggestions: Array<SearchResult> = [
+    {
+      Symbol: 'FB',
+      CompanyName: 'Facebook',
+      is_etf: false
+    },
+    {
+      Symbol: 'NFLX',
+      CompanyName: 'Netflix',
+      is_etf: false
+    },
+    {
+      Symbol: 'AMZN',
+      CompanyName: 'Amazon',
+      is_etf: false
+    }
+  ];
 
   constructor(public authService: AuthService,
               public ideasService: IdeasService,
