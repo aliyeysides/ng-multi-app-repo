@@ -38,13 +38,13 @@ interface SearchResult {
                  aria-describedby="basic-addon1">
           <mat-autocomplete #auto="matAutocomplete">
             <mat-optgroup *ngIf="!searchResults.length">
-              <mat-option *ngFor="let result of searchSuggestions" [value]="result.Symbol">
+              <mat-option (click)="onClick(result.Symbol)" *ngFor="let result of searchSuggestions" [value]="result.Symbol">
                 <span class="ticker">{{ result.Symbol }}</span>
                 <span class="company">{{ result.CompanyName }}</span>
               </mat-option>
             </mat-optgroup>
             <mat-optgroup *ngIf="searchResults.length">
-              <mat-option *ngFor="let result of searchResults" [value]="result.Symbol">
+              <mat-option (click)="onClick(result.Symbol)" *ngFor="let result of searchResults" [value]="result.Symbol">
                 <span class="ticker">{{ result.Symbol }}</span>
                 <span class="company">{{ result.CompanyName }}</span>
                 <div *ngIf="!resultInUserList(userStocks, result.Symbol)"
