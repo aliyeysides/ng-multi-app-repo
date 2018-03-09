@@ -93,25 +93,67 @@
       .mat-option-text {
         color: $font-color;
         font-size: 20px;
+        position: relative;
 
         .company {
           font-weight: 400;
+          display: inline-block;
+          max-width: 240px;
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
+          float: left;
         }
 
         .ticker {
           display: inline-block;
           width: 70px;
+          float: left;
           font-weight: 700;
+        }
+
+        .search__action {
+          opacity: 1;
+          display: inline-block;
+          float: right;
+          position: relative;
+
+          p {
+            float: right;
+            text-align: left;
+            color: $font-color--mid;
+            font-size: 13px;
+            line-height: 48px;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            width: 60px;
+
+            i {
+              display: inline-block;
+              opacity: 1;
+              vertical-align: text-bottom;
+              font-size: 18px;
+              color: $link-blue;
+            }
+          }
+
+          &:hover {
+            p {
+              color: $font-color;
+              
+              i {
+                opacity: 1;
+              }
+            }
+          }
         }
       }
     }
   }
 }
 .mat-optgroup .mat-option:not(.mat-option-multiple) {
-    padding-left: 18px;
+    padding-left: 15px !important;
 }
 
 

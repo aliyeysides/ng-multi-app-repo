@@ -42,12 +42,12 @@ declare let gtag: Function;
                 <span class="ticker">{{ result.Symbol }}</span>
                 <span class="company">{{ result.CompanyName }}</span>
                 <div *ngIf="!resultInUserList(userStocks, result.Symbol)"
-                    (click)="addToList(result.Symbol);$event.stopPropagation()" class="col-3 search__action">
-                  <p class="align-absolute"><i class="far fa-plus-circle"></i> &nbsp; Add stock</p>
+                    (click)="addToList(result.Symbol);$event.stopPropagation()" class="search__action">
+                  <p class=""><i class="far fa-plus-circle"></i> &nbsp;Add</p>
                 </div>
                 <div *ngIf="resultInUserList(userStocks, result.Symbol)"
-                     (click)="removeStock(result.Symbol);$event.stopPropagation()" class="col-3 search__action">
-                  <p class="align-absolute"><i class="far fa-minus-circle"></i> &nbsp; Remove stock</p>
+                     (click)="removeStock(result.Symbol);$event.stopPropagation()" class="search__action">
+                  <p class=""><i class="far fa-minus-circle"></i> &nbsp;Remove</p>
                 </div>
               </mat-option>
             </mat-optgroup>

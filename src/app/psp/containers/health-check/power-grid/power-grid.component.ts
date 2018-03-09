@@ -209,13 +209,17 @@ declare var gtag: Function;
                   <p class="industry red">{{ industry.IndustryName }}</p>
                 </div>
               </div>
-              <p *ngIf="getIndustryStockCount(weakIndustries, getStrongStock)==0">None.</p>
+              <div *ngIf="getIndustryStockCount(weakIndustries, getStrongStock)==0" class="row grid__row">
+                <div class="powergrid__empty col-6">
+                  <p class="none">None</p>
+                </div>
+              </div>
             </div>
 
             <div class="col-12 hidden-sm-up powerGrid">
               <div class="row col-headers">
                 <div class="col-6">
-                  <h4>WEAK STOCKS</h4>
+                  <h4 style="margin-top: 10px;">WEAK STOCKS</h4>
                 </div>
                 <div class="col-6">
                 </div>
@@ -234,7 +238,11 @@ declare var gtag: Function;
                   <p class="industry red">{{ industry.IndustryName }}</p>
                 </div>
               </div>
-              <p *ngIf="getIndustryStockCount(weakIndustries, getWeakStock)==0">None.</p>
+              <div *ngIf="getIndustryStockCount(weakIndustries, getWeakStock)==0" class="row grid__row">
+                <div class="powergrid__empty col-6">
+                  <p class="none">None</p>
+                </div>
+              </div>
             </div>
 
           </div>
