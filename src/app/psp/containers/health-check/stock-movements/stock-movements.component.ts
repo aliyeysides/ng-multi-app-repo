@@ -1,4 +1,14 @@
-import {Component, Output, EventEmitter, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewEncapsulation
+} from '@angular/core';
 import {ListSymbolObj, PortfolioStatus, StockStatus} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
@@ -112,7 +122,8 @@ interface FilterFunc {
                     </div>
                   </li>
                   <mat-accordion *ngIf="selectedTimespan == 'TODAY'" [multi]="false">
-                    <mat-expansion-panel [id]="stock.symbol" [disabled]="stock.arcColor==2" [expanded]="false"
+                    <mat-expansion-panel [id]="stock.symbol" [disabled]="true" [expanded]="false"
+                      (click)="gotoReport(stock.symbol)"
                       *ngFor="let stock of dailyStockData; trackBy: trackStock"
                       class="row no-gutters list-item__mover justify-content-center">
                       <mat-expansion-panel-header>
@@ -146,7 +157,8 @@ interface FilterFunc {
                     </mat-expansion-panel>
                   </mat-accordion>
                   <mat-accordion *ngIf="selectedTimespan == 'WEEK'" [multi]="false">
-                    <mat-expansion-panel [id]="stock.symbol" [disabled]="stock.arcColor==2" [expanded]="false"
+                    <mat-expansion-panel [id]="stock.symbol" [disabled]="true" [expanded]="false"
+                      (click)="gotoReport(stock.symbol)"
                       *ngFor="let stock of weeklyStockData; trackBy: trackStock"
                       class="row no-gutters list-item__mover justify-content-center">
                       <mat-expansion-panel-header>
