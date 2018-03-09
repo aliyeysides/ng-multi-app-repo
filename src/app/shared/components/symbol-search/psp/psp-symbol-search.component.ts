@@ -152,9 +152,9 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   constructor(public authService: AuthService,
               public ideasService: IdeasService,
               public symbolSearchService: SymbolSearchService,
+              public router: Router,
               private healthCheck: HealthCheckService,
-              private el: ElementRef,
-              public router: Router,) {
+              private el: ElementRef) {
     super(authService, ideasService, symbolSearchService, router);
     this.symbolSearchForm = new FormControl();
   }
