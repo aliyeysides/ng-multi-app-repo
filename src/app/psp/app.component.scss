@@ -724,59 +724,64 @@ sub {
 }
 
 
-  .add-stock {
-    position: fixed;
-    right: 2%;
-    bottom: 100px;
-    z-index: 2000;
-    width: 80px;
-    height: 80px;
-    transition: .2s;
+.add-stock {
+  position: fixed;
+  right: 2%;
+  bottom: 100px;
+  z-index: 2000;
+  width: 80px;
+  height: 80px;
+  transition: .2s;
 
-    @media screen AND (min-width: 1400px) {
-      right: calc(50% - 610px);
-    }
-    @media screen AND (min-width: 992px) AND (max-width: 1399px) {
-      right: calc(50% - 44.5%);
-    }
-    @media screen AND (max-width: 575px) {
-      right: -3%;
-      bottom: 60px;
-    }
+  @media screen AND (min-width: 1400px) {
+    right: calc(50% - 610px);
+  }
+  @media screen AND (min-width: 992px) AND (max-width: 1399px) {
+    right: calc(50% - 44.5%);
+  }
+  @media screen AND (max-width: 575px) {
+    right: -3%;
+    bottom: 60px;
+
     &:hover {
-      bottom: 104px;
+      bottom: 64px;
+    }
+  }
+  &:hover {
+    bottom: 104px;
+  }
+
+
+  button {
+    outline: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ddd;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    position: relative;
+    box-shadow: inset 0 0 0 4px rgba(255,255,255,1), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.04), 0 1px 5px 0 rgba(0, 0, 0, 0.05);
+
+    i {
+      font-size: 44px;
+      vertical-align: middle;
+      color: $font-color--mid;
+      font-weight: 400;
     }
 
+    &:focus {
+      outline:0;
+    }
 
-    button {
-      outline: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #ddd;
-      border-radius: 50%;
-      border: 1px solid #ddd;
-      position: relative;
-      box-shadow: inset 0 0 0 4px rgba(255,255,255,1), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.04), 0 1px 5px 0 rgba(0, 0, 0, 0.05);
+    &:hover {
+      background-color: $link-blue;
 
       i {
-        font-size: 44px;
-        vertical-align: middle;
-        color: $font-color--mid;
-      }
-
-      &:focus {
-        outline:0;
-      }
-
-      &:hover {
-        background-color: $link-blue;
-
-        i {
-          color: #ffffff;
-        }
+        color: #ffffff;
       }
     }
   }
+}
 
 
 .col-headers {
