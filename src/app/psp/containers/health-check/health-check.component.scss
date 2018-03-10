@@ -4,6 +4,8 @@
 
 .component--healthcheck {
 	background-color:$background--verylight;
+	position: relative;
+	height: 100%;
 }
 
 
@@ -447,8 +449,6 @@
 
 
 	.list-item__mover {
-/*	  margin:0;
-	  padding: 0px;*/
 
 		.mover__stock {
 			cursor: pointer;
@@ -458,6 +458,7 @@
 			  	font-size: 22px;
 			  	white-space: nowrap;
 			  	text-align: left;
+			  	color:$font-color;
 
 			  	@media screen AND (min-width: 1024px) {
 					padding-left: 12px;

@@ -25,6 +25,13 @@ import {MatSnackBar} from '@angular/material';
     <div [ngBusy]="loading" class="container-fluid component component--healthcheck">
       <div class="row justify-content-center">
 
+        <!-- ADD BUTTON -->
+        <div matTooltip="Add a stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="add-stock">
+          <button mat-icon-button class="button--add">
+            <i class="fas fa-plus align-absolute"></i>
+          </button>
+        </div>
+
         <!-- HEALTH-CHECK - Intro -->
         <cpt-psp-portfolio-overview [listId]="listId" (listChanged)="listChanged()" [lists]="allUserLists"
                                     [calc]="calculations" [data]="prognosisData"
