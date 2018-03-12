@@ -69,8 +69,10 @@ interface FilterFunc {
                   }}</p>
               </div>
             </div>
+          </div>
 
-            <div class="row no-gutters">
+          <div class="col-12">
+            <div [@expandHeight]="collapse" class="row">
               <div class="col-12">
                 <p class="label">SHOWING:</p>
                 <div class="btn-group" dropdown [autoClose]="true">
@@ -100,11 +102,6 @@ interface FilterFunc {
                   
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div class="col-12">
-            <div [@expandHeight]="collapse" class="row">
               <div class="col-12" id="mover-wrapper">
                 <ul class="section__chart">
                   <li class="row no-gutters col-headers justify-content-center">

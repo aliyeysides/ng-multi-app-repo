@@ -1131,10 +1131,6 @@ declare var gtag: Function;
               <img src="./assets/imgs/ux__expand--dots.svg">
               <p>Expand for details</p>
             </div>
-
-            <div class="col-12">
-              <div class="divider__full"></div>
-            </div>
           </div>
         </div>
 
@@ -1219,9 +1215,6 @@ declare var gtag: Function;
                   </div>
                 </li>
               </ul>
-            </div>
-            <div class="col-12">
-              <div class="divider__full"></div>
             </div>
           </div>
         </div>
