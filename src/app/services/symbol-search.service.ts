@@ -16,6 +16,7 @@ export class SymbolSearchService {
   }
 
   setSearchOpen(val: boolean) {
+
     this._isOpen.next(val);
   }
 
