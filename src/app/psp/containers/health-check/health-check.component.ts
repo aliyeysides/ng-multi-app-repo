@@ -3,6 +3,7 @@ import {HealthCheckService} from '../../../services/health-check.service';
 import {AuthService} from '../../../services/auth.service';
 
 import * as moment from 'moment';
+
 declare var gtag: Function;
 
 import {
@@ -17,6 +18,7 @@ import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
 import {IdeasService} from '../../../services/ideas.service';
 import {MatSnackBar} from '@angular/material';
+import {SymbolSearchService} from '../../../services/symbol-search.service';
 
 @Component({
   selector: 'cpt-health-check',
@@ -26,7 +28,7 @@ import {MatSnackBar} from '@angular/material';
       <div class="row justify-content-center">
 
         <!-- ADD BUTTON -->
-        <div matTooltip="Add a stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="add-stock">
+        <div (click)="openSearch()" matTooltip="Add a stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="add-stock">
           <button mat-icon-button class="button--add">
             <i class="fas fa-plus align-absolute"></i>
           </button>
@@ -98,6 +100,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService,
               public snackBar: MatSnackBar,
+              private symbolSearchService: SymbolSearchService,
               private ideasService: IdeasService,
               private healthCheck: HealthCheckService,
               private marketsSummary: MarketsSummaryService) {
@@ -273,6 +276,10 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
     snackBarRef.onAction().subscribe(() => {
       this.addStock(ticker);
     });
+  }
+
+  openSearch() {
+    this.symbolSearchService.setSearchOpen(true);
   }
 
 }

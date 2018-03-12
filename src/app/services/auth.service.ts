@@ -26,6 +26,7 @@ export class AuthService {
   }
 
   public setCurrentUser(usr: User) {
+    console.log('setCurrentUser', usr);
     this.currentUser.next(usr);
   }
 
