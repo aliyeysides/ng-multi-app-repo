@@ -82,7 +82,6 @@ import {BehaviorSubject} from 'rxjs';
 export class HealthCheckComponent implements OnInit, OnDestroy {
   private _uid: string;
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
-  private _autoComplete: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public listId: string;
   public calculations: PortfolioStatus;
