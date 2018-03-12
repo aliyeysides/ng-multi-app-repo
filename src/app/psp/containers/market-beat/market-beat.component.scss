@@ -8,22 +8,27 @@
 	height: 100vh;
 	background-color: #f8f8f8;
 
-	.article__masthead {
-		margin:85px auto 0;
-		padding: 0px;
+	.panel {
 		max-width: 1200px;
-	    overflow: hidden;
+		margin:85px auto 0;
+		overflow: hidden;
+		padding:0;
+		background-color: #fff;
+
+		@media screen AND (max-width: 991px) {
+	    	margin-top:40px;
+	    }	    
+	}
+
+	.article__masthead {
+		padding: 0px;
+		width: 100%;
 	    position: relative;
-	    background-color: #fff;	    
 	    background-image: 	linear-gradient(0deg, rgba(253,0,31,0.89) 0%, rgba(234,0,61,0.64) 35%, rgba(183,0,86,0.1) 80%), 
 	    					url('http://www.chaikinanalytics.com/images/BG__bearish-insights__container--5.png');
 	    background-repeat: no-repeat;
 	    background-size: cover;
 	    background-position: center;
-
-	    @media screen AND (max-width: 991px) {
-	    	margin-top:40px;
-	    }
 
 		.masthead__head {
 			padding:10px 25px;
@@ -144,10 +149,11 @@
 		.masthead__body {
 			margin:100px auto 0px;
 			width: 100%;
-			padding: 10px;
+			padding: 10px 20px;
 
 			@media screen AND (max-width: 575px) {
 				margin:20px auto 0px;
+				padding: 10px;
 			}
 
 			.headline {
@@ -159,6 +165,7 @@
 					font-size: 42px;
 					font-weight: 400;
 					line-height: 1.2;
+					text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 				}
 			}
 			.author {
@@ -173,192 +180,6 @@
 				}	
 			}
 		}
-
-/*		.masthead__background {
-			position: absolute;
-			float: left;
-			width: 100%;
-			height: 100%;
-			top:0;
-			bottom:0;
-			left:0;
-			right:0;
-			z-index: 1;
-			background-image: url('http://www.chaikinanalytics.com/images/BG__bearish-insights__container--2.png');
-	    	background-repeat: no-repeat;
-	    	background-size: cover;
-	    	background-position: center;
-		}
-	}
-
-	.article__body {
-		.featured__article {
-			.article__wrapper {
-				.article {
-
-				}
-			}
-		}
-	}
-	.section--masthead {
-		padding:100px 0 0 0;
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: 100% auto;
-
-		@media screen AND (min-width: 992px) {
-			padding:150px 0 0 0;
-		}
-
-		h2 {
-			color:#ffffff;
-			display:block;
-			background-color: rgba(0,0,0,0.7);
-			padding: 10px 0 6px;
-			margin:0;
-			text-align: center;
-			width: 100%;
-			opacity: 1;
-
-			@media screen AND (min-width: 992px) {
-				font-size: 44px;
-				font-weight: 400;
-			}
-		}
-	}
-
-	.masthead--featured {
-		background-image: url("../../../../assets/imgs/image__MI--masthead.png");
-	}
-
-	.anchor__top {
-		position: fixed;
-		right: 5px;
-		bottom:20%;
-		background-color: rgba(0, 0, 0, 0.05);
-		border: 2px solid #ffffff;
-		border-radius: 30px;
-		text-align: center;
-		padding:10px;
-		cursor: pointer;
-
-		p {
-			color:$font-color;
-			font-size: 18px;
-			font-weight: 700;
-			line-height: 28px;
-			cursor: pointer;
-		}
-	}
-
-	.section--author {
-		text-align: center;
-		font-size: 17px;
-		font-weight: 600;
-		line-height: 1;
-		padding:8px 0 15px;
-		color: $font-color--mid;
-
-		@media screen AND (min-width: 992px) {
-			padding:10px 0 20px;
-			font-size: 24px;
-		}
-	}
-
-	.section--date-select {
-
-		.btn-group {
-			margin-top: 0px;
-			margin-bottom: 5px;
-			cursor: pointer;
-
-			.btn {
-			    font-weight: 600;
-			    text-align: center;
-			    border: #ffffff;
-			    padding: 10px 25px 7px 30px;
-			    font-size: 26px;
-			    border-radius: 40px;
-			    cursor: pointer;
-			}
-			.btn-primary {
-		  		background-color: $font-color;
-			    border-color: #ffffff;
-			    font-size: 25px;
-			    line-height: 1;
-				color: #FFFFFF;
-				text-transform: uppercase;
-				box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
-				z-index: 10;
-			}
-			.dropdown-toggle {
-				min-width: 200px;
-
-				&::after {
-					vertical-align:middle;
-				}
-			}
-		}
-		.dropdown-menu {
-		    position: absolute;
-		    cursor: pointer;
-		    z-index: 5;
-		    float: left;
-		    min-width: 100%;
-		    padding: 40px 0 5px;
-		    margin: -40px 0 0;
-		    font-size: 24px;
-		    color: $font-color;
-		    width: 100%;
-		    text-align: center;
-		    list-style: none;
-		    background-color: rgba(255,255,255, 0.92);
-		    background-clip: padding-box;
-		    border: 2px solid #ffffff;
-		    border-radius: 20px;
-			box-shadow: 0 6px 40px rgba(50, 50, 50, 0.26);
-
-			.dropdown-item {
-				font-weight: 600;
-			}
-		}
-	}
-
-	.section--article {
-		position: relative;
-
-		.article__body {
-			height: 47vh;
-			overflow: hidden;
-			margin-top: 15px;
-			color: $font-color;
-			padding-bottom: 20px;
-
-			.article {
-				/*  styling done on app.component.scss  
-			}
-
-			@media screen AND (min-width: 576px) {
-				height: 52vh;
-			}
-		}
-		.article__body.opened {
-			overflow:visible;
-			height: 100%;
-
-			@media screen AND (max-width:576px) {
-				margin-top:40px;
-			}
-		}
-		.article__read-more {
-			display: block;
-			font-size: 13px;
-			color: $link-blue;
-			font-weight: 700;
-			margin: 5px 0 15px;
-			text-align: center;
-		}
-	} */
 	}
 }
 

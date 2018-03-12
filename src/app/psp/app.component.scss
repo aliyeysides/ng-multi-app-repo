@@ -248,7 +248,10 @@ sub {
 }
 
 .blur-me {
-  filter: blur(10px);
+  -webkit-filter: grayscale(96%) blur(2px);
+  filter: grayscale(96%) blur(2px);
+  transition: grayscale 0.3s;
+  /*filter: blur(2px);*/
   overflow: hidden;
 }
 

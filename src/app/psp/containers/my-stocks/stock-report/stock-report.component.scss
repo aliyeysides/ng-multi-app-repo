@@ -37,8 +37,9 @@
 
 	.panel {
 		box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
-		margin-bottom: 10px;
+		margin-bottom: 5px;
 		padding: 0 10px;
+		overflow: hidden;
 	}
 }
 
@@ -88,7 +89,7 @@
 		opacity:0.75;
 
 		@media screen AND (min-width:768px) {
-			left:2%;
+			left:1.5%;
 		}
 
 		&:hover {
@@ -109,7 +110,7 @@
 			}
 		}
 
-		@media screen AND (min-width:1023px) {
+		@media screen AND (min-width:1024px) {
 			right:1.5%;
 			display: block;
 		}
@@ -171,12 +172,12 @@
 
 			@media screen AND (min-width:768px) {
 				font-size: 40px;
-				margin: 0 4% 0 8%;
+				margin: 0 4% 0 7%;
 			}
 
-			@media screen AND (min-width:1200px) {
+			@media screen AND (min-width:1280px) {
 				font-size: 40px;
-				margin: 0 3% 0 7%;
+				margin: 0 3% 0 5%;
 			}
 		}
 
@@ -231,11 +232,13 @@
 	-webkit-overflow-scrolling: touch;
 	overflow-x: hidden;
 	padding-bottom: 148px;
+	padding-left: 4px;
+	padding-right: 4px;
 
 	@media screen AND (max-width:575px) {
 		padding-bottom: 178px;
-		padding-left: 0px;
-		padding-right: 0px;
+		padding-left: 2px;
+		padding-right: 2px;
 	}
 
 	&::-webkit-scrollbar {
@@ -840,6 +843,10 @@
 .stock-info--disclaimer {
 	padding-top:0px;
 	color:#ffffff;
+
+	@media screen AND (max-width: 575px) {
+		padding:0 10px;
+	}
 }
 
 
