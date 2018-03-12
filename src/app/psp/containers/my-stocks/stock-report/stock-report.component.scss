@@ -5,11 +5,13 @@
 /*           CONTAINER -- STOCK VIEW PAGE              */
 /*                                                     */
 
-
+.component--stockview.bullish, .component--stockview.bearish, .component--stockview.neutral {
+    background: #f8f8f8 !important;
+}
 .component--stockview {
 	position: absolute;
 	width: 100%;
-	top:92px;
+	top:90px;
 	left:0;
 	display: none;
 	color: $font-color;
@@ -37,7 +39,7 @@
 
 	.panel {
 		box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
-		margin-bottom: 5px;
+		margin-bottom: 15px;
 		padding: 0 10px;
 		overflow: hidden;
 	}
@@ -55,7 +57,7 @@
 
 .stockview__header {
 	width: 100%;
-	background-color: #ffffff;
+	background-color: #f8f8f8;
 
 	.header__button {
 		position: absolute;
@@ -164,7 +166,7 @@
 		.ticker {
 			text-align: left;
 			line-height: 62px;
-			color:#ffffff;
+			color:$font-color;
 			font-weight: 700;
 			font-size: 36px;
 			float: left;
@@ -184,7 +186,7 @@
 		.company-name {
 			text-align: left;
 			line-height: 62px;
-			color:#ffffff;
+			color:$font-color;
 			float: left;
 			font-size: 24px;
 			cursor:pointer;
@@ -232,8 +234,8 @@
 	-webkit-overflow-scrolling: touch;
 	overflow-x: hidden;
 	padding-bottom: 148px;
-	padding-left: 4px;
-	padding-right: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
 
 	@media screen AND (max-width:575px) {
 		padding-bottom: 178px;

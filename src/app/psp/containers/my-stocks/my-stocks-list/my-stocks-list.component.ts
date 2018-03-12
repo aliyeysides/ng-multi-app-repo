@@ -67,12 +67,12 @@ declare var gtag: Function;
         <li (click)="selectStock(stock.symbol)"
             *ngFor="let stock of myStocks | orderBy:orderByObject?.field:orderByObject?.ascending; trackBy: trackStock"
             class="row list__entry">
-          <div class="col-3 list-entry__pgr">
+          <div class="col-2 list-entry__pgr">
             <img class="align-absolute" src="{{ appendPGRImage(stock.PGR, stock.raw_PGR) }}">
           </div>
           <div class="col-3 list-entry__info">
             <p class="ticker">{{ stock.symbol }}</p>
-            <p class="company">{{ stock.name }}</p>
+            <!-- <p class="company">{{ stock.name }}</p> -->
           </div>
           <div class="col-3 list-entry__data">
             <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock.Last | decimal }}</p>
@@ -81,9 +81,12 @@ declare var gtag: Function;
             <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">
               (<span *ngIf="stock.Change>0">+</span>{{ stock['Percentage '] | decimal }}%)</p>
           </div>
+          <div class="col-1"></div>
+
           <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide hidden-sm-up">
             <img src="./assets/imgs/ui_slide.svg">
           </div>
+
           <div class="col-12 list-entry__overlay"
                [ngClass]="{'show': sliderObj[stock.symbol], 'green': stock.PGR>=4, 'red': stock.PGR<=2 && stock.PGR>0, 'yellow': stock.PGR==3, 'none': stock.PGR<=0 }">
             <div class="row no-gutters overlay__contents">

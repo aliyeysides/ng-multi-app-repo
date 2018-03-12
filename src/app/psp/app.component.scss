@@ -521,19 +521,8 @@ sub {
     background-color:#ffffff;
     height: 45px;
 
-    .logo--desktop {
-      display: relative;
-      padding:0 0px 0 15px;
-
-      img {
-        position: absolute;
-        height: 34px;
-        left:10px;
-        top:6px;
-      }
-    }
     .search--desktop {
-      padding:0;
+      padding:0 10px 0 0;
     }
     .markets--desktop {
       padding:0 15px 0 0;
@@ -593,6 +582,17 @@ sub {
     height: 45px;
     //background: $background--dark;
 
+    .logo--desktop {
+      display: relative;
+      padding:0 0px 0 15px;
+
+      img {
+        position: absolute;
+        height: 34px;
+        left:10px;
+        top:6px;
+      }
+    }
     .header__button {
       position: absolute;
       height: 45px;
@@ -686,10 +686,6 @@ sub {
     }
   }
 }
-
-
-
-
 
 
 
@@ -793,6 +789,8 @@ sub {
 }
 
 
+
+
 .col-headers {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -809,8 +807,6 @@ sub {
 
 
 
-
-
 .section__chart {
   margin:20px 0 30px;
 
@@ -818,7 +814,6 @@ sub {
     margin:25px 0 10px;
   }
 }
-
 
 
 
@@ -943,17 +938,18 @@ sub {
 
   .list__entry {
     position: relative;
-    padding-top:10px;
-    padding-bottom:4px;
+    height: 50px;
+    padding:0;
     cursor: pointer !important;
 
     .list-entry__pgr {
       position: relative;
       cursor: pointer;
+      padding:0;
 
       img {
-        width: 70%;
-        max-width: 55px;
+        width: 100%;
+        max-width: 32px;
       }
     }
 
@@ -962,9 +958,9 @@ sub {
       cursor: pointer;
 
       .ticker {
-        font-size: 28px;
+        font-size: 24px;
         font-weight: 700;
-        line-height: 1;
+        line-height: 50px;
         text-align: left;
         white-space: nowrap;
         cursor: pointer;
@@ -984,10 +980,10 @@ sub {
       cursor: pointer;
 
       .data {
-        font-size: 18px;
-        font-weight: 500;
+        font-size: 19px;
+        font-weight: 400;
         text-align: center;
-        line-height: 1;
+        line-height: 50px;
         cursor: pointer;
       }
     }
@@ -1026,11 +1022,11 @@ sub {
 }
 
 .overlay__contents {
-  height: 68px;
+  height: 50px;
 
   .ticker {
-    font-size: 36px;
-    line-height: 72px;
+    font-size: 32px;
+    line-height: 55px;
     color:#ffffff;
     text-align: left;
   }
@@ -1038,7 +1034,7 @@ sub {
   .data {
     font-weight: 400;
     font-size: 32px;
-    line-height: 72px;
+    line-height: 55px;
     color:#ffffff;
     text-align: left;
   }
@@ -1106,8 +1102,8 @@ sub {
 
   ul {
       list-style: disc;
-      padding: 0 2em 2em;
-      margin-top: -16px;
+      padding: 0 3em 2em;
+      margin-top: 0px;
 
       li {
         padding:5px 0 3px;
@@ -1146,6 +1142,10 @@ sub {
     font-size: 14px;
     line-height: 1.1;
     font-weight: 400;
+
+    &:first-of-type {
+      display: none;
+    }
   }
   img {
     width: auto;

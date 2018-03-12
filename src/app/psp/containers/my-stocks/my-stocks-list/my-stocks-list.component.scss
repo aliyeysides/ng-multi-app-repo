@@ -5,10 +5,6 @@
 	background: $gradient--pulse-grey;
 	height: 58px;
 
-	@media screen AND (min-width:768px) {
-		border-right: 2px solid #ffffff;
-	}
-
 	.btn-group {
 		margin-top:9px;
 		margin-bottom: 8px;
@@ -194,21 +190,13 @@
 
 .stocklist__overview--green {
   background: $gradient--pulse-green;
-
-	.btn-primary {
-	  	//color:$pulse-green !important;
-	}
 }
 .stocklist__overview--red {
   background: $gradient--pulse-red;
-
-  	.btn-primary {
-  		//color:$pulse-red !important;
-	}
 }
 
+
 .col-headers {
-	//border-bottom: $line--light--thin;
 	background-color: $background--verylight;
 	margin:0px;
 	padding: 4px 0 5px;
@@ -231,16 +219,17 @@
 
 .section__list {
 	margin-bottom: 50px;
-	background-color: #ffffff;
+	background-color: #f8f8f8;
 	padding:0;
 	
 	.list__entry {
-		border-bottom: 1px solid #f0f0f0;
+		border-bottom: 1px solid #fff;
+		background-color: #f8f8f8;
 	}
 }
 
 .heading__recent {
-	border-bottom: 2px solid #f0f0f0;
+	border-bottom: 2px solid #eee;
 	padding: 25px 0 5px;
 }
 

@@ -62,9 +62,9 @@ declare var gtag: Function;
         <p class="article__read-more">COLLAPSE ARTICLE</p>
       </div>
 
-<!--       <div class="anchor__top" *ngIf="opened" (click)="jumpToTop()">
+      <div class="anchor__top" *ngIf="opened" (click)="jumpToTop()">
         <p>Top</p>
-      </div> -->
+      </div>
       
       <!-- <div class="article__masthead">
         <div class="row justify-content-center masthead__head">
