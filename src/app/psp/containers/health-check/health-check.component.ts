@@ -19,6 +19,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {IdeasService} from '../../../services/ideas.service';
 import {MatSnackBar} from '@angular/material';
 import {SymbolSearchService} from '../../../services/symbol-search.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'cpt-health-check',
@@ -28,7 +29,7 @@ import {SymbolSearchService} from '../../../services/symbol-search.service';
       <div class="row justify-content-center">
 
         <!-- ADD BUTTON -->
-        <div (click)="openSearch()" matTooltip="Add a stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="add-stock">
+        <div (click)="openSearch();$event.stopPropagation()" matTooltip="Add a stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="add-stock">
           <button mat-icon-button class="button--add">
             <i class="fas fa-plus align-absolute"></i>
           </button>
@@ -81,6 +82,7 @@ import {SymbolSearchService} from '../../../services/symbol-search.service';
 export class HealthCheckComponent implements OnInit, OnDestroy {
   private _uid: string;
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
+  private _autoComplete: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public listId: string;
   public calculations: PortfolioStatus;

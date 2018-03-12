@@ -91,6 +91,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
 
   @HostListener('document:click', ['$event']) offClick(e: Event) {
     e.preventDefault();
+    e.stopPropagation();
     if (!this.el.nativeElement.contains(e.target) && !this.btn.contains(e.target as Node)) {
       this.toggleSearch.emit();
       return;
@@ -208,12 +209,10 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   }
 
   openAutoComplete() {
-    console.log('open');
     this.autoCompleteInput.openPanel();
   }
 
   closeAutoComplete() {
-    console.log('close');
     this.autoCompleteInput.closePanel();
   }
 
