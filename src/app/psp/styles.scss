@@ -64,7 +64,7 @@
   max-height: 360px !important;
   background: #fff;
   color: $font-color;
-  margin-top:4px;
+  margin-top:0px;
   border-radius: 0 0 5px 5px;
 
   .mat-optgroup {
@@ -98,11 +98,18 @@
         .company {
           font-weight: 400;
           display: inline-block;
-          max-width: 240px;
+          max-width: 235px;
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
           float: left;
+
+          @media screen AND (max-width: 575px) {
+            max-width: 200px;
+          }
+          @media screen AND (min-width: 1200px) {
+            max-width: 375px;
+          }
         }
 
         .ticker {
@@ -127,7 +134,7 @@
             text-transform: uppercase;
             font-weight: 600;
             cursor: pointer;
-            width: 60px;
+            width: 75px;
 
             i {
               display: inline-block;

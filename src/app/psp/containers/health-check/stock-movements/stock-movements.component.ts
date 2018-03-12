@@ -51,12 +51,6 @@ interface FilterFunc {
               </mat-tab-group>
             </div>
 
-            <div matTooltip="Add a stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="add-stock">
-              <button mat-icon-button class="button--add">
-                <i class="fas fa-plus align-absolute"></i>
-              </button>
-            </div>
-
             <div class="row">
               <div class="col-12">
                 <h2>Stock Movements</h2>
@@ -75,8 +69,10 @@ interface FilterFunc {
                   }}</p>
               </div>
             </div>
+          </div>
 
-            <div class="row no-gutters">
+          <div class="col-12">
+            <div [@expandHeight]="collapse" class="row">
               <div class="col-12">
                 <p class="label">SHOWING:</p>
                 <div class="btn-group" dropdown [autoClose]="true">
@@ -106,11 +102,6 @@ interface FilterFunc {
                   
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div class="col-12">
-            <div [@expandHeight]="collapse" class="row">
               <div class="col-12" id="mover-wrapper">
                 <ul class="section__chart">
                   <li class="row no-gutters col-headers justify-content-center">

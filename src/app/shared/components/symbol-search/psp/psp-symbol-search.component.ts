@@ -36,7 +36,7 @@ interface SearchResult {
                  placeholder="Search and Add"
                  [matAutocomplete]="auto"
                  aria-describedby="basic-addon1">
-          <mat-autocomplete #auto="matAutocomplete">
+          <mat-autocomplete #auto="matAutocomplete" class="search__dropdown">
             <mat-optgroup *ngIf="!searchResults.length">
               <mat-option (click)="onClick(result.Symbol)" *ngFor="let result of searchSuggestions" [value]="result.Symbol">
                 <span class="ticker">{{ result.Symbol }}</span>
