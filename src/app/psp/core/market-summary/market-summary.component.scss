@@ -1,0 +1,32 @@
+@import 'variablesPulse';
+
+.market-summary__contents {
+  width: 100%;
+  height: 45px;
+  padding:0;
+  white-space: nowrap;
+  overflow: hidden;
+
+  .indice {
+    display: inline-block;
+    float: right;
+    font-weight: 700;
+    font-size: 18px;
+    color: $font-color;
+    line-height: 45px;
+    margin-left: 5%;
+    margin-right: 0;
+
+    span {
+      margin-right: 5px;
+
+      i {
+      	vertical-align:middle;
+      }
+    }
+
+    &:last-child {
+      margin-left: 0px;
+    }
+  }
+}

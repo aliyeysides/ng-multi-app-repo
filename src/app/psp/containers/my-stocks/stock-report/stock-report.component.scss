@@ -43,6 +43,18 @@
 		margin-bottom: 15px;
 		padding: 5px 10px 10px;
 		overflow: hidden;
+
+		.tab--slide {
+		  width: 20%;
+		  height: 5px;
+		  background-color: $background--light;
+		  border-radius: 10px;
+		  opacity:0.5;
+		  margin: 0px 40%;
+		  cursor: pointer;
+		  position: fixed;
+		  z-index: 100;
+		}
 	}
 }
 
@@ -190,7 +202,7 @@
 			line-height: 62px;
 			color:$font-color;
 			font-weight: 700;
-			font-size: 36px;
+			font-size: 32px;
 			float: left;
 			margin: 0 4% 0 13%;
 
@@ -200,17 +212,16 @@
 			}
 
 			@media screen AND (min-width:1280px) {
-				font-size: 40px;
 				margin: 0 3% 0 5%;
 			}
 		}
 
 		.company-name {
 			text-align: left;
-			line-height: 62px;
+			line-height: 60px;
 			color:$font-color;
 			float: left;
-			font-size: 24px;
+			font-size: 26px;
 			cursor:pointer;
 			overflow: hidden;
 			white-space: nowrap;
@@ -425,7 +436,7 @@
 
 .stockview__main-rating {
 	text-align: center;
-	margin: 25px 0 0px;
+	margin: 20px 0 0px;
 	cursor: default;
 
 	@media screen AND (min-width:768px) {
@@ -568,7 +579,7 @@
 		padding:0;
 
 		@media screen AND (min-width: 992px) {
-			padding:10px 20px 20px;
+			padding:0px 20px 20px;
 		}
 	}
 }

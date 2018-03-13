@@ -9,11 +9,11 @@ import {fadeInDown} from '../../../shared/animations/fadeInDown';
     <div class="market-summary__contents">
       <p class="indice">
         <span>
-          <img *ngIf="SPY?.change<0" src="./assets/imgs/icon_arrow--down.svg">
-          <img *ngIf="SPY?.change>0" src="./assets/imgs/icon_arrow--up.svg">
-          <img *ngIf="SPY?.change==0" src="./assets/imgs/icon_arrow--nochange.svg">
+          <i *ngIf="SPY?.change<0" class="fas fa-arrow-down red"></i>
+          <i *ngIf="SPY?.change>0" class="fas fa-arrow-up green"></i>
+          <i *ngIf="SPY?.change==0" class="fas fa-window-minimize grey"></i>
         </span>
-        SPY&nbsp;
+        S&amp;P&nbsp;500&nbsp;
         <span [@fadeInDown]="fadeInDownSPYState" (@fadeInDown.done)="resetSPY()"
               [ngClass]="{'up-change':SPY?.change>0,'down-change':SPY?.change<0}">
           <span *ngIf="SPY?.change>0" class="up-change">+</span>{{SPY?.percent_change.toFixed(2) }}%
@@ -21,11 +21,11 @@ import {fadeInDown} from '../../../shared/animations/fadeInDown';
       </p>
       <p class="indice">
         <span>
-          <img *ngIf="DJI?.change<0" src="./assets/imgs/icon_arrow--down.svg">
-          <img *ngIf="DJI?.change>0" src="./assets/imgs/icon_arrow--up.svg">
-          <img *ngIf="DJI?.change==0" src="./assets/imgs/icon_arrow--nochange.svg">
+          <i *ngIf="DJI?.change<0" class="fas fa-arrow-down red"></i>
+          <i *ngIf="DJI?.change>0" class="fas fa-arrow-up green"></i>
+          <i *ngIf="DJI?.change==0" class="fas fa-window-minimize grey"></i>
         </span>
-        DIA&nbsp;
+        DOW 30&nbsp;
         <span [@fadeInDown]="fadeInDownDJIState" (@fadeInDown.done)="resetDJI()"
               [ngClass]="{'up-change':DJI?.change>0,'down-change':DJI?.change<0}">
           <span *ngIf="DJI?.change>0" class="up-change">+</span>{{DJI?.percent_change.toFixed(2) }}%
@@ -33,19 +33,16 @@ import {fadeInDown} from '../../../shared/animations/fadeInDown';
       </p>
       <p class="indice">
         <span>
-          <img *ngIf="QQQ?.change<0" src="./assets/imgs/icon_arrow--down.svg">
-          <img *ngIf="QQQ?.change>0" src="./assets/imgs/icon_arrow--up.svg">
-          <img *ngIf="QQQ?.change==0" src="./assets/imgs/icon_arrow--nochange.svg">
+          <i *ngIf="QQQ?.change<0" class="fas fa-arrow-down red"></i>
+          <i *ngIf="QQQ?.change>0" class="fas fa-arrow-up green"></i>
+          <i *ngIf="QQQ?.change==0" class="fas fa-window-minimize grey"></i>
         </span>
-        QQQ&nbsp;
+        NASDAQ&nbsp;
         <span [@fadeInDown]="fadeInDownQQQState" (@fadeInDown.done)="resetQQQ()"
               [ngClass]="{'up-change':QQQ?.change>0,'down-change':QQQ?.change<0}">
           <span *ngIf="QQQ?.change>0" class="up-change">+</span>{{QQQ?.percent_change.toFixed(2) }}%
         </span>
       </p>
-      <div class="market-summary__title">
-        <p class="current-time"><sup>*</sup>As of {{ currentTime }}</p>
-      </div>
     </div>
   `,
   styleUrls: ['./market-summary.component.scss'],
