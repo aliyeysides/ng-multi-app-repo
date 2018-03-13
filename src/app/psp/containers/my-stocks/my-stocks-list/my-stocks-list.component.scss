@@ -197,9 +197,9 @@
 
 
 .col-headers {
-	background-color: $background--verylight;
+	background-color: $background--lighter;
 	margin:0px;
-	padding: 4px 0 5px;
+	padding: 0px 0px 4px;
 
 	p {
 		display:inline-block;
@@ -211,7 +211,7 @@
 			background-color: $background--medium;
 			border-radius: 30px;
 			display: inline-block;
-			padding:5px 8px 3px;
+			padding:4px 8px 2px;
 			cursor: default;
 		}
 	}
@@ -219,18 +219,17 @@
 
 .section__list {
 	margin-bottom: 50px;
-	background-color: #f8f8f8;
+	background-color: $background--lighter;
 	padding:0;
 	
 	.list__entry {
-		border-bottom: 1px solid #fff;
-		background-color: #f8f8f8;
-	}
-}
+		border-bottom: 1px solid #f0f0f0;
+		background-color: #fcfcfc;
 
-.heading__recent {
-	border-bottom: 2px solid #eee;
-	padding: 25px 0 5px;
+		&:hover {
+			background-color: #fff;
+		}
+	}
 }
 
 

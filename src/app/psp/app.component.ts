@@ -24,7 +24,7 @@ declare let gtag: Function;
          id="page__header">
          
       <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--left" id="header_button--left">
-        <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
+        <i class="fal fa-bars"></i>
       </div>
 
       <cpt-psp-settings-menu [side]="menuPosition" [btn]="navBtn" [navOpened]="navOpened"
@@ -38,7 +38,7 @@ declare let gtag: Function;
 
       <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--right"
            id="header_button--right">
-        <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
+        <i class="fal fa-search"></i>
       </div>
     </div>
 
@@ -67,11 +67,11 @@ declare let gtag: Function;
       <!-- FIRST HEADER -->
       <div class="row header--first justify-content-center">
         <!-- SEARCH -->
-        <div class="col-6 col-xl-4 search--desktop">
+        <div class="col-6 col-lg-5 col-xl-4 search--desktop">
           <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search'"></cpt-psp-symbol-search>
         </div>
         <!-- MARKETS -->
-        <div class="col-6 col-xl-8 markets--desktop">
+        <div class="col-6 col-lg-7 col-xl-8 markets--desktop">
           <cpt-psp-market-summary id="desktop-markets"></cpt-psp-market-summary>
         </div>
       </div>

@@ -36,7 +36,7 @@ declare var gtag: Function;
       <!-- STOCK VIEW HEADER -->
       <div (click)="jumpToFragment(top, 'Top');$event.stopPropagation()" class="stockview__header" id="stockview">
         <div (click)="closeReport()" class="header__button header__button--left">
-          <img class="align-absolute" src="./assets/imgs/icon_back-arrow--white.svg">
+          <i class="fal fa-arrow-circle-left"></i>
         </div>
         <div class="header__stock">
           <h1 class="ticker">{{ stock }}</h1>
@@ -45,28 +45,28 @@ declare var gtag: Function;
         <div matTooltip="Add stock to list" [matTooltipPosition]="'after'" [matTooltipShowDelay]="500" *ngIf="!resultInUserList(userStocks, stock) && !is_etf"
              (click)="addStock(stock);$event.stopPropagation()"
              class="header__button header__button--right">
-          <img class="align-absolute" src="./assets/imgs/ux__plus--circle.svg">
+          <i class="fal fa-plus-circle"></i>
         </div>
         <div matTooltip="Remove stock from list" [matTooltipPosition]="'after'" [matTooltipShowDelay]="500" *ngIf="resultInUserList(userStocks, stock)"
              (click)="removeStock(stock);$event.stopPropagation()"
              class="header__button header__button--right">
-          <img class="align-absolute" src="./assets/imgs/ux__minus--circle.svg">
+          <i class="fal fa-minus-circle"></i>
         </div>
         <div *ngIf="!is_etf" class="header__button header__button--pdf">
           <button matTooltip="Download PDF Report" [matTooltipPosition]="'before'" [matTooltipShowDelay]="500" class="align-absolute"
                   (click)="getPDFStockReport(stock)"><i class="fal fa-file-pdf" aria-hidden="true"></i></button>
         </div>
         <div class="header__button header__button--anchors">
-          <button mat-raised-button matTooltip="Jump to Financials" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor"
+          <button mat-raised-button matTooltip="Jump to Financials" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor bullish"
                (click)="jumpToFragment(financials, 'Financials');$event.stopPropagation()"><i
             class="far fa-university" aria-hidden="true"></i></button>
-          <button mat-raised-button matTooltip="Jump to Earnings" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor"
+          <button mat-raised-button matTooltip="Jump to Earnings" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor bullish"
                (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()"><i class="far fa-money-bill"></i>
           </button>
-          <button mat-raised-button matTooltip="Jump to Technicals" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor"
+          <button mat-raised-button matTooltip="Jump to Technicals" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor bearish"
                (click)="jumpToFragment(technicals, 'Technicals');$event.stopPropagation()"><i
             class="far fa-chart-pie"></i></button>
-          <button mat-raised-button matTooltip="Jump to Experts" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor"
+          <button mat-raised-button matTooltip="Jump to Experts" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor veryBullish"
                (click)="jumpToFragment(experts, 'Experts');$event.stopPropagation()"><i
             class="far fa-users" aria-hidden="true"></i></button>
         </div>
@@ -2345,7 +2345,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     if (values) {
       return {
         "type": "bar",
-        height: 360,
+        height: 280,
         "background-color": "white",
         "tooltip": {
           "text": "$%v",
@@ -2428,7 +2428,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       const seriesD = [values[0][3], values[1][3], values[2][3]];
       return {
         "type": "bar",
-        "height": "360",
+        "height": "280",
         "background-color": "white",
         "tooltip": {
           "text": "$%v",
@@ -2555,10 +2555,10 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       ];
       return {
         "type": "scatter",
-        "height": "360",
+        "height": "280",
         "legend": {
           adjustLayout: true,
-          "offset-y": "275px",
+          "offset-y": "200px",
         },
         crosshairX: {
           lineWidth: 2,
@@ -2661,7 +2661,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     if (values) {
       return {
         "type": "bar",
-        height: 360,
+        height: 280,
         "background-color": "white",
         "tooltip": {
           "text": "$%v (M)",

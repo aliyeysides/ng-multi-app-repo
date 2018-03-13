@@ -169,13 +169,13 @@ sub {
 
 .chart-caption {
   font-family: $font-stack2;
-  font-size: 14px;
+  font-size: 12px;
   text-align: left;
   font-weight: 400;
   line-height: 1;
   cursor: default;
   font-style: italic;
-  margin-top: -10px;
+  margin-top: -5px;
   color: $font-color--mid;
 }
 
@@ -478,27 +478,24 @@ sub {
 
   .header__button {
     position: absolute;
-    height: 60%;
+    height: 100%;
     z-index: 10;
     cursor: pointer;
-    margin: .6em .7em;
+    text-align: center;
 
-    img {
-      width: auto;
-      height: 100%;
+    i {
+      font-size: 30px;
+      color: #ffffff;
+      line-height: 45px;
     }
   }
   .header__button--left {
-    left:1em;
+    left:5px;
     transition: left .5s;
     z-index: 13;
-
-    img {
-      height: 90%;
-    }
   }
   .header__button--right {
-    right:1em;
+    right:5px;
     transition: right .5s;
     z-index: 12;
   }
@@ -520,6 +517,7 @@ sub {
   .header--first {
     background-color:#ffffff;
     height: 45px;
+    overflow: hidden;
 
     .search--desktop {
       padding:0 10px 0 0;
@@ -580,7 +578,7 @@ sub {
 
   .header--second {
     height: 45px;
-    //background: $background--dark;
+    overflow: hidden;
 
     .logo--desktop {
       display: relative;
@@ -650,7 +648,7 @@ sub {
             cursor: pointer;
             font-weight: 500;
             margin: 4px 0;
-            border-radius: 20px;
+            border-radius: 5px;
           }
 
           i {
@@ -671,11 +669,9 @@ sub {
           .nav--toplevel {
             font-weight: 600;
             color:$font-color;
-            //color:#ffffff;
-            //color:$link-blue;
             background-color: rgba(255,255,255,1);
             box-shadow: inset 0 0px 5px 0px rgba(0, 0, 0, 0.3);
-            border: 1px solid #fff;
+            border: 0px solid #fff;
 
             &:hover {
               background-color: rgba(255,255,255,1);
@@ -808,7 +804,7 @@ sub {
 
 
 .section__chart {
-  margin:20px 0 30px;
+  margin:25px 0 10px;
 
   @media screen AND (max-width: 575px) {
     margin:25px 0 10px;
@@ -958,7 +954,7 @@ sub {
       cursor: pointer;
 
       .ticker {
-        font-size: 24px;
+        font-size: 26px;
         font-weight: 700;
         line-height: 50px;
         text-align: left;
@@ -991,9 +987,18 @@ sub {
 }
 .button__slide {
   position: absolute;
-  right:3%;
-  top:20px;
+  right:5px;
+  height: 50px;
+  width: 16px;
+  text-align: center;
   cursor: pointer;
+
+  i {
+    font-size: 32px;
+    color: $font-color--mid;
+    opacity: 0.33;
+    line-height: 50px;
+  }
 }
 
 
@@ -1026,31 +1031,43 @@ sub {
 
   .ticker {
     font-size: 32px;
-    line-height: 55px;
+    line-height: 52px;
     color:#ffffff;
     text-align: left;
   }
 
   .data {
     font-weight: 400;
-    font-size: 32px;
-    line-height: 55px;
+    font-size: 30px;
+    line-height: 50px;
     color:#ffffff;
     text-align: left;
   }
 
   .icon {
-    img {
-      width: 32px;
-      height: 32px;
+    text-align: center;
+
+    i {
+      font-size: 27px;
+      line-height: 50px;
+      color:#ffffff;
     }
   }
 
   .button__slide {
     position: absolute;
-    right:3%;
-    top:15px;
+    right:5px;
+    height: 50px;
+    width: 16px;
+    text-align: center;
     cursor: pointer;
+
+    i {
+      font-size: 32px;
+      color: #ffffff;
+      opacity: 0.5;
+      line-height: 50px;
+    }
   }
 }
 
@@ -1618,7 +1635,7 @@ sub {
 #qrtEPSChart,
 #epsSurprisesChart,
 #annualRevenueChart  {
-  height: 400px;
+  height: 320px;
   overflow: hidden;
 }
 
@@ -1636,12 +1653,12 @@ sub {
 
 
 .component--stockview.bullish {
-  #mainChart-graph-id0-crosshair-x-path,
+/*  #mainChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id2-crosshair-x-path,
   #mainChart-graph-id3-crosshair-x-path,
   #mainChart-graph-id4-crosshair-x-path, {
     stroke:$pulse-green__shade2;
-  }
+  }*/
   #epsSurprisesChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id0-plotset-plot-0-path,
   #epsSurprisesChart-graph-id0-legend-path {
@@ -1706,12 +1723,12 @@ sub {
 
 
 .component--stockview.bearish {
-  #mainChart-graph-id0-crosshair-x-path,
+/*  #mainChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id2-crosshair-x-path,
   #mainChart-graph-id3-crosshair-x-path,
   #mainChart-graph-id4-crosshair-x-path, {
     stroke:$pulse-red__shade2;
-  }
+  }*/
   #mainChart-graph-id1-scale-y-guide-4-path,
   #epsSurprisesChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id0-plotset-plot-0-path,
@@ -1777,12 +1794,12 @@ sub {
 
 
 .component--stockview.neutral {
-  #mainChart-graph-id0-crosshair-x-path,
+/*  #mainChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id2-crosshair-x-path,
   #mainChart-graph-id3-crosshair-x-path,
   #mainChart-graph-id4-crosshair-x-path, {
     stroke:$pulse-yellow__shade2;
-  }
+  }*/
   #mainChart-graph-id1-scale-y-guide-4-path,
   #epsSurprisesChart-graph-id0-crosshair-x-path,
   #mainChart-graph-id0-plotset-plot-0-path,
