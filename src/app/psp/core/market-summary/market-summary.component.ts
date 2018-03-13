@@ -1,10 +1,7 @@
-import {Component, OnDestroy, OnInit, NgZone} from '@angular/core';
+import {Component, OnInit, NgZone} from '@angular/core';
 import {MarketsSummaryService} from '../../../services/markets-summary.service';
-
-import * as moment from 'moment';
-import {fadeInDown} from '../../../shared/animations/fadeInDown';
 import {BaseMarketSummaryComponent} from '../../../shared/components/market-summary';
-
+import {fadeInDown} from '../../../shared/animations/fadeInDown';
 
 @Component({
   selector: 'cpt-market-summary',
@@ -51,14 +48,17 @@ import {BaseMarketSummaryComponent} from '../../../shared/components/market-summ
       </div>
     </div>
   `,
-  animations: [fadeInDown()],
-  styleUrls: ['./market-summary.component.scss']
+  styleUrls: ['./market-summary.component.scss'],
+  animations: [fadeInDown()]
 })
-export class BearMarketSummaryComponent extends BaseMarketSummaryComponent implements OnInit, OnDestroy {
+export class PspMarketSummaryComponent extends BaseMarketSummaryComponent implements OnInit {
 
   constructor(public marketsSummary: MarketsSummaryService,
               public zone: NgZone) {
     super(marketsSummary, zone);
+  }
+
+  ngOnInit() {
   }
 
 }

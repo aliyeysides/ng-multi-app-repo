@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {BearMarketSummaryComponent} from './market-summary.component';
+import {PspMarketSummaryComponent} from './market-summary.component';
 import {MarketsSummaryService} from '../../../services/markets-summary.service';
 import {SharedModule} from '../../../shared';
 
@@ -7,9 +7,9 @@ import {SharedModule} from '../../../shared';
   imports: [
     SharedModule
   ],
-  exports: [BearMarketSummaryComponent],
-  declarations: [BearMarketSummaryComponent],
+  exports: [PspMarketSummaryComponent],
+  declarations: [PspMarketSummaryComponent],
   providers: [MarketsSummaryService]
 })
-export class BearMarketSummaryModule {
+export class PspMarketSummaryModule {
 }
