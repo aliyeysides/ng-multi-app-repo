@@ -4,7 +4,7 @@ import {BaseMarketSummaryComponent} from '../../../shared/components/market-summ
 import {fadeInDown} from '../../../shared/animations/fadeInDown';
 
 @Component({
-  selector: 'cpt-market-summary',
+  selector: 'cpt-psp-market-summary',
   template: `
     <div class="market-summary__contents">
       <p class="indice">
@@ -56,9 +56,6 @@ export class PspMarketSummaryComponent extends BaseMarketSummaryComponent implem
   constructor(public marketsSummary: MarketsSummaryService,
               public zone: NgZone) {
     super(marketsSummary, zone);
-  }
-
-  ngOnInit() {
   }
 
 }

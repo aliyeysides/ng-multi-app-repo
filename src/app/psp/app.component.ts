@@ -61,7 +61,7 @@ declare let gtag: Function;
         </div>
         <!-- MARKETS -->
         <div class="col-3 col-xl-4 markets--desktop">
-          <cpt-market-summary id="desktop-markets"></cpt-market-summary>
+          <cpt-psp-market-summary id="desktop-markets"></cpt-psp-market-summary>
         </div>
       </div>
 
