@@ -21,6 +21,7 @@ export class AuthService {
   private loginParams: URLSearchParams;
 
   constructor(private utilService: UtilService,
+              private httpClient: HttpClient,
               private http: Http) {
     this.loginParams = new URLSearchParams;
   }
@@ -49,15 +50,14 @@ export class AuthService {
       },
       withCredentials: true,
     };
-    return this.utilService.getJson(getLoginUrl, options).finally(() => this.loggedIn = true);
 
-    // return this.http.get(getLoginUrl, options).map((res: Response) => {
-    //   console.log('res', res);
-    //   this.loggedIn = true;
-    //   return res;
-    // }).catch(this.utilService.handleError);
+    return this.httpClient.get(getLoginUrl, options).map((res: Response) => {
+      console.log('res', res);
+      this.loggedIn = true;
+      return res;
+    }).catch(this.utilService.handleError);
   }
-
+  //
   // public login(): Observable<any> {
   //   const email = localStorage.getItem('email');
   //   const getLoginUrl = `${this.apiHostName}/CPTRestSecure/app/user/login?`;
