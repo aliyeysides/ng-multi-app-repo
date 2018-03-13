@@ -3,11 +3,11 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
-import {SHARED_COMPONENTS} from './components/index';
+import {SHARED_COMPONENTS} from './components';
 
 import {FullListModalComponent} from "app/shared/components/idea-lists";
 import {BusyModule} from 'angular2-busy';
-import {PipesModule} from './pipes/index';
+import {PipesModule} from './pipes';
 import {MaterialModule} from './modules/material';
 
 @NgModule({

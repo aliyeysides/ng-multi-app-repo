@@ -1,8 +1,8 @@
-import {BearSymbolSearchComponent} from './symbol-search/bear/bear-symbol-search.component';
-import {IdeaListsComponent} from './idea-lists/idea-lists.component';
-import {FullListModalComponent} from './idea-lists/full-list-modal.component';
-import {PspSymbolSearchComponent} from './symbol-search/psp/psp-symbol-search.component';
-import {ChaikinChart} from './charts/zingchart.component';
+import {BearSymbolSearchComponent} from './symbol-search/bear';
+import {IdeaListsComponent} from './idea-lists';
+import {FullListModalComponent} from './idea-lists';
+import {PspSymbolSearchComponent} from './symbol-search/psp';
+import {ChaikinChart} from './charts';
 
 export const SHARED_COMPONENTS = [
   BearSymbolSearchComponent,
