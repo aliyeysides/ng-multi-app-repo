@@ -9,7 +9,7 @@ import {SymbolSearchService} from '../../../../services/symbol-search.service';
 import {IdeasService} from '../../../../services/ideas.service';
 import {AuthService} from '../../../../services/auth.service';
 import {Subscription} from 'rxjs/Subscription';
-import {BaseSymbolSearchComponent} from '../symbol-search.component';
+import {BaseSymbolSearchComponent} from '../../../../shared/components/symbol-search';
 
 declare let gtag: Function;
 

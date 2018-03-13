@@ -7,14 +7,14 @@ import {
 
 import {FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
-import {SymbolSearchService} from '../../../../services/symbol-search.service';
-import {IdeasService} from '../../../../services/ideas.service';
-import {AuthService} from '../../../../services/auth.service';
 import {Subscription} from 'rxjs/Subscription';
-import {BaseSymbolSearchComponent} from '../symbol-search.component';
-import {HealthCheckService} from '../../../../services/health-check.service';
-import {ListSymbolObj} from '../../../models/health-check';
 import {MatAutocompleteTrigger} from '@angular/material';
+import {BaseSymbolSearchComponent} from '../../../shared/components/symbol-search';
+import {ListSymbolObj} from '../../../shared/models/health-check';
+import {AuthService} from '../../../services/auth.service';
+import {IdeasService} from '../../../services/ideas.service';
+import {SymbolSearchService} from '../../../services/symbol-search.service';
+import {HealthCheckService} from '../../../services/health-check.service';
 
 declare let gtag: Function;
 
