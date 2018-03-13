@@ -5,14 +5,17 @@
 /*           CONTAINER -- STOCK VIEW PAGE              */
 /*                                                     */
 
-
+.component--stockview.bullish, .component--stockview.bearish, .component--stockview.neutral {
+    background: #f8f8f8 !important;
+}
 .component--stockview {
 	position: absolute;
 	width: 100%;
-	top:92px;
+	top:90px;
 	left:0;
 	display: none;
 	color: $font-color;
+	box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
 
 	@media screen AND (max-width:991px) {
 		top:45px;
@@ -37,8 +40,8 @@
 
 	.panel {
 		box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
-		margin-bottom: 5px;
-		padding: 0 10px;
+		margin-bottom: 15px;
+		padding: 5px 10px 10px;
 		overflow: hidden;
 	}
 }
@@ -55,7 +58,7 @@
 
 .stockview__header {
 	width: 100%;
-	background-color: #ffffff;
+	background-color: $background--verylight;
 
 	.header__button {
 		position: absolute;
@@ -64,19 +67,25 @@
 		display: flex;
 		z-index: 10;
 		cursor: pointer;
+		text-align: center;
 
-		img {
-			width: 28px;
-			height: 28px;
+		i {
+			font-size: 27px;
+			line-height: 58px;
 		}
 	}
 
 	.header__button--left {
 		left:2%;
+		opacity:0.3;
 		
 		img {
 			width: 26px;
 			height: 26px;
+		}
+
+		&:hover {
+			opacity:1;
 		}
 
 		@media screen AND (min-width:768px) {
@@ -86,28 +95,25 @@
 
 	.header__button--right {
 		right:2%;
-		opacity:0.75;
+		opacity:0.3;
 
 		@media screen AND (min-width:768px) {
-			left:1.5%;
+			left:1.25%;
 		}
 
 		&:hover {
 			opacity:1;
+			color: $link-blue;
 		}
 	}
 
 	.header__button--pdf {
 		display:none;
+		opacity: 0.4;
 
-		button {
-			background: transparent;
-			cursor: pointer;
-
-			i {
-				font-size: 33px;
-				color: #ffffff;
-			}
+		&:hover {
+			opacity:1;
+			color: $link-blue !important;
 		}
 
 		@media screen AND (min-width:1024px) {
@@ -130,8 +136,6 @@
 			height: 40px;
 			color:#ffffff;
 			margin: 0 4%;
-			font-size: 18px;
-			line-height: 34px;
 			border: $line--white;
 			padding: 0;
 			overflow: hidden;
@@ -141,17 +145,37 @@
 				box-shadow: 0px 0px 0px rgba(0,0,0,0);
 				outline:0;
 			}
+
+			i {
+				font-size: 18px;
+				line-height: 34px;
+			}
 		}
+
 		@media screen AND (min-width:1200px) {
 			width: 32%;
 		}
-
 		@media screen AND (max-width:1023px) {
 			right: 0;
 		}
-
 		@media screen AND (max-width:939px) {
 			display: none;
+		}
+
+		.anchor.mat-raised-button.veryBullish {
+			background-color: rgba(36,163,0,0.95);
+		}
+		.anchor.mat-raised-button.bullish {
+			background-color: rgba(126,211,33,0.95);
+		}
+		.anchor.mat-raised-button.neutral {
+			background-color: rgba(245,166,35,0.95);
+		}
+		.anchor.mat-raised-button.bearish {
+			background-color: rgba(253,0,31,0.95);
+		}
+		.anchor.mat-raised-button.veryBearish {
+			background-color: rgba(208,2,27,0.95);
 		}
 	}
 
@@ -164,7 +188,7 @@
 		.ticker {
 			text-align: left;
 			line-height: 62px;
-			color:#ffffff;
+			color:$font-color;
 			font-weight: 700;
 			font-size: 36px;
 			float: left;
@@ -184,7 +208,7 @@
 		.company-name {
 			text-align: left;
 			line-height: 62px;
-			color:#ffffff;
+			color:$font-color;
 			float: left;
 			font-size: 24px;
 			cursor:pointer;
@@ -232,13 +256,13 @@
 	-webkit-overflow-scrolling: touch;
 	overflow-x: hidden;
 	padding-bottom: 148px;
-	padding-left: 4px;
-	padding-right: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
 
 	@media screen AND (max-width:575px) {
 		padding-bottom: 178px;
-		padding-left: 2px;
-		padding-right: 2px;
+		padding-left: 4px;
+		padding-right: 4px;
 	}
 
 	&::-webkit-scrollbar {

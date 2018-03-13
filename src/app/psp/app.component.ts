@@ -24,7 +24,7 @@ declare let gtag: Function;
          id="page__header">
          
       <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--left" id="header_button--left">
-        <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
+        <i class="fal fa-bars"></i>
       </div>
 
       <cpt-psp-settings-menu [side]="menuPosition" [btn]="navBtn" [navOpened]="navOpened"
@@ -38,7 +38,7 @@ declare let gtag: Function;
 
       <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--right"
            id="header_button--right">
-        <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
+        <i class="fal fa-search"></i>
       </div>
     </div>
 
@@ -48,32 +48,35 @@ declare let gtag: Function;
 <!--     <div class="page__header--desktop container-fluid"
       [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}" > -->
 
-      <!-- FIRST HEADER -->
-      <div class="row header--first justify-content-center">
-        <!-- LOGO-->
-        <div class="col-3 col-xl-4 logo--desktop">
-          <img class="float-left" src="assets/imgs/logo_powerpulse--desktop-Dark.svg">
-          <img class="float-left hidden-xl-down" src="assets/imgs/logo_powerpulse--icon.svg">
-        </div>
-        <!-- SEARCH -->
-        <div class="col-6 col-xl-4 search--desktop">
-          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search'"></cpt-psp-symbol-search>
-        </div>
-        <!-- MARKETS -->
-        <div class="col-3 col-xl-4 markets--desktop">
-          <cpt-psp-market-summary id="desktop-markets"></cpt-psp-market-summary>
-        </div>
-      </div>
-
       <!-- SECOND HEADER-->
       <div class="row header--second justify-content-center">
-        <div class="col-10 col-lg-9 col-xl-7 header__nav">
+        <!-- LOGO-->
+        <div class="col-3 col-xl-3 logo--desktop">
+          <img class="float-left hidden-md-down" src="assets/imgs/logo_powerpulse--desktop.svg">
+          <img class="float-left hidden-lg-up" src="assets/imgs/logo_powerpulse--icon.svg">
+        </div>
+        <div class="col-8 col-xl-6 header__nav">
           <cpt-psp-navigator *ngIf="!searchOpened" class="desktop-nav" id="desktop-nav__wrapper"></cpt-psp-navigator>
         </div>
+        <div class="col-1 col-xl-3"></div>
         <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--right">
           <i class="fal fa-cog fa-spin-hover"></i>
         </div>
       </div>
+
+      <!-- FIRST HEADER -->
+      <div class="row header--first justify-content-center">
+        <!-- SEARCH -->
+        <div class="col-6 col-lg-5 col-xl-4 search--desktop">
+          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search'"></cpt-psp-symbol-search>
+        </div>
+        <!-- MARKETS -->
+        <div class="col-6 col-lg-7 col-xl-8 markets--desktop">
+          <cpt-psp-market-summary id="desktop-markets"></cpt-psp-market-summary>
+        </div>
+      </div>
+
+
 
     </div>
     <!-- END DESKTOP HEADER -->
