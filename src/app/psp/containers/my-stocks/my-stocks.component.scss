@@ -9,11 +9,9 @@
 	position:fixed;
 	left:0;
 	top:90px;
-	border-right:2px solid #ffffff;
 
 	@media screen AND (max-width: 575px) {
 	    padding-bottom: 220px;
-	    border-right:0px solid #ffffff;
 	}
 
 	@media screen AND (min-width:768px) {

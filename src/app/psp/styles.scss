@@ -61,24 +61,28 @@
   min-width: 112px;
   overflow: auto;
   max-width: none;
-  max-height: 360px !important;
+  max-height: 400px !important;
   background: #fff;
   color: $font-color;
-  margin-top:0px;
+  margin-top:4px;
   border-radius: 0 0 5px 5px;
+
+  @media screen AND (max-width: 575px) {
+    margin-top:0px;
+  }
 
   .mat-optgroup {
 
     .mat-optgroup-label {
-      //display: none;
-      line-height: 28px;
-      height: 28px;
+      line-height: 25px;
+      height: 25px;
       padding: 0 16px;
       text-align: left;
       cursor: default;
-      background-color: #ccc;
-      font-size: 14px;
-      color: $font-color;
+      background-color: $background--dark;
+      font-size: 10px;
+      color: $font-color--light;
+      font-weight: 600;
       text-transform: uppercase;
     }
 
@@ -107,7 +111,16 @@
           @media screen AND (max-width: 575px) {
             max-width: 200px;
           }
-          @media screen AND (min-width: 1200px) {
+          @media screen AND (min-width: 992px) {
+            max-width: 205px;
+          }
+          @media screen AND (min-width: 1280px) {
+            max-width: 220px;
+          }
+          @media screen AND (min-width: 1400px) {
+            max-width: 285px;
+          }
+          @media screen AND (min-width: 1600px) {
             max-width: 375px;
           }
         }
@@ -134,7 +147,7 @@
             text-transform: uppercase;
             font-weight: 600;
             cursor: pointer;
-            width: 75px;
+            width: 74px;
 
             i {
               display: inline-block;
@@ -273,6 +286,12 @@
     }
   }
 }
+
+
+
+
+
+
 
 
 

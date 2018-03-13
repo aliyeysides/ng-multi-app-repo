@@ -38,8 +38,8 @@ interface SearchResult {
                  #autoCompleteInput
                  aria-describedby="basic-addon1">
           <mat-autocomplete #auto="matAutocomplete" class="search__dropdown">
-            <mat-optgroup [label]="'opt group 1'">
-              <mat-option (click)="onClick(result.Symbol)" *ngFor="let result of searchSuggestions" [value]="result.Symbol">
+            <mat-optgroup *ngIf="searchResults.length" [label]="'Current Search Results'">
+              <mat-option (click)="onClick(result.Symbol)" *ngFor="let result of searchResults" [value]="result.Symbol">
                 <span class="ticker">{{ result.Symbol }}</span>
                 <span class="company">{{ result.CompanyName }}</span>
                 <div *ngIf="!resultInUserList(userStocks, result.Symbol)"
@@ -52,8 +52,8 @@ interface SearchResult {
                 </div>
               </mat-option>
             </mat-optgroup>
-            <mat-optgroup *ngIf="searchResults.length" [label]="'opt group 2'">
-              <mat-option (click)="onClick(result.Symbol)" *ngFor="let result of searchResults" [value]="result.Symbol">
+            <mat-optgroup [label]="'Popular Stocks'">
+              <mat-option (click)="onClick(result.Symbol)" *ngFor="let result of searchSuggestions" [value]="result.Symbol">
                 <span class="ticker">{{ result.Symbol }}</span>
                 <span class="company">{{ result.CompanyName }}</span>
                 <div *ngIf="!resultInUserList(userStocks, result.Symbol)"

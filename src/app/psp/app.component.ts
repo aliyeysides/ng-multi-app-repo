@@ -23,7 +23,7 @@ declare let gtag: Function;
          [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}"
          id="page__header">
          
-      <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--left" id="header_button--left">
+      <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--left">
         <i class="fal fa-bars"></i>
       </div>
 
@@ -36,8 +36,7 @@ declare let gtag: Function;
                                *ngIf="searchOpened"></cpt-psp-symbol-search>
       </div>
 
-      <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--right"
-           id="header_button--right">
+      <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--right">
         <i class="fal fa-search"></i>
       </div>
     </div>
@@ -72,7 +71,7 @@ declare let gtag: Function;
         </div>
         <!-- MARKETS -->
         <div class="col-6 col-lg-7 col-xl-8 markets--desktop">
-          <cpt-psp-market-summary id="desktop-markets"></cpt-psp-market-summary>
+          <cpt-psp-market-summary></cpt-psp-market-summary>
         </div>
       </div>
 
