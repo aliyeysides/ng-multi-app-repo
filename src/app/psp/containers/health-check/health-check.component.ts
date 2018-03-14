@@ -29,7 +29,7 @@ import {BehaviorSubject} from 'rxjs';
       <div class="row justify-content-center">
 
         <!-- ADD BUTTON -->
-        <div (click)="openSearch();$event.stopPropagation()" matTooltip="Add a stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="add-stock">
+        <div (click)="openSearch();$event.stopPropagation()" matTooltip="Add a stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="add-stock hidden-sm-down">
           <button mat-icon-button class="button--add">
             <i class="fas fa-plus align-absolute"></i>
           </button>
