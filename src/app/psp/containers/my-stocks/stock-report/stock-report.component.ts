@@ -283,7 +283,7 @@ declare var gtag: Function;
           <div class="row stock-info stock-info--chart">
             <div class="col-12 main-chart">
               <span *ngIf="loading"><mat-spinner></mat-spinner></span>
-              <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
+              <cpt-zingchart *ngIf="!loading" [chart]="mainChart"></cpt-zingchart>
             </div>
           </div>
         </div>
@@ -1578,6 +1578,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           research['EPS Quarterly Results']['quaterlyData']
             .map(x => x.splice(1).map(x => +x.slice(1))) : null;
 
+        const epsSurprises = research['EPS Surprises'];
+        const revDates = research['Revenue&EarningsGrowth']['labels'];
+        const annualRev = research['Revenue&EarningsGrowth'].hasOwnProperty('Revenue(M)') ? research['Revenue&EarningsGrowth']['Revenue(M)']
+          .map(x => parseFloat(x.replace(/,/g, ''))) : null;
+
         this.annualEPSChart = {
           id: 'annualEPSChart',
           data: {
@@ -1600,13 +1605,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           height: undefined,
           width: undefined
         };
-
-        const epsSurprises = research['EPS Surprises'];
-
-        const revDates = research['Revenue&EarningsGrowth']['labels'];
-        const annualRev = research['Revenue&EarningsGrowth'].hasOwnProperty('Revenue(M)') ? research['Revenue&EarningsGrowth']['Revenue(M)']
-          .map(x => parseFloat(x.replace(/,/g, ''))) : null;
-
         this.epsSurprisesChart = {
           id: 'epsSurprisesChart',
           data: {
@@ -1657,24 +1655,21 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
         this.timespanPerChange = this.calculatePricePerChange(closePrices[0], closePrices[closePrices.length - 1]);
         this.timespanPriceChange = this.calculatePriceChange(closePrices[0], closePrices[closePrices.length - 1]);
-        setTimeout(() => {
-          this.mainChart = {
-            id: 'mainChart',
-            data: {
-              layout: "vertical",
-              graphset: [
-                this.getCloseConfig(dates, closePrices),
-                this.getDemaConfig(dates, dema, closePrices),
-                this.getPGRConfig(dates, pgrData),
-                this.getRSIConfig(dates, relStr),
-                this.getCMFConfig(dates, cmf)
-              ]
-            },
-            height: 610,
-            width: undefined
-          };
-          return this.mainChart;
-        }, 0);
+        this.mainChart = {
+          id: 'mainChart',
+          data: {
+            layout: "vertical",
+            graphset: [
+              this.getCloseConfig(dates, closePrices),
+              this.getDemaConfig(dates, dema, closePrices),
+              this.getPGRConfig(dates, pgrData),
+              this.getRSIConfig(dates, relStr),
+              this.getCMFConfig(dates, cmf)
+            ]
+          },
+          height: 610,
+          width: undefined
+        };
         this.loading ? this.loading = false : null;
         this.cd.markForCheck();
       });

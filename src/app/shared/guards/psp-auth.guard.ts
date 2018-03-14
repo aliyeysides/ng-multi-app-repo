@@ -28,7 +28,6 @@ export class PspAuthGuard extends AuthGuard implements CanActivate, OnDestroy {
           },
           err => {
             this.utilService.handleError(err);
-            debugger;
             window.location.href = this.utilService.getApiHostName();
           });
     }
