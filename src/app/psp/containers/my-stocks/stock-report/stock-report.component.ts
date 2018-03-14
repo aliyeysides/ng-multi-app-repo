@@ -283,7 +283,7 @@ declare var gtag: Function;
           <div class="row stock-info stock-info--chart">
             <div class="col-12 main-chart">
               <span *ngIf="loading"><mat-spinner></mat-spinner></span>
-              <cpt-zingchart *ngIf="!loading" [chart]="mainChart"></cpt-zingchart>
+              <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
             </div>
           </div>
         </div>
@@ -1509,6 +1509,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     const chartComponents = 'oneYearChartData,fiveYearChartData,oneYearPgrData,fiveYearPgrData';
     if (this.stock) {
+      this.jumpToFragment(this.top.nativeElement, 'Top');
       this.symbolSearchService.symbolLookup(this.stock)
         .take(1)
         .subscribe(val => {
@@ -1539,13 +1540,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   getReportData(stock: string) {
     this.current = '1Y';
+
     this.reportService.getSymbolData(stock)
-      .take(1)
-      .filter(x => x != undefined)
-      .subscribe(res => {
-        this.symbolData = res;
-        this.cd.markForCheck();
-      });
+      .switchMap(data => {
+        this.symbolData = data;
+        return Observable.empty();
+      }).take(1).subscribe(() => this.cd.markForCheck());
 
     this.reportService.getPgrDataAndContextSummary(stock)
       .switchMap(summary => {

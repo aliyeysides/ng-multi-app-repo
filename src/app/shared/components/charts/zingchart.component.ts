@@ -29,12 +29,14 @@ export class ChaikinChart implements AfterViewInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['chart']) {
+      const cha = changes['chart'];
       const chart = changes['chart']['currentValue'];
       const data = chart['data'];
-      console.log('chhhange', data);
-      this.zone.runOutsideAngular(() => zingchart.exec(this.chart.id, 'appendseriesdata', {
-        data: data
-      }));
+      console.log('changes', cha);
+      // this.zone.runOutsideAngular(() => zingchart.render(this.chart));
+      // this.zone.runOutsideAngular(() => zingchart.exec(this.chart.id, 'appendseriesdata', {
+      //   data: data
+      // }));
     }
   }
 }
