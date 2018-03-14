@@ -35,13 +35,22 @@ declare var gtag: Function;
 
       <!-- STOCK VIEW HEADER -->
       <div (click)="jumpToFragment(top, 'Top');$event.stopPropagation()" class="stockview__header" id="stockview">
+
+        <!-- BUTTON - | - GO BACK -->
         <div (click)="closeReport()" class="header__button header__button--left">
           <i class="fal fa-arrow-circle-left"></i>
         </div>
+
+        <!-- TICKER - | - COMPANY -->
         <div class="header__stock">
-          <h1 class="ticker">{{ stock }}</h1>
+          <h1 class="ticker">
+            <img src="{{ appendPGRImage(symbolData) }}">
+            <span>{{ stock }}</span>
+          </h1>
           <p *ngIf="!is_etf" class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
         </div>
+
+        <!-- BUTTON - | - ADD REMOVE -->
         <div matTooltip="Add stock to list" [matTooltipPosition]="'after'" [matTooltipShowDelay]="500" *ngIf="!resultInUserList(userStocks, stock) && !is_etf"
              (click)="addStock(stock);$event.stopPropagation()"
              class="header__button header__button--right">
@@ -52,23 +61,40 @@ declare var gtag: Function;
              class="header__button header__button--right">
           <i class="fal fa-minus-circle"></i>
         </div>
+
+        <!-- BUTTON - | - PDF -->
         <div *ngIf="!is_etf" class="header__button header__button--pdf">
           <button matTooltip="Download PDF Report" [matTooltipPosition]="'before'" [matTooltipShowDelay]="500" class="align-absolute"
-                  (click)="getPDFStockReport(stock)"><i class="fal fa-file-pdf" aria-hidden="true"></i></button>
-        </div>
-        <div class="header__button header__button--anchors">
-          <button mat-raised-button matTooltip="Jump to Financials" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor bullish"
-               (click)="jumpToFragment(financials, 'Financials');$event.stopPropagation()"><i
-            class="far fa-university" aria-hidden="true"></i></button>
-          <button mat-raised-button matTooltip="Jump to Earnings" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor bullish"
-               (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()"><i class="far fa-money-bill"></i>
+                  (click)="getPDFStockReport(stock)"><i class="fal fa-file-pdf" aria-hidden="true"></i>
           </button>
+        </div>
+
+        <!-- BUTTON - | - ANCHORS -->
+        <div class="header__button header__button--anchors">
+
+          <!-- FINANCIALS -->
+          <button mat-raised-button matTooltip="Jump to Financials" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor neutral"
+               (click)="jumpToFragment(financials, 'Financials');$event.stopPropagation()">
+               <i class="far fa-university" aria-hidden="true"></i>
+          </button>
+
+          <!-- EARNINGS -->
+          <button mat-raised-button matTooltip="Jump to Earnings" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor bullish"
+               (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()">
+               <i class="far fa-money-bill"></i>
+          </button>
+
+          <!-- TECHNICALS -->
           <button mat-raised-button matTooltip="Jump to Technicals" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor bearish"
-               (click)="jumpToFragment(technicals, 'Technicals');$event.stopPropagation()"><i
-            class="far fa-chart-pie"></i></button>
+               (click)="jumpToFragment(technicals, 'Technicals');$event.stopPropagation()">
+               <i class="far fa-chart-pie"></i>
+          </button>
+
+          <!-- EXPERTS -->
           <button mat-raised-button matTooltip="Jump to Experts" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor veryBullish"
-               (click)="jumpToFragment(experts, 'Experts');$event.stopPropagation()"><i
-            class="far fa-users" aria-hidden="true"></i></button>
+               (click)="jumpToFragment(experts, 'Experts');$event.stopPropagation()">
+               <i class="far fa-users" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
 
@@ -88,8 +114,7 @@ declare var gtag: Function;
                   <div [innerHtml]="link"></div>
                 </ng-template>
                 <div class="col-12 stockview__main-rating">
-                  <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fas fa-info-circle"
-                                                                  placement="bottom" triggers="click"></i></a></p>
+                  <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fas fa-info-circle" placement="bottom" triggers="click"></i></a></p>
                   <p class="rating">
                     <img src="{{ appendPGRImage(symbolData) }}">
                     <span>{{ appendPGRText(symbolData) }}</span>
