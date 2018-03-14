@@ -74,24 +74,44 @@ declare var gtag: Function;
 
           <!-- FINANCIALS -->
           <button mat-raised-button matTooltip="Jump to Financials" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor neutral"
+               [ngClass]="{'veryBullish': summary?.status.financials=='Very Bullish',
+               'bullish': summary?.status.financials=='Bullish',
+               'neutral': summary?.status.financials=='Neutral',
+               'bearish': summary?.status.financials=='Bearish',
+               'veryBearish': summary?.status.financials=='Very Bearish'}"
                (click)="jumpToFragment(financials, 'Financials');$event.stopPropagation()">
                <i class="far fa-university" aria-hidden="true"></i>
           </button>
 
           <!-- EARNINGS -->
           <button mat-raised-button matTooltip="Jump to Earnings" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor bullish"
+               [ngClass]="{'veryBullish': summary?.status.earnings=='Very Bullish',
+               'bullish': summary?.status.earnings=='Bullish',
+               'neutral': summary?.status.earnings=='Neutral',
+               'bearish': summary?.status.earnings=='Bearish',
+               'veryBearish': summary?.status.earnings=='Very Bearish'}"
                (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()">
                <i class="far fa-money-bill"></i>
           </button>
 
           <!-- TECHNICALS -->
           <button mat-raised-button matTooltip="Jump to Technicals" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor bearish"
+               [ngClass]="{'veryBullish': summary?.status.technicals=='Very Bullish',
+               'bullish': summary?.status.technicals=='Bullish',
+               'neutral': summary?.status.technicals=='Neutral',
+               'bearish': summary?.status.technicals=='Bearish',
+               'veryBearish': summary?.status.technicals=='Very Bearish'}"
                (click)="jumpToFragment(technicals, 'Technicals');$event.stopPropagation()">
                <i class="far fa-chart-pie"></i>
           </button>
 
           <!-- EXPERTS -->
           <button mat-raised-button matTooltip="Jump to Experts" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor veryBullish"
+               [ngClass]="{'veryBullish': summary?.status.experts=='Very Bullish',
+               'bullish': summary?.status.experts=='Bullish',
+               'neutral': summary?.status.experts=='Neutral',
+               'bearish': summary?.status.experts=='Bearish',
+               'veryBearish': summary?.status.experts=='Very Bearish'}"
                (click)="jumpToFragment(experts, 'Experts');$event.stopPropagation()">
                <i class="far fa-users" aria-hidden="true"></i>
           </button>
@@ -360,7 +380,12 @@ declare var gtag: Function;
         <div class="panel">
           <div #financials class="row justify-content-center stock-info stock-info--breakdown">
             <div class="col-12">
-              <div class="pgr-section__icon">
+              <div class="pgr-section__icon" 
+              [ngClass]="{'veryBullish': summary?.status.financials=='Very Bullish',
+               'bullish': summary?.status.financials=='Bullish',
+               'neutral': summary?.status.financials=='Neutral',
+               'bearish': summary?.status.financials=='Bearish',
+               'veryBearish': summary?.status.financials=='Very Bearish'}">
                 <i class="fal fa-university"></i>
               </div>
             </div>
@@ -590,7 +615,12 @@ declare var gtag: Function;
         <div class="panel">
           <div #earnings class="row justify-content-center stock-info stock-info--breakdown">
             <div class="col-12">
-              <div class="pgr-section__icon">
+              <div class="pgr-section__icon" 
+              [ngClass]="{'veryBullish': summary?.status.earnings=='Very Bullish',
+               'bullish': summary?.status.earnings=='Bullish',
+               'neutral': summary?.status.earnings=='Neutral',
+               'bearish': summary?.status.earnings=='Bearish',
+               'veryBearish': summary?.status.earnings=='Very Bearish'}">
                 <i class="fal fa-money-bill"></i>
               </div>
             </div>
@@ -760,7 +790,12 @@ declare var gtag: Function;
         <div class="panel">
           <div #technicals class="row justify-content-center stock-info stock-info--breakdown">
             <div class="col-12">
-              <div class="pgr-section__icon">
+              <div class="pgr-section__icon"
+              [ngClass]="{'veryBullish': summary?.status.technicals=='Very Bullish',
+               'bullish': summary?.status.technicals=='Bullish',
+               'neutral': summary?.status.technicals=='Neutral',
+               'bearish': summary?.status.technicals=='Bearish',
+               'veryBearish': summary?.status.technicals=='Very Bearish'}">
                 <i class="fal fa-chart-pie"></i>
               </div>
             </div>
@@ -960,7 +995,12 @@ declare var gtag: Function;
         <div class="panel">
           <div #experts class="row justify-content-center stock-info stock-info--breakdown">
             <div class="col-12">
-              <div class="pgr-section__icon">
+              <div class="pgr-section__icon"
+              [ngClass]="{'veryBullish': summary?.status.experts=='Very Bullish',
+               'bullish': summary?.status.experts=='Bullish',
+               'neutral': summary?.status.experts=='Neutral',
+               'bearish': summary?.status.experts=='Bearish',
+               'veryBearish': summary?.status.experts=='Very Bearish'}">
                 <i class="fal fa-users"></i>
               </div>
             </div>
@@ -1502,28 +1542,35 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     this.reportService.getSymbolData(stock)
       .take(1)
       .filter(x => x != undefined)
-      .map(res => {
+      .subscribe(res => {
         this.symbolData = res;
         this.cd.markForCheck();
-      })
-      .switchMap(() => {
-        return Observable.combineLatest(
-          this.reportService.getPgrDataAndContextSummary(stock, this.symbolData['metaInfo'][0]['industry_name']),
-          this.reportService.getTickerCompetitors(stock),
-          this.reportService.getResearchReportData(stock),
-          this.ideasService.getHeadlines(stock)
-        )
-      })
-      .take(1)
-      .subscribe(([summary, competitors, research, headlines]) => {
+      });
+
+    this.reportService.getPgrDataAndContextSummary(stock)
+      .switchMap(summary => {
         this.summary = summary;
+        this.summary.status = {
+          financials: summary['financialContextSummary'][0]['status'],
+          experts: summary['expertOpnionsContextSummary'][0]['status'],
+          technicals: summary['priceVolumeContextSummary'][0]['status'],
+          earnings: summary['earningsContextSummary'][0]['status']
+        };
+
         const sen = this.summary['pgrContextSummary'][0]['mainSentence'];
         sen ? Object.assign(this.summary['pgrContextSummary'][0], {mainSentenceTM: sen.replace(/<TRADEMARK>/, '')}) : null;
+        return Observable.empty();
+      }).take(1).subscribe(() => this.cd.markForCheck());
 
+    this.reportService.getTickerCompetitors(stock)
+      .switchMap(competitors => {
         this.competitors = competitors['compititors'];
-        this.research = research;
-        this.headlines = headlines['headlines'] ? headlines['headlines'].filter((item, idx) => idx < 7) : [];
+        return Observable.empty();
+      }).take(1).subscribe(() => this.cd.markForCheck());
 
+    this.reportService.getResearchReportData(stock)
+      .switchMap(research => {
+        this.research = research;
         const annualEPSData = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData'].map(x => +x[5].slice(1)) : null;
         const annualEPSDates = research['EPS Quarterly Results'].hasOwnProperty('quaterlyData') ? research['EPS Quarterly Results']['quaterlyData'].map(x => x[0]) : null;
 
@@ -1582,8 +1629,15 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           height: undefined,
           width: undefined
         };
-        this.cd.markForCheck();
-      });
+
+        return Observable.empty();
+      }).take(1).subscribe(() => this.cd.markForCheck());
+
+    this.ideasService.getHeadlines(stock)
+      .switchMap(headlines => {
+        this.headlines = headlines['headlines'] ? headlines['headlines'].filter((item, idx) => idx < 7) : [];
+        return Observable.empty();
+      }).take(1).subscribe(() => this.cd.markForCheck());
   }
 
   getMainChart(stock: string, components?: string) {
@@ -1623,7 +1677,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         }, 0);
         this.loading ? this.loading = false : null;
         this.cd.markForCheck();
-      };
+      });
   }
 
   closeReport() {
@@ -2782,7 +2836,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   calculatePricePerChange(firstClose: number, lastClose: number): number {
-    return (((lastClose - firstClose) / firstClose ) * 100);
+    return (((lastClose - firstClose) / firstClose) * 100);
   }
 
   calculatePriceChange(firstClose: number, lastClose: number): number {

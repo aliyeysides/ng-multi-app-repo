@@ -17,11 +17,11 @@ export class ReportService {
     return this.utilService.getJson(url, { params, withCredentials: true });
   }
 
-  public getPgrDataAndContextSummary(symbol: string, industry: string) {
+  public getPgrDataAndContextSummary(symbol: string, industry?: string) {
     const url = `${this._apiHost}/CPTRestSecure/app/researchReportServices/getPgrDataAndContextSummary?`;
     const params = {
       'symbol': symbol,
-      'industry': industry
+      'industry': industry ? industry : null
     };
     return this.utilService.getJson(url, { params, withCredentials: true });
   }
