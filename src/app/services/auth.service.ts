@@ -40,9 +40,7 @@ export class AuthService {
   }
 
   public login(): Observable<any> {
-    console.log('localStorage', localStorage);
     const email = localStorage.getItem('email');
-    console.log('email', email);
     const getLoginUrl = `${this.apiHostName}/CPTRestSecure/app/user/login?`;
     const options = {
       params: {
@@ -55,7 +53,10 @@ export class AuthService {
       console.log('res', res);
       this.loggedIn = true;
       return res;
-    }).catch(this.utilService.handleError);
+    }).catch(res => {
+      console.log('onrejected', res);
+      return this.utilService.handleError(res);
+    });
   }
   //
   // public login(): Observable<any> {
@@ -81,7 +82,7 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    return this.loggedIn;
+    return this.loggedIn ? this.loggedIn : false;
   }
 
 }

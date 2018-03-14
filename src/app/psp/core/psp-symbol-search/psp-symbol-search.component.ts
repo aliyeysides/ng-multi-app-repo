@@ -107,7 +107,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
 
   public symbolSearchForm: FormControl;
   public searchResults: Array<any>;
-  public userStocks: ListSymbolObj[];
+  // public userStocks: ListSymbolObj[];
   public loading: Subscription;
   public searchSuggestions: Array<SearchResult> = [
     {

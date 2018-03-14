@@ -1603,24 +1603,27 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
         this.timespanPerChange = this.calculatePricePerChange(closePrices[0], closePrices[closePrices.length - 1]);
         this.timespanPriceChange = this.calculatePriceChange(closePrices[0], closePrices[closePrices.length - 1]);
-        this.mainChart = {
-          id: 'mainChart',
-          data: {
-            layout: "vertical",
-            graphset: [
-              this.getCloseConfig(dates, closePrices),
-              this.getDemaConfig(dates, dema, closePrices),
-              this.getPGRConfig(dates, pgrData),
-              this.getRSIConfig(dates, relStr),
-              this.getCMFConfig(dates, cmf)
-            ]
-          },
-          height: 610,
-          width: undefined
-        };
+        setTimeout(() => {
+          this.mainChart = {
+            id: 'mainChart',
+            data: {
+              layout: "vertical",
+              graphset: [
+                this.getCloseConfig(dates, closePrices),
+                this.getDemaConfig(dates, dema, closePrices),
+                this.getPGRConfig(dates, pgrData),
+                this.getRSIConfig(dates, relStr),
+                this.getCMFConfig(dates, cmf)
+              ]
+            },
+            height: 610,
+            width: undefined
+          };
+          return this.mainChart;
+        }, 0);
         this.loading ? this.loading = false : null;
         this.cd.markForCheck();
-      });
+      };
   }
 
   closeReport() {
