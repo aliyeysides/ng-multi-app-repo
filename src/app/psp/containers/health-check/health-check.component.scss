@@ -8,7 +8,6 @@
 	height: 100%;
 }
 
-
 .HC-overview {
 	width: 100%;
 	margin:0;
@@ -72,7 +71,7 @@
 			    font-size: 30px;
 			    line-height: 50px;
 				color: #ffffff;
-				box-shadow: inset 0 0px 20px 2px rgba(0, 0, 0, 0.1);
+				box-shadow: inset 0 0px 20px 2px rgba(0, 0, 0, 0.05);
 				z-index: 20;
 			    font-weight: 600;
 
@@ -94,9 +93,9 @@
 			    display: inline-block;
 			    position: absolute;
 			    right: 11px;
-			    top: 7px;
+			    top: 10px;
 			    color:#ffffff;
-			    font-size: 26px;
+			    font-size: 22px;
 			    vertical-align: middle;
 			    font-weight: 500;
 			    opacity:0.5;
@@ -372,7 +371,7 @@
 		    display: inline-block;
 		    vertical-align: middle;
 			color: $font-color;
-			box-shadow: inset 0 0px 20px 2px rgba(0, 0, 0, 0.05);
+			box-shadow: inset 0 0px 20px 2px rgba(0, 0, 0, 0.03);
 			z-index: 20;
 		    font-weight: 600;
 

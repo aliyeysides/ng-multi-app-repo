@@ -80,6 +80,9 @@
 		z-index: 10;
 		cursor: pointer;
 		text-align: center;
+		transition-property:color opacity;
+		transition-duration: 0.3s;
+		transition-timing-function: ease-in-out;
 
 		i {
 			font-size: 27px;
@@ -116,6 +119,7 @@
 		&:hover {
 			opacity:1;
 			color: $link-blue;
+						font-weight: 600;
 		}
 	}
 
@@ -125,7 +129,7 @@
 
 		&:hover {
 			opacity:1;
-			color: $link-blue !important;
+			color: $link-blue;
 		}
 
 		@media screen AND (min-width:1024px) {
@@ -136,22 +140,27 @@
 
 	.header__button--anchors {
 		width: 38%;
-		padding-top:9px;
+		padding-top:7px;
 		right: 3%;
 
 		.anchor.mat-raised-button {
 			display: inline-block;
-			background-color: rgba(255,255,255,0.25);
+			background-color: rgba(255,255,255,0.8);
 			border-radius: 30px;
-			width: 40px;
-			min-width: 40px;
-			height: 40px;
+			width: 45px;
+			min-width: 45px;
+			height: 45px;
 			color:#ffffff;
 			margin: 0 4%;
 			border: $line--white;
 			padding: 0;
 			overflow: hidden;
-			box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.04), 0 1px 5px 0 rgba(0,0,0,0.05);
+			box-shadow: 0 3px 1px -2px rgba(0,0,0,.1), 
+						0 2px 2px 0 rgba(0,0,0,.04), 
+						0 1px 3px 0 rgba(0,0,0,0.05);
+			transition-property:background-color color border;
+			transition-duration: 0.45s;
+			transition-timing-function: ease-in-out;
 
 			&:focus {
 				box-shadow: 0px 0px 0px rgba(0,0,0,0);
@@ -162,10 +171,19 @@
 				font-size: 18px;
 				line-height: 34px;
 			}
-		}
 
-		@media screen AND (min-width:1200px) {
-			width: 32%;
+			@media screen AND (min-width:1400px) {
+				margin: 0 5%;
+			}
+			@media screen AND (max-width:991px) {
+				margin: 0 3%;
+			}
+		}
+		@media screen AND (min-width:1400px) {
+			width: 31%;
+		}
+		@media screen AND (min-width:1280px) {
+			width: 33%;
 		}
 		@media screen AND (max-width:1023px) {
 			right: 0;
@@ -175,19 +193,49 @@
 		}
 
 		.anchor.mat-raised-button.veryBullish {
-			background-color: rgba(36,163,0,0.95);
+			color:rgba(36,163,0,1);
+			border: 2px solid rgba(36,163,0,1);
+
+			&:hover {
+				color:rgba(255,255,255,1);
+				background-color: rgba(36,163,0,1);
+			}
 		}
 		.anchor.mat-raised-button.bullish {
-			background-color: rgba(126,211,33,0.95);
+			color:rgba(126,211,33,1);
+			border:2px solid rgba(126,211,33,1);
+
+			&:hover {
+				color:rgba(255,255,255,1);
+				background-color: rgba(126,211,33,1);
+			}
 		}
 		.anchor.mat-raised-button.neutral {
-			background-color: rgba(245,166,35,0.95);
+			color:rgba(245,166,35,1);
+			border:2px solid rgba(245,166,35,1);
+
+			&:hover {
+				background-color: rgba(245,166,35,1);
+				color:rgba(255,255,255,1);
+			}
 		}
 		.anchor.mat-raised-button.bearish {
-			background-color: rgba(253,0,31,0.95);
+			color:rgba(253,0,31,1);
+			border:2px solid rgba(253,0,31,1);
+
+			&:hover {
+				background-color: rgba(253,0,31,1);
+				color:rgba(255,255,255,1);
+			}
 		}
 		.anchor.mat-raised-button.veryBearish {
-			background-color: rgba(208,2,27,0.95);
+			color:rgba(208,2,27,1);
+			border:2px solid rgba(208,2,27,1);
+
+			&:hover {
+				background-color: rgba(208,2,27,1);
+				color:rgba(255,255,255,1);
+			}
 		}
 	}
 
@@ -198,22 +246,32 @@
 		cursor: default;
 
 		.ticker {
+			display: block;
+			height: 100%;
 			text-align: left;
 			line-height: 62px;
 			color:$font-color;
-			font-weight: 700;
+			/*font-weight: 700;*/
 			font-size: 32px;
 			float: left;
 			margin: 0 4% 0 13%;
 
 			@media screen AND (min-width:768px) {
 				font-size: 40px;
-				margin: 0 4% 0 7%;
+				margin: 0 3% 0 7%;
+			}
+			@media screen AND (min-width:1280px) {
+				margin: 0 3% 0 6%;
 			}
 
-			@media screen AND (min-width:1280px) {
-				margin: 0 3% 0 5%;
-			}
+			img {
+		        width: 52px;
+		        display: inline-block;
+		        vertical-align: baseline
+		    }
+
+		    span {
+		    }
 		}
 
 		.company-name {
@@ -232,12 +290,9 @@
 				width: 53%;
 			}
 
-			@media screen AND (min-width:768px) {
-				font-size: 30px;
-			}
-
 			@media screen AND (min-width:501px) AND (max-width:939px) {
 				width: 62%;
+				font-size: 30px;
 			}
 
 			@media screen AND (min-width:1200px) {
