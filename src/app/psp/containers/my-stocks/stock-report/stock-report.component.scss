@@ -5,8 +5,8 @@
 /*           CONTAINER -- STOCK VIEW PAGE              */
 /*                                                     */
 
-.component--stockview.bullish, .component--stockview.bearish, .component--stockview.neutral {
-    background: #f8f8f8 !important;
+.component--stockview.bullish, .component--stockview.bearish, .component--stockview.neutral, .component--stockview.none {
+    background: $background--verylight !important;
 }
 .component--stockview {
 	position: absolute;
@@ -14,6 +14,7 @@
 	top:90px;
 	left:0;
 	display: none;
+	background: $background--verylight;
 	color: $font-color;
 	box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
 
@@ -74,14 +75,14 @@
 
 	.header__button {
 		position: absolute;
-		width: 28px;
+		width: 30px;
 		height: 58px;
 		display: flex;
 		z-index: 10;
 		cursor: pointer;
 		text-align: center;
 		transition-property:color opacity;
-		transition-duration: 0.3s;
+		transition-duration: 0.45;
 		transition-timing-function: ease-in-out;
 
 		i {
@@ -110,22 +111,53 @@
 
 	.header__button--right {
 		right:2%;
-		opacity:0.3;
+		text-align: center;
+
+		i {
+			opacity:0.3;
+		}
+
+		.fa-plus-circle {
+			display: inline-block;
+			margin-top:16px;
+			width: 30px;
+			height: 30px;
+			padding-right:1px;
+	        line-height: 30px;
+	        color: $link-blue;
+	        opacity: .8;	        
+	        background-color: #ffffff;
+	        border-radius: 50%;
+	        box-shadow: inset 0 0 0 4px rgba(255,255,255,1), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.04), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+
+	        &:active {
+	        	color: #207cca;
+	        	box-shadow: inset 0 0 0 4px rgba(255,255,255,1), 0 -3px 1px -2px rgba(0, 0, 0, 0.2), 0 -2px 2px 0 rgba(0, 0, 0, 0.04), 0 -1px 4px 0 rgba(0, 0, 0, 0.05);
+	        }
+	    }
 
 		@media screen AND (min-width:768px) {
 			left:1.25%;
 		}
 
 		&:hover {
-			opacity:1;
-			color: $link-blue;
-						font-weight: 600;
+
+			i {
+				opacity:1;
+				color: $link-blue;
+			}
+
+			.fa-plus-circle {
+				opacity:1;
+				color: $link-blue;
+			}
 		}
 	}
 
 	.header__button--pdf {
 		display:none;
 		opacity: 0.4;
+		z-index: 20;
 
 		&:hover {
 			opacity:1;
@@ -167,9 +199,15 @@
 				outline:0;
 			}
 
+			&:active {
+				box-shadow: 0 -3px 1px -2px rgba(0,0,0,.1), 
+						0 -2px 2px 0 rgba(0,0,0,.04), 
+						0 -1px 3px 0 rgba(0,0,0,0.05);
+			}
+
 			i {
-				font-size: 18px;
-				line-height: 34px;
+				font-size: 19px;
+				line-height: 40px;
 			}
 
 			@media screen AND (min-width:1400px) {
@@ -244,6 +282,7 @@
 		height: 60px;
 		position: absolute;
 		cursor: default;
+		overflow:hidden;
 
 		.ticker {
 			display: block;
@@ -251,7 +290,6 @@
 			text-align: left;
 			line-height: 62px;
 			color:$font-color;
-			/*font-weight: 700;*/
 			font-size: 32px;
 			float: left;
 			margin: 0 4% 0 13%;
@@ -267,10 +305,11 @@
 			img {
 		        width: 52px;
 		        display: inline-block;
-		        vertical-align: baseline
-		    }
+		        vertical-align: baseline;
 
-		    span {
+			    @media screen AND (max-width:767px) {
+			    	width: 45px;
+				}
 		    }
 		}
 
@@ -932,7 +971,7 @@
 
 .stock-info--disclaimer {
 	padding-top:0px;
-	color:#ffffff;
+	color:$font-color;
 
 	@media screen AND (max-width: 575px) {
 		padding:0 10px;

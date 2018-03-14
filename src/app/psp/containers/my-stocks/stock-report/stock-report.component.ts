@@ -54,7 +54,7 @@ declare var gtag: Function;
         <div matTooltip="Add stock to list" [matTooltipPosition]="'after'" [matTooltipShowDelay]="500" *ngIf="!resultInUserList(userStocks, stock) && !is_etf"
              (click)="addStock(stock);$event.stopPropagation()"
              class="header__button header__button--right">
-          <i class="fal fa-plus-circle"></i>
+          <i class="fas fa-plus-circle"></i>
         </div>
         <div matTooltip="Remove stock from list" [matTooltipPosition]="'after'" [matTooltipShowDelay]="500" *ngIf="resultInUserList(userStocks, stock)"
              (click)="removeStock(stock);$event.stopPropagation()"
