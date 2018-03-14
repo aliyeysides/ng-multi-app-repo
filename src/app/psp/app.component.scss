@@ -245,10 +245,8 @@ sub {
 
 
 .blur-me {
-  -webkit-filter: grayscale(96%) blur(2px);
-  filter: grayscale(1) blur(2px);
-  transition: grayscale 0.4s;
-  /*filter: blur(2px);*/
+  filter: grayscale(70%) brightness(15%);
+  transition: filter .4s ease-in-out;
   overflow: hidden;
 }
 
@@ -259,7 +257,8 @@ sub {
 
 .container--nav {
   position: absolute;
-  background-color: $background--dark;
+  //background-color: $background--dark;
+  background-image: $gradient--pulse-blue;
   height: 100vh;
   color:#ffffff;
   width: 0; /* 0 width - change this with JavaScript */
@@ -402,9 +401,10 @@ sub {
   top:0;
   left:0;
   bottom:0;
+  //transition: filter .4s ease-in-out;
 }
 #container--main {
-  transition: margin-left .5s;
+  transition: margin-left .5s, filter .4s ease-in-out;
 }
 .router__container {
   background-color: #ffffff;
@@ -680,7 +680,7 @@ sub {
       vertical-align: middle;
       color: #ffffff;
       font-weight: 400;
-      transition: 0.15;
+      transition: 0.15s;
 
       @media screen AND (max-width: 575px) {
         font-size: 28px;
