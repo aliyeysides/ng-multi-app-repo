@@ -29,22 +29,23 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
+    background-color: #eee;
     white-space: nowrap;
     position: relative;
-    border:1px solid #ddd;
+    border:0px solid #fff;
     font-weight: 600;
     color: $font-color--mid;
+    box-shadow: inset 0 0 0 3px white;
   }
   .mat-tab-label-active {
     background-image: linear-gradient(15deg, rgba(84,0,134,1) 0%, rgba(17,153,255,1) 100%);
     color: #ffffff;
-    box-shadow: inset 0 0 0 2px white;
   }
   .mat-tab-label {
 
     &:first-of-type {
       border-radius: 20px 0px 0px 20px;
+      margin-right: -1px;
     }
     &:last-of-type {
       border-radius: 0px 20px 20px 0px;
