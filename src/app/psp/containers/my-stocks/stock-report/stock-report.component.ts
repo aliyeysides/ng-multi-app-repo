@@ -1644,7 +1644,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       .take(1)
       .subscribe(data => {
         this.data = data;
-        console.log('this.data', this.data);
         let dates, closePrices, pgrData, cmf, relStr, dema;
         this.current === '5Y' ? dates = data['five_year_chart_data']['calculations_dates'] : dates = data['one_year_chart_data']['calculations_dates'].reverse();
         this.current === '5Y' ? closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse() : closePrices = data['one_year_chart_data']['close_price'].map(x => +x).reverse();
