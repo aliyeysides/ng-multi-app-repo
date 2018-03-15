@@ -1870,10 +1870,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           y: -5,
         },
         scaleLabel: {
-          visible: false,
+          visible: true,
+          fontSize: '20px',
           color: '#004c66',
           bold: true,
-          backgroundColor: '#30f300'
+          backgroundColor: '#BBB'
         }
       },
       title: {
@@ -1929,16 +1930,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineColor: "#eee"
         },
         values: dates,
-        "label": {
+        label: {
           "font-size": "14px",
           "font-weight": "normal",
           "offset-x": "10%",
         },
-        // transform: {
-        //   type: 'date',
-        //   all: '%m/%d/%y'
-        // },
         item: {
+          visible: true,
           fontColor: "#999",
           fontSize: "14",
           fontWeight: "500",
@@ -2039,10 +2037,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineColor: "#eee"
         },
         values: dates,
-        transform: {
-          type: 'date',
-          all: '%m/%d/%y'
-        },
         item: {
           visible: false,
           fontColor: "#999",
@@ -2339,6 +2333,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "borderColor": "#ffffff",
             "strokeWidth": "4",
             "height": 25,
+            "text": 'test %v',
             "borderRadius": 12,
             "fontFamily": "Open Sans",
             "backgroundColor": "#b9e5fb",
