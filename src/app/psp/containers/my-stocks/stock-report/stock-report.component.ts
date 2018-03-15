@@ -1509,7 +1509,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     const chartComponents = 'oneYearChartData,fiveYearChartData,oneYearPgrData,fiveYearPgrData';
     if (this.stock) {
-      this.jumpToFragment(this.top.nativeElement, 'Top');
+      this.top.nativeElement.scrollIntoView({block: 'start', inline: 'nearest'});
       this.symbolSearchService.symbolLookup(this.stock)
         .take(1)
         .subscribe(val => {
