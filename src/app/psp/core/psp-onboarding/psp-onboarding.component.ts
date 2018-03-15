@@ -66,7 +66,6 @@ export class PspOnboardingComponent implements OnInit {
       id: 5,
       src: 'assets/imgs/img_onboard-screen5.png',
       mobileSrc: 'assets/imgs/img_onboard-screen5--mobile.png',
-      link: 'https://www.chaikinanalytics.com/powerpulse-market-insights-video/'
     },
   ];
 

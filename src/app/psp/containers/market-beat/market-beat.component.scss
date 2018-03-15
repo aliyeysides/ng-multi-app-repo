@@ -4,8 +4,9 @@
 
 
 .component--marketbeat {
-	padding:20px 10px 0;
-	height: 100vh;
+	padding:20px 10px 15px;
+	height: 100%;
+	min-height:100vh;
 	background-color: #f8f8f8;
 
 	.panel {

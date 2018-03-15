@@ -11,7 +11,7 @@ import {fadeInDown} from '../../../shared/animations/fadeInDown';
         <span>
           <i *ngIf="SPY?.change<0" class="fas fa-arrow-down red"></i>
           <i *ngIf="SPY?.change>0" class="fas fa-arrow-up green"></i>
-          <i *ngIf="SPY?.change==0" class="fas fa-window-minimize grey"></i>
+          <i *ngIf="SPY?.change==0" class="fal fa-minus grey"></i>
         </span>
         S&amp;P&nbsp;500&nbsp;
         <span [@fadeInDown]="fadeInDownSPYState" (@fadeInDown.done)="resetSPY()"
@@ -23,7 +23,7 @@ import {fadeInDown} from '../../../shared/animations/fadeInDown';
         <span>
           <i *ngIf="DJI?.change<0" class="fas fa-arrow-down red"></i>
           <i *ngIf="DJI?.change>0" class="fas fa-arrow-up green"></i>
-          <i *ngIf="DJI?.change==0" class="fas fa-window-minimize grey"></i>
+          <i *ngIf="DJI?.change==0" class="fal fa-minus grey"></i>
         </span>
         DOW 30&nbsp;
         <span [@fadeInDown]="fadeInDownDJIState" (@fadeInDown.done)="resetDJI()"
@@ -35,7 +35,7 @@ import {fadeInDown} from '../../../shared/animations/fadeInDown';
         <span>
           <i *ngIf="QQQ?.change<0" class="fas fa-arrow-down red"></i>
           <i *ngIf="QQQ?.change>0" class="fas fa-arrow-up green"></i>
-          <i *ngIf="QQQ?.change==0" class="fas fa-window-minimize grey"></i>
+          <i *ngIf="QQQ?.change==0" class="fal fa-minus grey"></i>
         </span>
         NASDAQ&nbsp;
         <span [@fadeInDown]="fadeInDownQQQState" (@fadeInDown.done)="resetQQQ()"
