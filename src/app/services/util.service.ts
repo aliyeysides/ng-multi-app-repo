@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {Subject} from 'rxjs/Subject';
 import {MatSnackBar} from '@angular/material';
 
 @Injectable()
@@ -10,7 +9,7 @@ export class UtilService {
 
   protected apiHostName = environment.envProtocol + '://' + environment.envHostName;
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) {
+  constructor(private http: HttpClient, public snackBar: MatSnackBar) {
   }
 
   public getApiHostName() {
@@ -22,20 +21,20 @@ export class UtilService {
       .catch(this.handleError);
   }
 
-  public handleError(err: any) {
-    const errMsg = (err.message) ? err.message :
-      err.status ? `${err.status} - ${err.statusText}` : 'Server error';
-    this.openSnackBar(errMsg);
-    return Observable.throw(errMsg);
-  }
-
-  openSnackBar(msg: string) {
+  public openSnackBar(msg: string) {
     let snackBarRef = this.snackBar.open(msg, 'Reload Page', {
       duration: 3000
     });
     snackBarRef.onAction().subscribe(() => {
       location.reload();
     });
+  }
+
+  public handleError(err: any) {
+    const errMsg = (err.message) ? err.message :
+      err.status ? `${err.status} - ${err.statusText}` : 'Server error';
+    this.openSnackBar(errMsg);
+    return Observable.throw(errMsg);
   }
 
   public checkIfBullList(listName) {
