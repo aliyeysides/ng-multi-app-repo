@@ -1509,7 +1509,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     const chartComponents = 'oneYearChartData,fiveYearChartData,oneYearPgrData,fiveYearPgrData';
     if (this.stock) {
-      this.jumpToFragment(this.top.nativeElement, 'Top');
+      this.top.nativeElement.scrollIntoView({block: 'start', inline: 'nearest'});
       this.symbolSearchService.symbolLookup(this.stock)
         .take(1)
         .subscribe(val => {
@@ -1644,7 +1644,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       .take(1)
       .subscribe(data => {
         this.data = data;
-
         let dates, closePrices, pgrData, cmf, relStr, dema;
         this.current === '5Y' ? dates = data['five_year_chart_data']['calculations_dates'] : dates = data['one_year_chart_data']['calculations_dates'].reverse();
         this.current === '5Y' ? closePrices = data['five_year_chart_data']['close_price'].map(x => +x).reverse() : closePrices = data['one_year_chart_data']['close_price'].map(x => +x).reverse();
@@ -1709,7 +1708,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     this.loading = true;
 
     const closePrices = this.data['five_year_chart_data']['close_price'].map(x => +x).reverse();
-    const dates = this.data['five_year_chart_data']['calculations_dates'].slice().reverse();
+    const dates = this.data['five_year_chart_data']['calculations_date'].slice().reverse();
     const pgrData = this.data['five_year_pgr_data']['pgr_data'].map(x => +x).reverse();
     const cmf = this.data['five_year_chart_data']['cmf'].map(x => +x).reverse();
     const relStr = this.data['five_year_chart_data']['relative_strength'].map(x => +x).reverse();
@@ -1733,7 +1732,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       width: undefined
     };
     this.loading ? this.loading = false : null;
-    this.cd.detectChanges();
+    this.cd.markForCheck();
   }
 
   toggleChartTime(span: string) {
@@ -1785,8 +1784,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       height: 590,
       width: undefined
     };
-    this.loading ? this.loading = false : null;
-    this.cd.detectChanges();
+    this.loading = false
+    this.cd.markForCheck();
     gtag('event', 'chart_timespan_toggle', {
       'event_category': 'engagement',
       'event_label': span
@@ -1871,10 +1870,11 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           y: -5,
         },
         scaleLabel: {
-          visible: false,
+          visible: true,
+          fontSize: '20px',
           color: '#004c66',
           bold: true,
-          backgroundColor: '#30f300'
+          backgroundColor: '#BBB'
         }
       },
       title: {
@@ -1930,16 +1930,13 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineColor: "#eee"
         },
         values: dates,
-        "label": {
+        label: {
           "font-size": "14px",
           "font-weight": "normal",
           "offset-x": "10%",
         },
-        // transform: {
-        //   type: 'date',
-        //   all: '%m/%d/%y'
-        // },
         item: {
+          visible: true,
           fontColor: "#999",
           fontSize: "14",
           fontWeight: "500",
@@ -2040,10 +2037,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineColor: "#eee"
         },
         values: dates,
-        transform: {
-          type: 'date',
-          all: '%m/%d/%y'
-        },
         item: {
           visible: false,
           fontColor: "#999",
@@ -2340,6 +2333,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             "borderColor": "#ffffff",
             "strokeWidth": "4",
             "height": 25,
+            "text": 'test %v',
             "borderRadius": 12,
             "fontFamily": "Open Sans",
             "backgroundColor": "#b9e5fb",

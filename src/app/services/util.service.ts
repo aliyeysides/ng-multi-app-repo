@@ -18,22 +18,24 @@ export class UtilService {
 
   public getJson(url, options) {
     return this.http.get(url, options)
-      .catch(this.handleError);
+      .catch(err => this.handleError(err));
   }
 
-  public openSnackBar(msg: string) {
+  public openSnackBar(msg: string, duration: number, callback: Function) {
     let snackBarRef = this.snackBar.open(msg, 'Reload Page', {
-      duration: 3000
+      duration: duration ? duration : 3000
     });
     snackBarRef.onAction().subscribe(() => {
-      location.reload();
+      callback();
     });
   }
 
   public handleError(err: any) {
     const errMsg = (err.message) ? err.message :
       err.status ? `${err.status} - ${err.statusText}` : 'Server error';
-    this.openSnackBar(errMsg);
+    this.openSnackBar(errMsg, 10 * 1000, () => {
+      location.reload();
+    });
     return Observable.throw(errMsg);
   }
 

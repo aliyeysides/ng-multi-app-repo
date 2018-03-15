@@ -20,8 +20,7 @@ declare var gtag: Function;
               <div class="section--date-select">
                 <div class="btn-group float-md-right" dropdown [autoClose]="true">
                     <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-                      <!-- {{ selectedInsight ? selectedInsight['post_title'].slice(26) : null }} -->
-                      January 31, 2018
+                       {{ selectedInsight ? selectedInsight['post_title'].slice(26) : null }} 
                     </button>
                   <ul *dropdownMenu class="dropdown-menu" role="menu">
                       <li (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem"><a
@@ -142,6 +141,7 @@ export class MarketBeatComponent implements OnInit, OnDestroy {
       .subscribe(posts => {
         this.posts = posts[0]['2'];
         this.selectInsight(this.posts[0]);
+        console.log('post', this.selectedInsight);
       })
   }
 
