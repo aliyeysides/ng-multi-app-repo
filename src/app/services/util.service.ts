@@ -2,50 +2,38 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {Subject} from 'rxjs/Subject';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable()
 export class UtilService {
 
   protected apiHostName = environment.envProtocol + '://' + environment.envHostName;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public snackBar: MatSnackBar) {
   }
 
   public getApiHostName() {
     return this.apiHostName;
   }
 
-  public httpService(url, options) {
-    // httpRequest$ stream that allows us to push new requests
-    const httpRequest$ = new Subject();
-
-    // httpResponse$ stream that allows clients of the httpService
-    // to handle our responses (HttpClient here can be replaced with whatever
-    // http library you're using).
-    const httpResponse$ = httpRequest$
-      .switchMap(() => this.http.get(url, options));
-
-    // Expose a single method get() that pushes a new
-    // request onto the httpRequest stream. Expose the
-    // httpResponse$ stream to handle responses.
-    return {
-      get: () => httpRequest$.next(),
-      httpResponse$
-    };
-  }
-
   public getJson(url, options) {
-    // console.log(this.httpService(url, options).get());
-    // return this.httpService(url, options)
-    //   .catch(this.handleError);
     return this.http.get(url, options)
       .catch(this.handleError);
+  }
+
+  public openSnackBar(msg: string) {
+    let snackBarRef = this.snackBar.open(msg, 'Reload Page', {
+      duration: 3000
+    });
+    snackBarRef.onAction().subscribe(() => {
+      location.reload();
+    });
   }
 
   public handleError(err: any) {
     const errMsg = (err.message) ? err.message :
       err.status ? `${err.status} - ${err.statusText}` : 'Server error';
+    this.openSnackBar(errMsg);
     return Observable.throw(errMsg);
   }
 

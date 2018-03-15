@@ -15,6 +15,7 @@ declare let gtag: Function;
 export class BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
   @Input('placeholder') placeholder: string;
   @Input('defaultFocus') focus: boolean;
+  @Input('userStocks') userStocks: Array<string>;
   @ViewChild('search') search: ElementRef;
   @Output('focused') focused: EventEmitter<boolean> = new EventEmitter<boolean>();
 

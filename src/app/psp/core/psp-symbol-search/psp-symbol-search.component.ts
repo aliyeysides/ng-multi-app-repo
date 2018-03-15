@@ -107,7 +107,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
 
   public symbolSearchForm: FormControl;
   public searchResults: Array<any>;
-  public userStocks: ListSymbolObj[];
+  // public userStocks: ListSymbolObj[];
   public loading: Subscription;
   public searchSuggestions: Array<SearchResult> = [
     {
@@ -138,34 +138,33 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   }
 
   ngAfterViewInit() {
-    this.loading = this.authService.currentUser$
-      .map(usr => {
-        console.log('usr', usr);
-        this._uid = usr['UID']
-      })
-      .filter(x => x != undefined)
-      .map(res => this._listId = this.authService.userLists[0]['User Lists'].filter(x => x['name'] == this.healthCheck.currentList)[0]['list_id'])
-      .switchMap(listId => {
-        console.log('listId', listId);
-        return this.healthCheck.getListSymbols(listId, this._uid)
-      })
-      .subscribe(res => {
-        console.log('userStocks', res['symbols']);
-        this.userStocks = res['symbols'];
-      });
     // this.loading = this.authService.currentUser$
-    //   .map(usr => this._uid = usr['UID'])
+    //   .map(usr => {
+    //     console.log('usr', usr);
+    //     return this._uid = usr['UID'];
+    //   })
+    //   .filter(x => x != undefined)
     //   .map(res => this._listId = this.authService.userLists[0]['User Lists'].filter(x => x['name'] == this.healthCheck.currentList)[0]['list_id'])
     //   .switchMap(listId => {
+    //     console.log('listId', listId);
     //     return this.healthCheck.getListSymbols(listId, this._uid)
     //   })
-    //   .takeUntil(this.ngUnsubscribe)
     //   .subscribe(res => {
+    //     console.log('userStocks', res['symbols']);
     //     this.userStocks = res['symbols'];
-    //   })
+    //   });
+    this.loading = this.authService.currentUser$
+      .map(usr => this._uid = usr['UID'])
+      .map(res => this._listId = this.authService.userLists[0]['User Lists'].filter(x => x['name'] == this.healthCheck.currentList)[0]['list_id'])
+      .switchMap(listId => {
+        return this.healthCheck.getListSymbols(listId, this._uid)
+      })
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(res => {
+        this.userStocks = res['symbols'];
+      });
 
     this.symbolSearchService.isOpen.subscribe(res => {
-      console.log('res', res);
       res === true ? this.openAutoComplete() : this.closeAutoComplete();
     });
   }

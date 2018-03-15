@@ -21,6 +21,7 @@ export class AuthService {
   private loginParams: URLSearchParams;
 
   constructor(private utilService: UtilService,
+              private httpClient: HttpClient,
               private http: Http) {
     this.loginParams = new URLSearchParams;
   }
@@ -38,38 +39,39 @@ export class AuthService {
     return this._userLists.getValue();
   }
 
-  // public login(): Observable<any> {
-  //   console.log('localStorage', localStorage);
-  //   const email = localStorage.getItem('email');
-  //   console.log('email', email);
-  //   const getLoginUrl = `${this.apiHostName}/CPTRestSecure/app/user/login?`;
-  //   const options = {
-  //     params: {
-  //       'deviceId': email
-  //     },
-  //     withCredentials: true,
-  //   };
-  //
-  //   return this.http.get(getLoginUrl, options).map((res: Response) => {
-  //     console.log('res', res);
-  //     this.loggedIn = true;
-  //     return res;
-  //   }).catch(this.utilService.handleError);
-  // }
-  //
   public login(): Observable<any> {
     const email = localStorage.getItem('email');
     const getLoginUrl = `${this.apiHostName}/CPTRestSecure/app/user/login?`;
-    this.loginParams.set('deviceId', email);
-    return this.http.get(getLoginUrl, {
-      search: this.loginParams,
-      withCredentials: true
-    }).map(res => {
+    const options = {
+      params: {
+        'deviceId': email
+      },
+      withCredentials: true,
+    };
+
+    return this.httpClient.get(getLoginUrl, options).map((res: Response) => {
+      console.log('res', res);
       this.loggedIn = true;
-      return res.json();
-    })
-      .catch(this.utilService.handleError);
+      return res;
+    }).catch(res => {
+      console.log('onrejected', res);
+      return this.utilService.handleError(res);
+    });
   }
+  //
+  // public login(): Observable<any> {
+  //   const email = localStorage.getItem('email');
+  //   const getLoginUrl = `${this.apiHostName}/CPTRestSecure/app/user/login?`;
+  //   this.loginParams.set('deviceId', email);
+  //   return this.http.get(getLoginUrl, {
+  //     search: this.loginParams,
+  //     withCredentials: true
+  //   }).map(res => {
+  //     this.loggedIn = true;
+  //     return res.json();
+  //   })
+  //     .catch(this.utilService.handleError);
+  // }
 
   public logOutSession(): Observable<any> {
     const getLogoutUrl = `${this.apiHostName}/CPTRestSecure/app/session/killsessions?`;
@@ -80,7 +82,7 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    return this.loggedIn;
+    return this.loggedIn ? this.loggedIn : false;
   }
 
 }
