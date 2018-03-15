@@ -1028,13 +1028,13 @@ sub {
 
 
 .article {
-  font-family: $font-stack2;
+  font-family: $font-stack2 !important;
   color: $font-color;
   font-size: 17px;
   line-height: 1.5;
   text-align: left;
-  max-width: 1024px;
-  margin:-25px auto 25px;
+  max-width: 992px;
+  margin:-30px auto 25px;
 
   ul {
     list-style: disc;
@@ -1092,17 +1092,26 @@ sub {
     clear: both;
     display: block;
     max-width: 800px;
-    margin: 45px auto 15px;
+    margin: 30px auto 15px;
 
     @media screen AND (max-width:575px) {
       width: 100%;
     }
   }
+
+  img ~ i:first-of-type {
+    text-align: center;
+    font-size: 13px;
+    margin-top:-15px;
+  }
+
   span {
-    font-family: $font-stack2;
+    font-family: $font-stack2 !important;
+    display: inline-block;
     color: $font-color;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.5;
+    margin-bottom:15px;
   }
 }
 
