@@ -84,6 +84,12 @@
 		}
 	}
 }
+.stocklist__overview--green {
+  background: $gradient--pulse-green;
+}
+.stocklist__overview--red {
+  background: $gradient--pulse-red;
+}
 
 .stocklist__powerbar {
 	background-color: #ffffff;
@@ -118,81 +124,78 @@
 	      	font-size: 21px;
 	      	line-height: 27px;
 	      	white-space: nowrap;
+	      	overflow:hidden;
+	      	text-align:center;
 	    }
 
 	    .bullish--more {
 	      	height: 30px;
+	      	float:left;
 	      	background-color: $veryBullish-green;
-	      	float: left;
 	      	width: 56%;
 	      	border-radius: 25px 0px 0px 25px;
 	      	border: 2px solid #ffffff;
 	      	box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
 	    }
         .bullish--less {
-          height: 30px;
-          background-color: $veryBullish-green;
-          float: left;
-          width: 28%;
-          border-radius: 25px 0px 0px 25px;
-          border: 2px solid #ffffff;
-	      box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
+	      	height: 30px;
+	      	float:left;
+          	background-color: $veryBullish-green;
+          	width: 28%;
+          	border-radius: 25px 0px 0px 25px;
+          	border: 2px solid #ffffff;
+	      	box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
         }
         .bullish--same {
-          height: 30px;
-          background-color: $veryBullish-green;
-          float: left;
-          width: 42%;
-          border-radius: 25px 0px 0px 25px;
-          border: 2px solid #ffffff;
-          box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
+	      	height: 30px;
+	      	float:left;
+          	background-color: $veryBullish-green;
+          	width: 42%;
+          	border-radius: 25px 0px 0px 25px;
+          	border: 2px solid #ffffff;
+          	box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
         }
 	    .neutral {
-	      	width: 16%;
 	      	height: 30px;
+	      	float:left;
+	      	width: 16%;
 	      	background-color: $neutral-yellow;
-	      	float: left;
 	      	border-radius: 1px;
 	      	border-top: 2px solid #ffffff;
 	      	border-bottom: 2px solid #ffffff;
 	      	box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.15);
 	    }
 	    .bearish--more {
-	      	height: 40px;
+	      	height: 30px;
+	      	float:left;
 	      	background-color: $veryBearish-red;
-	      	float: left;
 	      	width: 56%;
 	      	border-radius:0px 25px 25px 0px;
 	      	border: 2px solid #ffffff;
 	      	box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
 	    }
         .bearish--less {
-          height: 30px;
-          background-color: $veryBearish-red;
-          float: left;
-          width: 28%;
-          border-radius:0px 25px 25px 0px;
-          border: 2px solid #ffffff;
-	      box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
+	      	height: 30px;
+	      	float:left;
+          	background-color: $veryBearish-red;
+          	width: 28%;
+          	border-radius:0px 25px 25px 0px;
+          	border: 2px solid #ffffff;
+	      	box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
         }
         .bearish--same {
-          height: 30px;
-          background-color: $veryBearish-red;
-          float: left;
-          width: 42%;
-          border-radius:0px 25px 25px 0px;
-          border: 2px solid #ffffff;
+	      	height: 30px;
+	      	float:left;
+          	background-color: $veryBearish-red;
+          	width: 42%;
+          	border-radius:0px 25px 25px 0px;
+          	border: 2px solid #ffffff;
 	      	box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.2);
         }
   	}
 }
 
-.stocklist__overview--green {
-  background: $gradient--pulse-green;
-}
-.stocklist__overview--red {
-  background: $gradient--pulse-red;
-}
+
 
 
 .col-headers {
@@ -203,6 +206,9 @@
 	p {
 		display:inline-block;
 		cursor:pointer;
+	}
+	.col--pgr {
+		margin-left:-7px;
 	}
 	.sorted {
 		p {
@@ -220,16 +226,121 @@
 	margin-bottom: 50px;
 	background-color: #ffffff;
 	padding:0;
-	
-	.list__entry {
-		border-bottom: 1px solid #f0f0f0;
-		background-color: #fcfcfc;
 
-		&:hover {
-			background-color: #fff;
+	.stock__list {
+
+		@media screen AND (max-width: 575px) {
+		    padding-bottom: 220px;
+		}
+
+		.list__entry {
+			border-bottom: 1px solid #f0f0f0;
+			background-color: #fcfcfc;
+			height: 50px;
+
+			&:hover {
+				background-color: #fff;
+			}
+
+			.list-entry__pgr {
+
+		      img {
+		        width: 100%;
+		        max-width: 32px;
+		      }
+		    }
+
+			.list-entry__info {
+
+		      	.ticker {
+		        	line-height: 50px;
+		      	}
+
+		      	.company {
+		        	display: none;
+		      	}
+		    }
+
+		    .list-entry__data {
+		      	cursor: pointer;
+
+		      	.data {
+		        	line-height: 50px;
+		      	}
+		    }
 		}
 	}
 }
+
+
+
+.list-entry__overlay {
+  display: none;
+  position: absolute;
+  top:0px;
+  left:0;
+  width: 100%;
+  background: $gradient--pulse-grey;
+  padding:0;
+}
+.list-entry__overlay.show {
+  display:block;
+}
+.list-entry__overlay.red {
+  background: $gradient--pulse-red;
+}
+.list-entry__overlay.green {
+  background: $gradient--pulse-green;
+}
+.list-entry__overlay.yellow {
+  background: $gradient--pulse-yellow;
+}
+
+.overlay__contents {
+  height: 50px;
+
+  .ticker {
+    font-size: 32px;
+    line-height: 52px;
+    color:#ffffff;
+    text-align: left;
+  }
+
+  .data {
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 50px;
+    color:#ffffff;
+    text-align: left;
+  }
+
+  .icon {
+    text-align: center;
+
+    i {
+      font-size: 27px;
+      line-height: 50px;
+      color:#ffffff;
+    }
+  }
+
+  .button__slide {
+    position: absolute;
+    right:5px;
+    height: 50px;
+    width: 16px;
+    text-align: center;
+    cursor: pointer;
+
+    i {
+      font-size: 32px;
+      color: #ffffff;
+      opacity: 0.5;
+      line-height: 50px;
+    }
+  }
+}
+
 
 
 

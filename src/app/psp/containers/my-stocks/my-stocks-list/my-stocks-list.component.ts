@@ -53,7 +53,7 @@ declare var gtag: Function;
 
     <div class="row justify-content-center no-gutters col-headers">
       <div [ngClass]="{'sorted': orderByObject['field'] === 'PGR'}" (click)="toggleOrderByObject('PGR', $event)" class="col-2">
-        <p>PGR</p>
+        <p class="col--pgr">PGR</p>
       </div>
       <div [ngClass]="{'sorted': orderByObject['field'] === 'symbol'}" (click)="toggleOrderByObject('symbol', $event)" class="col-3 text-left" style="padding-left:0;">
         <p>TICKER</p>

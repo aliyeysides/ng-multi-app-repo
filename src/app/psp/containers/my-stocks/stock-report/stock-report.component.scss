@@ -36,10 +36,6 @@
 		padding: 5px 10px 10px;
 		overflow: hidden;
 
-/*		&:first-of-type {
-			margin-top: 5px;
-		}
-*/
 		.tab--slide {
 		  width: 20%;
 		  height: 5px;
@@ -58,7 +54,6 @@
 		}
 	}
 }
-
 .component--stockview.open {
 	display:block;
 }
@@ -158,7 +153,6 @@
 			i {
 				color: $link-blue;
 			}
-
 		}
 
 		@media screen AND (min-width:1024px) {
@@ -330,12 +324,13 @@
 			width: 35%;
 
 			@media screen AND (max-width:575px) {
-				width: 50%;
-				padding-right:45px;
+				width: 40%;
+				padding-right:50px;
 				text-align: right;
 				font-size: 32px;
 				line-height: 62px;
 				font-weight: 500;
+				float: right;
 			}
 			@media screen AND (min-width:576px) {
 				color:$font-color;
@@ -375,6 +370,7 @@
 	padding-bottom: 148px;
 	padding-left: 10px;
 	padding-right: 10px;
+	z-index: 15px;
 
 	@media screen AND (max-width:575px) {
 		padding-bottom: 178px;
@@ -705,7 +701,7 @@
 		line-height: 1;
 		display: inline-block;
 		text-align: center;
-		padding:6px 13px 3px 13px;
+		padding:4px 13px 3px;
 		cursor: pointer;
 		white-space: nowrap;
 		border-radius: 30px;

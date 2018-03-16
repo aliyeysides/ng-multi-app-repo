@@ -190,11 +190,11 @@ interface FilterFunc {
           <div class="col-12">
             <div class="row">
               <div *ngIf="collapse!='closed'" (click)="collapse = 'closed'" class="col-12 expand-collapse">
-                <img src="./assets/imgs/ux__collapse--circle.svg">
+                <i class="far fa-scrubber"></i>
                 <p>Collapse</p>
               </div>
               <div *ngIf="collapse!='opened'" (click)="collapse = 'opened'" class="col-12 expand-collapse">
-                <img src="./assets/imgs/ux__expand--dots.svg">
+                <i class="far fa-ellipsis-h"></i>
                 <p>Expand for Detail</p>
               </div>
             </div>

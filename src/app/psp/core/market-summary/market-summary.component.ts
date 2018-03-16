@@ -11,36 +11,36 @@ import {fadeInDown} from '../../../shared/animations/fadeInDown';
         <span>
           <i *ngIf="SPY?.change<0" class="fas fa-arrow-down red"></i>
           <i *ngIf="SPY?.change>0" class="fas fa-arrow-up green"></i>
-          <i *ngIf="SPY?.change==0" class="fal fa-minus grey"></i>
+          <i *ngIf="SPY?.change==0" class="fas fa-minus grey"></i>
         </span>
-        S&amp;P&nbsp;500&nbsp;
+        <b>SPY</b> (S&amp;P&nbsp;500)&nbsp;
         <span [@fadeInDown]="fadeInDownSPYState" (@fadeInDown.done)="resetSPY()"
               [ngClass]="{'up-change':SPY?.change>0,'down-change':SPY?.change<0}">
-          <span *ngIf="SPY?.change>0" class="up-change">+</span>{{SPY?.percent_change.toFixed(2) }}%
+           <b><span *ngIf="SPY?.change>0" class="up-change">+</span>{{SPY?.percent_change.toFixed(2) }}%</b>
         </span>
       </p>
       <p class="indice">
         <span>
           <i *ngIf="DJI?.change<0" class="fas fa-arrow-down red"></i>
           <i *ngIf="DJI?.change>0" class="fas fa-arrow-up green"></i>
-          <i *ngIf="DJI?.change==0" class="fal fa-minus grey"></i>
+          <i *ngIf="DJI?.change==0" class="fas fa-minus grey"></i>
         </span>
-        DOW 30&nbsp;
+        <b>DIA</b> (DOW 30)&nbsp;
         <span [@fadeInDown]="fadeInDownDJIState" (@fadeInDown.done)="resetDJI()"
               [ngClass]="{'up-change':DJI?.change>0,'down-change':DJI?.change<0}">
-          <span *ngIf="DJI?.change>0" class="up-change">+</span>{{DJI?.percent_change.toFixed(2) }}%
+          <b><span *ngIf="DJI?.change>0" class="up-change">+</span>{{DJI?.percent_change.toFixed(2) }}%</b>
         </span>
       </p>
       <p class="indice">
         <span>
           <i *ngIf="QQQ?.change<0" class="fas fa-arrow-down red"></i>
           <i *ngIf="QQQ?.change>0" class="fas fa-arrow-up green"></i>
-          <i *ngIf="QQQ?.change==0" class="fal fa-minus grey"></i>
+          <i *ngIf="QQQ?.change==0" class="fas fa-minus grey"></i>
         </span>
-        NASDAQ&nbsp;
+        <b>QQQ</b> (NASDAQ)&nbsp;
         <span [@fadeInDown]="fadeInDownQQQState" (@fadeInDown.done)="resetQQQ()"
               [ngClass]="{'up-change':QQQ?.change>0,'down-change':QQQ?.change<0}">
-          <span *ngIf="QQQ?.change>0" class="up-change">+</span>{{QQQ?.percent_change.toFixed(2) }}%
+          <b><span *ngIf="QQQ?.change>0" class="up-change">+</span>{{QQQ?.percent_change.toFixed(2) }}%</b>
         </span>
       </p>
     </div>
