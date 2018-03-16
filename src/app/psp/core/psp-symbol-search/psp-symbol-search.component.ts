@@ -107,7 +107,6 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
 
   public symbolSearchForm: FormControl;
   public searchResults: Array<any>;
-  // public userStocks: ListSymbolObj[];
   public loading: Subscription;
   public searchSuggestions: Array<SearchResult> = [
     {
@@ -138,40 +137,32 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   }
 
   ngAfterViewInit() {
-    // this.loading = this.authService.currentUser$
-    //   .map(usr => {
-    //     console.log('usr', usr);
-    //     return this._uid = usr['UID'];
-    //   })
-    //   .filter(x => x != undefined)
-    //   .map(res => this._listId = this.authService.userLists[0]['User Lists'].filter(x => x['name'] == this.healthCheck.currentList)[0]['list_id'])
-    //   .switchMap(listId => {
-    //     console.log('listId', listId);
-    //     return this.healthCheck.getListSymbols(listId, this._uid)
-    //   })
-    //   .subscribe(res => {
-    //     console.log('userStocks', res['symbols']);
-    //     this.userStocks = res['symbols'];
-    //   });
+    this.symbolSearchService.isOpen$.subscribe(res => {
+      res === true ? this.openAutoComplete() : this.closeAutoComplete();
+    });
+
+    this.getUserStocks();
+  }
+
+  getUserStocks() {
     this.loading = this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
-      .map(res => this._listId = this.authService.userLists[0]['User Lists'].filter(x => x['name'] == this.healthCheck.currentList)[0]['list_id'])
+      .filter(x => x != undefined)
+      .switchMap(res => this.healthCheck.getAuthorizedLists(res))
+      .map(lists => lists[0]['User Lists'].filter(x => x['name'] == this.healthCheck.currentList)[0]['list_id'])
       .switchMap(listId => {
+        this._listId = listId;
         return this.healthCheck.getListSymbols(listId, this._uid)
       })
       .takeUntil(this.ngUnsubscribe)
       .subscribe(res => {
         this.userStocks = res['symbols'];
       });
-
-    this.symbolSearchService.isOpen.subscribe(res => {
-      res === true ? this.openAutoComplete() : this.closeAutoComplete();
-    });
   }
 
   onSubmit(ticker: string) {
     this.router.navigate(['stock-analysis', ticker.toUpperCase()]);
-    this.toggleSearch.emit();
+    this.closeAutoComplete();
     gtag('event', 'search', {'search_term': ticker});
   }
 
@@ -180,8 +171,11 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       .take(1)
       .subscribe(res => {
         this.healthCheck.updateMyStocksList();
-        this.router.navigate(['stock-analysis', ticker]);
-        this.toggleSearch.emit();
+        if (this.navEndLocation === 'MyStocksComponent') {
+          this.router.navigate(['stock-analysis', ticker]);
+          this.closeAutoComplete();
+        }
+        this.getUserStocks();
       });
     gtag('event', 'search', {'search_term': ticker});
   }
@@ -191,13 +185,13 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       .take(1)
       .subscribe(res => {
         this.healthCheck.updateMyStocksList();
-        this.toggleSearch.emit();
+        this.getUserStocks();
       });
   }
 
   onClick(ticker: string) {
     this.router.navigate(['stock-analysis', ticker]);
-    this.toggleSearch.emit();
+    this.closeAutoComplete();
     gtag('event', 'search', {'search_term': ticker});
   }
 

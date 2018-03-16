@@ -4,7 +4,6 @@ import {Observable} from 'rxjs/Observable';
 import {User} from '../shared/models/user';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {HttpClient} from "@angular/common/http";
-import {Http, URLSearchParams} from '@angular/http';
 
 @Injectable()
 export class AuthService {
@@ -18,16 +17,11 @@ export class AuthService {
 
   public loggedIn: boolean;
 
-  private loginParams: URLSearchParams;
-
   constructor(private utilService: UtilService,
-              private httpClient: HttpClient,
-              private http: Http) {
-    this.loginParams = new URLSearchParams;
+              private httpClient: HttpClient) {
   }
 
   public setCurrentUser(usr: User) {
-    console.log('setCurrentUser', usr);
     this.currentUser.next(usr);
   }
 
@@ -50,7 +44,6 @@ export class AuthService {
     };
 
     return this.httpClient.get(getLoginUrl, options).map((res: Response) => {
-      console.log('res', res);
       this.loggedIn = true;
       return res;
     }).catch(res => {
@@ -58,24 +51,10 @@ export class AuthService {
       return this.utilService.handleError(res);
     });
   }
-  //
-  // public login(): Observable<any> {
-  //   const email = localStorage.getItem('email');
-  //   const getLoginUrl = `${this.apiHostName}/CPTRestSecure/app/user/login?`;
-  //   this.loginParams.set('deviceId', email);
-  //   return this.http.get(getLoginUrl, {
-  //     search: this.loginParams,
-  //     withCredentials: true
-  //   }).map(res => {
-  //     this.loggedIn = true;
-  //     return res.json();
-  //   })
-  //     .catch(this.utilService.handleError);
-  // }
 
   public logOutSession(): Observable<any> {
     const getLogoutUrl = `${this.apiHostName}/CPTRestSecure/app/session/killsessions?`;
-    return this.http.get(getLogoutUrl, {withCredentials: true}).map(() => {
+    return this.httpClient.get(getLogoutUrl, {withCredentials: true}).map(() => {
       this.loggedIn = false;
       window.location.href = this.apiHostName;
     }).catch(this.utilService.handleError);

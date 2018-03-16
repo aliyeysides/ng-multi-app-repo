@@ -6,7 +6,7 @@ import {Subject} from 'rxjs/Subject';
 @Injectable()
 export class SymbolSearchService {
   private _isOpen: Subject<boolean> = new Subject<boolean>();
-  isOpen = this._isOpen.asObservable();
+  isOpen$ = this._isOpen.asObservable();
 
   private _addStock: Subject<void> = new Subject<void>();
   addStock$ = this._addStock.asObservable();
@@ -16,7 +16,6 @@ export class SymbolSearchService {
   }
 
   setSearchOpen(val: boolean) {
-
     this._isOpen.next(val);
   }
 

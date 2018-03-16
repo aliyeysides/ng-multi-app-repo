@@ -9,6 +9,7 @@ import {SymbolSearchService} from '../../../services/symbol-search.service';
 import {IdeasService} from '../../../services/ideas.service';
 import {AuthService} from '../../../services/auth.service';
 import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
 
 declare let gtag: Function;
 
@@ -42,7 +43,13 @@ export class BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
     this.searchResults = [];
     this.symbolSearchForm.valueChanges
       .debounceTime(500)
-      .switchMap(val => this.symbolSearchService.symbolLookup(val))
+      .switchMap(val => {
+        if (val === '') {
+          this.searchResults = [];
+          return Observable.of([]);
+        }
+        return this.symbolSearchService.symbolLookup(val)
+      })
       .takeUntil(this.ngUnsubscribe)
       .subscribe(val => {
         this.searchResults = val;
