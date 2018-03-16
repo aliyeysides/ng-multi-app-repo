@@ -4,7 +4,6 @@ import {Observable} from 'rxjs/Observable';
 import {User} from '../shared/models/user';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {HttpClient} from "@angular/common/http";
-import {Http, URLSearchParams} from '@angular/http';
 
 @Injectable()
 export class AuthService {
@@ -18,14 +17,11 @@ export class AuthService {
 
   public loggedIn: boolean;
 
-  private loginParams: URLSearchParams;
-
   constructor(private utilService: UtilService,
               private httpClient: HttpClient) {
   }
 
   public setCurrentUser(usr: User) {
-    console.log('setCurrentUser', usr);
     this.currentUser.next(usr);
   }
 
@@ -48,7 +44,6 @@ export class AuthService {
     };
 
     return this.httpClient.get(getLoginUrl, options).map((res: Response) => {
-      console.log('res', res);
       this.loggedIn = true;
       return res;
     }).catch(res => {
