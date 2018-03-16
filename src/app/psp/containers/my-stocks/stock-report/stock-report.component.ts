@@ -1571,7 +1571,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         return Observable.empty();
       }).take(1).subscribe(() => this.cd.markForCheck());
 
-    this.qrtEPSChart, this.annualEPSChart, this.annualRevenueChart, this.epsSurprisesChart = {} as ZingChart;
     this.reportService.getResearchReportData(stock)
       .switchMap(research => {
         this.research = research;
@@ -1913,12 +1912,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineColor: "#eee",
         },
         placement: "opposite",
-        // item: {
-        //   fontColor: "#999",
-        //   fontSize: "14",
-        //   fontWeight: "500",
-        //   fontFamily: "Rajdhani"
-        // },
         tick: {
           visible: false,
         },
@@ -1934,11 +1927,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineColor: "#eee"
         },
         values: dates,
-        label: {
-          "font-size": "14px",
-          "font-weight": "normal",
-          "offset-x": "10%",
-        },
         item: {
           visible: true,
           fontColor: "#999",
