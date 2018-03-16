@@ -150,7 +150,10 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       .filter(x => x != undefined)
       .switchMap(res => this.healthCheck.getAuthorizedLists(res))
       .map(lists => lists[0]['User Lists'].filter(x => x['name'] == this.healthCheck.currentList)[0]['list_id'])
-      .switchMap(listId => this.healthCheck.getListSymbols(listId, this._uid))
+      .switchMap(listId => {
+        this._listId = listId;
+        return this.healthCheck.getListSymbols(listId, this._uid)
+      })
       .takeUntil(this.ngUnsubscribe)
       .subscribe(res => {
         this.userStocks = res['symbols'];
@@ -159,7 +162,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
 
   onSubmit(ticker: string) {
     this.router.navigate(['stock-analysis', ticker.toUpperCase()]);
-    this.toggleSearch.emit();
+    this.closeAutoComplete();
     gtag('event', 'search', {'search_term': ticker});
   }
 
@@ -168,8 +171,11 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       .take(1)
       .subscribe(res => {
         this.healthCheck.updateMyStocksList();
-        this.router.navigate(['stock-analysis', ticker]);
-        this.toggleSearch.emit();
+        if (this.navEndLocation === 'MyStocksComponent') {
+          this.router.navigate(['stock-analysis', ticker]);
+          this.closeAutoComplete();
+        }
+        this.getUserStocks();
       });
     gtag('event', 'search', {'search_term': ticker});
   }
@@ -179,13 +185,13 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       .take(1)
       .subscribe(res => {
         this.healthCheck.updateMyStocksList();
-        this.toggleSearch.emit();
+        this.getUserStocks();
       });
   }
 
   onClick(ticker: string) {
     this.router.navigate(['stock-analysis', ticker]);
-    this.toggleSearch.emit();
+    this.closeAutoComplete();
     gtag('event', 'search', {'search_term': ticker});
   }
 
