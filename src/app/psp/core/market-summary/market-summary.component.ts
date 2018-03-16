@@ -16,7 +16,9 @@ import {fadeInDown} from '../../../shared/animations/fadeInDown';
         <b>SPY</b> (S&amp;P&nbsp;500)&nbsp;
         <span [@fadeInDown]="fadeInDownSPYState" (@fadeInDown.done)="resetSPY()"
               [ngClass]="{'up-change':SPY?.change>0,'down-change':SPY?.change<0}">
-           <b><span *ngIf="SPY?.change>0" class="up-change">+</span>{{SPY?.percent_change.toFixed(2) }}%</b>
+          <span *ngIf="SPY?.change>0" class="up-change">+</span>{{SPY?.percent_change.toFixed(2) }}%
+          <span>{{ SPY?.change | decimal }}</span>
+          <span>{{ SPY?.last | decimal }}</span>
         </span>
       </p>
       <p class="indice">
@@ -28,7 +30,9 @@ import {fadeInDown} from '../../../shared/animations/fadeInDown';
         <b>DIA</b> (DOW 30)&nbsp;
         <span [@fadeInDown]="fadeInDownDJIState" (@fadeInDown.done)="resetDJI()"
               [ngClass]="{'up-change':DJI?.change>0,'down-change':DJI?.change<0}">
-          <b><span *ngIf="DJI?.change>0" class="up-change">+</span>{{DJI?.percent_change.toFixed(2) }}%</b>
+          <span *ngIf="DJI?.change>0" class="up-change">+</span>{{DJI?.percent_change.toFixed(2) }}%
+          <span>{{ DJI?.change | decimal }}</span>
+          <span>{{ DJI?.last | decimal }}</span>
         </span>
       </p>
       <p class="indice">
@@ -40,7 +44,9 @@ import {fadeInDown} from '../../../shared/animations/fadeInDown';
         <b>QQQ</b> (NASDAQ)&nbsp;
         <span [@fadeInDown]="fadeInDownQQQState" (@fadeInDown.done)="resetQQQ()"
               [ngClass]="{'up-change':QQQ?.change>0,'down-change':QQQ?.change<0}">
-          <b><span *ngIf="QQQ?.change>0" class="up-change">+</span>{{QQQ?.percent_change.toFixed(2) }}%</b>
+          <span *ngIf="QQQ?.change>0" class="up-change">+</span>{{QQQ?.percent_change.toFixed(2) }}%
+          <span>{{ QQQ?.change | decimal }}</span>
+          <span>{{ QQQ?.last | decimal }}</span>
         </span>
       </p>
     </div>
