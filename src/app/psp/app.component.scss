@@ -228,18 +228,6 @@ sub {
 }
 
 
-.col-headers {
-  margin-top: 5px;
-  margin-bottom: 5px;
-
-  p {
-    font-size: 12px;
-    font-weight: 600;
-    color: $font-color--mid;
-    line-height: 1;
-    cursor: default;
-  }
-}
 
 
 
@@ -465,6 +453,15 @@ sub {
     z-index: 12;
   }
 }
+.page__header--green {
+  background: $gradient--pulse-green;
+}
+.page__header--red {
+  background: $gradient--pulse-red;
+}
+.page__header--grey {
+  background: $gradient--pulse-grey;
+}
 
 .page__header--desktop {
   position: fixed;
@@ -601,23 +598,6 @@ sub {
 
 
 
-.page__header--green {
-  background: $gradient--pulse-green;
-}
-
-.page__header--red {
-  background: $gradient--pulse-red;
-}
-
-.page__header--grey {
-  background: $gradient--pulse-grey;
-}
-
-
-
-
-
-
 
 
 
@@ -636,7 +616,7 @@ sub {
 }
 
 
-.add-stock {
+.fixed-button {
   position: fixed;
   right: 2%;
   bottom: 100px;
@@ -676,14 +656,14 @@ sub {
     box-shadow: inset 0 0 0 3px rgba(255,255,255,1), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.04), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
 
     i {
-      font-size: 40px;
+      font-size: 36px;
       vertical-align: middle;
       color: #ffffff;
       font-weight: 400;
       transition: 0.15s;
 
       @media screen AND (max-width: 575px) {
-        font-size: 28px;
+        font-size: 24px;
       }
     }
 
@@ -704,32 +684,26 @@ sub {
 
 
 
-
-
-.icon__separator {
-  opacity: 1;
-  margin: 0 auto;
-  max-width: 32px;
-
-  img, svg {
-    width: 100%;
-    max-width: 32px;
-  }
-}
-
-
-
-
-
-
-
-
-
 .section__chart {
   margin:15px 0 10px;
 
   @media screen AND (max-width: 575px) {
     margin:20px 0 10px;
+  }
+}
+
+
+
+.col-headers {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  p {
+    font-size: 12px;
+    font-weight: 600;
+    color: $font-color--mid;
+    line-height: 1;
+    cursor: default;
   }
 }
 
@@ -826,8 +800,49 @@ sub {
 
 
 
-/*        STOCK LIST ENTRY           */
+/*          EXPAND/COLLAPSE             */
 
+.expand-collapse {
+  margin:15px 0 0;
+  cursor: pointer;
+
+  p {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: $font-color--light;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+  }
+
+  i {
+    color: $font-color--light;
+    display: block;
+    clear: both;
+  }
+  .fa-scrubber {
+    font-size: 25px;
+    margin-bottom:6px;
+  }
+  .fa-ellipsis-h {
+    font-size: 32px;
+  }
+}
+
+
+
+
+
+
+
+
+
+/*        STOCK LIST ENTRY           */
 
 .stock__list {
   height: 100vh;
@@ -839,12 +854,9 @@ sub {
   padding-right: 10px;
 
   &::-webkit-scrollbar {
-
   }
 
-  @media screen AND (max-width: 575px) {
-    padding-bottom: 220px;
-  }
+
 
   .col-headers {
     margin-bottom: 5px;
@@ -852,7 +864,6 @@ sub {
 
   .list__entry {
     position: relative;
-    height: 50px;
     padding:0;
     cursor: pointer !important;
 
@@ -863,7 +874,7 @@ sub {
 
       img {
         width: 100%;
-        max-width: 32px;
+        max-width: 52px;
       }
     }
 
@@ -874,7 +885,6 @@ sub {
       .ticker {
         font-size: 26px;
         font-weight: 700;
-        line-height: 50px;
         text-align: left;
         white-space: nowrap;
         cursor: pointer;
@@ -883,7 +893,7 @@ sub {
       .company {
         font-size: 18px;
         font-weight: 400;
-        line-height: 1.4;
+        line-height: 1.1;
         text-align: left;
         white-space: nowrap;
         cursor: pointer;
@@ -895,9 +905,8 @@ sub {
 
       .data {
         font-size: 19px;
-        font-weight: 400;
+        font-weight: 500;
         text-align: center;
-        line-height: 50px;
         cursor: pointer;
       }
     }
@@ -921,110 +930,12 @@ sub {
 
 
 
-.list-entry__overlay {
-  display: none;
-  position: absolute;
-  top:0px;
-  left:0;
-  width: 100%;
-  background: $gradient--pulse-grey;
-  padding:0;
-}
-.list-entry__overlay.show {
-  display:block;
-}
-.list-entry__overlay.red {
-  background: $gradient--pulse-red;
-}
-.list-entry__overlay.green {
-  background: $gradient--pulse-green;
-}
-.list-entry__overlay.yellow {
-  background: $gradient--pulse-yellow;
-}
-
-.overlay__contents {
-  height: 50px;
-
-  .ticker {
-    font-size: 32px;
-    line-height: 52px;
-    color:#ffffff;
-    text-align: left;
-  }
-
-  .data {
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 50px;
-    color:#ffffff;
-    text-align: left;
-  }
-
-  .icon {
-    text-align: center;
-
-    i {
-      font-size: 27px;
-      line-height: 50px;
-      color:#ffffff;
-    }
-  }
-
-  .button__slide {
-    position: absolute;
-    right:5px;
-    height: 50px;
-    width: 16px;
-    text-align: center;
-    cursor: pointer;
-
-    i {
-      font-size: 32px;
-      color: #ffffff;
-      opacity: 0.5;
-      line-height: 50px;
-    }
-  }
-}
-
-
-
-
-
-
-
-
-/*          EXPAND/COLLAPSE             */
-
-
-.expand-collapse {
-  margin:10px 0 0;
-  cursor: pointer;
-
-  p {
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1.5;
-    color: $font-color--light;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-
-  img {
-    width: 30px;
-    height: 30px;
-  }
-}
-
-
 
 
 
 
 
 /*         MARKET INSIGHTS WORD PRESS            */
-
 
 .article {
   font-family: $font-stack2 !important;
@@ -1113,6 +1024,8 @@ sub {
     margin-bottom:15px;
   }
 }
+
+
 
 
 

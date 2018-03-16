@@ -43,12 +43,12 @@ declare var gtag: Function;
             </div>
             <div *ngIf="opened" (click)="toggleReadMore()"
              class="expand-collapse">
-              <img src="./assets/imgs/ux__collapse--circle.svg">
+              <i class="far fa-scrubber"></i>
               <p class="article__read-more">COLLAPSE ARTICLE</p>
             </div>
           </div>
         </div>
-        <div class="container article__body">
+        <div class="container">
           <div class="row">
   	      	<div class="col-12 section--article featured--article">
   	      		<div class="article__body" [class.opened]="opened">
@@ -59,8 +59,8 @@ declare var gtag: Function;
         </div>
       </div>
 
-      <div class="anchor__top" *ngIf="opened" (click)="jumpToTop()">
-        <p>Top</p>
+      <div id="anchor__top" class="fixed-button" *ngIf="opened" (click)="jumpToTop()">
+        <button mat-icon-button><i class="fal fa-chevron-double-up"></i></button>
       </div>
 
     </div>

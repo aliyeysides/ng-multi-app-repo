@@ -10,15 +10,27 @@
   .indice {
     display: inline-block;
     float: right;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 18px;
     color: $font-color;
     line-height: 45px;
     margin-left: 5%;
     margin-right: 0;
 
+    b {
+      font-weight: 700;
+    }
+
     span {
       margin-right: 5px;
+      
+      b {
+        font-weight: 600;
+
+        span {
+          margin-right:0px;
+        }
+      }
 
       i {
       	vertical-align:middle;
