@@ -23,31 +23,23 @@
 	}
 
 	.divider__long {
-		margin:25px auto;
-		width: 60%;
+		margin:20px auto;
+		width: 75%;
 	}
 	.divider__full {
 		margin:25px auto 45px;
 		width: 75%;
 	}
-/*	.divider__long--red,
-	.divider__long--green,
-	.divider__long--blue,
-	.divider__long--yellow {
-		margin:25px auto;
-		width: 95%;
-		opacity: 0.5;
-	}*/
 
 	.panel {
 		margin-bottom: 15px;
 		padding: 5px 10px 10px;
 		overflow: hidden;
 
-		&:first-of-type {
+/*		&:first-of-type {
 			margin-top: 5px;
 		}
-
+*/
 		.tab--slide {
 		  width: 20%;
 		  height: 5px;
@@ -58,6 +50,11 @@
 		  cursor: pointer;
 		  position: fixed;
 		  z-index: 100;
+		}
+
+		@media screen AND (max-width:575px) {
+			margin-bottom: 10px;
+			border-radius:0;
 		}
 	}
 }
@@ -124,6 +121,8 @@
 		}
 
 		.fa-plus-circle {
+			color: $link-blue;
+			opacity: 1;
 
 	        &:active {
 	        	color: #207cca;
@@ -155,7 +154,11 @@
 
 		&:hover {
 			opacity:1;
-			color: $link-blue;
+
+			i {
+				color: $link-blue;
+			}
+
 		}
 
 		@media screen AND (min-width:1024px) {
@@ -221,7 +224,15 @@
 			right: 0;
 		}
 		@media screen AND (max-width:939px) {
-			display: none;
+			display:none;
+			margin-top:60px;
+			width:100%;
+			left:0;
+			right:0;
+
+			.anchor.mat-raised-button {
+				margin: 0 26px;
+			}
 		}
 
 		.anchor.mat-raised-button.veryBullish {
@@ -307,10 +318,9 @@
 		    }
 		}
 
-		.company-name {
+		.more-ticker-info {
 			text-align: left;
 			line-height: 60px;
-			color:$font-color;
 			float: left;
 			font-size: 26px;
 			cursor:pointer;
@@ -319,8 +329,16 @@
 			text-overflow: ellipsis;
 			width: 35%;
 
-			@media screen AND (max-width:500px) {
-				width: 53%;
+			@media screen AND (max-width:575px) {
+				width: 50%;
+				padding-right:45px;
+				text-align: right;
+				font-size: 32px;
+				line-height: 62px;
+				font-weight: 500;
+			}
+			@media screen AND (min-width:576px) {
+				color:$font-color;
 			}
 
 			@media screen AND (min-width:501px) AND (max-width:939px) {
@@ -348,7 +366,7 @@
 
 .stockview__contents {
 	background-color: transparent;
-	margin: 54px auto 0;
+	margin: 58px auto 0;
 	height: 100vh;
 	width: 100%;
 	overflow-y: scroll;
@@ -360,12 +378,8 @@
 
 	@media screen AND (max-width:575px) {
 		padding-bottom: 178px;
-		padding-left: 4px;
-		padding-right: 4px;
-	}
-
-	&::-webkit-scrollbar {
-	    
+		padding-left: 0px;
+		padding-right: 0px;
 	}
 }
 
@@ -436,7 +450,7 @@
 		}
 	}
 	.pgr-section__icon.veryBullish {
-		background-color: rgba(36,163,0,0.1);
+		background-color: rgba(36,163,0,0.05);
 		color:$veryBullish-green;
 		border: 3px solid $veryBullish-green;
 
@@ -445,7 +459,7 @@
 		}
 	}
 	.pgr-section__icon.bullish {
-		background-color: rgba(106,204,0,0.1);
+		background-color: rgba(106,204,0,0.05);
 		color:$bullish-green;
 		border: 3px solid $bullish-green;
 
@@ -454,7 +468,7 @@
 		}
 	}
 	.pgr-section__icon.neutral {
-		background-color: rgba(245,166,35,0.1);
+		background-color: rgba(245,166,35,0.05);
 		color:$neutral-yellow;
 		border: 3px solid $neutral-yellow;
 
@@ -463,7 +477,7 @@
 		}
 	}
 	.pgr-section__icon.bearish {
-		background-color: rgba(253,69,0,0.1);
+		background-color: rgba(253,69,0,0.05);
 		color:$bearish-red;
 		border: 3px solid $bearish-red;
 
@@ -472,7 +486,7 @@
 		}
 	}
 	.pgr-section__icon.veryBearish {
-		background-color: rgba(208,2,27,0.1);
+		background-color: rgba(208,2,27,0.05);
 		color:$veryBearish-red;
 		border: 3px solid $veryBearish-red;
 
@@ -662,7 +676,7 @@
 
 
 .stock-info--chart-toggle {
-	padding: 0 5px;
+	//padding: 0 5px;
 
 	@media screen AND (max-width:991px) {
 		margin: 15px 0 0;
@@ -691,13 +705,14 @@
 		line-height: 1;
 		display: inline-block;
 		text-align: center;
-		padding:10px 10px 7px 10px;
+		padding:6px 13px 3px 13px;
 		cursor: pointer;
+		white-space: nowrap;
+		border-radius: 30px;
 	}
 
 	.date-select.selected {
 		opacity: 1;
-		border-radius: 30px;
 		color:#ffffff;
 		cursor: default;
 	}

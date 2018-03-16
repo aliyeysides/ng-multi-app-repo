@@ -32,7 +32,7 @@ declare var gtag: Function;
 
 
     <div class="row no-gutters justify-content-center stocklist__powerbar">
-<!--       <div class="col-3">
+      <!-- <div class="col-3">
         <p class="label">Power Bar</p>
       </div> -->
       <div class="col-10 powerbar">
@@ -51,7 +51,7 @@ declare var gtag: Function;
     </div>
 
 
-    <div class="row no-gutters col-headers">
+    <div class="row justify-content-center no-gutters col-headers">
       <div [ngClass]="{'sorted': orderByObject['field'] === 'PGR'}" (click)="toggleOrderByObject('PGR', $event)" class="col-2">
         <p>PGR</p>
       </div>
@@ -64,7 +64,6 @@ declare var gtag: Function;
       <div [ngClass]="{'sorted': orderByObject['field'] === 'Percentage '}" (click)="toggleOrderByObject('Percentage ', $event)" class="col-3">
         <p>CHG</p>
       </div>
-      <div class="col-1"></div>
     </div>
 
 
@@ -72,7 +71,7 @@ declare var gtag: Function;
       <ul class="stock__list" *ngIf="myStocks?.length">
         <li (click)="selectStock(stock.symbol)"
             *ngFor="let stock of myStocks | orderBy:orderByObject?.field:orderByObject?.ascending; trackBy: trackStock"
-            class="row list__entry">
+            class="row justify-content-center list__entry">
           <div class="col-2 list-entry__pgr">
             <img class="align-absolute" src="{{ appendPGRImage(stock.PGR, stock.raw_PGR) }}">
           </div>
@@ -87,7 +86,6 @@ declare var gtag: Function;
             <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">
               (<span *ngIf="stock.Change>0">+</span>{{ stock['Percentage '] | decimal }}%)</p>
           </div>
-          <div class="col-1"></div>
 
           <div (click)="toggleSlider(stock.symbol);$event.stopPropagation()" class="button__slide hidden-sm-up">
             <i class="fal fa-ellipsis-v"></i>
