@@ -21,9 +21,7 @@ export class AuthService {
   private loginParams: URLSearchParams;
 
   constructor(private utilService: UtilService,
-              private httpClient: HttpClient,
-              private http: Http) {
-    this.loginParams = new URLSearchParams;
+              private httpClient: HttpClient) {
   }
 
   public setCurrentUser(usr: User) {
@@ -58,24 +56,10 @@ export class AuthService {
       return this.utilService.handleError(res);
     });
   }
-  //
-  // public login(): Observable<any> {
-  //   const email = localStorage.getItem('email');
-  //   const getLoginUrl = `${this.apiHostName}/CPTRestSecure/app/user/login?`;
-  //   this.loginParams.set('deviceId', email);
-  //   return this.http.get(getLoginUrl, {
-  //     search: this.loginParams,
-  //     withCredentials: true
-  //   }).map(res => {
-  //     this.loggedIn = true;
-  //     return res.json();
-  //   })
-  //     .catch(this.utilService.handleError);
-  // }
 
   public logOutSession(): Observable<any> {
     const getLogoutUrl = `${this.apiHostName}/CPTRestSecure/app/session/killsessions?`;
-    return this.http.get(getLogoutUrl, {withCredentials: true}).map(() => {
+    return this.httpClient.get(getLogoutUrl, {withCredentials: true}).map(() => {
       this.loggedIn = false;
       window.location.href = this.apiHostName;
     }).catch(this.utilService.handleError);

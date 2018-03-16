@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpModule} from '@angular/http';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
@@ -31,7 +30,6 @@ import {PspOnboardingModule} from './core/psp-onboarding';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,

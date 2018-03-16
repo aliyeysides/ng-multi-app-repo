@@ -107,7 +107,6 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
 
   public symbolSearchForm: FormControl;
   public searchResults: Array<any>;
-  // public userStocks: ListSymbolObj[];
   public loading: Subscription;
   public searchSuggestions: Array<SearchResult> = [
     {
@@ -158,6 +157,10 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       res === true ? this.openAutoComplete() : this.closeAutoComplete();
     });
 
+    setTimeout(this.getUserStocks.bind(this), 0);
+  }
+
+  getUserStocks() {
     this.loading = this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
       .map(res => this._listId = this.authService.userLists[0]['User Lists'].filter(x => x['name'] == this.healthCheck.currentList)[0]['list_id'])
@@ -168,8 +171,6 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
       .subscribe(res => {
         this.userStocks = res['symbols'];
       });
-
-
   }
 
   onSubmit(ticker: string) {
