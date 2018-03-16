@@ -26,7 +26,7 @@ import {BsModalRef} from 'ngx-bootstrap';
     </div>
     <div class="modal-footer row">
       <div class="col-12">
-        <pagination class="align-absolute" [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage"></pagination>
+        <pagination class="" [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage"></pagination>
       </div>
       <ng-container *ngIf="currentPage === ( totalItems / itemsPerPage )">
         <a class="link__get-started" (click)="bsModalRef.hide()">Start!</a>
@@ -49,6 +49,7 @@ export class PspOnboardingComponent implements OnInit {
       id: 2,
       src: 'assets/imgs/img_onboard-screen2.png',
       mobileSrc: 'assets/imgs/img_onboard-screen2--mobile.png'
+      link: 'https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/'
     },
     {
       id: 3,
