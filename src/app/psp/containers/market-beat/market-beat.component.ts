@@ -37,6 +37,15 @@ declare var gtag: Function;
             <div class="col-12 author">
               <p>Weekly Commentary By Marc Chaikin</p>
             </div>
+            <div *ngIf="!opened" (click)="toggleReadMore()" class="expand-collapse">
+              <i class="far fa-ellipsis-h"></i>
+              <p class="article__read-more">READ FULL ARTICLE</p>
+            </div>
+            <div *ngIf="opened" (click)="toggleReadMore()"
+             class="expand-collapse">
+              <img src="./assets/imgs/ux__collapse--circle.svg">
+              <p class="article__read-more">COLLAPSE ARTICLE</p>
+            </div>
           </div>
         </div>
         <div class="container article__body">
@@ -50,73 +59,9 @@ declare var gtag: Function;
         </div>
       </div>
 
-      <div *ngIf="!opened" (click)="toggleReadMore()"
-       class="expand-collapse">
-        <img src="./assets/imgs/ux__expand--dots.svg">
-        <p class="article__read-more">READ FULL ARTICLE</p>
-      </div>
-      <div *ngIf="opened" (click)="toggleReadMore()"
-       class="expand-collapse">
-        <img src="./assets/imgs/ux__collapse--circle.svg">
-        <p class="article__read-more">COLLAPSE ARTICLE</p>
-      </div>
-
       <div class="anchor__top" *ngIf="opened" (click)="jumpToTop()">
         <p>Top</p>
       </div>
-      
-      <!-- <div class="article__masthead">
-        <div class="row justify-content-center masthead__head">
-          <div class="col-12 col-md-6 masthead__logo">
-            <img class="float-md-left" src="http://www.chaikinanalytics.com/images/logo__market-insights.png">
-          </div>
-          <div class="col-12 col-md-6 author">
-            <p>Weekly Commentary By Marc Chaikin</p>
-          </div>
-          <div class="col-12 masthead__date">
-            <div class="section--date-select">
-              <div class="btn-group" dropdown [autoClose]="true">
-                  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-                    <!-- {{ selectedInsight ? selectedInsight['post_title'].slice(26) : null }}
-                    January 31, 2018
-                  </button>
-                <ul *dropdownMenu class="dropdown-menu" role="menu">
-                    <li (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem"><a
-                      class="dropdown-item">{{ post['post_title'].slice(26) }}</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row no-gutters justify-content-center masthead__body">
-          <div class="col-12 col-xl-10 headline">
-            <h1>Overbought Conditions, Narrowing Breadth and Rising VIX Levels Trigger Sharpest Sell-Off Since Last Fall</h1>
-          </div>
-        </div>
-      </div>
-      <div class="container article__body panel">
-        <div class="row">
-          <div class="col-12 section--article featured--article">
-            <div class="article__body" [class.opened]="opened">
-              <div class="article" [innerHTML]="commentary"></div>
-            </div>
-            <div *ngIf="!opened" (click)="toggleReadMore()"
-             class="expand-collapse">
-              <img src="./assets/imgs/ux__expand--dots.svg">
-              <p class="article__read-more">READ FULL ARTICLE</p>
-            </div>
-            <div *ngIf="opened" (click)="toggleReadMore()"
-             class="expand-collapse">
-              <img src="./assets/imgs/ux__collapse--circle.svg">
-              <p class="article__read-more">COLLAPSE ARTICLE</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="anchor__top" *ngIf="opened" (click)="jumpToTop()">
-        <p>Top</p>
-      </div>-->
 
     </div>
   `,

@@ -38,7 +38,7 @@ declare var gtag: Function;
 
         <!-- BUTTON - | - GO BACK -->
         <div (click)="closeReport()" class="header__button header__button--left">
-          <i class="fal fa-arrow-circle-left"></i>
+          <i class="fal fa-chevron-circle-left"></i>
         </div>
 
         <!-- TICKER - | - COMPANY -->
@@ -47,7 +47,10 @@ declare var gtag: Function;
             <img src="{{ appendPGRImage(symbolData) }}">
             <span>{{ stock }}</span>
           </h1>
-          <p *ngIf="!is_etf" class="company-name">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
+          <p *ngIf="!is_etf" class="more-ticker-info hidden-sm-down">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</p>
+          <p class="more-ticker-info hidden-md-up" [ngClass]="{'green': stockState ? stockState['Change']>0:null, 'red': stockState ? stockState['Change']<0:null}"><span
+                    *ngIf="stockState?.Change>0">+</span>{{ stockState ? (stockState['Percentage '] | decimal ) : ( symbolData?.metaInfo[0]['Percentage '] | decimal )
+                    }}<sub>%</sub></p>
         </div>
 
         <!-- BUTTON - | - ADD REMOVE -->
@@ -263,19 +266,19 @@ declare var gtag: Function;
               </p>
             </div>
             <div (click)="toggleChartTime('1W')" class="col-2">
-              <p class="date-select" [ngClass]="{'selected': current == '1W' }">1W</p>
+              <p class="date-select" [ngClass]="{'selected': current == '1W' }"><span class="hidden-lg-up">1W</span><span class="hidden-md-down">1 Week</span></p>
             </div>
             <div (click)="toggleChartTime('1M')" class="col-2">
-              <p class="date-select" [ngClass]="{'selected': current == '1M' }">1M</p>
+              <p class="date-select" [ngClass]="{'selected': current == '1M' }"><span class="hidden-lg-up">1M</span><span class="hidden-md-down">1 Month</span></p>
             </div>
             <div (click)="toggleChartTime('6M')" class="col-2">
-              <p class="date-select" [ngClass]="{'selected': current == '6M' }">6M</p>
+              <p class="date-select" [ngClass]="{'selected': current == '6M' }"><span class="hidden-lg-up">6M</span><span class="hidden-md-down">6 Months</span></p>
             </div>
             <div (click)="toggleChartTime('1Y')" class="col-2">
-              <p class="date-select" [ngClass]="{'selected': current == '1Y' }">1Y</p>
+              <p class="date-select" [ngClass]="{'selected': current == '1Y' }"><span class="hidden-lg-up">1Y</span><span class="hidden-md-down">1 Year</span></p>
             </div>
             <div (click)="getFiveYearChart()" class="col-2">
-              <p class="date-select" [ngClass]="{'selected': current == '5Y' }">5Y</p>
+              <p class="date-select" [ngClass]="{'selected': current == '5Y' }"><span class="hidden-lg-up">5Y</span><span class="hidden-md-down">5 Years</span></p>
             </div>
           </div>
 

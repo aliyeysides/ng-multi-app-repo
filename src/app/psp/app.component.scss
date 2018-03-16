@@ -401,7 +401,6 @@ sub {
   top:0;
   left:0;
   bottom:0;
-  //transition: filter .4s ease-in-out;
 }
 #container--main {
   transition: margin-left .5s, filter .4s ease-in-out;
@@ -629,7 +628,7 @@ sub {
 
 .panel {
   background-color: #ffffff;
-  border-radius: 15px;
+  border-radius: 10px;
   border:1px solid #fff;
   padding-bottom:7px;
   position: relative;
