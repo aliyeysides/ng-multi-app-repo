@@ -42,7 +42,11 @@ export class BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
     this.searchResults = [];
     this.symbolSearchForm.valueChanges
       .debounceTime(500)
-      .switchMap(val => this.symbolSearchService.symbolLookup(val))
+      .switchMap(val => {
+        console.log('val', val);
+        if (val === '') this.searchResults = [];
+        return this.symbolSearchService.symbolLookup(val)
+      })
       .takeUntil(this.ngUnsubscribe)
       .subscribe(val => {
         this.searchResults = val;

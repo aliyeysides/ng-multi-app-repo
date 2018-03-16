@@ -153,6 +153,11 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
     //     console.log('userStocks', res['symbols']);
     //     this.userStocks = res['symbols'];
     //   });
+
+    this.symbolSearchService.isOpen$.subscribe(res => {
+      res === true ? this.openAutoComplete() : this.closeAutoComplete();
+    });
+
     this.loading = this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
       .map(res => this._listId = this.authService.userLists[0]['User Lists'].filter(x => x['name'] == this.healthCheck.currentList)[0]['list_id'])
@@ -164,9 +169,7 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
         this.userStocks = res['symbols'];
       });
 
-    this.symbolSearchService.isOpen.subscribe(res => {
-      res === true ? this.openAutoComplete() : this.closeAutoComplete();
-    });
+
   }
 
   onSubmit(ticker: string) {
