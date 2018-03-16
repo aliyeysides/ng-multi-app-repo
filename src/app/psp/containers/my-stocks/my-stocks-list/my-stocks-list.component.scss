@@ -237,6 +237,7 @@
 			border-bottom: 1px solid #f0f0f0;
 			background-color: #fcfcfc;
 			height: 50px;
+			overflow:hidden;
 
 			&:hover {
 				background-color: #fff;
@@ -275,16 +276,17 @@
 
 
 .list-entry__overlay {
-  display: none;
+  display: block;
   position: absolute;
-  top:0px;
+  top:-50px;
   left:0;
   width: 100%;
   background: $gradient--pulse-grey;
   padding:0;
+  transition: .33s;
 }
 .list-entry__overlay.show {
-  display:block;
+    top:0px;
 }
 .list-entry__overlay.red {
   background: $gradient--pulse-red;

@@ -856,8 +856,6 @@ sub {
   &::-webkit-scrollbar {
   }
 
-
-
   .col-headers {
     margin-bottom: 5px;
   }
@@ -1098,7 +1096,7 @@ sub {
         }
 
         .link__watch-video {
-          font-size: 20px;
+          font-size: 18px;
           font-weight: 600;
           color:$link-blue;
           margin-top:10px;
@@ -1239,7 +1237,7 @@ sub {
   background: $background--lighter;
 }
 
-.divider__long--green {
+/*.divider__long--green {
   background: $background--lighter;
   width: 90%;
   margin: 15px auto;
@@ -1274,7 +1272,7 @@ sub {
   border-radius: 5px;
   opacity: .8;
 }
-
+*/
 
 
 
