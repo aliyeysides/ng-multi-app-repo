@@ -32,9 +32,9 @@
 	}
 
 	.panel {
-		margin-bottom: 15px;
-		padding: 5px 10px 10px;
+		padding: 0px 10px 10px;
 		overflow: hidden;
+		margin: 5px 0 10px;
 
 		.tab--slide {
 		  width: 20%;
@@ -46,6 +46,7 @@
 		  cursor: pointer;
 		  position: fixed;
 		  z-index: 100;
+		  //padding: 10px 0px 10px;
 		}
 
 		@media screen AND (max-width:575px) {
@@ -71,7 +72,7 @@
 	.header__button {
 		position: absolute;
 		width: 30px;
-		height: 58px;
+		height: 60px;
 		display: flex;
 		z-index: 10;
 		cursor: pointer;
@@ -82,7 +83,7 @@
 
 		i {
 			font-size: 27px;
-			line-height: 58px;
+			line-height: 62px;
 			transition-property:color opacity;
 			transition-duration: 0.45s;
 			transition-timing-function: ease;
@@ -282,6 +283,7 @@
 		position: absolute;
 		cursor: default;
 		overflow:hidden;
+		padding-top: 4px;
 
 		.ticker {
 			display: block;
@@ -361,7 +363,7 @@
 
 .stockview__contents {
 	background-color: transparent;
-	margin: 58px auto 0;
+	margin: 56px auto 0;
 	height: 100vh;
 	width: 100%;
 	overflow-y: scroll;
