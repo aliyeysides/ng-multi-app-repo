@@ -18,7 +18,6 @@ import {AuthService} from '../../../../services/auth.service';
 import {SymbolSearchService} from '../../../../services/symbol-search.service';
 import {Location} from '@angular/common';
 import {fadeIn} from '../../../../shared/animations/fadeIn';
-import {AnchorOptionsComponent} from './anchor-options.component';
 
 declare var zingchart: any;
 declare var gtag: Function;
@@ -78,8 +77,8 @@ declare var gtag: Function;
       </div>
 
       <!-- STOCK VIEW CONTENTS -->
-      <div [class.blur-me]="is_etf || !stock" class="container-fluid stockview__contents anchor-drop">
-        <div #anchorContainer></div>
+      <div [class.anchor-drop]="loadedAnchors"  [class.blur-me]="is_etf || !stock" class="container-fluid stockview__contents anchor-drop">
+
         <div class="panel">
           <div #top class="row justify-content-center">
             <div (click)="toggleAnchorOptions()" class="col-12">
@@ -1331,7 +1330,6 @@ declare var gtag: Function;
   `,
   animations: [fadeIn()],
   styleUrls: ['./stock-report.component.scss'],
-  entryComponents: [AnchorOptionsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
@@ -2281,7 +2279,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "zoom": {
           "shared": true
         },
-        "crosshairX": {
+        "-crosshairX": {
           "shared": true,
           "lineColor": "transparent",
           "visible": false,
@@ -2820,18 +2818,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   toggleAnchorOptions() {
-    if (this.loadedAnchors === true) {
-      this.anchorContainer.clear();
-      this.loadedAnchors = false;
-      return;
-    }
-    this.loadAnchorComponent();
-  }
-
-  loadAnchorComponent() {
     this.loadedAnchors = !this.loadedAnchors;
-    const factory = this.resolver.resolveComponentFactory(AnchorOptionsComponent);
-    this.anchorContainer.createComponent(factory);
   }
 
 }

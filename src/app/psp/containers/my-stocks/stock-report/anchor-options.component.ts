@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ElementRef} from '@angular/core';
+import {Component, Input, ElementRef} from '@angular/core';
 
 declare var gtag: Function;
 
