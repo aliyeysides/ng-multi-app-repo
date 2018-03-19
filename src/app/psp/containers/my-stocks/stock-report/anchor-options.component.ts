@@ -61,16 +61,11 @@ interface SummaryStatus {
   `,
   styleUrls: ['./stock-report.component.scss']
 })
-export class AnchorOptionsComponent implements OnInit {
+export class AnchorOptionsComponent {
   @Input('status') status: SummaryStatus;
   @Input('viewChildren') viewChildren;
 
   constructor() {}
-
-  ngOnInit() {
-    console.log('status', this.status);
-    console.log('viewChildren', this.viewChildren);
-  }
 
   jumpToFragment(viewChild: ElementRef, label: string) {
     viewChild.nativeElement.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});

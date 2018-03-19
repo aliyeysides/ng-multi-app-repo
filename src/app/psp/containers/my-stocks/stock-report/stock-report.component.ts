@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component, ElementRef, EventEmitter, Input, NgZone, OnChanges, OnDestroy, OnInit, Output,
-  SimpleChanges, ViewChild
+  SimpleChanges, ViewChild, ViewContainerRef, ComponentFactoryResolver
 } from '@angular/core';
 import {ReportService} from '../../../../services/report.service';
 import {Subject} from 'rxjs/Subject';
@@ -18,6 +18,7 @@ import {AuthService} from '../../../../services/auth.service';
 import {SymbolSearchService} from '../../../../services/symbol-search.service';
 import {Location} from '@angular/common';
 import {fadeIn} from '../../../../shared/animations/fadeIn';
+import {AnchorOptionsComponent} from './anchor-options.component';
 
 declare var zingchart: any;
 declare var gtag: Function;
@@ -78,10 +79,10 @@ declare var gtag: Function;
 
       <!-- STOCK VIEW CONTENTS -->
       <div [class.blur-me]="is_etf || !stock" class="container-fluid stockview__contents">
-
+        <div #anchorContainer></div>
         <div class="panel">
           <div #top class="row justify-content-center">
-            <div (click)="openAnchorOptions()" class="col-12 hidden-md-up">
+            <div (click)="toggleAnchorOptions()" class="col-12 hidden-md-up">
               <div class="tab--slide"></div>
             </div>
 
@@ -241,7 +242,7 @@ declare var gtag: Function;
           <div class="row stock-info stock-info--chart">
             <div class="col-12 main-chart">
               <span *ngIf="loading"><mat-spinner></mat-spinner></span>
-              <cpt-zingchart *ngIf="!loading" [chart]="mainChart"></cpt-zingchart>
+              <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
             </div>
           </div>
         </div>
@@ -1330,6 +1331,7 @@ declare var gtag: Function;
   `,
   animations: [fadeIn()],
   styleUrls: ['./stock-report.component.scss'],
+  entryComponents: [AnchorOptionsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
@@ -1339,8 +1341,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('earnings') earnings: ElementRef;
   @ViewChild('technicals') technicals: ElementRef;
   @ViewChild('experts') experts: ElementRef;
-
-  allViewChildren: object;
+  @ViewChild('anchorContainer', {read: ViewContainerRef}) anchorContainer: ViewContainerRef;
 
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _listId: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -1391,6 +1392,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   competitors;
   research;
   data;
+  allViewChildren: object;
 
   toolTipText: string = "Stock rating based on a 20-factor model that produces a rating from Very Bullish (or likely to outperform the market) to Very Bearish (unlikely to perform in the short to medium term). ";
   link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/">Read more here.</a>`;
@@ -1451,6 +1453,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   timespanPriceChange: number;
 
   is_etf: boolean;
+  loadedAnchors: boolean = false;
 
   fadeInPriceInfoState: string;
 
@@ -1460,6 +1463,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               private ideasService: IdeasService,
               private utilService: UtilService,
               private cd: ChangeDetectorRef,
+              private resolver: ComponentFactoryResolver,
               private zone: NgZone,
               private location: Location,
               private symbolSearchService: SymbolSearchService,
@@ -2815,8 +2819,19 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  openAnchorOptions() {
-    console.log('clicked');
+  toggleAnchorOptions() {
+    if (this.loadedAnchors === true) {
+      this.anchorContainer.clear();
+      this.loadedAnchors = false;
+      return;
+    }
+    this.loadAnchorComponent();
+  }
+
+  loadAnchorComponent() {
+    this.loadedAnchors = !this.loadedAnchors;
+    const factory = this.resolver.resolveComponentFactory(AnchorOptionsComponent);
+    this.anchorContainer.createComponent(factory);
   }
 
 }
