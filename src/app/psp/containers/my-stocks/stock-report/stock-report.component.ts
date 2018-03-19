@@ -2281,7 +2281,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "zoom": {
           "shared": true
         },
-        "crosshairX": {
+        "-crosshairX": {
           "shared": true,
           "lineColor": "transparent",
           "visible": false,

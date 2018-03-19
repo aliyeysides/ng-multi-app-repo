@@ -185,7 +185,7 @@ declare var gtag: Function;
                 <div class="col-6">
                 </div>
               </div>
-              <div *ngFor="let industry of weakIndustries;let last = last" class="row grid__row">
+              <div *ngFor="let industry of weakIndustries" class="row grid__row">
                 <div *ngIf="getStrongStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant green">
                   <p class="ticker">
                     <a (click)="gotoReport(stock)"
@@ -199,11 +199,8 @@ declare var gtag: Function;
                   <p class="industry red">{{ industry.IndustryName }}</p>
                 </div>
               </div>
-              <div *ngIf="getIndustryStockCount(weakIndustries, getStrongStock)==0" class="row grid__row">
-                <div class="powergrid__empty col-6">
-                  <p class="none">None</p>
-                </div>
-              </div>
+              <!--<div *ngIf="getIndustryStockCount(weakIndustries, getStrongStock)==0" class="row grid__row">-->
+              <p *ngIf="getIndustryStockCount(weakIndustries, getStrongStock)==0">None.</p>
             </div>
 
             <div class="col-12 hidden-sm-up powerGrid">
@@ -214,7 +211,7 @@ declare var gtag: Function;
                 <div class="col-6">
                 </div>
               </div>
-              <div *ngFor="let industry of weakIndustries;let last = last" class="row grid__row">
+              <div *ngFor="let industry of weakIndustries" class="row grid__row">
                 <div *ngIf="getWeakStock(industry.SymbolPGRMappings).length>0" class="col-6 grid__quadrant red">
                   <p class="ticker">
                     <a (click)="gotoReport(stock)"
@@ -228,11 +225,12 @@ declare var gtag: Function;
                   <p class="industry red">{{ industry.IndustryName }}</p>
                 </div>
               </div>
-              <div *ngIf="getIndustryStockCount(weakIndustries, getWeakStock)==0" class="row grid__row">
-                <div class="powergrid__empty col-6">
-                  <p class="none">None</p>
-                </div>
-              </div>
+              <!--<div *ngIf="getIndustryStockCount(weakIndustries, getWeakStock)==0" class="row grid__row">-->
+                <!--<div class="powergrid__empty col-6">-->
+                  <!--<p class="none">None</p>-->
+                <!--</div>-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+              <p *ngIf="getIndustryStockCount(weakIndustries, getWeakStock)==0">None.</p>
             </div>
 
           </div>
@@ -289,6 +287,11 @@ export class PowerGridComponent implements OnInit, OnDestroy {
         this.neutralIndustries = this.allIndustries.filter(x => x['IndustryScore'] <= 0.04 && x['IndustryScore'] >= -0.04);
         this.neutralIndustries.splice(1, this.neutralIndustries.length - 2);
         this.weakIndustries = this.allIndustries.filter(x => x['IndustryScore'] < -0.04);
+
+        console.log('testty1', this.getIndustryStockCount(this.strongIndustries, this.getStrongStock));
+        console.log('testty2', this.getIndustryStockCount(this.strongIndustries, this.getWeakStock));
+        console.log('testty3', this.getIndustryStockCount(this.weakIndustries, this.getStrongStock));
+        console.log('testty4', this.getIndustryStockCount(this.weakIndustries, this.getWeakStock));
       });
 
     this.healthCheck.getPortfolioStatus()
