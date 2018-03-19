@@ -3,7 +3,7 @@
 .market-summary__contents {
   width: 100%;
   height: 45px;
-  padding:0;
+  padding:1px 0 0;
   white-space: nowrap;
   overflow: hidden;
 
@@ -14,7 +14,7 @@
     font-size: 18px;
     color: $font-color;
     line-height: 45px;
-    margin-left: 5%;
+    margin-left: 2%;
     margin-right: 0;
 
     b {
@@ -22,13 +22,40 @@
     }
 
     span {
-      margin-right: 5px;
+      margin-right: 8px;
       
-      b {
+      .market-data {
         font-weight: 600;
 
         span {
-          margin-right:0px;
+          margin-right:5px;
+
+          span {
+            margin-right:0px;
+          }
+
+          &:last-child {
+            margin-right:0px;
+          }
+        }
+        .last-price {
+          font-weight:700;
+
+          @media screen AND (max-width: 992px) {
+            display: none;
+          }
+        }
+        .change-percent {
+
+          @media screen AND (max-width: 1199px) {
+            display: none;
+          }
+
+        }
+        .change-price {
+          @media screen AND (max-width: 1525px) {
+            display: none;
+          }
         }
       }
 
