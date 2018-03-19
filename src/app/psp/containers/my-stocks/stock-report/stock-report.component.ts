@@ -79,7 +79,6 @@ declare var gtag: Function;
 
       <!-- STOCK VIEW CONTENTS -->
       <div [class.anchor-drop]="loadedAnchors"  [class.blur-me]="is_etf || !stock" class="container-fluid stockview__contents anchor-drop">
-        
         <div class="panel">
           <div #top class="row justify-content-center">
             <div (click)="toggleAnchorOptions()" class="col-12 hidden-md-up tab__container">
