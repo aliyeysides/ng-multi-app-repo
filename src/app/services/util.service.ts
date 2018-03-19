@@ -33,7 +33,7 @@ export class UtilService {
   public handleError(err: any) {
     const errMsg = (err.message) ? err.message :
       err.status ? `${err.status} - ${err.statusText}` : 'Server error';
-    const snackMsg = 'Oops, Something went wrong with our servers!';
+    const snackMsg = 'Oops, Something went wrong!';
     this.openSnackBar(snackMsg, 10 * 1000, () => {
       location.reload();
     });

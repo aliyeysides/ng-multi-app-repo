@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component, ElementRef, EventEmitter, Input, NgZone, OnChanges, OnDestroy, OnInit, Output,
-  SimpleChanges, ViewChild
+  SimpleChanges, ViewChild, ViewContainerRef, ComponentFactoryResolver
 } from '@angular/core';
 import {ReportService} from '../../../../services/report.service';
 import {Subject} from 'rxjs/Subject';
@@ -18,6 +18,7 @@ import {AuthService} from '../../../../services/auth.service';
 import {SymbolSearchService} from '../../../../services/symbol-search.service';
 import {Location} from '@angular/common';
 import {fadeIn} from '../../../../shared/animations/fadeIn';
+import {AnchorOptionsComponent} from './anchor-options.component';
 
 declare var zingchart: any;
 declare var gtag: Function;
@@ -73,60 +74,15 @@ declare var gtag: Function;
         </div>
 
         <!-- BUTTON - | - ANCHORS -->
-        <div class="header__button header__button--anchors">
-
-          <!-- FINANCIALS -->
-          <button mat-raised-button matTooltip="Jump to Financials" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor neutral"
-               [ngClass]="{'veryBullish': summary?.status.financials=='Very Bullish',
-               'bullish': summary?.status.financials=='Bullish',
-               'neutral': summary?.status.financials=='Neutral',
-               'bearish': summary?.status.financials=='Bearish',
-               'veryBearish': summary?.status.financials=='Very Bearish'}"
-               (click)="jumpToFragment(financials, 'Financials');$event.stopPropagation()">
-               <i class="far fa-university" aria-hidden="true"></i>
-          </button>
-
-          <!-- EARNINGS -->
-          <button mat-raised-button matTooltip="Jump to Earnings" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor bullish"
-               [ngClass]="{'veryBullish': summary?.status.earnings=='Very Bullish',
-               'bullish': summary?.status.earnings=='Bullish',
-               'neutral': summary?.status.earnings=='Neutral',
-               'bearish': summary?.status.earnings=='Bearish',
-               'veryBearish': summary?.status.earnings=='Very Bearish'}"
-               (click)="jumpToFragment(earnings, 'Earnings');$event.stopPropagation()">
-               <i class="far fa-money-bill"></i>
-          </button>
-
-          <!-- TECHNICALS -->
-          <button mat-raised-button matTooltip="Jump to Technicals" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor bearish"
-               [ngClass]="{'veryBullish': summary?.status.technicals=='Very Bullish',
-               'bullish': summary?.status.technicals=='Bullish',
-               'neutral': summary?.status.technicals=='Neutral',
-               'bearish': summary?.status.technicals=='Bearish',
-               'veryBearish': summary?.status.technicals=='Very Bearish'}"
-               (click)="jumpToFragment(technicals, 'Technicals');$event.stopPropagation()">
-               <i class="far fa-chart-pie"></i>
-          </button>
-
-          <!-- EXPERTS -->
-          <button mat-raised-button matTooltip="Jump to Experts" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" class="anchor veryBullish"
-               [ngClass]="{'veryBullish': summary?.status.experts=='Very Bullish',
-               'bullish': summary?.status.experts=='Bullish',
-               'neutral': summary?.status.experts=='Neutral',
-               'bearish': summary?.status.experts=='Bearish',
-               'veryBearish': summary?.status.experts=='Very Bearish'}"
-               (click)="jumpToFragment(experts, 'Experts');$event.stopPropagation()">
-               <i class="far fa-users" aria-hidden="true"></i>
-          </button>
-        </div>
+        <cpt-psp-report-anchor-options [status]="summary?.status" [viewChildren]="allViewChildren"></cpt-psp-report-anchor-options>
       </div>
 
       <!-- STOCK VIEW CONTENTS -->
       <div [class.blur-me]="is_etf || !stock" class="container-fluid stockview__contents">
-
+        <div #anchorContainer></div>
         <div class="panel">
           <div #top class="row justify-content-center">
-            <div class="col-12 hidden-md-up">
+            <div (click)="toggleAnchorOptions()" class="col-12 hidden-md-up">
               <div class="tab--slide"></div>
             </div>
 
@@ -286,7 +242,7 @@ declare var gtag: Function;
           <div class="row stock-info stock-info--chart">
             <div class="col-12 main-chart">
               <span *ngIf="loading"><mat-spinner></mat-spinner></span>
-              <cpt-zingchart *ngIf="!loading" [chart]="mainChart"></cpt-zingchart>
+              <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
             </div>
           </div>
         </div>
@@ -1375,6 +1331,7 @@ declare var gtag: Function;
   `,
   animations: [fadeIn()],
   styleUrls: ['./stock-report.component.scss'],
+  entryComponents: [AnchorOptionsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
@@ -1384,6 +1341,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('earnings') earnings: ElementRef;
   @ViewChild('technicals') technicals: ElementRef;
   @ViewChild('experts') experts: ElementRef;
+  @ViewChild('anchorContainer', {read: ViewContainerRef}) anchorContainer: ViewContainerRef;
 
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _listId: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -1434,6 +1392,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   competitors;
   research;
   data;
+  allViewChildren: object;
 
   toolTipText: string = "Stock rating based on a 20-factor model that produces a rating from Very Bullish (or likely to outperform the market) to Very Bearish (unlikely to perform in the short to medium term). ";
   link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/">Read more here.</a>`;
@@ -1494,6 +1453,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   timespanPriceChange: number;
 
   is_etf: boolean;
+  loadedAnchors: boolean = false;
 
   fadeInPriceInfoState: string;
 
@@ -1503,6 +1463,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
               private ideasService: IdeasService,
               private utilService: UtilService,
               private cd: ChangeDetectorRef,
+              private resolver: ComponentFactoryResolver,
               private zone: NgZone,
               private location: Location,
               private symbolSearchService: SymbolSearchService,
@@ -1511,6 +1472,12 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     const chartComponents = 'oneYearChartData,fiveYearChartData,oneYearPgrData,fiveYearPgrData';
+    this.allViewChildren = {
+      financials: this.financials,
+      earnings: this.earnings,
+      technicals: this.technicals,
+      experts: this.experts
+    };
     if (this.stock) {
       this.top.nativeElement.scrollIntoView({block: 'start', inline: 'nearest'});
       this.symbolSearchService.symbolLookup(this.stock)
@@ -2850,6 +2817,21 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
     this.zone.run(() => {
       this.fadeInPriceInfoState = 'inactive';
     });
+  }
+
+  toggleAnchorOptions() {
+    if (this.loadedAnchors === true) {
+      this.anchorContainer.clear();
+      this.loadedAnchors = false;
+      return;
+    }
+    this.loadAnchorComponent();
+  }
+
+  loadAnchorComponent() {
+    this.loadedAnchors = !this.loadedAnchors;
+    const factory = this.resolver.resolveComponentFactory(AnchorOptionsComponent);
+    this.anchorContainer.createComponent(factory);
   }
 
 }

@@ -48,7 +48,7 @@ export class PspOnboardingComponent implements OnInit {
     {
       id: 2,
       src: 'assets/imgs/img_onboard-screen2.png',
-      mobileSrc: 'assets/imgs/img_onboard-screen2--mobile.png'
+      mobileSrc: 'assets/imgs/img_onboard-screen2--mobile.png',
       link: 'https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/'
     },
     {
