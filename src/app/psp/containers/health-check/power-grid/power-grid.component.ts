@@ -277,12 +277,6 @@ export class PowerGridComponent implements OnInit, OnDestroy {
         this.neutralIndustries = this.allIndustries.filter(x => x['IndustryScore'] <= 0.04 && x['IndustryScore'] >= -0.04);
         this.neutralIndustries.splice(1, this.neutralIndustries.length - 2);
         this.weakIndustries = this.allIndustries.filter(x => x['IndustryScore'] < -0.04);
-
-        console.log('strongIndustries', this.strongIndustries, 'weakIndustries', this.weakIndustries);
-        console.log('testty1', this.getIndustryStockCount(this.strongIndustries, this.getStrongStock));
-        console.log('testty2', this.getIndustryStockCount(this.strongIndustries, this.getWeakStock));
-        console.log('testty3', this.getIndustryStockCount(this.weakIndustries, this.getStrongStock));
-        console.log('testty4', this.getIndustryStockCount(this.weakIndustries, this.getWeakStock));
       });
 
     this.healthCheck.getPortfolioStatus()
