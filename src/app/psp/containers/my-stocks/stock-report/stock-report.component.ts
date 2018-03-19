@@ -81,7 +81,7 @@ declare var gtag: Function;
 
         <div class="panel">
           <div #top class="row justify-content-center">
-            <div (click)="toggleAnchorOptions()" class="col-12">
+            <div (click)="toggleAnchorOptions()" class="col-12 hidden-md-up tab__container">
               <div class="tab--slide"></div>
             </div>
 
