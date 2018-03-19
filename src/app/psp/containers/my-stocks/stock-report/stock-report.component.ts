@@ -78,11 +78,11 @@ declare var gtag: Function;
       </div>
 
       <!-- STOCK VIEW CONTENTS -->
-      <div [class.blur-me]="is_etf || !stock" class="container-fluid stockview__contents">
+      <div [class.blur-me]="is_etf || !stock" class="container-fluid stockview__contents anchor-drop">
         <div #anchorContainer></div>
         <div class="panel">
           <div #top class="row justify-content-center">
-            <div (click)="toggleAnchorOptions()" class="col-12 hidden-md-up">
+            <div (click)="toggleAnchorOptions()" class="col-12">
               <div class="tab--slide"></div>
             </div>
 
