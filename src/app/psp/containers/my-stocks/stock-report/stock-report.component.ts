@@ -222,24 +222,24 @@ declare var gtag: Function;
               </p>
             </div>
             <div (click)="toggleChartTime('1W')" class="col-2">
-              <p class="date-select" [ngClass]="{'selected': current == '1W' }"><span class="hidden-lg-up">1W</span><span class="hidden-md-down">1 Week</span></p>
+              <p class="date-select" [ngClass]="{'selected': current == '1W' }">1W</p>
             </div>
             <div (click)="toggleChartTime('1M')" class="col-2">
-              <p class="date-select" [ngClass]="{'selected': current == '1M' }"><span class="hidden-lg-up">1M</span><span class="hidden-md-down">1 Month</span></p>
+              <p class="date-select" [ngClass]="{'selected': current == '1M' }">1M</p>
             </div>
             <div (click)="toggleChartTime('6M')" class="col-2">
-              <p class="date-select" [ngClass]="{'selected': current == '6M' }"><span class="hidden-lg-up">6M</span><span class="hidden-md-down">6 Months</span></p>
+              <p class="date-select" [ngClass]="{'selected': current == '6M' }">6M</p>
             </div>
             <div (click)="toggleChartTime('1Y')" class="col-2">
-              <p class="date-select" [ngClass]="{'selected': current == '1Y' }"><span class="hidden-lg-up">1Y</span><span class="hidden-md-down">1 Year</span></p>
+              <p class="date-select" [ngClass]="{'selected': current == '1Y' }">1Y</p>
             </div>
             <div (click)="getFiveYearChart()" class="col-2">
-              <p class="date-select" [ngClass]="{'selected': current == '5Y' }"><span class="hidden-lg-up">5Y</span><span class="hidden-md-down">5 Years</span></p>
+              <p class="date-select" [ngClass]="{'selected': current == '5Y' }">5Y</p>
             </div>
           </div>
 
           <!-- STOCK VIEW MAIN CHART -->
-          <div class="row stock-info stock-info--chart">
+          <div class="row stock-info stock-info--chart" style="position:relative">
             <div class="col-12 main-chart">
               <span *ngIf="loading"><mat-spinner></mat-spinner></span>
               <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
