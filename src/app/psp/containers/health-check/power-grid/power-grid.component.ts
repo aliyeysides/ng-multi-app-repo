@@ -147,7 +147,7 @@ declare var gtag: Function;
             <div class="col-12 hidden-sm-up powerGrid">
               <div class="row col-headers">
                 <div class="col-6">
-                  <h4>WEAK STOCKS</h4>
+                  <h4 style="margin-top: 35px;">WEAK STOCKS</h4>
                 </div>
                 <div class="col-6">
                 </div>
@@ -202,7 +202,7 @@ declare var gtag: Function;
             <div class="col-12 hidden-sm-up powerGrid">
               <div class="row col-headers">
                 <div class="col-6">
-                  <h4 style="margin-top: 10px;">WEAK STOCKS</h4>
+                  <h4 style="margin-top: 30px;">WEAK STOCKS</h4>
                 </div>
                 <div class="col-6">
                 </div>
