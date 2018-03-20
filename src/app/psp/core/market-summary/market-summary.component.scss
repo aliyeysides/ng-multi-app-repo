@@ -42,13 +42,17 @@
         .last-price {
           font-weight:700;
 
-          @media screen AND (max-width: 992px) {
+          @media screen AND (max-width: 1329px) AND (min-width: 1199px) {
+            display: none;
+          }
+
+          @media screen AND (max-width: 1079px) {
             display: none;
           }
         }
         .change-percent {
 
-          @media screen AND (max-width: 1199px) {
+          @media screen AND (max-width: 991px) {
             display: none;
           }
 
