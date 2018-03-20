@@ -33,6 +33,7 @@ interface SearchResult {
           <input matInput [formControl]="symbolSearchForm"
                  type="search"
                  class="search-box"
+                 id="focus-input"
                  placeholder="Search and Add"
                  [matAutocomplete]="auto"
                  #autoCompleteInput

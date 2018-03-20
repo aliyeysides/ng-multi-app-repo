@@ -30,7 +30,7 @@ import {BehaviorSubject} from 'rxjs';
 
         <!-- ADD BUTTON -->
         <div (click)="openSearch();$event.stopPropagation()" matTooltip="Add a stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" id="add-stock" class="fixed-button hidden-sm-down">
-          <button mat-icon-button class="button--add">
+          <button mat-icon-button class="button--add" for="focus-input">
             <i class="fas fa-plus align-absolute"></i>
           </button>
         </div>

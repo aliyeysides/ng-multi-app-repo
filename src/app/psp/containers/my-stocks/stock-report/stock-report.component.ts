@@ -77,7 +77,7 @@ declare var gtag: Function;
       </div>
 
       <!-- STOCK VIEW CONTENTS -->
-      <div [class.anchor-drop]="loadedAnchors"  [class.blur-me]="is_etf || !stock" class="container-fluid stockview__contents anchor-drop">
+      <div [class.anchor-drop]="loadedAnchors"  [class.blur-me]="is_etf || !stock" class="container-fluid stockview__contents">
 
         <div class="panel">
           <div #top class="row justify-content-center">
@@ -238,9 +238,9 @@ declare var gtag: Function;
           </div>
 
           <!-- STOCK VIEW MAIN CHART -->
-          <div class="row stock-info stock-info--chart" style="position:relative">
-            <div class="col-12 main-chart">
-              <span *ngIf="loading"><mat-spinner></mat-spinner></span>
+          <div class="row stock-info stock-info--chart">
+            <div class="col-12 main-chart" style="position:relative">
+              <span class="chart-spinner__wrapper" *ngIf="loading"><mat-spinner class="chart-spinner"></mat-spinner></span>
               <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
             </div>
           </div>

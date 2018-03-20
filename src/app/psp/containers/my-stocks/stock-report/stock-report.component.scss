@@ -42,7 +42,7 @@
 			padding: 0px;
 
 			.tab--slide {
-			  width: 20%;
+			  width: 21%;
 			  height: 5px;
 			  background-color: $background--light;
 			  border-radius: 10px;
@@ -480,34 +480,19 @@
 
 .stockview__main-rating {
 	text-align: center;
-	margin: 10px 0 0px;
+	margin: 15px 0 0px;
 	cursor: default;
 
-	@media screen AND (min-width:768px) {
-		margin:20px 0 5px;
-	}
-
-	.label {
-		line-height: 1.4;
-		margin-bottom:20px;
-
-		@media screen AND (min-width:1400px) {
-			display: inline-block;
-			margin-right:5%;
-			vertical-align: super;
-			float: left;
-		}
-
-		i {
-			color: #1199ff;
-		}
+	@media screen AND (max-width:575px) {
+		margin: 5px 0 0px;
 	}
 
 	.rating {
-		margin-bottom:0px;
+		margin-bottom:5px;
 
-		@media screen AND (min-width:1400px) {
+		@media screen AND (min-width:1401px) {
 			display: inline-block;
+			margin-bottom: 10px;
 		}
 
 		span {
@@ -521,6 +506,22 @@
 			width: 50px;
 			margin-right: 7px;
 			vertical-align: baseline;
+		}
+	}
+	.label {
+		line-height: 1.3;
+		margin-bottom:20px;
+
+		@media screen AND (min-width:1401px) {
+			display: inline-block;
+			margin:15px 0px 0 20px;
+			vertical-align: super;
+			float: left;
+			line-height: 1;
+		}
+
+		i {
+			color: $link-blue;
 		}
 	}
 }
