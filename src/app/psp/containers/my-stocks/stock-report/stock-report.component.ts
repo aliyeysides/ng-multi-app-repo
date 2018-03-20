@@ -92,11 +92,11 @@ declare var gtag: Function;
                   <div [innerHtml]="link"></div>
                 </ng-template>
                 <div class="col-12 stockview__main-rating">
-                  <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fas fa-info-circle" placement="bottom" triggers="click"></i></a></p>
                   <p class="rating">
                     <img src="{{ appendPGRImage(symbolData) }}">
                     <span>{{ appendPGRText(symbolData) }}</span>
                   </p>
+                  <p class="label">Power Gauge Rating &nbsp;<a><i [tooltip]="toolTipTemp" class="fas fa-info-circle" placement="bottom" triggers="click"></i></a></p>
                 </div>
                 <div class="col-12 stockview__PGR">
                   <ul *ngIf="stock" class="pgr__sliders">
