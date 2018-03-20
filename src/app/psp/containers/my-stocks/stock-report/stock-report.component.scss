@@ -34,11 +34,12 @@
 	.panel {
 		padding: 0px 10px 10px;
 		overflow: hidden;
-		margin: 5px 0 10px;
+		margin: 0px 0 15px;
 
 		.tab__container {
 			z-index: 100;
 			height: 16px;
+			padding: 0px;
 
 			.tab--slide {
 			  width: 20%;
@@ -49,6 +50,7 @@
 			  margin: 5px 40% 0;
 			  cursor: pointer;
 			  position: fixed;
+			  transition:.4s;
 			}
 		}
 
@@ -77,7 +79,7 @@
 	.header__button {
 		position: absolute;
 		width: 30px;
-		height: 60px;
+		height: 58px;
 		display: flex;
 		z-index: 10;
 		cursor: pointer;
@@ -88,7 +90,7 @@
 
 		i {
 			font-size: 27px;
-			line-height: 62px;
+			line-height: 58px;
 			transition-property:color opacity;
 			transition-duration: 0.45s;
 			transition-timing-function: ease;
@@ -169,7 +171,7 @@
 
 	.header__stock {
 		width: 100%;
-		height: 60px;
+		height: 58px;
 		position: absolute;
 		cursor: default;
 		overflow:hidden;
@@ -183,7 +185,7 @@
 			display: block;
 			height: 100%;
 			text-align: left;
-			line-height: 62px;
+			line-height: 58px;
 			color:$font-color;
 			font-size: 32px;
 			float: left;
@@ -210,7 +212,7 @@
 
 		.more-ticker-info {
 			text-align: left;
-			line-height: 60px;
+			line-height: 58px;
 			float: left;
 			font-size: 26px;
 			cursor:pointer;
@@ -277,7 +279,7 @@
 }
 
 .stockview__contents.anchor-drop {
-		margin: 110px auto 0;
+	margin: 113px auto 0;
 }
 
 
@@ -478,7 +480,7 @@
 
 .stockview__main-rating {
 	text-align: center;
-	margin: 5px 0 0px;
+	margin: 10px 0 0px;
 	cursor: default;
 
 	@media screen AND (min-width:768px) {
@@ -487,11 +489,13 @@
 
 	.label {
 		line-height: 1.4;
+		margin-bottom:20px;
 
 		@media screen AND (min-width:1400px) {
 			display: inline-block;
 			margin-right:5%;
 			vertical-align: super;
+			float: left;
 		}
 
 		i {
@@ -500,7 +504,7 @@
 	}
 
 	.rating {
-		margin-bottom:10px;
+		margin-bottom:0px;
 
 		@media screen AND (min-width:1400px) {
 			display: inline-block;
@@ -510,6 +514,7 @@
 			display: inline-block;
 			font-size: 36px;
 			font-weight: 700;
+			line-height: 1.2;
 		}
 		img {
 			display: inline-block;

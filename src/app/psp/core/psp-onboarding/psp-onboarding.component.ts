@@ -6,7 +6,7 @@ import {BsModalRef} from 'ngx-bootstrap';
   template: `
     <div class="modal-header row">
       <div class="col-2"></div>
-      <div class=" col-8"><h4 class="modal-title">Getting Started With PowerPulse</h4></div>
+      <div class=" col-8"><h4 class="modal-title">Getting Started</h4></div>
       <div class="col-2">
         <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
           <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
@@ -25,7 +25,7 @@ import {BsModalRef} from 'ngx-bootstrap';
         </ng-container>
       </div>
     </div>
-    <div class="modal-footer row">
+    <div class="modal-footer row no-gutters">
       <div class="col-12">
         <pagination class="" [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage"></pagination>
       </div>
