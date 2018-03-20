@@ -1061,7 +1061,7 @@ sub {
 
   ul {
     list-style: disc;
-    padding: 0 3em 2em;
+    padding: 0 1em 2em 3em;
     margin-top: 0px;
 
     li {
@@ -1161,7 +1161,7 @@ sub {
   }
   @media screen AND (max-width: 767px) {
     width: 100%;
-    min-width: 350px;
+    min-width: 320px;
     margin: 0px;
     height:100vh;
   }
@@ -1183,6 +1183,7 @@ sub {
       height: 100%;
       width: 100%;
     }
+
 
     .modal-header {
       padding: 6px 15px;
@@ -1210,27 +1211,29 @@ sub {
       }
     }
 
-    .modal-body {
-        padding: 0 10px 15px;
-        text-align: center;
 
-        img {
-          width: 100%;
-        }
-        .slide-title {
-          color: $link-blue;
-          font-size: 32px;
-          font-weight: 500;
-          margin:10px 0 0;
-        }
-        .link__watch-video {
-          font-size: 18px;
-          font-weight: 600;
-          color:$link-blue;
-          margin-top:10px;
-          padding-bottom:20px;
-        }
+    .modal-body {
+      padding: 0 10px 15px;
+      text-align: center;
+
+      img {
+        width: 100%;
+      }
+      .slide-title {
+        color: $link-blue;
+        font-size: 32px;
+        font-weight: 500;
+        margin:10px 0 0;
+      }
+      .link__watch-video {
+        font-size: 18px;
+        font-weight: 600;
+        color:$link-blue;
+        margin-top:10px;
+        padding-bottom:20px;
+      }
     }
+
 
     .modal-footer {
       padding: 0;
@@ -1244,8 +1247,16 @@ sub {
 
       .pagination {
         border-radius: 0;
-        width: 350px;
+        width: 370px;
         margin: 0 auto;
+
+        @media screen AND (max-width: 575px) {
+          padding-left:25px;
+        }
+
+        @media screen AND (max-width: 320px) {
+          padding-left:0px;
+        }
 
         .page-item {
           color: $font-color;
@@ -1313,17 +1324,17 @@ sub {
             }
 
             &:after {
-                font-family: "Font Awesome 5 Pro";
-                content: "\f104 ";
-                display: inline-block;
-                position: absolute;
-                left: -2px;
-                top: 6px;
-                color: $pulse-blue;
-                font-size: 17px;
-                vertical-align: middle;
-                font-weight: 500;
-                opacity:1;
+              font-family: "Font Awesome 5 Pro";
+              content: "\f104 ";
+              display: inline-block;
+              position: absolute;
+              left: -2px;
+              top: 6px;
+              color: $pulse-blue;
+              font-size: 17px;
+              vertical-align: middle;
+              font-weight: 500;
+              opacity:1;
             }
 
             @media screen AND (max-width: 575px) {
@@ -1337,6 +1348,8 @@ sub {
             width: 30px;
             height: 30px;
             font-size: 16px;
+            line-height: 31px;
+            padding: 0;
           }
         }
         .pagination-next {
@@ -1368,7 +1381,6 @@ sub {
           }
         }
       }
-
       .link__get-started {
         position: absolute;
         color: $pulse-blue;
@@ -1376,7 +1388,7 @@ sub {
         right:50%;
         bottom:12px;
         font-weight: 600;
-        margin-right:-152px;
+        margin-right:-158px;
         text-align: left;
 
         &:after {
@@ -1395,6 +1407,10 @@ sub {
 
         @media screen AND (max-width: 575px) {
           font-size: 15px;
+          margin-right:-140px;
+        }
+        @media screen AND (max-width: 320px) {
+          margin-right:-130px;
         }
       }
     }
