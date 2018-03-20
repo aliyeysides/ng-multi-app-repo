@@ -2,7 +2,7 @@ import {
   ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
+import {NavigationEnd, Router, ActivatedRoute} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 import {HealthCheckService} from '../services/health-check.service';
@@ -10,6 +10,7 @@ import {PortfolioStatus} from '../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 import {PspOnboardingComponent} from './core/psp-onboarding/psp-onboarding.component';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {ReportService} from '../services/report.service';
 
 declare let gtag: Function;
 
@@ -19,8 +20,8 @@ declare let gtag: Function;
   styleUrls: ['./app.component.scss'],
   template: `
     <!-- PANEL HEADER - Fixed to the top of each panel-->
-    <div class="page__header"
-         [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}"
+    <div cptStockPgrColor [stock]="currentStock" [status]="status" class="page__header"
+         [ngClass]="{'page__header--green': status?.avgPercentageChange>0 && !currentStock, 'page__header--red': status?.avgPercentageChange<0 && !currentStock}"
          id="page__header">
          
       <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--left" id="header_button--left">
@@ -110,10 +111,13 @@ export class AppComponent implements OnInit, OnDestroy {
   title: string;
   status: PortfolioStatus;
   menuPosition: string;
+  currentStock: string;
   bsModalRef: BsModalRef;
 
   constructor(private router: Router,
               private cd: ChangeDetectorRef,
+              private route: ActivatedRoute,
+              private reportService: ReportService,
               private modalService: BsModalService,
               private healthCheck: HealthCheckService) {
     const mobWidth = (window.screen.width);
@@ -127,15 +131,19 @@ export class AppComponent implements OnInit, OnDestroy {
             let cap = str.charAt(0).toUpperCase();
             return cap + str.slice(1);
           }).join(' ');
+        if (this.title === 'Health Check' || this.title === 'Market Insights') this.currentStock = undefined;
         gtag('config', 'UA-109763576-2', {
           'page_location': 'https://app.chaikinanalytics.com/ideas/' + event.urlAfterRedirects,
           'page_path': event.urlAfterRedirects
         });
       }
     });
+
     this.healthCheck.getPortfolioStatus()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => this.status = res);
+
+    this.reportService.selectedSymbol$.subscribe(stock => this.currentStock = stock);
   }
 
   ngOnInit() {

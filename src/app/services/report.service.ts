@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import {UtilService} from './util.service';
+import {Subject} from 'rxjs';
 
 @Injectable()
 export class ReportService {
 
   private _apiHost = this.utilService.getApiHostName();
+  private _selectedSymbol: Subject<string> = new Subject<string>();
+  selectedSymbol$ = this._selectedSymbol.asObservable();
 
   constructor(private utilService: UtilService) { }
+
+  set selectedSymbol(val: string) {
+    this._selectedSymbol.next(val);
+  }
 
   public getSymbolData(symbol: string) {
     const url = `${this._apiHost}/CPTRestSecure/app/portfolio/getSymbolData?`;
