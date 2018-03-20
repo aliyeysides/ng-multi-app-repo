@@ -9,6 +9,7 @@ import {FullListModalComponent} from "app/shared/components/idea-lists";
 import {BusyModule} from 'angular2-busy';
 import {PipesModule} from './pipes';
 import {MaterialModule} from './modules/material';
+import {StockPgrColorDirective} from './directives/stock-pgrcolor.directive';
 
 @NgModule({
   imports: [
@@ -28,12 +29,13 @@ import {MaterialModule} from './modules/material';
     BusyModule,
     PipesModule,
     MaterialModule,
-    ...SHARED_COMPONENTS
+    ...SHARED_COMPONENTS,
+    StockPgrColorDirective
   ],
   entryComponents: [
     FullListModalComponent
   ],
-  declarations: [...SHARED_COMPONENTS],
+  declarations: [...SHARED_COMPONENTS, StockPgrColorDirective],
   providers: []
 })
 export class SharedModule {

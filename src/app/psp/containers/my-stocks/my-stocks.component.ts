@@ -121,6 +121,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
         if (params.symbol) {
           if (this.selectedStockSub) this.selectedStockSub.unsubscribe();
           this.selectedStock = params.symbol.slice();
+          this.reportService.selectedSymbol = params.symbol;
           this.createSymbolDataRx(params.symbol);
           Observable.interval(30 * 1000)
             .takeUntil(this._ngUnsubscribe)
