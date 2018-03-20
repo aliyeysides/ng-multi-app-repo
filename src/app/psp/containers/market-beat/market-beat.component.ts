@@ -27,7 +27,7 @@ import * as moment from 'moment';
       
                   <mat-menu #appMenu="matMenu">
                     <button mat-menu-item class="label">My Current Lists</button>
-                    <button mat-menu-item (click)="selectList(list)" *ngFor="let post of posts" role="menuitem">
+                    <button mat-menu-item (click)="selectInsight(post)" *ngFor="let post of posts" role="menuitem">
                       <a class="dropdown-item">{{ moment(post['post_date']).format('MMMM Do, YYYY') }}</a>
                     </button>
                   </mat-menu>
