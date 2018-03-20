@@ -1823,18 +1823,19 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       x: 0,
       y: 0,
       crosshairX: {
-        lineWidth: 2,
-        lineColor: "#444",
+        lineWidth: 1,
+        lineColor: "#000",
         alpha: 0.5,
         shared: true,
         plotLabel: {
           fontFamily: "Open Sans",
-          backgroundColor: "#b9e5fb",
+          backgroundColor: "#333",
+          color: "#ffffff",
           text: "Close: %v",
           borderColor: "#ffffff",
-          strokeWidth: "2",
-          height: 25,
-          borderRadius: 12,
+          strokeWidth: "0",
+          height: 28,
+          borderRadius: 3,
           y: -5,
         },
         scaleLabel: {
@@ -1924,20 +1925,19 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       x: 0,
       y: 0,
       crosshairX: {
-        lineWidth: 2,
-        lineColor: "#444",
         alpha: 0,
         visible: false,
         shared: true,
         plotLabel: {
           visible: true,
           fontFamily: "Open Sans",
-          backgroundColor: "#b9e5fb",
+          backgroundColor: "#333",
           text: "Long Term Trend: %v",
           borderColor: "#ffffff",
-          strokeWidth: "2",
-          height: 25,
-          borderRadius: 12,
+          strokeWidth: "0",
+          color:"#ffffff",
+          height: 28,
+          borderRadius: 3,
         },
         scaleLabel: {
           visible: false,
@@ -2012,7 +2012,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           lineColor: "#3150C6",
           lineWidth: 2,
           lineStyle: "dashdot",
-          alpha: 0.5,
+          alpha: 0.85,
         }
       ]
     };
