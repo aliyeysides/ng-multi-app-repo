@@ -6,6 +6,7 @@ import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {ActivatedRoute} from '@angular/router';
 import {OrderByPipe} from '../../../../shared/pipes/order-by.pipe';
+import {SymbolSearchService} from '../../../../services/symbol-search.service';
 
 declare var gtag: Function;
 
@@ -77,7 +78,6 @@ declare var gtag: Function;
           </div>
           <div class="col-3 list-entry__info">
             <p class="ticker">{{ stock.symbol }}</p>
-            <!-- <p class="company">{{ stock.name }}</p> -->
           </div>
           <div class="col-3 list-entry__data">
             <p class="data" [ngClass]="{'green': stock.Change>0,'red': stock.Change<0}">{{ stock.Last | decimal }}</p>
@@ -127,7 +127,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   private _powerbar: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _userlists: BehaviorSubject<object[]> = new BehaviorSubject<object[]>({} as object[]);
 
-  @HostListener('window:keydown', ['$event']) onKeyDown(e) {
+  @HostListener('document:keydown', ['$event']) onKeyDown(e) {
     const valid = ['Tab', 'ArrowUp', 'ArrowDown'];
     const ordArr = this.orderBy.transform(this.myStocks, this.orderByObject['field'], this.orderByObject['ascending']);
     const indx = ordArr.map(x => x.symbol).indexOf(this.selectedStock);
@@ -135,6 +135,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
     if (valid.filter(x => x === e.key).length > 0) {
       e.preventDefault();
       e.stopPropagation();
+      this.symbolSearchService.setSearchOpen(false);
       if (e.key === 'Tab') {
         const next = ordArr.map(x => x.symbol).indexOf(this.selectedStock) + 1;
         if (ordArr.length > next) this.selectStock(ordArr[next].symbol);
@@ -194,6 +195,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
   constructor(private signalService: SignalService,
               private route: ActivatedRoute,
               private orderBy: OrderByPipe,
+              private symbolSearchService: SymbolSearchService,
               private healthCheck: HealthCheckService) {
   }
 
@@ -232,8 +234,7 @@ export class MyStocksListComponent implements OnInit, OnDestroy {
           } else {
             // this.selectStock = 'AAPL';
           }
-        }
-      );
+        });
 
     this.selectedListName = this.healthCheck.currentList;
     this.orderByObject['field'] = 'PGR';

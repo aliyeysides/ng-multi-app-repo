@@ -209,6 +209,4 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
     this.autoCompleteInput.closePanel();
   }
 
-
-
 }
