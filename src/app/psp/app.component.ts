@@ -131,7 +131,11 @@ export class AppComponent implements OnInit, OnDestroy {
             let cap = str.charAt(0).toUpperCase();
             return cap + str.slice(1);
           }).join(' ');
-        if (this.title === 'Health Check' || this.title === 'Market Insights') this.currentStock = undefined;
+
+        if (this.title === 'Health Check' || this.title === 'Market Insights' || this.title === 'Stock Analysis') {
+          this.currentStock = undefined;
+        }
+
         gtag('config', 'UA-109763576-2', {
           'page_location': 'https://app.chaikinanalytics.com/ideas/' + event.urlAfterRedirects,
           'page_path': event.urlAfterRedirects
