@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {UtilService} from './util.service';
 import {Subject} from 'rxjs/Subject';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable()
 export class SymbolSearchService {
-  private _isOpen: Subject<boolean> = new Subject<boolean>();
+  private _isOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isOpen$ = this._isOpen.asObservable();
 
   private _addStock: Subject<void> = new Subject<void>();
