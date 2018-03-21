@@ -123,7 +123,7 @@ iframe {
 }
 
 ::-webkit-scrollbar {
-  display: none;
+
 }
 
 .container-fluid {
@@ -1063,6 +1063,11 @@ iframe {
         font-size:20px;
         cursor: pointer;
 
+        @media screen AND (max-width: 1023px) {
+          padding:0px 1px;
+          font-size:18px;
+        }
+
         &:hover {
           color:$font-color--MD;
         }
@@ -1077,6 +1082,10 @@ iframe {
           cursor: pointer;
           display: inline-block;
           padding:0 5px;
+
+          @media screen AND (max-width: 1023px) {
+            padding:0px 1px;
+          }
 
           button {
             color:$link-blue;
@@ -1326,8 +1335,13 @@ iframe {
     .idea-lists__container {
       margin-top:10px;
       padding:0; 
-      height: 100%;
+      height: 300px;
       position: relative;
+      overflow-y: scroll;
+
+      @media screen AND (min-height: 785px) {
+          height: 320px;
+      }
 
       ul {
         width: 100%;
@@ -1339,6 +1353,13 @@ iframe {
         overflow: hidden;
         overflow-x: auto;
         overflow-y: auto;
+
+        @media screen AND (max-width: 1023px) {
+          padding-bottom: 80px;
+        }
+        @media screen AND (max-height: 700px) {
+          padding-bottom: 100px;
+        }
 
         .list__option {
           display: inline-block;
@@ -1406,6 +1427,7 @@ iframe {
     .idea-lists__footer {
       display: block;
       padding:5px 0px;
+      margin-top: -5px;
 
       p {
         font-size: 12px;
