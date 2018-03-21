@@ -5,11 +5,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
 
-import {SharedModule} from '../shared/index';
+import {SharedModule} from '../shared';
 
 import {ROUTES} from './app.routes';
-import {APP_CORE_MODULES} from './core/index';
-import {APP_CONTAINER_MODULES} from './containers/index';
+import {APP_CORE_MODULES} from './core';
+import {APP_CONTAINER_MODULES} from './containers';
 
 import {UtilService} from '../services/util.service';
 import {AuthService} from '../services/auth.service';
@@ -25,7 +25,6 @@ import {NotificationsService} from 'angular2-notifications';
 import {TooltipModule} from 'ngx-bootstrap';
 import {BearOnboardingComponent} from './core/bear-onboarding/bear-onboarding.component';
 import {HttpClientModule} from '@angular/common/http';
-import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ import {HttpModule} from '@angular/http';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     HttpClientModule,
     SharedModule,
     BrowserAnimationsModule,

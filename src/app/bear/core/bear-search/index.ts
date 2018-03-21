@@ -4,6 +4,7 @@ import {SharedModule} from '../../../shared';
 import {SymbolSearchService} from '../../../services/symbol-search.service';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {BearSymbolSearchModule} from './bear-symbol-search';
+import {BearSymbolSearchComponent} from './bear-symbol-search/bear-symbol-search.component';
 
 @NgModule({
   imports: [
@@ -11,7 +12,7 @@ import {BearSymbolSearchModule} from './bear-symbol-search';
     BearSymbolSearchModule,
     TooltipModule.forRoot()
   ],
-  exports: [BearSearchComponent],
+  exports: [BearSearchComponent, BearSymbolSearchComponent],
   declarations: [BearSearchComponent],
   providers: [SymbolSearchService]
 })
