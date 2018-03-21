@@ -202,12 +202,10 @@ declare var gtag: Function;
               </div>
             </div>
           </div>
-
+        </div>
+        <div class="panel">
           <!-- STOCK VIEW CHART HEADER -->
           <div class="row no-gutters stock-info stock-info--chart-toggle justify-content-center">
-            <div class="col-12 hidden-md-down">
-              <div class="divider__long"></div>
-            </div>
             <div class="col-12">
               <p class="chart-header__breakdown">
                 <span class="bold">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</span> was
@@ -1825,25 +1823,37 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       crosshairX: {
         lineWidth: 1,
         lineColor: "#000",
-        alpha: 0.5,
+        alpha: 0.75,
         shared: true,
         plotLabel: {
+          "html-mode": false,
+          text: "Close --- $%v",
           fontFamily: "Open Sans",
+          fontSize: '12px',
           backgroundColor: "#333",
+          alpha:0.95,
           color: "#ffffff",
-          text: "Close: %v",
-          borderColor: "#ffffff",
+          borderColor: "transparent",
           strokeWidth: "0",
-          height: 28,
-          borderRadius: 3,
-          y: -5,
+          height: 26,
+          borderRadius: 5,
+          padding: '10px',
+          y: -10,
+          callout: false,
         },
         scaleLabel: {
           visible: true,
-          fontSize: '20px',
-          color: '#004c66',
-          bold: true,
-          backgroundColor: '#BBB'
+          fontFamily: "Open Sans",
+          fontSize: '12px',
+          backgroundColor: "#333",
+          alpha:0.95,
+          color: "#ffffff",
+          borderColor: "transparent",
+          strokeWidth: "0",
+          height: 26,
+          borderRadius: 5,
+          padding: '10px',
+          offsetY: 5,
         }
       },
       title: {
@@ -1853,7 +1863,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       plotarea: {
         margin: "25 60",
       },
-      "plot": {
+      plot: {
         midPoint: true,
         "marker": {
           "visible": false
@@ -1861,12 +1871,9 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
       },
       tooltip: {
         visible: false,
-        text: "CLOSE: %v",
-        backgroundColor: "#BBB",
-        borderColor: "transparent"
       },
       scaleYN: {
-        lineColor: "#fff"
+        lineColor: "#fff",
       },
       scaleY: {
         maxValue: Math.max(...values),
@@ -1929,15 +1936,18 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         visible: false,
         shared: true,
         plotLabel: {
-          visible: true,
+          multiple: true,
+          text: "Long Term Trend --- %v",
           fontFamily: "Open Sans",
-          backgroundColor: "#333",
-          text: "Long Term Trend: %v",
-          borderColor: "#ffffff",
+          fontSize: '12px',
+          backgroundColor: "#3150C6",
+          alpha:0.9,
+          color: "#ffffff",
+          borderColor: "transparent",
           strokeWidth: "0",
-          color:"#ffffff",
-          height: 28,
-          borderRadius: 3,
+          height: 26,
+          borderRadius: 5,
+          padding: '10px',
         },
         scaleLabel: {
           visible: false,
@@ -1996,10 +2006,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         values: dates,
         item: {
           visible: false,
-          fontColor: "#999",
-          fontSize: "14",
-          fontWeight: "500",
-          fontFamily: "Rajdhani"
         },
         tick: {
           visible: false,
@@ -2040,9 +2046,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         tooltip: {
           visible: false,
-          text: "Rel. Strength: %v",
-          fontFamily: "Open Sans",
-          borderColor: "transparent"
         },
         title: {
           visible: true,
@@ -2054,23 +2057,27 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           fontWeight: "600",
         },
         crosshairX: {
-          lineWidth: 2,
-          lineColor: "#444",
-          alpha: 0.5,
+          lineWidth: 1,
+          lineColor: "#000",
+          alpha: 0.75,
           shared: true,
-          scaleLabel: {
-            visible: false
-          },
           plotLabel: {
             fontFamily: "Open Sans",
-            backgroundColor: "#b9e5fb",
-            text: "Rel. Strength: %v",
-            borderColor: "#ffffff",
-            strokeWidth: "4",
-            height: 25,
-            borderRadius: 12,
-            y: -5,
+            text: "Rel. Strength --- %v",
+            fontSize: '12px',
+            backgroundColor: "#333",
+            alpha:0.9,
+            color: "#ffffff",
+            borderColor: "transparent",
+            strokeWidth: "0",
+            height: 26,
+            borderRadius: 5,
+            padding: '10px',
+            multiple: true,
           }
+          scaleLabel: {
+            visible: false,
+          },
         },
         scaleX: {
           offset: 0,
@@ -2123,9 +2130,6 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         },
         tooltip: {
           visible: false,
-          text: "Chaikin Money Flow: %v",
-          fontFamily: "Open Sans",
-          borderColor: "transparent"
         },
         title: {
           visible: true,
@@ -2137,23 +2141,26 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           fontWeight: "600",
         },
         crosshairX: {
-          lineWidth: 2,
-          lineColor: "#444",
-          alpha: 0.5,
+          lineWidth: 1,
+          lineColor: "#000",
+          alpha: 0.75,
           shared: true,
+          plotLabel: {
+            text: "Chaikin Money Flow --- %v",
+            fontFamily: "Open Sans",
+            fontSize: '12px',
+            backgroundColor: "#333",
+            color: "#ffffff",
+            borderColor: "transparent",
+            strokeWidth: "0",
+            height: 26,
+            borderRadius: 5,
+            padding: '10px',
+            multiple: true,
+          },
           scaleLabel: {
             visible: false
           },
-          plotLabel: {
-            fontFamily: "Open Sans",
-            backgroundColor: "#b9e5fb",
-            text: "Chaikin Money Flow: %v",
-            borderColor: "#ffffff",
-            strokeWidth: "4",
-            height: 25,
-            borderRadius: 12,
-            y: -5,
-          }
         },
         scaleX: {
           offset: 0,
@@ -2253,9 +2260,8 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           "guide": {
             "visible": false
           },
-          "item": {
-            "font-color": "#999",
-            "visible": false
+          item: {
+            visible: false
           },
           "zooming": true
         },
@@ -2279,45 +2285,46 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         "zoom": {
           "shared": true
         },
-        "-crosshairX": {
-          "shared": true,
-          "lineColor": "transparent",
-          "visible": false,
+        crosshairX: {
+          shared: true,
+          lineColor: "transparent",
+          visible: false,
           alpha: 0,
-          "plotLabel": {
-            "multiple": false,
-            "visible": false,
-            "borderColor": "#ffffff",
-            "strokeWidth": "4",
-            "height": 25,
-            "text": 'test %v',
-            "borderRadius": 12,
-            "fontFamily": "Open Sans",
-            "backgroundColor": "#b9e5fb",
-            "rules": [
+          plotLabel: {
+            multiple: false,
+            visible: false,
+            fontSize: '12px',
+            backgroundColor: "#333",
+            color: '#ffffff',
+            borderColor: "transparent",
+            strokeWidth: 0,
+            height: 26,
+            padding: '10px',
+            borderRadius: 5,
+            fontFamily: 'Open Sans',
+            callout: true,
+            rules: [
               {
                 "rule": "%v == 100",
                 "text": "%t",
                 "visible": true
               }
             ],
-            "y": -10
-          }
+            offsetY: -14,
+          },
+          scaleLabel: {
+            visible: false
+          },
         },
         "tooltip": {
           "visible": false,
-          "htmlMode": true,
-          "backgroundColor": "none",
-          "padding": 0,
-          "placement": "node:center",
-          "text": "<div class='zingchart-tooltip'><div class='scalex-value'>%kt</div><div class='scaley-value'>$%v</div></div>"
         },
         "series": [
           {
             type: "bar",
             "values": veryBullish,
             "alpha": 1,
-            "text": "Power Gauge: Very Bullish",
+            "text": "Power Gauge --- Very Bullish",
             "backgroundColor": "#24A300",
             "hover-state": {
               "visible": false
@@ -2326,7 +2333,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           {
             type: "bar",
             "values": bullish,
-            "text": "Power Gauge: Bullish",
+            "text": "Power Gauge --- Bullish",
             "alpha": 1,
             "backgroundColor": "#6ACC00",
             "hover-state": {
@@ -2336,7 +2343,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           {
             type: "bar",
             "values": neutral,
-            "text": "Power Gauge: Neutral",
+            "text": "Power Gauge --- Neutral",
             "alpha": 1,
             "backgroundColor": "#FF9900",
             "hover-state": {
@@ -2346,7 +2353,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           {
             type: "bar",
             "values": bearish,
-            "text": "Power Gauge: Bearish",
+            "text": "Power Gauge --- Bearish",
             "alpha": 1,
             "backgroundColor": "#FD4500",
             "hover-state": {
@@ -2356,7 +2363,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
           {
             type: "bar",
             "values": veryBearish,
-            "text": "Power Gauge: Very Bearish",
+            "text": "Power Gauge --- Very Bearish",
             "alpha": 1,
             "backgroundColor": "#EB001C",
             "hover-state": {
