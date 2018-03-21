@@ -20,7 +20,7 @@ import {BsModalRef} from 'ngx-bootstrap';
             <p class="slide-title">{{ item.title }}</p>
             <img class="desktop hidden-sm-down" src="{{ item.src }}">
             <img class="mobile hidden-sm-up" *ngIf="item.mobileSrc" src="{{ item.mobileSrc }}">
-            <a class="link__watch-video" target="_new" *ngIf="item.link" href="{{ item.link }}"><i class="far fa-play-circle"></i> &nbsp; {{ item.linktext }}</a>
+            <a class="link__watch-video" target="_new" *ngIf="item.link" href="{{ item.link }}">{{ item.linktext }} &nbsp; <i class="far fa-angle-double-right"></i></a>
           </ng-container>
         </ng-container>
       </div>
