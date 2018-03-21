@@ -20,7 +20,7 @@ import {BsModalRef} from 'ngx-bootstrap';
             <p class="slide-title">{{ item.title }}</p>
             <img class="desktop hidden-sm-down" src="{{ item.src }}">
             <img class="mobile hidden-sm-up" *ngIf="item.mobileSrc" src="{{ item.mobileSrc }}">
-            <a class="link__watch-video" target="_new" *ngIf="item.link" href="{{ item.link }}">{{ item.linktext }} &nbsp; <i class="far fa-angle-double-right"></i></a>
+            <a class="link__watch-video" (click)="openVid(item.link)" target="_blank" *ngIf="item.link" href="{{ item.link }}"><i class="far fa-play-circle"></i> &nbsp; WATCH THE VIDEO</a>
           </ng-container>
         </ng-container>
       </div>
@@ -52,24 +52,21 @@ export class PspOnboardingComponent implements OnInit {
       title: 'The Rating System',
       src: 'assets/imgs/img_onboard-screen2.png',
       mobileSrc: 'assets/imgs/img_onboard-screen2--mobile.png',
-      link: 'http://www.chaikinanalytics.com/chaikin-powerpulse-user-guide#the-workspace-2_wrap',
-      linktext: 'Read More'
+      link: 'https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/#the-workspace-2_wrap'
     },
     {
       id: 3,
       title: 'Health Check',
       src: 'assets/imgs/img_onboard-screen3.png',
       mobileSrc: 'assets/imgs/img_onboard-screen3--mobile.png',
-      link: 'http://www.chaikinanalytics.com/powerpulse-health-check-video/',
-      linktext: 'Watch the Video'
+      link: 'https://www.chaikinanalytics.com/powerpulse-health-check-video/'
     },
     {
       id: 4,
       title: 'Stock Analysis',
       src: 'assets/imgs/img_onboard-screen4.png',
       mobileSrc: 'assets/imgs/img_onboard-screen4--mobile.png',
-      link: 'http://www.chaikinanalytics.com/powerpulse-stock-analysis/',
-      linktext: 'Watch the Video'
+      link: 'https://www.chaikinanalytics.com/powerpulse-stock-analysis/'
     },
     {
       id: 5,
@@ -84,6 +81,10 @@ export class PspOnboardingComponent implements OnInit {
 
   ngOnInit() {
     this.totalItems = this.items.length;
+  }
+
+  openVid(link: string) {
+    window.open(link,'_blank');
   }
 
 }
