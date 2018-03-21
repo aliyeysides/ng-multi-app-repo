@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
@@ -16,7 +16,7 @@ import {IdeasService} from '../../../services/ideas.service';
         <div class="section-header">
           <h1>Stock view for</h1>
           <div class="section-header__search">
-            <cpt-bear-symbol-search [placeholder]="symbol.toUpperCase()"></cpt-bear-symbol-search>
+            <!--<cpt-bear-symbol-search [placeholder]="symbol.toUpperCase()"></cpt-bear-symbol-search>-->
           </div>
           <div class="section-header__actions">
             <a (click)="gotoDiscovery(symbol)" class="discovery-icon">

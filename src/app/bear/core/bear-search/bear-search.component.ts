@@ -1,6 +1,6 @@
-import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {SymbolSearchService} from '../../../services/symbol-search.service';
-import {BaseSettingsMenuComponent} from '../../../shared/components/menus/settings-menu.component';
+import {BaseSettingsMenuComponent} from '../../../shared/components/menus';
 import {AuthService} from '../../../services/auth.service';
 
 declare let gtag: Function;

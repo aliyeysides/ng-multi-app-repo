@@ -2,18 +2,20 @@ import {NgModule} from '@angular/core';
 import {routing} from './discovery.routing';
 
 import {DiscoveryService} from '../../../services/discovery.service';
-import {SharedModule} from '../../../shared/index';
+import {SharedModule} from '../../../shared';
 import {SignalService} from '../../../services/signal.service';
 
 import {DiscoveryComponent} from './discovery.component';
-import {DiscoverySeedComponent} from './discovery-seed/discovery-seed.component';
-import {DiscoveryResultsComponent} from './discovery-results/discovery-results.component';
-import {DiscoveryCardComponent} from './discovery-results/discovery-card/discovery-card.component';
+import {DiscoverySeedComponent} from './discovery-seed';
+import {DiscoveryResultsComponent} from './discovery-results';
+import {DiscoveryCardComponent} from './discovery-results/discovery-card';
+import {BearSymbolSearchModule} from '../../core/bear-search/bear-symbol-search';
 
 @NgModule({
   imports: [
     routing,
-    SharedModule
+    SharedModule,
+    BearSymbolSearchModule
   ],
   exports: [DiscoveryComponent],
   declarations: [

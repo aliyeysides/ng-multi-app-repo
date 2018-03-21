@@ -1,5 +1,5 @@
 import {
-  AfterContentInit, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild,
+  AfterContentInit, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild, Directive,
 } from '@angular/core';
 
 import {FormControl} from '@angular/forms';
@@ -13,6 +13,9 @@ import {Observable} from 'rxjs/Observable';
 
 declare let gtag: Function;
 
+@Directive({
+  selector: '[cptBaseSymbolSearchComponent]'
+})
 export class BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
   @Input('placeholder') placeholder: string;
   @Input('defaultFocus') focus: boolean;
