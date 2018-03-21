@@ -6,6 +6,9 @@
 
 
 
+
+
+
 #movement-timespan {
   .mat-tab-header, .mat-tab-nav-bar {
       border-bottom: 0px solid rgba(0,0,0,0);
@@ -299,6 +302,20 @@
 
 
 
+
+.overview__powerbar {
+  .tooltip-inner {
+      min-width:230px;
+  }
+}
+
+.tooltip {
+  .arrow {
+    &:before {
+      display:none;
+    }
+  }
+}
 
 
 

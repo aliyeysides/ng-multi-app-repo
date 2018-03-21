@@ -599,9 +599,9 @@ sub {
 
 .header__button--anchors {
   position: absolute;
-  width: 38%;
+  width: 340px;
   padding-top:8px;
-  right: 3%;
+  right: 4%;
   top:0;
 
   .anchor.mat-raised-button {
@@ -642,17 +642,19 @@ sub {
     @media screen AND (min-width:1400px) {
       margin: 0 5%;
     }
-    @media screen AND (max-width:991px) {
-      margin: 0 3%;
+    @media screen AND (max-width:1199px) {
+      margin: 0 2%;
     }
   }
   @media screen AND (min-width:1400px) {
-    width: 31%;
+    right:10%;
   }
-  @media screen AND (min-width:1280px) {
-    width: 33%;
+  @media screen AND (min-width:992px) AND (max-width:1199px) {
+    width: 300px;
+    right:10px;
   }
-  @media screen AND (max-width:1023px) {
+  @media screen AND (max-width:991px) {
+    width: 300px;
     right: 0;
   }
   @media screen AND (max-width:767px) {
