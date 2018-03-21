@@ -195,11 +195,6 @@ declare var gtag: Function;
                   <p class="label">% CHG</p>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-12 hidden-md-up">
-                  <div class="divider__long"></div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -2074,7 +2069,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
             borderRadius: 5,
             padding: '10px',
             multiple: true,
-          }
+          },
           scaleLabel: {
             visible: false,
           },

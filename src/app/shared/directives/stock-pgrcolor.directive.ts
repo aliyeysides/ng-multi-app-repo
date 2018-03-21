@@ -9,9 +9,9 @@ export class StockPgrColorDirective implements OnChanges {
   @Input() stock: string;
   @Input() status: PortfolioStatus;
 
-  red: string = '#D0021B';
-  yellow: string = '#F5A623';
-  green: string = '#24A300';
+  red: string = 'linear-gradient(45deg, rgba(253,0,31,1) 0%, rgba(234,0,61,1) 51%, rgba(183,0,86,1) 100%)';
+  yellow: string = 'linear-gradient(-135deg, rgba(250,218,61,1) 0%, rgba(248,153,57,1) 100%)';
+  green: string = 'linear-gradient(135deg, rgba(0,192,78,1) 0%, rgba(0,193,169,1) 100%)';
 
   constructor(private el: ElementRef, private reportService: ReportService) {}
 
