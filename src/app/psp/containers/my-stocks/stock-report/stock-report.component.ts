@@ -68,7 +68,7 @@ declare var gtag: Function;
         <!-- BUTTON - | - PDF -->
         <div *ngIf="!is_etf" class="header__button header__button--pdf">
           <button matTooltip="Download PDF Report" [matTooltipPosition]="'before'" [matTooltipShowDelay]="500" class="align-absolute"
-                  (click)="getPDFStockReport(stock)"><i class="fal fa-file-pdf" aria-hidden="true"></i>
+                  (click)="getPDFStockReport(stock)"><i class="fas fa-file-pdf" aria-hidden="true"></i>
           </button>
         </div>
 

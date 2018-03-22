@@ -57,8 +57,7 @@ declare var gtag: Function;
 
       <div class="row justify-content-center overview__powerbar">
         <div matTooltip="Download Report PDF" [matTooltipPosition]="'left'" [matTooltipShowDelay]="500" class="button--pdf">
-          <button mat-icon-button class="align-absolute" (click)="getPHCReportforListId(listId)"><i class="fal fa-file-pdf"
-                                                                              aria-hidden="true"></i></button>
+          <button mat-icon-button class="align-absolute" (click)="getPHCReportforListId(listId)"><i class="fas fa-file-pdf"></i></button>
         </div>
         <div class="col-12 col-md-6 col-xl-6 powerbar flex-md-last" id="powerbar">
           <button mat-raised-button (click)="setToggleOptions('Bulls')"
