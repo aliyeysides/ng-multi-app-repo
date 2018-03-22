@@ -920,7 +920,7 @@ sub {
 /*          EXPAND/COLLAPSE             */
 
 .expand-collapse {
-  margin:15px 0 0;
+  margin:10px 0 0;
   cursor: pointer;
 
   p {
@@ -1065,6 +1065,10 @@ sub {
     list-style: disc;
     padding: 0 1em 2em 3em;
     margin-top: 0px;
+
+    @media screen AND (max-width: 575px) {
+        padding: 0 1em 2em 1.5em;
+    }
 
     li {
       padding:5px 0 3px;

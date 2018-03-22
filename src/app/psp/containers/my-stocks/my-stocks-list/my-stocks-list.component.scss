@@ -10,12 +10,12 @@
 		margin-bottom: 8px;
 		cursor: pointer;
 		z-index: 20;
-		min-width: 200px;
+		min-width: 250px;
 
 		.btn-primary {
 			text-align: center;
 		    border: 0;
-		    padding: 7px 15px 6px 0px;
+		    padding: 7px 10px 6px 0px;
 		    border-radius: 0;
 			cursor: pointer;
 	  		background-color: transparent;
@@ -27,7 +27,7 @@
 		    font-weight: 600;
 		}			
 		.dropdown-toggle {
-			min-width: 200px;
+			min-width: 250px;
 		    &:after {
 				content:  none;
 		    }
@@ -49,7 +49,7 @@
 	    position: absolute;
 	    z-index: 10;
 	    float: left;
-	    min-width: 200px;
+	    min-width: 250px;
 	    padding: 15px 0px 15px;
 	    margin: 8px auto 0px;
 	    font-size: 20px;
