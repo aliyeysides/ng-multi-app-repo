@@ -232,8 +232,8 @@ declare var gtag: Function;
 
           <!-- STOCK VIEW MAIN CHART -->
           <div class="row stock-info stock-info--chart">
-            <div class="col-12 main-chart" style="position:relative">
-              <span class="chart-spinner__wrapper" *ngIf="loading"><mat-spinner class="chart-spinner"></mat-spinner></span>
+            <div class="col-12 main-chart">
+              <span class="align-absolute chart-spinner__wrapper" *ngIf="loading"><mat-spinner class="chart-spinner"></mat-spinner></span>
               <cpt-zingchart [chart]="mainChart"></cpt-zingchart>
             </div>
           </div>
