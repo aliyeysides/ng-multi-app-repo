@@ -65,7 +65,7 @@ import * as moment from 'moment';
         </div>
       </div>
 
-      <div id="anchor__top" class="fixed-button" *ngIf="opened" (click)="jumpToTop()">
+      <div id="anchor__top" class="fixed-button" (click)="jumpToTop()">
         <button mat-icon-button><i class="fal fa-chevron-double-up"></i></button>
       </div>
 
