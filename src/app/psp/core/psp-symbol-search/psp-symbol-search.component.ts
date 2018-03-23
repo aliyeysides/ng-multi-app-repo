@@ -91,7 +91,6 @@ export class PspSymbolSearchComponent extends BaseSymbolSearchComponent implemen
   @Output('toggleSearch') toggleSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @HostListener('document:click', ['$event']) offClick(e: Event) {
-    e.preventDefault();
     e.stopPropagation();
     if (!this.el.nativeElement.contains(e.target) && !this.btn.contains(e.target as Node)) {
       this.toggleSearch.emit();

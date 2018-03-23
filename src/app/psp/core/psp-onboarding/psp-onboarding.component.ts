@@ -20,7 +20,7 @@ import {BsModalRef} from 'ngx-bootstrap';
             <p class="slide-title">{{ item.title }}</p>
             <img class="desktop hidden-sm-down" src="{{ item.src }}">
             <img class="mobile hidden-sm-up" *ngIf="item.mobileSrc" src="{{ item.mobileSrc }}">
-            <a class="link__watch-video" (click)="openVid(item.link)" target="_blank" *ngIf="item.link" href="{{ item.link }}">{{ item.linkText }} &nbsp; <i class="far fa-external-link-alt"></i></a>
+            <a class="link__watch-video" target="_blank" *ngIf="item.link" href="{{ item.link }}">{{ item.linkText }} &nbsp; <i class="far fa-external-link-alt"></i></a>
           </ng-container>
         </ng-container>
       </div>
@@ -84,10 +84,6 @@ export class PspOnboardingComponent implements OnInit {
 
   ngOnInit() {
     this.totalItems = this.items.length;
-  }
-
-  openVid(link: string) {
-    window.open(link,'_blank');
   }
 
 }
