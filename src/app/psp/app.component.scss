@@ -220,11 +220,21 @@ sub {
 .disclaimer {
   font-family: $font-stack2;
   font-size: 12px;
-  margin: 15px 0 25px;
+  margin: 5px 0 10px;
   text-align: left;
   font-weight: 300;
   line-height: 1.5;
   cursor: default;
+
+  @media screen AND (max-width: 575px) {
+    margin: 15px 0 35px;
+  }
+
+  a {
+    color: $link-blue;
+    text-decoration: underline;
+    font-weight: 600;
+  }
 }
 
 
@@ -752,14 +762,16 @@ sub {
     width: 50px;
     height: 50px;
     right: 0;
-    bottom: 60px;
-
-    &:hover {
-      bottom: 64px;
-    }
   }
   &:hover {
     bottom: 104px;
+
+    @media screen AND (max-width: 575px) {
+
+      &:hover {
+        bottom: 100px !important;
+      }
+    }
   }
 
   button {

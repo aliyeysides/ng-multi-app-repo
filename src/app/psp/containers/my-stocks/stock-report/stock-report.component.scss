@@ -654,6 +654,10 @@
 		sub {
 			bottom:0;
 		}
+
+		@media screen AND (min-width: 1200px) {
+			font-size: 34px;
+		}
 	}
 
 	.data--large {
@@ -1106,6 +1110,13 @@
 			}
 		}
 	}
+	.stock-info--competition {
+		.col-headers {
+			p {
+				color:$pulse-green__shade2;
+			}
+		}
+	}
 }
 
 .component--stockview.bearish {
@@ -1150,6 +1161,13 @@
 			}
 		}
 	}
+	.stock-info--competition {
+		.col-headers {
+			p {
+				color:$pulse-red__shade2;
+			}
+		}
+	}
 }
 
 .component--stockview.neutral {
@@ -1190,6 +1208,13 @@
 	.data-table {
 		table {
 			.label {
+				color:$pulse-yellow__shade2;
+			}
+		}
+	}
+	.stock-info--competition {
+		.col-headers {
+			p {
 				color:$pulse-yellow__shade2;
 			}
 		}

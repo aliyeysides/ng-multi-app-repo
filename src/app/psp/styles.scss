@@ -9,6 +9,10 @@
 
 
 
+
+/*  TIMESPAN PANEL TOGGLE  */
+
+
 #movement-timespan {
   .mat-tab-header, .mat-tab-nav-bar {
       border-bottom: 0px solid rgba(0,0,0,0);
@@ -59,6 +63,11 @@
 
 
 
+
+
+
+
+/*  SEARCH DROPDOWN  */
  
 
 .mat-autocomplete-panel {
@@ -182,6 +191,9 @@
 
 
 
+
+/*  ANCHORS TAB  */
+
 .stockview__contents.anchor-drop {
   .tab--slide {
     background-color: $link-blue !important;
@@ -192,6 +204,9 @@
   }
 }
 
+
+
+/*  DROP DOWN MENU  */
 
 .mat-menu-panel {
   font-family: $font-stack;
@@ -262,14 +277,28 @@
         background-color: $link-blue;
       }
     }
+
   }
 }
 .mat-elevation-z2 {
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.15), 0 2px 2px 0 rgba(0,0,0,.15), 0 4px 20px 0 rgba(0,0,0,.25);
 }
 
+/*  DROP DOWN MENU -- Market Insights  */
+
+.masthead__date {
+  .dropdown-item {
+    font-size: 15px;
+    line-height: 50px;
+    height: 50px;
+  }
+}
 
 
+
+
+
+/*  SEARCH FORM FIELD  */
 
 .mat-form-field {
   display: inline-block;
@@ -303,11 +332,7 @@
 
 
 
-.overview__powerbar {
-  .tooltip-inner {
-      min-width:230px;
-  }
-}
+/*  TOOL TIPS  */
 
 .tooltip {
   .arrow {
@@ -317,9 +342,35 @@
   }
 }
 
+.stockview__main-rating {
+  .tooltip-inner {
+    min-width:220px;
+    a { 
+      font-weight:600;
+      text-decoration:underline;
+    }
+
+    @media screen AND (min-width:768px) {
+      min-width:250px;
+    }
+  }
+}
+
+.overview__powerbar {
+  .tooltip-inner {
+    min-width:230px;
+    a { 
+      font-weight:600;
+      text-decoration:underline;
+    }
+  }
+}
 
 
 
+
+
+/*  SPINNERS  */
 
 .fa-spin-hover:hover {
   -webkit-animation: fa-spin 2s infinite linear;

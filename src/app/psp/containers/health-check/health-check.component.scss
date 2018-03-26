@@ -192,6 +192,21 @@
 	  		right:2%;
 	  		height: 60px;
 	  		bottom: 0;
+	  		opacity: 0.4;
+			transition-property:color opacity;
+			transition-duration: 0.45s;
+			transition-timing-function: ease;
+
+	  		&:hover {
+				opacity:1;
+
+				button {
+
+					i {
+						color: $link-blue;
+					}
+				}
+			}
 
 		  	button {
 				background: transparent;
@@ -200,6 +215,9 @@
 				i {
 					font-size: 28px;
 					color: $font-color;
+					transition-property:color opacity;
+					transition-duration: 0.45s;
+					transition-timing-function: ease;
 				}
 			}
 

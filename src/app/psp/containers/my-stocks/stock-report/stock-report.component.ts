@@ -551,12 +551,12 @@ declare var gtag: Function;
 
             <div *ngIf="collapse['financials'] == true" (click)="toggleCollapse('financials')"
                  class="col-12 hidden-lg-up expand-collapse">
-              <img src="./assets/imgs/ux__collapse--circle.svg">
+              <i class="far fa-scrubber"></i>
               <p>Collapse</p>
             </div>
             <div *ngIf="collapse['financials'] == false" (click)="toggleCollapse('financials')"
                  class="col-12 hidden-lg-up expand-collapse">
-              <img src="./assets/imgs/ux__expand--dots.svg">
+              <i class="far fa-ellipsis-h"></i>
               <p>Expand for details</p>
             </div>
           </div>
@@ -726,12 +726,12 @@ declare var gtag: Function;
 
             <div *ngIf="collapse['earnings'] == true" (click)="toggleCollapse('earnings')"
                  class="col-12 hidden-lg-up expand-collapse">
-              <img src="./assets/imgs/ux__collapse--circle.svg">
+              <i class="far fa-scrubber"></i>
               <p>Collapse</p>
             </div>
             <div *ngIf="collapse['earnings'] == false" (click)="toggleCollapse('earnings')"
                  class="col-12 hidden-lg-up expand-collapse">
-              <img src="./assets/imgs/ux__expand--dots.svg">
+              <i class="far fa-ellipsis-h"></i>
               <p>Expand for details</p>
             </div>
           </div>
@@ -931,12 +931,12 @@ declare var gtag: Function;
 
             <div *ngIf="collapse['technicals'] == true" (click)="toggleCollapse('technicals')"
                  class="col-12 hidden-lg-up expand-collapse">
-              <img src="./assets/imgs/ux__collapse--circle.svg">
+              <i class="far fa-scrubber"></i>
               <p>Collapse</p>
             </div>
             <div *ngIf="collapse['technicals'] == false" (click)="toggleCollapse('technicals')"
                  class="col-12 hidden-lg-up expand-collapse">
-              <img src="./assets/imgs/ux__expand--dots.svg">
+              <i class="far fa-ellipsis-h"></i>
               <p>Expand for details</p>
             </div>
           </div>
@@ -1139,12 +1139,12 @@ declare var gtag: Function;
             <!-- COLLAPSE -->
             <div *ngIf="collapse['experts'] == true" (click)="toggleCollapse('experts')"
                  class="col-12 hidden-lg-up expand-collapse">
-              <img src="./assets/imgs/ux__collapse--circle.svg">
+              <i class="far fa-scrubber"></i>
               <p>Collapse</p>
             </div>
             <div *ngIf="collapse['experts'] == false" (click)="toggleCollapse('experts')"
                  class="col-12 hidden-lg-up expand-collapse">
-              <img src="./assets/imgs/ux__expand--dots.svg">
+              <i class="far fa-ellipsis-h"></i>
               <p>Expand for details</p>
             </div>
           </div>
@@ -1291,16 +1291,15 @@ declare var gtag: Function;
 
         <!-- DISCLAIMER -->
         <div class="row justify-content-center stock-info stock-info--disclaimer">
-          <div class="col-12 col-lg-10">
-            <h4>Disclaimer:</h4>
+          <div class="col-12 col-xl-10">
+            <h4 class="text-left">Disclaimer:</h4>
             <p class="disclaimer">Chaikin Analytics (CA) is not registered as a securities Broker/Dealer or Investment
               Advisor with either the U.S. Securities and Exchange Commission or with any state securities regulatory
               authority. The information presented in our reports does not represent a recommendation to buy or sell
               stocks or any financial instrument nor is it intended as an endorsement of any security or investment.
               The information in this report does not take into account an individual's specific financial situation.
               The user bears complete responsibility for their own investment research and should consult with their
-              financial advisor before making buy/sell decisions. For more information, see <a target="_blank"
-                                                                                               href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a>
+              financial advisor before making buy/sell decisions. For more information, see <a target="_blank" href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a>
               <a target="_blank" href="http://www.chaikinanalytics.com/attributions/">See Attributions &raquo;</a></p>
           </div>
         </div>
@@ -1386,7 +1385,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
   allViewChildren: object;
 
   toolTipText: string = "Stock rating based on a 20-factor model that produces a rating from Very Bullish (or likely to outperform the market) to Very Bearish (unlikely to perform in the short to medium term). ";
-  link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/">Read more here.</a>`;
+  link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide#the-workspace-2">Read more here.</a>`;
 
   current: string = '1Y';
   mainChart: ZingChart = {
