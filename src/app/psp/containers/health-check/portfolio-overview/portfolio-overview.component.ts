@@ -95,7 +95,7 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   private _lists: BehaviorSubject<object[]> = new BehaviorSubject<object[]>([] as object[]);
 
   toolTipText: string = "The Chaikin Power Bar is your list's report card. It gives the ratio of Bullish stocks (likely to outperform the market) to Bearish stocks (unlikely to perform in the short to medium term) as rated by the ";
-  link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/">Chaikin Power Rating.</a>`;
+  link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide#the-workspace-2">Chaikin Power Rating.</a>`;
   allUserLists: object[];
   selectedListName: string;
 
