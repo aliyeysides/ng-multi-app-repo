@@ -118,6 +118,7 @@ interface FilterFunc {
                       *ngFor="let stock of dailyStockData; trackBy: trackStock"
                       class="row no-gutters list-item__mover justify-content-center">
                       <mat-expansion-panel-header>
+                        <i class="fal fa-minus-circle" (click)="emitRemoveStock(stock.symbol);$event.stopPropagation()"></i>
                         <div class="col-4 col-sm-2 mover__stock">
                           <p class="ticker" [ngClass]="{'market': stock.arcColor==2}"><img *ngIf="stock.arcColor != 2"
                                                  src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
@@ -153,6 +154,7 @@ interface FilterFunc {
                       *ngFor="let stock of weeklyStockData; trackBy: trackStock"
                       class="row no-gutters list-item__mover justify-content-center">
                       <mat-expansion-panel-header>
+                      <i class="fal fa-minus-circle" (click)="emitRemoveStock(stock.symbol);$event.stopPropagation()"></i>
                     <div class="col-4 col-sm-2 mover__stock">
                       <p class="ticker" [ngClass]="{'market': stock.arcColor==2}"><img *ngIf="stock.arcColor != 2"
                                              src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
