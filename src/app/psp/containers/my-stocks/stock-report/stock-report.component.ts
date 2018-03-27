@@ -297,11 +297,11 @@ declare var gtag: Function;
                   <div (click)="goToHeadline(headline)" class="col-12 headline__link">
                     <p class="headline">{{ headline.title }}&nbsp;→</p>
                   </div>
-                  <div class="col-8">
-                    <p class="source">{{ headline.source }}</p>
+                  <div class="col-8 source">
+                    <p class="">{{ headline.source }}</p>
                   </div>
-                  <div class="col-4">
-                    <p class="date">{{ headline.headline_last_updated }}</p>
+                  <div class="col-4 date">
+                    <p class="">{{ headline.headline_last_updated }}</p>
                   </div>
                 </div>
               </li>
