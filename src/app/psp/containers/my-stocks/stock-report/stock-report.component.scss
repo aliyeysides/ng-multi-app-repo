@@ -85,14 +85,14 @@
 		cursor: pointer;
 		text-align: center;
 		transition-property:color opacity;
-		transition-duration: 0.45s;
+		transition-duration: 0.33s;
 		transition-timing-function: ease;
 
 		i {
 			font-size: 27px;
 			line-height: 58px;
 			transition-property:color opacity;
-			transition-duration: 0.45s;
+			transition-duration: 0.33s;
 			transition-timing-function: ease;
 		}
 	}
@@ -152,7 +152,7 @@
 
 	.header__button--pdf {
 		display:none;
-		opacity: 0.6;
+		opacity: 0.2;
 		z-index: 20;
 
 		&:hover {
@@ -241,6 +241,7 @@
 
 			@media screen AND (min-width:1200px) {
 				font-size: 35px;
+				line-height: 54px;
 				width: 43%;
 			}
 		}
@@ -786,6 +787,14 @@
 				font-size: 15px;
 				font-weight: 600;
 				line-height: 35px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+
+				&:hover {
+					overflow: visible;
+					white-space: nowrap;
+					cursor: default;
+				}
 			}
 
 			.date {
@@ -796,6 +805,8 @@
 				line-height: 35px;
 				padding-right: 10px;
 				text-transform: uppercase;
+				white-space: nowrap;
+				cursor: default;
 			}
 
 			&:last-child {
