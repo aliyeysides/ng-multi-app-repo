@@ -24,7 +24,8 @@ import {SimpleNotificationsModule} from 'angular2-notifications';
 import {NotificationsService} from 'angular2-notifications';
 import {TooltipModule} from 'ngx-bootstrap';
 import {BearOnboardingComponent} from './core/bear-onboarding/bear-onboarding.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthInterceptor} from '../shared/inteceptors/auth.inteceptor';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,19 @@ import {HttpClientModule} from '@angular/common/http';
     ...APP_CORE_MODULES,
     ...APP_CONTAINER_MODULES,
   ],
-  providers: [UtilService, AuthService, AuthGuard, IdeasService, SignalService, NotificationsService],
+  providers: [
+    UtilService,
+    AuthService,
+    AuthGuard,
+    IdeasService,
+    SignalService,
+    NotificationsService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [BearOnboardingComponent]
 })
