@@ -203,7 +203,7 @@ declare var gtag: Function;
           <div class="row no-gutters stock-info stock-info--chart-toggle justify-content-center">
             <div class="col-12">
               <p class="chart-header__breakdown">
-                <span class="bold">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</span> was
+                <span class="bold">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</span> was&nbsp;
                 <span class="mobile-break">
                   <span class="bold green" *ngIf="timespanPerChange>0"><i class="far fa-arrow-up"></i></span>
                   <span class="bold greyed-out" *ngIf="timespanPerChange==0">unchanged</span>
@@ -297,11 +297,11 @@ declare var gtag: Function;
                   <div (click)="goToHeadline(headline)" class="col-12 headline__link">
                     <p class="headline">{{ headline.title }}&nbsp;→</p>
                   </div>
-                  <div class="col-6">
-                    <p class="source">{{ headline.source }}</p>
+                  <div class="col-8 source">
+                    <p class="">{{ headline.source }}</p>
                   </div>
-                  <div class="col-6">
-                    <p class="date">{{ headline.headline_last_updated }}</p>
+                  <div class="col-4 date">
+                    <p class="">{{ headline.headline_last_updated }}</p>
                   </div>
                 </div>
               </li>
