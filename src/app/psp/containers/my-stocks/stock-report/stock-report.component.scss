@@ -34,7 +34,7 @@
 	.panel {
 		padding: 0px 10px 10px;
 		overflow: hidden;
-		margin: 0px 0 15px;
+		margin: 0px 0 10px;
 
 		.tab__container {
 			z-index: 100;
@@ -99,7 +99,7 @@
 
 	.header__button--left {
 		left:2%;
-		opacity:0.3;
+		opacity:0.6;
 		
 		img {
 			width: 26px;
@@ -120,7 +120,7 @@
 		text-align: center;
 
 		i {
-			opacity:0.3;
+			opacity:0.6;
 		}
 
 		.fa-plus-circle {
@@ -152,7 +152,7 @@
 
 	.header__button--pdf {
 		display:none;
-		opacity: 0.4;
+		opacity: 0.6;
 		z-index: 20;
 
 		&:hover {
@@ -175,10 +175,10 @@
 		position: absolute;
 		cursor: default;
 		overflow:hidden;
-		padding-top: 2px;
+		padding-top: 3px;
 
 		@media screen AND (max-width: 575px) {
-			padding-top: 0px;
+			padding-top: 2px;
 		}
 
 		.ticker {
@@ -187,7 +187,7 @@
 			text-align: left;
 			line-height: 58px;
 			color:$font-color;
-			font-size: 32px;
+			font-size: 36px;
 			float: left;
 			margin: 0 4% 0 13%;
 
@@ -225,8 +225,8 @@
 				width: 40%;
 				padding-right:50px;
 				text-align: right;
-				font-size: 32px;
-				line-height: 62px;
+				font-size: 34px;
+				line-height: 58px;
 				font-weight: 500;
 				float: right;
 			}
@@ -579,24 +579,43 @@
 
 
 .stock-info--chart-toggle {
-	//padding: 0 5px;
 
 	@media screen AND (max-width:991px) {
 		margin: 15px 0 0;
 	}
 
 	.chart-header__breakdown {
-		font-size: 22px;
+		font-size: 24px;
 		font-weight: 500;
 		line-height: 1.5;
-		margin-bottom: 25px;
+		margin-bottom: 13px;
 		cursor: default;
 		margin-top: 10px;
 
-		@media screen AND (min-width:992px) {
+		@media screen AND (min-width:768px) {
 			font-size: 28px;
 			margin-top: 15px;
 			margin-bottom: 20px;
+
+			i {
+				font-size: 24px;
+				vertical-align: baseline;
+			}
+		}
+
+		.mobile-break {
+			@media screen and (max-width: 767px) {
+				display: block;
+				clear: both;
+				font-size: 36px;
+				line-height: 48px;
+				height: 46px;
+
+				i {
+					font-size: 30px;
+					vertical-align: baseline;
+				}
+			}
 		}
 	}
 
@@ -654,10 +673,6 @@
 		sub {
 			bottom:0;
 		}
-
-		@media screen AND (min-width: 1200px) {
-			font-size: 34px;
-		}
 	}
 
 	.data--large {
@@ -674,7 +689,11 @@
 		}
 
 		@media screen AND (min-width: 1200px) {
-			font-size: 40px;
+			font-size: 48px;
+
+			sub {
+				font-size: 30px;
+			}
 		}
 
 		@media screen AND (max-width: 370px) {
@@ -685,6 +704,14 @@
 	.stock-industry {
 		margin-top: 5px;
 		margin-bottom:25px;
+
+		.data {
+			font-size: 32px;
+
+			@media screen AND (max-width: 1199px) {
+				font-size: 30px;
+			}
+		}
 	}
 
 	.divider__full {

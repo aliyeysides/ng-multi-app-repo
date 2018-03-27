@@ -204,13 +204,16 @@ declare var gtag: Function;
             <div class="col-12">
               <p class="chart-header__breakdown">
                 <span class="bold">{{ symbolData ? symbolData['metaInfo'][0]['name'] : null }}</span> was
-                <span class="bold green" *ngIf="timespanPerChange>0">up</span>
-                <span class="bold greyed-out" *ngIf="timespanPerChange==0">unch</span>
-                <span class="bold red" *ngIf="timespanPerChange<0">down</span>
-                <span class="bold"
-                      [ngClass]="{ 'green': timespanPerChange>0, 'red': timespanPerChange<0}">{{ timespanPriceChange | decimal
-                  }} &nbsp;({{ timespanPerChange | decimal
-                  }}<sub>%</sub>)</span> over the last:
+                <span class="mobile-break">
+                  <span class="bold green" *ngIf="timespanPerChange>0"><i class="far fa-arrow-up"></i></span>
+                  <span class="bold greyed-out" *ngIf="timespanPerChange==0">unchanged</span>
+                  <span class="bold red" *ngIf="timespanPerChange<0"><i class="far fa-arrow-down"></i></span>
+                  <span class="bold"
+                        [ngClass]="{ 'green': timespanPerChange>0, 'red': timespanPerChange<0}">{{ timespanPriceChange | decimal
+                    }} &nbsp;({{ timespanPerChange | decimal
+                    }}<sub>%</sub>)</span> 
+                </span>
+                  over the last:
               </p>
             </div>
             <div (click)="toggleChartTime('1W')" class="col-2">
@@ -2027,7 +2030,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         y: 480,
         backgroundColor: "transparent",
         plotarea: {
-          margin: "25 60"
+          margin: "35 60 10"
         },
         "plot": {
           midPoint: true,
@@ -2111,7 +2114,7 @@ export class StockReportComponent implements OnInit, OnChanges, OnDestroy {
         y: 355,
         backgroundColor: "#fff",
         plotarea: {
-          margin: "25 60"
+          margin: "35 60 10"
         },
         "plot": {
           midPoint: true,
