@@ -608,7 +608,7 @@
 	}
 
 	.chart-header__breakdown {
-		font-size: 24px;
+		font-size: 28px;
 		font-weight: 500;
 		line-height: 1.5;
 		margin-bottom: 13px;
@@ -616,12 +616,22 @@
 		margin-top: 10px;
 
 		@media screen AND (min-width:768px) {
-			font-size: 28px;
 			margin-top: 15px;
 			margin-bottom: 20px;
 
 			i {
 				font-size: 24px;
+				vertical-align: baseline;
+			}
+		}
+
+		@media screen AND (min-width:1280px) {
+			font-size: 32px;
+			margin-top: 15px;
+			margin-bottom: 20px;
+
+			i {
+				font-size: 28px;
 				vertical-align: baseline;
 			}
 		}

@@ -568,18 +568,18 @@ sub {
             cursor: pointer;
             font-weight: 500;
             margin: 4px 0;
-            border-radius: 5px;
+            border-radius: 4px;
           }
 
           i {
-            font-size: 24px;
+            font-size: 20px;
             display: inline-block;
             position: absolute;
-            font-weight: 300;
+            font-weight: 400;
             vertical-align: middle;
             text-align: center;
             left:10px;
-            top:6px;
+            top:9px;
 
           }
         }
@@ -590,7 +590,7 @@ sub {
             font-weight: 600;
             color:$link-blue;
             background-color: rgba(255,255,255,1);
-            box-shadow: inset 0 0px 5px 0px rgba(0, 0, 0, 0.3);
+            //box-shadow: inset 0 0px 5px 0px rgba(0, 0, 0, 0.3);
             border: 0px solid #fff;
 
             &:hover {
@@ -748,8 +748,8 @@ sub {
   right: 2%;
   bottom: 100px;
   z-index: 500;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   transition: .2s;
 
   @media screen AND (min-width: 1400px) {
@@ -759,8 +759,8 @@ sub {
     right: calc(50% - 44.5%);
   }
   @media screen AND (max-width: 575px) {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     right: 0;
   }
   &:hover {
@@ -773,6 +773,9 @@ sub {
       }
     }
   }
+  &:active {
+    bottom: 102px;
+  }
 
   button {
     outline: 0;
@@ -780,9 +783,9 @@ sub {
     height: 100%;
     background: linear-gradient(0deg, rgba(84,0,134,0.95) 0%, rgba(17,153,255,0.95) 100%);
     border-radius: 50%;
-    border: 0px solid #fff;
+    border: 4px solid #fff;
     position: relative;
-    box-shadow: inset 0 0 0 3px rgba(255,255,255,1), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.04), 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+    //box-shadow: inset 0 0 0 4px rgba(255,255,255,1);
 
     i {
       font-size: 36px;
@@ -806,6 +809,10 @@ sub {
       i {
         color: #ffffff;
       }
+    }
+
+    &:active {
+      background-image: linear-gradient(180deg, rgba(84,0,134,0.95) 0%, rgba(17,153,255,0.95) 75%);
     }
   }
 }

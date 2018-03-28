@@ -85,16 +85,16 @@
 			    border-radius: 8px;
 			    border-bottom:0px;
 				cursor: pointer;
-		  		background-color: transparent;
+		  		background-color: rgba(255,255,255,0.15);
 			    font-size: 30px;
 			    line-height: 50px;
 				color: #ffffff;
-				box-shadow: inset 0 0px 20px 2px rgba(0, 0, 0, 0.05);
+				box-shadow: inset 0 0px 15px 2px rgba(0, 0, 0, 0.1);
 				z-index: 20;
 			    font-weight: 600;
 
 			    &:hover {
-			    	box-shadow: inset 0 0px 20px 2px rgba(0, 0, 0, 0.25);
+			    	box-shadow: inset 0 0px 13px 2px rgba(0, 0, 0, 0.2);
 			    }
 			}
 			.dropdown-toggle {
@@ -115,7 +115,7 @@
 			    font-size: 22px;
 			    vertical-align: middle;
 			    font-weight: 500;
-			    opacity:0.66;
+			    opacity:0.8;
 			}
 			&:hover {
 				&:after {
@@ -406,12 +406,12 @@
 		    display: inline-block;
 		    vertical-align: middle;
 			color: $font-color;
-			box-shadow: inset 0 0px 20px 2px rgba(0, 0, 0, 0.03);
+			box-shadow: inset 0 0px 15px 2px rgba(0, 0, 0, 0.03);
 			z-index: 20;
 		    font-weight: 600;
 
 		    &:hover {
-		    	box-shadow: inset 0 0px 20px 2px rgba(0, 0, 0, 0.175);
+		    	box-shadow: inset 0 0px 13px 2px rgba(0, 0, 0, 0.15);
 		    }
 		}
 		.dropdown-toggle {
@@ -483,7 +483,51 @@
 
 
 	.list-item__mover {
+		position: relative;
 
+		&:hover {
+			.mat-content {
+				i {
+					opacity: 0.5;
+				}
+			}
+		}
+
+		.mat-content {
+			i {
+				cursor: pointer;
+				font-size: 20px;
+				display: inline-block;
+				width: 20px;
+				margin-left: 10px;
+				vertical-align: middle;
+				height: 33px;
+				line-height: 33px;
+				opacity: 0;
+				color:$font-color;
+				font-weight: 500;
+
+				@media screen AND (max-width: 575px) {
+					margin-left: 3px;
+					opacity: 0.5;
+					width:15px;
+					font-size: 15px;
+				}
+
+				@media screen AND (min-width: 1280px) {
+					margin-left: 50px;
+				}
+
+				@media screen AND (min-width: 1400px) {
+					margin-left: 70px;
+				}
+
+				&:active {
+					color: $link-blue;
+					opacity: 1;
+				}
+			}
+		}
 		.mover__stock {
 			cursor: pointer;
 
@@ -494,16 +538,25 @@
 			  	text-align: left;
 			  	color:$font-color;
 
+				@media screen AND (max-width: 575px) {
+					padding-left: 0px;
+					margin-left: -5px;
+				} 
+
 			  	@media screen AND (min-width: 1024px) {
 					padding-left: 12px;
 				}
 
-			  	@media screen AND (min-width: 1200px) {
+				@media screen AND (min-width: 1200px) {
 					padding-left: 25px;
 				}
 
 			  	@media screen AND (min-width: 1280px) {
-					padding-left: 45px;
+					padding-left: 15px;
+				}
+
+				@media screen AND (min-width: 1400px) {
+					padding-left: 0px;
 				}
 
 			  	img {
@@ -1215,11 +1268,9 @@
 
 
 #HC--Disclaimer {
-	background-color: #f8f8f8;
-	margin-top: 10px;
 
-	@media screen AND (max-width:575px) {
-		padding-bottom: 20px;
+	@media screen AND (max-width:375px) {
+		padding-bottom: 30px;
 	}
 }
 
