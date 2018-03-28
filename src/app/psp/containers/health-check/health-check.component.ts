@@ -60,17 +60,9 @@ import {BehaviorSubject} from 'rxjs';
         <div class="col-12 col-lg-10" id="HC--Disclaimer">
           <div class="row justify-content-center">
 
-            <div class="col-12 col-lg-10">
-              <h4>Disclaimer:</h4>
-              <p class="disclaimer">Chaikin Analytics (CA) is not registered as a securities Broker/Dealer or Investment
-                Advisor with either the U.S. Securities and Exchange Commission or with any state securities regulatory
-                authority. The information presented in our reports does not represent a recommendation to buy or sell
-                stocks or any financial instrument nor is it intended as an endorsement of any security or investment.
-                The information in this report does not take into account an individual's specific financial situation.
-                The user bears complete responsibility for their own investment research and should consult with their
-                financial advisor before making buy/sell decisions. For more information, see <a target="_blank"
-                                                                                                 href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a>
-                <a target="_blank" href="http://www.chaikinanalytics.com/attributions/">See Attributions &raquo;</a></p>
+            <div class="col-12 col-xl-10">
+              <h4 class="text-left">Disclaimer:</h4>
+              <p class="disclaimer">Chaikin Analytics (CA) is not registered as a securities Broker/Dealer or Investment Advisor with either the U.S. Securities and Exchange Commission or with any state securities regulatory authority. The information presented in our reports does not represent a recommendation to buy or sell stocks or any financial instrument nor is it intended as an endorsement of any security or investment. The information in this report does not take into account an individual's specific financial situation. The user bears complete responsibility for their own investment research and should consult with their financial advisor before making buy/sell decisions. For more information, see <a target="_blank" href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a> <br><a target="_blank" href="http://www.chaikinanalytics.com/attributions/">See Attributions &raquo;</a></p>
             </div>
           </div>
         </div>
