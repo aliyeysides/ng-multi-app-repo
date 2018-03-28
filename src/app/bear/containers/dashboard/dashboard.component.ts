@@ -9,18 +9,29 @@ import {AuthService} from '../../../services/auth.service';
   selector: 'cpt-dashboard',
   template: `
     <div class="container-fluid dashboard">
-      <div class="row">
-        <div class="col-md-6 col-lg-7 col-xl-8">
-          <cpt-bearish-insights></cpt-bearish-insights>
-          <div class="bear-lists__dashboard">
-            <cpt-idea-lists [lists]="allLists" (listSelected)="listSelected($event)"></cpt-idea-lists>
+      <div class="row bearish-insights__container">
+        <div class="col-12 align-self-center" style="padding:0;">
+          <div class="row no-gutters" style="height: 100%;">
+            <div class="col-12 col-md-7 col-xl-8">
+              <cpt-bearish-insights></cpt-bearish-insights>
+            </div>
+            <div class="col-12 col-md-5 col-xl-4">
+              <cpt-bear-of-the-week></cpt-bear-of-the-week>
+            </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-          <cpt-bear-of-the-week></cpt-bear-of-the-week>
-          <cpt-user-lists></cpt-user-lists>
-          <cpt-best-bear-ideas></cpt-best-bear-ideas>
+      </div>
+
+      <div class="row bearish-ideas__container">
+
+        <div class="col-12 col-md-5 col-xl-4">
+          <cpt-lists-container></cpt-lists-container>
         </div>
+
+        <div class="col-12 col-md-7 col-xl-8 dashboard__panel" id="bearish-ideas__list">
+          <cpt-idea-lists [lists]="allLists" (selectList)="selectList($event)"></cpt-idea-lists>
+        </div>
+
       </div>
     </div>
   `,
@@ -34,7 +45,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public loading: Subscription;
 
   constructor(private ideasService: IdeasService,
-              private authService: AuthService) { }
+              private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.loading = this.authService.currentUser$
@@ -52,7 +64,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  public listSelected(list: IdeaList) {
+  public selectList(list: IdeaList) {
     this.selectedList = list;
   }
 

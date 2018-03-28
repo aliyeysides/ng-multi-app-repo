@@ -4,22 +4,25 @@ import {BsModalRef} from 'ngx-bootstrap';
 @Component({
   selector: 'cpt-bear-commentary-weekly-modal',
   template: `
-    <div class="insights__container insights__container--large insights__container--modal">
-      <div class="post-head post-head--bearpick">
-        <h2 class="">{{ title }}</h2>
-        <div class="divider-h"></div>
-        <p class="header__post-date">{{ date }}</p>
-        <button type="button" class="post-head__button" aria-label="Close" (click)="bsModalRef.hide()">
-          <a class="">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
-            <span>&nbsp;Close</span>
-          </a>
-        </button>
+    <div class="container-fluid modal-content--bearpick">
+      <div class="row no-gutters modal-head modal-head--bearpick">
+        <div class="col-9 col-md-10">
+          <h2 class="">{{ title }}</h2>
+          <p class="modal-head__date">{{ date }}</p>
+        </div>
+        <div class="col-3 col-md-2">
+          <button type="button" class="modal-head__button" aria-label="Close" (click)="bsModalRef.hide()">
+            <a class="">
+              <i class="fa fa-times-circle" aria-hidden="true"></i>
+              <span>&nbsp;Close</span>
+            </a>
+          </button>
+        </div>
       </div>
-      <div class="post-body">
-        <div [innerHtml]="commentary"></div>
-        <div class="post-footer">
-          <button type="button" class="post-footer__button" (click)="bsModalRef.hide()">
+      <div class="row modal-body">
+        <div class="col-12" [innerHtml]="commentary"></div>
+        <div class="modal-footer">
+          <button type="button" class="post-footer__button align-absolute" (click)="bsModalRef.hide()">
             <a><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Close</a>
           </button>
         </div>

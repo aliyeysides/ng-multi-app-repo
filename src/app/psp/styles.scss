@@ -1,7 +1,383 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../../assets/styles/variablesPulse';
 @import '../../../node_modules/bootstrap/scss/bootstrap';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+
+
+
+
+
+
+
+/*  TIMESPAN PANEL TOGGLE  */
+
+
+#movement-timespan {
+  .mat-tab-header, .mat-tab-nav-bar {
+      border-bottom: 0px solid rgba(0,0,0,0);
+      margin:0 auto;
+  }
+  .mat-tab-label-content {
+     font-family: $font-stack;
+  }
+  .mat-ink-bar {
+    display: none;
+    height: 36px;
+  }
+  .mat-tab-label {
+    height: 36px;
+    padding: 0 20px;
+    cursor: pointer;
+    box-sizing: border-box;
+    opacity: 1;
+    min-width: 100px;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    white-space: nowrap;
+    position: relative;
+    border:0px solid #fff;
+    font-weight: 600;
+    color: $font-color--mid;
+    box-shadow: inset 0 0 0 3px white;
+  }
+  .mat-tab-label-active {
+    background-image: linear-gradient(15deg, rgba(84,0,134,1) 0%, rgba(17,153,255,1) 100%);
+    color: #ffffff;
+  }
+  .mat-tab-label {
+
+    &:first-of-type {
+      border-radius: 20px 0px 0px 20px;
+      margin-right: -1px;
+    }
+    &:last-of-type {
+      border-radius: 0px 20px 20px 0px;
+      margin-left: -1px;
+    }
+  }
+}
+
+
+
+
+
+
+
+/*  SEARCH DROPDOWN  */
+ 
+
+.mat-autocomplete-panel {
+  min-width: 112px;
+  overflow: auto;
+  max-width: none;
+  max-height: 400px !important;
+  background: #fff;
+  color: $font-color;
+  margin-top:4px;
+  border-radius: 0 0 5px 5px;
+
+  @media screen AND (max-width: 575px) {
+    margin-top:0px;
+  }
+
+  .mat-optgroup {
+
+    .mat-optgroup-label {
+      line-height: 25px;
+      height: 25px;
+      padding: 0 16px;
+      text-align: left;
+      cursor: default;
+      background-color: $background--dark;
+      font-size: 10px;
+      color: $font-color--light;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .mat-option {
+      line-height: 48px;
+      height: 48px;
+      padding: 0 10px;
+      text-align: left;
+      cursor: pointer;
+      align-items: center;
+
+      .mat-option-text {
+        color: $font-color;
+        font-size: 20px;
+        position: relative;
+
+        .company {
+          font-weight: 400;
+          display: inline-block;
+          max-width: 235px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          float: left;
+
+          @media screen AND (max-width: 575px) {
+            max-width: 200px;
+          }
+          @media screen AND (min-width: 992px) {
+            max-width: 205px;
+          }
+          @media screen AND (min-width: 1280px) {
+            max-width: 220px;
+          }
+          @media screen AND (min-width: 1400px) {
+            max-width: 275px;
+          }
+          @media screen AND (min-width: 1600px) {
+            max-width: 375px;
+          }
+        }
+
+        .ticker {
+          display: inline-block;
+          width: 70px;
+          float: left;
+          font-weight: 700;
+        }
+
+        .search__action {
+          opacity: 1;
+          display: inline-block;
+          float: right;
+          position: relative;
+
+          p {
+            float: right;
+            text-align: left;
+            color: $font-color--mid;
+            font-size: 13px;
+            line-height: 48px;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            width: 74px;
+
+            i {
+              display: inline-block;
+              opacity: 1;
+              vertical-align: text-bottom;
+              font-size: 18px;
+              color: $link-blue;
+            }
+          }
+
+          &:hover {
+            p {
+              color: $font-color;
+              
+              i {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.mat-optgroup .mat-option:not(.mat-option-multiple) {
+    padding-left: 15px !important;
+}
+
+
+
+
+/*  ANCHORS TAB  */
+
+.stockview__contents.anchor-drop {
+  .tab--slide {
+    background-color: $link-blue !important;
+    opacity:1 !important;
+    width: 40% !important;
+    margin: 5px 31% 0 !important;
+    height:3px !important;
+  }
+}
+
+
+
+/*  DROP DOWN MENU  */
+
+.mat-menu-panel {
+  font-family: $font-stack;
+  min-width: 250px !important;
+  max-width: 300px !important;
+  border-radius: 8px !important;
+
+  .mat-menu-content {
+    padding-top: 0px;
+    padding-bottom: 0px;
+
+    .mat-menu-item {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      cursor: pointer;
+      outline: 0;
+      border: none;
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      line-height: 55px;
+      height: 55px;
+      padding:0;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .dropdown-item, .label {
+      text-align: center !important;
+
+      &:focus {
+        outline:0px;
+      }
+    }
+    .label {
+      cursor:default;
+      height: 30px;
+      line-height: 30px;
+      border-bottom:1px solid #ddd;
+      font-size: 12px;
+      font-weight: 600;
+      color:$font-color--light;
+      background-color: #333;
+
+      &:hover {
+        background-color: #333;
+      }
+    }
+    .dropdown-item {
+      padding: 0;
+      font-weight: 600;
+      text-align: center;
+      font-size: 24px;
+      line-height: 56px;
+      height: 56px;
+
+      &:hover {
+        background-color: rgba(0,0,0,0.025);
+      }
+
+      &:active {
+        color: #fff !important;
+        text-decoration: none;
+        background-color: $link-blue;
+      }
+    }
+
+  }
+}
+.mat-elevation-z2 {
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.15), 0 2px 2px 0 rgba(0,0,0,.15), 0 4px 20px 0 rgba(0,0,0,.25);
+}
+
+/*  DROP DOWN MENU -- Market Insights  */
+
+.masthead__date {
+  .dropdown-item {
+    font-size: 15px;
+    line-height: 50px;
+    height: 50px;
+  }
+}
+
+
+
+
+
+/*  SEARCH FORM FIELD  */
+
+.mat-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  width: 100%;
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+
+    .mat-form-field-underline {
+        bottom: -4px;
+        height: 2px;
+        display: none;
+    }
+    .mat-form-field-flex {
+      .mat-form-field-infix {
+        padding: 0;
+        border-top: 0;
+        display: block;
+        position: relative;
+        flex: auto;
+        min-width: 0;
+        width: 100%;
+      }
+    }
+  }
+}
+
+
+
+
+
+/*  TOOL TIPS  */
+
+.tooltip {
+  .arrow {
+    &:before {
+      display:none;
+    }
+  }
+}
+
+.stockview__main-rating {
+  .tooltip-inner {
+    min-width:220px;
+    a { 
+      font-weight:600;
+      text-decoration:underline;
+    }
+
+    @media screen AND (min-width:768px) {
+      min-width:250px;
+    }
+  }
+}
+
+.overview__powerbar {
+  .tooltip-inner {
+    min-width:230px;
+    a { 
+      font-weight:600;
+      text-decoration:underline;
+    }
+  }
+}
+
+
+
+
+
+/*  SPINNERS  */
+
+.fa-spin-hover:hover {
+  -webkit-animation: fa-spin 2s infinite linear;
+  -moz-animation: fa-spin 2s infinite linear;
+  -o-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}
 
 
 

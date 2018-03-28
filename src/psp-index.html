@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Power Pulse</title>
+  <title>Chaikin Power Pulse</title>
   <base href="/">
 
   <meta name="description" content="Chaikin Stock Summary Sheet">
@@ -62,6 +62,50 @@
             url(assets/imgs/img_onboard-screen5--mobile.png) no-repeat -9999px -9999px;
     }
 
+    .spinner {
+      width: 40px;
+      height: 40px;
+      position: relative;
+      margin: 100px auto;
+    }
+    .double-bounce1,
+    .double-bounce2 {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: #333;
+      opacity: 0.6;
+      position: absolute;
+      top: 0;
+      left: 0;
+      -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+      animation: sk-bounce 2.0s infinite ease-in-out;
+    }
+    .double-bounce2 {
+      -webkit-animation-delay: -1.0s;
+      animation-delay: -1.0s;
+    }
+    @-webkit-keyframes sk-bounce {
+      0%,
+      100% {
+        -webkit-transform: scale(0.0)
+      }
+      50% {
+        -webkit-transform: scale(1.0)
+      }
+    }
+    @keyframes sk-bounce {
+      0%,
+      100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+      }
+      50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+      }
+    }
+
   </style>
 
 
@@ -74,7 +118,7 @@
   <link rel="stylesheet" href="assets/styles/css/fontawesome.css">
   <link rel="stylesheet" href="assets/styles/css/fontawesome-all.css">
 
-
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -92,7 +136,11 @@
 <cpt-psp-root>
   <div class="loading loading-Pulse">
     <div style="width: 100%; position: relative;">
-      <img class="align-absolute" width="239" src="assets/imgs/loading_splash--Pulse__logo.png">
+      <img class="align-absolute" width="300" src="assets/imgs/loading_splash--Pulse__logo.png">
+    </div>
+    <div class="spinner">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
     </div>
   </div>
 </cpt-psp-root>

@@ -10,6 +10,8 @@ import {Observable} from 'rxjs/Observable';
 import {SignalService} from '../../../services/signal.service';
 
 import * as moment from 'moment';
+import {ReportService} from '../../../services/report.service';
+import {MatSnackBar} from '@angular/material';
 
 declare var gtag: Function;
 
@@ -17,10 +19,9 @@ declare var gtag: Function;
   selector: 'cpt-my-stocks',
   template: `
     <div class="container-fluid">
-
       <div class="row">
         <div class="col-12 col-md-4 col-xl-3 component--mystocks">
-          <cpt-my-stocks-list [ngBusy]="loading" (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
+          <cpt-my-stocks-list (listChanged)="ngOnInit()" (addStockClicked)="addStock($event)"
                               (removeStockClicked)="removeStock($event)"
                               (updateData)="updateData()"
                               (stockClicked)="selectStock($event)"
@@ -33,7 +34,8 @@ declare var gtag: Function;
                                 [listId]="listId" (addStockClicked)="addStock($event)"
                                 (removeStockClicked)="removeStock($event)" (closeClicked)="closeReport()"
                                 [show]="!!selectedStock || desktopView"
-                                [stock]="selectedStock">
+                                [stock]="selectedStock"
+                                [stockState]="selectedStockSymbolData">
           </cpt-psp-stock-report>
         </div>
 
@@ -61,18 +63,22 @@ export class MyStocksComponent implements OnInit, OnDestroy {
 
   listId: string;
   selectedStock: string | boolean;
+  selectedStockSymbolData: ListSymbolObj;
   desktopView: boolean;
   userStocks: ListSymbolObj[];
   powerBar: string;
   loading: Subscription;
+  selectedStockSub: Subscription;
   allUserLists: object[];
   currentList: string;
   recentlyViewed: object[] = [];
 
   constructor(private authService: AuthService,
               private healthCheck: HealthCheckService,
+              private reportService: ReportService,
               private ideasService: IdeasService,
               private route: ActivatedRoute,
+              public snackBar: MatSnackBar,
               private router: Router,
               private signalService: SignalService) {
     const mobWidth = (window.screen.width);
@@ -81,7 +87,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loading = this.authService.currentUser$
+    this.authService.currentUser$
       .map(usr => this._uid = usr['UID'])
       .do(() => this.currentList = this.healthCheck.currentList)
       .take(1)
@@ -108,27 +114,21 @@ export class MyStocksComponent implements OnInit, OnDestroy {
         this.healthCheck.setPortfolioStatus(calc[Object.keys(calc)[0]]);
       });
 
-    Observable.interval(30 * 1000)
-      .takeUntil(this._ngUnsubscribe)
-      .subscribe(res => this.updateData());
-
     this.route.params
       .takeUntil(this._ngUnsubscribe)
-      .subscribe(params => {
-          if (params.symbol) {
-            this.selectedStock = params.symbol.slice();
-          }
+      .debounceTime(500)
+      .switchMap(params => {
+        if (params.symbol) {
+          if (this.selectedStockSub) this.selectedStockSub.unsubscribe();
+          this.selectedStock = params.symbol.slice();
+          this.reportService.selectedSymbol = params.symbol;
+          this.createSymbolDataRx(params.symbol);
+          Observable.interval(30 * 1000)
+            .takeUntil(this._ngUnsubscribe)
+            .subscribe(res => this.updateData());
         }
-      );
-
-    // TODO: Uncomment for recently viewed functionality
-    const recentlyViewedString = localStorage.getItem('recentlyViewed');
-    if (recentlyViewedString) {
-      const viewed = JSON.parse(recentlyViewedString).symbols;
-      Observable.from(viewed)
-        .flatMap(ticker => this.ideasService.getStockCardData(ticker as string))
-        .subscribe(res => this.recentlyViewed.push(res));
-    }
+        return Observable.empty();
+      }).subscribe();
   }
 
   ngOnDestroy() {
@@ -140,19 +140,26 @@ export class MyStocksComponent implements OnInit, OnDestroy {
     this.healthCheck.getListSymbols(this.listId, this._uid)
       .filter(x => x != undefined)
       .take(1)
-      .subscribe(res => {
+      .switchMap(res => {
         this.userStocks = res['symbols'];
+        if (this.resultInUserList(this.userStocks, this.selectedStock as string)) {
+          this.selectedStockSymbolData = this.userStocks.filter(x => x['symbol'] == this.selectedStock)[0];
+        }
         this.healthCheck.setUserStocks(res['symbols']);
         this.powerBar = res['PowerBar'];
-        // this.recentlyViewed = [];
-        // const recentlyViewedString = localStorage.getItem('recentlyViewed');
-        // if (recentlyViewedString) {
-        //   const viewed = JSON.parse(recentlyViewedString).symbols;
-        //   Observable.from(viewed)
-        //     .flatMap(ticker => this.ideasService.getStockCardData(ticker as string))
-        //     .subscribe(res => this.recentlyViewed.push(res));
-        // }
+        return Observable.empty();
+      }).subscribe()
+  }
+
+  createSymbolDataRx(stock: string) {
+    this.selectedStockSub = Observable.timer(0, 30 * 1000).switchMap(() => {
+      return this.reportService.getSymbolData(stock);
+    })
+      .filter(x => x != undefined)
+      .map(res => {
+        this.selectedStockSymbolData = res['metaInfo'][0];
       })
+      .subscribe()
   }
 
   addStock(ticker: string) {
@@ -168,6 +175,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   removeStock(ticker: string) {
     this.ideasService.deleteSymbolFromList(this.listId, ticker)
       .take(1)
+      .finally(() => this.openSnackBar(ticker))
       .subscribe(res => this.updateData());
     gtag('event', 'remove_stock_clicked', {
       'event_category': 'engagement',
@@ -176,6 +184,7 @@ export class MyStocksComponent implements OnInit, OnDestroy {
   }
 
   selectStock(ticker: string) {
+    this.updateData();
     this.gotoReport(ticker);
     gtag('event', 'stock_clicked', {
       'event_category': 'engagement',
@@ -193,6 +202,21 @@ export class MyStocksComponent implements OnInit, OnDestroy {
 
   appendPGRImage(pgr, rawPgr) {
     return this.signalService.appendPGRImage(pgr, rawPgr);
+  }
+
+  resultInUserList(arr: ListSymbolObj[], ticker: string): boolean {
+    if (arr) {
+      return arr.filter(x => x['symbol'] == ticker).length > 0;
+    }
+  }
+
+  openSnackBar(ticker: string) {
+    let snackBarRef = this.snackBar.open(ticker + ' removed', 'Undo', {
+      duration: 3000
+    });
+    snackBarRef.onAction().subscribe(() => {
+      this.addStock(ticker);
+    });
   }
 
 }

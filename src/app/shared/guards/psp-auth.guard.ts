@@ -1,6 +1,5 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {Subject} from 'rxjs/Subject';
 import {AuthService} from '../../services/auth.service';
 import {UtilService} from '../../services/util.service';
 import {AuthGuard} from './auth.guard';
@@ -17,7 +16,7 @@ export class PspAuthGuard extends AuthGuard implements CanActivate, OnDestroy {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (!this.authService.isLoggedIn()) {
+    if (this.authService.isLoggedIn() != true) {
       this.authService.login()
         .takeUntil(this.ngUnsubscribe)
         .do(user => this.authService.setCurrentUser(user))

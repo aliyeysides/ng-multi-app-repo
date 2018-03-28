@@ -16,19 +16,24 @@ declare var gtag: Function;
     'section--overview--red': calculations?.avgPercentageChange < 0}">
 
       <div class="row no-gutters overview__summary justify-content-center">
-        <div class="col-12 col-md-4 col-xl-3 align-self-center">
+        <div class="col-12 col-md-4 align-self-center">
           <p class="timespan">LAST WEEK</p>
-          <div class="btn-group" dropdown [autoClose]="true">
-            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+          <div class="btn-group">
+
+            <button class="btn btn-primary dropdown-toggle" mat-icon-button [matMenuTriggerFor]="appMenu">
               {{ selectedListName }}
             </button>
-            <ul *dropdownMenu class="dropdown-menu" role="menu">
-              <li (click)="selectList(list)" *ngFor="let list of allUserLists" role="menuitem"><a
-                class="dropdown-item">{{ list['name'] }}</a></li>
-            </ul>
+
+            <mat-menu #appMenu="matMenu">
+              <button mat-menu-item class="label">My Current Lists</button>
+              <button mat-menu-item (click)="selectList(list)" *ngFor="let list of allUserLists" role="menuitem">
+                <a class="dropdown-item">{{ list['name'] }}</a>
+              </button>
+            </mat-menu>
+            
           </div>
         </div>
-        <div class="col-12 col-md-4 col-xl-3 align-self-center">
+        <div class="col-12 col-md-4 align-self-center">
           <p class="data">
             <span class="icon__arrow">
               <img *ngIf="isPortUp()" src="./assets/imgs/icon__thin-arrow--up.svg">
@@ -39,10 +44,10 @@ declare var gtag: Function;
             }}<sub>%</sub>
           </p>
         </div>
-        <div class="col-12 col-md-4 col-xl-3 align-self-center text-md-left" style="padding:0 10px;">
-          <p>compared to the <span class="market">S&amp;P 500</span> ---
-            <span class="market market--change"> 
-              <span *ngIf="isSPYUp()">Up +</span>
+        <div class="col-12 col-md-4 align-self-center text-md-left" style="padding:0 10px;">
+          <p>While the <button matTooltip="Download S&P 500 Health Check PDF" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" (click)="getPHCReportforListId('44493')" class="market">S&amp;P 500</button> was 
+            <span class="market--change"> 
+              <span *ngIf="isSPYUp()">Up </span>
               <span *ngIf="!isSPYUp()">Down </span>{{ calculations?.SPYPercentageChange | number:'.2-2' }}%
             </span>
             over the same timespan.
@@ -51,24 +56,23 @@ declare var gtag: Function;
       </div>
 
       <div class="row justify-content-center overview__powerbar">
-        <div tooltip="Download Report PDF" placement="auto" class="button--pdf">
-          <button class="align-absolute" (click)="getPHCReportforListId()"><i class="fal fa-file-pdf"
-                                                                              aria-hidden="true"></i></button>
+        <div matTooltip="Download Report PDF" [matTooltipPosition]="'left'" [matTooltipShowDelay]="500" class="button--pdf">
+          <button mat-icon-button class="align-absolute" (click)="getPHCReportforListId(listId)"><i class="fas fa-file-pdf"></i></button>
         </div>
-        <div class="col-12 col-md-8 col-xl-6 powerbar flex-md-last">
-          <div (click)="setToggleOptions('Bulls')"
+        <div class="col-12 col-md-6 col-xl-6 powerbar flex-md-last" id="powerbar">
+          <button mat-raised-button (click)="setToggleOptions('Bulls')"
                [ngClass]="{'bullish--more':prognosisData?.BullishSymbolsCount>prognosisData?.BearishSymbolsCount, 'bullish--less':prognosisData?.BullishSymbolsCount<prognosisData?.BearishSymbolsCount,'bullish--same':prognosisData?.BullishSymbolsCount==prognosisData?.BearishSymbolsCount}">
             <p>{{ prognosisData?.BullishSymbolsCount }}</p>
-          </div>
-          <div (click)="setToggleOptions('Neutral')" class="neutral">
+          </button>
+          <button mat-raised-button (click)="setToggleOptions('Neutral')" class="neutral">
             <p>{{ prognosisData?.NeutralSymbolsCount }}</p>
-          </div>
-          <div (click)="setToggleOptions('Bears')"
+          </button>
+          <button mat-raised-button (click)="setToggleOptions('Bears')"
                [ngClass]="{'bearish--more':prognosisData?.BearishSymbolsCount>prognosisData?.BullishSymbolsCount, 'bearish--less':prognosisData?.BearishSymbolsCount<prognosisData?.BullishSymbolsCount,'bearish--same':prognosisData?.BearishSymbolsCount==prognosisData?.BullishSymbolsCount}">
             <p>{{ prognosisData?.BearishSymbolsCount }}</p>
-          </div>
+          </button>
         </div>
-        <div class="col-12 col-md-4 col-xl-2 align-self-center">
+        <div class="col-12 col-md-3 col-xl-2 align-self-center">
           <ng-template #toolTipTemp>
             <div [innerHtml]="link"></div>
           </ng-template>
@@ -91,7 +95,7 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   private _lists: BehaviorSubject<object[]> = new BehaviorSubject<object[]>([] as object[]);
 
   toolTipText: string = "The Chaikin Power Bar is your list's report card. It gives the ratio of Bullish stocks (likely to outperform the market) to Bearish stocks (unlikely to perform in the short to medium term) as rated by the ";
-  link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide/">Chaikin Power Rating.</a>`;
+  link: string = `${this.toolTipText}<a target="_blank" href="https://www.chaikinanalytics.com/chaikin-powerpulse-user-guide#the-workspace-2">Chaikin Power Rating.</a>`;
   allUserLists: object[];
   selectedListName: string;
 
@@ -172,7 +176,6 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
   }
 
   setToggleOptions(option: string) {
-    console.log('option', option);
     this.healthCheck.setToggleOptions(option);
     gtag('event', 'power_bar_filter_clicked', {
       'event_category': 'engagement',
@@ -189,15 +192,16 @@ export class PortfolioOverviewComponent implements OnInit, OnDestroy {
     });
   }
 
-  getPHCReportforListId() {
+  getPHCReportforListId(listId: string) {
     this.authService.currentUser$
       .filter(x => x != undefined)
       .take(1)
       .subscribe(usr => {
-        window.open(`${this._apiHostName}/CPTRestSecure/app/phc/getPHCReportForListID?listID=${this.listId}&uid=${usr['UID']}&response=file&additionalSymbols=SPY&phcVersion=1.3&_=1513675654286`, "_blank");
+        window.open(`${this._apiHostName}/CPTRestSecure/app/phc/getPHCReportForListID?listID=${listId}&uid=${usr['UID']}&response=file&additionalSymbols=SPY&phcVersion=1.3&_=1513675654286`, "_blank");
       });
     gtag('event', 'phc_pdf_clicked', {
       'event_category': 'engagement'
     });
   }
+
 }

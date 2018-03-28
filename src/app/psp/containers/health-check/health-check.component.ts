@@ -3,6 +3,9 @@ import {HealthCheckService} from '../../../services/health-check.service';
 import {AuthService} from '../../../services/auth.service';
 
 import * as moment from 'moment';
+
+declare var gtag: Function;
+
 import {
   EarningsAnalystRevisions,
   EarningsReportSurprises, ExpectedEarningsReports, ListSymbolObj, PGRChanges, PHCGridData, PortfolioStatus,
@@ -13,9 +16,10 @@ import {Observable} from 'rxjs/Observable';
 import {MarketsSummaryService} from '../../../services/markets-summary.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
-import {ReportService} from '../../../services/report.service';
-import {UtilService} from '../../../services/util.service';
-import {SignalService} from '../../../services/signal.service';
+import {IdeasService} from '../../../services/ideas.service';
+import {MatSnackBar} from '@angular/material';
+import {SymbolSearchService} from '../../../services/symbol-search.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'cpt-health-check',
@@ -24,6 +28,13 @@ import {SignalService} from '../../../services/signal.service';
     <div [ngBusy]="loading" class="container-fluid component component--healthcheck">
       <div class="row justify-content-center">
 
+        <!-- ADD BUTTON -->
+        <div (click)="openSearch();$event.stopPropagation()" matTooltip="Add a stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" id="add-stock" class="fixed-button hidden-sm-down">
+          <button mat-icon-button class="button--add" for="focus-input">
+            <i class="fas fa-plus align-absolute"></i>
+          </button>
+        </div>
+
         <!-- HEALTH-CHECK - Intro -->
         <cpt-psp-portfolio-overview [listId]="listId" (listChanged)="listChanged()" [lists]="allUserLists"
                                     [calc]="calculations" [data]="prognosisData"
@@ -31,39 +42,27 @@ import {SignalService} from '../../../services/signal.service';
 
         <!-- HEALTH-CHECK - Stock Movements -->
         <cpt-psp-stock-movements [calc]="calculations" [weeklyStocks]="stocksStatus"
-                                 [dailyStocks]="dailySymbolList" class="col-12 col-lg-10"></cpt-psp-stock-movements>
+                                 (removeStockClicked)="removeStock($event)"
+                                 [dailyStocks]="dailySymbolList" class="col-12 col-lg-10 HC-panel__padding"></cpt-psp-stock-movements>
 
         <!-- HEALTH-CHECK - Ratings Changes -->
-        <cpt-psp-rating-changes [alerts]="pgrChanges" class="col-12 col-lg-10"></cpt-psp-rating-changes>
+        <cpt-psp-rating-changes [alerts]="pgrChanges" class="col-12 col-lg-10 HC-panel__padding"></cpt-psp-rating-changes>
 
         <!-- HEALTH-CHECK - Earnings Reports -->
         <cpt-psp-earnings-report [surprises]="earningsSurprise"
                                  [revisions]="analystRevisions"
-                                 [expected]="expectedEarnings" class="col-12 col-lg-10"></cpt-psp-earnings-report>
+                                 [expected]="expectedEarnings" class="col-12 col-lg-10 HC-panel__padding"></cpt-psp-earnings-report>
 
         <!-- HEALTH-CHECK - Power Grid -->
-        <cpt-psp-power-grid [data]="pgrGridData" class="col-12 col-lg-10"></cpt-psp-power-grid>
+        <cpt-psp-power-grid [data]="pgrGridData" class="col-12 col-lg-10 HC-panel__padding"></cpt-psp-power-grid>
 
         <!-- HEALTH-CHECK - DISCLAIMER -->
         <div class="col-12 col-lg-10" id="HC--Disclaimer">
           <div class="row justify-content-center">
-            <div class="col-12">
-              <div class="divider__long"
-                   [ngClass]="{'divider__long--green': calculations?.avgPercentageChange>0, 'divider__long--red': calculations?.avgPercentageChange<0}">
-              </div>
-            </div>
 
-            <div class="col-12 col-lg-10">
-              <h4>Disclaimer:</h4>
-              <p class="disclaimer">Chaikin Analytics (CA) is not registered as a securities Broker/Dealer or Investment
-                Advisor with either the U.S. Securities and Exchange Commission or with any state securities regulatory
-                authority. The information presented in our reports does not represent a recommendation to buy or sell
-                stocks or any financial instrument nor is it intended as an endorsement of any security or investment.
-                The information in this report does not take into account an individual's specific financial situation.
-                The user bears complete responsibility for their own investment research and should consult with their
-                financial advisor before making buy/sell decisions. For more information, see <a target="_blank"
-                                                                                                 href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a>
-                <a target="_blank" href="http://www.chaikinanalytics.com/attributions/">See Attributions &raquo;</a></p>
+            <div class="col-12 col-xl-10">
+              <h4 class="text-left">Disclaimer:</h4>
+              <p class="disclaimer">Chaikin Analytics (CA) is not registered as a securities Broker/Dealer or Investment Advisor with either the U.S. Securities and Exchange Commission or with any state securities regulatory authority. The information presented in our reports does not represent a recommendation to buy or sell stocks or any financial instrument nor is it intended as an endorsement of any security or investment. The information in this report does not take into account an individual's specific financial situation. The user bears complete responsibility for their own investment research and should consult with their financial advisor before making buy/sell decisions. For more information, see <a target="_blank" href="http://www.chaikinanalytics.com/disclaimer/">disclaimer.</a> <br><a target="_blank" href="http://www.chaikinanalytics.com/attributions/">See Attributions &raquo;</a></p>
             </div>
           </div>
         </div>
@@ -91,7 +90,11 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
   public allUserLists: object[];
   public currentList: string;
 
+
   constructor(private authService: AuthService,
+              public snackBar: MatSnackBar,
+              private symbolSearchService: SymbolSearchService,
+              private ideasService: IdeasService,
               private healthCheck: HealthCheckService,
               private marketsSummary: MarketsSummaryService) {
   }
@@ -209,7 +212,7 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
 
   loadDailyData() {
     const lastWeekStart = moment().subtract(1, 'weeks').day(-2).format('YYYY-MM-DD'),
-    lastWeekEnd = moment(lastWeekStart).add(7, 'days').format('YYYY-MM-DD');
+      lastWeekEnd = moment(lastWeekStart).add(7, 'days').format('YYYY-MM-DD');
     Observable.timer(0, 30 * 1000)
       .switchMap(() => {
         return Observable.combineLatest(
@@ -235,6 +238,41 @@ export class HealthCheckComponent implements OnInit, OnDestroy {
         }));
         this.dailySymbolList = this.dailySymbolList.slice(0); // hack to bypass dirty checking for non-primitives
       });
+  }
+
+  addStock(ticker: string) {
+    this.ideasService.addStockIntoList(this.listId.toString(), ticker)
+      .take(1)
+      .subscribe(res => this.updateData());
+    gtag('event', 'add_stock_clicked', {
+      'event_category': 'engagement',
+      'event_label': ticker
+    });
+  }
+
+  removeStock(ticker: string) {
+    this.ideasService.deleteSymbolFromList(this.listId, ticker)
+      .take(1)
+      .finally(() => this.openSnackBar(ticker))
+      .subscribe(res => this.updateData());
+
+    gtag('event', 'remove_stock_clicked', {
+      'event_category': 'engagement',
+      'event_label': ticker
+    });
+  }
+
+  openSnackBar(ticker: string) {
+    let snackBarRef = this.snackBar.open(ticker + ' removed', 'Undo', {
+      duration: 3000
+    });
+    snackBarRef.onAction().subscribe(() => {
+      this.addStock(ticker);
+    });
+  }
+
+  openSearch() {
+    this.symbolSearchService.setSearchOpen(true);
   }
 
 }

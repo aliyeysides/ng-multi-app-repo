@@ -14,7 +14,7 @@ import {OrderByPipe} from '../../../shared/pipes/order-by.pipe';
       <li (click)="closeNav($event)" *ngFor="let route of routes"
           [ngClass]="{active: currentRoute?.slice(0,10) === route.link.slice(0,10) }"
           routerLink="{{ route.link }}">
-        <a class="nav--toplevel"><i class="{{ route.klass }}" aria-hidden="true"></i> &nbsp;{{ route.label }}</a>
+        <a mat-button class="nav--toplevel"><i class="{{ route.klass }}" aria-hidden="true"></i> &nbsp;{{ route.label }}</a>
       </li>
     </ul>
   `,
@@ -39,7 +39,7 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   public routes: object[] = [
     {link: '/health-check', klass: 'fal fa-heartbeat', label: 'Health Check'},
     {link: '/stock-analysis', klass: 'fal fa-tachometer', label: 'Stock Analysis'},
-    {link: '/market-insights', klass: 'fab fa-medapps', label: 'Market Insights'},
+    {link: '/market-insights', klass: 'fal fa-lightbulb', label: 'Market Insights'},
   ];
 
 
@@ -63,7 +63,8 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
       .filter(x => x != undefined)
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
-        res.length ? this.firstUserStock = this.orderByPipe.transform(res, 'PGR', false)[0].symbol : this.firstUserStock = '';
+        const stocks = res.filter(x => x['symbol'] != 'S&P 500');
+        res.length ? this.firstUserStock = this.orderByPipe.transform(stocks, 'PGR', false)[0].symbol : this.firstUserStock = '';
         this.updateRoutes();
       });
   }
@@ -76,21 +77,22 @@ export class PspNavigatorComponent implements OnInit, OnDestroy {
   updateRoutes() {
     if (this.reportOpen) {
       this.routes = [
-        {link: '/health-check', klass: 'fal fa-heartbeat', label: 'Health Check'},
-        {link: '/stock-analysis/' + this.firstUserStock, klass: 'fal fa-tachometer', label: 'Stock Analysis'},
-        {link: '/market-insights', klass: 'fab fa-medapps', label: 'Market Insights'},
+        {link: '/health-check', klass: 'far fa-heartbeat', label: 'Health Check'},
+        {link: '/stock-analysis/' + this.firstUserStock, klass: 'far fa-tachometer', label: 'Stock Analysis'},
+        {link: '/market-insights', klass: 'fal fa-lightbulb', label: 'Market Insights'},
       ];
       return;
     }
     this.routes = [
       {link: '/health-check', klass: 'fal fa-heartbeat', label: 'Health Check'},
       {link: '/stock-analysis', klass: 'fal fa-tachometer', label: 'Stock Analysis'},
-      {link: '/market-insights', klass: 'fab fa-medapps', label: 'Market Insights'},
+      {link: '/market-insights', klass: 'fal fa-lightbulb', label: 'Market Insights'},
     ];
   }
 
   closeNav(e: Event) {
     this.routeClicked.emit();
+    window.scrollTo({behavior: "smooth", top: 0});
     e.stopPropagation();
   }
 }

@@ -1,5 +1,5 @@
 import {
-  AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild,
+  AfterContentInit, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild, Directive,
 } from '@angular/core';
 
 import {FormControl} from '@angular/forms';
@@ -9,11 +9,17 @@ import {SymbolSearchService} from '../../../services/symbol-search.service';
 import {IdeasService} from '../../../services/ideas.service';
 import {AuthService} from '../../../services/auth.service';
 import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
 
 declare let gtag: Function;
 
+@Directive({
+  selector: '[cptBaseSymbolSearchComponent]'
+})
 export class BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
   @Input('placeholder') placeholder: string;
+  @Input('defaultFocus') focus: boolean;
+  @Input('userStocks') userStocks: Array<string>;
   @ViewChild('search') search: ElementRef;
   @Output('focused') focused: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -22,7 +28,6 @@ export class BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
 
   public symbolSearchForm: FormControl;
   public searchResults: Array<any>;
-  public focus: boolean = false;
   public loading: Subscription;
 
   constructor(public authService: AuthService,
@@ -37,11 +42,17 @@ export class BaseSymbolSearchComponent implements AfterContentInit, OnDestroy {
   }
 
   ngAfterContentInit() {
-    this.search.nativeElement.focus();
+    if (this.focus) this.search.nativeElement.focus();
     this.searchResults = [];
     this.symbolSearchForm.valueChanges
       .debounceTime(500)
-      .switchMap(val => this.symbolSearchService.symbolLookup(val))
+      .switchMap(val => {
+        if (val === '') {
+          this.searchResults = [];
+          return Observable.of([]);
+        }
+        return this.symbolSearchService.symbolLookup(val)
+      })
       .takeUntil(this.ngUnsubscribe)
       .subscribe(val => {
         this.searchResults = val;

@@ -1,13 +1,15 @@
-import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {BaseSettingsMenuComponent} from '../../../shared/components/menus/settings-menu.component';
+import {BearOnboardingComponent} from '../bear-onboarding/bear-onboarding.component';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 declare let gtag: Function;
 
 @Component({
   selector: 'cpt-bear-settings-menu',
   template: `
-    <a class="quick-link">
+    <button tooltip="Settings" placement="bottom"  class="quick-link">
       <svg class="align-absolute" width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <defs></defs>
@@ -17,7 +19,7 @@ declare let gtag: Function;
             id="icon"></path>
         </g>
       </svg>
-    </a>
+    </button>
     <div #nav id="settingsSideNav" class="sidenav">
 
       <div class="right-sidebar__header">
@@ -51,9 +53,21 @@ declare let gtag: Function;
   styleUrls: ['./bear-settings-menu.component.scss']
 })
 export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
-  @ViewChild('nav') nav: ElementRef;
+  @ViewChild('nav') nav: HTMLElement;
+
+  bsModalRef: BsModalRef;
 
   public items: object[] = [
+    {
+      title: 'Getting Started',
+      icon: 'fa fa-book',
+      href: '#',
+      target: '',
+      fn: () => {
+        gtag('event', 'quick_start_clicked');
+        this.startOnboarding();
+      }
+    },
     {
       title: 'User guide',
       icon: 'fa fa-book',
@@ -84,7 +98,7 @@ export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
     {
       title: 'Upgrade',
       icon: 'fa fa-upload',
-      href: 'https://mh214.infusionsoft.com/app/form/bear_upgrade-form',
+      href: 'https://masteringthebear.com/upgrade',
       target: '_blank',
       fn: () => {
         gtag('event', 'upgrade_clicked');
@@ -117,8 +131,15 @@ export class BearSettingsMenuComponent extends BaseSettingsMenuComponent {
     }
   ];
 
-  constructor(public el: ElementRef, public authService: AuthService) {
+  constructor(public el: ElementRef,
+              public authService: AuthService,
+              private modalService: BsModalService) {
     super(el, authService);
+  }
+
+  startOnboarding() {
+    this.bsModalRef = this.modalService.show(BearOnboardingComponent);
+    this.toggleNav(this.nav, '0', false);
   }
 
 }

@@ -1,15 +1,19 @@
-import {BearBrandModule} from './bear-brand/index';
-import {BearNavigatorModule} from './bear-navigator/index';
-import {MarketSummaryModule} from './market-summary/index';
-import {BearSearchModule} from './bear-search/index';
-import {BearAlertsModule} from './bear-alerts/index';
-import {BearSettingsMenuModule} from './bear-settings-menu/index';
+import {BearBrandModule} from './bear-brand';
+import {BearNavigatorModule} from './bear-navigator';
+import {BearMarketSummaryModule} from './market-summary';
+import {BearSearchModule} from './bear-search';
+import {BearAlertsModule} from './bear-alerts';
+import {BearSettingsMenuModule} from './bear-settings-menu';
+import {BearOnboardingModule} from './bear-onboarding';
+import {BearSymbolSearchModule} from './bear-search/bear-symbol-search';
 
 export const APP_CORE_MODULES = [
   BearBrandModule,
   BearNavigatorModule,
-  MarketSummaryModule,
+  BearMarketSummaryModule,
   BearSearchModule,
+  BearSymbolSearchModule,
   BearAlertsModule,
-  BearSettingsMenuModule
+  BearSettingsMenuModule,
+  BearOnboardingModule
 ];

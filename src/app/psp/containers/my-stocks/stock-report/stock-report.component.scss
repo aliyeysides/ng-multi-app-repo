@@ -5,32 +5,62 @@
 /*           CONTAINER -- STOCK VIEW PAGE              */
 /*                                                     */
 
-
+.component--stockview.bullish, .component--stockview.bearish, .component--stockview.neutral, .component--stockview.none {
+    background: $background--verylight !important;
+}
 .component--stockview {
 	position: absolute;
 	width: 100%;
-	top:47px;
+	top:90px;
 	left:0;
 	display: none;
+	background: $background--verylight;
 	color: $font-color;
+	box-shadow: inset 0px 1px 2px 0px rgba(0,0,0,0.2);
+
+	@media screen AND (max-width:991px) {
+		top:45px;
+	}
 
 	.divider__long {
-		margin:25px auto;
-		width: 60%;
+		margin:20px auto;
+		width: 95%;
 	}
 	.divider__full {
 		margin:25px auto 45px;
-		width: 75%;
-	}
-	.divider__long--red,
-	.divider__long--green,
-	.divider__long--blue,
-	.divider__long--yellow {
-		margin:25px auto;
 		width: 95%;
-		opacity: 0.5;
+	}
+
+	.panel {
+		padding: 0px 10px 10px;
+		overflow: hidden;
+		margin: 0px 0 10px;
+
+		.tab__container {
+			z-index: 100;
+			height: 16px;
+			padding: 0px;
+
+			.tab--slide {
+			  width: 21%;
+			  height: 5px;
+			  background-color: $background--light;
+			  border-radius: 10px;
+			  opacity:0.5;
+			  margin: 5px 40% 0;
+			  cursor: pointer;
+			  position: fixed;
+			  transition:.4s;
+			}
+		}
+
+		@media screen AND (max-width:575px) {
+			margin-bottom: 10px;
+			border-radius:0;
+		}
 	}
 }
+
 
 .component--stockview.open {
 	display:block;
@@ -44,24 +74,41 @@
 
 .stockview__header {
 	width: 100%;
-	background-color: #ffffff;
+	background-color: $background--verylight;
 
 	.header__button {
 		position: absolute;
-		width: 32px;
+		width: 30px;
 		height: 58px;
 		display: flex;
 		z-index: 10;
 		cursor: pointer;
+		text-align: center;
+		transition-property:color opacity;
+		transition-duration: 0.33s;
+		transition-timing-function: ease;
 
-		img {
-			width: 32px;
-			height: 32px;
+		i {
+			font-size: 27px;
+			line-height: 58px;
+			transition-property:color opacity;
+			transition-duration: 0.33s;
+			transition-timing-function: ease;
 		}
 	}
 
 	.header__button--left {
 		left:2%;
+		opacity:0.6;
+		
+		img {
+			width: 26px;
+			height: 26px;
+		}
+
+		&:hover {
+			opacity:1;
+		}
 
 		@media screen AND (min-width:768px) {
 			display:none;
@@ -70,103 +117,154 @@
 
 	.header__button--right {
 		right:2%;
-		opacity:0.75;
+		text-align: center;
+
+		i {
+			opacity:0.6;
+		}
+
+		.fa-plus-circle {
+			color: $link-blue;
+			opacity: 1;
+
+	        &:active {
+	        	color: #207cca;
+	        }
+	    }
 
 		@media screen AND (min-width:768px) {
-			left:2%;
+			left:1.25%;
 		}
 
 		&:hover {
-			opacity:1;
+
+			i {
+				opacity:1;
+				color: $link-blue;
+			}
+
+			.fa-plus-circle {
+				opacity:1;
+				color: $link-blue;
+			}
 		}
 	}
 
 	.header__button--pdf {
 		display:none;
+		opacity: 0.2;
+		z-index: 20;
 
-		button {
-			background: transparent;
-			cursor: pointer;
+		&:hover {
+			opacity:1;
 
 			i {
-				font-size: 33px;
-				color: #ffffff;
+				color: $link-blue;
 			}
 		}
 
-		@media screen AND (min-width:1023px) {
+		@media screen AND (min-width:1024px) {
 			right:1.5%;
 			display: block;
 		}
 	}
 
-	.header__button--anchors {
-		width: 38%;
-		padding-top:8px;
-		right: 3%;
-
-		.anchor {
-			display: inline-block;
-			background-color: rgba(255,255,255,0.25);
-			border-radius: 30px;
-			width: 40px;
-			height: 40px;
-			color:#ffffff;
-			margin: 0 4%;
-			font-size: 18px;
-			line-height: 38px;
-			border: $line--white;
-
-		}
-		@media screen AND (max-width:1023px) {
-			right: 0;
-		}
-
-		@media screen AND (max-width:939px) {
-			display: none;
-		}
-	}
-
 	.header__stock {
 		width: 100%;
-		height: 60px;
+		height: 58px;
 		position: absolute;
 		cursor: default;
+		overflow:hidden;
+		padding-top: 3px;
 
-		.ticker {
-			text-align: left;
-			line-height: 64px;
-			color:#ffffff;
-			font-weight: 700;
-			font-size: 36px;
-			float: left;
-			margin: 0 4% 0 16%;
-
-			@media screen AND (min-width:768px) {
-				font-size: 40px;
-				margin: 0 5% 0 9%;
-			}
-
-			@media screen AND (min-width:1200px) {
-				font-size: 40px;
-				margin: 0 4% 0 7%;
-			}
+		@media screen AND (max-width: 320px) {
+			padding-top: 0px;
 		}
 
-		.company-name {
+		@media screen AND (min-width:321px) AND (max-width: 575px) {
+			padding-top: 2px;
+		}
+
+		.ticker {
+			display: block;
+			height: 100%;
 			text-align: left;
-			line-height: 64px;
-			color:#ffffff;
+			line-height: 58px;
+			color:$font-color;
+			font-size: 36px;
 			float: left;
-			font-size: 25px;
-			cursor:pointer;
+			margin: 0 4% 0 13%;
+
+			@media screen AND (max-width:320px) {
+				font-size: 32px;
+			}
 
 			@media screen AND (min-width:768px) {
+				font-size: 40px;
+				margin: 0 3% 0 7%;
+			}
+			@media screen AND (min-width:1280px) {
+				margin: 0 3% 0 6%;
+			}
+
+			img {
+		        width: 52px;
+		        display: inline-block;
+		        vertical-align: baseline;
+
+			    @media screen AND (max-width:320px) {
+					width: 40px;
+				}
+
+			    @media screen AND (min-width:321px) AND (max-width:767px) {
+			    	width: 45px;
+				}
+		    }
+		}
+
+		.more-ticker-info {
+			text-align: left;
+			line-height: 58px;
+			float: left;
+			font-size: 26px;
+			cursor:pointer;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			width: 35%;
+
+			@media screen AND (max-width:320px) {
+				width: 40%;
+				padding-right:40px;
+				text-align: right;
+				font-size: 30px;
+				line-height: 58px;
+				font-weight: 500;
+				float: right;
+			}
+
+			@media screen AND (min-width:321px) AND (max-width:575px) {
+				width: 40%;
+				padding-right:50px;
+				text-align: right;
+				font-size: 34px;
+				line-height: 58px;
+				font-weight: 500;
+				float: right;
+			}
+			@media screen AND (min-width:576px) {
+				color:$font-color;
+			}
+
+			@media screen AND (min-width:501px) AND (max-width:939px) {
+				width: 62%;
 				font-size: 30px;
 			}
 
 			@media screen AND (min-width:1200px) {
-				font-size: 38px;
+				font-size: 35px;
+				line-height: 54px;
+				width: 43%;
 			}
 		}
 	}
@@ -183,25 +281,31 @@
 
 
 .stockview__contents {
-	background-color: #ffffff;
-	border-radius: 10px 10px 0 0;
-	box-shadow: 0px -5px 19px rgba(0,0,0,0.15);
-	margin: 58px 0 0;
+	background-color: transparent;
+	margin: 56px auto 0;
 	height: 100vh;
-	overflow-y: auto;
+	width: 100%;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
 	overflow-x: hidden;
-	padding-bottom: 103px;
+	padding-bottom: 148px;
+	padding-left: 10px;
+	padding-right: 10px;
+	z-index: 15px;
+	transition: .4s;
 
-	@media screen AND (max-width: 375px) {
-		padding-bottom: 133px;
-	}
-
-	&::-webkit-scrollbar {
-	    display:none;
+	@media screen AND (max-width:575px) {
+		padding-bottom: 178px;
+		padding-left: 0px;
+		padding-right: 0px;
+		background-color: #f8f8f8;
+		box-shadow: 0px -1px 5px 0px rgba(0,0,0,0.04),
 	}
 }
 
-
+.stockview__contents.anchor-drop {
+	margin: 113px auto 0;
+}
 
 
 
@@ -265,6 +369,51 @@
 
 		i {
 			color:#ccc;
+		}
+	}
+	.pgr-section__icon.veryBullish {
+		background-color: rgba(36,163,0,0.05);
+		color:$veryBullish-green;
+		border: 3px solid $veryBullish-green;
+
+		i {
+			color:$veryBullish-green;
+		}
+	}
+	.pgr-section__icon.bullish {
+		background-color: rgba(106,204,0,0.05);
+		color:$bullish-green;
+		border: 3px solid $bullish-green;
+
+		i {
+			color:$bullish-green;
+		}
+	}
+	.pgr-section__icon.neutral {
+		background-color: rgba(245,166,35,0.05);
+		color:$neutral-yellow;
+		border: 3px solid $neutral-yellow;
+
+		i {
+			color:$neutral-yellow;
+		}
+	}
+	.pgr-section__icon.bearish {
+		background-color: rgba(253,69,0,0.05);
+		color:$bearish-red;
+		border: 3px solid $bearish-red;
+
+		i {
+			color:$bearish-red;
+		}
+	}
+	.pgr-section__icon.veryBearish {
+		background-color: rgba(208,2,27,0.05);
+		color:$veryBearish-red;
+		border: 3px solid $veryBearish-red;
+
+		i {
+			color:$veryBearish-red;
 		}
 	}
 
@@ -356,44 +505,48 @@
 
 .stockview__main-rating {
 	text-align: center;
-	margin: 10px 0 0px;
+	margin: 15px 0 0px;
 	cursor: default;
 
-	@media screen AND (min-width:768px) {
-		margin:20px 0 5px;
-	}
-
-	.label {
-		line-height: 1.4;
-
-		@media screen AND (min-width:1400px) {
-			display: inline-block;
-			margin-right:5%;
-			vertical-align: super;
-		}
-
-		i {
-			color: #1199ff;
-		}
+	@media screen AND (max-width:575px) {
+		margin: 5px 0 0px;
 	}
 
 	.rating {
-		margin-bottom:10px;
+		margin-bottom:5px;
 
-		@media screen AND (min-width:1400px) {
+		@media screen AND (min-width:1401px) {
 			display: inline-block;
+			margin-bottom: 10px;
 		}
 
 		span {
 			display: inline-block;
 			font-size: 36px;
 			font-weight: 700;
+			line-height: 1.2;
 		}
 		img {
 			display: inline-block;
 			width: 50px;
 			margin-right: 7px;
 			vertical-align: baseline;
+		}
+	}
+	.label {
+		line-height: 1.3;
+		margin-bottom:20px;
+
+		@media screen AND (min-width:1401px) {
+			display: inline-block;
+			margin:15px 0px 0 20px;
+			vertical-align: super;
+			float: left;
+			line-height: 1;
+		}
+
+		i {
+			color: $link-blue;
 		}
 	}
 }
@@ -433,6 +586,7 @@
 		line-height: 1.4;
 		margin-top:15px;
 		cursor: default;
+		white-space: nowrap;
 	}
 	.label {
 		line-height: 1.1;
@@ -448,24 +602,53 @@
 
 
 .stock-info--chart-toggle {
-	padding: 0 5px;
 
 	@media screen AND (max-width:991px) {
 		margin: 15px 0 0;
 	}
 
 	.chart-header__breakdown {
-		font-size: 22px;
+		font-size: 28px;
 		font-weight: 500;
 		line-height: 1.5;
-		margin-bottom: 25px;
+		margin-bottom: 13px;
 		cursor: default;
-		margin-top: 5px;
+		margin-top: 10px;
 
-		@media screen AND (min-width:992px) {
-			font-size: 28px;
-			margin-top: 20px;
+		@media screen AND (min-width:768px) {
+			margin-top: 15px;
 			margin-bottom: 20px;
+
+			i {
+				font-size: 24px;
+				vertical-align: baseline;
+			}
+		}
+
+		@media screen AND (min-width:1280px) {
+			font-size: 32px;
+			margin-top: 15px;
+			margin-bottom: 20px;
+
+			i {
+				font-size: 28px;
+				vertical-align: baseline;
+			}
+		}
+
+		.mobile-break {
+			@media screen and (max-width: 767px) {
+				display: block;
+				clear: both;
+				font-size: 36px;
+				line-height: 48px;
+				height: 46px;
+
+				i {
+					font-size: 30px;
+					vertical-align: baseline;
+				}
+			}
 		}
 	}
 
@@ -477,13 +660,14 @@
 		line-height: 1;
 		display: inline-block;
 		text-align: center;
-		padding:10px 10px 7px 10px;
+		padding:4px 13px 3px;
 		cursor: pointer;
+		white-space: nowrap;
+		border-radius: 30px;
 	}
 
 	.date-select.selected {
 		opacity: 1;
-		border-radius: 30px;
 		color:#ffffff;
 		cursor: default;
 	}
@@ -498,7 +682,7 @@
 		padding:0;
 
 		@media screen AND (min-width: 992px) {
-			padding:10px 20px 20px;
+			padding:0px 20px 20px;
 		}
 	}
 }
@@ -512,10 +696,7 @@
 
 
 .stock-info--stats {
-	padding:5px 0 35px;
-
-	.label {
-	}
+	padding:30px 0;
 
 	.data {
 		font-size: 24px;
@@ -534,11 +715,36 @@
 		sub {
 			font-size: 24px;
 			bottom:0;
+
+			@media screen AND (min-width: 1200px) {
+				font-size: 28px;
+			}
+		}
+
+		@media screen AND (min-width: 1200px) {
+			font-size: 48px;
+
+			sub {
+				font-size: 30px;
+			}
+		}
+
+		@media screen AND (max-width: 370px) {
+			font-size: 28px;
 		}
 	}
 
 	.stock-industry {
-		margin-bottom:30px;
+		margin-top: 5px;
+		margin-bottom:25px;
+
+		.data {
+			font-size: 32px;
+
+			@media screen AND (max-width: 1199px) {
+				font-size: 30px;
+			}
+		}
 	}
 
 	.divider__full {
@@ -554,13 +760,15 @@
 
 
 .stock-info--news {
-	padding:10px 0px 10px;
+	padding:30px 0;
 
 	h2 {
 		margin-bottom: 30px;
 	}
 
 	.chevron-slider {
+		cursor: pointer;
+
 		img {
 			width: 20px;
 			height: 40px;
@@ -574,10 +782,19 @@
 	    white-space: nowrap;
 	    overflow:hidden;
 
+    	@media screen AND (max-width:320px) {
+			max-width: 255px;
+			padding:0;
+		}
+
 		li {
 			display: inline-block;
 			width: 300px;
 			margin-right:50px;
+
+	    	@media screen AND (max-width:320px) {
+				width: 240px;
+			}
 
 			.headline__link {
 				max-height: 195px;
@@ -612,6 +829,14 @@
 				font-size: 15px;
 				font-weight: 600;
 				line-height: 35px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+
+				&:hover {
+					overflow: visible;
+					white-space: nowrap;
+					cursor: default;
+				}
 			}
 
 			.date {
@@ -621,7 +846,10 @@
 				font-style: italic;
 				line-height: 35px;
 				padding-right: 10px;
+				padding-left:0;
 				text-transform: uppercase;
+				white-space: nowrap;
+				cursor: default;
 			}
 
 			&:last-child {
@@ -724,6 +952,8 @@
 
 
 .stock-info--competition {
+	padding:30px 0;
+
 	.chart-list {
 
 		ul {
@@ -744,6 +974,8 @@
 
 
 .stock-info--profile {
+	padding:30px 0;
+
 	.copy-block {
 		margin-bottom:35px;
 	}
@@ -780,7 +1012,12 @@
 
 
 .stock-info--disclaimer {
-	padding-top:30px;
+	padding-top:0px;
+	color:$font-color;
+
+	@media screen AND (max-width: 575px) {
+		padding:0 10px;
+	}
 }
 
 
@@ -915,15 +1152,6 @@
 .component--stockview.bullish {
 	background: $gradient--pulse-green--a1;
 
-	.pgr-section__icon {
-		background-color: rgba(0,192,78,0.04);
-		border-color: $pulse-green;
-
-		i {
-			color:$pulse-green;
-		}
-	}
-
 	.divider__full {
 	 	background: $gradient--pulse-green;
 	 	opacity: 0.5;
@@ -963,19 +1191,17 @@
 			}
 		}
 	}
+	.stock-info--competition {
+		.col-headers {
+			p {
+				color:$pulse-green__shade2;
+			}
+		}
+	}
 }
 
 .component--stockview.bearish {
 	background: $gradient--pulse-red--a1;
-
-	.pgr-section__icon {
-		background-color: rgba(253,0,31,0.04);
-		border-color: $pulse-red;
-
-		i {
-			color:$pulse-red;
-		}
-	}
 
 	.divider__full {
 	  background: $gradient--pulse-red;
@@ -1016,19 +1242,18 @@
 			}
 		}
 	}
+	.stock-info--competition {
+		.col-headers {
+			p {
+				color:$pulse-red__shade2;
+			}
+		}
+	}
 }
 
 .component--stockview.neutral {
 	background-image: $gradient--pulse-yellow--a1;
 
-	.pgr-section__icon {
-		background-color: rgba(250,218,61,0.04);
-		border-color: $pulse-yellow;
-
-		i {
-			color:$pulse-yellow;
-		}
-	}
 	.divider__full {
 	  	background-image: $gradient--pulse-yellow;
 	  	opacity: 0.5;
@@ -1064,6 +1289,13 @@
 	.data-table {
 		table {
 			.label {
+				color:$pulse-yellow__shade2;
+			}
+		}
+	}
+	.stock-info--competition {
+		.col-headers {
+			p {
 				color:$pulse-yellow__shade2;
 			}
 		}

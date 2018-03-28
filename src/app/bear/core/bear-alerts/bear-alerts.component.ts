@@ -6,13 +6,14 @@ import {AuthService} from '../../../services/auth.service';
 import {IdeasService} from '../../../services/ideas.service';
 import {Observable} from 'rxjs/Observable';
 import {BaseSettingsMenuComponent} from '../../../shared/components/menus/settings-menu.component';
+import {Router} from '@angular/router';
 
 declare let gtag: Function;
 
 @Component({
   selector: 'cpt-bear-alerts',
   template: `
-    <a class="quick-link">
+    <button tooltip="Alerts" placement="bottom"  class="quick-link">
       <svg class="align-absolute" width="300px" height="300px" viewBox="0 0 300 300" version="1.1"
            xmlns="http://www.w3.org/2000/svg"
            xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -24,7 +25,7 @@ declare let gtag: Function;
         </g>
       </svg>
       <span *ngIf="allItems>0" class="badge badge-danger align-absolute">{{ allItems }}</span>
-    </a>
+    </button>
     <div #nav id="notificationSideNav" class="sidenav sidenav--alerts">
 
       <div class="right-sidebar__header">
@@ -52,7 +53,7 @@ declare let gtag: Function;
               <div class="col-4 alert__stock">
                 <p class="ticker">
                   <img class="rating" src="{{ alert['pgr_url'] }}">
-                  <span>{{ alert['Symbol'] }}</span>
+                  <span (click)="gotoReport(alert['Symbol'])">{{ alert['Symbol'] }}</span>
                 </p>
               </div>
               <div class="col-8 alert__info">
@@ -90,7 +91,7 @@ declare let gtag: Function;
               <div class="col-4 alert__stock">
                 <p class="ticker">
                   <img class="rating" src="{{ alert['pgr_url'] }}">
-                  <span>{{ alert['Symbol'] }}</span>
+                  <span (click)="gotoReport(alert['Symbol'])">{{ alert['Symbol'] }}</span>
                 </p>
               </div>
               <div class="col-8 alert__info">
@@ -129,7 +130,7 @@ declare let gtag: Function;
               <div class="col-4 alert__stock">
                 <p class="ticker">
                   <img class="rating" src="{{ alert['pgr_url'] }}">
-                  <span>{{ alert['Symbol'] }}</span>
+                  <span (click)="gotoReport(alert['Symbol'])">{{ alert['Symbol'] }}</span>
                 </p>
               </div>
               <div class="col-1 stock__alert down-alert">
@@ -175,6 +176,7 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
   public loading: Subscription;
 
   constructor(public el: ElementRef,
+              private router: Router,
               public authService: AuthService,
               private signalService: SignalService,
               private ideasService: IdeasService) {
@@ -206,12 +208,12 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
         return Observable.combineLatest(
           this.signalService.getAllAlerts({
             list_id: this.holdingListId,
-            period: '1',
+            period: '2',
             uid: this.uid
           }),
           this.signalService.getAllAlerts({
             list_id: this.watchingListId,
-            period: '1',
+            period: '2',
             uid: this.uid
           }),
           this.signalService.getSignalDataForList(this.bestBearsListId.toString(), '1', this.uid)
@@ -234,7 +236,7 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
           if (x['Signals'] === '[000000010100]') {
             return Object.assign(x, {signal_text: 'Rel. Strength & Money Flow Sell'});
           }
-        });
+        }).filter(this.assignPgrUrl.bind(this));
         this.allItems = this.holdingListAlerts.length + this.watchingListAlerts.length + this.bearListSignals.length;
       })
   }
@@ -243,7 +245,12 @@ export class BearAlertsComponent extends BaseSettingsMenuComponent implements Af
     if (x['Text'] == 'Estimate Revision' || x['Text'] == 'Earnings Surprise') {
       return Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['pgrRating'], x['rawPgrRating'])});
     }
-    return Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['Value'], 0) });
+    return Object.assign(x, {pgr_url: this.signalService.appendPGRImage(x['pgrData'][0]['pgr_rating'], x['pgrData'][0]['raw_pgr_rating']) });
+  }
+
+  gotoReport(ticker: string) {
+    this.ideasService.selectedStock = ticker;
+    this.router.navigate(['/report', ticker]);
   }
 
 }

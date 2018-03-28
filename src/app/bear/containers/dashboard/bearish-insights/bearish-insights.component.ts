@@ -1,32 +1,33 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {PreviousInsightsModalComponent} from './modals/previous-modal.component';
-import {InsightsCommentaryModalComponent} from './modals/commentary-modal.component';
 import {WordpressService} from '../../../../services/wordpress.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
+import {Router} from '@angular/router';
 
 declare let gtag: Function;
+import * as moment from 'moment';
 
 @Component({
   selector: 'cpt-bearish-insights',
   template: `
-    <div class="insights__container insights__container--large insights__container--mainbear">
-      <div class="post-head post-head--insights">
-        <h2>Mastering The Bear</h2>
-        <div class="divider-h"></div>
-        <p class="header__post-date">{{ post ? post['post_date_formatted'] : null }}</p>
-        <a (click)="openPreviousModal()" class="post-head__button">
-          <i class="fa fa-calendar" aria-hidden="true"></i>
-          <span>&nbsp;Previous</span>
-        </a>
+    <div class="insights__container">
+      <div class="post-head row no-gutters">
+        <div class="col-12 col-sm-6 post-head__logo">
+          <img src="http://www.chaikinanalytics.com/images/logo__bearish-insights.png" alt="BearishInsights">
+        </div>
+        <div class="col-12 col-sm-6 post-head__date">
+          <p class="">{{ shortDate }}</p>
+        </div>
       </div>
-      <div class="post-body post-body--insights" [ngBusy]="loading">
-        <div [innerHtml]="commentary"></div>
+      <div class="row no-gutters post-body post-body--insights">
+        <div class="col-12 headline">
+          <h1>{{ title }}</h1>
+        </div>
+        <!--<p class="post-author">Weekly commentary by {{ post?.author ? post['author'] : 'John Schlitz' }}</p>-->
       </div>
-      <div (click)="openCommentaryModal()" class="link__read-all">
-        <a>Read the full commentary &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+      <div (click)="openCommentaryModal()" class="row no-gutters link__read-all">
+        <a>Read the Weekly Newsletter &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
       </div>
     </div>
   `,
@@ -36,26 +37,12 @@ export class BearishInsightsComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   public loading: Subscription;
-  public insightsModalRef: BsModalRef;
   public title: string;
+  public shortDate: string;
   public post: object;
   public commentary: string;
-  public config = {
-    animated: true,
-    keyboard: true,
-    backdrop: false,
-    ignoreBackdropClick: false,
-    class: 'modal-dialog--fullscreen',
-  };
-  public config2 = {
-    animated: true,
-    keyboard: true,
-    backdrop: false,
-    ignoreBackdropClick: false,
-    class: 'modal-dialog--popup',
-  };
 
-  constructor(public modalService: BsModalService,
+  constructor(private router: Router,
               private wordpressService: WordpressService) {
   }
 
@@ -67,6 +54,8 @@ export class BearishInsightsComponent implements OnInit, OnDestroy {
       .subscribe(post => {
         this.post = post;
         this.title = post['post_title'];
+        this.shortDate = moment(this.post['post_date']).format('MMMM Do, YYYY');
+        this.wordpressService.assignAuthorProp([post]);
         this.commentary = this.wordpressService.getInsightPostBody(this.post);
         this.wordpressService.assignWordPressDateProperties([post]);
       })
@@ -77,15 +66,8 @@ export class BearishInsightsComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  public openPreviousModal() {
-    this.insightsModalRef = this.modalService.show(PreviousInsightsModalComponent, this.config2);
-  }
-
   public openCommentaryModal() {
-    this.insightsModalRef = this.modalService.show(InsightsCommentaryModalComponent, this.config);
-    this.insightsModalRef.content.title = this.title;
-    this.insightsModalRef.content.commentary = this.commentary;
-    this.insightsModalRef.content.date = this.post['post_date_formatted'];
+    this.router.navigate(['commentary']);
     gtag('event', 'insight_opened', {
       'event_category': 'engagement',
       'event_label': this.title

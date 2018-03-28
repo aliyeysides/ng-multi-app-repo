@@ -2,7 +2,7 @@ import {
   ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
+import {NavigationEnd, Router, ActivatedRoute} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 import {HealthCheckService} from '../services/health-check.service';
@@ -10,6 +10,7 @@ import {PortfolioStatus} from '../shared/models/health-check';
 import {Subject} from 'rxjs/Subject';
 import {PspOnboardingComponent} from './core/psp-onboarding/psp-onboarding.component';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {ReportService} from '../services/report.service';
 
 declare let gtag: Function;
 
@@ -19,13 +20,12 @@ declare let gtag: Function;
   styleUrls: ['./app.component.scss'],
   template: `
     <!-- PANEL HEADER - Fixed to the top of each panel-->
-
-    <div class="page__header"
-         [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}"
+    <div cptStockPgrColor [stock]="currentStock" [status]="status" class="page__header"
+         [ngClass]="{'page__header--green': status?.avgPercentageChange>0 && !currentStock, 'page__header--red': status?.avgPercentageChange<0 && !currentStock}"
          id="page__header">
-
+         
       <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--left" id="header_button--left">
-        <img class="align-absolute" src="assets/imgs/icon_sandwich.svg">
+        <i class="fal fa-bars"></i>
       </div>
 
       <cpt-psp-settings-menu [side]="menuPosition" [btn]="navBtn" [navOpened]="navOpened"
@@ -33,38 +33,54 @@ declare let gtag: Function;
 
       <div class="header__title header__search">
         <h1 *ngIf="!searchOpened">{{ title }}</h1>
-        <cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
+        <cpt-psp-symbol-search id="mobile-search" [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
                                *ngIf="searchOpened"></cpt-psp-symbol-search>
       </div>
 
-      <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--right"
-           id="header_button--right">
-        <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
+      <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--right" id="header_button--right">
+        <i class="fal fa-search"></i>
       </div>
     </div>
 
-    <div class="page__header--desktop">
-      <div class="row no-gutters">
-        <div class="col-2 col-lg-3 logo--desktop">
-          <img src="assets/imgs/logo_powerpulse.svg">
+
+    <!-- DESKTOP HEADER -->
+        <div class="page__header--desktop container-fluid">
+<!--     <div class="page__header--desktop container-fluid"
+      [ngClass]="{'page__header--green': status?.avgPercentageChange>0, 'page__header--red': status?.avgPercentageChange<0}" > -->
+
+      <!-- SECOND HEADER-->
+      <div class="row header--second justify-content-center">
+        <!-- LOGO-->
+        <div class="col-3 col-xl-3 logo--desktop">
+          <img class="float-left hidden-md-down" src="assets/imgs/logo_powerpulse--desktop.svg">
+          <img class="float-left hidden-lg-up" src="assets/imgs/logo_powerpulse--icon.svg">
         </div>
-        <div class="col-8 col-lg-7 col-xl-6 header__search">
-          <cpt-psp-navigator *ngIf="!searchOpened" class="desktop-nav"></cpt-psp-navigator>
-          <cpt-psp-symbol-search [btn]="searchBtn" (toggleSearch)="toggleSearch()" [placeholder]="'Search'"
-                                 *ngIf="searchOpened"></cpt-psp-symbol-search>
+        <div class="col-8 col-xl-6 header__nav">
+          <cpt-psp-navigator *ngIf="!searchOpened" class="desktop-nav" id="desktop-nav__wrapper"></cpt-psp-navigator>
         </div>
-        <div class="col-2 col-lg-2 col-xl-3">
-          <div #searchBtn (click)="toggleSearch();$event.stopPropagation()" class="header__button header__button--left"
-               id="header_button--right">
-            <img class="align-absolute" src="assets/imgs/icon_psp_search.svg">
-          </div>
-          <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--right">
-            <img class="align-absolute" src="assets/imgs/ux__gear.svg">
-          </div>
+        <div class="col-1 col-xl-3"></div>
+        <div #navBtn (click)="toggleNav();$event.stopPropagation()" class="header__button header__button--right">
+          <i class="fal fa-cog fa-spin-hover"></i>
         </div>
       </div>
+
+      <!-- FIRST HEADER -->
+      <div class="row header--first justify-content-center">
+        <!-- SEARCH -->
+        <div class="col-6 col-lg-5 col-xl-4 search--desktop">
+          <cpt-psp-symbol-search id="desktop-search" [btn]="searchBtn" [placeholder]="'Search'"></cpt-psp-symbol-search>
+        </div>
+        <!-- MARKETS -->
+        <div class="col-6 col-lg-7 col-xl-8 markets--desktop">
+          <cpt-psp-market-summary></cpt-psp-market-summary>
+        </div>
+      </div>
+
+
+
     </div>
-    
+    <!-- END DESKTOP HEADER -->
+
     <!-- Onboarding Modal -->
     <cpt-psp-onboarding style="display:none;"></cpt-psp-onboarding>
 
@@ -95,10 +111,13 @@ export class AppComponent implements OnInit, OnDestroy {
   title: string;
   status: PortfolioStatus;
   menuPosition: string;
+  currentStock: string;
   bsModalRef: BsModalRef;
 
   constructor(private router: Router,
               private cd: ChangeDetectorRef,
+              private route: ActivatedRoute,
+              private reportService: ReportService,
               private modalService: BsModalService,
               private healthCheck: HealthCheckService) {
     const mobWidth = (window.screen.width);
@@ -112,15 +131,23 @@ export class AppComponent implements OnInit, OnDestroy {
             let cap = str.charAt(0).toUpperCase();
             return cap + str.slice(1);
           }).join(' ');
+
+        if (this.title === 'Health Check' || this.title === 'Market Insights' || this.title === 'Stock Analysis') {
+          this.currentStock = undefined;
+        }
+
         gtag('config', 'UA-109763576-2', {
           'page_location': 'https://app.chaikinanalytics.com/ideas/' + event.urlAfterRedirects,
           'page_path': event.urlAfterRedirects
         });
       }
     });
+
     this.healthCheck.getPortfolioStatus()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => this.status = res);
+
+    this.reportService.selectedSymbol$.subscribe(stock => this.currentStock = stock);
   }
 
   ngOnInit() {

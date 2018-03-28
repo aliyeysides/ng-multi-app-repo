@@ -13,29 +13,13 @@ declare let gtag: Function;
 @Component({
   selector: 'cpt-best-bear-ideas',
   template: `
-    <div class="insights__container insights__container--list">
-      <div class="post-head">
-        <div class="clearfix">
-          <h4>Best Bear Ideas</h4>
-          <a (click)="viewBearList()" class="post-head__button">
-            <i class="fa fa-external-link-square" aria-hidden="true"></i>
-            <span>&nbsp;View List</span>
-          </a>
-        </div>
-        <div class="col-header__container row no-gutters">
-          <div class="col-header col-2">Rating</div>
-          <div class="col-header col-header--ticker col-3">Ticker</div>
-          <div class="col-header col-1"></div>
-          <div class="col-header col-3">Last Price</div>
-          <div class="col-header col-3">% Chg</div>
-        </div>
-      </div>
-      <ul [ngBusy]="loading" class="post-body post-body--bearlist">
+    <div class="dashboard__panel--list">
+      <ul [ngBusy]="loading" class="dash-body dash-body--bearlist">
         <li *ngFor="let stock of bestBearIdeas" class="row no-gutters">
           <div class="col-2 stock__PGR">
             <img class="align-absolute" src="{{ appendPGRImage(stock?.PGR, stock?.raw_PGR) }}">
           </div>
-          <div class="col-3 stock__ticker">
+          <div (click)="gotoReport(stock?.symbol)" class="col-3 stock__ticker">
             <p class="ticker">{{ stock?.symbol }}</p>
           </div>
           <div (click)="openAlerts();$event.stopPropagation()" class="col-1 stock__alert down-alert">
@@ -48,8 +32,8 @@ declare let gtag: Function;
           </div>
           <div class="col-3 stock__price">
             <p class="data" [ngClass]="{'up-change':stock?.Change>0,'down-change':stock?.Change<0}">
-              (<span *ngIf="stock?.Change>0" class="up-change">+</span>{{ stock['Percentage '] | decimal
-              }}%)</p>
+              <span *ngIf="stock?.Change>0" class="up-change">+</span>{{ stock['Percentage '] | decimal
+              }}%</p>
           </div>
         </li>
       </ul>
@@ -98,15 +82,6 @@ export class BestBearIdeasComponent implements OnInit {
       });
   }
 
-  viewBearList() {
-    this.ideasService.setSelectedList(this.bestBearIdeaList);
-    gtag('event', 'list_clicked', {
-      'event_category': 'engagement',
-      'event_label': 'Best Bear Ideas'
-    });
-    this.router.navigate(['/ideas']);
-  }
-
   public appendPGRImage(pgr: number, rawPgr: number) {
     return this.signalService.appendPGRImage(pgr, rawPgr);
   }
@@ -126,6 +101,11 @@ export class BestBearIdeasComponent implements OnInit {
 
   openAlerts() {
     this.signalService.openAlerts();
+  }
+
+  gotoReport(ticker: string) {
+    this.ideasService.selectedStock = ticker;
+    this.router.navigate(['/report', ticker]);
   }
 
 }

@@ -1,98 +1,166 @@
 @import 'variables';
 
-.post-head--pick {
-	.divider-h {
-	    @media screen and (max-width: 1480px) and (min-width: 992px) {
-        	display: none;
-      	}
-	}
 
-	.header__post-date {
-	    @media screen and (max-width: 1480px) and (min-width: 992px) {
-        	display: none;
-      	}
-	}
-}
+.dashboard__panel.dashboard__panel--bearpick {
+  height: 300px;
+  border:2px solid #ffffff;
+  border-radius: 12px;
 
+  	.dash-head {
+    	height: 40px;
+    	background-image: linear-gradient(135deg, #EC2E2E 0%, #A01861 100%);
 
-.post-body--bearpick {
-	padding: 5px 0px;
-	min-height: 100px;
+	    h4 {
+	      	margin: 0 10px 0 10px;
+	      	line-height: 40px;
+	      	height: 40px;
+	      	font-weight: 700;
+	      	font-size: 20px;
+	      	color: #ffffff;
+	      	white-space: nowrap;
+	    }
 
-	.row {
-		padding:5px 0;
-	}
+	    .dash-head__button {
+	    	font-weight: 400;
+	    	font-size: 11px;
+	    	height: 30px;
+	    	padding: 6px 15px;
+	    	margin-top: 5px;
+	    	color: #ffffff;
+	    	border-left: 4px dotted rgba(255,255,255,0.5);
 
-	.ticker {
-		float: left;
-		font-size: 28px;
-		font-weight: 700;
-		line-height: 1;
+	      	i {
+	        	font-size: 16px;
+	      	}
 
-		.rating {
-			width: 48px;
-			height: 25px;
-			display: inline-block;
-			margin: 1px 5px 0 0;
-		}
+	      	span {
+	        	margin-left: 3px;
+	      	}
+	    }
+  	}
 
-		span {
-			display: inline-block;
-		}
-	}
+	.dash-body.dash-body--bearpick {
+		padding: 25px 0px 0;
 
-	.price-data {
-		margin: 0 0px 0 0;
+		.bearpick__container {
+			padding:0 10px;
 
-		.data {
-		    display: inline-block;
-		    float: right;
-		    font-size: 17px;
-		    font-weight: 600;
-		    line-height: 32px;
-		    margin-left: 0px;
-		    vertical-align: middle;
-		}
+			.ticker-info {
+				width: 100%;
+				margin-bottom:20px;
 
-		.data--change {
-			margin-left:15%;
-		}
-	}
+				.ticker {
+					font-size: 30px;
+					font-weight: 800;
+					line-height: 1;
+					margin-bottom:8px;
+					white-space: nowrap;
+					cursor:pointer;
 
-	.company-name {
-		font-size: 20px;
-		font-weight: 400;
-		line-height: 1.3;
-	    white-space: nowrap;
-	    text-overflow: ellipsis;
-	    overflow: hidden;
-	}
+					.rating {
+						width: auto;
+						height: 23px;
+						display: inline-block;
+						margin: -6px 4px 0 0;
+					}
+				}
 
-	.industry-name {
-		font-size: 13px;
-	    font-weight: 400;
-	    line-height: 24px;
-	    height: 24px;
-	    color: $font-color--MD;
-	    font-style: italic;
-	    text-align: left;
-	    white-space: nowrap;
-	    text-overflow: ellipsis;
-	    overflow: hidden;
-	}
+				.company-name {
+					font-size: 17px;
+					font-weight: 400;
+					line-height: 1.5;
+				    white-space: nowrap;
+				    text-overflow: ellipsis;
+				    overflow: hidden;
+				    color: $font-color--MD;
+				}
+			}
 
-	.link__see-more {
-		font-weight: 600;
-		font-size: 14px;
-		text-align: center;
-		line-height: 1;
+			.price-data {
+				width: 100%;
+				height: 70px;
+				text-align: left;
+				margin-bottom:40px;
 
-		a {
-			color: $link-blue;
-			cursor: pointer;
+				.change {
+				    font-size: 18px;
+				    font-weight: 400;
+				    line-height: 32px;
 
-		    &:hover {
-		       	color: $link-blue;
+				    span {
+				    	margin-right:30px;
+
+				    	&:last-child {
+				    		margin-right:0;
+				    	}
+				    }
+				}
+
+				.price {
+					font-size: 28px;
+				    font-weight: 700;
+				    line-height: 32px;
+				    margin-bottom: 5px;
+				}
+			}
+
+			.link__see-more {
+				position: absolute;
+				bottom:5px;
+
+				a {
+					color: $link-blue;
+					cursor: pointer;
+					font-weight: 600;
+					font-size: 14px;
+					line-height: 1;
+
+				    &:hover {
+				       	color: $link-blue;
+				    }
+				}
+			}
+
+			.quick-view__pgr {
+				.pgr__title {
+			        font-weight: 600;
+			        font-size: 10px;
+			        color: $font-color--MD;
+			        text-transform: uppercase;
+			        line-height: 1;
+			        white-space: nowrap;
+			        margin-bottom:2px;
+			        margin-top:-7px;
+		        }
+
+		        .pgr__text {
+		            font-weight: 700;
+		            font-size: 20px;
+		            text-transform: uppercase;
+		            white-space: nowrap;
+		            line-height: 1.3;
+		        }
+
+		        .pgr__sliders {
+		          	margin-top: 10px;
+
+		          	li {
+		           		margin: 2px 0 5px;
+
+		            	.sliderBar-container {
+							.slider-veryBullish {
+							  	margin-left: -35px;
+							}
+		              		.pgr__label {
+		                		font-weight: 600;
+		                		font-size: 11px;
+		                		color: $font-color--MD;
+		                		text-transform: uppercase;
+		                		margin: -1px 2px 2px;
+		              		}
+		            	}
+		          	}
+		        }
 		    }
 		}
 	}

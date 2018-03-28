@@ -13,23 +13,26 @@ declare let gtag: Function;
 @Component({
   selector: 'cpt-bear-weekly-previous-modal',
   template: `
-    <div class="insights__container insights__container--large insights__container--modal">
-      <div class="post-head post-head--bearpick">
-        <h2 class="modal-title pull-left">{{ title }}</h2>
-        <button type="button" class="post-head__button" aria-label="Close" (click)="bsModalRef.hide()">
-          <a class="">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
-            <span>&nbsp;Close</span>
-          </a>
-        </button>
+    <div class="container-fluid modal-content--bearpick">
+      <div class="row no-gutters modal-head modal-head--bearpick">
+        <div class="col-9">
+          <h2 class="modal-title">{{ title }}</h2>
+        </div>
+        <div class="col-3">
+          <button type="button" class="modal-head__button" aria-label="Close" (click)="bsModalRef.hide()">
+            <a class="">
+              <i class="fa fa-times-circle" aria-hidden="true"></i>
+              <span>&nbsp;Close</span>
+            </a>
+          </button>
+        </div>
       </div>
-      <div class="post-body post-body--previous-pick">
+      <div class="modal-body">
         <ul class="container" [ngBusy]="loading">
-          <li class="row" *ngFor="let post of posts">
+          <li class="row no-gutters" *ngFor="let post of posts">
             <ng-container *ngIf="post['data']">
               <div class="col-6">
-                <img class="rating" src="{{ appendPGRImage(post['data']['pgr']['Corrected PGR Value'], post['data']['pgr']['PGR Value']) }}">
-                <p class="ticker">{{ post.ticker }}</p>
+                <p class="ticker"><img class="rating" src="{{ appendPGRImage(post['data']['pgr']['Corrected PGR Value'], post['data']['pgr']['PGR Value']) }}">{{ post.ticker }}</p>
               </div>
               <div class="col-6">
                 <p class="company">{{ post['data']['meta-info'].name }}</p>
@@ -41,7 +44,7 @@ declare let gtag: Function;
                 <p class="industry">{{ post['data']['meta-info'].industry_name }}</p>
               </div>
               <div class="col-12">
-                <a (click)="openCommentaryModal(post)">Commentary &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                <a (click)="openCommentaryModal(post)">See Commentary &nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
               </div>
             </ng-container>
           </li>

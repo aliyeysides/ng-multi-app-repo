@@ -1,11 +1,21 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewEncapsulation
+} from '@angular/core';
 import {ListSymbolObj, PortfolioStatus, StockStatus} from '../../../../shared/models/health-check';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subject} from 'rxjs/Subject';
 import {SignalService} from '../../../../services/signal.service';
 import {HealthCheckService} from '../../../../services/health-check.service';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import {expandHeight} from '../../../../shared/animations/expandHeight';
 
 declare var gtag: Function;
 
@@ -26,105 +36,169 @@ interface FilterFunc {
   template: `
     <div id="HC--Stock-Movements" class="">
 
-      <div class="row no-gutters">
-        <div class="col-12 col-xl-12">
-          <div class="row section__toggle">
-            <div class="col-12 toggle toggle--timespan">
-              <p (click)="selectTimespan('TODAY')" [ngClass]="{'selected':this.selectedTimespan==='TODAY'}"
-                 class="toggle__left">TODAY</p>
-              <p (click)="selectTimespan('WEEK')" [ngClass]="{'selected':this.selectedTimespan==='WEEK'}"
-                 class="toggle__right">LAST WEEK</p>
+      <div class="panel container">
+        <div class="row">
+          <div class="col-12">
+
+            <div class="row section__toggle" id="movement-timespan">
+              <mat-tab-group (selectedTabChange)="selectTimespan($event);" class="col-12 toggle toggle--timespan">
+                <mat-tab label="TODAY"
+                         [ngClass]="{'selected':this.selectedTimespan==='TODAY'}"
+                         class="toggle__left"></mat-tab>
+                <mat-tab label="LAST WEEK"
+                         [ngClass]="{'selected':this.selectedTimespan==='WEEK'}"
+                         class="toggle__right"></mat-tab>
+              </mat-tab-group>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <h2>Stock Movements</h2>
+              </div>
+            </div>
+
+            <div class="row no-gutters section__summary justify-content-center">
+              <div class="col-6 col-md-5 col-lg-4 col-xl-4 summary--left">
+                <p><img
+                  src="./assets/imgs/icon_circle-movement--green.svg">{{ selectedTimespan == 'WEEK' ? upStocksWeekly : upStocksDaily
+                  }}</p>
+              </div>
+              <div class="col-6 col-md-5 col-lg-4 col-xl-4 summary--right">
+                <p><img
+                  src="./assets/imgs/icon_circle-movement--red.svg">{{ selectedTimespan == 'WEEK' ? downStocksWeekly : downStocksDaily
+                  }}</p>
+              </div>
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-12">
-              <h2>Stock Movements</h2>
-            </div>
-          </div>
-
-          <div class="row no-gutters section__summary justify-content-center">
-            <div class="col-6 col-md-5 col-lg-4 col-xl-4 summary--left">
-              <p><img
-                src="./assets/imgs/icon_circle-movement--green.svg">{{ selectedTimespan == 'WEEK' ? upStocksWeekly : upStocksDaily
-                }}</p>
-            </div>
-            <div class="col-6 col-md-5 col-lg-4 col-xl-4 summary--right">
-              <p><img
-                src="./assets/imgs/icon_circle-movement--red.svg">{{ selectedTimespan == 'WEEK' ? downStocksWeekly : downStocksDaily
-                }}</p>
-            </div>
-          </div>
-
-          <div class="row no-gutters">
-            <div class="col-12">
-              <p class="label">SHOWING:</p>
-              <div class="btn-group" dropdown [autoClose]="true">
-                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-                  {{ currentToggleOptionText$ | async }}
-                </button>
-                <ul *dropdownMenu class="dropdown-menu" role="menu">
-                  <li (click)="selectToggleOption(toggleOptions.movers, 'Top Movers');" role="menuitem"><a
-                    class="dropdown-item">Top Movers</a></li>
-                  <li (click)="selectToggleOption(toggleOptions.all, 'All');" role="menuitem"><a
-                    class="dropdown-item">All</a></li>
-                  <li (click)="selectToggleOption(toggleOptions.bulls, 'Bulls')" role="menuitem"><a
-                    class="dropdown-item">Bulls</a>
+          <div class="col-12">
+            <div [@expandHeight]="collapse" class="row">
+              <div class="col-12">
+                <p class="label">SHOWING:</p>
+                <div class="btn-group" dropdown [autoClose]="true">
+                
+                  <button class="btn btn-primary dropdown-toggle" mat-icon-button [matMenuTriggerFor]="appMenu">
+                    {{ currentToggleOptionText$ | async }}
+                  </button>
+      
+                  <mat-menu #appMenu="matMenu">
+                    <button mat-menu-item class="label">Sort By:</button>
+                    <button mat-menu-item (click)="selectToggleOption(toggleOptions.movers, 'Top Movers');" role="menuitem">
+                      <a class="dropdown-item">Top Movers</a>
+                    </button>
+                    <button mat-menu-item (click)="selectToggleOption(toggleOptions.all, 'All Stocks');" role="menuitem">
+                      <a class="dropdown-item">All Stocks</a>
+                    </button>
+                    <button mat-menu-item (click)="selectToggleOption(toggleOptions.bulls, 'Bulls');" role="menuitem">
+                      <a class="dropdown-item">Bulls</a>
+                    </button>
+                    <button mat-menu-item (click)="selectToggleOption(toggleOptions.bears, 'Bears');" role="menuitem">
+                      <a class="dropdown-item">Bears</a>
+                    </button>
+                    <button mat-menu-item (click)="selectToggleOption(toggleOptions.neutral, 'Neutral');" role="menuitem">
+                      <a class="dropdown-item">Neutral</a>
+                    </button>
+                  </mat-menu>
+                  
+                </div>
+              </div>
+              <div class="col-12" id="mover-wrapper">
+                <ul class="section__chart">
+                  <li class="row no-gutters col-headers justify-content-center">
+                    <div class="col-4 col-sm-2 col-xl-2">
+                      <p class="text-left">RATING / TICKER</p>
+                    </div>
+                    <div class="col-8 col-sm-8 col-xl-8">
+                      <p class="text-left col-header--per-chg">% CHANGE</p>
+                    </div>
                   </li>
-                  <li (click)="selectToggleOption(toggleOptions.bears, 'Bears')" role="menuitem"><a
-                    class="dropdown-item">Bears</a>
-                  </li>
-                  <li (click)="selectToggleOption(toggleOptions.neutral, 'Neutral')" role="menuitem"><a
-                    class="dropdown-item">Neutral</a>
-                  </li>
+                  <mat-accordion *ngIf="selectedTimespan == 'TODAY'" [multi]="false">
+                    <mat-expansion-panel [id]="stock.symbol" [disabled]="true" [expanded]="false"
+                      (click)="gotoReport(stock.symbol)"
+                      *ngFor="let stock of dailyStockData; trackBy: trackStock"
+                      class="row no-gutters list-item__mover justify-content-center">
+                      <mat-expansion-panel-header>
+                        <i [ngClass]="{'invisible': stock.arcColor==2}" class="fal fa-minus-circle" (click)="emitRemoveStock(stock.symbol);$event.stopPropagation()"></i>
+                        <div class="col-4 col-sm-2 mover__stock">
+                          <p class="ticker" [ngClass]="{'market': stock.arcColor==2}"><img *ngIf="stock.arcColor != 2"
+                                                 src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
+                            {{ stock.symbol }}</p>
+                        </div>
+                        <div class="col-8 col-sm-8 mover__data">
+                          <div class="mover__bar" [style.width]="stock['barWidth']"
+                               [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0,'indice':stock.arcColor==2}">
+                            <p class="data" [ngClass]="{'data--right':stock['width']<25}">
+                              {{ stock.percentageChange | decimal
+                              }}%</p>
+                          </div>
+                        </div>
+                      </mat-expansion-panel-header>
+                      <mat-action-row>
+                        <p class="details">
+                          <span class="company">{{ stock['companyName'] }}</span>
+                          <span class="prices"><span>$</span>{{ stock['closePrice'] | decimal }}</span>
+                          <span class="industry hidden-md-down">{{ stock['industry_name'] }}</span>
+                        </p>
+                        <span matTooltip="Remove stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500">
+                          <button class="remove" mat-raised-button (click)="emitRemoveStock(stock.symbol)"><i class="far fa-times"></i><span class="hidden-sm-down"> &nbsp;Remove</span></button>
+                        </span>
+                        <span matTooltip="Analyze stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500">
+                          <button class="analyze" mat-raised-button (click)="gotoReport(stock.symbol)"><i class="far fa-tachometer"></i><span class="hidden-sm-down"> &nbsp;Analysis</span></button>
+                        </span>
+                      </mat-action-row>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                  <mat-accordion *ngIf="selectedTimespan == 'WEEK'" [multi]="false">
+                    <mat-expansion-panel [id]="stock.symbol" [disabled]="true" [expanded]="false"
+                      (click)="gotoReport(stock.symbol)"
+                      *ngFor="let stock of weeklyStockData; trackBy: trackStock"
+                      class="row no-gutters list-item__mover justify-content-center">
+                      <mat-expansion-panel-header>
+                      <i [ngClass]="{'invisible': stock.arcColor==2}" class="far fa-minus-circle" (click)="emitRemoveStock(stock.symbol);$event.stopPropagation()"></i>
+                    <div class="col-4 col-sm-2 mover__stock">
+                      <p class="ticker" [ngClass]="{'market': stock.arcColor==2}"><img *ngIf="stock.arcColor != 2"
+                                             src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
+                        {{ stock.symbol }}</p>
+                    </div>
+                    <div class="col-8 col-sm-8 mover__data">
+                      <div class="mover__bar" [style.width]="stock['barWidth']"
+                           [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0,'indice':stock.arcColor==2}">
+                        <p class="data" [ngClass]="{'data--right':stock['width']<25}">
+                          {{ stock.percentageChange | decimal
+                          }}%</p>
+                      </div>
+                    </div>
+                    </mat-expansion-panel-header>
+                    <mat-action-row>
+                      <p class="details">
+                        <span class="company">{{ stock['companyName'] }}</span>
+                        <span class="prices"><span>$</span>{{ stock['closePrice'] | decimal }}</span>
+                        <span class="industry hidden-md-down">{{ stock['industry_name'] }}</span>
+                      </p>
+                      <span matTooltip="Remove stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500">
+                        <button class="remove" mat-raised-button (click)="emitRemoveStock(stock.symbol)"><i class="far fa-times"></i><span class="hidden-sm-down"> &nbsp;Remove</span></button>
+                      </span>
+                      <span matTooltip="Analyze stock" [matTooltipPosition]="'below'" [matTooltipShowDelay]="500">
+                        <button class="analyze" mat-raised-button (click)="gotoReport(stock.symbol)"><i class="far fa-tachometer"></i><span class="hidden-sm-down"> &nbsp;Analysis</span></button>
+                      </span>
+                    </mat-action-row> 
+                  </mat-expansion-panel>
+                  </mat-accordion>
                 </ul>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-12 col-xl-12">
-          <div *ngIf="!collapse" class="row">
-            <div class="col-12">
-              <ul class="section__chart">
-                <li class="row no-gutters col-headers justify-content-center">
-                  <div class="col-4 col-sm-2 col-xl-2">
-                    <p class="text-left">RATING / TICKER</p>
-                  </div>
-                  <div class="col-8 col-sm-8 col-xl-8">
-                    <p class="text-left col-header--per-chg">% CHANGE</p>
-                  </div>
-                </li>
-                <li (click)="gotoReport(stock.symbol)"
-                    *ngFor="let stock of selectedTimespan == 'WEEK' ? weeklyStockData : dailyStockData"
-                    class="row no-gutters list-item__mover justify-content-center">
-                  <div class="col-4 col-sm-2 col-lg-2 col-xl-2 mover__stock">
-                    <p class="ticker"><img *ngIf="stock.arcColor != 2"
-                                           src="{{ appendPGRImage(stock.corrected_pgr_rating, stock.raw_pgr_rating ) }}">
-                      {{ stock.symbol }}</p>
-                  </div>
-                  <div class="col-8 col-sm-8 col-lg-8 col-xl-8 mover__data">
-                    <div class="mover__bar" [style.width]="stock['barWidth']"
-                         [ngClass]="{'positive':stock.percentageChange>0,'negative':stock.percentageChange<0,'indice':stock.arcColor==2}">
-                      <p class="data" [ngClass]="{'data--right':stock['width']<25}">{{ stock.percentageChange | decimal
-                        }}%</p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12">
-          <div class="row">
-            <div *ngIf="!collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-              <img src="./assets/imgs/ux__collapse--circle.svg">
-              <p>Collapse</p>
-            </div>
-            <div *ngIf="collapse" (click)="toggleCollapse()" class="col-12 expand-collapse">
-              <img src="./assets/imgs/ux__expand--dots.svg">
-              <p>Expand for Detail</p>
+          <div class="col-12">
+            <div class="row">
+              <div *ngIf="collapse!='closed'" (click)="collapse = 'closed'" class="col-12 expand-collapse">
+                <i class="far fa-scrubber"></i>
+                <p>Collapse</p>
+              </div>
+              <div *ngIf="collapse!='opened'" (click)="collapse = 'opened'" class="col-12 expand-collapse">
+                <i class="far fa-ellipsis-h"></i>
+                <p>Expand for Detail</p>
+              </div>
             </div>
           </div>
         </div>
@@ -132,12 +206,17 @@ interface FilterFunc {
     </div>
   `,
   styleUrls: ['../health-check.component.scss'],
+  animations: [expandHeight()],
+  encapsulation: ViewEncapsulation.None
 })
 export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _calc: BehaviorSubject<PortfolioStatus> = new BehaviorSubject<PortfolioStatus>({} as PortfolioStatus);
   private _weeklyStocks: BehaviorSubject<StockStatus[]> = new BehaviorSubject<StockStatus[]>({} as StockStatus[]);
   private _dailyStocks: BehaviorSubject<ListSymbolObj[]> = new BehaviorSubject<ListSymbolObj[]>({} as ListSymbolObj[]);
+
+  @Output('addStockClicked') addStockClicked: EventEmitter<string> = new EventEmitter<string>();
+  @Output('removeStockClicked') removeStockClicked: EventEmitter<string> = new EventEmitter<string>();
 
   @Input('calc')
   set calc(val: PortfolioStatus) {
@@ -168,7 +247,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
 
   toggleOptions: ToggleOptions = {
     all(stock: StockStatus) {
-      this.currentToggleOptionText$.next('All');
+      this.currentToggleOptionText$.next('All Stocks');
       return true;
     },
 
@@ -205,7 +284,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   downStocksWeekly: number;
   downStocksDaily: number;
 
-  collapse: boolean = false;
+  collapse: string = 'opened';
 
   constructor(private signalService: SignalService,
               private healthCheck: HealthCheckService,
@@ -213,8 +292,6 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit() {
-    this.updateData();
-
     this.healthCheck.getToggleOptions()
       .takeUntil(this._ngUnsubscribe)
       .subscribe(res => {
@@ -288,6 +365,7 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   selectToggleOption(fn: FilterFunc, label: string) {
+    if (this.collapse == 'closed') this.collapse = 'opened';
     this.selectedToggleOption$.next(fn);
     this.updateData();
     gtag('event', 'stock_movements_filter_clicked', {
@@ -296,20 +374,13 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
     });
   }
 
-  selectTimespan(mode: string) {
-    this.selectedTimespan = mode;
+  selectTimespan(mode: { index: number, tab: any }) {
+    if (mode.index === 0) this.selectedTimespan = 'TODAY';
+    if (mode.index === 1) this.selectedTimespan = 'WEEK';
     this.updateData();
     gtag('event', 'stock_movements_timespan_clicked', {
       'event_category': 'engagement',
-      'event_label': mode
-    });
-  }
-
-  toggleCollapse() {
-    this.collapse = !this.collapse;
-    gtag('event', 'stock_movements_collapse_clicked', {
-      'event_category': 'engagement',
-      'event_label': this.collapse
+      'event_label': this.selectedTimespan
     });
   }
 
@@ -366,12 +437,24 @@ export class StockMovementsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   gotoReport(ticker: string) {
-    if (ticker === 'S&P 500') return;
+    if (ticker === 'S&P 500' || this.collapse == 'closed') return;
     this.router.navigate(['stock-analysis', ticker]);
     gtag('event', 'stock_clicked', {
       'event_category': 'engagement',
       'event_label': ticker
     });
+  }
+
+  emitAddStock(ticker: string) {
+    this.addStockClicked.emit(ticker);
+  }
+
+  emitRemoveStock(ticker: string) {
+    this.removeStockClicked.emit(ticker);
+  }
+
+  trackStock(idx, stock) {
+    return stock ? stock.symbol : undefined;
   }
 
 }

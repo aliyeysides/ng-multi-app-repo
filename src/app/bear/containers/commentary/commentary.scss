@@ -1,0 +1,212 @@
+@import 'variablesPulse';
+
+
+
+
+.article__container {
+	.article__masthead {
+		padding: 2% 2.5%;
+	    //overflow: hidden;
+	    position: relative;
+	    background-image: url("http://www.chaikinanalytics.com/images/BG__bearish-insights__container.png");
+	    background-repeat: no-repeat;
+	    background-size: cover;
+	    background-position: center;
+	    background-color:#6d0019;
+	    border-left: 1px solid #ddd;
+	    min-height: 270px;
+
+		.masthead__head {
+			margin:10px 0 25px;
+
+		    .masthead__logo {
+			    img {
+			        width: 230px;
+			        height: auto;
+			    }
+		    }
+		    .masthead__date {
+		      	text-align: right;
+
+		      	p {
+		      		color: #FD001F;
+		      		font-weight: 700;
+		      		font-size: 18px;
+		      	}
+	      		.section--date-select {
+
+					.btn-group {
+						margin-top: 0px;
+						margin-bottom: 5px;
+						cursor: pointer;
+
+						.btn-primary {
+							text-align: center;
+						    border: 0;
+						    padding: 0px 45px 0px 5px;
+						    border-radius: 0;
+							cursor: pointer;
+					  		background-color: transparent;
+						    font-size: 21px;
+						    line-height: 1;
+							color: #FD001F;
+							box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0);
+							z-index: 20;
+						    font-weight: 600;
+						}			
+						.dropdown-toggle {
+							min-width: 200px;
+						    &:after {
+								content:  none;
+						    }
+						}
+						&:after {
+						    font-family: "FontAwesome";
+						    content: "\f271 ";
+						    display: inline-block;
+						    position: absolute;
+						    right: 0px;
+						    top: -4px;
+						    color:#FD001F;
+						    font-size: 24px;
+						    vertical-align: middle;
+						    font-weight: 300;
+						}
+					}
+					.dropdown-menu {
+					    position: absolute;
+					    z-index: 10;
+					    float: left;
+					    min-width: 200px;
+					    padding: 10px 0px;
+					    margin: 10px auto 0px;
+					    font-size: 18px;
+					    color: $font-color;
+					    width: 100%;
+					    overflow: hidden;
+					    text-align: center;
+					    list-style: none;
+					    background-color: rgba(255,255,255, 0.95);
+					    background-clip: padding-box;
+					    border: 0;
+					    border-radius: 0 0 5px 5px;
+						box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+
+						.label {
+							padding-bottom: 10px;
+							border-bottom:1px solid #ddd;
+							margin: 0 10px 10px;
+						}
+						.dropdown-item {
+							cursor: pointer;
+							font-weight: 400;
+							text-overflow: ellipsis;
+							overflow: hidden;
+							white-space: nowrap;
+							padding: 10px 5px;
+							border-top:0px solid #fff;
+
+							&:hover {
+								background-color: rgba(0,0,0, 0.05);
+							}
+						}
+					}
+				}
+		    }
+		    .masthead__button {
+		      	font-weight: 400;
+		      	font-size: 26px;
+		      	height: 45px;
+		      	padding: 11px 15px;
+		      	color: #ffffff;
+
+		      	i {
+		        	font-size: 20px;
+		      	}
+
+		      	span {
+		        	margin-left: 3px;
+		      	}
+		    }
+		}
+
+		.masthead__body {
+			.headline {
+			/* max-height: 155px;
+				overflow: hidden;
+				display: -webkit-box;
+				max-width: 100%;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				margin-bottom: 15px; */
+
+				h1 {
+					color: #ffffff;
+					font-size: 38px;
+					font-weight: 300;
+					line-height: 1.5;
+				}
+			}
+
+			.author {
+				p {
+					color: #ffffff;
+					font-size: 16px;
+					font-weight: 600;
+					line-height: 1.5;
+				}
+			}
+		}
+
+		.link__read-all {
+			margin-top: 30px;
+			color:#1199ff;
+			font-weight: 400;
+			font-size: 20px;
+			line-height: 1.3;
+			cursor:pointer;
+		}
+	}
+
+	.article__body {
+		.featured__article {
+			.article__wrapper {
+				margin:0 25px 100px;
+
+				.article {
+	/*          STYLING DONE IN STYLE.SCSS             */
+				}
+			}
+		}
+	}
+}
+
+
+/*          EXPAND/COLLAPSE             */
+
+
+.expand-collapse {
+	display: none;
+
+  margin:10px 0 0;
+  width: 100%;
+  cursor: pointer;
+
+  p {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: $font-color--light;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+

@@ -9,51 +9,113 @@ import {IdeasService} from '../../../../services/ideas.service';
 import {Idea} from '../../../../shared/models/idea';
 import {Subscription} from 'rxjs/Subscription';
 import {SignalService} from '../../../../services/signal.service';
+import {Router} from '@angular/router';
 
 declare let gtag: Function;
 
 @Component({
   selector: 'cpt-bear-of-the-week',
   template: `
-    <div class="insights__container insights__container--small" [ngBusy]="loading">
-      <div class="post-head post-head--pick">
+    <div class="dashboard__panel dashboard__panel--bearpick" [ngBusy]="loading">
+      <div class="dash-head">
         <h4>Bear of the Week</h4>
-        <div class="divider-h"></div>
-        <p class="header__post-date">{{ post ? post['post_date_formatted'] : null }}</p>
-        <a (click)="openPreviousModal()" class="post-head__button">
+        <a (click)="openPreviousModal()" class="dash-head__button">
           <i class="fa fa-calendar" aria-hidden="true"></i>
           <span>&nbsp;Previous</span>
         </a>
       </div>
-      <div class="post-body post-body--bearpick">
-        <div class="container">
+      <div class="dash-body dash-body--bearpick">
+        <div class="container bearpick__container">
           <div class="row no-gutters">
-            <div class="col-6">
-              <p class="ticker">
-                <img class="rating"
-                     src="{{ appendPGRImage(stockDataPGR ? stockDataPGR['Corrected PGR Value'] : null, stockDataPGR ? stockDataPGR['PGR Value'] : null) }}">
-                <span [innerHTML]="ticker"></span>
-              </p>
+            <div class="col-7 col-xl-7">
+              <div class="ticker-info">
+                <p (click)="gotoReport(stockDataMeta?.symbol)" class="ticker">
+                  <span><img class="rating" src="{{ pgrImgUrl }}"></span>
+                  {{ stockDataMeta?.symbol }}
+                </p>
+                <p class=" company-name">{{ stockDataMeta?.name }}</p>
+              </div>
+              <div class="price-data">
+                <p class="data price"
+                   [ngClass]="{'down-change': stockDataMeta?.Change<0,'up-change':stockDataMeta?.Change>0}">
+                  {{ stockDataMeta?.Last | decimal }}</p>
+                <p class="data change"
+                   [ngClass]="{'down-change': stockDataMeta?.Change<0,'up-change':stockDataMeta?.Change>0}">
+                  <span><span *ngIf="stockDataMeta?.Change>0">+</span>{{ stockDataMeta?.Change | decimal }}</span>
+                  <span>(<span
+                    *ngIf="stockDataMeta?.Change>0">+</span>{{ stockDataMeta ? (stockDataMeta['Percentage '] | decimal) : null
+                    }}%)</span></p>
+              </div>
+              <div (click)="openCommentaryModal()" class="link__see-more">
+                <a class="">See Commentary <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+              </div>
             </div>
-            <div class="col-6 price-data">
-              <p class="data data--change"
-                 [ngClass]="{'down-change':stockDataMeta?.Change<0, 'up-change':stockDataMeta?.Change>0}">
-                (<span *ngIf="stockDataMeta?.Change>0" class="up-change">+</span>{{ stockDataMeta ? stockDataMeta['Percentage '] : null | number:'.2-2' }}%)</p>
-              <p class="data" [ngClass]="{'down-change':stockDataMeta?.Change<0, 'up-change':stockDataMeta?.Change>0}">
-                {{ stockDataMeta?.Last.toFixed(2) }}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <p class="company-name">{{ stockDataMeta?.name }}</p>
-            </div>
-            <div class="col-6">
-              <p class="industry-name">{{ stockDataMeta?.industry_name }}</p>
-            </div>
-          </div>
-          <div (click)="openCommentaryModal()" class="row">
-            <div class="link__see-more col-sm-12">
-              <a class="">See Commentary <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+            <div class="quick-view__pgr col-5 col-xl-5">
+              <ng-template #toolTipTemp>
+                <div [innerHtml]="link"></div>
+              </ng-template>
+              <p class="pgr__title">Power Gauge Rating: <a class="info-icon"><i [tooltip]="toolTipTemp"
+                                                                                placement="left top" triggers="click"
+                                                                                class="fa fa-info-circle"></i></a></p>
+              <p class="pgr__text"
+                 [ngClass]="{'veryBearish':pgrText=='Very Bearish','bearish':pgrText=='Bearish','neutral':pgrText=='Neutral','bullish':pgrText=='Bullish','veryBullish':pgrText=='Very Bullish'}">
+                {{ pgrText }}</p>
+              <ul class="pgr__sliders row">
+                <li class="col-12">
+                  <div class="sliderBar-container">
+                    <div class="sliderProgress">
+                      <div [ngClass]="appendSliderClass(stockDataPGR?.Financials)"></div>
+                      <div [ngClass]="appendSliderBarClass(stockDataPGR?.Financials)" class="sliderBar"
+                           role="progressbar"
+                           aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div class="pgr__label">
+                      <p>Financials</p>
+                    </div>
+                  </div>
+                </li>
+                <li class="col-12">
+                  <div class="sliderBar-container">
+                    <div class="sliderProgress">
+                      <div [ngClass]="appendSliderClass(stockDataPGR?.Earnings)"></div>
+                      <div [ngClass]="appendSliderBarClass(stockDataPGR?.Earnings)" class="sliderBar" role="progressbar"
+                           aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div class="pgr__label">
+                      <p>Earnings</p>
+                    </div>
+                  </div>
+                </li>
+                <li class="col-12">
+                  <div class="sliderBar-container">
+                    <div class="sliderProgress">
+                      <div [ngClass]="appendSliderClass(stockDataPGR?.Technicals)"></div>
+                      <div [ngClass]="appendSliderBarClass(stockDataPGR?.Technicals)" class="sliderBar"
+                           role="progressbar"
+                           aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div class="pgr__label">
+                      <p>Technicals</p>
+                    </div>
+                  </div>
+                </li>
+                <li class="col-12">
+                  <div class="sliderBar-container">
+                    <div class="sliderProgress">
+                      <div [ngClass]="appendSliderClass(stockDataPGR?.Experts)"></div>
+                      <div [ngClass]="appendSliderBarClass(stockDataPGR?.Experts)" class="sliderBar" role="progressbar"
+                           aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                    <div class="pgr__label">
+                      <p>Experts</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -70,7 +132,9 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
   public post: object;
   public ticker: string;
   public stockDataMeta: Idea;
-  public stockDataPGR: number;
+  public stockDataPGR;
+  public pgrText: string;
+  public pgrImgUrl: string;
   public loading: Subscription;
   public config = {
     animated: true,
@@ -79,7 +143,6 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
     ignoreBackdropClick: false,
     class: 'modal-dialog--fullscreen',
   };
-
   public config2 = {
     animated: true,
     keyboard: true,
@@ -88,8 +151,12 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
     class: 'modal-dialog--popup',
   };
 
+  toolTipText: string = "The Chaikin Power Gauge Rating combines 20 fundamental and technical factors into a reliable indication of a stock's potential to outperform the market (Very Bullish) or underperform (Very Bearish) over a 1 to 6 month time frame.";
+  link: string = `${this.toolTipText}<a target="_blank" href="https://masteringthebear.com/user-guide/">[Read more here].</a>`;
+
   constructor(public modalService: BsModalService,
               private ideasService: IdeasService,
+              private router: Router,
               private wordpressService: WordpressService,
               private signalService: SignalService) {
   }
@@ -124,6 +191,8 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         this.stockDataMeta = data['meta-info'];
         this.stockDataPGR = data['pgr'];
+        this.pgrText = this.appendPGRText(this.stockDataPGR['Corrected PGR Value'], this.stockDataPGR['PGR Value']);
+        this.pgrImgUrl = this.appendPGRImage(this.stockDataPGR['Corrected PGR Value'], this.stockDataPGR['PGR Value']);
       })
   }
 
@@ -135,7 +204,7 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
     this.bearModalRef = this.modalService.show(WeeklyCommentaryModalComponent, this.config);
     this.bearModalRef.content.commentary = this.wordpressService.getInsightPostBody(this.post);
     this.bearModalRef.content.date = this.post['post_date_formatted'];
-    gtag('event', 'bear_of_the_week_opened', {
+    gtag('event', 'bear_of_the_week__commentary_opened', {
       'event_category': 'engagement',
       'event_label': this.ticker
     });
@@ -143,5 +212,22 @@ export class BearOfTheWeekComponent implements OnInit, OnDestroy {
 
   public appendPGRImage(pgr: number, rawPgr: number) {
     return this.signalService.appendPGRImage(pgr, rawPgr);
+  }
+
+  public appendSliderClass(pgr: number) {
+    return this.signalService.appendSliderClass(pgr);
+  }
+
+  public appendSliderBarClass(pgr: number) {
+    return this.signalService.appendSliderBarClass(pgr);
+  }
+
+  public appendPGRText(pgr: number, rawPgr: number) {
+    return this.signalService.appendPGRText(pgr, rawPgr);
+  }
+
+  public gotoReport(ticker: string) {
+    this.ideasService.selectedStock = ticker;
+    this.router.navigate(['/report', ticker]);
   }
 }

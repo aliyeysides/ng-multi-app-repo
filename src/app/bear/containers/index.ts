@@ -1,11 +1,13 @@
-import {DashboardModule} from './dashboard/index';
-import {StockReportModule} from './stock-report/index';
-import {DiscoveryModule} from './discovery/index';
-import {IdeasModule} from './ideas/index';
+import {DashboardModule} from './dashboard';
+import {StockReportModule} from './stock-report';
+import {DiscoveryModule} from './discovery';
+import {IdeasModule} from './ideas';
+import {CommentaryModule} from './commentary';
 
 export const APP_CONTAINER_MODULES = [
   DashboardModule,
   StockReportModule,
   DiscoveryModule,
-  IdeasModule
+  IdeasModule,
+  CommentaryModule
 ];

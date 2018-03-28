@@ -12,6 +12,7 @@ import {UtilService} from '../../../../services/util.service';
 declare let gtag: Function;
 import {Observable} from 'rxjs/Observable';
 import {SymbolSearchService} from '../../../../services/symbol-search.service';
+import {ReportService} from '../../../../services/report.service';
 
 @Component({
   selector: 'cpt-list-view',
@@ -55,9 +56,15 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public chartData: object = null;
 
+  public symbolData;
+
+  toolTipText: string = "The Chaikin Power Gauge Rating combines 20 fundamental and technical factors into a reliable indication of a stock's potential to outperform the market (Very Bullish) or underperform (Very Bearish) over a 1 to 6 month time frame.";
+  link: string = `${this.toolTipText}<a target="_blank" href="https://masteringthebear.com/user-guide/">[Read more here].</a>`;
+
   constructor(private router: Router,
               private authService: AuthService,
               private utilService: UtilService,
+              private reportService: ReportService,
               private searchService: SymbolSearchService,
               private signalService: SignalService,
               private ideaService: IdeasService) {
@@ -86,7 +93,7 @@ export class ListViewComponent implements OnInit, OnDestroy {
       .flatMap(list => {
         this.currentList = list;
         this.gotoListView();
-        return this.ideaService.getListSymbols(list['list_id'].toString(), this.uid)
+        return this.ideaService.getListSymbols(list['list_id'].toString(), this.uid);
       })
       .subscribe(stocks => {
         this.clearOrderByObject();
@@ -125,9 +132,11 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   public selectStock(stock: Idea) {
     this.selectedStock = stock;
+    this.ideaService.selectedStock = stock.symbol;
     if (stock) {
       this.getSelectedStockData(stock, this.assignSelectedStock.bind(this));
       this.getSelectedStockHeadlines(stock);
+      this.getSelectedStockReportData(stock);
     }
   }
 
@@ -157,6 +166,16 @@ export class ListViewComponent implements OnInit, OnDestroy {
         .subscribe(res => {
           this.headlines = res['headlines'].filter((item, index) => index < 7);
         })
+    }
+  }
+
+  public getSelectedStockReportData(stock: Idea) {
+    if (stock) {
+      this.panelLoading = this.reportService.getSymbolData(this.selectedStock.symbol)
+        .take(1)
+        .subscribe(res => {
+          this.symbolData = res;
+        });
     }
   }
 

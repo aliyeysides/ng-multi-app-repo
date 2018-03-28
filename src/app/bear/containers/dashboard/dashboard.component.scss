@@ -1,10 +1,25 @@
- @import 'variables';
+@import 'variables';
 
- .dashboard {
- 	padding: 20px 25px 70px 25px;
+.dashboard {
+  height: 100%;
+  padding: 0 15px;
 
- 	.bear-lists__dashboard {
- 		margin-left:-20px;
- 	}
- }
+  .bearish-insights__container {
+    height: 44%;
+    padding: 1% 1.5%;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #9E0B0B 0%, #3C096F 100%);
+    position: relative;
+    background-image: url("http://www.chaikinanalytics.com/images/BG__bearish-insights__container.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-left: 1px solid #ddd;
+    min-height: 310px;
+  }
 
+  .bearish-ideas__container {
+    height: 50%;
+    padding: 2% 1%;
+  }
+}

@@ -19,7 +19,7 @@ import {HealthCheckService} from '../../../services/health-check.service';
     routing,
     SharedModule,
     TooltipModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
   ],
   exports: [HealthCheckComponent],
   declarations: [

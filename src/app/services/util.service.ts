@@ -1,30 +1,42 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
-import {Http} from '@angular/http';
 import {environment} from '../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable()
 export class UtilService {
 
   protected apiHostName = environment.envProtocol + '://' + environment.envHostName;
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient, public snackBar: MatSnackBar) {
+  }
 
   public getApiHostName() {
     return this.apiHostName;
   }
 
-  public getJson(url, params) {
-    return this.http.get(url, {
-      search: params,
-      withCredentials: true
-    }).map(res => res.json())
-      .catch(this.handleError);
+  public getJson(url, options) {
+    return this.http.get(url, options)
+      .catch(err => this.handleError(err));
+  }
+
+  public openSnackBar(msg: string, duration: number, callback: Function) {
+    let snackBarRef = this.snackBar.open(msg, 'Reload Page', {
+      duration: duration ? duration : 3000
+    });
+    snackBarRef.onAction().subscribe(() => {
+      callback();
+    });
   }
 
   public handleError(err: any) {
     const errMsg = (err.message) ? err.message :
       err.status ? `${err.status} - ${err.statusText}` : 'Server error';
+    const snackMsg = 'Oops, Something went wrong!';
+    this.openSnackBar(snackMsg, 10 * 1000, () => {
+      location.reload();
+    });
     return Observable.throw(errMsg);
   }
 
